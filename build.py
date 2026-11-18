@@ -17,6 +17,7 @@ import os
 import re
 import shutil
 import sys
+from collections import Counter
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 CONTENT = os.path.join(ROOT, 'content')
@@ -363,6 +364,8 @@ def page_head(head, archive, page):
     out += indent(blocks(head.get('blocks', []), page), 4)
     if archive and archive.get('map'):
         out += [''] + indent(talk_map(archive, page), 4)
+    if archive and archive.get('themes'):
+        out += [''] + indent(theme_cloud(archive, page), 4)
     if archive:
         out += indent(archive_controls(archive, page), 4)
     out += ['  </div>', '</section>']
@@ -810,6 +813,53 @@ def talk_map(archive, page):
     return out
 
 
+THEME_KEY = re.compile(r'^[a-z0-9]+(-[a-z0-9]+)*$')
+CLOUD_LEVELS = (3, 6, 12)
+
+
+def talk_themes(t, ev, archive, page):
+    items = archive.get('themes', {}).get('items', {})
+    keys = t.get('themes', [])
+    name = t.get('title') or t.get('video') or t.get('slides')
+    if not isinstance(keys, list) or not all(isinstance(k, str) for k in keys):
+        page.fail('themes of a talk at {!r} must be a list of theme keys'.format(ev['name']))
+    if not keys:
+        page.fail('talk {!r} at {!r} needs "themes", one or more keys of archive.themes.items'.format(name, ev['name']))
+    for k in keys:
+        if k not in items:
+            page.fail('talk {!r} at {!r} is about {!r}, which archive.themes.items does not define'.format(name, ev['name'], k))
+    if len(set(keys)) != len(keys):
+        page.fail('talk {!r} at {!r} lists a theme twice'.format(name, ev['name']))
+    return keys
+
+
+def theme_cloud(archive, page):
+    th = archive['themes']
+    items = th.get('items') or {}
+    for key in items:
+        if not THEME_KEY.match(key):
+            page.fail('theme key {!r} must be lowercase words joined by hyphens'.format(key))
+    count = Counter()
+    total = 0
+    for _, events in archive_years(archive, page):
+        total += len(events)
+        for ev in events:
+            count.update({k for t in ev.get('talks', []) for k in talk_themes(t, ev, archive, page)})
+    unused = sorted(k for k in items if not count[k])
+    if unused:
+        page.fail('archive.themes.items defines {}, but no talk is about it'.format(', '.join(unused)))
+    # site.js treats an empty data-theme as "no theme chosen", so this chip clears the choice.
+    buttons = ['<button type="button" class="all" data-theme="" aria-pressed="true">{} <span class="n">{}</span></button>'.format(
+        text(th['all']), total)]
+    buttons += ['<button type="button" class="t{}" data-theme="{}" data-label="{}" aria-pressed="false">{} <span class="n">{}</span></button>'.format(
+                    1 + sum(count[k] >= n for n in CLOUD_LEVELS), attr(k), attr(items[k]), text(items[k]), count[k])
+                for k in sorted(items, key=lambda k: items[k].lower())]
+    return (['<section class="themes" aria-labelledby="themes-title" hidden>',
+             '  <h2 class="sub" id="themes-title">{}</h2>'.format(text(th['heading'])),
+             '  <div class="cloud" role="group" aria-label="{}">'.format(attr(th['label']))]
+            + indent(buttons, 4) + ['  </div>', '</section>'])
+
+
 def archive_controls(archive, page):
     strip =['<li><a href="#y{0}" aria-label="{0}"><span class="bar"></span>'
              '<span class="yr" aria-hidden="true"><span class="yr-c">{1}</span>{2}</span></a></li>'.format(y, y[:2], y[2:])
@@ -827,8 +877,12 @@ def archive_controls(archive, page):
 
 def event(ev, archive, page):
     talks = ev.get('talks', [])
+    themes = [talk_themes(t, ev, archive, page) for t in talks]
     flags = (' data-slides' if any(t.get('slides') for t in talks) else '') + \
             (' data-video' if any(t.get('video') for t in talks) else '')
+    union = sorted({k for keys in themes for k in keys})
+    if union:
+        flags += ' data-themes="{}"'.format(attr(' '.join(union)))
     place = place_of(ev, archive, page)
     if place:
         flags += ' data-country="{}"'.format(place['country'])
@@ -854,7 +908,7 @@ def event(ev, archive, page):
         out.append('    <p class="ev-meta">{}</p>'.format(' · '.join(meta)))
     if talks:
         out.append('    <ul class="ev-talks">')
-        for t in talks:
+        for t, keys in zip(talks, themes):
             about = text(t.get('title') or ev['name'])
             links = []
             if t.get('slides'):
@@ -869,9 +923,16 @@ def event(ev, archive, page):
                 parts.append('<span class="ev-title"{}>{}</span>'.format(tlang, text(t['title'])))
             if links:
                 parts.append('<span class="ev-links">' + ' '.join(links) + '</span>')
+            if keys:
+                items = archive['themes']['items']
+                parts.append('<span class="ev-themes" hidden>' + ' '.join(
+                    '<button type="button" data-theme="{}" aria-pressed="false" aria-label="{}">{}</button>'.format(
+                        attr(k), attr(fill(archive['themes']['tag_label'], theme=items[k])), text(items[k]))
+                    for k in keys) + '</span>')
             if t.get('summary'):
                 parts.append('<span class="ev-summary">{}</span>'.format(inline(t['summary'])))
-            out.append('      <li>' + ' '.join(parts) + '</li>')
+            li = '<li data-themes="{}">'.format(attr(' '.join(keys))) if keys else '<li>'
+            out.append('      ' + li + ' '.join(parts) + '</li>')
         out.append('    </ul>')
     if ev.get('photo'):
         out += indent(event_photo(ev, page), 4)
@@ -917,6 +978,10 @@ def shell(page, body):
     d, site, p = page.data, page.site, page.prefix
     title = d['title']
     image = d.get('image', site['image'])
+    if not all(isinstance(image.get(k), int) and image[k] > 0 for k in ('width', 'height')):
+        page.fail('share image {} needs "width" and "height" in pixels'.format(image.get('src')))
+    if not os.path.isfile(os.path.join(ROOT, image['src'])):
+        page.fail('share image {} does not exist'.format(image['src']))
     nav = ['<a href="{}{}"{}>{}</a>'.format(p, attr(item['path']), ' aria-current="page"' if item['path'] == page.path else '',
                                              text(item['label'])) for item in site['nav']]
     extra = []
@@ -952,13 +1017,16 @@ def shell(page, body):
         '  <link rel="canonical" href="{}{}">'.format(site['url'], page.path),
         '',
         '  <meta property="og:type" content="{}">'.format(attr(d.get('og_type', 'website'))),
+        '  <meta property="og:site_name" content="{}">'.format(attr(site['name'])),
         '  <meta property="og:url" content="{}{}">'.format(site['url'], page.path),
         '  <meta property="og:title" content="{}">'.format(attr(d.get('og_title', title))),
         '  <meta property="og:description" content="{}">'.format(attr(d.get('og_description', d['description']))),
         '  <meta property="og:image" content="{}{}">'.format(site['url'], attr(image['src'])),
+        '  <meta property="og:image:width" content="{}">'.format(image['width']),
+        '  <meta property="og:image:height" content="{}">'.format(image['height']),
         '  <meta property="og:image:alt" content="{}">'.format(attr(image['alt'])),
     ] + extra + [
-        '  <meta name="twitter:card" content="{}">'.format(attr(d.get('card', 'summary'))),
+        '  <meta name="twitter:card" content="summary_large_image">',
         '  <meta name="twitter:site" content="{}">'.format(attr(site['twitter'])),
         '',
         '  <link rel="icon" href="{}assets/favicon.svg" type="image/svg+xml">'.format(p),
@@ -1057,6 +1125,7 @@ def render_not_found(page):
         '  <meta name="color-scheme" content="light dark">',
         '  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">',
         '  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">',
+        '  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">',
         '  <link rel="preconnect" href="https://fonts.googleapis.com">',
         '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
         '  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap">',

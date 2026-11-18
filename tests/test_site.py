@@ -169,6 +169,14 @@ def webp_size(path):
     raise AssertionError('{} has an unknown WebP chunk {!r}'.format(path, chunk))
 
 
+def png_size(path):
+    with open(path, 'rb') as f:
+        data = f.read(24)
+    if data[:8] != b'\x89PNG\r\n\x1a\n' or data[12:16] != b'IHDR':
+        raise AssertionError(path + ' is not a PNG')
+    return int.from_bytes(data[16:20], 'big'), int.from_bytes(data[20:24], 'big')
+
+
 def css_values(css, selector, prop):
     bodies = re.findall(r'(?m)^\s*' + re.escape(selector) + r'\s*\{([^}]*)\}', css)
     return [v.strip() for body in bodies for v in re.findall(r'(?:^|[;\s])' + re.escape(prop) + r':([^;]+);', body)]
@@ -297,6 +305,72 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
                 if ev.get('place'):
                     ev['place'] = 'online'
         self.assertRejected(self.edit('talks', online), 'needs at least one event at a place on the map')
+
+    # Sharing
+
+    def test_a_share_image_without_its_size(self):
+        self.assertRejected(self.edit('site', lambda d: d['image'].pop('height')),
+                            'share image assets/img/social.jpg needs "width" and "height" in pixels')
+
+    def test_a_share_image_that_does_not_exist(self):
+        def gone(d):
+            d['image']['src'] = 'assets/img/nowhere.jpg'
+        self.assertRejected(self.edit('site', gone), 'share image assets/img/nowhere.jpg does not exist')
+
+    # Themes
+
+    def talk(self, d, title):
+        return next(t for ev in self.events(d) for t in ev.get('talks', []) if t.get('title') == title)
+
+    def test_a_titled_talk_without_themes(self):
+        self.assertRejected(self.edit('talks', lambda d: self.talk(d, 'Git: Bildiğiniz Gibi Değil').pop('themes')),
+                            "talk 'Git: Bildiğiniz Gibi Değil' at 'Karabük Üniversitesi Programlama Günleri 2016' needs \"themes\"")
+
+    def test_a_titled_talk_with_an_empty_theme_list(self):
+        def empty(d):
+            self.talk(d, 'Git: Bildiğiniz Gibi Değil')['themes'] = []
+        self.assertRejected(self.edit('talks', empty), "talk 'Git: Bildiğiniz Gibi Değil' at 'Karabük Üniversitesi Programlama Günleri 2016' needs \"themes\"")
+
+    def test_an_untitled_talk_without_themes(self):
+        def untitled(d):
+            ev = next(ev for ev in self.events(d) if ev['name'] == 'WeekEng 2021')
+            ev['talks'][0].pop('themes')
+        self.assertRejected(self.edit('talks', untitled),
+                            "talk 'https://www.youtube.com/watch?v=FFYDNTWG-JI' at 'WeekEng 2021' needs \"themes\"")
+
+    def test_themes_that_are_not_a_list(self):
+        def bare(d):
+            self.talk(d, 'Git: Bildiğiniz Gibi Değil')['themes'] = 'git'
+        self.assertRejected(self.edit('talks', bare), 'must be a list of theme keys')
+
+    def test_themes_that_are_not_names(self):
+        def numbered(d):
+            self.talk(d, 'Git: Bildiğiniz Gibi Değil')['themes'] = [7]
+        self.assertRejected(self.edit('talks', numbered), 'must be a list of theme keys')
+
+    def test_a_talk_about_a_theme_the_vocabulary_does_not_define(self):
+        def kotlin(d):
+            self.talk(d, 'Git: Bildiğiniz Gibi Değil')['themes'].append('kotlin')
+        self.assertRejected(self.edit('talks', kotlin), "is about 'kotlin', which archive.themes.items does not define")
+
+    def test_a_talk_listing_one_theme_twice(self):
+        def twice(d):
+            self.talk(d, 'Git: Bildiğiniz Gibi Değil')['themes'] = ['git', 'git']
+        self.assertRejected(self.edit('talks', twice), 'lists a theme twice')
+
+    def test_a_theme_no_talk_is_about(self):
+        def cobol(d):
+            d['archive']['themes']['items']['cobol'] = 'COBOL'
+        self.assertRejected(self.edit('talks', cobol), 'archive.themes.items defines cobol, but no talk is about it')
+
+    def test_a_theme_key_that_is_not_lowercase_words(self):
+        def spaced(d):
+            items = d['archive']['themes']['items']
+            items['Code Review'] = items.pop('code-review')
+            for ev in self.events(d):
+                for t in ev.get('talks', []):
+                    t['themes'] = ['Code Review' if k == 'code-review' else k for k in t.get('themes', [])]
+        self.assertRejected(self.edit('talks', spaced), "theme key 'Code Review' must be lowercase words joined by hyphens")
 
     # Hero
 
@@ -710,6 +784,135 @@ class BuiltSite(unittest.TestCase):
             self.assertEqual(b.attrs.get('data-label'), expected, c + ' ' + (r or ''))
         self.assertGreater(regions, 0)
 
+    def test_every_talk_shows_and_carries_the_themes_talks_json_gives_it(self):
+        labels = self.talks['themes']['items']
+        tag_label = self.talks['themes']['tag_label']
+        expected = [(ev['name'], [t.get('themes', []) for t in ev.get('talks', [])])
+                    for _, evs in sorted(self.talks['events'].items(), reverse=True) for ev in evs]
+        events = self.trees['talks'].find(lambda n: n.tag == 'li' and 'ev' in n.classes())
+        found, tagged = [], 0
+        for ev in events:
+            talks = [li for ul in ev.find(has_class('ev-talks')) for li in ul.children if isinstance(li, Node)]
+            keys = []
+            for li in talks:
+                tags = li.find(lambda n: n.tag == 'button' and 'data-theme' in n.attrs)
+                mine = [b.attrs['data-theme'] for b in tags]
+                self.assertEqual([b.all_text() for b in tags], [labels[k] for k in mine])
+                self.assertEqual([b.attrs['aria-label'] for b in tags], [tag_label.replace('{theme}', labels[k]) for k in mine])
+                self.assertEqual((li.attrs.get('data-themes') or '').split(), mine)
+                keys.append(mine)
+                tagged += bool(mine)
+            found.append((ev.find(has_class('ev-name'))[0].all_text(), keys))
+            self.assertEqual((ev.attrs.get('data-themes') or '').split(), sorted({k for ks in keys for k in ks}))
+        self.assertEqual(found, expected)
+        self.assertGreater(tagged, len(labels))
+
+    def test_theme_chips_count_the_events_about_each_theme(self):
+        labels = self.talks['themes']['items']
+        count = Counter(k for evs in self.talks['events'].values() for ev in evs
+                        for k in {k for t in ev.get('talks', []) for k in t.get('themes', [])})
+        cloud = self.trees['talks'].find(has_class('cloud'))[0]
+        everything, *chips = cloud.find(lambda n: n.tag == 'button')
+        got = {b.attrs['data-theme']: (b.attrs['data-label'], int(b.find(has_class('n'))[0].text)) for b in chips}
+        self.assertEqual(got, {k: (labels[k], count[k]) for k in labels})
+        self.assertGreater(len(chips), 1)
+        events = sum(len(evs) for evs in self.talks['events'].values())
+        self.assertEqual((everything.attrs.get('data-theme'), everything.attrs.get('aria-pressed')), ('', 'true'))
+        self.assertEqual(everything.all_text().split(), self.talks['themes']['all'].split() + [str(events)])
+
+    def test_the_theme_cloud_waits_for_js_lists_chips_by_label_and_grows_them_with_their_count(self):
+        th = self.talks['themes']
+        section, = self.trees['talks'].find(has_class('themes'))
+        self.assertIn('hidden', section.attrs, 'without JS the chips would show and do nothing')
+        heading = [n for n in self.trees['talks'].walk() if n.attrs.get('id') == section.attrs.get('aria-labelledby')]
+        self.assertEqual([h.all_text() for h in heading], [th['heading']])
+        cloud, = section.find(has_class('cloud'))
+        self.assertEqual((cloud.attrs.get('role'), cloud.attrs.get('aria-label')), ('group', th['label']))
+        chips = cloud.find(lambda n: n.tag == 'button')[1:]
+        self.assertEqual([c.attrs['data-label'] for c in chips], sorted(th['items'].values(), key=str.lower))
+        self.assertEqual({c.attrs.get('aria-pressed') for c in chips}, {'false'})
+        sized = []
+        for c in chips:
+            tier = [int(k[1:]) for k in c.classes() if re.fullmatch(r't[1-4]', k)]
+            self.assertEqual(len(tier), 1, c.attrs['data-label'])
+            sized.append((int(c.find(has_class('n'))[0].text), tier[0]))
+        sized.sort()
+        self.assertEqual([t for _, t in sized], sorted(t for _, t in sized), 'a chip with more events is smaller than one with fewer')
+        self.assertGreater(len({t for _, t in sized}), 1)
+        with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
+            css = f.read()
+        sizes = [css_values(css, '.cloud .t{}'.format(n), 'font-size') for n in range(1, 5)]
+        self.assertEqual([len(s) for s in sizes], [1] * 4)
+        rems = [float(re.fullmatch(r'([\d.]+)rem', s[0]).group(1)) for s in sizes]
+        self.assertEqual(rems, sorted(set(rems)), 'a higher tier should set a larger font')
+
+    def test_the_tags_on_each_talk_wait_for_js_like_the_cloud(self):
+        spans = self.trees['talks'].find(has_class('ev-themes'))
+        talks = sum(bool(t.get('themes')) for evs in self.talks['events'].values() for ev in evs for t in ev.get('talks', []))
+        self.assertEqual(len(spans), talks)
+        self.assertEqual([s.all_text() for s in spans if 'hidden' not in s.attrs], [], 'without JS these buttons would do nothing')
+        self.assertGreater(talks, 1)
+
+    def test_the_talks_page_gives_every_ui_string_site_js_reads(self):
+        with open(os.path.join(ROOT, 'assets', 'site.js'), encoding='utf-8') as f:
+            read = set(re.findall(r'\bui\.([a-z_]+)', f.read()))
+        self.assertIn('theme_status', read)
+        island = [n for n in self.trees['talks'].walk() if n.attrs.get('id') == 'ui-text']
+        self.assertEqual(len(island), 1)
+        self.assertEqual(sorted(read - set(json.loads(island[0].all_text()))), [])
+
+    def test_every_talk_photo_is_the_size_its_thumbnail_declares(self):
+        photos = self.trees['talks'].find(has_class('ev-photo'))
+        expected = sum(1 for evs in self.talks['events'].values() for ev in evs if ev.get('photo'))
+        self.assertEqual(len(photos), expected)
+        self.assertGreater(expected, 1)
+        for a in photos:
+            img = a.find(lambda n: n.tag == 'img')[0]
+            declared = (int(img.attrs['width']), int(img.attrs['height']))
+            self.assertEqual(jpeg_size(os.path.join(self.out, 'talks', img.attrs['src'])), declared, img.attrs['src'])
+            self.assertTrue(os.path.isfile(os.path.join(self.out, 'talks', a.attrs['href'])), a.attrs['href'])
+
+    # Sharing
+
+    def test_every_page_shares_an_image_of_the_size_it_declares(self):
+        site = read_json(ROOT, 'content', 'site.json')
+        shared = 0
+        for name, tree in self.trees.items():
+            if name == '404':
+                continue
+            meta = {n.attrs.get('property') or n.attrs.get('name'): n.attrs.get('content')
+                    for n in tree.find(lambda n: n.tag == 'meta')}
+            self.assertTrue(meta['og:image'].startswith(site['url']), meta['og:image'])
+            path = os.path.join(self.out, meta['og:image'][len(site['url']):])
+            size = jpeg_size(path)
+            self.assertEqual(size, (int(meta['og:image:width']), int(meta['og:image:height'])), name)
+            # X shows a large card only for an image of at least 300x157.
+            self.assertEqual(meta['twitter:card'], 'summary_large_image', name)
+            self.assertTrue(size[0] >= 300 and size[1] >= 157, (name, size))
+            self.assertEqual(meta['og:site_name'], site['name'], name)
+            self.assertEqual(meta['og:url'], site['url'] + ('' if name == 'home' else name + '/'))
+            canonical = tree.find(lambda n: n.tag == 'link' and n.attrs.get('rel') == 'canonical')
+            self.assertEqual([c.attrs['href'] for c in canonical], [meta['og:url']], name)
+            shared += 1
+        self.assertEqual(shared, len(self.trees) - 1)
+        self.assertGreater(shared, 1)
+
+    def test_every_icon_a_page_links_to_exists_at_the_size_it_declares(self):
+        for name, tree in self.trees.items():
+            links = tree.find(lambda n: n.tag == 'link' and n.attrs.get('rel') in ('icon', 'apple-touch-icon'))
+            self.assertEqual(sorted(link.attrs['rel'] for link in links), ['apple-touch-icon', 'icon', 'icon'], name)
+            here = os.path.dirname(os.path.join(self.out, page_file(name)))
+            for link in links:
+                href = link.attrs['href']
+                path = os.path.join(self.out, href[1:]) if href.startswith('/') else os.path.join(here, href)
+                if link.attrs.get('type') == 'image/svg+xml':
+                    with open(path, encoding='utf-8') as f:
+                        box = re.search(r'viewBox="0 0 (\S+) (\S+)"', f.read())
+                    self.assertEqual(box.group(1), box.group(2), path)
+                else:
+                    # Apple's touch icon is 180 px square and the link names no size.
+                    self.assertEqual('{}x{}'.format(*png_size(path)), link.attrs.get('sizes', '180x180'), path)
+
     # Home: hero and git game
 
     @staticmethod
@@ -823,6 +1026,16 @@ class BuiltSite(unittest.TestCase):
         capped = re.findall(r'\(min-width: ([\d.]+)rem\) {}rem'.format(re.escape(cap)), sizes)
         self.assertEqual(len(capped), 1, sizes)
         self.assertLess(abs(float(capped[0]) - float(cap) * 100 / int(vw)), 1)
+
+    def test_the_talks_intro_runs_as_wide_as_the_paragraph_under_it_and_no_other_intro_does(self):
+        with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
+            css = f.read()
+        self.assertEqual(css_values(css, '.archive .intro', 'max-width'), ['none'])
+        self.assertEqual(css_values(css, '.intro', 'max-width'), ['40rem'])
+        main, = [n for n in self.trees['talks'].walk() if n.tag == 'main']
+        self.assertIn('archive', main.classes())
+        self.assertEqual(len(main.find(has_class('intro'))), 1)
+        self.assertEqual([p for p, t in self.trees.items() if t.find(has_class('archive'))], ['talks'])
 
     def test_the_lane_svg_and_the_css_multiples_of_row_agree(self):
         with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:

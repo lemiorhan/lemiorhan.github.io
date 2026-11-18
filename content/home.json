@@ -15,7 +15,7 @@
     "worksFor": { "@type": "Organization", "name": "Craftgate", "url": "https://craftgate.io" },
     "alumniOf": { "@type": "CollegeOrUniversity", "name": "Marmara University" },
     "address": { "@type": "PostalAddress", "addressLocality": "Istanbul", "addressCountry": "TR" },
-    "image": "https://lemiorhan.github.io/assets/img/lemi.jpg",
+    "image": "https://lemiorhanergin.com/assets/img/lemi.jpg",
     "sameAs": [
       "https://www.linkedin.com/in/lemiorhan",
       "https://x.com/lemiorhan",
@@ -237,7 +237,7 @@
         "setup": ["git commit -m \"Craftbase\"", "git commit -m \"Gateway\"", "git commit -m \"Public launch\"", "git commit -m \"Only Craftgate\""],
         "solution": ["git tag launch HEAD~1"],
         "hint": "A tag is a pointer that never moves. git tag <name> <commit> puts one anywhere, and HEAD~1 means one commit before HEAD.",
-        "fact": { "text": "In April 2018 I co-founded Craftbase with Hakan Erdoğan, Sabri Onur Tüzün and Murathan Özcan. Craftgate grew inside it and was introduced publicly in January 2021.", "link": "craftgate/" },
+        "fact": { "text": "In April 2018 we founded Craftbase: Hakan Erdoğan, Sabri Onur Tüzün, Murathan Özcan and I. Craftgate grew inside it and was introduced publicly in January 2021.", "link": "craftgate/" },
         "checks": {
           "alternatives": [["git tag launch {Public launch}"], ["git checkout HEAD~1", "git tag launch", "git checkout main"]],
           "near_misses": [["git tag launch"]]
@@ -385,7 +385,7 @@
           "items": [
             { "path": "bio/", "name": "Bio", "text": "The longer story, wiki style: from İzmir to Istanbul, writing software since 2001, and the people and work along the way." },
             { "path": "talks/", "name": "Talks", "text": "Conferences, meetups and universities, year by year and on a map, with slides and recordings." },
-            { "path": "craftgate/", "name": "Craftgate", "text": "The payment orchestration company I co-founded: how it started and where it stands." },
+            { "path": "craftgate/", "name": "Craftgate", "text": "The payment orchestration company we founded: how it started and where it stands." },
             { "path": "career/", "name": "Career", "text": "Positions since 2001, drawn as a git log." },
             { "path": "community/", "name": "Community", "text": "Software Craftsmanship Turkey, Agile Turkey, and manifesto translations." },
             { "path": "sharing/", "name": "Sharing", "text": "Everything I share in public: code, recordings, the podcast, slides, articles and my accounts." },

@@ -3,9 +3,10 @@
   "description": "Conferences, meetups, universities and webinars where Lemi Orhan Ergin has spoken, year by year, with slides and recordings where they exist.",
   "image": {
     "src": "assets/img/stage.jpg",
-    "alt": "Lemi on stage presenting to a full conference room"
+    "alt": "Lemi on stage presenting to a full conference room",
+    "width": 1500,
+    "height": 500
   },
-  "card": "summary_large_image",
   "head": {
     "heading": "Talks",
     "cmd": "git log --oneline -- talks/",
@@ -77,6 +78,31 @@
       "tarsus": { "country": "TR", "province": "TR-33", "city": "Tarsus" },
       "trabzon": { "country": "TR", "province": "TR-61" }
     },
+    "themes": {
+      "heading": "Themes",
+      "label": "Show talks about",
+      "tag_label": "Show talks about {theme}",
+      "all": "All themes",
+      "items": {
+        "agile": "Agile",
+        "ai": "AI",
+        "architecture": "Architecture",
+        "career": "Career",
+        "code-review": "Code review",
+        "craftsmanship": "Craftsmanship",
+        "culture": "Engineering culture",
+        "design": "Software design",
+        "ethics": "Ethics",
+        "git": "Git",
+        "lean": "Lean",
+        "motivation": "Motivation",
+        "product": "Product development",
+        "quality": "Quality",
+        "security": "Security",
+        "speaking": "Public speaking",
+        "testing": "Testing & TDD"
+      }
+    },
     "ui": {
       "event_one": "{n} event",
       "event_many": "{n} events",
@@ -84,20 +110,25 @@
       "showing_all": "Showing all {events}",
       "showing_some": "Showing {visible} of {events}",
       "jump_to_year": "Jump to year",
-      "place_status": "{events} in {place}, listed below by year."
+      "place_status": "{events} in {place}, listed below by year.",
+      "theme_status": "{events} about {theme}, listed below by year.",
+      "theme_place_status": "{events} about {theme} in {place}, listed below by year."
     },
     "events": {
       "2026": [
         {
           "date": "2026-11-06",
-          "name": "Eclit Better26 Buluşması",
-          "lang": "tr",
+          "name": "Eclit Better://27",
           "talks": [
             {
-              "title": "AI yazılım geliştirme kültürümüzü nasıl değiştiriyor",
-              "lang": "tr"
+              "title": "How AI Is Changing Our Software Development Culture",
+              "themes": ["ai", "culture"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2026-eclit",
+            "alt": "Lemi and the host standing on stage in conversation, the session title and both speakers on the screen behind"
+          }
         },
         {
           "date": "2026-10-17",
@@ -107,7 +138,8 @@
             {
               "title": "When Code Becomes Disposible...",
               "slides": "https://speakerdeck.com/lemiorhan/when-code-becomes-disposible-dot-dot-dot",
-              "summary": "AI makes code cheap to write and harder to trust. On regenerative software, where the implementation can be rebuilt and the behavior survives."
+              "summary": "AI makes code cheap to write and harder to trust. On regenerative software, where the implementation can be rebuilt and the behavior survives.",
+              "themes": ["ai", "architecture"]
             }
           ],
           "photo": {
@@ -124,7 +156,8 @@
           "talks": [
             {
               "title": "AI Dönüşüm Döneminde Yazılım Geliştirme: Mimari, Kalite ve Kültürün Yeniden Tanımı",
-              "lang": "tr"
+              "lang": "tr",
+              "themes": ["ai", "architecture", "quality", "culture"]
             }
           ],
           "photo": {
@@ -141,12 +174,41 @@
             {
               "title": "Rebirth of Software Craftsmanship in the AI Era",
               "slides": "https://speakerdeck.com/lemiorhan/rebirth-of-software-craftsmanship-in-the-ai-era",
-              "video": "https://www.youtube.com/watch?v=EcBrbOEPclM"
+              "video": "https://www.youtube.com/watch?v=EcBrbOEPclM",
+              "themes": ["ai", "craftsmanship"]
             }
           ],
           "photo": {
             "file": "2026-javaday",
             "alt": "A full hotel ballroom watching Lemi's keynote, the talk title on two screens"
+          }
+        },
+        {
+          "name": "Devnot",
+          "role": "Podcast",
+          "talks": [
+            {
+              "title": "Product Developer: Kod Yazmaktan Ürün Geliştirmeye",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=8EXXkeweFWA",
+              "themes": ["product", "career"]
+            }
+          ]
+        },
+        {
+          "name": "Backendguru Academy webinar",
+          "place": "online",
+          "talks": [
+            {
+              "title": "“Test Var” Demek Yetmez: Güvenilir Kod için Unit Testing",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=N6tSrpE2XhY",
+              "themes": ["testing"]
+            }
+          ],
+          "photo": {
+            "file": "2026-backendguru-unit-testing",
+            "alt": "Lemi smiling at the camera on a webcam, captioned with his name, on a purple background"
           }
         },
         {
@@ -156,9 +218,14 @@
           "talks": [
             {
               "title": "Unit Testing & Test-Driven Development",
-              "video": "https://www.youtube.com/watch?v=HutPyJs23WI"
+              "video": "https://www.youtube.com/watch?v=HutPyJs23WI",
+              "themes": ["testing"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2026-backendguru",
+            "alt": "Lemi talking on a video call beside Akin Kaldıroğlu, both in captioned webcam tiles on a purple backend guru background"
+          }
         }
       ],
       "2025": [
@@ -169,7 +236,8 @@
           "talks": [
             {
               "title": "Unlearn Unit Testing",
-              "video": "https://www.youtube.com/watch?v=QzbSRiru4gg"
+              "video": "https://www.youtube.com/watch?v=QzbSRiru4gg",
+              "themes": ["testing"]
             }
           ],
           "photo": {
@@ -186,7 +254,8 @@
             {
               "title": "Conway's Law Never Lies",
               "slides": "https://speakerdeck.com/lemiorhan/conways-law-never-lies",
-              "summary": "Software mirrors the organization that builds it, so architecture, team structure and communication have to change together."
+              "summary": "Software mirrors the organization that builds it, so architecture, team structure and communication have to change together.",
+              "themes": ["architecture", "culture"]
             }
           ],
           "photo": {
@@ -201,7 +270,8 @@
           "lang": "tr",
           "talks": [
             {
-              "title": "Unlearn OOP: Back To Origins"
+              "title": "Unlearn OOP: Back To Origins",
+              "themes": ["design"]
             }
           ],
           "photo": {
@@ -217,13 +287,42 @@
             {
               "title": "Fixing The Typos in Engineering Culture",
               "slides": "https://speakerdeck.com/lemiorhan/fixing-the-typos-in-engineering-culture",
-              "summary": "Small, widely accepted habits that quietly wear down trust, autonomy and purpose, seen through building Craftgate."
+              "summary": "Small, widely accepted habits that quietly wear down trust, autonomy and purpose, seen through building Craftgate.",
+              "themes": ["culture"]
             }
           ],
           "photo": {
             "file": "2025-devnot",
             "alt": "Lemi on the Developer Summit stage, the title Fixing the Typos in Engineering Culture on the screen behind"
           }
+        },
+        {
+          "name": "weproduct",
+          "role": "Interview",
+          "talks": [
+            {
+              "title": "Co-founder perspektifinden ürün yönetimi, ürün geliştirme ve AI",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=oqQnI2JRV3s",
+              "themes": ["product", "ai"]
+            }
+          ],
+          "photo": {
+            "file": "2025-weproduct",
+            "alt": "Lemi smiling at the camera on a webcam, in a magenta t-shirt, with white bookshelves behind him"
+          }
+        },
+        {
+          "name": "Enderinko",
+          "role": "Podcast",
+          "talks": [
+            {
+              "title": "Mükemmellik Yerine Adaptasyon: Modern Yazılımcının Rehberi",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=IdBSKIbfAtk",
+              "themes": ["career"]
+            }
+          ]
         },
         {
           "date": "2025-02-27",
@@ -233,7 +332,8 @@
             {
               "title": "Everything You Know About Agile Is Wrong",
               "slides": "https://speakerdeck.com/lemiorhan/everything-you-know-about-agile-is-wrong",
-              "summary": "Was agile pushed in the wrong direction soon after the manifesto was written?"
+              "summary": "Was agile pushed in the wrong direction soon after the manifesto was written?",
+              "themes": ["agile"]
             }
           ]
         }
@@ -248,7 +348,8 @@
               "title": "Unlearn Product Development",
               "slides": "https://speakerdeck.com/lemiorhan/unlearn-product-development",
               "summary": "Why features go unused and technical debt piles up: problems before features, and decisions made with data.",
-              "video": "https://www.youtube.com/watch?v=ohbwpy696Vg"
+              "video": "https://www.youtube.com/watch?v=ohbwpy696Vg",
+              "themes": ["product"]
             }
           ],
           "photo": {
@@ -274,7 +375,8 @@
           "talks": [
             {
               "title": "Unlearn OOP: Back To Origins",
-              "slides": "https://speakerdeck.com/lemiorhan/unlearn-oop-back-to-origins"
+              "slides": "https://speakerdeck.com/lemiorhan/unlearn-oop-back-to-origins",
+              "themes": ["design"]
             }
           ],
           "photo": {
@@ -289,7 +391,8 @@
           "talks": [
             {
               "title": "Unlearn Modularity",
-              "slides": "https://speakerdeck.com/lemiorhan/unlearn-modularity"
+              "slides": "https://speakerdeck.com/lemiorhan/unlearn-modularity",
+              "themes": ["architecture", "design"]
             }
           ],
           "photo": {
@@ -304,9 +407,31 @@
           "talks": [
             {
               "title": "Shape of Code: What Makes Your Code Beautiful",
-              "video": "https://www.youtube.com/watch?v=yQMG-bwFXUY"
+              "video": "https://www.youtube.com/watch?v=yQMG-bwFXUY",
+              "themes": ["design"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2024-turkiye-java-community",
+            "alt": "Lemi smiling in a webcam tile captioned with his name, bookshelves and Chinese scroll paintings behind him, next to Mert Bahardoğan on a Türkiye Java Community stream"
+          }
+        },
+        {
+          "name": "Tütsü Sektör",
+          "lang": "tr",
+          "role": "Podcast",
+          "talks": [
+            {
+              "title": "Yazılımın Perde Arkası ve İncelikleri",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=0c3WJuUIypo",
+              "themes": ["career"]
+            }
+          ],
+          "photo": {
+            "file": "2024-tutsu-sektor",
+            "alt": "Lemi in a black polo shirt seated in a beige armchair in front of a white curtain, hands clasped"
+          }
         },
         {
           "date": "2024-03-07",
@@ -315,11 +440,13 @@
           "talks": [
             {
               "title": "The Disturbing Truth: Why Do Most Software Projects Suck?",
-              "slides": "https://speakerdeck.com/lemiorhan/the-disturbing-truth-why-do-most-software-projects-suck"
+              "slides": "https://speakerdeck.com/lemiorhan/the-disturbing-truth-why-do-most-software-projects-suck",
+              "themes": ["product", "quality"]
             },
             {
               "title": "Unlearn Software Quality & Excellence",
-              "slides": "https://speakerdeck.com/lemiorhan/unlearn-software-quality-and-excellence"
+              "slides": "https://speakerdeck.com/lemiorhan/unlearn-software-quality-and-excellence",
+              "themes": ["quality"]
             }
           ],
           "photo": {
@@ -334,12 +461,29 @@
           "lang": "tr",
           "talks": [
             {
-              "video": "https://www.youtube.com/watch?v=YTf9xrVWd6k"
+              "video": "https://www.youtube.com/watch?v=YTf9xrVWd6k",
+              "themes": ["career", "craftsmanship"]
             }
           ],
           "photo": {
             "file": "2024-yonetim-bilisim",
             "alt": "Lemi on a wide stage between Turkish flags, a speaker card on the screen above"
+          }
+        },
+        {
+          "name": "PeaksOnTheBack #2",
+          "role": "Podcast",
+          "talks": [
+            {
+              "title": "Sunum Sihirbazı",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=aS_bQhcI06M",
+              "themes": ["career", "speaking"]
+            }
+          ],
+          "photo": {
+            "file": "2024-peaksontheback",
+            "alt": "Lemi smiling in a webcam tile captioned with his name, bookshelves and Chinese scroll paintings behind him in pink light"
           }
         }
       ],
@@ -352,7 +496,8 @@
             {
               "title": "Fixing The Typos in Softvare Devlopment",
               "slides": "https://speakerdeck.com/lemiorhan/fixing-the-typo-in-softvare-devlopment-devfest-izmir-2023",
-              "video": "https://www.youtube.com/watch?v=2Mu0O-VyeUQ"
+              "video": "https://www.youtube.com/watch?v=2Mu0O-VyeUQ",
+              "themes": ["craftsmanship", "culture"]
             }
           ],
           "photo": {
@@ -369,7 +514,8 @@
             {
               "title": "SOLID Is Dead, Long Live SOLID",
               "slides": "https://speakerdeck.com/lemiorhan/solid-is-dead-long-live-solid",
-              "video": "https://www.youtube.com/watch?v=agkgb6mJFFs"
+              "video": "https://www.youtube.com/watch?v=agkgb6mJFFs",
+              "themes": ["design"]
             }
           ],
           "photo": {
@@ -386,7 +532,8 @@
             {
               "title": "Code Is Cheap, Show Me The Purpose",
               "slides": "https://speakerdeck.com/lemiorhan/code-is-cheap-show-me-the-purpose",
-              "video": "https://www.youtube.com/watch?v=GJIprRgnjJM"
+              "video": "https://www.youtube.com/watch?v=GJIprRgnjJM",
+              "themes": ["product", "craftsmanship"]
             }
           ],
           "photo": {
@@ -401,12 +548,30 @@
           "talks": [
             {
               "title": "The Lost Chapter: Rediscovering Foundations in Software Design",
-              "slides": "https://speakerdeck.com/lemiorhan/the-lost-chapter-rediscovering-foundations-in-software-design"
+              "slides": "https://speakerdeck.com/lemiorhan/the-lost-chapter-rediscovering-foundations-in-software-design",
+              "themes": ["design"]
             }
           ],
           "photo": {
             "file": "2023-devnot",
             "alt": "Lemi on stage in front of the title slide, Rediscovering Foundations in Software Design"
+          }
+        },
+        {
+          "name": "Teknasyon ile Kesin Yaşanmıştır #14",
+          "lang": "tr",
+          "role": "Podcast",
+          "talks": [
+            {
+              "title": "Apple'daki açığı ifşa edince tüm dünyada haber oldum!",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=rLR9bdSc1AE",
+              "themes": ["security", "career"]
+            }
+          ],
+          "photo": {
+            "file": "2023-teknasyon-podcast",
+            "alt": "Lemi smiling in a dark t-shirt printed with a dictionary entry for crafter, in front of a green plant wall"
           }
         },
         {
@@ -418,9 +583,14 @@
             {
               "title": "AI Ethics: Problems, Questions, Hopes, Regrets",
               "slides": "https://speakerdeck.com/lemiorhan/ai-ethics-problems-questions-hopes-regrets",
-              "video": "https://www.youtube.com/watch?v=D3vVJWyBqn8"
+              "video": "https://www.youtube.com/watch?v=D3vVJWyBqn8",
+              "themes": ["ai", "ethics"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2023-iqra",
+            "alt": "Lemi laughing on a full-screen video call, captioned with his name, bookshelves and Chinese scroll paintings behind him"
+          }
         },
         {
           "date": "2023-05-06",
@@ -431,7 +601,8 @@
             {
               "title": "Modeling Complexity: Using Modularization and Bounded Contexts in Domain Driven Design",
               "slides": "https://speakerdeck.com/lemiorhan/modeling-complexity-using-modularization-and-bounded-contexts-in-domain-driven-design",
-              "video": "https://www.youtube.com/watch?v=qE0J-t-ZXmA"
+              "video": "https://www.youtube.com/watch?v=qE0J-t-ZXmA",
+              "themes": ["architecture"]
             }
           ],
           "photo": {
@@ -442,6 +613,18 @@
       ],
       "2022": [
         {
+          "date": "2022-12-17",
+          "name": "DevFest İzmir 2022",
+          "place": "izmir",
+          "talks": [
+            {
+              "title": "Domain Driven Modular Architecture",
+              "video": "https://www.youtube.com/watch?v=EKiQNh_X5uU",
+              "themes": ["architecture"]
+            }
+          ]
+        },
+        {
           "date": "2022-12-11",
           "name": "DevFest Istanbul 2022",
           "place": "istanbul",
@@ -450,7 +633,8 @@
             {
               "title": "Unlearn Unit Testing",
               "slides": "https://speakerdeck.com/lemiorhan/unlearn-unit-testing",
-              "video": "https://www.youtube.com/watch?v=pjx06exON7g"
+              "video": "https://www.youtube.com/watch?v=pjx06exON7g",
+              "themes": ["testing"]
             }
           ],
           "photo": {
@@ -467,7 +651,8 @@
             {
               "title": "Unlearn Software Quality: Redefine What Should Be Really Cared",
               "slides": "https://speakerdeck.com/lemiorhan/unlearn-software-quality-redefine-what-should-be-really-cared",
-              "video": "https://www.youtube.com/watch?v=EruxW-pSg1U"
+              "video": "https://www.youtube.com/watch?v=EruxW-pSg1U",
+              "themes": ["quality", "testing"]
             }
           ]
         },
@@ -478,7 +663,8 @@
           "talks": [
             {
               "title": "Fixing the Typo in Softvare Devlpment",
-              "slides": "https://speakerdeck.com/lemiorhan/fixing-the-typo-in-softvare-devlpment"
+              "slides": "https://speakerdeck.com/lemiorhan/fixing-the-typo-in-softvare-devlpment",
+              "themes": ["craftsmanship", "culture"]
             }
           ],
           "photo": {
@@ -494,7 +680,8 @@
             {
               "title": "Pure Agile: Building a Culture Without Scrum, Kanban and XP",
               "slides": "https://speakerdeck.com/lemiorhan/pure-agile-building-a-culture-without-scrum-kanban-and-xp",
-              "video": "https://www.youtube.com/watch?v=6pim0Mbcteg"
+              "video": "https://www.youtube.com/watch?v=6pim0Mbcteg",
+              "themes": ["agile", "culture"]
             }
           ],
           "photo": {
@@ -509,9 +696,14 @@
           "talks": [
             {
               "title": "Software Craftsmanship Culture",
-              "video": "https://www.youtube.com/watch?v=aHhWUFW8Ec8"
+              "video": "https://www.youtube.com/watch?v=aHhWUFW8Ec8",
+              "themes": ["craftsmanship", "culture"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2022-turkiye-java-community",
+            "alt": "Lemi smiling in a webcam tile captioned with his name, next to Taner Genç on a Turkey Java Community stream"
+          }
         },
         {
           "date": "2022-05-28",
@@ -522,12 +714,30 @@
             {
               "title": "Domain Driven Modular Architecture",
               "slides": "https://speakerdeck.com/lemiorhan/domain-driven-modular-architecture",
-              "video": "https://www.youtube.com/watch?v=tH1sQsR0Crk"
+              "video": "https://www.youtube.com/watch?v=tH1sQsR0Crk",
+              "themes": ["architecture"]
             }
           ],
           "photo": {
             "file": "2022-javaday",
             "alt": "Lemi in front of the Domain Driven Modular Architecture title slide"
+          }
+        },
+        {
+          "date": "2022-05-11",
+          "name": "Agile Dönüşümleri Yazılım Uzmanlarından Dinleyelim",
+          "place": "online",
+          "lang": "tr",
+          "role": "Panel",
+          "talks": [
+            {
+              "video": "https://www.youtube.com/watch?v=WzC_J4VLFH4",
+              "themes": ["agile"]
+            }
+          ],
+          "photo": {
+            "file": "2022-agile-donusumleri",
+            "alt": "Lemi talking to his webcam on a video call, in glasses and a black polo shirt with white earbuds, a black office chair and a white wall behind him"
           }
         }
       ],
@@ -539,9 +749,14 @@
             {
               "title": "Yazılımcı: Sıradan İnsanların Teknoloji Üreten Zanaatkarlara Dönüşüm Yolculuğu",
               "lang": "tr",
-              "video": "https://www.youtube.com/watch?v=s3L_Cux2RFs"
+              "video": "https://www.youtube.com/watch?v=s3L_Cux2RFs",
+              "themes": ["craftsmanship", "career"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2021-bilim-sohbetleri",
+            "alt": "Lemi smiling in a round Zoom webcam beside a slide with a photo of a young boy and a page of BASIC sprite code from an old programming book"
+          }
         },
         {
           "date": "2021-10-23",
@@ -551,13 +766,27 @@
             {
               "title": "Unlearn OOP: Deleted Scenes, Misconceptions, Unspoken Truths",
               "slides": "https://speakerdeck.com/lemiorhan/unlearn-oop-deleted-scenes-misconceptions-unspoken-truths",
-              "video": "https://www.youtube.com/watch?v=zsmzO1aT0mA"
+              "video": "https://www.youtube.com/watch?v=zsmzO1aT0mA",
+              "themes": ["design"]
             }
           ],
           "photo": {
             "file": "2021-devnot",
             "alt": "Screenshot of the online talk, a slide on time lost to abstractions and design patterns"
           }
+        },
+        {
+          "name": "Junior Bile Değil #7",
+          "lang": "tr",
+          "role": "Podcast",
+          "talks": [
+            {
+              "title": "Yazılımın Geçmişi ve Geleceği",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=mBPx4ZtsMmM",
+              "themes": ["career", "speaking"]
+            }
+          ]
         },
         {
           "date": "2021-08-13",
@@ -568,9 +797,14 @@
             {
               "title": "Testlerde Mock Cehenneminden Kaçış",
               "lang": "tr",
-              "video": "https://www.youtube.com/watch?v=MdLlJEhODkE"
+              "video": "https://www.youtube.com/watch?v=MdLlJEhODkE",
+              "themes": ["testing"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2021-teknasyon",
+            "alt": "Lemi smiling in a webcam tile captioned with his name, next to Suna Yazıcı on a Teknasyon Tech stream"
+          }
         },
         {
           "name": "Ruby Türkiye Akşam Oturması #10",
@@ -580,9 +814,28 @@
             {
               "title": "Yazılımın Modüler Yapıya Evrimi",
               "lang": "tr",
-              "video": "https://www.youtube.com/watch?v=ixN8LeAs_ZI"
+              "video": "https://www.youtube.com/watch?v=ixN8LeAs_ZI",
+              "themes": ["architecture"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2021-ruby-turkiye",
+            "alt": "Lemi on a full-screen webcam in a dim room, wearing a black t-shirt and a white earbud"
+          }
+        },
+        {
+          "name": "Think. Design. Work Smart. with Alex Bolboaca",
+          "role": "Podcast",
+          "talks": [
+            {
+              "video": "https://www.youtube.com/watch?v=jksb10dcYB8",
+              "themes": ["git", "culture", "design"]
+            }
+          ],
+          "photo": {
+            "file": "2021-think-design-work-smart",
+            "alt": "Lemi smiling at the camera on a webcam, in a dark hoodie and a white earbud, in front of a plain wall and a mesh chair"
+          }
         },
         {
           "date": "2021-03-14",
@@ -590,9 +843,14 @@
           "place": "online",
           "talks": [
             {
-              "video": "https://www.youtube.com/watch?v=tVdaiOtraD4&t=2508s"
+              "video": "https://www.youtube.com/watch?v=tVdaiOtraD4&t=2508s",
+              "themes": ["career"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2021-cs-techtalks",
+            "alt": "Lemi talking in a large StreamYard webcam tile captioned with his name, with Ümit Kaan Usta in a small tile beside him"
+          }
         },
         {
           "date": "2021-03-07",
@@ -600,12 +858,45 @@
           "place": "online",
           "talks": [
             {
-              "video": "https://www.youtube.com/watch?v=FFYDNTWG-JI"
+              "video": "https://www.youtube.com/watch?v=FFYDNTWG-JI",
+              "themes": ["culture"]
+            }
+          ],
+          "photo": {
+            "file": "2021-weekeng",
+            "alt": "Lemi smiling in his webcam tile next to Ali Nizam on the WeekEng 2021 question-and-answer screen"
+          }
+        },
+        {
+          "name": "Üretim Bandı",
+          "lang": "tr",
+          "role": "Podcast",
+          "talks": [
+            {
+              "title": "Teknik: Kod İnceleme Süreçleri",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=x5lGD81HGyw",
+              "themes": ["code-review"]
             }
           ]
         }
       ],
       "2020": [
+        {
+          "name": "Daha İyi Bir Profesyonel Hayatın Dillendirilmeyen Kuralları",
+          "place": "online",
+          "lang": "tr",
+          "talks": [
+            {
+              "video": "https://www.youtube.com/watch?v=VBWS1-ngCKo",
+              "themes": ["career"]
+            }
+          ],
+          "photo": {
+            "file": "2020-profesyonel-hayat",
+            "alt": "Lemi smiling on his webcam in rimless glasses and a black polo shirt, a mesh office chair and a grey wall behind him"
+          }
+        },
         {
           "date": "2020-11-21",
           "name": "Devnot Developer Summit Online 2020",
@@ -614,7 +905,25 @@
             {
               "title": "It is not SOLID Anymore",
               "slides": "https://speakerdeck.com/lemiorhan/it-is-not-solid-anymore",
-              "video": "https://www.youtube.com/watch?v=pdtpWYNBzqM"
+              "video": "https://www.youtube.com/watch?v=pdtpWYNBzqM",
+              "themes": ["design"]
+            }
+          ],
+          "photo": {
+            "file": "2020-devnot",
+            "alt": "Lemi in a captioned webcam tile beside his slide The Modularity Mindset on the Devnot Developer Summit Online stream"
+          }
+        },
+        {
+          "name": "Üretim Bandı",
+          "lang": "tr",
+          "role": "Podcast",
+          "talks": [
+            {
+              "title": "Teknik: Craftbase nasıl yazılım geliştiriyor?",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=9SxmASl_Wpc",
+              "themes": ["craftsmanship", "architecture"]
             }
           ]
         },
@@ -625,7 +934,8 @@
           "talks": [
             {
               "title": "Beyti Code: Growing Hexagonal Microservices with TDD",
-              "video": "https://www.youtube.com/watch?v=ZMB-Xlh5Rj0"
+              "video": "https://www.youtube.com/watch?v=ZMB-Xlh5Rj0",
+              "themes": ["architecture", "testing"]
             }
           ],
           "photo": {
@@ -642,7 +952,8 @@
             {
               "title": "Modular Architecture for Pragmatic Developers",
               "slides": "https://speakerdeck.com/lemiorhan/modular-architecture-for-pragmatic-developers",
-              "video": "https://www.youtube.com/watch?v=aWOHq6AHNjU&t=10832s"
+              "video": "https://www.youtube.com/watch?v=aWOHq6AHNjU&t=10832s",
+              "themes": ["architecture"]
             }
           ]
         },
@@ -653,7 +964,8 @@
             {
               "title": "Finding The Invisible Gorilla At Your Product Development Journey",
               "slides": "https://speakerdeck.com/lemiorhan/finding-the-invisible-gorilla-at-your-product-development-journey",
-              "video": "https://www.youtube.com/watch?v=g0-Lramjn3A"
+              "video": "https://www.youtube.com/watch?v=g0-Lramjn3A",
+              "themes": ["product", "agile"]
             }
           ]
         },
@@ -664,7 +976,19 @@
           "talks": [
             {
               "title": "10 Faulty Behaviors of Code Review",
-              "slides": "https://speakerdeck.com/lemiorhan/10-faulty-behaviors-of-code-review-itake-unconference"
+              "slides": "https://speakerdeck.com/lemiorhan/10-faulty-behaviors-of-code-review-itake-unconference",
+              "themes": ["code-review"]
+            }
+          ]
+        },
+        {
+          "name": "Git: Bildiğiniz Gibi Değil",
+          "place": "online",
+          "lang": "tr",
+          "talks": [
+            {
+              "video": "https://www.youtube.com/watch?v=OOmsCltczCA",
+              "themes": ["git"]
             }
           ]
         },
@@ -675,12 +999,45 @@
           "lang": "tr",
           "talks": [
             {
-              "video": "https://www.youtube.com/watch?v=amP0SNQh9yA"
+              "video": "https://www.youtube.com/watch?v=amP0SNQh9yA",
+              "themes": ["git"]
             }
           ]
+        },
+        {
+          "date": "2020-02-22",
+          "name": "BİLMÖK 2020, Yeditepe Üniversitesi",
+          "place": "istanbul",
+          "lang": "tr",
+          "talks": [
+            {
+              "title": "Revolutionary Hexagonal Architecture",
+              "video": "https://www.youtube.com/watch?v=B5SRBoubjao&t=21700s",
+              "themes": ["architecture"]
+            }
+          ],
+          "photo": {
+            "file": "2020-bilmok",
+            "alt": "Lemi in a black long-sleeved polo shirt on a wooden stage, talking with a handheld microphone in one hand and gesturing with the other"
+          }
         }
       ],
       "2019": [
+        {
+          "name": "JetBrains Day Istanbul 2019",
+          "place": "istanbul",
+          "talks": [
+            {
+              "title": "Slow Down To Go Faster In Software Development",
+              "video": "https://www.youtube.com/watch?v=f9YXAIwuTro",
+              "themes": ["craftsmanship", "quality"]
+            }
+          ],
+          "photo": {
+            "file": "2019-jetbrains-day",
+            "alt": "Lemi in a black polo shirt with a lanyard and headset microphone, talking with a slight smile on a dark stage in front of a dark backdrop with the JetBrains name cut off at the edge"
+          }
+        },
         {
           "name": "TEDxTarsusAmericanCollege",
           "place": "tarsus",
@@ -689,7 +1046,8 @@
               "title": "Bir Gecede Ünlü Eden Elma",
               "lang": "tr",
               "video": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma",
-              "summary": "The night of the macOS root bug, told again two years later. The [root bug page](../root-bug/) has the story and the press."
+              "summary": "The night of the macOS root bug, told again two years later. The [root bug page](../root-bug/) has the story and the press.",
+              "themes": ["security", "ethics"]
             }
           ],
           "photo": {
@@ -705,12 +1063,38 @@
           "talks": [
             {
               "title": "10 Exclusive Development Practice Every Developer Should Consider",
-              "slides": "https://speakerdeck.com/lemiorhan/10-exclusive-development-practice-every-developer-should-consider"
+              "slides": "https://speakerdeck.com/lemiorhan/10-exclusive-development-practice-every-developer-should-consider",
+              "themes": ["craftsmanship"]
             }
           ],
           "photo": {
             "file": "2019-devfest-istanbul",
             "alt": "Lemi on the DevFest Istanbul 2019 stage with a terminal on the screen behind"
+          }
+        },
+        {
+          "name": "QaCast S1E8",
+          "role": "Podcast",
+          "talks": [
+            {
+              "video": "https://www.youtube.com/watch?v=IkOc-hr5NWQ",
+              "themes": ["quality"]
+            }
+          ]
+        },
+        {
+          "name": "Yazılımcı Sohbetleri, Çay Kahve İnsan",
+          "lang": "tr",
+          "role": "Interview",
+          "talks": [
+            {
+              "video": "https://www.youtube.com/watch?v=VaeGtoH4dhU",
+              "themes": ["career"]
+            }
+          ],
+          "photo": {
+            "file": "2019-cay-kahve-insan",
+            "alt": "Lemi smiling in a light blue polo shirt with a clip-on microphone, in an office with glass walls, city buildings and a large potted plant behind him"
           }
         },
         {
@@ -720,7 +1104,8 @@
           "talks": [
             {
               "title": "Slow Down To Go Faster Than Ever, But How?",
-              "video": "https://www.youtube.com/watch?v=sLDKsjK4kEw"
+              "video": "https://www.youtube.com/watch?v=sLDKsjK4kEw",
+              "themes": ["craftsmanship", "quality"]
             }
           ],
           "photo": {
@@ -736,9 +1121,14 @@
             {
               "title": "Start the Journey of Craftsmanship in Your Startup",
               "slides": "https://speakerdeck.com/lemiorhan/start-the-journey-of-craftsmanship-in-your-startup",
-              "video": "https://www.youtube.com/watch?v=T_fzUxfEQL8"
+              "video": "https://www.youtube.com/watch?v=T_fzUxfEQL8",
+              "themes": ["craftsmanship"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2019-kodla",
+            "alt": "Lemi on a dark stage in a black polo shirt and headset microphone, gesturing with both hands below the projection screen"
+          }
         },
         {
           "name": "Women Software Crafters Empowerment Program, Software Craftsmanship Turkey",
@@ -757,17 +1147,37 @@
             {
               "title": "Slow Down To Go Faster Than Ever, But How?",
               "slides": "https://speakerdeck.com/lemiorhan/slow-down-to-go-faster-than-ever-but-how",
-              "video": "https://www.youtube.com/watch?v=sxf-DpYrJfk"
+              "video": "https://www.youtube.com/watch?v=sxf-DpYrJfk",
+              "themes": ["craftsmanship", "quality"]
             },
             {
               "title": "10 Git Anti-Patterns You Should Be Aware Of",
               "slides": "https://speakerdeck.com/lemiorhan/10-git-anti-patterns-you-should-be-aware-of",
-              "video": "https://www.youtube.com/watch?v=X3QZ_nY5ufU"
+              "video": "https://www.youtube.com/watch?v=X3QZ_nY5ufU",
+              "themes": ["git"]
             }
           ],
           "photo": {
             "file": "2018-growit",
             "alt": "Lemi wearing a speaker badge in front of the GrowIT 2018 sponsor wall in Novi Sad"
+          }
+        },
+        {
+          "date": "2018-12-08",
+          "name": "Kesişen Yollar",
+          "lang": "tr",
+          "role": "Interview",
+          "talks": [
+            {
+              "title": "Yazılım Uzmanlığı",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=RwyG2U7GuGA",
+              "themes": ["career"]
+            }
+          ],
+          "photo": {
+            "file": "2018-kesisen-yollar",
+            "alt": "Lemi smiling at the camera on a webcam, in a heather purple shirt, white bookshelves behind him"
           }
         },
         {
@@ -779,7 +1189,8 @@
             {
               "title": "Agile Bitti Mi?: Hadi Artık Biraz İş Yapalım",
               "lang": "tr",
-              "video": "https://www.youtube.com/watch?v=9vVZLskBFBc"
+              "video": "https://www.youtube.com/watch?v=9vVZLskBFBc",
+              "themes": ["agile"]
             }
           ],
           "photo": {
@@ -813,7 +1224,9 @@
           "talks": [
             {
               "title": "Dünyayı Yazılımın Elinden Kim Kurtaracak?",
-              "lang": "tr"
+              "lang": "tr",
+              "slides": "https://speakerdeck.com/lemiorhan/kodlama-ogrenmek-gercekten-gerekli-mi",
+              "themes": ["career"]
             }
           ],
           "photo": {
@@ -828,22 +1241,13 @@
           "talks": [
             {
               "title": "10 Git Anti Patterns You Should be Aware of",
-              "slides": "https://speakerdeck.com/lemiorhan/10-git-anti-patterns-you-should-be-aware-of"
+              "slides": "https://speakerdeck.com/lemiorhan/10-git-anti-patterns-you-should-be-aware-of",
+              "themes": ["git"]
             }
           ],
           "photo": {
             "file": "2018-itake",
             "alt": "Lemi pointing at a slide that asks: are you brave enough to jump to any commit?"
-          }
-        },
-        {
-          "date": "2018-06-06",
-          "name": "Code.YapıKredi",
-          "place": "istanbul",
-          "lang": "tr",
-          "photo": {
-            "file": "2018-yapikredi",
-            "alt": "Close-up of Lemi speaking with a headset microphone"
           }
         },
         {
@@ -853,7 +1257,8 @@
           "talks": [
             {
               "title": "Clean Software Design: The Practices to Make The Design Simple",
-              "slides": "https://speakerdeck.com/lemiorhan/clean-software-design-the-practices-to-make-the-design-simple"
+              "slides": "https://speakerdeck.com/lemiorhan/clean-software-design-the-practices-to-make-the-design-simple",
+              "themes": ["design"]
             }
           ],
           "photo": {
@@ -869,7 +1274,8 @@
             {
               "title": "10 Faulty Behaviors of Code Review",
               "slides": "https://speakerdeck.com/lemiorhan/10-faulty-behaviors-of-code-review",
-              "video": "https://www.youtube.com/watch?v=d20ol4iJwNM"
+              "video": "https://www.youtube.com/watch?v=d20ol4iJwNM",
+              "themes": ["code-review"]
             }
           ],
           "photo": {
@@ -886,7 +1292,8 @@
               "title": "Yeni Nesil Yazılım Kültürü: Daha İyi Profesyoneller, Daha Kaliteli Yazılım, Daha Çevik Ekip",
               "lang": "tr",
               "slides": "https://speakerdeck.com/lemiorhan/yeni-nesil-yazilim-kulturu-daha-iyi-profesyoneller-daha-kaliteli-yazilim-daha-cevik-ekip",
-              "video": "https://www.youtube.com/watch?v=5k8YSGzFrvc"
+              "video": "https://www.youtube.com/watch?v=5k8YSGzFrvc",
+              "themes": ["craftsmanship", "culture"]
             }
           ],
           "photo": {
@@ -910,7 +1317,8 @@
             {
               "title": "Irresponsible Disclosure: Short Handbook of an Ethical Developer",
               "slides": "https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer",
-              "summary": "Going public with the macOS root bug, and the principles of an ethical developer. The [root bug page](../root-bug/) tells the story."
+              "summary": "Going public with the macOS root bug, and the principles of an ethical developer. The [root bug page](../root-bug/) tells the story.",
+              "themes": ["ethics", "security"]
             }
           ],
           "photo": {
@@ -926,7 +1334,8 @@
           "talks": [
             {
               "title": "Temiz Kod Tasarımı",
-              "lang": "tr"
+              "lang": "tr",
+              "themes": ["design"]
             }
           ],
           "photo": {
@@ -944,7 +1353,8 @@
             {
               "title": "Yeni Nesil Yazılım Kültürü",
               "lang": "tr",
-              "video": "https://www.youtube.com/watch?v=DRGnkTJqBzQ"
+              "video": "https://www.youtube.com/watch?v=DRGnkTJqBzQ",
+              "themes": ["craftsmanship", "culture"]
             }
           ],
           "photo": {
@@ -961,9 +1371,14 @@
             {
               "title": "Teknik Mülakatlara Nasıl Hazırlanmalı?",
               "lang": "tr",
-              "video": "https://www.youtube.com/watch?v=H1fapuTjCs4"
+              "video": "https://www.youtube.com/watch?v=H1fapuTjCs4",
+              "themes": ["career"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2018-koc",
+            "alt": "Lemi seated in an armchair in a striped sweater, gesturing as he talks, in front of a Kworks banner"
+          }
         }
       ],
       "2017": [
@@ -975,7 +1390,25 @@
           "talks": [
             {
               "title": "Agile For Startups: How to Turn Chaos into Agility at Startups",
-              "video": "https://www.youtube.com/watch?v=I9IDIXLN5Uc"
+              "video": "https://www.youtube.com/watch?v=I9IDIXLN5Uc",
+              "themes": ["agile"]
+            }
+          ],
+          "photo": {
+            "file": "2017-koc",
+            "alt": "Lemi in a black iyzico polo shirt speaking beside a projected iyzico slide and a Kworks banner"
+          }
+        },
+        {
+          "name": "Üretim Bandı",
+          "lang": "tr",
+          "role": "Podcast",
+          "talks": [
+            {
+              "title": "İyzico nasıl ürün geliştiriyor?",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=jOnvWQPgUE8",
+              "themes": ["product"]
             }
           ]
         },
@@ -986,9 +1419,14 @@
           "talks": [
             {
               "title": "Git Anti-Patterns: How To Mess Up With Git And Love It Again",
-              "video": "https://www.youtube.com/watch?v=07Q96cNYzPQ"
+              "video": "https://www.youtube.com/watch?v=07Q96cNYzPQ",
+              "themes": ["git"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2017-devfest-istanbul",
+            "alt": "Lemi in a pink polo shirt on a dark stage beside a Kadir Has University lectern, under a GDG DevFest Istanbul 2017 banner"
+          }
         },
         {
           "date": "2017-11-10",
@@ -999,12 +1437,14 @@
             {
               "title": "Git Anti Patterns",
               "slides": "https://speakerdeck.com/lemiorhan/git-anti-patterns-1",
-              "video": "https://www.youtube.com/watch?v=J_JYrAjX05Y"
+              "video": "https://www.youtube.com/watch?v=J_JYrAjX05Y",
+              "themes": ["git"]
             },
             {
               "title": "Fighting with Waste Driven Development: Lean Thinking for Software Developers",
               "slides": "https://speakerdeck.com/lemiorhan/fighting-with-waste-driven-development-lean-thinking-for-software-developers",
-              "video": "https://www.youtube.com/watch?v=Iw3I_nALH6s"
+              "video": "https://www.youtube.com/watch?v=Iw3I_nALH6s",
+              "themes": ["lean"]
             }
           ],
           "photo": {
@@ -1029,6 +1469,18 @@
           }
         },
         {
+          "name": "Yazılım Ofisleri, Devnot",
+          "lang": "tr",
+          "role": "Interview",
+          "talks": [
+            {
+              "title": "iyzico",
+              "video": "https://www.youtube.com/watch?v=rg54C7Ki3tQ",
+              "themes": ["culture", "product"]
+            }
+          ]
+        },
+        {
           "date": "2017-05-12",
           "name": "İzmir Ekonomi Üniversitesi",
           "place": "izmir",
@@ -1045,12 +1497,27 @@
           "talks": [
             {
               "title": "Git Anti-Patterns: How To Mess Up With Git And Love It Again",
-              "video": "https://www.youtube.com/watch?v=bEXuYvry3_o"
+              "video": "https://www.youtube.com/watch?v=bEXuYvry3_o",
+              "themes": ["git"]
             }
           ],
           "photo": {
             "file": "2017-javaday",
             "alt": "Wide view of a hotel ballroom, Lemi on stage between two screens showing Git Anti Patterns"
+          }
+        },
+        {
+          "name": "Java Day Istanbul 2017",
+          "role": "Interview",
+          "talks": [
+            {
+              "video": "https://www.youtube.com/watch?v=KAHKXbIW-2M",
+              "themes": ["culture"]
+            }
+          ],
+          "photo": {
+            "file": "2017-javaday-interview",
+            "alt": "Lemi smiling in a black polo shirt with a blue lanyard, captioned with his name and iyzico, in front of a banner reading DAY Istanbul"
           }
         },
         {
@@ -1061,7 +1528,8 @@
             {
               "title": "Git Anti-Patterns: How To Mess Up With Git and Love it Again",
               "slides": "https://speakerdeck.com/lemiorhan/git-anti-patterns-how-to-mess-up-with-git-and-love-it-again",
-              "video": "https://www.youtube.com/watch?v=m3ITI7tT_Qo"
+              "video": "https://www.youtube.com/watch?v=m3ITI7tT_Qo",
+              "themes": ["git"]
             }
           ],
           "photo": {
@@ -1076,7 +1544,8 @@
           "role": "Panel",
           "talks": [
             {
-              "title": "Agile Testing Tools & Technologies"
+              "title": "Agile Testing Tools & Technologies",
+              "themes": ["testing", "agile"]
             }
           ],
           "photo": {
@@ -1094,7 +1563,8 @@
             {
               "title": "Çevik Dönüşüm Paneli",
               "lang": "tr",
-              "video": "https://www.youtube.com/watch?v=YZsAdA9HCFw"
+              "video": "https://www.youtube.com/watch?v=YZsAdA9HCFw",
+              "themes": ["agile"]
             }
           ],
           "photo": {
@@ -1110,7 +1580,8 @@
             {
               "title": "Clean Software Design",
               "slides": "https://speakerdeck.com/lemiorhan/clean-software-design-1",
-              "video": "https://www.youtube.com/watch?v=7m88T8-96X4"
+              "video": "https://www.youtube.com/watch?v=7m88T8-96X4",
+              "themes": ["design"]
             }
           ],
           "photo": {
@@ -1124,12 +1595,29 @@
           "place": "novi-sad",
           "talks": [
             {
-              "title": "Fighting with Waste Driven Development"
+              "title": "Fighting with Waste Driven Development",
+              "themes": ["lean"]
             }
           ],
           "photo": {
             "file": "2017-agile-coaching-serbia",
             "alt": "Lemi at the front of a packed meetup room, a slide on the screen behind"
+          }
+        },
+        {
+          "name": "Devnot",
+          "role": "Interview",
+          "talks": [
+            {
+              "title": "Yazılımda Ustalık Çıraklık İlişkisi",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=q_AIH90dEvw",
+              "themes": ["craftsmanship"]
+            }
+          ],
+          "photo": {
+            "file": "2017-devnot-ustalik",
+            "alt": "Lemi smiling on a grey sofa in a purple polo shirt with a clip-on microphone, against a plain cream wall"
           }
         },
         {
@@ -1139,7 +1627,8 @@
           "lang": "tr",
           "talks": [
             {
-              "title": "Crafting Professional Development"
+              "title": "Crafting Professional Development",
+              "themes": ["craftsmanship"]
             }
           ],
           "photo": {
@@ -1155,7 +1644,8 @@
           "talks": [
             {
               "title": "Agile Kültürü ve Scrum",
-              "lang": "tr"
+              "lang": "tr",
+              "themes": ["agile"]
             }
           ],
           "photo": {
@@ -1171,6 +1661,22 @@
           "photo": {
             "file": "2017-fsm",
             "alt": "Lemi beside a slide that reads Be honest, to yourself, to teammates, to managers"
+          }
+        },
+        {
+          "name": "Devnot",
+          "role": "Interview",
+          "talks": [
+            {
+              "title": "TDD Uygulamak Neden Zor?",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=pX8wsryhRKo",
+              "themes": ["testing"]
+            }
+          ],
+          "photo": {
+            "file": "2017-devnot-tdd",
+            "alt": "Lemi smiling broadly on a grey sofa in a purple polo shirt with a clip-on microphone, against a plain cream wall"
           }
         },
         {
@@ -1191,7 +1697,8 @@
             {
               "title": "Test Driven Design",
               "slides": "https://speakerdeck.com/lemiorhan/test-driven-design",
-              "video": "https://www.youtube.com/watch?v=ayqLzN78PsU"
+              "video": "https://www.youtube.com/watch?v=ayqLzN78PsU",
+              "themes": ["testing", "design"]
             }
           ],
           "photo": {
@@ -1204,10 +1711,38 @@
           "place": "izmir"
         },
         {
+          "date": "2016-11-17",
+          "name": "IT Serbia Podcast",
+          "role": "Podcast",
+          "talks": [
+            {
+              "title": "On fighting elephants in the room",
+              "video": "https://www.youtube.com/watch?v=Di-dsOBgrdY",
+              "themes": ["agile", "craftsmanship"]
+            }
+          ]
+        },
+        {
           "name": "Global Day of Coderetreat 2016",
           "place": "istanbul",
           "url": "https://www.coderetreat.org/",
           "role": "Facilitator"
+        },
+        {
+          "name": "Yönetim 2.0, Gelecekhane",
+          "lang": "tr",
+          "talks": [
+            {
+              "title": "Çevik Yönetim: 3. Nesil Yönetim Felsefesi",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=25xGWtgfYYA",
+              "themes": ["agile"]
+            }
+          ],
+          "photo": {
+            "file": "2016-gelecekhane",
+            "alt": "Lemi in a striped shirt with a lanyard and headset microphone, talking toward the camera in front of a white wall with a grey geometric logo"
+          }
         },
         {
           "name": "Bosnia Agile Day 2016",
@@ -1217,7 +1752,8 @@
             {
               "title": "Let The Elephants Leave The Room: Remove Waste in Software Development",
               "slides": "https://speakerdeck.com/lemiorhan/let-the-elephants-leave-the-room-remove-waste-in-software-development",
-              "video": "https://www.youtube.com/watch?v=OUJKu9ZHLis"
+              "video": "https://www.youtube.com/watch?v=OUJKu9ZHLis",
+              "themes": ["lean"]
             }
           ],
           "photo": {
@@ -1231,7 +1767,8 @@
           "talks": [
             {
               "title": "Lemi's Way About Preparing and Presenting Talks",
-              "slides": "https://speakerdeck.com/lemiorhan/lemis-way-about-preparing-and-presenting-talks"
+              "slides": "https://speakerdeck.com/lemiorhan/lemis-way-about-preparing-and-presenting-talks",
+              "themes": ["speaking"]
             }
           ],
           "photo": {
@@ -1247,9 +1784,14 @@
             {
               "title": "Çevikliği Kodlamak: Teknik Çeviklik ve DevOps Kültürünün Yapıtaşları",
               "lang": "tr",
-              "video": "https://www.youtube.com/watch?v=l1DqBlddbeQ"
+              "video": "https://www.youtube.com/watch?v=l1DqBlddbeQ",
+              "themes": ["agile", "culture"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2016-agile-talks",
+            "alt": "Lemi in a red polo shirt holding a handheld microphone in front of a Havelsan banner"
+          }
         },
         {
           "name": "Agile Middle East 2016",
@@ -1257,9 +1799,14 @@
           "talks": [
             {
               "title": "Let the Elephants Leave the Room: Tips for Making Development Life Leaner",
-              "video": "https://www.youtube.com/watch?v=osU3UR9Y_o0"
+              "video": "https://www.youtube.com/watch?v=osU3UR9Y_o0",
+              "themes": ["lean"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2016-agile-middle-east",
+            "alt": "Lemi in a blue shirt and lanyard gesturing with both arms beside a flipchart, the Agile ME logo in the corner and the audience in front"
+          }
         },
         {
           "date": "2016-04-12",
@@ -1269,9 +1816,14 @@
             {
               "title": "Happy Developer's Guide to the Galaxy: Thinking About Motivation of Developers",
               "slides": "https://speakerdeck.com/lemiorhan/happy-developers-guide-to-the-galaxy-thinking-about-motivation-of-developers",
-              "video": "https://www.youtube.com/watch?v=naq49KIEVls"
+              "video": "https://www.youtube.com/watch?v=naq49KIEVls",
+              "themes": ["motivation"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2016-agile-bulusmalar",
+            "alt": "Lemi in a striped shirt standing in front of a slide titled Manage Your Brand, beside an AgileTurkey banner"
+          }
         },
         {
           "name": "Boğaziçi University Tech Summit 2016",
@@ -1289,7 +1841,19 @@
             {
               "title": "Git: Bildiğiniz Gibi Değil",
               "lang": "tr",
-              "slides": "https://speakerdeck.com/lemiorhan/git-bildiginiz-gibi-degil"
+              "slides": "https://speakerdeck.com/lemiorhan/git-bildiginiz-gibi-degil",
+              "themes": ["git"]
+            }
+          ]
+        },
+        {
+          "date": "2016-01-11",
+          "name": "DevPod",
+          "role": "Podcast",
+          "talks": [
+            {
+              "video": "https://www.youtube.com/watch?v=j5Or2ZjguS8",
+              "themes": ["craftsmanship"]
             }
           ]
         }
@@ -1308,9 +1872,14 @@
             {
               "title": "Code Your Agility: Tips for Boosting Technical Agility in Your Organization",
               "slides": "https://speakerdeck.com/lemiorhan/code-your-agility-tips-for-boosting-technical-agility-in-your-organization",
-              "video": "https://www.youtube.com/watch?v=_om9fwD_eNk"
+              "video": "https://www.youtube.com/watch?v=_om9fwD_eNk",
+              "themes": ["agile", "craftsmanship"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2015-agile-tour-kaunas",
+            "alt": "Lemi in a red shirt and speaker badge in front of Callcredit and Intermedix sponsor banners"
+          }
         },
         {
           "date": "2015-09-17",
@@ -1319,9 +1888,14 @@
             {
               "title": "Lost in Motivation in an Agile World",
               "slides": "https://speakerdeck.com/lemiorhan/lost-in-motivation-in-an-agile-world",
-              "video": "https://www.youtube.com/watch?v=GnWbFTQPNHY"
+              "video": "https://www.youtube.com/watch?v=GnWbFTQPNHY",
+              "themes": ["motivation", "agile"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2015-turk-telekom",
+            "alt": "Lemi in a striped shirt at a lectern, wearing a name badge on a lanyard"
+          }
         },
         {
           "name": "PHPKonf 2015",
@@ -1331,7 +1905,8 @@
           "talks": [
             {
               "title": "TDD: Inevitable Challenge for Software Developers",
-              "slides": "https://speakerdeck.com/lemiorhan/tdd-inevitable-challenge-for-software-developers"
+              "slides": "https://speakerdeck.com/lemiorhan/tdd-inevitable-challenge-for-software-developers",
+              "themes": ["testing"]
             }
           ]
         },
@@ -1342,7 +1917,8 @@
           "talks": [
             {
               "title": "Unleashed Power Behind The Myths: Pair Programming",
-              "slides": "https://speakerdeck.com/lemiorhan/unleashed-power-behind-the-myths-pair-programming"
+              "slides": "https://speakerdeck.com/lemiorhan/unleashed-power-behind-the-myths-pair-programming",
+              "themes": ["craftsmanship"]
             }
           ]
         },
@@ -1353,7 +1929,8 @@
           "talks": [
             {
               "title": "Trespassing The Forgotten and Abandoned: Ethics in Software Development",
-              "slides": "https://speakerdeck.com/lemiorhan/trespassing-the-forgotten-and-abandoned-ethics-in-software-development"
+              "slides": "https://speakerdeck.com/lemiorhan/trespassing-the-forgotten-and-abandoned-ethics-in-software-development",
+              "themes": ["ethics"]
             }
           ]
         },
@@ -1363,9 +1940,14 @@
           "talks": [
             {
               "title": "Searching The Missing Single Quote",
-              "video": "https://www.youtube.com/watch?v=U2DA3a_hurk"
+              "video": "https://www.youtube.com/watch?v=U2DA3a_hurk",
+              "themes": ["craftsmanship", "quality"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2015-bilkent",
+            "alt": "Lemi at a lectern on a wide auditorium stage beside his title slide Searching the Missing Single Quote"
+          }
         },
         {
           "name": "Boğaziçi University Exit Days 2015",
@@ -1381,7 +1963,8 @@
             {
               "title": "Teoriden Pratiğe Mikroservisler",
               "lang": "tr",
-              "slides": "https://speakerdeck.com/lemiorhan/teoriden-pratige-mikroservisler"
+              "slides": "https://speakerdeck.com/lemiorhan/teoriden-pratige-mikroservisler",
+              "themes": ["architecture"]
             }
           ]
         },
@@ -1393,7 +1976,8 @@
           "role": "Facilitator",
           "talks": [
             {
-              "slides": "https://speakerdeck.com/lemiorhan/global-day-of-coderetreat-istanbul-event-2014"
+              "slides": "https://speakerdeck.com/lemiorhan/global-day-of-coderetreat-istanbul-event-2014",
+              "themes": ["craftsmanship"]
             }
           ]
         },
@@ -1404,14 +1988,37 @@
           "talks": [
             {
               "title": "Let The Elephants Leave The Room: Tips For Making Your Development Life Leaner",
-              "slides": "https://speakerdeck.com/lemiorhan/let-the-elephants-leave-the-room-tips-for-making-your-development-life-leaner"
+              "slides": "https://speakerdeck.com/lemiorhan/let-the-elephants-leave-the-room-tips-for-making-your-development-life-leaner",
+              "themes": ["lean"]
             }
           ]
         },
         {
+          "date": "2014-09-24",
+          "name": "Agile Leaders, Episode 1",
+          "place": "online",
+          "talks": [
+            {
+              "video": "https://www.youtube.com/watch?v=Af1ymJzPjIo",
+              "themes": ["agile"]
+            }
+          ],
+          "photo": {
+            "file": "2014-agile-leaders",
+            "alt": "Lemi talking to his webcam in a headset with a boom microphone, a yellow wall behind him and light reflecting on his glasses"
+          }
+        },
+        {
           "name": "DevFest Istanbul 2014",
           "place": "istanbul",
-          "url": "https://devfest.istanbul/"
+          "url": "https://devfest.istanbul/",
+          "talks": [
+            {
+              "title": "Software Craftsmanship: Building A Culture for The Future",
+              "video": "https://www.youtube.com/watch?v=Dy1EVPaZtYg",
+              "themes": ["craftsmanship", "culture"]
+            }
+          ]
         },
         {
           "name": "GDG Istanbul meetup",
@@ -1419,7 +2026,8 @@
           "talks": [
             {
               "title": "A Gentle Introduction to Micro Services: From Theory into Practice",
-              "slides": "https://speakerdeck.com/lemiorhan/a-gentle-introduction-to-micro-services-from-theory-into-practice"
+              "slides": "https://speakerdeck.com/lemiorhan/a-gentle-introduction-to-micro-services-from-theory-into-practice",
+              "themes": ["architecture"]
             }
           ]
         },
@@ -1433,9 +2041,14 @@
             {
               "title": "Fix Your Broken Windows With Code Reviews",
               "slides": "https://speakerdeck.com/lemiorhan/fix-your-broken-windows-with-code-reviews",
-              "video": "https://www.youtube.com/watch?v=fSCcTTaSvNM"
+              "video": "https://www.youtube.com/watch?v=fSCcTTaSvNM",
+              "themes": ["code-review"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2014-phpist",
+            "alt": "Lemi in a light shirt with a handheld microphone beside a Bahçeşehir University lectern, the phpist sponsor wall and his name slide behind him"
+          }
         },
         {
           "name": "Kodcu.com webinar",
@@ -1444,9 +2057,25 @@
             {
               "title": "Java Exception Handling Best Practices",
               "slides": "https://speakerdeck.com/lemiorhan/java-exception-handling-best-practices",
-              "video": "https://www.youtube.com/watch?v=mpx5lEcXxt0"
+              "video": "https://www.youtube.com/watch?v=mpx5lEcXxt0",
+              "themes": ["design"]
             }
           ]
+        },
+        {
+          "date": "2014-01-29",
+          "name": "BBS, Sony",
+          "talks": [
+            {
+              "title": "Advanced Git Topics: Git Internals",
+              "video": "https://www.youtube.com/watch?v=rv7rddQfU70",
+              "themes": ["git"]
+            }
+          ],
+          "photo": {
+            "file": "2014-sony-git-internals",
+            "alt": "Lemi in a grey checked shirt standing beside a projected slide titled .GIT DIRECTORY in a meeting room"
+          }
         }
       ],
       "2013": [
@@ -1458,7 +2087,23 @@
             {
               "title": "Git and Git Workflow Models as Catalysts of Software Development",
               "slides": "https://speakerdeck.com/lemiorhan/git-and-git-workflow-models-as-catalysts-of-software-development",
-              "video": "https://www.youtube.com/watch?v=fmFQ4jF3J10"
+              "video": "https://www.youtube.com/watch?v=fmFQ4jF3J10",
+              "themes": ["git"]
+            }
+          ],
+          "photo": {
+            "file": "2013-devfest-istanbul",
+            "alt": "Lemi in a striped shirt beside a slide titled Git Workflow Model, seen over the heads of the audience"
+          }
+        },
+        {
+          "date": "2013-11-06",
+          "name": "BBS, Sony",
+          "talks": [
+            {
+              "title": "Git Branching Model",
+              "video": "https://www.youtube.com/watch?v=rcZAh3v1lp4",
+              "themes": ["git"]
             }
           ]
         },
@@ -1469,7 +2114,35 @@
             {
               "title": "How Do You Build Software? Software Engineering Practices of an Agile Developer",
               "slides": "https://speakerdeck.com/lemiorhan/how-do-you-build-software-software-engineering-practices-of-an-agile-developer",
-              "video": "https://www.youtube.com/watch?v=O3otp9iPISA"
+              "video": "https://www.youtube.com/watch?v=O3otp9iPISA",
+              "themes": ["agile", "craftsmanship"]
+            }
+          ],
+          "photo": {
+            "file": "2013-etohum",
+            "alt": "Lemi in a lavender shirt holding a microphone in front of a whiteboard covered in Scrum sketches, the eTohum logo in the corner"
+          }
+        },
+        {
+          "date": "2013-09-18",
+          "name": "BBS, Sony",
+          "talks": [
+            {
+              "title": "Technical Debt",
+              "video": "https://www.youtube.com/watch?v=0fToMM7Za74",
+              "themes": ["quality"]
+            }
+          ]
+        },
+        {
+          "date": "2013-06-12",
+          "name": "BBS, Sony",
+          "talks": [
+            {
+              "title": "GDOsuz Yazılım Geliştirme Teknikleri",
+              "lang": "tr",
+              "video": "https://www.youtube.com/watch?v=lfarPkVmkFY",
+              "themes": ["agile", "craftsmanship"]
             }
           ]
         },
@@ -1480,7 +2153,8 @@
             {
               "title": "GMO'less Software Development Practices",
               "slides": "https://speakerdeck.com/lemiorhan/gmoless-software-development-practices",
-              "video": "https://www.youtube.com/watch?v=TxJo4O9uHZ8"
+              "video": "https://www.youtube.com/watch?v=TxJo4O9uHZ8",
+              "themes": ["agile", "craftsmanship"]
             }
           ]
         },
@@ -1495,7 +2169,8 @@
             {
               "title": "Başarılı Projelerin Anahtarı: Çevik Yazılım Geliştirme Pratikleri",
               "lang": "tr",
-              "slides": "https://speakerdeck.com/lemiorhan/basarili-projelerin-anahtari-cevik-yazilim-gelistirme-pratikleri"
+              "slides": "https://speakerdeck.com/lemiorhan/basarili-projelerin-anahtari-cevik-yazilim-gelistirme-pratikleri",
+              "themes": ["agile"]
             }
           ]
         },
@@ -1505,11 +2180,27 @@
       ],
       "2012": [
         {
+          "date": "2012-12-13",
+          "name": "Internal talk, Sony",
+          "talks": [
+            {
+              "title": "The Elephant in the Room: Motivation",
+              "video": "https://www.youtube.com/watch?v=_mYgWhoa28I",
+              "themes": ["motivation"]
+            }
+          ],
+          "photo": {
+            "file": "2012-sony-motivation",
+            "alt": "Lemi in a striped shirt talking in a dim room beside a projected slide with his name and a Sony e-mail address"
+          }
+        },
+        {
           "date": "2012-12-04",
           "name": "IPYD seminar",
           "talks": [
             {
-              "title": "The Elephant in the Room: Motivation"
+              "title": "The Elephant in the Room: Motivation",
+              "themes": ["motivation"]
             }
           ]
         },
@@ -1520,9 +2211,14 @@
           "lang": "tr",
           "talks": [
             {
-              "video": "https://www.youtube.com/watch?v=MrIj53lFoSw"
+              "video": "https://www.youtube.com/watch?v=MrIj53lFoSw",
+              "themes": ["code-review", "culture"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2012-gtu-ieee",
+            "alt": "Lemi in a grey shirt speaking at a lectern in front of a GYTE IEEE banner"
+          }
         },
         {
           "name": "Marmara University, Computer Engineering",
@@ -1530,7 +2226,8 @@
           "talks": [
             {
               "title": "Professional Code of Ethics in Software Engineering",
-              "slides": "https://speakerdeck.com/lemiorhan/professional-code-of-ethics-in-software-engineering"
+              "slides": "https://speakerdeck.com/lemiorhan/professional-code-of-ethics-in-software-engineering",
+              "themes": ["ethics"]
             }
           ]
         },
@@ -1540,7 +2237,8 @@
           "talks": [
             {
               "title": "Professional Software Development, Practices and Ethics",
-              "slides": "https://speakerdeck.com/lemiorhan/professional-software-development-practices-and-ethics"
+              "slides": "https://speakerdeck.com/lemiorhan/professional-software-development-practices-and-ethics",
+              "themes": ["ethics", "craftsmanship"]
             }
           ]
         }

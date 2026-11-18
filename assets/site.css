@@ -965,6 +965,7 @@ a:hover { text-decoration-color: var(--accent); }
 }
 .page-head .cmd { margin-bottom: clamp(1.5rem, 4vw, 2.5rem); }
 .page-head .intro { margin-bottom: 0.5rem; }
+.archive .intro { max-width: none; }
 
 .flag {
   display: inline-block;
@@ -1062,6 +1063,48 @@ a:hover { text-decoration-color: var(--accent); }
 
 .tmap-status { margin: 0.75rem 0 0; font-size: 0.95rem; color: var(--ink-soft); }
 .tmap-status:empty { display: none; }
+
+.themes { margin-top: clamp(2rem, 5vw, 3rem); }
+.themes .sub { margin-top: 0; }
+.cloud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.5rem;
+  margin-top: 0.9rem;
+}
+.cloud button {
+  display: inline-flex;
+  align-items: baseline;
+  padding: 0.3em 0.8em;
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.cloud .all { font-size: 0.95rem; }
+.cloud .t1 { font-size: 0.85rem; font-weight: 500; }
+.cloud .t2 { font-size: 0.95rem; }
+.cloud .t3 { font-size: 1.1rem; }
+.cloud .t4 { font-size: 1.3rem; font-weight: 700; }
+.cloud button:hover { border-color: var(--ink-soft); }
+.cloud button[aria-pressed="true"] {
+  color: var(--paper);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.cloud .n {
+  margin-left: 0.4em;
+  font-size: 0.75em;
+  font-weight: 500;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.cloud button[aria-pressed="true"] .n { color: inherit; opacity: 0.75; }
 
 .ev-place { white-space: nowrap; }
 
@@ -1310,6 +1353,28 @@ a:hover { text-decoration-color: var(--accent); }
   text-decoration-color: color-mix(in srgb, var(--accent-text) 35%, transparent);
 }
 .ev-links a:hover { text-decoration-color: currentColor; }
+
+.ev-themes { display: inline-flex; flex-wrap: wrap; gap: 0.35rem; }
+.ev-themes button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.6rem;
+  padding: 0 0.6rem;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.ev-themes button:hover { color: var(--ink); border-color: var(--ink-soft); }
+.ev-themes button[aria-pressed="true"] {
+  color: var(--paper);
+  background: var(--ink);
+  border-color: var(--ink);
+}
 
 .empty-note { padding-block: 3rem; color: var(--ink-soft); }
 

@@ -1,7 +1,8 @@
 'use strict';
 
-// A DOM double for tests/git_game_dom_cli.js, written by hand for what assets/git-game.js
-// uses. There is no layout: every box measures 0. Reading, writing or calling anything this
+// A DOM double for tests/git_game_dom_cli.js and tests/archive_dom_cli.js, written by hand for
+// what assets/git-game.js and the year archive in assets/site.js use. There is no layout: every
+// box measures 0 and every scroll is only recorded. Reading, writing or calling anything this
 // file does not define throws, and so do selectors, media queries, event types and namespaces
 // it does not know, so page code that needs more DOM fails the smoke test instead of running
 // on `undefined`. An exception in a listener reaches the caller.
@@ -46,20 +47,33 @@ function only(node, tags, member) {
 
 var COMPOUND = /^([a-z][a-z0-9-]*)?((?:\.[\w-]+|#[\w-]+|\[[\w-]+(?:="[^"]*")?\])*)$/i;
 
+// A compiled selector is a list of chains, one per comma; `child` on a compound means it must be
+// the direct child of the element the compound before it matched.
 function compile(selector) {
+  function unsupported() { return new Error('fake DOM: unsupported selector ' + JSON.stringify(String(selector))); }
   return String(selector).split(',').map(function (part) {
-    return part.trim().split(/\s+/).map(function (text) {
+    var chain = [];
+    var child = false;
+    part.trim().replace(/\s*>\s*/g, ' > ').split(/\s+/).forEach(function (text) {
+      if (text === '>') {
+        if (!chain.length || child) throw unsupported();
+        child = true;
+        return;
+      }
       var m = COMPOUND.exec(text);
-      if (!text || !m) throw new Error('fake DOM: unsupported selector ' + JSON.stringify(String(selector)));
-      var c = { tag: m[1] ? m[1].toLowerCase() : null, classes: [], ids: [], attrs: [] };
+      if (!text || !m) throw unsupported();
+      var c = { tag: m[1] ? m[1].toLowerCase() : null, classes: [], ids: [], attrs: [], child: child };
+      child = false;
       m[2].replace(/\.([\w-]+)|#([\w-]+)|\[([\w-]+)(?:="([^"]*)")?\]/g, function (all, cls, id, attr, value) {
         if (cls) c.classes.push(cls);
         else if (id) c.ids.push(id);
         else c.attrs.push([attr, value]);
         return all;
       });
-      return c;
+      chain.push(c);
     });
+    if (child || !chain.length) throw unsupported();
+    return chain;
   });
 }
 
@@ -71,15 +85,18 @@ function matchesCompound(node, c) {
     c.attrs.every(function (a) { return has(node._.attrs, a[0]) && (a[1] === undefined || node._.attrs[a[0]] === a[1]); });
 }
 
+function matchesFrom(node, chain, i) {
+  if (!matchesCompound(node, chain[i])) return false;
+  if (i === 0) return true;
+  if (chain[i].child) return !!node._.parent && matchesFrom(node._.parent, chain, i - 1);
+  for (var up = node._.parent; up; up = up._.parent) {
+    if (matchesFrom(up, chain, i - 1)) return true;
+  }
+  return false;
+}
+
 function matches(node, compiled) {
-  return compiled.some(function (chain) {
-    if (!matchesCompound(node, chain[chain.length - 1])) return false;
-    var i = chain.length - 2;
-    for (var up = node._.parent; up && i >= 0; up = up._.parent) {
-      if (matchesCompound(up, chain[i])) i--;
-    }
-    return i < 0;
-  });
+  return compiled.some(function (chain) { return matchesFrom(node, chain, chain.length - 1); });
 }
 
 function descendants(node, out) {
@@ -159,7 +176,19 @@ class Element extends FakeNode {
 
   setAttribute(name, value) { this._.attrs[name] = String(value); }
   getAttribute(name) { return has(this._.attrs, name) ? this._.attrs[name] : null; }
+  hasAttribute(name) { return has(this._.attrs, name); }
   removeAttribute(name) { delete this._.attrs[name]; }
+
+  cloneNode(deep) {
+    var doc = this._.doc;
+    var copy = this._.svg ? doc.createElementNS(SVG_NS, this._.tag) : doc.createElement(this._.tag);
+    var attrs = this._.attrs;
+    Object.keys(attrs).forEach(function (name) { copy.setAttribute(name, attrs[name]); });
+    if (deep) {
+      this._.children.forEach(function (c) { copy.appendChild(isElement(c) ? c.cloneNode(true) : text(doc, c.textContent)); });
+    }
+    return copy;
+  }
 
   get className() { only(this, null, 'className'); return this.getAttribute('class') || ''; }
   set className(value) { only(this, null, 'className'); this.setAttribute('class', value); }
@@ -171,6 +200,8 @@ class Element extends FakeNode {
     if (value) this.setAttribute('hidden', '');
     else this.removeAttribute('hidden');
   }
+  get tabIndex() { only(this, null, 'tabIndex'); return Number(this.getAttribute('tabindex') || 0); }
+  set tabIndex(value) { only(this, null, 'tabIndex'); this.setAttribute('tabindex', Number(value)); }
   get title() { only(this, null, 'title'); return this.getAttribute('title') || ''; }
   set title(value) { only(this, null, 'title'); this.setAttribute('title', value); }
   get type() { only(this, ['button', 'input'], 'type'); return this.getAttribute('type') || ''; }
@@ -206,13 +237,18 @@ class Element extends FakeNode {
     }
     return new Proxy({}, {
       get: function (t, key) { var v = node.getAttribute(attr(key)); return v === null ? undefined : v; },
-      set: function (t, key, value) { node.setAttribute(attr(key), value); return true; }
+      set: function (t, key, value) { node.setAttribute(attr(key), value); return true; },
+      has: function (t, key) { return node.hasAttribute(attr(key)); }
     });
   }
 
   get style() {
     var props = this._.style;
-    return strict({ setProperty: function (name, value) { props[name] = String(value); } }, 'style');
+    return strict({
+      setProperty: function (name, value) { props[name] = String(value); },
+      get top() { return props.top || ''; },
+      set top(value) { props.top = String(value); }
+    }, 'style');
   }
 
   addEventListener(type, listener) {
@@ -257,6 +293,26 @@ class Element extends FakeNode {
   get scrollWidth() { return 0; }
   get clientWidth() { return 0; }
   get offsetWidth() { return 0; }
+  get offsetHeight() { return 0; }
+  getBoundingClientRect() {
+    return strict({ top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0 }, 'DOMRect');
+  }
+
+  // The SVG geometry the talks map reads: what the attributes say, and a zero box for every shape.
+  get viewBox() {
+    if (!this._.svg || this._.tag !== 'svg') throw new Error('fake DOM: <' + this._.tag + '> has no viewBox');
+    var v = (this.getAttribute('viewBox') || '').trim().split(/\s+/).map(Number);
+    if (v.length !== 4 || v.some(Number.isNaN)) throw new Error('fake DOM: viewBox ' + JSON.stringify(this.getAttribute('viewBox')) + ' is not four numbers');
+    return strict({ baseVal: strict({ x: v[0], y: v[1], width: v[2], height: v[3] }, 'SVGRect') }, 'SVGAnimatedRect');
+  }
+  get r() {
+    if (this._.tag !== 'circle') throw new Error('fake DOM: <' + this._.tag + '> has no r');
+    return strict({ baseVal: strict({ value: Number(this.getAttribute('r')) }, 'SVGLength') }, 'SVGAnimatedLength');
+  }
+  getBBox() {
+    if (!this._.svg) throw new Error('fake DOM: <' + this._.tag + '> has no getBBox');
+    return strict({ x: 0, y: 0, width: 0, height: 0 }, 'SVGRect');
+  }
 
   get value() { only(this, ['input'], 'value'); return this._.value || ''; }
   set value(v) {
@@ -287,6 +343,7 @@ class Document {
     this._ = { active: null, body: null, handled: 0, scrolls: 0 };
   }
 
+  get documentElement() { return this._.html; }
   get body() { return this._.body; }
   get activeElement() { return this._.active || this._.body; }
 
@@ -302,12 +359,14 @@ class Document {
   }
 
   querySelector(selector) { return this._.body.querySelector(selector); }
+  querySelectorAll(selector) { return this._.body.querySelectorAll(selector); }
 }
 
 function createDocument() {
   var raw = new Document();
   var doc = strict(raw, 'document');
-  raw._.body = element(doc, 'body', false);
+  raw._.html = element(doc, 'html', false);
+  raw._.body = raw._.html.appendChild(element(doc, 'body', false));
   return doc;
 }
 
@@ -340,14 +399,19 @@ function fire(target, type, init) {
   return { prevented: prevented, handled: handled };
 }
 
-// options: {narrow, reduceMotion, storage, location: {origin, pathname}}.
+// options: {narrow, reduceMotion, dark, storage, location: {origin, pathname}}.
 function createWindow(options) {
-  var media = { '(max-width: 40rem)': !!options.narrow, '(prefers-reduced-motion: reduce)': !!options.reduceMotion };
+  var media = {
+    '(max-width: 40rem)': !!options.narrow,
+    '(prefers-reduced-motion: reduce)': !!options.reduceMotion,
+    '(prefers-color-scheme: dark)': !!options.dark
+  };
   var frames = [];
   var lastFrame = 0;
   var clock = 0;
   var engine;
-  var resize = [];
+  var listeners = { resize: [], scroll: [] };
+  var scrolls = [];
   var location = strict({ origin: options.location.origin, pathname: options.location.pathname }, 'location');
   var raw = {
     get GitEngine() { return engine; },
@@ -365,13 +429,23 @@ function createWindow(options) {
     cancelAnimationFrame: function (id) {
       frames = frames.filter(function (f) { return f.id !== id; });
     },
-    addEventListener: function (type, listener) {
-      if (arguments.length > 2 || type !== 'resize') throw new Error('fake DOM: window has no ' + type + ' events');
-      resize.push(listener);
+    addEventListener: function (type, listener, opts) {
+      if (!has(listeners, type)) throw new Error('fake DOM: window has no ' + type + ' events');
+      if (arguments.length > 3 || (arguments.length === 3 && (typeof opts !== 'object' || opts === null))) {
+        throw new Error('fake DOM: window listener options must be an object');
+      }
+      listeners[type].push(listener);
+    },
+    scrollBy: function (by) {
+      if (typeof by !== 'object' || typeof by.top !== 'number' || Number.isNaN(by.top)) {
+        throw new Error('fake DOM: scrollBy takes {top: number}');
+      }
+      scrolls.push(by.top);
     }
   };
   return {
     window: strict(raw, 'window'),
+    scrolls: function () { return scrolls.slice(); },
     flushFrames: function () {
       for (var round = 0; frames.length; round++) {
         if (round > 1000) throw new Error('fake DOM: animation frames never stop');
@@ -391,14 +465,19 @@ function createStorage(map) {
   }, 'localStorage');
 }
 
-// tree: {tag, attrs: [[name, value]], children} with text nodes as strings.
+// The SVG attribute names an HTML parser gives back their case; the trees come lowercased.
+var SVG_ATTRS = { viewbox: 'viewBox', preserveaspectratio: 'preserveAspectRatio' };
+
+// tree: {tag, attrs: [[name, value]], children} with text nodes as strings. An <svg> and
+// everything inside it are SVG elements, as an HTML parser makes them.
 function build(doc, parent, tree) {
   if (typeof tree === 'string') {
     parent.appendChild(text(doc, tree));
     return;
   }
-  var node = doc.createElement(tree.tag);
-  tree.attrs.forEach(function (a) { node.setAttribute(a[0], a[1]); });
+  var svg = tree.tag === 'svg' || parent._.svg;
+  var node = svg ? doc.createElementNS(SVG_NS, tree.tag) : doc.createElement(tree.tag);
+  tree.attrs.forEach(function (a) { node.setAttribute(svg && has(SVG_ATTRS, a[0]) ? SVG_ATTRS[a[0]] : a[0], a[1]); });
   parent.appendChild(node);
   tree.children.forEach(function (c) { build(doc, node, c); });
 }

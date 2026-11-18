@@ -344,7 +344,9 @@ class AllLevels(unittest.TestCase):
 
 class Double(unittest.TestCase):
     REFUSALS = [
-        ('select', 'div > p', 'unsupported selector "div > p"'),
+        ('select', 'div + p', 'unsupported selector "div + p"'),
+        ('select', '> p', 'unsupported selector "> p"'),
+        ('select', 'div > > p', 'unsupported selector "div > > p"'),
         ('select', 'li:first-child', 'unsupported selector "li:first-child"'),
         ('get', 'innerHTML', '<input> has no innerHTML'),
         ('set', 'onclick', 'cannot set <input>.onclick'),

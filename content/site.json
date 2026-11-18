@@ -1,10 +1,12 @@
 {
   "name": "Lemi Orhan Ergin",
-  "url": "https://lemiorhan.github.io/",
+  "url": "https://lemiorhanergin.com/",
   "twitter": "@lemiorhan",
   "image": {
-    "src": "assets/img/lemi.jpg",
-    "alt": "Portrait of Lemi Orhan Ergin"
+    "src": "assets/img/social.jpg",
+    "alt": "Lemi Orhan Ergin, Software Crafter: co-founder and Chief Software Crafter of Craftgate, founder of Software Craftsmanship Turkey, shown on stage mid-talk",
+    "width": 1200,
+    "height": 630
   },
   "skip": "Skip to content",
   "nav_label": "Site",

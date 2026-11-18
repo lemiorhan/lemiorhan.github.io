@@ -223,13 +223,20 @@
     var status = archive.querySelector('.filter-status');
     var empty = archive.querySelector('.empty-note');
     var total = archive.querySelectorAll('.ev').length;
+    var cloud = archive.querySelector('.themes');
+    var themeButtons = Array.prototype.slice.call(archive.querySelectorAll('button[data-theme]'));
 
-    var state = { media: 'all', country: '', region: '' };
+    var state = { media: 'all', country: '', region: '', theme: '' };
 
     function plural(n) { return fill(n === 1 ? ui.event_one : ui.event_many, { n: n }); }
 
+    function about(el) {
+      return (' ' + (el.dataset.themes || '') + ' ').indexOf(' ' + state.theme + ' ') !== -1;
+    }
+
     function matches(ev) {
       if (state.media !== 'all' && !ev.hasAttribute('data-' + state.media)) return false;
+      if (state.theme && !about(ev)) return false;
       if (state.country && ev.dataset.country !== state.country) return false;
       return !state.region || ev.dataset.region === state.region;
     }
@@ -241,6 +248,10 @@
           var match = matches(ev);
           ev.hidden = !match;
           if (match) shown++;
+          // An event matches when one of its talks does; its other talks step aside.
+          ev.querySelectorAll('.ev-talks > li').forEach(function (talk) {
+            talk.hidden = Boolean(state.theme) && !about(talk);
+          });
         });
         section.hidden = shown === 0;
         return shown;
@@ -269,15 +280,28 @@
       buttons.forEach(function (b) {
         b.setAttribute('aria-pressed', String(b.dataset.filter === state.media));
       });
+      themeButtons.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.theme === state.theme));
+      });
       empty.hidden = visible > 0;
       return visible;
     }
 
+    function themeLabel() {
+      var chip = cloud && cloud.querySelector('button[data-theme="' + state.theme + '"]');
+      return chip ? chip.dataset.label : state.theme;
+    }
+
     function refresh() {
       var visible = apply();
-      status.textContent = showPlaceCount(visible) || (visible === total
-        ? fill(ui.showing_all, { events: plural(total) })
-        : fill(ui.showing_some, { visible: visible, events: plural(total) }));
+      var place = showPlaceCount(visible);
+      var events = plural(visible);
+      var theme = state.theme ? themeLabel() : '';
+      status.textContent = theme && place ? fill(ui.theme_place_status, { events: events, theme: theme, place: place })
+        : theme ? fill(ui.theme_status, { events: events, theme: theme })
+        : place ? fill(ui.place_status, { events: events, place: place })
+        : visible === total ? fill(ui.showing_all, { events: plural(total) })
+        : fill(ui.showing_some, { visible: visible, events: plural(total) });
       queue();
     }
 
@@ -330,7 +354,19 @@
       });
     });
 
+    themeButtons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var talk = b.closest('.ev-talks > li');
+        var before = talk ? talk.getBoundingClientRect().top : 0;
+        state.theme = state.theme === b.dataset.theme ? '' : b.dataset.theme;
+        refresh();
+        if (talk) window.scrollBy({ top: talk.getBoundingClientRect().top - before, behavior: 'instant' });
+      });
+    });
+
     refresh();
+    if (cloud) cloud.hidden = false;
+    archive.querySelectorAll('.ev-themes').forEach(function (tags) { tags.hidden = false; });
     strip.classList.add('has-bars');
     mini.strip.classList.add('has-bars');
     filters.hidden = false;
@@ -342,7 +378,7 @@
   // The talks map is a second way into the year archive: choosing a country,
   // province or city filters the archive to it and zooms the map to its country.
   // Returns the function that shows how many events the filter left in that
-  // place and returns the same text, '' when no place is chosen, so that the
+  // place and returns the place's name, '' when no place is chosen, so that the
   // filter status can announce it.
   function setupTalkMap(archive, select, plural) {
     var map = archive.querySelector('.tmap');
@@ -454,15 +490,14 @@
     map.classList.add('is-live');
 
     return function (visible) {
-      var said = '';
+      var place = '';
       if (current.country) {
-        var chip = chips.filter(function (b) {
+        place = chips.filter(function (b) {
           return b.getAttribute('aria-pressed') === 'true' && (!current.region || 'region' in b.dataset);
-        })[0];
-        said = fill(ui.place_status, { events: plural(visible), place: chip.dataset.label });
+        })[0].dataset.label;
       }
-      status.textContent = said;
-      return said;
+      status.textContent = place ? fill(ui.place_status, { events: plural(visible), place: place }) : '';
+      return place;
     };
   }
 
