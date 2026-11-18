@@ -1,0 +1,39 @@
+{
+  "title": "Community, Lemi Orhan Ergin",
+  "description": "Software Craftsmanship Turkey, Agile Turkey, and the manifestos Lemi Orhan Ergin translated into Turkish.",
+  "head": {
+    "heading": "Community",
+    "cmd": "git shortlog --summary",
+    "blocks": [
+      { "type": "p", "class": "intro", "text": "Communities I have built or helped run, and manifestos I have translated into Turkish." }
+    ]
+  },
+  "sections": [
+    {
+      "blocks": [
+        {
+          "type": "items",
+          "items": [
+            {
+              "title": "Software Craftsmanship Turkey",
+              "url": "https://kommunity.com/software-craftsmanship-turkey",
+              "meta": "Founder, 2014 – now",
+              "text": "A community for developers who care about their craft. More than 200 free meetups so far, and code retreats, including the Global Day of Coderetreat, which I have facilitated since 2013."
+            },
+            {
+              "title": "Agile Turkey",
+              "url": "https://www.agileturkey.org",
+              "meta": "Community lead & product owner, 2015 – 2017",
+              "text": "More than 50 free public meetups (Agile Buluşmalar) in two years. Product owner and organization lead of Agile Turkey Summit 2015 and 2016 and CraftSummit 2015."
+            },
+            {
+              "title": "Manifesto translations",
+              "meta": "Turkish",
+              "text": "Part of the team that translated the [Agile Manifesto](https://agilemanifesto.org/iso/tr/manifesto.html). Turkish translator of the [Software Craftsmanship Manifesto](https://manifesto.softwarecraftsmanship.org/#/tr), the [SOA Manifesto](http://www.soa-manifesto.org/default_turkish.html) and the Disciplined Agile Manifesto."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

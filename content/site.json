@@ -1,0 +1,36 @@
+{
+  "name": "Lemi Orhan Ergin",
+  "url": "https://lemiorhan.github.io/",
+  "twitter": "@lemiorhan",
+  "image": {
+    "src": "assets/img/lemi.jpg",
+    "alt": "Portrait of Lemi Orhan Ergin"
+  },
+  "skip": "Skip to content",
+  "nav_label": "Site",
+  "nav": [
+    { "path": "bio/", "label": "Bio" },
+    { "path": "talks/", "label": "Talks" },
+    { "path": "craftgate/", "label": "Craftgate" },
+    { "path": "career/", "label": "Career" },
+    { "path": "community/", "label": "Community" },
+    { "path": "sharing/", "label": "Sharing" },
+    { "path": "contact/", "label": "Contact" }
+  ],
+  "theme_toggle": "Switch color theme",
+  "ui": {
+    "theme_to_dark": "Switch to dark theme",
+    "theme_to_light": "Switch to light theme",
+    "copied": "Copied",
+    "copy_failed": "Could not copy. Select the text instead.",
+    "photo_viewer": "Photo viewer",
+    "close": "Close",
+    "previous_photo": "Previous photo",
+    "next_photo": "Next photo"
+  },
+  "footer": [
+    "© 2026 Lemi Orhan Ergin",
+    "Updated November 2026"
+  ],
+  "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+}

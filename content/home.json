@@ -1,0 +1,399 @@
+{
+  "title": "Lemi Orhan Ergin, Software Crafter",
+  "description": "Lemi Orhan Ergin is a software crafter in Istanbul, co-founder and Chief Software Crafter of Craftgate, and founder of Software Craftsmanship Turkey.",
+  "og_description": "Co-founder and Chief Software Crafter of Craftgate. Founder of Software Craftsmanship Turkey. Programming since 2001.",
+  "og_type": "profile",
+  "profile": {
+    "first_name": "Lemi Orhan",
+    "last_name": "Ergin"
+  },
+  "person": {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Lemi Orhan Ergin",
+    "jobTitle": "Co-founder & Chief Software Crafter",
+    "worksFor": { "@type": "Organization", "name": "Craftgate", "url": "https://craftgate.io" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Marmara University" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Istanbul", "addressCountry": "TR" },
+    "image": "https://lemiorhan.github.io/assets/img/lemi.jpg",
+    "sameAs": [
+      "https://www.linkedin.com/in/lemiorhan",
+      "https://x.com/lemiorhan",
+      "https://github.com/lemiorhan",
+      "https://speakerdeck.com/lemiorhan",
+      "https://medium.com/@lemiorhan"
+    ]
+  },
+  "hero": {
+    "name": ["Lemi Orhan", "Ergin"],
+    "photo": {
+      "talk": "Conway's Law Never Lies",
+      "alt": "Lemi Orhan Ergin on stage at {event}, mid-talk and gesturing with both hands, in front of a projected hand-drawn tic-tac-toe grid",
+      "caption": "On stage at {event}"
+    },
+    "role": "Software crafter. Co-founder of [Craftgate](https://craftgate.io).",
+    "text": "I have been writing code since {since}, in technical leadership and coaching roles at Sony, eBay/GittiGidiyor, ACM and iyzico. Today I build Craftgate, a payment orchestration platform, as its Chief Software Crafter. I founded the Software Craftsmanship Turkey community in {founded}, and I talk about how good software gets made: craftsmanship, team culture, and what is still worth keeping now that code is cheap to generate.",
+    "community": "Software Craftsmanship Turkey",
+    "actions": [
+      { "label": "Play the git game", "url": "#play" },
+      { "label": "Read the full bio", "url": "bio/" }
+    ],
+    "head": "HEAD -> main",
+    "path_label": "Where I have worked, as a git log, newest first",
+    "profiles_label": "Profiles",
+    "profiles": [
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/lemiorhan" },
+      { "label": "X", "url": "https://x.com/lemiorhan" },
+      { "label": "GitHub", "url": "https://github.com/lemiorhan" },
+      { "label": "Speaker Deck", "url": "https://speakerdeck.com/lemiorhan" },
+      { "label": "YouTube", "url": "https://www.youtube.com/playlist?list=PLQTv1b9jwvWdvUVfv0M55mRbTB8CMYT9R" },
+      { "label": "Medium", "url": "https://medium.com/@lemiorhan" }
+    ]
+  },
+  "game": {
+    "heading": "Git is a graph",
+    "cmd": "git log --graph --all",
+    "intro": "In 2016 I gave a talk in Turkish, {talk}. Its one idea: every git command is a move on a graph. Commits are nodes; branches, tags and HEAD are pointers to them. Here you run real git commands, typed or tapped together, and move commits and pointers until your graph matches the goal. Each level is a piece of my own history, and solving it tells you a little more about me.",
+    "talk": {
+      "title": "Git: Bildiğiniz Gibi Değil",
+      "lang": "tr",
+      "gloss": "Git is not what you think",
+      "url": "https://speakerdeck.com/lemiorhan/git-bildiginiz-gibi-degil"
+    },
+    "fallback": "The game runs in your browser with JavaScript, which is off here. These are its levels.",
+    "slides": "Slides of the talk on Speaker Deck",
+    "ui": {
+      "goal": "Goal",
+      "your_graph": "Your graph",
+      "terminal": "Terminal",
+      "hint": "Hint",
+      "undo": "Undo",
+      "restart": "Restart",
+      "next": "Next level",
+      "levels": "Levels",
+      "par": "Par",
+      "commands": "Commands",
+      "copy_result": "Copy your result",
+      "ranks": ["Detached HEAD", "Committer", "Brancher", "Rebaser", "Software crafter"],
+      "level_of": "Level {n} of {total}",
+      "level_button": "Level {n}: {title}",
+      "level_button_solved": "Level {n}: {title}, solved with {stars}",
+      "teaches": "Teaches",
+      "show_goal": "Show the goal",
+      "prompt": "Command",
+      "placeholder": "Type a command",
+      "run": "Run",
+      "erase": "Delete the last word",
+      "builder_label": "Commands",
+      "options_label": "Options and new names",
+      "builder": {
+        "commit": ["--amend"],
+        "branch": ["-d", "-D"],
+        "checkout": ["-b"],
+        "switch": ["-c"],
+        "merge": ["--no-ff"],
+        "rebase": ["--onto"],
+        "cherry-pick": [],
+        "reset": ["--hard", "--soft"],
+        "revert": [],
+        "tag": ["-d"],
+        "reflog": [],
+        "log": ["--oneline", "--all"]
+      },
+      "more_output": "Show all output",
+      "less_output": "Show less output",
+      "welcome": "# Level {n}: {title}",
+      "welcome_help": "# Type git commands, or build them with the buttons below and tap commits or branch names in the graph. help lists everything, hint gives a nudge.",
+      "help": [
+        "git help   the git commands this game understands",
+        "hint       a nudge for this level",
+        "undo       take back the last command that changed the graph",
+        "restart    start this level again",
+        "levels     list the levels and your stars",
+        "clear      clear the terminal"
+      ],
+      "nothing_to_undo": "Nothing to undo.",
+      "undone": "Took back: {line}",
+      "restarted": "Level {n} starts again.",
+      "levels_line": "{n}. {title}  {stars}",
+      "star": "★",
+      "star_empty": "☆",
+      "stars_label": "{n} of {max} stars",
+      "solved": "Your graph matches the goal.",
+      "command_one": "{n} command",
+      "command_many": "{n} commands",
+      "score_line": "{commands}, par {par}",
+      "fact_more": "Read more on this site",
+      "fact_links": {
+        "career/": "My career, drawn as a git log",
+        "craftgate/": "How Craftgate started and where it stands",
+        "talks/": "Every talk, year by year",
+        "root-bug/": "The night of the macOS root bug",
+        "community/": "Software Craftsmanship Turkey and other communities",
+        "https://speakerdeck.com/lemiorhan/git-bildiginiz-gibi-degil": "The slides of the talk"
+      },
+      "finish": "Your result",
+      "summary_levels": "Levels solved",
+      "summary_commands": "Commands",
+      "summary_par": "Par",
+      "summary_stars": "Stars",
+      "of": "{n} of {total}",
+      "result": "I played Git is a graph, Lemi Orhan Ergin's git game: {solved} of {total} levels, {commands} commands for a par of {par}, {stars} of {max} stars. Rank: {rank}. {url}",
+      "copied": "Copied. Paste it wherever you like.",
+      "copy_failed": "Could not copy. Select the text above instead.",
+      "again": "Play again from level 1",
+      "talks_link": "Every talk, year by year",
+      "talks_url": "talks/",
+      "flag_head": "HEAD",
+      "flag_current": "HEAD -> {name}",
+      "flag_tag": "tag: {name}",
+      "flag_label": "{name}. Enter puts the name on the command line.",
+      "commit_label": "Commit {hash}, {message}{lost}. Enter puts the hash on the command line.",
+      "commit_lost": ", unreachable",
+      "goal_hash": "·······",
+      "goal_new": "a new commit",
+      "goal_copy": "a copy of {message}",
+      "goal_amend": "{message}, amended",
+      "goal_revert": "a commit that undoes {message}",
+      "goal_revert_some": "a revert commit",
+      "goal_merge": "a merge commit",
+      "goal_keep": "{message}, unchanged",
+      "sr_ref": "{name} at {hash}",
+      "sr_head_branch": "HEAD on {name}",
+      "sr_head_detached": "HEAD detached at {hash}",
+      "sr_commits": "{commits} commits, {lost} of them unreachable",
+      "say_commit": "New commit {hash}.",
+      "say_branch_new": "Branch {name} created at {to}.",
+      "say_branch_deleted": "Branch {name} deleted; it was at {from}.",
+      "say_branch_moved": "{name} moved from {from} to {to}.",
+      "say_tag_new": "Tag {name} created at {to}.",
+      "say_tag_deleted": "Tag {name} deleted; it was at {from}.",
+      "say_tag_moved": "Tag {name} moved from {from} to {to}.",
+      "say_head_branch": "HEAD is on {name}.",
+      "say_head_detached": "HEAD is detached at {hash}.",
+      "say_nothing": "The graph did not change.",
+      "say_solved": "Solved, {stars}.",
+      "shape_right": "Your graph has the right shape, but {commit} was made another way: the goal has {want}. Try {how}.",
+      "shape_wrong_commit": "Right command, wrong commit: the goal has {want}.",
+      "shape_how_amend": "git commit --amend",
+      "shape_how_revert": "git revert",
+      "shape_how_copy": "git cherry-pick or git rebase",
+      "shape_how_keep": "undo or restart",
+      "shape_how_merge": "git merge",
+      "shape_how_new": "git commit"
+    },
+    "levels": [
+      {
+        "id": "first-commit",
+        "title": "Hello, 2001",
+        "teaches": ["git commit"],
+        "story": "Summer 2001: my first job, as a software engineer at TÜSSİDE. A year later I was a lab assistant at Marmara University.",
+        "task": "Make two commits on main. Watch what the main pointer does.",
+        "setup": ["git commit -m \"Marmara University\""],
+        "solution": ["git commit -m \"TÜSSİDE\"", "git commit -m \"Lab assistant\""],
+        "hint": "Type git commit. A commit is a new node in the graph, and the branch you are on moves to it.",
+        "fact": { "text": "My first job was in the summer of 2001, as a software engineer at TÜSSİDE. I have been writing code ever since.", "link": "career/" },
+        "checks": {
+          "alternatives": [["git commit", "git commit"]],
+          "near_misses": [["git commit"]]
+        }
+      },
+      {
+        "id": "branch",
+        "title": "Pointers, not copies",
+        "teaches": ["git branch", "git checkout"],
+        "story": "In 2004 I joined Sony, where I spent most of the following decade.",
+        "task": "Create a branch called sony, switch to it, and commit on it. main must stay where it is.",
+        "setup": ["git commit -m \"Marmara, M.Sc.\"", "git commit -m \"BYM\""],
+        "solution": ["git checkout -b sony", "git commit -m \"Sony\""],
+        "hint": "A branch is only a pointer to a commit. git checkout -b <name> creates one and moves HEAD onto it.",
+        "fact": { "text": "I joined Sony in 2004 and stayed for most of the following decade, from software engineer to Scrum Master, technical lead, solution architect and agile practice lead.", "link": "career/" },
+        "checks": {
+          "alternatives": [["git branch sony", "git checkout sony", "git commit"], ["git switch -c sony", "git commit"]],
+          "near_misses": [["git branch sony", "git commit"], ["git checkout {BYM}", "git commit -m \"Sony\"", "git branch sony", "git checkout main"]]
+        }
+      },
+      {
+        "id": "no-ff",
+        "title": "I left twice",
+        "teaches": ["git merge --no-ff"],
+        "story": "I left Sony twice and came back both times. My career page draws those detours as side branches.",
+        "task": "Merge air-force back into main so the detour stays visible. A fast-forward would hide it.",
+        "setup": ["git commit -m \"Sony\"", "git checkout -b air-force", "git commit -m \"Air Force\"", "git checkout main"],
+        "solution": ["git merge --no-ff air-force"],
+        "hint": "When main has not moved since the branch started, git merge only slides main forward. --no-ff forces a merge commit with two parents.",
+        "fact": { "text": "From 2006 to 2007 I served as a software officer in the Turkish Air Force, and in 2012 I spent six months at GittiGidiyor, eBay's marketplace in Türkiye. Both times I came back to Sony.", "link": "career/" },
+        "checks": {
+          "alternatives": [["git merge air-force --no-ff"]],
+          "near_misses": [["git merge air-force"]]
+        }
+      },
+      {
+        "id": "tag",
+        "title": "Launch day",
+        "teaches": ["git tag"],
+        "story": "Craftgate grew inside Craftbase, the company we started in 2018, and was introduced publicly in January 2021.",
+        "task": "Tag the commit \"Public launch\" as launch. Do not move any branch.",
+        "setup": ["git commit -m \"Craftbase\"", "git commit -m \"Gateway\"", "git commit -m \"Public launch\"", "git commit -m \"Only Craftgate\""],
+        "solution": ["git tag launch HEAD~1"],
+        "hint": "A tag is a pointer that never moves. git tag <name> <commit> puts one anywhere, and HEAD~1 means one commit before HEAD.",
+        "fact": { "text": "In April 2018 I co-founded Craftbase with Hakan Erdoğan, Sabri Onur Tüzün and Murathan Özcan. Craftgate grew inside it and was introduced publicly in January 2021.", "link": "craftgate/" },
+        "checks": {
+          "alternatives": [["git tag launch {Public launch}"], ["git checkout HEAD~1", "git tag launch", "git checkout main"]],
+          "near_misses": [["git tag launch"]]
+        }
+      },
+      {
+        "id": "amend",
+        "title": "Forgot something",
+        "teaches": ["git commit --amend"],
+        "story": "Everyone commits and then notices something is missing. The commit you are about to fix holds the slides of a talk.",
+        "task": "Fix the last commit instead of adding a new one.",
+        "setup": ["git commit -m \"Abstract\"", "git commit -m \"Slides\""],
+        "solution": ["git commit --amend -m \"Slides, with demo\""],
+        "hint": "git commit --amend makes a new commit on the same parent and moves the branch to it. The old commit is still there, only unreachable.",
+        "fact": { "text": "In 2016 I gave a talk in Turkish at Karabük University's Programming Days: \"Git: Bildiğiniz Gibi Değil\", Git is not what you think. This game is built on its idea: every Git command is a move on a graph.", "link": "https://speakerdeck.com/lemiorhan/git-bildiginiz-gibi-degil" },
+        "checks": {
+          "alternatives": [["git commit --amend"]],
+          "near_misses": [["git commit -m \"Demo\""], ["git reset --hard HEAD~1", "git commit -m \"Slides, with demo\""], ["git reset --soft HEAD~1", "git commit -m \"Slides, with demo\""]]
+        }
+      },
+      {
+        "id": "rebase",
+        "title": "Straight lines",
+        "teaches": ["git rebase"],
+        "story": "A small typofix branch waits while main moves on. Rebase replays it on top, so history reads as one straight line.",
+        "task": "Move typofix on top of main without a merge commit.",
+        "setup": ["git commit -m \"Intro\"", "git checkout -b typofix", "git commit -m \"Fix typo\"", "git checkout main", "git commit -m \"Demo\"", "git commit -m \"Q&A\""],
+        "solution": ["git rebase main typofix"],
+        "hint": "git rebase <upstream> copies your branch's commits onto the tip of upstream and moves the branch there. The originals become unreachable.",
+        "fact": { "text": "I have taken Git talks across Europe: Git Anti-Patterns at Devoxx Poland and XP Days Ukraine in 2017, and 10 Git Anti-Patterns You Should Be Aware Of at GrowIT in Serbia in 2018.", "link": "talks/" },
+        "checks": {
+          "alternatives": [["git checkout typofix", "git rebase main"], ["git switch typofix", "git rebase main"]],
+          "near_misses": [["git merge typofix"], ["git checkout typofix", "git merge main"]]
+        }
+      },
+      {
+        "id": "cherry-pick",
+        "title": "Only what is tested",
+        "teaches": ["git cherry-pick"],
+        "story": "In 2022 I wrote down the foundations of Craftgate's team culture. One line of it: untested development is incomplete development.",
+        "task": "Bring only the two tested commits from experiments onto main, in their original order.",
+        "setup": ["git commit -m \"Craftgate\"", "git checkout -b experiments", "git commit -m \"Refunds, tested\"", "git commit -m \"Spike, no tests\"", "git commit -m \"Payouts, tested\"", "git checkout main"],
+        "solution": ["git cherry-pick experiments~2 experiments"],
+        "hint": "git cherry-pick copies commits onto where you stand. Name several and they are applied in the order you give them.",
+        "fact": { "text": "In 2022 I wrote down the foundations of Craftgate's team culture. Among them: no seniority levels in job titles, no team leader position, and untested development is incomplete development.", "link": "craftgate/" },
+        "checks": {
+          "alternatives": [["git cherry-pick {Refunds, tested}", "git cherry-pick {Payouts, tested}"]],
+          "near_misses": [["git merge experiments"], ["git cherry-pick experiments experiments~2"]]
+        }
+      },
+      {
+        "id": "reset",
+        "title": "We pursued neither",
+        "teaches": ["git reset"],
+        "story": "By September 2021 eleven investors had reached out to Craftgate and three large companies wanted to buy it. We pursued neither.",
+        "task": "Move main back two commits, as if those calls never happened. Nobody else has seen them yet.",
+        "setup": ["git commit -m \"Craftgate\"", "git commit -m \"Product\"", "git commit -m \"Investor calls\"", "git commit -m \"Buyer calls\""],
+        "solution": ["git reset --hard HEAD~2"],
+        "hint": "git reset moves the branch you are on to another commit. The commits it leaves behind are not deleted, only unreachable.",
+        "fact": { "text": "Instead of investors or buyers, we chose to leave our profitable service work. Since 1 January 2022 the company has been only Craftgate.", "link": "craftgate/" },
+        "checks": {
+          "alternatives": [["git reset HEAD~2"], ["git reset --hard {Product}"]],
+          "near_misses": [["git reset --hard HEAD~1"], ["git revert HEAD"]]
+        }
+      },
+      {
+        "id": "revert",
+        "title": "Undo in public",
+        "teaches": ["git revert"],
+        "story": "On 28 November 2017 I asked Apple on Twitter whether it knew that anyone could log in as root on macOS High Sierra with an empty password. The fix shipped the next day.",
+        "task": "main is public. Undo the commit \"Credential check\" without rewriting history.",
+        "setup": ["git commit -m \"High Sierra\"", "git commit -m \"Credential check\"", "git commit -m \"10.13.1\""],
+        "solution": ["git revert HEAD~1"],
+        "hint": "git revert adds a new commit that undoes an old one. Nothing is rewritten, so everyone who already has main stays in step.",
+        "fact": { "text": "The root bug was not my find: the infrastructure team at the company I worked for came across it and reported it to Apple five days earlier. My tweet was covered around the world, and Apple released Security Update 2017-001 on 29 November 2017.", "link": "root-bug/" },
+        "checks": {
+          "alternatives": [["git revert {Credential check}"]],
+          "near_misses": [["git revert HEAD"], ["git reset --hard HEAD~2"]]
+        }
+      },
+      {
+        "id": "reflog",
+        "title": "Nothing is lost",
+        "teaches": ["git reflog", "git branch <name> <commit>"],
+        "story": "I founded Software Craftsmanship Turkey in 2014. Someone has just deleted its branch with git branch -D.",
+        "task": "Bring the branch scturkey back exactly where it was, and stay on main. git reflog remembers where HEAD has been.",
+        "setup": ["git commit -m \"Community\"", "git checkout -b scturkey", "git commit -m \"First meetup\"", "git commit -m \"Coderetreat\"", "git checkout main", "git branch -D scturkey"],
+        "solution": ["git branch scturkey {Coderetreat}"],
+        "hint": "The commits are still there, faded. Find the hash of the newest one in git reflog, then git branch scturkey <hash>.",
+        "fact": { "text": "Software Craftsmanship Turkey has run more than 200 free meetups since I founded it in 2014, and I have facilitated code retreats since 2013, including the Global Day of Coderetreat.", "link": "community/" },
+        "checks": {
+          "alternatives": [["git checkout {Coderetreat}", "git branch scturkey", "git checkout main"]],
+          "near_misses": [["git branch scturkey {First meetup}"], ["git checkout -b scturkey {Coderetreat}"]]
+        }
+      },
+      {
+        "id": "onto",
+        "title": "Burning the ships",
+        "teaches": ["git rebase --onto"],
+        "story": "Craftgate grew on top of Craftbase's client work. At the end of 2021 we left all of that service work behind.",
+        "task": "Move craftgate's own two commits off services and directly onto main. Leave services where it is.",
+        "setup": ["git commit -m \"Craftbase\"", "git checkout -b services", "git commit -m \"Client A\"", "git commit -m \"Client B\"", "git checkout -b craftgate", "git commit -m \"Gateway\"", "git commit -m \"Launch\"", "git checkout main"],
+        "solution": ["git rebase --onto main services craftgate"],
+        "hint": "git rebase --onto <new base> <old base> <branch> takes the commits after old base and replays them on new base.",
+        "fact": { "text": "Since leaving service work, Craftgate has raised investment, made the Deloitte Technology Fast 50 Türkiye, and opened its first market abroad, in Spain.", "link": "craftgate/" },
+        "checks": {
+          "alternatives": [["git checkout craftgate", "git rebase --onto main services"], ["git checkout craftgate", "git rebase --onto main HEAD~2"]],
+          "near_misses": [["git rebase main craftgate"]]
+        }
+      },
+      {
+        "id": "release",
+        "title": "Ship the talk",
+        "teaches": ["git rebase", "git merge --no-ff", "git tag", "git branch -d"],
+        "story": "I have given more than 200 seminars at companies and universities, and spoken at conferences across Europe and the Middle East. Time to ship one more talk.",
+        "task": "Put talk on top of main, merge it into main with a merge commit, tag that merge devoxx, and delete the talk branch.",
+        "setup": ["git commit -m \"Idea\"", "git checkout -b talk", "git commit -m \"Outline\"", "git commit -m \"Slides\"", "git checkout main", "git commit -m \"CFP accepted\""],
+        "solution": ["git rebase main talk", "git checkout main", "git merge --no-ff talk", "git tag devoxx", "git branch -d talk"],
+        "hint": "One move at a time: rebase, go back to main, merge with --no-ff, tag, then delete the branch. git branch -d refuses to delete what is not merged.",
+        "fact": { "text": "Outside Türkiye I have spoken at Devoxx in Belgium, Poland and Ukraine, XP Days Ukraine, GrowIT in Serbia, ITAKE in Romania, Agile Tour Kaunas, Bosnia Agile Day and Agile Middle East in Dubai.", "link": "talks/" },
+        "checks": {
+          "alternatives": [["git checkout talk", "git rebase main", "git switch main", "git merge talk --no-ff", "git tag devoxx", "git branch -d talk"]],
+          "near_misses": [["git rebase main talk", "git checkout main", "git merge talk", "git tag devoxx", "git branch -d talk"]]
+        }
+      }
+    ]
+  },
+  "sections": [
+    {
+      "id": "recent",
+      "heading": "Recent talks",
+      "cmd": "git log -- talks/",
+      "blocks": [
+        { "type": "latest-talks", "count": 6 },
+        { "type": "p", "class": "more", "text": "[Every talk, year by year](talks/) [All slides on Speaker Deck](https://speakerdeck.com/lemiorhan) [Recordings on YouTube](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdvUVfv0M55mRbTB8CMYT9R)" }
+      ]
+    },
+    {
+      "id": "pages",
+      "heading": "On this site",
+      "cmd": "ls",
+      "blocks": [
+        {
+          "type": "toc",
+          "items": [
+            { "path": "bio/", "name": "Bio", "text": "The longer story, wiki style: from İzmir to Istanbul, writing software since 2001, and the people and work along the way." },
+            { "path": "talks/", "name": "Talks", "text": "Conferences, meetups and universities, year by year and on a map, with slides and recordings." },
+            { "path": "craftgate/", "name": "Craftgate", "text": "The payment orchestration company I co-founded: how it started and where it stands." },
+            { "path": "career/", "name": "Career", "text": "Positions since 2001, drawn as a git log." },
+            { "path": "community/", "name": "Community", "text": "Software Craftsmanship Turkey, Agile Turkey, and manifesto translations." },
+            { "path": "sharing/", "name": "Sharing", "text": "Everything I share in public: code, recordings, the podcast, slides, articles and my accounts." },
+            { "path": "root-bug/", "name": "The macOS root bug", "text": "The night in 2017 I asked Apple, on Twitter, whether it knew anyone could log in as root on a Mac. The fix came the next day; the story, the press and what I learned from it." },
+            { "path": "contact/", "name": "Contact", "text": "For talks, podcasts and community events." }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "title": "Sharing, Lemi Orhan Ergin",
+  "description": "Everything Lemi Orhan Ergin shares in public: code on GitHub, talk recordings, the Lemi'nin Not Defteri podcast, slides, articles and social media accounts.",
+  "head": {
+    "heading": "Sharing",
+    "cmd": "git remote -v",
+    "blocks": [
+      { "type": "p", "class": "intro", "text": "Everything I share in public, in one place: code, recordings, my podcast, slides, articles, and the accounts I post from." }
+    ]
+  },
+  "sections": [
+    {
+      "id": "code",
+      "heading": "Code",
+      "cmd": "gh repo list",
+      "blocks": [
+        { "type": "p", "class": "sub-note", "text": "My own repositories on [GitHub](https://github.com/lemiorhan). The year is when each one started." },
+        {
+          "type": "entries",
+          "items": [
+            { "kind": "2026, Python", "title": "brewdash", "url": "https://github.com/lemiorhan/brewdash", "text": "The missing dashboard for Homebrew on the Mac. Installs from its own [Homebrew tap](https://github.com/lemiorhan/homebrew-brewdash); [project page](https://lemiorhan.github.io/brewdash)." },
+            { "kind": "2026, TypeScript", "title": "keycode", "url": "https://github.com/lemiorhan/keycode", "text": "A terminal-based presentation tool for macOS." },
+            { "kind": "2026, Python", "title": "audiocript", "url": "https://github.com/lemiorhan/audiocript", "text": "A terminal-based audio transcription app for macOS." },
+            { "kind": "2026, JavaScript", "title": "firefox-advanced-tab-manager", "url": "https://github.com/lemiorhan/firefox-advanced-tab-manager", "text": "An advanced tab manager for the browser." },
+            { "kind": "2021, Groovy", "title": "grand-unified-divisibility-rule", "url": "https://github.com/lemiorhan/grand-unified-divisibility-rule", "text": "One divisibility rule for all numbers." },
+            { "kind": "2021", "title": "lemiorhan.github.io", "url": "https://github.com/lemiorhan/lemiorhan.github.io", "text": "The source of this website." },
+            { "kind": "2019, Shell", "title": "sparse-checkout", "url": "https://github.com/lemiorhan/sparse-checkout", "text": "Easy git sparse checkout for working with monorepos, with its own [Homebrew tap](https://github.com/lemiorhan/homebrew-sparse-checkout)." },
+            { "kind": "2017, Shell", "title": "git-kata", "url": "https://github.com/lemiorhan/git-kata", "text": "Kata scripts for learning Git." },
+            { "kind": "2017", "title": "personal-zen", "url": "https://github.com/lemiorhan/personal-zen", "text": "Some words about my values and principles, and about life in general." },
+            { "kind": "2016, Java", "title": "RomanNumeralsCodeKata", "url": "https://github.com/lemiorhan/RomanNumeralsCodeKata", "text": "Integers to Roman numerals, as a TDD code kata. The bowling game kata is in [katas](https://github.com/lemiorhan/katas)." },
+            { "kind": "2014, Shell", "title": "git-extras", "url": "https://github.com/lemiorhan/git-extras", "text": "Commands that extend your Git experience." },
+            { "kind": "2013, Java", "title": "darklord", "url": "https://github.com/lemiorhan/darklord", "text": "A Java API for Project Voldemort, the distributed key-value store." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "video",
+      "heading": "Video",
+      "cmd": "ls *.mp4",
+      "blocks": [
+        {
+          "type": "entries",
+          "items": [
+            { "kind": "YouTube", "title": "My channel, @lemiorhan", "url": "https://www.youtube.com/@lemiorhan", "text": "With a playlist of [recordings of my talks](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdvUVfv0M55mRbTB8CMYT9R), including the ones published on conference channels, and one on [modularity](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdK0lBBfpGhwX1ppqq128WD)." },
+            { "kind": "TEDx, 2019", "title": "Bir Gecede Ünlü Eden Elma", "lang": "tr", "url": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma", "text": "In Turkish, at TEDxTarsusAmericanCollege: the night a macOS root login bug made me known worldwide, and what it says about professional ethics. The [root bug page](../root-bug/) has the whole story." },
+            { "kind": "2025", "title": "Unlearn Unit Testing", "url": "https://www.youtube.com/watch?v=QzbSRiru4gg", "text": "DevFest İzmir 2025, on the GDG İzmir channel." },
+            { "kind": "2024", "title": "Craftgate'in Yazılım Altyapısı", "lang": "tr", "url": "https://www.youtube.com/watch?v=oYafmr9aNx4", "text": "A short video in Turkish on Craftgate's software: the stack, hexagonal architecture, the payment form and the API." },
+            { "kind": "2019", "title": "Slow Down To Go Faster Than Ever, But How?", "url": "https://www.youtube.com/watch?v=sLDKsjK4kEw", "text": "Devoxx Ukraine 2019." },
+            { "kind": "2017", "title": "Git Anti-Patterns: How To Mess Up With Git and Love It Again", "url": "https://www.youtube.com/watch?v=m3ITI7tT_Qo", "text": "Devoxx Poland 2017." },
+            { "kind": "Live session", "title": "Kodun Doğru Çalıştığını Nereden Biliyorsun?", "lang": "tr", "url": "https://www.youtube.com/watch?v=HutPyJs23WI", "text": "Unit testing, live with Akın Kaldıroğlu on the Backendguru Academy channel, in Turkish." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "audio",
+      "heading": "Audio",
+      "cmd": "ls *.mp3",
+      "blocks": [
+        {
+          "type": "entries",
+          "items": [
+            { "kind": "Podcast, 2018 – 2020", "title": "Lemi'nin Not Defteri", "url": "https://open.spotify.com/show/29k87DtwOLRZ1h2f0ONXni", "text": "My podcast in Turkish, on software, technology and culture. Also on [Apple Podcasts](https://podcasts.apple.com/tr/podcast/leminin-not-defteri/id1410475318), [Spreaker](https://www.spreaker.com/podcast/lemi-nin-not-defteri--6288114) and [YouTube](https://www.youtube.com/playlist?list=PLQTv1b9jwvWd7AwjQrOsDGOvRcRs4tb2k), and as an [RSS feed](https://www.spreaker.com/show/6288114/episodes/feed)." },
+            { "kind": "Guest, 2020", "title": "Teknik: Craftbase nasıl yazılım geliştiriyor?", "lang": "tr", "url": "https://open.spotify.com/episode/3x1FiEoaDg0VW59bPVGy2d", "text": "On the Üretim Bandı podcast, about how we built software at Craftbase." },
+            { "kind": "Guest, 2017", "title": "İyzico nasıl ürün geliştiriyor?", "lang": "tr", "url": "https://open.spotify.com/episode/3Pb7IUoSRMTR32C5Hqk0BO", "text": "On the Üretim Bandı podcast, about how iyzico builds products." },
+            { "kind": "Guest, 2016", "title": "On fighting elephants in the room", "url": "https://podcasts.apple.com/us/podcast/on-fighting-elephants-in-the-room-with-lemi-orhan-ergin/id936476881?i=1000377992398", "text": "On the IT Serbia Podcast, in English." },
+            { "kind": "Guest, 2016", "title": "DevPod Röportajı", "lang": "tr", "url": "https://www.youtube.com/watch?v=j5Or2ZjguS8", "text": "An interview on the DevPod podcast, in Turkish." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "slides",
+      "heading": "Slides",
+      "cmd": "ls *.pdf",
+      "blocks": [
+        {
+          "type": "entries",
+          "items": [
+            { "kind": "Speaker Deck", "title": "speakerdeck.com/lemiorhan", "url": "https://speakerdeck.com/lemiorhan", "text": "The slides of my talks. The [Talks page](../talks/) links each deck next to its event." },
+            { "kind": "SlideShare", "title": "slideshare.net/lemiorhan", "url": "https://www.slideshare.net/lemiorhan", "text": "Older decks, such as Git Anti-Patterns from Devoxx Poland 2017." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "heading": "Writing",
+      "cmd": "ls *.md",
+      "blocks": [
+        {
+          "type": "entries",
+          "items": [
+            { "kind": "Medium, 2025", "title": "10 Things Every Foreign Speaker Should Know Before Stepping on the Conference Stage", "url": "https://medium.com/@lemiorhan/10-things-every-foreign-speaker-should-know-before-stepping-on-the-conference-stage-bbcf5e1c5298", "text": "Advice for speakers about to talk in a country not their own." },
+            { "kind": "InfoQ, 2019", "title": "How to Slow Down to Go Faster Than Ever in Software Development", "url": "https://www.infoq.com/articles/slow-down-go-faster/", "text": "Rushing makes a team neither faster nor more productive. Slowing down on practice and code quality does." },
+            { "kind": "Medium, 2019", "title": "Anatomy of Scottyzen Software Engineers", "url": "https://medium.com/scotty-engineering/anatomy-of-scottyzen-software-engineers-18b99a8dcdac", "text": "On Scotty Engineering, about the engineers behind Scotty." },
+            { "kind": "Medium, 2018", "title": "First Day Challenge", "url": "https://medium.com/iyzico-engineering/first-day-challenge-87188808eb18", "text": "On iyzico Engineering, about a new engineer's first day." },
+            { "kind": "Medium, 2017", "title": "The Story Behind “anyone can login as root” Tweet", "url": "https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71", "text": "Written the day after the macOS High Sierra root bug went public. The [root bug page](../root-bug/) tells it again, with the press coverage." },
+            { "kind": "Medium, 2017", "title": "Engineers behind iyzico: The iyzicoders", "url": "https://medium.com/iyzico-engineering/engineers-behind-iyzico-the-iyzicoders-a1d77ec7700f", "text": "On iyzico Engineering, introducing the team and its culture." },
+            { "kind": "Blog, 2012 – 2014", "title": "Agilistanbul", "lang": "tr", "url": "https://web.archive.org/web/20260511123956/http://www.agilistanbul.com/", "text": "My Turkish blog on agile software development. The domain is gone, so the link goes to the Internet Archive's copy." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "accounts",
+      "heading": "Accounts",
+      "cmd": "git config --get user.name",
+      "blocks": [
+        {
+          "type": "entries",
+          "items": [
+            { "kind": "LinkedIn", "title": "in/lemiorhan", "url": "https://www.linkedin.com/in/lemiorhan" },
+            { "kind": "X", "title": "@lemiorhan", "url": "https://x.com/lemiorhan" },
+            { "kind": "Instagram", "title": "@lemiorhan", "url": "https://www.instagram.com/lemiorhan/" },
+            { "kind": "GitHub", "title": "lemiorhan", "url": "https://github.com/lemiorhan" },
+            { "kind": "YouTube", "title": "@lemiorhan", "url": "https://www.youtube.com/@lemiorhan" },
+            { "kind": "Speaker Deck", "title": "lemiorhan", "url": "https://speakerdeck.com/lemiorhan" },
+            { "kind": "Medium", "title": "@lemiorhan", "url": "https://medium.com/@lemiorhan" },
+            { "kind": "Community", "title": "Software Craftsmanship Turkey", "url": "https://kommunity.com/software-craftsmanship-turkey", "text": "The community I founded, on Kommunity and on [GitHub](https://github.com/scturkey)." }
+          ]
+        }
+      ]
+    }
+  ]
+}

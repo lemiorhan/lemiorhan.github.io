@@ -1,0 +1,19 @@
+{
+  "title": "Contact, Lemi Orhan Ergin",
+  "description": "How to reach Lemi Orhan Ergin about talks, podcasts and community events.",
+  "head": {
+    "heading": "Contact",
+    "cmd": "git send-email",
+    "blocks": []
+  },
+  "sections": [
+    {
+      "class": "contact",
+      "blocks": [
+        { "type": "mail", "user": "lemiorhan", "domain": "scturkey.org", "at": " at " },
+        "Write to me about talks, podcasts and community events. I no longer take on training or consulting work; my time goes to Craftgate. You can also reach me on [LinkedIn](https://www.linkedin.com/in/lemiorhan) or [X](https://x.com/lemiorhan).",
+        { "type": "p", "class": "meta", "text": "Istanbul, Türkiye" }
+      ]
+    }
+  ]
+}

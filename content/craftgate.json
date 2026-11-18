@@ -1,0 +1,108 @@
+{
+  "title": "Craftgate, Lemi Orhan Ergin",
+  "description": "How Craftgate, the payment orchestration platform Lemi Orhan Ergin co-founded, started, how it is built, and where it stands today.",
+  "head": {
+    "heading": "Craftgate",
+    "cmd": "git switch --create craftgate",
+    "blocks": [
+      { "type": "p", "class": "intro", "text": "Craftgate is the company I co-founded with Hakan Erdoğan, Sabri Onur Tüzün and Murathan Özcan, and where I am Chief Software Crafter. It is a payment orchestration platform: an online business integrates once and reaches its banks, payment providers and alternative payment methods through it." },
+      { "type": "p", "class": "more", "text": "[craftgate.io](https://craftgate.io)" }
+    ]
+  },
+  "sections": [
+    {
+      "id": "story",
+      "heading": "Story",
+      "cmd": "git log --reverse",
+      "class": "prose",
+      "blocks": [
+        "Payments were familiar ground. Between us, we had built and run payment systems at GittiGidiyor, Limango and iyzico, and had met the market's hardest problems first-hand.",
+        "In 2018 we started Craftbase, a company that built fintech and payment software for clients. Craftgate grew inside it as a product, paid for by that service work, and was introduced publicly in January 2021 as a cloud payment gateway that connects a merchant to every bank's virtual POS from one place. The problem it took on is a costly one: a merchant working with dozens of virtual POS terminals and payment institutions, each with its own commissions, integration and campaign terms, carries a heavy operational load and loses money along the way.",
+        "By September 2021, eleven investors had reached out and three large companies wanted to buy Craftgate. We pursued neither. We made the other choice instead: leave a profitable service business and put everything into the product. The team left all service work at the end of 2021, and from 1 January 2022 the company was only Craftgate.",
+        {
+          "type": "quote",
+          "text": "We chose the hard road.",
+          "caption": "Hakan Erdoğan, co-founder and CEO, to [Ekonomist](https://www.ekonomist.com.tr/makale/turk-muhendislerin-girisimi-craftgate-global-yolculuga-cikti-64177) in August 2025, on choosing between a profitable service business and burning the ships. Translated from Turkish:",
+          "original": "“Biz zoru seçtik.”",
+          "original_lang": "tr"
+        },
+        { "type": "h3", "text": "Milestones" },
+        {
+          "type": "log",
+          "label": "Milestones, newest first",
+          "items": [
+            { "when": "Oct 2026", "title": "Investment from Turkven", "note": "To support international growth. The amount was not disclosed, and the founders kept the majority." },
+            { "when": "Dec 2025", "title": "9th on Deloitte Technology Fast 50 Türkiye", "note": "With 1,968% growth in net sales over three years." },
+            { "when": "Nov 2024", "title": "First market abroad: Spain", "note": "Craftgate Europe started operating in Spain, the first step toward the rest of Europe and Latin America." },
+            { "when": "Aug 2023", "title": "$1M from Hepsiburada and D4 Ventures" },
+            { "when": "Jun 2022", "title": "$2M seed round", "note": "Led by APY Ventures, with Ak Portföy Girişim Sermayesi and Boğaziçi Ventures." },
+            { "when": "Jan 2022", "title": "Only Craftgate", "note": "The team left all service work behind." },
+            { "when": "Jan 2021", "title": "Introduced publicly", "note": "A cloud payment gateway for online merchants, sold as SaaS for a fixed monthly fee." },
+            { "when": "2020", "title": "Built inside Craftbase" },
+            { "when": "Apr 2018", "title": "Craftbase founded", "note": "A company building fintech and payment software for clients." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "culture",
+      "heading": "How we work",
+      "cmd": "cat CONTRIBUTING.md",
+      "blocks": [
+        { "type": "p", "class": "intro", "text": "In 2022 I wrote down the foundations of our team culture, in [Turkish](https://craftgate.io/blog/craftgate-ekip-kulturu) and later [in English](https://craftgate.io/en/blog/craftgate-team-culture). The short version:" },
+        {
+          "type": "points",
+          "items": [
+            { "title": "We are all Crafters.", "text": "No seniority levels in job titles, and no team leader position." },
+            { "title": "No framework by the book.", "text": "We don't follow Scrum, Kanban or XP rules. We get to know the team and work on what it needs." },
+            { "title": "Untested development is incomplete development.", "text": "We write tests until we feel safe putting the change live." },
+            { "title": "Hexagonal architecture.", "text": "For years it has kept our domain code apart from technology-dependent integration code." },
+            { "title": "One short plan a day, together.", "text": "Developers, testers, sales and marketing meet for half an hour every day." },
+            { "title": "Remote engineering.", "text": "The engineering team has worked remotely since March 2020 and plans to stay that way." }
+          ]
+        },
+        { "type": "h3", "text": "From the stage" },
+        {
+          "type": "entries",
+          "items": [
+            { "date": "2025-10", "title": "Fixing The Typos in Engineering Culture", "url": "https://speakerdeck.com/lemiorhan/fixing-the-typos-in-engineering-culture", "text": "Habits that wear down trust, autonomy and purpose, learned while building Craftgate, and why a few companies build like Formula 1 teams instead of factories." },
+            { "date": "2024-12", "title": "Unlearn Product Development, Unleashed Edition", "url": "https://speakerdeck.com/lemiorhan/unlearn-product-development-unleashed-edition", "text": "What is broken in typical product development, and how we are fixing it at Craftgate." },
+            { "date": "2024-02", "title": "Craftgate'in Yazılım Altyapısı", "lang": "tr", "url": "https://www.youtube.com/watch?v=oYafmr9aNx4", "text": "A short video in Turkish on Craftgate's software: the technology stack, why hexagonal architecture, the payment form and the API." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "today",
+      "heading": "Today",
+      "cmd": "git status",
+      "class": "prose",
+      "blocks": [
+        { "type": "p", "class": "sub-note", "text": "As of November 2026." },
+        "Craftgate serves more than 600 businesses, among them Beymen, Boyner, MediaMarkt, ebebek, Penti and Karaca. Transaction volume on the platform passed 107 billion TL in 2024. The team is more than 50 people.",
+        "Craftgate is not a licensed payment institution, and money never passes through it. Merchants keep their own agreements with banks and payment providers. Craftgate is the technical layer that connects them, routes payments, retries failed ones and watches for problems. It is PCI DSS Level 1 and ISO 27001 certified.",
+        "Spain is the first market abroad, with the rest of Europe and Latin America next."
+      ]
+    },
+    {
+      "id": "sources",
+      "heading": "Sources",
+      "blocks": [
+        {
+          "type": "sources",
+          "items": [
+            "[Webrazzi, 4 January 2021](https://webrazzi.com/2021/01/04/craftbase-ekibinden-bulut-tabanli-odeme-gecidi-craftgate): Craftgate introduced; Craftbase founded in 2018",
+            "[Webrazzi, 1 September 2021](https://webrazzi.com/2021/09/01/bulut-tabanli-odeme-gecidi-craftgate-yil-sonunda-1-milyar-tllik-odeme-hacmini-gecmeyi-hedefliyor): investors, buyers, and leaving service work",
+            "[Webrazzi, 1 June 2022](https://webrazzi.com/2022/06/01/bulut-tabanli-odeme-gecidi-craftgate-2-milyon-dolar-tohum-yatirim-aldi): seed round",
+            "[Webrazzi, 23 August 2023](https://webrazzi.com/2023/08/23/craftgate-hepsiburada-ve-d4-ventures-tan-1-milyon-dolar-yatirim-aldi/): Hepsiburada and D4 Ventures",
+            "[Invest in Spain, 23 January 2025](https://www.investinspain.org/content/icex-invest/en/noticias-main/2025/craftgate.html): Craftgate Europe",
+            "[Ekonomist, 22 August 2025](https://www.ekonomist.com.tr/makale/turk-muhendislerin-girisimi-craftgate-global-yolculuga-cikti-64177): the founding team, the choice, 2024 volume",
+            "[Para Dergi, 12 December 2025](https://www.paradergi.com.tr/teknoloji/2025/12/12/deloitte-teknoloji-fast-50-programinda-en-hizli-buyuyenler-odullendirildi): Deloitte Technology Fast 50 Türkiye",
+            "[Webrazzi, 12 October 2026](https://webrazzi.com/2026/10/12/craftgate-turkven-den-yatirim-aldi/) and [YatırımX, 12 October 2026](https://www.yatirimx.com.tr/startup-radari/turkven-odeme-teknolojileri-sirketi-craftgatee-yatirim-yapti/26366): Turkven, merchant count",
+            "[craftgate.io](https://craftgate.io) and [its about page](https://craftgate.io/en/about-us), read in November 2026: licence status, certifications, merchants, team"
+          ]
+        }
+      ]
+    }
+  ]
+}

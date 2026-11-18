@@ -1,0 +1,65 @@
+{
+  "title": "Career, Lemi Orhan Ergin",
+  "description": "Positions held by Lemi Orhan Ergin since 2001, from Sony to Craftgate, with education and certifications.",
+  "head": {
+    "heading": "Career",
+    "cmd": "git log --graph",
+    "blocks": [
+      { "type": "p", "class": "intro", "text": "I have been writing code since 2001. The orange branches are the two times I left Sony and came back." }
+    ]
+  },
+  "sections": [
+    {
+      "id": "positions",
+      "heading": "Positions",
+      "blocks": [
+        {
+          "type": "log",
+          "label": "Positions, newest first",
+          "items": [
+            { "when": "Dec 2021 – now", "title": "Co-founder & Chief Software Crafter", "org": "[Craftgate](https://craftgate.io)", "note": "A payment orchestration platform that connects online merchants to banks, payment providers and alternative payment methods through one integration." },
+            { "when": "Apr 2018 – Dec 2021", "title": "Co-founder & Software Crafter", "org": "Craftbase" },
+            { "when": "Jan 2017 – Apr 2018", "title": "Agile Practice Lead & Software Crafter", "org": "iyzico", "note": "Led the cultural transformation of iyzico engineering around agile and lean thinking and software craftsmanship." },
+            { "when": "Jan 2014 – Dec 2016", "title": "Managing Partner, Master Software Craftsman, Agile Coach & Trainer", "org": "ACM", "note": "Consulting and training for dozens of companies on agile culture and engineering practices." },
+            { "when": "Sep 2012 – Dec 2014", "title": "Principal Software Engineer, Technical Lead & Agile Practice Lead", "org": "Sony", "note": "Also Solution Architect (Dec 2013 – May 2014), then Technical Architect & Scrum Master (May – Dec 2014)." },
+            { "when": "Mar 2012 – Sep 2012", "title": "MTS1 Software Engineer", "org": "GittiGidiyor / eBay", "branch": true },
+            { "when": "Apr 2010 – Mar 2012", "title": "Expert Software Engineer", "org": "Sony" },
+            { "when": "May 2008 – Apr 2010", "title": "Technical Coordinator & Scrum Master", "org": "Sony" },
+            { "when": "Aug 2007 – May 2008", "title": "Senior Software Engineer", "org": "Sony" },
+            { "when": "Aug 2006 – Jul 2007", "title": "Software Officer", "org": "Turkish Air Force", "branch": true },
+            { "when": "Oct 2004 – May 2006", "title": "Lead Software Engineer", "org": "Sony" },
+            { "when": "Aug 2003 – Sep 2004", "title": "Software Engineer", "org": "BYM" },
+            { "when": "Jun 2002 – Jan 2003", "title": "Laboratory Assistant", "org": "Marmara University" },
+            { "when": "Jun 2001 – Sep 2001", "title": "Software Engineer", "org": "TÜSSİDE" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "education",
+      "heading": "Education",
+      "blocks": [
+        {
+          "type": "facts",
+          "groups": [
+            {
+              "heading": "Degrees",
+              "items": [
+                { "title": "M.Sc., Computer Engineering", "text": "Marmara University, 2003 – 2005" },
+                { "title": "B.Sc., Computer Engineering", "text": "Marmara University, 1997 – 2002" }
+              ]
+            },
+            {
+              "heading": "Certifications",
+              "items": [
+                { "title": "[Certified ScrumMaster](https://www.scrumalliance.org/members/49418)", "text": "Scrum Alliance, 2009, trained by James Coplien" },
+                { "title": "PSM I & PSD I", "text": "Scrum.org, 2013" },
+                { "title": "Certified Kanban Practitioner", "text": "Lean Kanban University" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
