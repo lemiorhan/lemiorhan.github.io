@@ -5,5 +5,29 @@
   "blocks": [
     "This address does not exist on this site.",
     "[Go to the home page](/), or straight to [Talks](/talks/), [Craftgate](/craftgate/) or [Contact](/contact/)."
-  ]
+  ],
+  "maze": {
+    "title": "While you are here",
+    "intro": "Bugs got into this page. You are HEAD, the orange dot. Collect every commit, and grab a green test to squash the bugs while it lasts.",
+    "ui": {
+      "board": "Maze game. You are HEAD, the orange dot: collect the commits and keep away from the bugs.",
+      "play": "Play",
+      "start": "Move with the arrow keys or WASD. On a phone, swipe on the maze or use the arrows under it.",
+      "caught": "A bug got you. Move to go on.",
+      "next": "Next maze, faster bugs. Move to start.",
+      "cleared": "nothing to commit, working tree clean",
+      "over": "fatal: no lives left",
+      "again": "Play again",
+      "paused": "Paused",
+      "resume": "Resume",
+      "score": "Score",
+      "best": "Best",
+      "level": "Level",
+      "lives": "Lives",
+      "up": "Up",
+      "down": "Down",
+      "left": "Left",
+      "right": "Right"
+    }
+  }
 }

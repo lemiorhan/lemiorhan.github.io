@@ -590,6 +590,12 @@ class ContentRendersAsText(unittest.TestCase):
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False)
         cls.game = data['game']
+        path = os.path.join(site, 'content', '404.json')
+        data = read_json(path)
+        data['maze'] = cls.plant(data['maze'])
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False)
+        cls.maze = data['maze']
         out = os.path.join(cls.tmp.name, 'out')
         result = run_build(site, out)
         if result.returncode:
@@ -597,6 +603,8 @@ class ContentRendersAsText(unittest.TestCase):
         with open(os.path.join(out, 'index.html'), encoding='utf-8') as f:
             cls.source = f.read()
         cls.tree = Tree(cls.source).root
+        with open(os.path.join(out, '404.html'), encoding='utf-8') as f:
+            cls.not_found = f.read()
 
     @classmethod
     def tearDownClass(cls):
@@ -641,6 +649,38 @@ class ContentRendersAsText(unittest.TestCase):
         self.assertEqual(island['ui'], self.game['ui'])
         self.assertEqual([lv['story'] for lv in island['levels']], [lv['story'] for lv in self.game['levels']])
         self.assertIn(self.MARK, island['levels'][0]['story'])
+
+    def test_the_maze_strings_render_as_text_and_its_island_holds_no_angle_bracket(self):
+        tree = Tree(self.not_found).root
+        self.assertEqual(tree.find(lambda n: n.tag == 'xmark'), [])
+        section = tree.find(lambda n: 'data-maze' in n.attrs)[0]
+        self.assertEqual([n.all_text() for n in section.find(lambda n: n.tag in ('h2', 'p'))],
+                         [self.maze['title'], self.maze['intro']])
+        self.assertIn(self.MARK, self.maze['title'])
+        start = self.not_found.index('<script type="application/json" id="maze-data">')
+        start = self.not_found.index('>', start) + 1
+        body = self.not_found[start:self.not_found.index('</script>', start)]
+        self.assertNotIn('<', body)
+        self.assertEqual(json.loads(body), {'ui': self.maze['ui']})
+        self.assertIn(self.MARK, self.maze['ui']['over'])
+
+
+class NotFoundWithoutAMaze(unittest.TestCase):
+    def test_without_a_maze_in_404_json_the_page_builds_with_no_trace_of_the_game(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            site = copy_site(tmp)
+            path = os.path.join(site, 'content', '404.json')
+            data = read_json(path)
+            del data['maze']
+            with open(path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False)
+            out = os.path.join(tmp, 'out')
+            result = run_build(site, out)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            with open(os.path.join(out, '404.html'), encoding='utf-8') as f:
+                html = f.read()
+        self.assertNotIn('maze', html)
+        self.assertEqual([n.all_text() for n in Tree(html).root.find(lambda n: n.tag == 'h1')], [data['heading']])
 
 
 class BuiltSite(unittest.TestCase):
@@ -1402,6 +1442,45 @@ class BuiltSite(unittest.TestCase):
                 self.assertTrue(os.path.isfile(os.path.join(self.out, path)), path)
         self.assertIn('home', with_game)
         self.assertGreater(without, 0)
+
+    # 404.html is served at whatever path was asked for, so its assets must not be relative.
+    MAZE_ASSETS = ['/assets/maze-game.css', '/assets/maze-game.js']
+
+    def test_only_the_not_found_page_loads_the_maze_game_from_root_absolute_paths_in_its_head(self):
+        loaders = {}
+        for name, tree in self.trees.items():
+            refs = [n for n in tree.find(lambda n: n.tag in ('link', 'script'))
+                    if 'maze-game' in (n.attrs.get('href') or n.attrs.get('src') or '')]
+            if refs:
+                loaders[name] = refs
+        self.assertEqual({name: [n.attrs.get('href') or n.attrs['src'] for n in refs] for name, refs in loaders.items()},
+                         {'404': self.MAZE_ASSETS})
+        head = self.trees['404'].find(lambda n: n.tag == 'head')[0]
+        self.assertEqual([n for n in loaders['404'] if n not in head.walk()], [])
+        self.assertEqual([n.attrs.get('rel') for n in loaders['404'] if n.tag == 'link'], ['stylesheet'])
+        self.assertIn('defer', [n for n in loaders['404'] if n.tag == 'script'][0].attrs)
+        for path in self.MAZE_ASSETS:
+            self.assertTrue(os.path.isfile(os.path.join(self.out, path.lstrip('/'))), path)
+
+    def test_the_not_found_page_mounts_the_maze_hidden_with_the_ui_strings_404_json_gives(self):
+        maze = read_json(ROOT, 'content', '404.json')['maze']
+        tree = self.trees['404']
+        mounts = tree.find(lambda n: 'data-maze' in n.attrs)
+        self.assertEqual(len(mounts), 1)
+        self.assertIn('hidden', mounts[0].attrs)
+        self.assertEqual([n.all_text() for n in mounts[0].find(lambda n: n.tag in ('h2', 'p'))],
+                         [maze['title'], maze['intro']])
+        self.assertEqual(tree.find(lambda n: n.attrs.get('id') == mounts[0].attrs['aria-labelledby']),
+                         mounts[0].find(lambda n: n.tag == 'h2'))
+        islands = tree.find(lambda n: n.attrs.get('id') == 'maze-data')
+        self.assertEqual(len(islands), 1)
+        self.assertEqual(json.loads(islands[0].text), {'ui': maze['ui']})
+
+    def test_the_maze_game_reads_every_ui_string_404_json_has_and_no_other(self):
+        with open(os.path.join(ROOT, 'assets', 'maze-game.js'), encoding='utf-8') as f:
+            read = set(re.findall(r'\bui\.([a-z_]+)', f.read()))
+        self.assertIn('play', read)
+        self.assertEqual(read, set(read_json(ROOT, 'content', '404.json')['maze']['ui']))
 
     BEACON = 'https://static.cloudflareinsights.com/beacon.min.js'
 

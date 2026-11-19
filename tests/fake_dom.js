@@ -1,14 +1,20 @@
 'use strict';
 
-// A DOM double for tests/git_game_dom_cli.js and tests/archive_dom_cli.js, written by hand for
-// what assets/git-game.js and the year archive in assets/site.js use. There is no layout: every
-// box measures 0 and every scroll is only recorded. Reading, writing or calling anything this
-// file does not define throws, and so do selectors, media queries, event types and namespaces
-// it does not know, so page code that needs more DOM fails the smoke test instead of running
-// on `undefined`. An exception in a listener reaches the caller.
+// A DOM double for tests/git_game_dom_cli.js, tests/archive_dom_cli.js and
+// tests/maze_game_dom_cli.js, written by hand for what assets/git-game.js, the year archive in
+// assets/site.js and assets/maze-game.js use. There is no layout: every box measures 0 unless a
+// driver places it on screen through `element._.rect`, and every scroll is only recorded, as is
+// each textContent write on an element, in `element._.writes`, the way a live region hears it. There is
+// no drawing either: a canvas gives no context, as in a browser that cannot make one. Reading,
+// writing or calling anything this file does not define throws, and so do selectors, media
+// queries, event types and namespaces it does not know, so page code that needs more DOM fails
+// the smoke test instead of running on `undefined`. An exception in a listener reaches the caller.
 
 var SVG_NS = 'http://www.w3.org/2000/svg';
-var EVENTS = { click: 'mouse', pointerdown: 'mouse', keydown: 'key', input: 'plain', submit: 'plain', focusin: 'plain' };
+var EVENTS = {
+  click: 'mouse', pointerdown: 'mouse', pointermove: 'mouse', pointerup: 'mouse', pointercancel: 'mouse',
+  keydown: 'key', input: 'plain', submit: 'plain', focusin: 'plain', visibilitychange: 'plain'
+};
 var FOCUSABLE = { a: true, button: true, input: true };
 
 function has(map, key) {
@@ -135,7 +141,7 @@ class Text extends FakeNode {
 class Element extends FakeNode {
   constructor(doc, tag, svg) {
     super(doc);
-    Object.assign(this._, { tag: tag, svg: svg, attrs: {}, children: [], listeners: {}, style: {}, scrollTop: 0, scrollLeft: 0 });
+    Object.assign(this._, { tag: tag, svg: svg, attrs: {}, children: [], listeners: {}, style: {}, scrollTop: 0, scrollLeft: 0, writes: 0 });
   }
 
   get childNodes() { return this._.children.slice(); }
@@ -170,6 +176,7 @@ class Element extends FakeNode {
   }
 
   set textContent(value) {
+    this._.writes++;
     this._.children.slice().forEach(detach);
     if (String(value) !== '') this.appendChild(text(this._.doc, value));
   }
@@ -283,7 +290,15 @@ class Element extends FakeNode {
     fire(this, 'focusin', {});
   }
 
-  scrollIntoView() { this._.doc._.scrolls++; }
+  scrollIntoView(options) {
+    this._.doc._.scrolls++;
+    this._.doc._.scrolledWith = options;
+  }
+
+  getContext() {
+    only(this, ['canvas'], 'getContext');
+    return null;
+  }
 
   get scrollTop() { return this._.scrollTop; }
   set scrollTop(value) { this._.scrollTop = Number(value); }
@@ -295,7 +310,9 @@ class Element extends FakeNode {
   get offsetWidth() { return 0; }
   get offsetHeight() { return 0; }
   getBoundingClientRect() {
-    return strict({ top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0 }, 'DOMRect');
+    var r = this._.rect || { top: 0, bottom: 0, left: 0, right: 0 };
+    return strict({ top: r.top, bottom: r.bottom, left: r.left, right: r.right,
+                    width: r.right - r.left, height: r.bottom - r.top }, 'DOMRect');
   }
 
   // The SVG geometry the talks map reads: what the attributes say, and a zero box for every shape.
@@ -340,12 +357,19 @@ function element(doc, tag, svg) {
 
 class Document {
   constructor() {
-    this._ = { active: null, body: null, handled: 0, scrolls: 0 };
+    this._ = { active: null, body: null, handled: 0, scrolls: 0, scrolledWith: null, hidden: false, listeners: {} };
   }
 
   get documentElement() { return this._.html; }
   get body() { return this._.body; }
   get activeElement() { return this._.active || this._.body; }
+  get hidden() { return this._.hidden; }
+
+  addEventListener(type, listener) {
+    if (arguments.length > 2) throw new Error('fake DOM: addEventListener options are not supported');
+    if (!has(EVENTS, type)) throw new Error('fake DOM: no ' + type + ' events');
+    (this._.listeners[type] = this._.listeners[type] || []).push(listener);
+  }
 
   createElement(tag) { return element(this, String(tag).toLowerCase(), false); }
 
@@ -370,8 +394,9 @@ function createDocument() {
   return doc;
 }
 
-// Dispatches an event that bubbles from `target` up its ancestors, the way every event the game
-// listens for does, and returns whether a listener prevented the default and how many ran.
+// Dispatches an event that bubbles from `target` up its ancestors, and on to the document when
+// `target` is in it, the way every event the pages listen for does; `target` may be the document
+// itself. Returns whether a listener prevented the default and how many ran.
 function fire(target, type, init) {
   if (!has(EVENTS, type)) throw new Error('fake DOM: no ' + type + ' events');
   var prevented = false;
@@ -387,19 +412,32 @@ function fire(target, type, init) {
     });
   }
   if (EVENTS[type] === 'key') Object.defineProperty(raw, 'key', { get: function () { return init.key; }, enumerable: true });
-  var event = strict(raw, type + ' event');
-  var handled = 0;
-  for (var node = target; node; node = node._.parent) {
-    (node._.listeners[type] || []).slice().forEach(function (listener) {
-      listener.call(node, event);
-      handled++;
+  if (EVENTS[type] === 'mouse') {
+    [['detail', 0], ['clientX', 0], ['clientY', 0], ['pointerId', 1]].forEach(function (f) {
+      Object.defineProperty(raw, f[0], { get: function () { return has(init, f[0]) ? init[f[0]] : f[1]; }, enumerable: true });
     });
   }
-  target._.doc._.handled += handled;
+  var event = strict(raw, type + ' event');
+  var doc = isElement(target) ? target._.doc : target;
+  var path = [];
+  if (isElement(target)) {
+    for (var node = target; node; node = node._.parent) path.push(node);
+    if (path[path.length - 1] === doc.documentElement) path.push(doc);
+  } else {
+    path.push(doc);
+  }
+  var handled = 0;
+  path.forEach(function (at) {
+    (at._.listeners[type] || []).slice().forEach(function (listener) {
+      listener.call(at, event);
+      handled++;
+    });
+  });
+  doc._.handled += handled;
   return { prevented: prevented, handled: handled };
 }
 
-// options: {narrow, reduceMotion, dark, storage, location: {origin, pathname}}.
+// options: {narrow, reduceMotion, dark, storage, location: {origin, pathname}, document?}.
 function createWindow(options) {
   var media = {
     '(max-width: 40rem)': !!options.narrow,
@@ -410,7 +448,7 @@ function createWindow(options) {
   var lastFrame = 0;
   var clock = 0;
   var engine;
-  var listeners = { resize: [], scroll: [] };
+  var listeners = { resize: [], scroll: [], blur: [] };
   var scrolls = [];
   var location = strict({ origin: options.location.origin, pathname: options.location.pathname }, 'location');
   var raw = {
@@ -418,6 +456,15 @@ function createWindow(options) {
     set GitEngine(value) { engine = value; },
     get localStorage() { return options.storage; },
     get location() { return location; },
+    get document() {
+      if (!options.document) throw new Error('fake DOM: window has no document');
+      return options.document;
+    },
+    get innerHeight() { return 800; },
+    performance: strict({ now: function () { return clock; } }, 'performance'),
+    getComputedStyle: function () {
+      return strict({ getPropertyValue: function () { return ''; } }, 'CSSStyleDeclaration');
+    },
     matchMedia: function (query) {
       if (!has(media, query)) throw new Error('fake DOM: unsupported media query ' + query);
       return strict({ get matches() { return media[query]; } }, 'MediaQueryList');
@@ -446,6 +493,23 @@ function createWindow(options) {
   return {
     window: strict(raw, 'window'),
     scrolls: function () { return scrolls.slice(); },
+    emit: function (type) {
+      if (!has(listeners, type)) throw new Error('fake DOM: window has no ' + type + ' events');
+      listeners[type].slice().forEach(function (listener) { listener(strict({ type: type }, type + ' event')); });
+    },
+    pendingFrames: function () { return frames.length; },
+    // For a page whose frames never stop while something moves: runs at most `limit` rounds,
+    // `gap` ms apart (16 by default, a 60 Hz screen), and returns how many ran.
+    runFrames: function (limit, gap) {
+      var round = 0;
+      for (; round < limit && frames.length; round++) {
+        clock += gap || 16;
+        var due = frames;
+        frames = [];
+        due.forEach(function (f) { f.callback(clock); });
+      }
+      return round;
+    },
     flushFrames: function () {
       for (var round = 0; frames.length; round++) {
         if (round > 1000) throw new Error('fake DOM: animation frames never stop');

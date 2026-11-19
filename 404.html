@@ -20,14 +20,23 @@
       if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
     } catch (e) {}
   </script>
+  <link rel="stylesheet" href="/assets/maze-game.css">
+  <script src="/assets/maze-game.js" defer></script>
   <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;dfdddb20cad844759f9acc8e6c47f1aa&quot;}"></script>
 </head>
 <body>
   <main class="wrap notfound">
-    <h1>Page not found</h1>
-    <p><code>fatal: pathspec did not match any files</code></p>
-    <p>This address does not exist on this site.</p>
-    <p><a href="/">Go to the home page</a>, or straight to <a href="/talks/">Talks</a>, <a href="/craftgate/">Craftgate</a> or <a href="/contact/">Contact</a>.</p>
+    <div class="notfound-text">
+      <h1>Page not found</h1>
+      <p><code>fatal: pathspec did not match any files</code></p>
+      <p>This address does not exist on this site.</p>
+      <p><a href="/">Go to the home page</a>, or straight to <a href="/talks/">Talks</a>, <a href="/craftgate/">Craftgate</a> or <a href="/contact/">Contact</a>.</p>
+    </div>
+    <section class="maze" aria-labelledby="maze-title" data-maze hidden>
+      <h2 id="maze-title">While you are here</h2>
+      <p class="maze-intro">Bugs got into this page. You are HEAD, the orange dot. Collect every commit, and grab a green test to squash the bugs while it lasts.</p>
+    </section>
+    <script type="application/json" id="maze-data">{"ui": {"board": "Maze game. You are HEAD, the orange dot: collect the commits and keep away from the bugs.", "play": "Play", "start": "Move with the arrow keys or WASD. On a phone, swipe on the maze or use the arrows under it.", "caught": "A bug got you. Move to go on.", "next": "Next maze, faster bugs. Move to start.", "cleared": "nothing to commit, working tree clean", "over": "fatal: no lives left", "again": "Play again", "paused": "Paused", "resume": "Resume", "score": "Score", "best": "Best", "level": "Level", "lives": "Lives", "up": "Up", "down": "Down", "left": "Left", "right": "Right"}}</script>
   </main>
 </body>
 </html>
