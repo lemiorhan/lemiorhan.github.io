@@ -972,17 +972,6 @@
           ]
         },
         {
-          "name": "Git: Not What You Think",
-          "place": "online",
-          "spoken": "tr",
-          "talks": [
-            {
-              "video": "https://www.youtube.com/watch?v=OOmsCltczCA",
-              "themes": ["git"]
-            }
-          ]
-        },
-        {
           "date": "2020-04-15",
           "name": "Açık Seminer: Siber Güvenlik, Git ve PHP 101",
           "place": "online",
@@ -991,7 +980,7 @@
           "talks": [
             {
               "title": "Git: Not What You Think",
-              "video": "https://www.youtube.com/watch?v=amP0SNQh9yA",
+              "video": "https://www.youtube.com/watch?v=OOmsCltczCA",
               "themes": ["git"]
             }
           ]
@@ -1505,7 +1494,7 @@
           "url": "https://devoxx.pl/",
           "talks": [
             {
-              "title": "Git Anti-Patterns: How To Mess Up With Git and Love it Again",
+              "title": "Git Anti-Patterns: How To Mess Up With Git and Love It Again",
               "slides": "https://speakerdeck.com/lemiorhan/git-anti-patterns-how-to-mess-up-with-git-and-love-it-again",
               "video": "https://www.youtube.com/watch?v=m3ITI7tT_Qo",
               "themes": ["git"]

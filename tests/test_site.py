@@ -1116,6 +1116,13 @@ class BuiltSite(unittest.TestCase):
             self.assertEqual(jpeg_size(os.path.join(self.out, 'talks', img.attrs['src'])), declared, img.attrs['src'])
             self.assertTrue(os.path.isfile(os.path.join(self.out, 'talks', a.attrs['href'])), a.attrs['href'])
 
+    def test_every_file_in_assets_talks_is_used_by_a_built_page(self):
+        folder = os.path.join(ROOT, 'assets', 'talks')
+        files = {f for f in os.listdir(folder) if not f.startswith('.')}
+        self.assertGreater(len(files), 1)
+        unused = {f for f in files if not any('assets/talks/' + f in html for html in self.html.values())}
+        self.assertEqual(unused, set())
+
     # Sharing
 
     def test_every_page_shares_an_image_of_the_size_it_declares(self):
