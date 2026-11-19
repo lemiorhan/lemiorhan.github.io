@@ -398,11 +398,12 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
             with self.subTest(change=change.__name__):
                 self.assertRejected(self.edit('talks', change), 'build failed: content/talks.json: ' + message)
 
-    def test_an_event_at_a_place_on_the_map_that_states_its_own_spoken_language(self):
-        def stated(d):
-            next(ev for ev in self.events(d) if ev['name'] == 'Devoxx Belgium 2022')['spoken'] = 'tr'
-        self.assertRejected(self.edit('talks', stated),
-                            "content/talks.json: event 'Devoxx Belgium 2022' takes its language from its country; drop \"spoken\"")
+    def test_an_event_that_states_no_spoken_language(self):
+        for name in ('Devoxx Belgium 2022', 'Iqra – Okuyun', 'IT Serbia Podcast'):
+            def unstated(d):
+                next(ev for ev in self.events(d) if ev['name'] == name).pop('spoken')
+            with self.subTest(event=name):
+                self.assertRejected(self.edit('talks', unstated), 'content/talks.json: event {!r} needs "spoken"'.format(name))
 
     def test_a_spoken_value_that_is_not_a_language_code(self):
         for name in ('IT Serbia Podcast', 'Devoxx Belgium 2022'):
@@ -991,7 +992,7 @@ class BuiltSite(unittest.TestCase):
             with open(os.path.join(out, page), encoding='utf-8') as f:
                 return Tree(f.read()).root
 
-    def test_named_events_carry_turkish_in_turkiye_english_abroad_and_online_what_spoken_states(self):
+    def test_named_events_carry_the_badge_of_the_language_they_state(self):
         events = self.badges_by_event(self.trees['talks'])
         self.assertEqual(events['Karabük Üniversitesi Programlama Günleri 2016'], [['Turkish']])
         self.assertEqual(events['Devoxx Belgium 2022'], [['English']])
@@ -1003,31 +1004,31 @@ class BuiltSite(unittest.TestCase):
         self.assertEqual(events['ITAKE Unconference 2020'], [['English']])
         self.assertEqual(events['Turkcell Agile Talks'], [['Turkish']], 'an event with no place, no role and no talks')
 
-    def test_an_online_or_unplaced_event_that_states_no_spoken_language_has_no_badge(self):
-        shapes = {'Unstated online': lambda ev: ev.get('place') == 'online', 'Unstated unplaced': lambda ev: 'place' not in ev}
-        def unstate(data):
+    def test_an_event_at_a_place_on_the_map_carries_the_language_it_states_not_its_countrys(self):
+        def swap(data):
             every = [ev for evs in data['archive']['events'].values() for ev in evs]
-            for name, shape in shapes.items():
-                ev = next(ev for ev in every if shape(ev) and ev['name'] not in shapes)
-                ev.pop('spoken', None)
-                ev['name'] = name
-        events = self.badges_by_event(self.built_with_talks(unstate, os.path.join('talks', 'index.html')))
-        self.assertEqual({name: events.get(name) for name in shapes}, {name: [[]] for name in shapes})
+            next(ev for ev in every if ev['name'] == 'Devoxx Belgium 2022')['spoken'] = 'tr'
+            next(ev for ev in every if ev['name'] == 'Karabük Üniversitesi Programlama Günleri 2016')['spoken'] = 'en'
+        events = self.badges_by_event(self.built_with_talks(swap, os.path.join('talks', 'index.html')))
+        self.assertEqual(events['Devoxx Belgium 2022'], [['Turkish']])
+        self.assertEqual(events['Karabük Üniversitesi Programlama Günleri 2016'], [['English']])
 
-    def test_every_event_is_turkish_in_turkiye_english_abroad_and_elsewhere_what_spoken_states_or_unbadged(self):
-        def badge(ev):
-            place = ev.get('place')
-            if place not in (None, 'online'):
-                return 'Turkish' if self.talks['places'][place]['country'] == 'TR' else 'English'
-            return {'tr': 'Turkish', 'en': 'English', None: None}[ev.get('spoken')]
-        want = Counter((ev['name'], badge(ev)) for evs in self.talks['events'].values() for ev in evs)
+    def test_every_event_carries_the_one_badge_its_spoken_language_names(self):
+        label = {'tr': 'Turkish', 'en': 'English'}
+        want = Counter((ev['name'], label[ev['spoken']]) for evs in self.talks['events'].values() for ev in evs)
         got = Counter()
         for ev in self.trees['talks'].find(has_class('ev')):
             badges = self.spoken_badges(ev)
-            self.assertLessEqual(len(badges), 1, ev.all_text())
-            got[ev.find(has_class('ev-name'))[0].all_text(), next(iter(badges), None)] += 1
+            self.assertEqual(len(badges), 1, ev.all_text())
+            got[ev.find(has_class('ev-name'))[0].all_text(), badges[0]] += 1
         self.assertEqual(got, want)
         self.assertLessEqual({'Turkish', 'English'}, {b for _, b in want})
+
+    def test_every_event_at_a_place_on_the_map_states_turkish_in_turkiye_and_english_abroad(self):
+        placed = [ev for evs in self.talks['events'].values() for ev in evs if ev.get('place') not in (None, 'online')]
+        in_turkiye = {id(ev): self.talks['places'][ev['place']]['country'] == 'TR' for ev in placed}
+        self.assertEqual([ev['name'] for ev in placed if ev['spoken'] != ('tr' if in_turkiye[id(ev)] else 'en')], [])
+        self.assertEqual(set(in_turkiye.values()), {True, False}, 'no event in Türkiye or none abroad, so one side of the rule is unchecked')
 
     def siblings(self, node):
         return [c for c in node.parent.children if isinstance(c, Node)]
@@ -1044,20 +1045,18 @@ class BuiltSite(unittest.TestCase):
     def test_each_recent_talk_on_home_carries_the_badge_of_its_own_event_beside_its_title(self):
         count = next(b['count'] for s in read_json(ROOT, 'content', 'home.json')['sections']
                      for b in s['blocks'] if b['type'] == 'latest-talks')
-        pattern = (('kyiv', True), ('tr', False), (None, True), ('kyiv', False), ('tr', True))
+        pattern = (('en', 'istanbul', True), ('tr', 'kyiv', False), ('en', 'online', False), ('tr', None, True))
         self.assertGreaterEqual(count, len(pattern), 'the fixture below needs a recent talk for each of its rows')
-        label = {'kyiv': ['English'], 'tr': ['Turkish'], None: []}
+        label = {'en': ['English'], 'tr': ['Turkish']}
         want = []
         def mix(data):
             events = [ev for _, evs in sorted(data['archive']['events'].items(), reverse=True) for ev in evs if ev.get('talks')]
             for i, ev in enumerate(events[:count]):
-                language, linked = pattern[i % len(pattern)]
+                language, place, linked = pattern[i % len(pattern)]
                 ev.pop('place', None)
-                ev.pop('spoken', None)
-                if language == 'kyiv':
-                    ev['place'] = language
-                elif language:
-                    ev['spoken'] = language
+                ev['spoken'] = language
+                if place:
+                    ev['place'] = place
                 ev['talks'] = ev['talks'][:1]
                 ev['talks'][0].pop('slides', None)
                 ev['talks'][0].pop('video', None)

@@ -121,6 +121,8 @@
         {
           "date": "2026-11-06",
           "name": "Eclit Better://27",
+          "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "How AI Is Changing Our Software Development Culture",
@@ -136,6 +138,7 @@
           "date": "2026-10-17",
           "name": "Devnot Developer Summit 2026",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "When Code Becomes Disposible...",
@@ -153,8 +156,8 @@
           "date": "2026-05-07",
           "name": "Devnot Dotnet Konferansı 2026",
           "place": "istanbul",
-          "lang": "tr",
           "role": "Closing talk",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Software Development in the Age of AI: Redefining Architecture, Quality and Culture",
@@ -171,6 +174,7 @@
           "name": "Java Day Istanbul 2026",
           "place": "istanbul",
           "url": "https://javaday.istanbul/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Rebirth of Software Craftsmanship in the AI Era",
@@ -219,6 +223,7 @@
           "date": "2025-12-13",
           "name": "DevFest İzmir 2025",
           "place": "izmir",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Unlearn Unit Testing",
@@ -236,6 +241,7 @@
           "name": "DevFest Istanbul 2025",
           "place": "istanbul",
           "url": "https://devfest.istanbul/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Conway's Law Never Lies",
@@ -253,7 +259,7 @@
           "date": "2025-12-03",
           "name": "MacTech 2025, Marmara Üniversitesi",
           "place": "istanbul",
-          "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Unlearn OOP: Back To Origins",
@@ -269,6 +275,7 @@
           "date": "2025-10-18",
           "name": "Devnot Developer Summit 2025",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Fixing The Typos in Engineering Culture",
@@ -314,6 +321,7 @@
           "date": "2025-02-27",
           "name": "Tech Leaders Summit 2025",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Everything You Know About Agile Is Wrong",
@@ -329,6 +337,7 @@
           "date": "2024-12-07",
           "name": "DevFest İzmir 2024",
           "place": "izmir",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Unlearn Product Development",
@@ -347,7 +356,7 @@
           "date": "2024-12-06",
           "name": "MacTech Teknoloji ve Yazılım Zirvesi 2024, Marmara Üniversitesi",
           "place": "istanbul",
-          "lang": "tr",
+          "spoken": "tr",
           "photo": {
             "file": "2024-mactech",
             "alt": "Lemi with a handheld microphone on stage, beside a lectern carrying the MacTech logo"
@@ -358,6 +367,7 @@
           "name": "DevFest Istanbul 2024",
           "place": "istanbul",
           "url": "https://devfest.istanbul/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Unlearn OOP: Back To Origins",
@@ -374,6 +384,7 @@
           "date": "2024-10-12",
           "name": "Devnot Developer Summit 2024",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Unlearn Modularity",
@@ -390,6 +401,7 @@
           "date": "2024-04-25",
           "name": "Türkiye Java Community",
           "place": "online",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Shape of Code: What Makes Your Code Beautiful",
@@ -404,7 +416,6 @@
         },
         {
           "name": "Tütsü Sektör",
-          "lang": "tr",
           "role": "Podcast",
           "spoken": "tr",
           "talks": [
@@ -423,6 +434,7 @@
           "date": "2024-03-07",
           "name": "Tech Leaders Summit 2024",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "The Disturbing Truth: Why Do Most Software Projects Suck?",
@@ -444,7 +456,7 @@
           "date": "2024-03-02",
           "name": "8. Ulusal Yönetim Bilişim Zirvesi, Dokuz Eylül Üniversitesi",
           "place": "izmir",
-          "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=YTf9xrVWd6k",
@@ -478,6 +490,7 @@
           "date": "2023-12-02",
           "name": "DevFest İzmir 2023",
           "place": "izmir",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Fixing The Typos in Softvare Devlopment",
@@ -496,6 +509,7 @@
           "name": "DevFest Istanbul 2023",
           "place": "istanbul",
           "url": "https://devfest.istanbul/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "SOLID Is Dead, Long Live SOLID",
@@ -514,6 +528,7 @@
           "name": "Hepsiburada JSKonf 2023",
           "place": "istanbul",
           "url": "https://jskonf.com/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Code Is Cheap, Show Me The Purpose",
@@ -531,6 +546,7 @@
           "date": "2023-10-07",
           "name": "Devnot Developer Summit 2023",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "The Lost Chapter: Rediscovering Foundations in Software Design",
@@ -545,7 +561,6 @@
         },
         {
           "name": "Teknasyon ile Kesin Yaşanmıştır #14",
-          "lang": "tr",
           "role": "Podcast",
           "spoken": "tr",
           "talks": [
@@ -564,7 +579,6 @@
           "date": "2023-06-08",
           "name": "Iqra – Okuyun",
           "place": "online",
-          "lang": "tr",
           "spoken": "tr",
           "talks": [
             {
@@ -584,6 +598,7 @@
           "name": "Java Day Istanbul 2023",
           "place": "istanbul",
           "url": "https://javaday.istanbul/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Modeling Complexity: Using Modularization and Bounded Contexts in Domain Driven Design",
@@ -603,6 +618,7 @@
           "date": "2022-12-17",
           "name": "DevFest İzmir 2022",
           "place": "izmir",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Domain Driven Modular Architecture",
@@ -616,6 +632,7 @@
           "name": "DevFest Istanbul 2022",
           "place": "istanbul",
           "url": "https://devfest.istanbul/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Unlearn Unit Testing",
@@ -634,6 +651,7 @@
           "name": "Test Summit 2022",
           "place": "online",
           "role": "Keynote",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Unlearn Software Quality: Redefine What Should Be Really Cared",
@@ -647,6 +665,7 @@
           "date": "2022-10-15",
           "name": "Devnot Developer Summit 2022",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Fixing the Typo in Softvare Devlpment",
@@ -663,6 +682,7 @@
           "name": "Devoxx Belgium 2022",
           "place": "antwerp",
           "url": "https://devoxx.be/",
+          "spoken": "en",
           "talks": [
             {
               "title": "Pure Agile: Building a Culture Without Scrum, Kanban and XP",
@@ -680,6 +700,7 @@
           "date": "2022-06-10",
           "name": "Türkiye Java Community",
           "place": "online",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Software Craftsmanship Culture",
@@ -697,6 +718,7 @@
           "name": "Java Day Istanbul 2022",
           "place": "istanbul",
           "url": "https://javaday.istanbul/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Domain Driven Modular Architecture",
@@ -731,7 +753,6 @@
       "2021": [
         {
           "name": "Bilim Sohbetleri, İzmir Özel Türk Koleji",
-          "lang": "tr",
           "spoken": "tr",
           "talks": [
             {
@@ -749,6 +770,7 @@
           "date": "2021-10-23",
           "name": "Devnot Developer Summit Online 2021",
           "place": "online",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Unlearn OOP: Deleted Scenes, Misconceptions, Unspoken Truths",
@@ -764,7 +786,6 @@
         },
         {
           "name": "Junior Bile Değil #7",
-          "lang": "tr",
           "role": "Podcast",
           "spoken": "tr",
           "talks": [
@@ -779,7 +800,6 @@
           "date": "2021-08-13",
           "name": "Teknasyon Tech Meetup #2",
           "place": "online",
-          "lang": "tr",
           "spoken": "tr",
           "talks": [
             {
@@ -796,7 +816,6 @@
         {
           "name": "Ruby Türkiye Akşam Oturması #10",
           "place": "online",
-          "lang": "tr",
           "spoken": "tr",
           "talks": [
             {
@@ -813,6 +832,7 @@
         {
           "name": "Think. Design. Work Smart. with Alex Bolboaca",
           "role": "Podcast",
+          "spoken": "en",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=jksb10dcYB8",
@@ -828,6 +848,7 @@
           "date": "2021-03-14",
           "name": "CS TechTalks Alumni, IEEE Marmara",
           "place": "online",
+          "spoken": "tr",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=tVdaiOtraD4&t=2508s",
@@ -843,6 +864,7 @@
           "date": "2021-03-07",
           "name": "WeekEng 2021",
           "place": "online",
+          "spoken": "tr",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=FFYDNTWG-JI",
@@ -856,7 +878,6 @@
         },
         {
           "name": "Üretim Bandı",
-          "lang": "tr",
           "role": "Podcast",
           "spoken": "tr",
           "talks": [
@@ -904,7 +925,6 @@
         },
         {
           "name": "Üretim Bandı",
-          "lang": "tr",
           "role": "Podcast",
           "spoken": "tr",
           "talks": [
@@ -919,6 +939,7 @@
           "name": "Java Day Istanbul 2020",
           "place": "online",
           "url": "https://javaday.istanbul/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Beyti Code: Growing Hexagonal Microservices with TDD",
@@ -935,7 +956,6 @@
           "date": "2020-06-20",
           "name": "Online Microservices & DDD Konferansı, Devnot",
           "place": "online",
-          "lang": "tr",
           "spoken": "tr",
           "talks": [
             {
@@ -949,6 +969,7 @@
         {
           "name": "Online Agile Talks 2020 #3, Agile Türkiye",
           "place": "online",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Finding The Invisible Gorilla At Your Product Development Journey",
@@ -975,7 +996,6 @@
           "date": "2020-04-15",
           "name": "Açık Seminer: Siber Güvenlik, Git ve PHP 101",
           "place": "online",
-          "lang": "tr",
           "spoken": "tr",
           "talks": [
             {
@@ -989,7 +1009,7 @@
           "date": "2020-02-22",
           "name": "BİLMÖK 2020, Yeditepe Üniversitesi",
           "place": "istanbul",
-          "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Revolutionary Hexagonal Architecture",
@@ -1007,6 +1027,7 @@
         {
           "name": "JetBrains Day Istanbul 2019",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Slow Down To Go Faster In Software Development",
@@ -1022,6 +1043,7 @@
         {
           "name": "TEDxTarsusAmericanCollege",
           "place": "tarsus",
+          "spoken": "tr",
           "talks": [
             {
               "title": "The Apple That Made Me Famous Overnight",
@@ -1039,6 +1061,7 @@
           "date": "2019-11-24",
           "name": "DevFest Istanbul 2019",
           "place": "istanbul",
+          "spoken": "tr",
           "url": "https://devfest.istanbul/",
           "talks": [
             {
@@ -1055,6 +1078,7 @@
         {
           "name": "QaCast S1E8",
           "role": "Podcast",
+          "spoken": "tr",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=IkOc-hr5NWQ",
@@ -1064,7 +1088,6 @@
         },
         {
           "name": "Yazılımcı Sohbetleri, Çay Kahve İnsan",
-          "lang": "tr",
           "role": "Interview",
           "spoken": "tr",
           "talks": [
@@ -1081,6 +1104,7 @@
         {
           "name": "Devoxx Ukraine 2019",
           "place": "kyiv",
+          "spoken": "en",
           "url": "https://devoxx.com.ua/",
           "talks": [
             {
@@ -1097,6 +1121,7 @@
         {
           "name": "Kodla.co 2019",
           "place": "trabzon",
+          "spoken": "tr",
           "url": "https://kodla.co/",
           "talks": [
             {
@@ -1114,6 +1139,7 @@
         {
           "name": "Women Software Crafters Empowerment Program, Software Craftsmanship Turkey",
           "role": "10-week program",
+          "spoken": "tr",
           "photo": {
             "file": "2019-women-program",
             "alt": "Participants of the program gathered for a group photo, the attendance certificate on the screen behind them"
@@ -1124,6 +1150,7 @@
         {
           "name": "GrowIT Conference 2018",
           "place": "novi-sad",
+          "spoken": "en",
           "talks": [
             {
               "title": "Slow Down To Go Faster Than Ever, But How?",
@@ -1146,7 +1173,6 @@
         {
           "date": "2018-12-08",
           "name": "Kesişen Yollar",
-          "lang": "tr",
           "role": "Interview",
           "spoken": "tr",
           "talks": [
@@ -1165,6 +1191,7 @@
           "date": "2018-11-15",
           "name": "Webrazzi Developer 2018",
           "place": "istanbul",
+          "spoken": "tr",
           "role": "Panel",
           "talks": [
             {
@@ -1182,6 +1209,7 @@
           "date": "2018-11-14",
           "name": "KoçFinans Lunch&Learn",
           "place": "istanbul",
+          "spoken": "tr",
           "photo": {
             "file": "2018-kocfinans",
             "alt": "Two speakers at the front of an office lounge, the audience seated at tables"
@@ -1191,6 +1219,7 @@
           "date": "2018-10-25",
           "name": "Agile Turkey Summit 2018",
           "place": "istanbul",
+          "spoken": "tr",
           "photo": {
             "file": "2018-agile-turkey",
             "alt": "Three speakers at the front of a room beside a slide about building a healthy company culture"
@@ -1200,7 +1229,7 @@
           "date": "2018-10-11",
           "name": "Code.YapıKredi, İstanbul Tasarım Bienali",
           "place": "istanbul",
-          "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Who Will Save the World from Software?",
@@ -1216,6 +1245,7 @@
         {
           "name": "ITAKE Unconference 2018",
           "place": "bucharest",
+          "spoken": "en",
           "url": "https://itakeunconf.com/",
           "talks": [
             {
@@ -1232,6 +1262,7 @@
         {
           "name": "PHPKonf 2018",
           "place": "istanbul",
+          "spoken": "tr",
           "url": "https://phpkonf.org/",
           "talks": [
             {
@@ -1248,6 +1279,7 @@
         {
           "date": "2018-05-12",
           "name": "Devnot Developer Summit 2018",
+          "spoken": "tr",
           "place": "istanbul",
           "talks": [
             {
@@ -1266,6 +1298,7 @@
           "name": "Kodla.co 2018",
           "place": "trabzon",
           "url": "https://kodla.co/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Next-Generation Software Culture: Better Professionals, Better Software, More Agile Teams",
@@ -1283,6 +1316,7 @@
           "name": "Java Day Istanbul 2018",
           "place": "istanbul",
           "url": "https://javaday.istanbul/",
+          "spoken": "tr",
           "photo": {
             "file": "2018-javaday",
             "alt": "A crowded room of attendees gathered close around a session"
@@ -1291,6 +1325,7 @@
         {
           "name": "Women Techmakers Istanbul 2018",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Irresponsible Disclosure: Short Handbook of an Ethical Developer",
@@ -1308,7 +1343,7 @@
           "date": "2018-03-23",
           "name": "FSM Vakıf Üniversitesi",
           "place": "istanbul",
-          "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Clean Software Design",
@@ -1324,7 +1359,7 @@
           "date": "2018-03-11",
           "name": "BİLMÖK 2018, Yeditepe Üniversitesi",
           "place": "istanbul",
-          "lang": "tr",
+          "spoken": "tr",
           "url": "https://bilmok.org/",
           "talks": [
             {
@@ -1342,7 +1377,7 @@
           "date": "2018-03-06",
           "name": "Koç Üniversitesi Girişimcilik Araştırma Merkezi",
           "place": "istanbul",
-          "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "How to Prepare for Technical Interviews",
@@ -1361,7 +1396,7 @@
           "date": "2017-12-28",
           "name": "Koç Üniversitesi Girişimcilik Araştırma Merkezi",
           "place": "istanbul",
-          "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Agile For Startups: How to Turn Chaos into Agility at Startups",
@@ -1376,7 +1411,6 @@
         },
         {
           "name": "Üretim Bandı",
-          "lang": "tr",
           "role": "Podcast",
           "spoken": "tr",
           "talks": [
@@ -1391,6 +1425,7 @@
           "name": "DevFest Istanbul 2017",
           "place": "istanbul",
           "url": "https://devfest.istanbul/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Git Anti-Patterns: How To Mess Up With Git And Love It Again",
@@ -1408,6 +1443,7 @@
           "name": "XP Days Ukraine 2017",
           "place": "kyiv",
           "url": "https://xpdays.com.ua/",
+          "spoken": "en",
           "talks": [
             {
               "title": "Git Anti Patterns",
@@ -1439,6 +1475,7 @@
         {
           "name": "Bucharest Business Summit 2017",
           "place": "bucharest",
+          "spoken": "en",
           "photo": {
             "file": "2017-bucharest",
             "alt": "Lemi at the lectern, a speaker card and the Java Summit logo on the screen"
@@ -1446,7 +1483,6 @@
         },
         {
           "name": "Yazılım Ofisleri, Devnot",
-          "lang": "tr",
           "role": "Interview",
           "spoken": "tr",
           "talks": [
@@ -1461,7 +1497,7 @@
           "date": "2017-05-12",
           "name": "İzmir Ekonomi Üniversitesi",
           "place": "izmir",
-          "lang": "tr",
+          "spoken": "tr",
           "photo": {
             "file": "2017-izmir-ekonomi",
             "alt": "Lemi at the front of a classroom, students at their desks with laptops"
@@ -1471,6 +1507,7 @@
           "name": "Java Day Istanbul 2017",
           "place": "istanbul",
           "url": "https://javaday.istanbul/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Git Anti-Patterns: How To Mess Up With Git And Love It Again",
@@ -1492,6 +1529,7 @@
           "name": "Devoxx Poland 2017",
           "place": "krakow",
           "url": "https://devoxx.pl/",
+          "spoken": "en",
           "talks": [
             {
               "title": "Git Anti-Patterns: How To Mess Up With Git and Love It Again",
@@ -1510,6 +1548,7 @@
           "name": "Testistanbul 2017",
           "place": "istanbul",
           "role": "Panel",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Agile Testing Tools & Technologies",
@@ -1524,9 +1563,9 @@
         {
           "name": "Dinamikler 2017",
           "place": "istanbul",
-          "lang": "tr",
           "url": "https://www.dinamikler.org/",
           "role": "Panel",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Agile Transformation Panel",
@@ -1543,6 +1582,7 @@
           "date": "2017-04-08",
           "name": "Devnot Developer Summit 2017",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Clean Software Design",
@@ -1560,6 +1600,7 @@
           "date": "2017-03-26",
           "name": "Agile Coaching Serbia meetup",
           "place": "novi-sad",
+          "spoken": "en",
           "talks": [
             {
               "title": "Fighting with Waste Driven Development",
@@ -1596,7 +1637,7 @@
           "date": "2017-03-20",
           "name": "Bahçeşehir Üniversitesi",
           "place": "istanbul",
-          "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Crafting Professional Development",
@@ -1612,7 +1653,7 @@
           "date": "2017-03-17",
           "name": "Arel Üniversitesi, Bilişim, Teknoloji ve Endüstri 4.0 Günü",
           "place": "istanbul",
-          "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Agile Culture and Scrum",
@@ -1628,7 +1669,7 @@
           "date": "2017-03-15",
           "name": "FSM Vakıf Üniversitesi",
           "place": "istanbul",
-          "lang": "tr",
+          "spoken": "tr",
           "photo": {
             "file": "2017-fsm",
             "alt": "Lemi beside a slide that reads Be honest, to yourself, to teammates, to managers"
@@ -1637,6 +1678,7 @@
         {
           "name": "Gebze Geek Day 2017",
           "place": "gebze",
+          "spoken": "tr",
           "photo": {
             "file": "2017-gebze-geek-day",
             "alt": "Lemi presenting in a lecture hall, the title slide on the screen beside"
@@ -1648,6 +1690,7 @@
           "name": "DevFest Istanbul 2016",
           "place": "istanbul",
           "url": "https://devfest.istanbul/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Test Driven Design",
@@ -1663,7 +1706,8 @@
         },
         {
           "name": "DevFest İzmir 2016",
-          "place": "izmir"
+          "place": "izmir",
+          "spoken": "tr"
         },
         {
           "date": "2016-11-17",
@@ -1682,11 +1726,11 @@
           "name": "Global Day of Coderetreat 2016",
           "place": "istanbul",
           "url": "https://www.coderetreat.org/",
-          "role": "Facilitator"
+          "role": "Facilitator",
+          "spoken": "tr"
         },
         {
           "name": "Yönetim 2.0, Gelecekhane",
-          "lang": "tr",
           "spoken": "tr",
           "talks": [
             {
@@ -1704,6 +1748,7 @@
           "name": "Bosnia Agile Day 2016",
           "place": "sarajevo",
           "role": "Keynote",
+          "spoken": "en",
           "talks": [
             {
               "title": "Let The Elephants Leave The Room: Remove Waste in Software Development",
@@ -1720,6 +1765,7 @@
         {
           "name": "Software Craftsmanship Turkey meetup",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Lemi's Way About Preparing and Presenting Talks",
@@ -1736,6 +1782,7 @@
           "date": "2016-06-02",
           "name": "Agile Talks, Agile Türkiye",
           "place": "ankara",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Coding Agility: The Building Blocks of Technical Agility and DevOps Culture",
@@ -1751,6 +1798,7 @@
         {
           "name": "Agile Middle East 2016",
           "place": "dubai",
+          "spoken": "en",
           "talks": [
             {
               "title": "Let the Elephants Leave the Room: Tips for Making Development Life Leaner",
@@ -1766,7 +1814,7 @@
         {
           "date": "2016-04-12",
           "name": "Agile Buluşmalar, Agile Türkiye",
-          "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Happy Developer's Guide to the Galaxy: Thinking About Motivation of Developers",
@@ -1783,6 +1831,7 @@
         {
           "name": "Boğaziçi University Tech Summit 2016",
           "place": "istanbul",
+          "spoken": "tr",
           "photo": {
             "file": "2016-bogazici-tech-summit",
             "alt": "Lemi on a small stage in a room of red seats, seen from the back rows"
@@ -1791,7 +1840,7 @@
         {
           "name": "Karabük Üniversitesi Programlama Günleri 2016",
           "place": "karabuk",
-          "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Git: Not What You Think",
@@ -1818,11 +1867,13 @@
           "name": "Global Day of Coderetreat 2015",
           "place": "istanbul",
           "url": "https://www.coderetreat.org/",
-          "role": "Facilitator"
+          "role": "Facilitator",
+          "spoken": "tr"
         },
         {
           "name": "Agile Tour Kaunas 2015",
           "place": "kaunas",
+          "spoken": "en",
           "talks": [
             {
               "title": "Code Your Agility: Tips for Boosting Technical Agility in Your Organization",
@@ -1839,6 +1890,7 @@
         {
           "date": "2015-09-17",
           "name": "Türk Telekom Group Agile Summit 2015",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Lost in Motivation in an Agile World",
@@ -1857,6 +1909,7 @@
           "place": "istanbul",
           "url": "https://phpkonf.org/",
           "role": "Keynote",
+          "spoken": "tr",
           "talks": [
             {
               "title": "TDD: Inevitable Challenge for Software Developers",
@@ -1869,6 +1922,7 @@
           "date": "2015-05-30",
           "name": "CraftSummit 2015",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Unleashed Power Behind The Myths: Pair Programming",
@@ -1881,6 +1935,7 @@
           "date": "2015-05-09",
           "name": "Voxxed Days Istanbul 2015",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Trespassing The Forgotten and Abandoned: Ethics in Software Development",
@@ -1892,6 +1947,7 @@
         {
           "name": "Bilkent Mobile Days 2015",
           "place": "ankara",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Searching The Missing Single Quote",
@@ -1906,14 +1962,15 @@
         },
         {
           "name": "Boğaziçi University Exit Days 2015",
-          "place": "istanbul"
+          "place": "istanbul",
+          "spoken": "tr"
         }
       ],
       "2014": [
         {
           "name": "Özgür Web Teknolojileri Günü 2014",
           "place": "istanbul",
-          "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Microservices from Theory into Practice",
@@ -1928,6 +1985,7 @@
           "place": "istanbul",
           "url": "https://www.coderetreat.org/",
           "role": "Facilitator",
+          "spoken": "tr",
           "talks": [
             {
               "slides": "https://speakerdeck.com/lemiorhan/global-day-of-coderetreat-istanbul-event-2014",
@@ -1939,6 +1997,7 @@
           "date": "2014-11-08",
           "name": "Lean Kanban Istanbul 2014",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Let The Elephants Leave The Room: Tips For Making Your Development Life Leaner",
@@ -1951,6 +2010,7 @@
           "date": "2014-09-24",
           "name": "Agile Leaders, Episode 1",
           "place": "online",
+          "spoken": "tr",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=Af1ymJzPjIo",
@@ -1966,6 +2026,7 @@
           "name": "DevFest Istanbul 2014",
           "place": "istanbul",
           "url": "https://devfest.istanbul/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Software Craftsmanship: Building A Culture for The Future",
@@ -1977,6 +2038,7 @@
         {
           "name": "GDG Istanbul meetup",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "A Gentle Introduction to Micro Services: From Theory into Practice",
@@ -1986,11 +2048,13 @@
           ]
         },
         {
-          "name": "Avea Agile Summit 2014"
+          "name": "Avea Agile Summit 2014",
+          "spoken": "tr"
         },
         {
           "name": "PHPIst 2014",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Fix Your Broken Windows With Code Reviews",
@@ -2007,6 +2071,7 @@
         {
           "name": "Kodcu.com webinar",
           "place": "online",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Java Exception Handling Best Practices",
@@ -2022,6 +2087,7 @@
           "name": "DevFest Istanbul 2013",
           "place": "istanbul",
           "url": "https://devfest.istanbul/",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Git and Git Workflow Models as Catalysts of Software Development",
@@ -2055,6 +2121,7 @@
         {
           "name": "Agile Talks, Agile Türkiye",
           "place": "ankara",
+          "spoken": "tr",
           "talks": [
             {
               "title": "GMO'less Software Development Practices",
@@ -2065,12 +2132,27 @@
           ]
         },
         {
+          "date": "2013-06-14",
+          "name": "YapıKredi Seminars",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "The Elephant in the Room: Motivation",
+              "themes": ["motivation"]
+            }
+          ],
+          "photo": {
+            "file": "2013-yapikredi",
+            "alt": "Rows of empty colourful chairs facing two screens that show the title slide The Elephant in the Room: Motivation, a lectern with a laptop on the left"
+          }
+        },
+        {
           "date": "2013-03-23",
           "name": "Dinamikler 2013",
           "place": "istanbul",
-          "lang": "tr",
           "url": "https://www.dinamikler.org/",
           "role": "Panel",
+          "spoken": "tr",
           "talks": [
             {
               "title": "The Key to Successful Projects: Agile Software Development Practices",
@@ -2080,13 +2162,32 @@
           ]
         },
         {
-          "name": "International Workshop on Agile Approaches 2013"
+          "date": "2013-02-28",
+          "name": "Marmara University, Computer Engineering Alumni Panel",
+          "place": "istanbul",
+          "role": "Panel",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Career Journey",
+              "themes": ["career"]
+            }
+          ],
+          "photo": {
+            "file": "2013-marmara-alumni",
+            "alt": "Three panelists seated at a table below a projected slide that reads CSE Club Mezun Sohbetleri and names Hasan Ünal, Onur Karadeli and Lemi Orhan Ergin, students in the foreground"
+          }
+        },
+        {
+          "name": "International Workshop on Agile Approaches 2013",
+          "spoken": "tr"
         }
       ],
       "2012": [
         {
           "date": "2012-12-04",
           "name": "IPYD seminar",
+          "spoken": "tr",
           "talks": [
             {
               "title": "The Elephant in the Room: Motivation",
@@ -2098,7 +2199,7 @@
           "date": "2012-12-02",
           "name": "GTÜ IEEE: BMO & Sony",
           "place": "gebze",
-          "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=MrIj53lFoSw",
@@ -2113,6 +2214,7 @@
         {
           "name": "Marmara University, Computer Engineering",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Professional Code of Ethics in Software Engineering",
@@ -2124,6 +2226,7 @@
         {
           "name": "Marmara University, Faculty of Engineering",
           "place": "istanbul",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Professional Software Development, Practices and Ethics",

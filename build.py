@@ -292,8 +292,7 @@ def block_latest_talks(b, page):
         lang = ' lang="{}"'.format(attr(lang)) if lang else ''
         link = t.get('slides') or next(iter(talk_videos(t, ev, talks_page)), None)
         archive = talks_page.data['archive']
-        badge = spoken_badge(ev, place_of(ev, archive, talks_page), archive, talks_page)
-        badge = ' ' + badge if badge else ''
+        badge = ' ' + spoken_badge(ev, archive, talks_page)
         if link:
             out.append('      <a class="entry-title" href="{}"{}>{}</a>{}'.format(attr(link), lang, text(title), badge))
         else:
@@ -696,16 +695,12 @@ def place_of(ev, archive, page):
             'point': point, 'label': label, 'flag': flag(code, page)}
 
 
-def spoken_badge(ev, place, archive, page):
-    code = ev.get('spoken')
-    if 'spoken' in ev and not (isinstance(code, str) and code):
+def spoken_badge(ev, archive, page):
+    if 'spoken' not in ev:
+        page.fail('event {!r} needs "spoken", a language code such as "tr"'.format(ev['name']))
+    code = ev['spoken']
+    if not (isinstance(code, str) and code):
         page.fail('"spoken" of event {!r} must be a language code such as "tr"'.format(ev['name']))
-    if place and place['country'] != 'online':
-        if 'spoken' in ev:
-            page.fail('event {!r} takes its language from its country; drop "spoken"'.format(ev['name']))
-        code = 'tr' if place['country'] == 'TR' else 'en'
-    if not code:
-        return ''
     label = archive.get('spoken', {}).get(code)
     if not label:
         page.fail('event {!r} is in language {!r}, which archive.spoken gives no label for'.format(ev['name'], code))
@@ -935,9 +930,8 @@ def event(ev, archive, page):
         meta.append('<span class="ev-place">{}{}</span>'.format(place['flag'], text(place['label'])))
     if ev.get('role'):
         meta.append(text(ev['role']))
-    badge = spoken_badge(ev, place, archive, page)
-    if meta or badge:
-        out.append('    <p class="ev-meta">{}</p>'.format(' '.join(part for part in (' · '.join(meta), badge) if part)))
+    badge = spoken_badge(ev, archive, page)
+    out.append('    <p class="ev-meta">{}</p>'.format(' '.join(part for part in (' · '.join(meta), badge) if part)))
     if talks:
         out.append('    <ul class="ev-talks">')
         for t, keys in zip(talks, themes):
