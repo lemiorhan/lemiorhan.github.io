@@ -51,6 +51,7 @@
       "regions_label": "Cities in {country}"
     },
     "online": "Online",
+    "spoken": { "tr": "Turkish", "en": "English" },
     "countries": {
       "TR": "Türkiye",
       "BE": "Belgium",
@@ -186,6 +187,7 @@
         {
           "name": "Devnot",
           "role": "Podcast",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Product Developer: From Writing Code to Building Products",
@@ -198,6 +200,7 @@
           "date": "2026-01-08",
           "name": "Backendguru Academy webinar",
           "place": "online",
+          "spoken": "tr",
           "talks": [
             {
               "title": "“We Have Tests” Is Not Enough: Unit Testing for Reliable Code",
@@ -282,6 +285,7 @@
         {
           "name": "weproduct",
           "role": "Interview",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Product Management, Product Development and AI from a Co-founder's Perspective",
@@ -297,6 +301,7 @@
         {
           "name": "Enderinko",
           "role": "Podcast",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Adaptation over Perfection: A Guide for the Modern Developer",
@@ -401,6 +406,7 @@
           "name": "Tütsü Sektör",
           "lang": "tr",
           "role": "Podcast",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Software Behind the Scenes, and Its Finer Points",
@@ -453,6 +459,7 @@
         {
           "name": "PeaksOnTheBack #2",
           "role": "Podcast",
+          "spoken": "tr",
           "talks": [
             {
               "title": "The Presentation Wizard",
@@ -540,6 +547,7 @@
           "name": "Teknasyon ile Kesin Yaşanmıştır #14",
           "lang": "tr",
           "role": "Podcast",
+          "spoken": "tr",
           "talks": [
             {
               "title": "I Disclosed a Flaw in Apple and Made the News Worldwide!",
@@ -557,6 +565,7 @@
           "name": "Iqra – Okuyun",
           "place": "online",
           "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "AI Ethics: Problems, Questions, Hopes, Regrets",
@@ -706,6 +715,7 @@
           "name": "Agile Transformations, as Told by Software Experts",
           "place": "online",
           "role": "Panel",
+          "spoken": "tr",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=WzC_J4VLFH4",
@@ -722,6 +732,7 @@
         {
           "name": "Bilim Sohbetleri, İzmir Özel Türk Koleji",
           "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "The Developer: How Ordinary People Become Craftspeople Who Build Technology",
@@ -755,6 +766,7 @@
           "name": "Junior Bile Değil #7",
           "lang": "tr",
           "role": "Podcast",
+          "spoken": "tr",
           "talks": [
             {
               "title": "The Past and Future of Software",
@@ -768,6 +780,7 @@
           "name": "Teknasyon Tech Meetup #2",
           "place": "online",
           "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Escaping Mock Hell in Tests",
@@ -784,6 +797,7 @@
           "name": "Ruby Türkiye Akşam Oturması #10",
           "place": "online",
           "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "The Evolution of Software Toward Modular Design",
@@ -844,6 +858,7 @@
           "name": "Üretim Bandı",
           "lang": "tr",
           "role": "Podcast",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Technical: Code Review Processes",
@@ -857,6 +872,7 @@
         {
           "name": "The Unspoken Rules of a Better Professional Life",
           "place": "online",
+          "spoken": "tr",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=VBWS1-ngCKo",
@@ -872,6 +888,7 @@
           "date": "2020-11-21",
           "name": "Devnot Developer Summit Online 2020",
           "place": "online",
+          "spoken": "tr",
           "talks": [
             {
               "title": "It is not SOLID Anymore",
@@ -889,6 +906,7 @@
           "name": "Üretim Bandı",
           "lang": "tr",
           "role": "Podcast",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Technical: How Does Craftbase Build Software?",
@@ -918,6 +936,7 @@
           "name": "Online Microservices & DDD Konferansı, Devnot",
           "place": "online",
           "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Modular Architecture for Pragmatic Developers",
@@ -943,6 +962,7 @@
           "name": "ITAKE Unconference 2020",
           "place": "online",
           "url": "https://itakeunconf.com/",
+          "spoken": "en",
           "talks": [
             {
               "title": "10 Faulty Behaviors of Code Review",
@@ -954,6 +974,7 @@
         {
           "name": "Git: Not What You Think",
           "place": "online",
+          "spoken": "tr",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=OOmsCltczCA",
@@ -966,8 +987,10 @@
           "name": "Açık Seminer: Siber Güvenlik, Git ve PHP 101",
           "place": "online",
           "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
+              "title": "Git: Not What You Think",
               "video": "https://www.youtube.com/watch?v=amP0SNQh9yA",
               "themes": ["git"]
             }
@@ -1054,6 +1077,7 @@
           "name": "Yazılımcı Sohbetleri, Çay Kahve İnsan",
           "lang": "tr",
           "role": "Interview",
+          "spoken": "tr",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=VaeGtoH4dhU",
@@ -1135,6 +1159,7 @@
           "name": "Kesişen Yollar",
           "lang": "tr",
           "role": "Interview",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Software Expertise",
@@ -1297,7 +1322,7 @@
           "lang": "tr",
           "talks": [
             {
-              "title": "Clean Code Design",
+              "title": "Clean Software Design",
               "themes": ["design"]
             }
           ],
@@ -1364,6 +1389,7 @@
           "name": "Üretim Bandı",
           "lang": "tr",
           "role": "Podcast",
+          "spoken": "tr",
           "talks": [
             {
               "title": "How Does iyzico Build Products?",
@@ -1415,6 +1441,7 @@
         {
           "date": "2017-09-16",
           "name": "Turkcell Agile Talks",
+          "spoken": "tr",
           "photo": {
             "file": "2017-turkcell",
             "alt": "Lemi speaking in front of a screen showing Lemi's name and speaker bio"
@@ -1432,6 +1459,7 @@
           "name": "Yazılım Ofisleri, Devnot",
           "lang": "tr",
           "role": "Interview",
+          "spoken": "tr",
           "talks": [
             {
               "title": "iyzico",
@@ -1557,6 +1585,7 @@
         {
           "name": "Devnot",
           "role": "Interview",
+          "spoken": "tr",
           "talks": [
             {
               "title": "The Master–Apprentice Relationship in Software",
@@ -1651,6 +1680,7 @@
           "date": "2016-11-17",
           "name": "IT Serbia Podcast",
           "role": "Podcast",
+          "spoken": "en",
           "talks": [
             {
               "title": "On fighting elephants in the room",
@@ -1668,6 +1698,7 @@
         {
           "name": "Yönetim 2.0, Gelecekhane",
           "lang": "tr",
+          "spoken": "tr",
           "talks": [
             {
               "title": "Agile Management: The Third Generation of Management Philosophy",
@@ -1784,6 +1815,7 @@
           "date": "2016-01-11",
           "name": "DevPod",
           "role": "Podcast",
+          "spoken": "tr",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=j5Or2ZjguS8",
@@ -1994,21 +2026,6 @@
               "themes": ["design"]
             }
           ]
-        },
-        {
-          "date": "2014-01-29",
-          "name": "BBS, Sony",
-          "talks": [
-            {
-              "title": "Advanced Git Topics: Git Internals",
-              "video": "https://www.youtube.com/watch?v=rv7rddQfU70",
-              "themes": ["git"]
-            }
-          ],
-          "photo": {
-            "file": "2014-sony-git-internals",
-            "alt": "Lemi in a grey checked shirt standing beside a projected slide titled .GIT DIRECTORY in a meeting room"
-          }
         }
       ],
       "2013": [
@@ -2030,19 +2047,9 @@
           }
         },
         {
-          "date": "2013-11-06",
-          "name": "BBS, Sony",
-          "talks": [
-            {
-              "title": "Git Branching Model",
-              "video": "https://www.youtube.com/watch?v=rcZAh3v1lp4",
-              "themes": ["git"]
-            }
-          ]
-        },
-        {
           "date": "2013-10-10",
           "name": "Etohum Developers Day 2013",
+          "spoken": "tr",
           "talks": [
             {
               "title": "How Do You Build Software? Software Engineering Practices of an Agile Developer",
@@ -2055,28 +2062,6 @@
             "file": "2013-etohum",
             "alt": "Lemi in a lavender shirt holding a microphone in front of a whiteboard covered in Scrum sketches, the eTohum logo in the corner"
           }
-        },
-        {
-          "date": "2013-09-18",
-          "name": "BBS, Sony",
-          "talks": [
-            {
-              "title": "Technical Debt",
-              "video": "https://www.youtube.com/watch?v=0fToMM7Za74",
-              "themes": ["quality"]
-            }
-          ]
-        },
-        {
-          "date": "2013-06-12",
-          "name": "BBS, Sony",
-          "talks": [
-            {
-              "title": "GMO'less Software Development Practices",
-              "video": "https://www.youtube.com/watch?v=lfarPkVmkFY",
-              "themes": ["agile", "craftsmanship"]
-            }
-          ]
         },
         {
           "name": "Agile Talks, Agile Türkiye",
@@ -2110,21 +2095,6 @@
         }
       ],
       "2012": [
-        {
-          "date": "2012-12-13",
-          "name": "Internal talk, Sony",
-          "talks": [
-            {
-              "title": "The Elephant in the Room: Motivation",
-              "video": "https://www.youtube.com/watch?v=_mYgWhoa28I",
-              "themes": ["motivation"]
-            }
-          ],
-          "photo": {
-            "file": "2012-sony-motivation",
-            "alt": "Lemi in a striped shirt talking in a dim room beside a projected slide with his name and a Sony e-mail address"
-          }
-        },
         {
           "date": "2012-12-04",
           "name": "IPYD seminar",

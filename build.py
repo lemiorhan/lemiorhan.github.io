@@ -286,10 +286,13 @@ def block_latest_talks(b, page):
         lang = t.get('lang') if t.get('title') else ev.get('lang')
         lang = ' lang="{}"'.format(attr(lang)) if lang else ''
         link = t.get('slides') or next(iter(talk_videos(t, ev, talks_page)), None)
+        archive = talks_page.data['archive']
+        badge = spoken_badge(ev, place_of(ev, archive, talks_page), archive, talks_page)
+        badge = ' ' + badge if badge else ''
         if link:
-            out.append('      <a class="entry-title" href="{}"{}>{}</a>'.format(attr(link), lang, text(title)))
+            out.append('      <a class="entry-title" href="{}"{}>{}</a>{}'.format(attr(link), lang, text(title), badge))
         else:
-            out.append('      <span class="entry-title"{}>{}</span>'.format(lang, text(title)))
+            out.append('      <span class="entry-title"{}>{}</span>{}'.format(lang, text(title), badge))
         if t.get('title'):
             ev_lang = ' lang="{}"'.format(attr(ev['lang'])) if ev.get('lang') else ''
             out.append('      <p class="entry-meta"{}>{}</p>'.format(ev_lang, text(ev['name'])))
@@ -688,6 +691,22 @@ def place_of(ev, archive, page):
             'point': point, 'label': label, 'flag': flag(code, page)}
 
 
+def spoken_badge(ev, place, archive, page):
+    code = ev.get('spoken')
+    if 'spoken' in ev and not (isinstance(code, str) and code):
+        page.fail('"spoken" of event {!r} must be a language code such as "tr"'.format(ev['name']))
+    if place and place['country'] != 'online':
+        if 'spoken' in ev:
+            page.fail('event {!r} takes its language from its country; drop "spoken"'.format(ev['name']))
+        code = 'tr' if place['country'] == 'TR' else 'en'
+    if not code:
+        return ''
+    label = archive.get('spoken', {}).get(code)
+    if not label:
+        page.fail('event {!r} is in language {!r}, which archive.spoken gives no label for'.format(ev['name'], code))
+    return '<span class="spoken">{}</span>'.format(text(label))
+
+
 MAP_LEVELS = (3, 10)
 MAP_ASPECT = 2
 MAP_PADDING = 1.2
@@ -911,8 +930,9 @@ def event(ev, archive, page):
         meta.append('<span class="ev-place">{}{}</span>'.format(place['flag'], text(place['label'])))
     if ev.get('role'):
         meta.append(text(ev['role']))
-    if meta:
-        out.append('    <p class="ev-meta">{}</p>'.format(' · '.join(meta)))
+    badge = spoken_badge(ev, place, archive, page)
+    if meta or badge:
+        out.append('    <p class="ev-meta">{}</p>'.format(' '.join(part for part in (' · '.join(meta), badge) if part)))
     if talks:
         out.append('    <ul class="ev-talks">')
         for t, keys in zip(talks, themes):

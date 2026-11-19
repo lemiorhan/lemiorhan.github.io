@@ -330,16 +330,17 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
 
     # Themes
 
-    def talk(self, d, title):
-        return next(t for ev in self.events(d) for t in ev.get('talks', []) if t.get('title') == title)
+    def git_talk(self, d):
+        return next(t for ev in self.events(d) if ev['name'] == 'Karabük Üniversitesi Programlama Günleri 2016'
+                    for t in ev['talks'] if t.get('title') == 'Git: Not What You Think')
 
     def test_a_titled_talk_without_themes(self):
-        self.assertRejected(self.edit('talks', lambda d: self.talk(d, 'Git: Not What You Think').pop('themes')),
+        self.assertRejected(self.edit('talks', lambda d: self.git_talk(d).pop('themes')),
                             "talk 'Git: Not What You Think' at 'Karabük Üniversitesi Programlama Günleri 2016' needs \"themes\"")
 
     def test_a_titled_talk_with_an_empty_theme_list(self):
         def empty(d):
-            self.talk(d, 'Git: Not What You Think')['themes'] = []
+            self.git_talk(d)['themes'] = []
         self.assertRejected(self.edit('talks', empty), "talk 'Git: Not What You Think' at 'Karabük Üniversitesi Programlama Günleri 2016' needs \"themes\"")
 
     def test_an_untitled_talk_without_themes(self):
@@ -359,23 +360,23 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
 
     def test_themes_that_are_not_a_list(self):
         def bare(d):
-            self.talk(d, 'Git: Not What You Think')['themes'] = 'git'
+            self.git_talk(d)['themes'] = 'git'
         self.assertRejected(self.edit('talks', bare), 'must be a list of theme keys')
 
     def test_themes_that_are_not_names(self):
         def numbered(d):
-            self.talk(d, 'Git: Not What You Think')['themes'] = [7]
+            self.git_talk(d)['themes'] = [7]
         self.assertRejected(self.edit('talks', numbered), 'must be a list of theme keys')
 
     def test_a_talk_about_a_theme_the_vocabulary_does_not_define(self):
         def kotlin(d):
-            self.talk(d, 'Git: Not What You Think')['themes'].append('kotlin')
+            self.git_talk(d)['themes'].append('kotlin')
         self.assertRejected(self.edit('talks', kotlin), "is about 'kotlin', which archive.themes.items does not define")
 
     def test_a_talk_video_that_is_neither_a_url_nor_a_list_of_urls(self):
         for video in ([7], 7, {'url': 'https://example.com/v'}, '', ['']):
             def odd(d):
-                self.talk(d, 'Git: Not What You Think')['video'] = video
+                self.git_talk(d)['video'] = video
             with self.subTest(video=video):
                 self.assertRejected(self.edit('talks', odd), 'must be a URL or a list of URLs')
 
@@ -386,9 +387,40 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
             talk['video'] = 7
         self.assertRejected(self.edit('talks', newest), 'build failed: content/talks.json: video of a talk at')
 
+    def test_a_bad_spoken_or_place_on_a_recent_talk_is_blamed_on_talks_json(self):
+        def newest(d):
+            return next(ev for _, evs in sorted(d['archive']['events'].items(), reverse=True) for ev in evs if ev.get('talks'))
+        def spoken(d):
+            newest(d)['spoken'] = ['tr']
+        def place(d):
+            newest(d)['place'] = 'atlantis'
+        for change, message in ((spoken, '"spoken" of event'), (place, 'event')):
+            with self.subTest(change=change.__name__):
+                self.assertRejected(self.edit('talks', change), 'build failed: content/talks.json: ' + message)
+
+    def test_an_event_at_a_place_on_the_map_that_states_its_own_spoken_language(self):
+        def stated(d):
+            next(ev for ev in self.events(d) if ev['name'] == 'Devoxx Belgium 2022')['spoken'] = 'tr'
+        self.assertRejected(self.edit('talks', stated),
+                            "content/talks.json: event 'Devoxx Belgium 2022' takes its language from its country; drop \"spoken\"")
+
+    def test_a_spoken_value_that_is_not_a_language_code(self):
+        for name in ('IT Serbia Podcast', 'Devoxx Belgium 2022'):
+            for spoken in (['en'], {'x': 1}, 7, '', None):
+                def odd(d):
+                    next(ev for ev in self.events(d) if ev['name'] == name)['spoken'] = spoken
+                with self.subTest(event=name, spoken=spoken):
+                    self.assertRejected(self.edit('talks', odd), 'content/talks.json: "spoken" of event {!r} must be a language code'.format(name))
+
+    def test_a_spoken_language_that_archive_spoken_gives_no_label_for(self):
+        def german(d):
+            next(ev for ev in self.events(d) if ev['name'] == 'IT Serbia Podcast')['spoken'] = 'de'
+        self.assertRejected(self.edit('talks', german),
+                            "content/talks.json: event 'IT Serbia Podcast' is in language 'de', which archive.spoken gives no label for")
+
     def test_a_talk_listing_one_theme_twice(self):
         def twice(d):
-            self.talk(d, 'Git: Not What You Think')['themes'] = ['git', 'git']
+            self.git_talk(d)['themes'] = ['git', 'git']
         self.assertRejected(self.edit('talks', twice), 'lists a theme twice')
 
     def test_a_theme_no_talk_is_about(self):
@@ -888,6 +920,125 @@ class BuiltSite(unittest.TestCase):
             return t.get('slides') or next(iter(videos), None)
         self.assertEqual(got, ['https://example.com/v1', 'https://example.com/v3', 'https://example.com/s', None] +
                          [link(t) for t in newest[4:count]])
+
+    def spoken_badges(self, node):
+        return [b.all_text() for b in node.find(has_class('spoken'))]
+
+    def langs_around(self, node):
+        langs = set()
+        while node is not None:
+            langs.add(node.attrs.get('lang'))
+            node = node.parent
+        return langs - {None}
+
+    def badges_by_event(self, tree):
+        events = {}
+        for ev in tree.find(has_class('ev')):
+            events.setdefault(ev.find(has_class('ev-name'))[0].all_text(), []).append(self.spoken_badges(ev))
+        return events
+
+    def built_with_talks(self, change, page):
+        with tempfile.TemporaryDirectory() as tmp:
+            site = copy_site(tmp)
+            path = os.path.join(site, 'content', 'talks.json')
+            data = read_json(path)
+            change(data)
+            with open(path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False)
+            out = os.path.join(tmp, 'out')
+            result = run_build(site, out)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            with open(os.path.join(out, page), encoding='utf-8') as f:
+                return Tree(f.read()).root
+
+    def test_named_events_carry_turkish_in_turkiye_english_abroad_and_online_what_spoken_states(self):
+        events = self.badges_by_event(self.trees['talks'])
+        self.assertEqual(events['Karabük Üniversitesi Programlama Günleri 2016'], [['Turkish']])
+        self.assertEqual(events['Devoxx Belgium 2022'], [['English']])
+        self.assertEqual(events['Agile Tour Kaunas 2015'], [['English']])
+        self.assertEqual(events['Teknasyon Tech Meetup #2'], [['Turkish']])
+        self.assertEqual(events['IT Serbia Podcast'], [['English']])
+        self.assertEqual(events['Kesişen Yollar'], [['Turkish']])
+        self.assertEqual(events['Etohum Developers Day 2013'], [['Turkish']], 'an event with no place and no role')
+        self.assertEqual(events['ITAKE Unconference 2020'], [['English']])
+        self.assertEqual(events['Turkcell Agile Talks'], [['Turkish']], 'an event with no place, no role and no talks')
+
+    def test_an_online_or_unplaced_event_that_states_no_spoken_language_has_no_badge(self):
+        shapes = {'Unstated online': lambda ev: ev.get('place') == 'online', 'Unstated unplaced': lambda ev: 'place' not in ev}
+        def unstate(data):
+            every = [ev for evs in data['archive']['events'].values() for ev in evs]
+            for name, shape in shapes.items():
+                ev = next(ev for ev in every if shape(ev) and ev['name'] not in shapes)
+                ev.pop('spoken', None)
+                ev['name'] = name
+        events = self.badges_by_event(self.built_with_talks(unstate, os.path.join('talks', 'index.html')))
+        self.assertEqual({name: events.get(name) for name in shapes}, {name: [[]] for name in shapes})
+
+    def test_every_event_is_turkish_in_turkiye_english_abroad_and_elsewhere_what_spoken_states_or_unbadged(self):
+        def badge(ev):
+            place = ev.get('place')
+            if place not in (None, 'online'):
+                return 'Turkish' if self.talks['places'][place]['country'] == 'TR' else 'English'
+            return {'tr': 'Turkish', 'en': 'English', None: None}[ev.get('spoken')]
+        want = Counter((ev['name'], badge(ev)) for evs in self.talks['events'].values() for ev in evs)
+        got = Counter()
+        for ev in self.trees['talks'].find(has_class('ev')):
+            badges = self.spoken_badges(ev)
+            self.assertLessEqual(len(badges), 1, ev.all_text())
+            got[ev.find(has_class('ev-name'))[0].all_text(), next(iter(badges), None)] += 1
+        self.assertEqual(got, want)
+        self.assertLessEqual({'Turkish', 'English'}, {b for _, b in want})
+
+    def siblings(self, node):
+        return [c for c in node.parent.children if isinstance(c, Node)]
+
+    def test_every_badge_on_the_talks_page_ends_its_events_meta_line_under_no_lang_but_the_pages(self):
+        badges = self.trees['talks'].find(has_class('spoken'))
+        self.assertGreater(len(badges), 0)
+        for b in badges:
+            self.assertIn('ev-meta', b.parent.classes(), b.parent.all_text())
+            self.assertIs([c for c in b.parent.children if not isinstance(c, str) or c.strip()][-1], b, b.parent.all_text())
+            self.assertEqual(self.langs_around(b), {'en'}, b.parent.all_text())
+        self.assertTrue(any(b.parent.text.strip(' ·') for b in badges), 'no badge shares its line with a role, so its order against text is unchecked')
+
+    def test_each_recent_talk_on_home_carries_the_badge_of_its_own_event_beside_its_title(self):
+        count = next(b['count'] for s in read_json(ROOT, 'content', 'home.json')['sections']
+                     for b in s['blocks'] if b['type'] == 'latest-talks')
+        pattern = (('kyiv', True), ('tr', False), (None, True), ('kyiv', False), ('tr', True))
+        self.assertGreaterEqual(count, len(pattern), 'the fixture below needs a recent talk for each of its rows')
+        label = {'kyiv': ['English'], 'tr': ['Turkish'], None: []}
+        want = []
+        def mix(data):
+            events = [ev for _, evs in sorted(data['archive']['events'].items(), reverse=True) for ev in evs if ev.get('talks')]
+            for i, ev in enumerate(events[:count]):
+                language, linked = pattern[i % len(pattern)]
+                ev.pop('place', None)
+                ev.pop('spoken', None)
+                if language == 'kyiv':
+                    ev['place'] = language
+                elif language:
+                    ev['spoken'] = language
+                ev['talks'] = ev['talks'][:1]
+                ev['talks'][0].pop('slides', None)
+                ev['talks'][0].pop('video', None)
+                if linked:
+                    ev['talks'][0]['slides'] = 'https://example.com/s{}'.format(i)
+                want.append(label[language])
+        tree = self.built_with_talks(mix, 'index.html')
+        items = tree.find(lambda n: n.attrs.get('id') == 'recent')[0].find(lambda n: n.tag == 'li')
+        self.assertEqual([self.spoken_badges(li) for li in items], want)
+        self.assertEqual(len(items), count)
+        seen = set()
+        for li in items:
+            title = li.find(has_class('entry-title'))[0]
+            for b in li.find(has_class('spoken')):
+                row = self.siblings(b)
+                self.assertGreater(row.index(b), 0, li.all_text())
+                self.assertIs(row[row.index(b) - 1], title, li.all_text())
+                self.assertEqual(self.langs_around(b), {'en'}, li.all_text())
+                seen.add((title.tag, b.all_text()))
+        self.assertEqual(seen, {(tag, b) for tag in ('a', 'span') for b in ('English', 'Turkish')},
+                         'the fixture should badge both a linked and an unlinked title in both languages')
 
     def test_theme_chips_count_the_events_about_each_theme(self):
         labels = self.talks['themes']['items']

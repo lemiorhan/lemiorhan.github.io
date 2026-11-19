@@ -45,10 +45,10 @@
             { "kind": "YouTube", "title": "My channel, @lemiorhan", "url": "https://www.youtube.com/@lemiorhan", "text": "With a playlist of [recordings of my talks](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdvUVfv0M55mRbTB8CMYT9R), including the ones published on conference channels, and one on [modularity](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdK0lBBfpGhwX1ppqq128WD)." },
             { "kind": "TEDx, 2019", "title": "The Apple That Made Me Famous Overnight","url": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma", "text": "In Turkish, at TEDxTarsusAmericanCollege: the night a macOS root login bug made me known worldwide, and what it says about professional ethics. The [root bug page](../root-bug/) has the whole story." },
             { "kind": "2025", "title": "Unlearn Unit Testing", "url": "https://www.youtube.com/watch?v=QzbSRiru4gg", "text": "DevFest İzmir 2025, on the GDG İzmir channel." },
-            { "kind": "2024", "title": "Craftgate'in Yazılım Altyapısı", "lang": "tr", "url": "https://www.youtube.com/watch?v=oYafmr9aNx4", "text": "A short video in Turkish on Craftgate's software: the stack, hexagonal architecture, the payment form and the API." },
+            { "kind": "2024", "title": "Craftgate's Software Infrastructure", "url": "https://www.youtube.com/watch?v=oYafmr9aNx4", "text": "A short video in Turkish on Craftgate's software: the stack, hexagonal architecture, the payment form and the API." },
             { "kind": "2019", "title": "Slow Down To Go Faster Than Ever, But How?", "url": "https://www.youtube.com/watch?v=sLDKsjK4kEw", "text": "Devoxx Ukraine 2019." },
             { "kind": "2017", "title": "Git Anti-Patterns: How To Mess Up With Git and Love It Again", "url": "https://www.youtube.com/watch?v=m3ITI7tT_Qo", "text": "Devoxx Poland 2017." },
-            { "kind": "Live session", "title": "How Do You Know Your Code Works?","url": "https://www.youtube.com/watch?v=HutPyJs23WI", "text": "Unit testing, live with Akın Kaldıroğlu on the Backendguru Academy channel, in Turkish." }
+            { "kind": "Live session", "title": "“We Have Tests” Is Not Enough: Unit Testing for Reliable Code","url": "https://www.youtube.com/watch?v=HutPyJs23WI", "text": "Unit testing, live with Akın Kaldıroğlu on the Backendguru Academy channel, in Turkish." }
           ]
         }
       ]

@@ -68,7 +68,7 @@
           "items": [
             { "date": "2025-10", "title": "Fixing The Typos in Engineering Culture", "url": "https://speakerdeck.com/lemiorhan/fixing-the-typos-in-engineering-culture", "text": "Habits that wear down trust, autonomy and purpose, learned while building Craftgate, and why a few companies build like Formula 1 teams instead of factories." },
             { "date": "2024-12", "title": "Unlearn Product Development, Unleashed Edition", "url": "https://speakerdeck.com/lemiorhan/unlearn-product-development-unleashed-edition", "text": "What is broken in typical product development, and how we are fixing it at Craftgate." },
-            { "date": "2024-02", "title": "Craftgate'in Yazılım Altyapısı", "lang": "tr", "url": "https://www.youtube.com/watch?v=oYafmr9aNx4", "text": "A short video in Turkish on Craftgate's software: the technology stack, why hexagonal architecture, the payment form and the API." }
+            { "date": "2024-02", "title": "Craftgate's Software Infrastructure", "url": "https://www.youtube.com/watch?v=oYafmr9aNx4", "text": "A short video in Turkish on Craftgate's software: the technology stack, why hexagonal architecture, the payment form and the API." }
           ]
         }
       ]
