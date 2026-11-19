@@ -2134,6 +2134,7 @@
         {
           "date": "2013-06-14",
           "name": "YapıKredi Seminars",
+          "place": "istanbul",
           "spoken": "tr",
           "talks": [
             {
@@ -2187,13 +2188,18 @@
         {
           "date": "2012-12-04",
           "name": "IPYD seminar",
+          "place": "istanbul",
           "spoken": "tr",
           "talks": [
             {
               "title": "The Elephant in the Room: Motivation",
               "themes": ["motivation"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2012-ipyd",
+            "alt": "Lemi in a light blue shirt holding a microphone beside the title slide The Elephant in the Room: Motivation, the ARI Teknokent logo above the screen"
+          }
         },
         {
           "date": "2012-12-02",
