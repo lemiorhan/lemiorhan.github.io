@@ -978,7 +978,7 @@ def shell(page, body):
     d, site, p = page.data, page.site, page.prefix
     title = d['title']
     image = d.get('image', site['image'])
-    if not all(isinstance(image.get(k), int) and image[k] > 0 for k in ('width', 'height')):
+    if not all(type(image.get(k)) is int and image[k] > 0 for k in ('width', 'height')):
         page.fail('share image {} needs "width" and "height" in pixels'.format(image.get('src')))
     if not os.path.isfile(os.path.join(ROOT, image['src'])):
         page.fail('share image {} does not exist'.format(image['src']))
@@ -990,7 +990,11 @@ def shell(page, body):
                  '  <meta property="profile:last_name" content="{}">'.format(attr(d['profile']['last_name']))]
     jsonld = []
     if d.get('person'):
-        data = json.dumps(d['person'], ensure_ascii=False, indent=2).replace('</', '<\\/')
+        person = dict(d['person'])
+        if not os.path.isfile(os.path.join(ROOT, person.get('image', ''))):
+            page.fail('person image {} does not exist'.format(person.get('image')))
+        person['image'] = site['url'] + person['image']
+        data = json.dumps(person, ensure_ascii=False, indent=2).replace('</', '<\\/')
         jsonld = ['', '  <script type="application/ld+json">'] + indent(data.split('\n'), 2) + ['  </script>']
     ui = dict(site['ui'])
     ui.update(d.get('archive', {}).get('ui', {}))

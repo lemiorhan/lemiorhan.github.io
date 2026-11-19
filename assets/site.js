@@ -288,8 +288,7 @@
     }
 
     function themeLabel() {
-      var chip = cloud && cloud.querySelector('button[data-theme="' + state.theme + '"]');
-      return chip ? chip.dataset.label : state.theme;
+      return cloud.querySelector('button[data-theme="' + state.theme + '"]').dataset.label;
     }
 
     function refresh() {
@@ -365,7 +364,7 @@
     });
 
     refresh();
-    if (cloud) cloud.hidden = false;
+    cloud.hidden = false;
     archive.querySelectorAll('.ev-themes').forEach(function (tags) { tags.hidden = false; });
     strip.classList.add('has-bars');
     mini.strip.classList.add('has-bars');

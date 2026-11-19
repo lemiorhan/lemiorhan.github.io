@@ -15,7 +15,7 @@
     "worksFor": { "@type": "Organization", "name": "Craftgate", "url": "https://craftgate.io" },
     "alumniOf": { "@type": "CollegeOrUniversity", "name": "Marmara University" },
     "address": { "@type": "PostalAddress", "addressLocality": "Istanbul", "addressCountry": "TR" },
-    "image": "https://lemiorhanergin.com/assets/img/lemi.jpg",
+    "image": "assets/img/lemi.jpg",
     "sameAs": [
       "https://www.linkedin.com/in/lemiorhan",
       "https://x.com/lemiorhan",

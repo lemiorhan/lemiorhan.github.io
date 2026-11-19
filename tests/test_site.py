@@ -317,6 +317,17 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
             d['image']['src'] = 'assets/img/nowhere.jpg'
         self.assertRejected(self.edit('site', gone), 'share image assets/img/nowhere.jpg does not exist')
 
+    def test_a_share_image_whose_size_is_not_a_number(self):
+        def flag(d):
+            d['image']['width'] = True
+        self.assertRejected(self.edit('site', flag),
+                            'share image assets/img/social.jpg needs "width" and "height" in pixels')
+
+    def test_a_person_image_that_does_not_exist(self):
+        def gone(d):
+            d['person']['image'] = 'assets/img/nowhere.jpg'
+        self.assertRejected(self.edit('home', gone), 'person image assets/img/nowhere.jpg does not exist')
+
     # Themes
 
     def talk(self, d, title):
@@ -889,6 +900,8 @@ class BuiltSite(unittest.TestCase):
             # X shows a large card only for an image of at least 300x157.
             self.assertEqual(meta['twitter:card'], 'summary_large_image', name)
             self.assertTrue(size[0] >= 300 and size[1] >= 157, (name, size))
+            # Large cards are cropped to about 1.91:1, so an image at that ratio shows whole.
+            self.assertAlmostEqual(size[0] / size[1], 1.91, delta=0.02, msg=(name, size))
             self.assertEqual(meta['og:site_name'], site['name'], name)
             self.assertEqual(meta['og:url'], site['url'] + ('' if name == 'home' else name + '/'))
             canonical = tree.find(lambda n: n.tag == 'link' and n.attrs.get('rel') == 'canonical')
@@ -896,6 +909,22 @@ class BuiltSite(unittest.TestCase):
             shared += 1
         self.assertEqual(shared, len(self.trees) - 1)
         self.assertGreater(shared, 1)
+
+    def test_the_home_page_describes_lemi_with_an_image_on_this_site(self):
+        site = read_json(ROOT, 'content', 'site.json')
+        person = read_json(ROOT, 'content', 'home.json')['person']
+        blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', self.html['home'], re.S)
+        self.assertEqual(len(blocks), 1)
+        built = json.loads(blocks[0])
+        self.assertEqual(built['image'], site['url'] + person['image'])
+        self.assertTrue(os.path.isfile(os.path.join(self.out, person['image'])), person['image'])
+        self.assertEqual({k: v for k, v in built.items() if k != 'image'}, {k: v for k, v in person.items() if k != 'image'})
+
+    def test_the_hidden_attribute_beats_a_class_that_sets_display(self):
+        with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
+            css = f.read()
+        self.assertEqual(css_values(css, '[hidden]', 'display'), ['none !important'])
+        self.assertNotEqual(css_values(css, '.ev-themes', 'display'), [], 'without a display rule on a hidden element this guard has nothing to beat')
 
     def test_every_icon_a_page_links_to_exists_at_the_size_it_declares(self):
         for name, tree in self.trees.items():
