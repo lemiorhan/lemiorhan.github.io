@@ -1403,6 +1403,23 @@ class BuiltSite(unittest.TestCase):
         self.assertIn('home', with_game)
         self.assertGreater(without, 0)
 
+    BEACON = 'https://static.cloudflareinsights.com/beacon.min.js'
+
+    def test_every_page_loads_the_cloudflare_beacon_once_with_the_token_site_json_gives(self):
+        token = read_json(ROOT, 'content', 'site.json')['cloudflare_analytics_token']
+        pages = sorted(os.path.relpath(os.path.join(folder, f), self.out)
+                       for folder, _, files in os.walk(self.out) for f in files if f.endswith(('.html', '.htm')))
+        for page in pages:
+            with open(os.path.join(self.out, page), encoding='utf-8') as f:
+                tree = Tree(f.read()).root
+            beacons = tree.find(lambda n: n.tag == 'script' and n.attrs.get('src') == self.BEACON)
+            self.assertEqual(len(beacons), 1, page)
+            self.assertEqual(beacons[0].attrs.get('type'), 'module', page)
+            self.assertEqual(json.loads(beacons[0].attrs['data-cf-beacon']), {'token': token}, page)
+        self.assertIn('index.html', pages)
+        self.assertIn('404.html', pages)
+        self.assertLessEqual({page_file(n) for n in self.trees}, set(pages))
+
     GAME_UI_KEYS_BUILT_BY_NAME = {'say_branch_new', 'say_branch_moved', 'say_branch_deleted',
                                   'say_tag_new', 'say_tag_moved', 'say_tag_deleted'}
 
