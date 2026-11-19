@@ -1968,6 +1968,22 @@
       ],
       "2014": [
         {
+          "date": "2014-12-18",
+          "name": "İstanbul Kültür University, BMO Seminar",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Software Development Practices",
+              "themes": ["craftsmanship"]
+            }
+          ],
+          "photo": {
+            "file": "2014-kultur-bmo",
+            "alt": "Lemi in a red shirt speaking on an auditorium stage beside a screen showing an Every Second infographic, an İstanbul Kültür Üniversitesi banner behind the lectern and students in the front rows"
+          }
+        },
+        {
           "name": "Özgür Web Teknolojileri Günü 2014",
           "place": "istanbul",
           "spoken": "tr",
@@ -2023,6 +2039,39 @@
           }
         },
         {
+          "date": "2014-09-13",
+          "name": "BMO seminar",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "“Even More Efficient” Software Development Processes",
+              "themes": ["agile"]
+            }
+          ],
+          "photo": {
+            "file": "2014-bmo-seminar",
+            "alt": "Lemi in a checked shirt standing on the right, about fifteen people on office chairs around a projector in a small room with striped blinds"
+          }
+        },
+        {
+          "date": "2014-07-25",
+          "name": "Sherpa",
+          "place": "istanbul",
+          "role": "Training",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Use Git Like a Master",
+              "themes": ["git"]
+            }
+          ],
+          "photo": {
+            "file": "2014-sherpa-git",
+            "alt": "Lemi standing on the left and talking to about thirty people at rows of white and yellow desks, the handouts in front of them titled Git'i Ustası Gibi Kullanın"
+          }
+        },
+        {
           "name": "DevFest Istanbul 2014",
           "place": "istanbul",
           "url": "https://devfest.istanbul/",
@@ -2048,10 +2097,8 @@
           ]
         },
         {
-          "name": "Avea Agile Summit 2014",
-          "spoken": "tr"
-        },
-        {
+          "date": "2014-05-04",
+          "date": "2014-05-03",
           "name": "PHPIst 2014",
           "place": "istanbul",
           "spoken": "tr",
@@ -2065,7 +2112,7 @@
           ],
           "photo": {
             "file": "2014-phpist",
-            "alt": "Lemi in a light shirt with a handheld microphone beside a Bahçeşehir University lectern, the phpist sponsor wall and his name slide behind him"
+            "alt": "Lemi on stage with a handheld microphone in front of a slide asking Have you ever tried rubber duck debugging?, a Bahçeşehir Üniversitesi lectern and the php-ist banner beside him"
           }
         },
         {
@@ -2215,6 +2262,21 @@
           "photo": {
             "file": "2012-gtu-ieee",
             "alt": "Lemi in a grey shirt speaking at a lectern in front of a GYTE IEEE banner"
+          }
+        },
+        {
+          "date": "2012-11-14",
+          "name": "Agile Buluşmalar #1",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Agile and Scrum",
+              "themes": ["agile"]
+            }
+          ],
+          "photo": {
+            "file": "2012-agile-bulusmalar",
+            "alt": "About fifteen people sitting in a circle on sofas and chairs in a café, cups and books on a low table between them"
           }
         },
         {
