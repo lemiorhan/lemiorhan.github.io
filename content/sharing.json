@@ -43,12 +43,12 @@
           "type": "entries",
           "items": [
             { "kind": "YouTube", "title": "My channel, @lemiorhan", "url": "https://www.youtube.com/@lemiorhan", "text": "With a playlist of [recordings of my talks](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdvUVfv0M55mRbTB8CMYT9R), including the ones published on conference channels, and one on [modularity](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdK0lBBfpGhwX1ppqq128WD)." },
-            { "kind": "TEDx, 2019", "title": "Bir Gecede Ünlü Eden Elma", "lang": "tr", "url": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma", "text": "In Turkish, at TEDxTarsusAmericanCollege: the night a macOS root login bug made me known worldwide, and what it says about professional ethics. The [root bug page](../root-bug/) has the whole story." },
+            { "kind": "TEDx, 2019", "title": "The Apple That Made Me Famous Overnight","url": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma", "text": "In Turkish, at TEDxTarsusAmericanCollege: the night a macOS root login bug made me known worldwide, and what it says about professional ethics. The [root bug page](../root-bug/) has the whole story." },
             { "kind": "2025", "title": "Unlearn Unit Testing", "url": "https://www.youtube.com/watch?v=QzbSRiru4gg", "text": "DevFest İzmir 2025, on the GDG İzmir channel." },
             { "kind": "2024", "title": "Craftgate'in Yazılım Altyapısı", "lang": "tr", "url": "https://www.youtube.com/watch?v=oYafmr9aNx4", "text": "A short video in Turkish on Craftgate's software: the stack, hexagonal architecture, the payment form and the API." },
             { "kind": "2019", "title": "Slow Down To Go Faster Than Ever, But How?", "url": "https://www.youtube.com/watch?v=sLDKsjK4kEw", "text": "Devoxx Ukraine 2019." },
             { "kind": "2017", "title": "Git Anti-Patterns: How To Mess Up With Git and Love It Again", "url": "https://www.youtube.com/watch?v=m3ITI7tT_Qo", "text": "Devoxx Poland 2017." },
-            { "kind": "Live session", "title": "Kodun Doğru Çalıştığını Nereden Biliyorsun?", "lang": "tr", "url": "https://www.youtube.com/watch?v=HutPyJs23WI", "text": "Unit testing, live with Akın Kaldıroğlu on the Backendguru Academy channel, in Turkish." }
+            { "kind": "Live session", "title": "How Do You Know Your Code Works?","url": "https://www.youtube.com/watch?v=HutPyJs23WI", "text": "Unit testing, live with Akın Kaldıroğlu on the Backendguru Academy channel, in Turkish." }
           ]
         }
       ]
@@ -62,8 +62,8 @@
           "type": "entries",
           "items": [
             { "kind": "Podcast, 2018 – 2020", "title": "Lemi'nin Not Defteri", "url": "https://open.spotify.com/show/29k87DtwOLRZ1h2f0ONXni", "text": "My podcast in Turkish, on software, technology and culture. Also on [Apple Podcasts](https://podcasts.apple.com/tr/podcast/leminin-not-defteri/id1410475318), [Spreaker](https://www.spreaker.com/podcast/lemi-nin-not-defteri--6288114) and [YouTube](https://www.youtube.com/playlist?list=PLQTv1b9jwvWd7AwjQrOsDGOvRcRs4tb2k), and as an [RSS feed](https://www.spreaker.com/show/6288114/episodes/feed)." },
-            { "kind": "Guest, 2020", "title": "Teknik: Craftbase nasıl yazılım geliştiriyor?", "lang": "tr", "url": "https://open.spotify.com/episode/3x1FiEoaDg0VW59bPVGy2d", "text": "On the Üretim Bandı podcast, about how we built software at Craftbase." },
-            { "kind": "Guest, 2017", "title": "İyzico nasıl ürün geliştiriyor?", "lang": "tr", "url": "https://open.spotify.com/episode/3Pb7IUoSRMTR32C5Hqk0BO", "text": "On the Üretim Bandı podcast, about how iyzico builds products." },
+            { "kind": "Guest, 2020", "title": "Technical: How Does Craftbase Build Software?","url": "https://open.spotify.com/episode/3x1FiEoaDg0VW59bPVGy2d", "text": "On the Üretim Bandı podcast, about how we built software at Craftbase." },
+            { "kind": "Guest, 2017", "title": "How Does iyzico Build Products?","url": "https://open.spotify.com/episode/3Pb7IUoSRMTR32C5Hqk0BO", "text": "On the Üretim Bandı podcast, about how iyzico builds products." },
             { "kind": "Guest, 2016", "title": "On fighting elephants in the room", "url": "https://podcasts.apple.com/us/podcast/on-fighting-elephants-in-the-room-with-lemi-orhan-ergin/id936476881?i=1000377992398", "text": "On the IT Serbia Podcast, in English." },
             { "kind": "Guest, 2016", "title": "DevPod Röportajı", "lang": "tr", "url": "https://www.youtube.com/watch?v=j5Or2ZjguS8", "text": "An interview on the DevPod podcast, in Turkish." }
           ]

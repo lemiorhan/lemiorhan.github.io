@@ -334,13 +334,13 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
         return next(t for ev in self.events(d) for t in ev.get('talks', []) if t.get('title') == title)
 
     def test_a_titled_talk_without_themes(self):
-        self.assertRejected(self.edit('talks', lambda d: self.talk(d, 'Git: Bildiğiniz Gibi Değil').pop('themes')),
-                            "talk 'Git: Bildiğiniz Gibi Değil' at 'Karabük Üniversitesi Programlama Günleri 2016' needs \"themes\"")
+        self.assertRejected(self.edit('talks', lambda d: self.talk(d, 'Git: Not What You Think').pop('themes')),
+                            "talk 'Git: Not What You Think' at 'Karabük Üniversitesi Programlama Günleri 2016' needs \"themes\"")
 
     def test_a_titled_talk_with_an_empty_theme_list(self):
         def empty(d):
-            self.talk(d, 'Git: Bildiğiniz Gibi Değil')['themes'] = []
-        self.assertRejected(self.edit('talks', empty), "talk 'Git: Bildiğiniz Gibi Değil' at 'Karabük Üniversitesi Programlama Günleri 2016' needs \"themes\"")
+            self.talk(d, 'Git: Not What You Think')['themes'] = []
+        self.assertRejected(self.edit('talks', empty), "talk 'Git: Not What You Think' at 'Karabük Üniversitesi Programlama Günleri 2016' needs \"themes\"")
 
     def test_an_untitled_talk_without_themes(self):
         def untitled(d):
@@ -349,24 +349,46 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
         self.assertRejected(self.edit('talks', untitled),
                             "talk 'https://www.youtube.com/watch?v=FFYDNTWG-JI' at 'WeekEng 2021' needs \"themes\"")
 
+    def test_an_untitled_talk_with_several_videos_is_named_by_its_first(self):
+        def untitled(d):
+            talk = next(ev for ev in self.events(d) if ev['name'] == 'WeekEng 2021')['talks'][0]
+            talk.pop('themes')
+            talk['video'] = [talk['video'], 'https://example.com/second']
+        self.assertRejected(self.edit('talks', untitled),
+                            "talk 'https://www.youtube.com/watch?v=FFYDNTWG-JI' at 'WeekEng 2021' needs \"themes\"")
+
     def test_themes_that_are_not_a_list(self):
         def bare(d):
-            self.talk(d, 'Git: Bildiğiniz Gibi Değil')['themes'] = 'git'
+            self.talk(d, 'Git: Not What You Think')['themes'] = 'git'
         self.assertRejected(self.edit('talks', bare), 'must be a list of theme keys')
 
     def test_themes_that_are_not_names(self):
         def numbered(d):
-            self.talk(d, 'Git: Bildiğiniz Gibi Değil')['themes'] = [7]
+            self.talk(d, 'Git: Not What You Think')['themes'] = [7]
         self.assertRejected(self.edit('talks', numbered), 'must be a list of theme keys')
 
     def test_a_talk_about_a_theme_the_vocabulary_does_not_define(self):
         def kotlin(d):
-            self.talk(d, 'Git: Bildiğiniz Gibi Değil')['themes'].append('kotlin')
+            self.talk(d, 'Git: Not What You Think')['themes'].append('kotlin')
         self.assertRejected(self.edit('talks', kotlin), "is about 'kotlin', which archive.themes.items does not define")
+
+    def test_a_talk_video_that_is_neither_a_url_nor_a_list_of_urls(self):
+        for video in ([7], 7, {'url': 'https://example.com/v'}, '', ['']):
+            def odd(d):
+                self.talk(d, 'Git: Not What You Think')['video'] = video
+            with self.subTest(video=video):
+                self.assertRejected(self.edit('talks', odd), 'must be a URL or a list of URLs')
+
+    def test_a_bad_video_on_a_recent_talk_is_blamed_on_talks_json(self):
+        def newest(d):
+            talk = next(t for _, evs in sorted(d['archive']['events'].items(), reverse=True) for ev in evs for t in ev.get('talks', []))
+            talk.pop('slides', None)
+            talk['video'] = 7
+        self.assertRejected(self.edit('talks', newest), 'build failed: content/talks.json: video of a talk at')
 
     def test_a_talk_listing_one_theme_twice(self):
         def twice(d):
-            self.talk(d, 'Git: Bildiğiniz Gibi Değil')['themes'] = ['git', 'git']
+            self.talk(d, 'Git: Not What You Think')['themes'] = ['git', 'git']
         self.assertRejected(self.edit('talks', twice), 'lists a theme twice')
 
     def test_a_theme_no_talk_is_about(self):
@@ -576,7 +598,7 @@ class ContentRendersAsText(unittest.TestCase):
                     found.add(where)
         self.assertEqual(found, {'hero-name', 'hero-role', 'hero-intro', 'hero-play', 'hero-more', 'ul[aria-label]',
                                  'profiles', 'hero-ref', 'img[alt]', 'hero-caption', 'ol[aria-label]',
-                                 'game-head', 'cmd', 'game-intro', 'a[lang]', 'gg-fallback'})
+                                 'game-head', 'cmd', 'game-intro', 'gg-fallback'})
 
     def test_the_game_data_island_holds_no_angle_bracket_a_browser_could_end_it_on(self):
         start = self.source.index('<script type="application/json" id="git-game-data">')
@@ -818,6 +840,55 @@ class BuiltSite(unittest.TestCase):
         self.assertEqual(found, expected)
         self.assertGreater(tagged, len(labels))
 
+    def test_every_video_of_a_talk_gets_a_link_numbered_only_when_there_are_several(self):
+        a = self.talks
+        talks = [(ev, t) for _, evs in sorted(a['events'].items(), reverse=True) for ev in evs for t in ev.get('talks', [])]
+        rows = [li for ul in self.trees['talks'].find(has_class('ev-talks')) for li in ul.children if isinstance(li, Node)]
+        self.assertEqual(len(rows), len(talks))
+        several = 0
+        for (ev, t), li in zip(talks, rows):
+            about = t.get('title') or ev['name']
+            videos = [t['video']] if isinstance(t.get('video'), str) else t.get('video', [])
+            several += len(videos) > 1
+            labels = [a['video']] if len(videos) == 1 else [a['video_n'].replace('{n}', str(n)) for n in range(1, len(videos) + 1)]
+            want = ([(t['slides'], a['slides'] + a['slides_hidden'].replace('{title}', about))] if t.get('slides') else []) + \
+                [(url, label + a['video_hidden'].replace('{title}', about)) for url, label in zip(videos, labels)]
+            got = [(n.attrs['href'], n.all_text()) for span in li.find(has_class('ev-links')) for n in span.find(lambda n: n.tag == 'a')]
+            self.assertEqual(got, want, about)
+            self.assertEqual(len({text for _, text in got}), len(got), 'two links of {!r} read the same'.format(about))
+        self.assertGreater(several, 0)
+
+    def test_each_recent_talk_on_home_links_its_slides_or_else_its_first_video(self):
+        count = next(b['count'] for s in read_json(ROOT, 'content', 'home.json')['sections']
+                     for b in s['blocks'] if b['type'] == 'latest-talks')
+        self.assertGreaterEqual(count, 4, 'the fixture below sets up four recent talks')
+        with tempfile.TemporaryDirectory() as tmp:
+            site = copy_site(tmp)
+            path = os.path.join(site, 'content', 'talks.json')
+            data = read_json(path)
+            newest = [t for _, evs in sorted(data['archive']['events'].items(), reverse=True) for ev in evs for t in ev.get('talks', [])]
+            for t in newest[:4]:
+                t.pop('slides', None)
+                t.pop('video', None)
+            newest[0]['video'] = ['https://example.com/v1', 'https://example.com/v2']
+            newest[1]['video'] = 'https://example.com/v3'
+            newest[2]['slides'], newest[2]['video'] = 'https://example.com/s', 'https://example.com/v4'
+            with open(path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False)
+            out = os.path.join(tmp, 'out')
+            result = run_build(site, out)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            with open(os.path.join(out, 'index.html'), encoding='utf-8') as f:
+                tree = Tree(f.read()).root
+        recent = tree.find(lambda n: n.attrs.get('id') == 'recent')[0]
+        got = [n.attrs.get('href') for n in recent.find(has_class('entry-title'))]
+
+        def link(t):
+            videos = [t['video']] if isinstance(t.get('video'), str) else t.get('video', [])
+            return t.get('slides') or next(iter(videos), None)
+        self.assertEqual(got, ['https://example.com/v1', 'https://example.com/v3', 'https://example.com/s', None] +
+                         [link(t) for t in newest[4:count]])
+
     def test_theme_chips_count_the_events_about_each_theme(self):
         labels = self.talks['themes']['items']
         count = Counter(k for evs in self.talks['events'].values() for ev in evs
@@ -831,7 +902,7 @@ class BuiltSite(unittest.TestCase):
         self.assertEqual((everything.attrs.get('data-theme'), everything.attrs.get('aria-pressed')), ('', 'true'))
         self.assertEqual(everything.all_text().split(), self.talks['themes']['all'].split() + [str(events)])
 
-    def test_the_theme_cloud_waits_for_js_lists_chips_by_label_and_grows_them_with_their_count(self):
+    def test_the_theme_cloud_waits_for_js_lists_chips_by_label_and_only_the_themes_section_rules_name_a_mark_the_place_chips_lack(self):
         th = self.talks['themes']
         section, = self.trees['talks'].find(has_class('themes'))
         self.assertIn('hidden', section.attrs, 'without JS the chips would show and do nothing')
@@ -842,20 +913,31 @@ class BuiltSite(unittest.TestCase):
         chips = cloud.find(lambda n: n.tag == 'button')[1:]
         self.assertEqual([c.attrs['data-label'] for c in chips], sorted(th['items'].values(), key=str.lower))
         self.assertEqual({c.attrs.get('aria-pressed') for c in chips}, {'false'})
-        sized = []
-        for c in chips:
-            tier = [int(k[1:]) for k in c.classes() if re.fullmatch(r't[1-4]', k)]
-            self.assertEqual(len(tier), 1, c.attrs['data-label'])
-            sized.append((int(c.find(has_class('n'))[0].text), tier[0]))
-        sized.sort()
-        self.assertEqual([t for _, t in sized], sorted(t for _, t in sized), 'a chip with more events is smaller than one with fewer')
-        self.assertGreater(len({t for _, t in sized}), 1)
+        places = self.trees['talks'].find(has_class('tmap-controls'))[0].find(lambda n: n.attrs.get('role') == 'group')
+        self.assertIn('chips', places[0].classes())
+        self.assertIn('chips', cloud.classes(), 'the cloud should take its look from the place chips')
+        self.assertEqual(sorted(cloud.attrs), ['aria-label', 'class', 'role'])
+        self.assertEqual([sorted(b.attrs) for b in cloud.find(lambda n: n.tag == 'button')],
+                         [['aria-pressed', 'data-theme', 'type']] + [['aria-pressed', 'data-label', 'data-theme', 'type']] * len(chips),
+                         'a class or a style on a chip could size it apart from the place chips')
+        self.assertEqual([(n.tag, n.attrs) for b in cloud.find(lambda n: n.tag == 'button') for n in b.find(lambda n: n is not b)],
+                         [('span', {'class': 'n'})] * (len(chips) + 1), 'a class or a style on a count could size it apart')
+
+        def marks(group):
+            out, node = set(), group
+            while node is not None:
+                out |= {'.' + c for c in node.classes()} | {'[' + a for a in node.attrs if a != 'class'}
+                out |= {'#' + node.attrs['id']} if node.attrs.get('id') else set()
+                node = node.parent
+            return out | {'[' + a for b in group.find(lambda n: n.tag == 'button') for a in b.attrs}
+        own = marks(cloud) - marks(places[0]) | {'"{}"'.format(cloud.attrs['aria-label'])}
+        self.assertTrue({'.cloud', '.themes', '[data-theme'} <= own, own)
         with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
-            css = f.read()
-        sizes = [css_values(css, '.cloud .t{}'.format(n), 'font-size') for n in range(1, 5)]
-        self.assertEqual([len(s) for s in sizes], [1] * 4)
-        rems = [float(re.fullmatch(r'([\d.]+)rem', s[0]).group(1)) for s in sizes]
-        self.assertEqual(rems, sorted(set(rems)), 'a higher tier should set a larger font')
+            css = re.sub(r'/\*.*?\*/', '', f.read(), flags=re.S)
+        css = re.sub(r''':root(?::not\()?\[data-theme=["']\w+["']\]\)?''', ':root', css)
+        selectors = [s.strip() for group in re.findall(r'([^{}@;]+)\{', css) for s in group.split(',')]
+        self.assertEqual([s for s in selectors if any(re.search(re.escape(m) + r'(?![\w-])', s) for m in own)],
+                         ['.themes', '.themes .sub'], 'a rule naming a mark of the cloud that the place chips lack could size its chips apart')
 
     def test_the_tags_on_each_talk_wait_for_js_like_the_cloud(self):
         spans = self.trees['talks'].find(has_class('ev-themes'))
@@ -1182,9 +1264,8 @@ class BuiltSite(unittest.TestCase):
         section = self.trees['home'].find(lambda n: n.attrs.get('id') == 'play')[0]
         intro = section.find(has_class('game-intro'))[0]
         self.assertNotIn('{', intro.all_text())
-        self.assertIn(talk['gloss'], intro.all_text())
-        self.assertEqual([(a.attrs.get('href'), a.attrs.get('lang'), a.all_text()) for a in intro.find(lambda n: n.tag == 'a')],
-                         [(talk['url'], talk['lang'], talk['title'])])
+        self.assertEqual([(a.attrs, a.all_text()) for a in intro.find(lambda n: n.tag == 'a')],
+                         [({'href': talk['url']}, talk['title'])])
         fallback = section.find(has_class('gg-fallback'))[0]
         first = fallback.find(lambda n: n.tag == 'a')[0]
         self.assertEqual((first.attrs.get('href'), first.all_text()), (talk['url'], game['slides']))

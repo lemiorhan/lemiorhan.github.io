@@ -74,7 +74,7 @@
           "type": "log",
           "label": "What happened, newest first",
           "items": [
-            { "when": "Dec 2019", "title": "I tell the story again at TEDx", "org": "TEDxTarsusAmericanCollege", "note": "[Bir Gecede Ünlü Eden Elma](https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma), in Turkish." },
+            { "when": "Dec 2019", "title": "I tell the story again at TEDx", "org": "TEDxTarsusAmericanCollege", "note": "[The Apple That Made Me Famous Overnight](https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma), in Turkish." },
             { "when": "31 Mar 2018", "title": "Irresponsible Disclosure", "org": "Women Techmakers Istanbul", "note": "The [slides](https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer) are on Speaker Deck." },
             { "when": "29 Nov 2017", "title": "Apple ships Security Update 2017-001 and apologises", "note": "Later that day it starts installing itself on every Mac running 10.13.1.[^9]" },
             { "when": "29 Nov 2017, 14:27", "title": "I write the story behind the tweet", "org": "[Medium](https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71)" },
@@ -157,7 +157,7 @@
           "items": [
             { "kind": "Medium, 2017", "title": "The Story Behind “anyone can login as root” Tweet", "url": "https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71", "text": "Written the day after, to explain how we noticed the issue and why I tweeted." },
             { "kind": "Talk, 2018", "title": "Irresponsible Disclosure: Short Handbook of an Ethical Developer", "url": "https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer", "text": "Women Techmakers Istanbul: the ethics of going public, and the principles of an ethical developer." },
-            { "kind": "TEDx, 2019", "title": "Bir Gecede Ünlü Eden Elma", "lang": "tr", "url": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma", "text": "At TEDxTarsusAmericanCollege, in Turkish: the chain of events of one night, and the apple that made me known overnight." }
+            { "kind": "TEDx, 2019", "title": "The Apple That Made Me Famous Overnight", "url": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma", "text": "At TEDxTarsusAmericanCollege, in Turkish: the chain of events of one night." }
           ]
         }
       ]

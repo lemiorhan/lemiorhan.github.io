@@ -39,6 +39,7 @@
     "slides": "Slides",
     "slides_hidden": " for {title}",
     "video": "Video",
+    "video_n": "Video {n}",
     "video_hidden": " of {title}",
     "empty": "Nothing matches this filter.",
     "map": {
@@ -155,8 +156,7 @@
           "role": "Closing talk",
           "talks": [
             {
-              "title": "AI Dönüşüm Döneminde Yazılım Geliştirme: Mimari, Kalite ve Kültürün Yeniden Tanımı",
-              "lang": "tr",
+              "title": "Software Development in the Age of AI: Redefining Architecture, Quality and Culture",
               "themes": ["ai", "architecture", "quality", "culture"]
             }
           ],
@@ -188,28 +188,11 @@
           "role": "Podcast",
           "talks": [
             {
-              "title": "Product Developer: Kod Yazmaktan Ürün Geliştirmeye",
-              "lang": "tr",
+              "title": "Product Developer: From Writing Code to Building Products",
               "video": "https://www.youtube.com/watch?v=8EXXkeweFWA",
               "themes": ["product", "career"]
             }
           ]
-        },
-        {
-          "name": "Backendguru Academy webinar",
-          "place": "online",
-          "talks": [
-            {
-              "title": "“Test Var” Demek Yetmez: Güvenilir Kod için Unit Testing",
-              "lang": "tr",
-              "video": "https://www.youtube.com/watch?v=N6tSrpE2XhY",
-              "themes": ["testing"]
-            }
-          ],
-          "photo": {
-            "file": "2026-backendguru-unit-testing",
-            "alt": "Lemi smiling at the camera on a webcam, captioned with his name, on a purple background"
-          }
         },
         {
           "date": "2026-01-08",
@@ -217,14 +200,14 @@
           "place": "online",
           "talks": [
             {
-              "title": "Unit Testing & Test-Driven Development",
-              "video": "https://www.youtube.com/watch?v=HutPyJs23WI",
+              "title": "“We Have Tests” Is Not Enough: Unit Testing for Reliable Code",
+              "video": ["https://www.youtube.com/watch?v=HutPyJs23WI", "https://www.youtube.com/watch?v=N6tSrpE2XhY"],
               "themes": ["testing"]
             }
           ],
           "photo": {
-            "file": "2026-backendguru",
-            "alt": "Lemi talking on a video call beside Akin Kaldıroğlu, both in captioned webcam tiles on a purple backend guru background"
+            "file": "2026-backendguru-unit-testing",
+            "alt": "Lemi smiling at the camera on a webcam, captioned with his name, on a purple background"
           }
         }
       ],
@@ -301,8 +284,7 @@
           "role": "Interview",
           "talks": [
             {
-              "title": "Co-founder perspektifinden ürün yönetimi, ürün geliştirme ve AI",
-              "lang": "tr",
+              "title": "Product Management, Product Development and AI from a Co-founder's Perspective",
               "video": "https://www.youtube.com/watch?v=oqQnI2JRV3s",
               "themes": ["product", "ai"]
             }
@@ -317,8 +299,7 @@
           "role": "Podcast",
           "talks": [
             {
-              "title": "Mükemmellik Yerine Adaptasyon: Modern Yazılımcının Rehberi",
-              "lang": "tr",
+              "title": "Adaptation over Perfection: A Guide for the Modern Developer",
               "video": "https://www.youtube.com/watch?v=IdBSKIbfAtk",
               "themes": ["career"]
             }
@@ -422,8 +403,7 @@
           "role": "Podcast",
           "talks": [
             {
-              "title": "Yazılımın Perde Arkası ve İncelikleri",
-              "lang": "tr",
+              "title": "Software Behind the Scenes, and Its Finer Points",
               "video": "https://www.youtube.com/watch?v=0c3WJuUIypo",
               "themes": ["career"]
             }
@@ -475,8 +455,7 @@
           "role": "Podcast",
           "talks": [
             {
-              "title": "Sunum Sihirbazı",
-              "lang": "tr",
+              "title": "The Presentation Wizard",
               "video": "https://www.youtube.com/watch?v=aS_bQhcI06M",
               "themes": ["career", "speaking"]
             }
@@ -563,8 +542,7 @@
           "role": "Podcast",
           "talks": [
             {
-              "title": "Apple'daki açığı ifşa edince tüm dünyada haber oldum!",
-              "lang": "tr",
+              "title": "I Disclosed a Flaw in Apple and Made the News Worldwide!",
               "video": "https://www.youtube.com/watch?v=rLR9bdSc1AE",
               "themes": ["security", "career"]
             }
@@ -725,9 +703,8 @@
         },
         {
           "date": "2022-05-11",
-          "name": "Agile Dönüşümleri Yazılım Uzmanlarından Dinleyelim",
+          "name": "Agile Transformations, as Told by Software Experts",
           "place": "online",
-          "lang": "tr",
           "role": "Panel",
           "talks": [
             {
@@ -747,8 +724,7 @@
           "lang": "tr",
           "talks": [
             {
-              "title": "Yazılımcı: Sıradan İnsanların Teknoloji Üreten Zanaatkarlara Dönüşüm Yolculuğu",
-              "lang": "tr",
+              "title": "The Developer: How Ordinary People Become Craftspeople Who Build Technology",
               "video": "https://www.youtube.com/watch?v=s3L_Cux2RFs",
               "themes": ["craftsmanship", "career"]
             }
@@ -781,8 +757,7 @@
           "role": "Podcast",
           "talks": [
             {
-              "title": "Yazılımın Geçmişi ve Geleceği",
-              "lang": "tr",
+              "title": "The Past and Future of Software",
               "video": "https://www.youtube.com/watch?v=mBPx4ZtsMmM",
               "themes": ["career", "speaking"]
             }
@@ -795,8 +770,7 @@
           "lang": "tr",
           "talks": [
             {
-              "title": "Testlerde Mock Cehenneminden Kaçış",
-              "lang": "tr",
+              "title": "Escaping Mock Hell in Tests",
               "video": "https://www.youtube.com/watch?v=MdLlJEhODkE",
               "themes": ["testing"]
             }
@@ -812,8 +786,7 @@
           "lang": "tr",
           "talks": [
             {
-              "title": "Yazılımın Modüler Yapıya Evrimi",
-              "lang": "tr",
+              "title": "The Evolution of Software Toward Modular Design",
               "video": "https://www.youtube.com/watch?v=ixN8LeAs_ZI",
               "themes": ["architecture"]
             }
@@ -873,8 +846,7 @@
           "role": "Podcast",
           "talks": [
             {
-              "title": "Teknik: Kod İnceleme Süreçleri",
-              "lang": "tr",
+              "title": "Technical: Code Review Processes",
               "video": "https://www.youtube.com/watch?v=x5lGD81HGyw",
               "themes": ["code-review"]
             }
@@ -883,9 +855,8 @@
       ],
       "2020": [
         {
-          "name": "Daha İyi Bir Profesyonel Hayatın Dillendirilmeyen Kuralları",
+          "name": "The Unspoken Rules of a Better Professional Life",
           "place": "online",
-          "lang": "tr",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=VBWS1-ngCKo",
@@ -920,8 +891,7 @@
           "role": "Podcast",
           "talks": [
             {
-              "title": "Teknik: Craftbase nasıl yazılım geliştiriyor?",
-              "lang": "tr",
+              "title": "Technical: How Does Craftbase Build Software?",
               "video": "https://www.youtube.com/watch?v=9SxmASl_Wpc",
               "themes": ["craftsmanship", "architecture"]
             }
@@ -982,9 +952,8 @@
           ]
         },
         {
-          "name": "Git: Bildiğiniz Gibi Değil",
+          "name": "Git: Not What You Think",
           "place": "online",
-          "lang": "tr",
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=OOmsCltczCA",
@@ -1043,8 +1012,7 @@
           "place": "tarsus",
           "talks": [
             {
-              "title": "Bir Gecede Ünlü Eden Elma",
-              "lang": "tr",
+              "title": "The Apple That Made Me Famous Overnight",
               "video": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma",
               "summary": "The night of the macOS root bug, told again two years later. The [root bug page](../root-bug/) has the story and the press.",
               "themes": ["security", "ethics"]
@@ -1169,8 +1137,7 @@
           "role": "Interview",
           "talks": [
             {
-              "title": "Yazılım Uzmanlığı",
-              "lang": "tr",
+              "title": "Software Expertise",
               "video": "https://www.youtube.com/watch?v=RwyG2U7GuGA",
               "themes": ["career"]
             }
@@ -1187,8 +1154,7 @@
           "role": "Panel",
           "talks": [
             {
-              "title": "Agile Bitti Mi?: Hadi Artık Biraz İş Yapalım",
-              "lang": "tr",
+              "title": "Is Agile Over? Let's Get Some Work Done",
               "video": "https://www.youtube.com/watch?v=9vVZLskBFBc",
               "themes": ["agile"]
             }
@@ -1223,8 +1189,7 @@
           "lang": "tr",
           "talks": [
             {
-              "title": "Dünyayı Yazılımın Elinden Kim Kurtaracak?",
-              "lang": "tr",
+              "title": "Who Will Save the World from Software?",
               "slides": "https://speakerdeck.com/lemiorhan/kodlama-ogrenmek-gercekten-gerekli-mi",
               "themes": ["career"]
             }
@@ -1289,8 +1254,7 @@
           "url": "https://kodla.co/",
           "talks": [
             {
-              "title": "Yeni Nesil Yazılım Kültürü: Daha İyi Profesyoneller, Daha Kaliteli Yazılım, Daha Çevik Ekip",
-              "lang": "tr",
+              "title": "Next-Generation Software Culture: Better Professionals, Better Software, More Agile Teams",
               "slides": "https://speakerdeck.com/lemiorhan/yeni-nesil-yazilim-kulturu-daha-iyi-profesyoneller-daha-kaliteli-yazilim-daha-cevik-ekip",
               "video": "https://www.youtube.com/watch?v=5k8YSGzFrvc",
               "themes": ["craftsmanship", "culture"]
@@ -1333,8 +1297,7 @@
           "lang": "tr",
           "talks": [
             {
-              "title": "Temiz Kod Tasarımı",
-              "lang": "tr",
+              "title": "Clean Code Design",
               "themes": ["design"]
             }
           ],
@@ -1351,8 +1314,7 @@
           "url": "https://bilmok.org/",
           "talks": [
             {
-              "title": "Yeni Nesil Yazılım Kültürü",
-              "lang": "tr",
+              "title": "Next-Generation Software Culture",
               "video": "https://www.youtube.com/watch?v=DRGnkTJqBzQ",
               "themes": ["craftsmanship", "culture"]
             }
@@ -1369,8 +1331,7 @@
           "lang": "tr",
           "talks": [
             {
-              "title": "Teknik Mülakatlara Nasıl Hazırlanmalı?",
-              "lang": "tr",
+              "title": "How to Prepare for Technical Interviews",
               "video": "https://www.youtube.com/watch?v=H1fapuTjCs4",
               "themes": ["career"]
             }
@@ -1405,8 +1366,7 @@
           "role": "Podcast",
           "talks": [
             {
-              "title": "İyzico nasıl ürün geliştiriyor?",
-              "lang": "tr",
+              "title": "How Does iyzico Build Products?",
               "video": "https://www.youtube.com/watch?v=jOnvWQPgUE8",
               "themes": ["product"]
             }
@@ -1499,25 +1459,16 @@
               "title": "Git Anti-Patterns: How To Mess Up With Git And Love It Again",
               "video": "https://www.youtube.com/watch?v=bEXuYvry3_o",
               "themes": ["git"]
-            }
-          ],
-          "photo": {
-            "file": "2017-javaday",
-            "alt": "Wide view of a hotel ballroom, Lemi on stage between two screens showing Git Anti Patterns"
-          }
-        },
-        {
-          "name": "Java Day Istanbul 2017",
-          "role": "Interview",
-          "talks": [
+            },
             {
+              "title": "Interview",
               "video": "https://www.youtube.com/watch?v=KAHKXbIW-2M",
               "themes": ["culture"]
             }
           ],
           "photo": {
-            "file": "2017-javaday-interview",
-            "alt": "Lemi smiling in a black polo shirt with a blue lanyard, captioned with his name and iyzico, in front of a banner reading DAY Istanbul"
+            "file": "2017-javaday",
+            "alt": "Wide view of a hotel ballroom, Lemi on stage between two screens showing Git Anti Patterns"
           }
         },
         {
@@ -1561,8 +1512,7 @@
           "role": "Panel",
           "talks": [
             {
-              "title": "Çevik Dönüşüm Paneli",
-              "lang": "tr",
+              "title": "Agile Transformation Panel",
               "video": "https://www.youtube.com/watch?v=YZsAdA9HCFw",
               "themes": ["agile"]
             }
@@ -1609,10 +1559,14 @@
           "role": "Interview",
           "talks": [
             {
-              "title": "Yazılımda Ustalık Çıraklık İlişkisi",
-              "lang": "tr",
+              "title": "The Master–Apprentice Relationship in Software",
               "video": "https://www.youtube.com/watch?v=q_AIH90dEvw",
               "themes": ["craftsmanship"]
+            },
+            {
+              "title": "Why Is TDD Hard to Practice?",
+              "video": "https://www.youtube.com/watch?v=pX8wsryhRKo",
+              "themes": ["testing"]
             }
           ],
           "photo": {
@@ -1643,8 +1597,7 @@
           "lang": "tr",
           "talks": [
             {
-              "title": "Agile Kültürü ve Scrum",
-              "lang": "tr",
+              "title": "Agile Culture and Scrum",
               "themes": ["agile"]
             }
           ],
@@ -1661,22 +1614,6 @@
           "photo": {
             "file": "2017-fsm",
             "alt": "Lemi beside a slide that reads Be honest, to yourself, to teammates, to managers"
-          }
-        },
-        {
-          "name": "Devnot",
-          "role": "Interview",
-          "talks": [
-            {
-              "title": "TDD Uygulamak Neden Zor?",
-              "lang": "tr",
-              "video": "https://www.youtube.com/watch?v=pX8wsryhRKo",
-              "themes": ["testing"]
-            }
-          ],
-          "photo": {
-            "file": "2017-devnot-tdd",
-            "alt": "Lemi smiling broadly on a grey sofa in a purple polo shirt with a clip-on microphone, against a plain cream wall"
           }
         },
         {
@@ -1733,8 +1670,7 @@
           "lang": "tr",
           "talks": [
             {
-              "title": "Çevik Yönetim: 3. Nesil Yönetim Felsefesi",
-              "lang": "tr",
+              "title": "Agile Management: The Third Generation of Management Philosophy",
               "video": "https://www.youtube.com/watch?v=25xGWtgfYYA",
               "themes": ["agile"]
             }
@@ -1782,8 +1718,7 @@
           "place": "ankara",
           "talks": [
             {
-              "title": "Çevikliği Kodlamak: Teknik Çeviklik ve DevOps Kültürünün Yapıtaşları",
-              "lang": "tr",
+              "title": "Coding Agility: The Building Blocks of Technical Agility and DevOps Culture",
               "video": "https://www.youtube.com/watch?v=l1DqBlddbeQ",
               "themes": ["agile", "culture"]
             }
@@ -1839,8 +1774,7 @@
           "lang": "tr",
           "talks": [
             {
-              "title": "Git: Bildiğiniz Gibi Değil",
-              "lang": "tr",
+              "title": "Git: Not What You Think",
               "slides": "https://speakerdeck.com/lemiorhan/git-bildiginiz-gibi-degil",
               "themes": ["git"]
             }
@@ -1961,8 +1895,7 @@
           "lang": "tr",
           "talks": [
             {
-              "title": "Teoriden Pratiğe Mikroservisler",
-              "lang": "tr",
+              "title": "Microservices from Theory into Practice",
               "slides": "https://speakerdeck.com/lemiorhan/teoriden-pratige-mikroservisler",
               "themes": ["architecture"]
             }
@@ -2139,8 +2072,7 @@
           "name": "BBS, Sony",
           "talks": [
             {
-              "title": "GDOsuz Yazılım Geliştirme Teknikleri",
-              "lang": "tr",
+              "title": "GMO'less Software Development Practices",
               "video": "https://www.youtube.com/watch?v=lfarPkVmkFY",
               "themes": ["agile", "craftsmanship"]
             }
@@ -2167,8 +2099,7 @@
           "role": "Panel",
           "talks": [
             {
-              "title": "Başarılı Projelerin Anahtarı: Çevik Yazılım Geliştirme Pratikleri",
-              "lang": "tr",
+              "title": "The Key to Successful Projects: Agile Software Development Practices",
               "slides": "https://speakerdeck.com/lemiorhan/basarili-projelerin-anahtari-cevik-yazilim-gelistirme-pratikleri",
               "themes": ["agile"]
             }

@@ -55,9 +55,7 @@
     "cmd": "git log --graph --all",
     "intro": "In 2016 I gave a talk in Turkish, {talk}. Its one idea: every git command is a move on a graph. Commits are nodes; branches, tags and HEAD are pointers to them. Here you run real git commands, typed or tapped together, and move commits and pointers until your graph matches the goal. Each level is a piece of my own history, and solving it tells you a little more about me.",
     "talk": {
-      "title": "Git: Bildiğiniz Gibi Değil",
-      "lang": "tr",
-      "gloss": "Git is not what you think",
+      "title": "Git: Not What You Think",
       "url": "https://speakerdeck.com/lemiorhan/git-bildiginiz-gibi-degil"
     },
     "fallback": "The game runs in your browser with JavaScript, which is off here. These are its levels.",
@@ -252,7 +250,7 @@
         "setup": ["git commit -m \"Abstract\"", "git commit -m \"Slides\""],
         "solution": ["git commit --amend -m \"Slides, with demo\""],
         "hint": "git commit --amend makes a new commit on the same parent and moves the branch to it. The old commit is still there, only unreachable.",
-        "fact": { "text": "In 2016 I gave a talk in Turkish at Karabük University's Programming Days: \"Git: Bildiğiniz Gibi Değil\", Git is not what you think. This game is built on its idea: every Git command is a move on a graph.", "link": "https://speakerdeck.com/lemiorhan/git-bildiginiz-gibi-degil" },
+        "fact": { "text": "In 2016 I gave a talk in Turkish at Karabük University's Programming Days, \"Git: Not What You Think\". This game is built on its idea: every Git command is a move on a graph.", "link": "https://speakerdeck.com/lemiorhan/git-bildiginiz-gibi-degil" },
         "checks": {
           "alternatives": [["git commit --amend"]],
           "near_misses": [["git commit -m \"Demo\""], ["git reset --hard HEAD~1", "git commit -m \"Slides, with demo\""], ["git reset --soft HEAD~1", "git commit -m \"Slides, with demo\""]]

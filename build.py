@@ -285,7 +285,7 @@ def block_latest_talks(b, page):
         title = t.get('title') or ev['name']
         lang = t.get('lang') if t.get('title') else ev.get('lang')
         lang = ' lang="{}"'.format(attr(lang)) if lang else ''
-        link = t.get('slides') or t.get('video')
+        link = t.get('slides') or next(iter(talk_videos(t, ev, talks_page)), None)
         if link:
             out.append('      <a class="entry-title" href="{}"{}>{}</a>'.format(attr(link), lang, text(title)))
         else:
@@ -599,7 +599,7 @@ def game(g, page):
     levels = game_levels(g, page)
     island = json.dumps({'ui': g['ui'], 'levels': levels}, ensure_ascii=False).replace('<', '\\u003c')
     talk = g['talk']
-    cited = '<a href="{}" lang="{}">{}</a> — {}'.format(attr(talk['url']), attr(talk['lang']), text(talk['title']), text(talk['gloss']))
+    cited = '<a href="{}">{}</a>'.format(attr(talk['url']), text(talk['title']))
     out = ['<section class="game" id="play" aria-labelledby="play-title">',
            '  <div class="wrap">',
            '    <div class="game-head">',
@@ -814,13 +814,12 @@ def talk_map(archive, page):
 
 
 THEME_KEY = re.compile(r'^[a-z0-9]+(-[a-z0-9]+)*$')
-CLOUD_LEVELS = (3, 6, 12)
 
 
 def talk_themes(t, ev, archive, page):
     items = archive.get('themes', {}).get('items', {})
     keys = t.get('themes', [])
-    name = t.get('title') or t.get('video') or t.get('slides')
+    name = t.get('title') or next(iter(talk_videos(t, ev, page)), None) or t.get('slides')
     if not isinstance(keys, list) or not all(isinstance(k, str) for k in keys):
         page.fail('themes of a talk at {!r} must be a list of theme keys'.format(ev['name']))
     if not keys:
@@ -831,6 +830,14 @@ def talk_themes(t, ev, archive, page):
     if len(set(keys)) != len(keys):
         page.fail('talk {!r} at {!r} lists a theme twice'.format(name, ev['name']))
     return keys
+
+
+def talk_videos(t, ev, page):
+    urls = t.get('video', [])
+    urls = [urls] if isinstance(urls, str) else urls
+    if not isinstance(urls, list) or not all(isinstance(u, str) and u for u in urls):
+        page.fail('video of a talk at {!r} must be a URL or a list of URLs'.format(ev['name']))
+    return urls
 
 
 def theme_cloud(archive, page):
@@ -849,14 +856,14 @@ def theme_cloud(archive, page):
     if unused:
         page.fail('archive.themes.items defines {}, but no talk is about it'.format(', '.join(unused)))
     # site.js treats an empty data-theme as "no theme chosen", so this chip clears the choice.
-    buttons = ['<button type="button" class="all" data-theme="" aria-pressed="true">{} <span class="n">{}</span></button>'.format(
+    buttons = ['<button type="button" data-theme="" aria-pressed="true">{} <span class="n">{}</span></button>'.format(
         text(th['all']), total)]
-    buttons += ['<button type="button" class="t{}" data-theme="{}" data-label="{}" aria-pressed="false">{} <span class="n">{}</span></button>'.format(
-                    1 + sum(count[k] >= n for n in CLOUD_LEVELS), attr(k), attr(items[k]), text(items[k]), count[k])
+    buttons += ['<button type="button" data-theme="{}" data-label="{}" aria-pressed="false">{} <span class="n">{}</span></button>'.format(
+                    attr(k), attr(items[k]), text(items[k]), count[k])
                 for k in sorted(items, key=lambda k: items[k].lower())]
     return (['<section class="themes" aria-labelledby="themes-title" hidden>',
              '  <h2 class="sub" id="themes-title">{}</h2>'.format(text(th['heading'])),
-             '  <div class="cloud" role="group" aria-label="{}">'.format(attr(th['label']))]
+             '  <div class="chips cloud" role="group" aria-label="{}">'.format(attr(th['label']))]
             + indent(buttons, 4) + ['  </div>', '</section>'])
 
 
@@ -914,9 +921,11 @@ def event(ev, archive, page):
             if t.get('slides'):
                 links.append('<a href="{}">{}<span class="sr-only">{}</span></a>'.format(
                     attr(t['slides']), text(archive['slides']), fill(text(archive['slides_hidden']), title=about)))
-            if t.get('video'):
+            videos = talk_videos(t, ev, page)
+            for n, url in enumerate(videos, 1):
+                label = archive['video'] if len(videos) == 1 else fill(archive['video_n'], n=str(n))
                 links.append('<a href="{}">{}<span class="sr-only">{}</span></a>'.format(
-                    attr(t['video']), text(archive['video']), fill(text(archive['video_hidden']), title=about)))
+                    attr(url), text(label), fill(text(archive['video_hidden']), title=about)))
             parts = []
             if t.get('title'):
                 tlang = ' lang="{}"'.format(attr(t['lang'])) if t.get('lang') else ''

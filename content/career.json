@@ -17,16 +17,16 @@
           "type": "log",
           "label": "Positions, newest first",
           "items": [
-            { "when": "Dec 2021 – now", "title": "Co-founder & Chief Software Crafter", "org": "[Craftgate](https://craftgate.io)", "note": "A payment orchestration platform that connects online merchants to banks, payment providers and alternative payment methods through one integration." },
+            { "when": "Jun 2020 – now", "title": "Co-founder & Chief Software Crafter", "org": "[Craftgate](https://craftgate.io)", "note": "A payment orchestration platform that connects online merchants to banks, payment providers and alternative payment methods through one integration." },
             { "when": "Apr 2018 – Dec 2021", "title": "Co-founder & Software Crafter", "org": "Craftbase" },
             { "when": "Jan 2017 – Apr 2018", "title": "Agile Practice Lead & Software Crafter", "org": "iyzico", "note": "Led the cultural transformation of iyzico engineering around agile and lean thinking and software craftsmanship." },
-            { "when": "Jan 2014 – Dec 2016", "title": "Managing Partner, Master Software Craftsman, Agile Coach & Trainer", "org": "ACM", "note": "Consulting and training for dozens of companies on agile culture and engineering practices." },
-            { "when": "Sep 2012 – Dec 2014", "title": "Principal Software Engineer, Technical Lead & Agile Practice Lead", "org": "Sony", "note": "Also Solution Architect (Dec 2013 – May 2014), then Technical Architect & Scrum Master (May – Dec 2014)." },
-            { "when": "Mar 2012 – Sep 2012", "title": "MTS1 Software Engineer", "org": "GittiGidiyor / eBay", "branch": true },
-            { "when": "Apr 2010 – Mar 2012", "title": "Expert Software Engineer", "org": "Sony" },
-            { "when": "May 2008 – Apr 2010", "title": "Technical Coordinator & Scrum Master", "org": "Sony" },
-            { "when": "Aug 2007 – May 2008", "title": "Senior Software Engineer", "org": "Sony" },
-            { "when": "Aug 2006 – Jul 2007", "title": "Software Officer", "org": "Turkish Air Force", "branch": true },
+            { "when": "Jan 2015 – Dec 2016", "title": "Managing Partner, Master Software Craftsman, Agile Coach & Trainer", "org": "ACM", "note": "Consulting and training for dozens of companies on agile culture and engineering practices." },
+            { "when": "Sep 2012 – Dec 2014", "title": "Principal Software Engineer, Technical Lead & Agile Practice Lead", "org": "Sony", "note": "Also Solution Architect (Dec 2013 – May 2014), then Technical Architect & Scrum Master (May – Dec 2014). Wrote a manifesto for software development at Sony, and organized its Brown Bag Sessions, the weekly trainings colleagues gave each other, along with code retreats and coding dojos." },
+            { "when": "Mar 2012 – Sep 2012", "title": "MTS1 Software Engineer", "org": "GittiGidiyor / eBay", "branch": true, "note": "Started GittiGidiyor's move from SVN to Git, set up its central Maven repository, and built its private shopping project from scratch." },
+            { "when": "Apr 2010 – Mar 2012", "title": "Expert Software Engineer", "org": "Sony", "note": "Backend services and infrastructure for Sony's marketing websites in the US, Canada and Europe." },
+            { "when": "May 2008 – Apr 2010", "title": "Technical Coordinator & Scrum Master", "org": "Sony", "note": "Technical lead and people manager of a team of six to seven that built the web services at the centre of Sony Europe's content hub, with shared libraries and backend services." },
+            { "when": "Aug 2007 – May 2008", "title": "Senior Software Engineer", "org": "Sony", "note": "Support modules for Sony's European marketing websites, and a common toolbar for all of Sony's European sites." },
+            { "when": "Aug 2006 – Jul 2007", "title": "Software Officer, Second Lieutenant", "org": "Turkish Air Force", "branch": true, "note": "In Konya, building military applications on a web framework I designed." },
             { "when": "Oct 2004 – May 2006", "title": "Lead Software Engineer", "org": "Sony" },
             { "when": "Aug 2003 – Sep 2004", "title": "Software Engineer", "org": "BYM" },
             { "when": "Jun 2002 – Jan 2003", "title": "Laboratory Assistant", "org": "Marmara University" },
@@ -45,16 +45,26 @@
             {
               "heading": "Degrees",
               "items": [
-                { "title": "M.Sc., Computer Engineering", "text": "Marmara University, 2003 – 2005" },
-                { "title": "B.Sc., Computer Engineering", "text": "Marmara University, 1997 – 2002" }
+                { "title": "M.Sc., Computer Engineering", "text": "Marmara University, 2002 – 2005. Thesis: an XML-based content management engine." },
+                { "title": "B.Sc., Computer Engineering", "text": "Marmara University, 1997 – 2002. Thesis: a task-scheduling algorithm for M-Tasks and S-Tasks in heterogeneous systems." }
               ]
             },
             {
               "heading": "Certifications",
               "items": [
                 { "title": "[Certified ScrumMaster](https://www.scrumalliance.org/members/49418)", "text": "Scrum Alliance, 2009, trained by James Coplien" },
-                { "title": "PSM I & PSD I", "text": "Scrum.org, 2013" },
-                { "title": "Certified Kanban Practitioner", "text": "Lean Kanban University" }
+                { "title": "PSM I", "text": "Scrum.org, 2013" },
+                { "title": "Certified Kanban Practitioner", "text": "Lean Kanban University, 2013" },
+                { "title": "Management 3.0 Licensed Facilitator", "text": "Happy Melly, 2015" },
+                { "title": "PSD I", "text": "Scrum.org, 2015" }
+              ]
+            },
+            {
+              "heading": "Languages",
+              "items": [
+                { "title": "Turkish", "text": "Native" },
+                { "title": "English", "text": "Professional working proficiency" },
+                { "title": "German", "text": "Elementary" }
               ]
             }
           ]

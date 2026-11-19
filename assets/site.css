@@ -1066,45 +1066,6 @@ a:hover { text-decoration-color: var(--accent); }
 
 .themes { margin-top: clamp(2rem, 5vw, 3rem); }
 .themes .sub { margin-top: 0; }
-.cloud {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.45rem 0.5rem;
-  margin-top: 0.9rem;
-}
-.cloud button {
-  display: inline-flex;
-  align-items: baseline;
-  padding: 0.3em 0.8em;
-  font: inherit;
-  font-weight: 600;
-  line-height: 1.25;
-  color: var(--ink);
-  background: transparent;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  cursor: pointer;
-}
-.cloud .all { font-size: 0.95rem; }
-.cloud .t1 { font-size: 0.85rem; font-weight: 500; }
-.cloud .t2 { font-size: 0.95rem; }
-.cloud .t3 { font-size: 1.1rem; }
-.cloud .t4 { font-size: 1.3rem; font-weight: 700; }
-.cloud button:hover { border-color: var(--ink-soft); }
-.cloud button[aria-pressed="true"] {
-  color: var(--paper);
-  background: var(--ink);
-  border-color: var(--ink);
-}
-.cloud .n {
-  margin-left: 0.4em;
-  font-size: 0.75em;
-  font-weight: 500;
-  color: var(--ink-soft);
-  font-variant-numeric: tabular-nums;
-}
-.cloud button[aria-pressed="true"] .n { color: inherit; opacity: 0.75; }
 
 .ev-place { white-space: nowrap; }
 
