@@ -190,6 +190,7 @@
           }
         },
         {
+          "date": "2026-04-07",
           "name": "Devnot",
           "role": "Podcast",
           "spoken": "tr",
@@ -294,6 +295,7 @@
           }
         },
         {
+          "date": "2025-09-18",
           "name": "weproduct",
           "role": "Interview",
           "spoken": "tr",
@@ -311,6 +313,7 @@
           }
         },
         {
+          "date": "2025-07-16",
           "name": "Enderinko",
           "role": "Podcast",
           "spoken": "tr",
@@ -424,6 +427,7 @@
           }
         },
         {
+          "date": "2024-03-30",
           "name": "Tütsü Sektör",
           "role": "Podcast",
           "spoken": "tr",
@@ -482,6 +486,7 @@
           }
         },
         {
+          "date": "2024-02-06",
           "name": "PeaksOnTheBack #2",
           "role": "Podcast",
           "spoken": "tr",
@@ -578,6 +583,7 @@
           }
         },
         {
+          "date": "2023-07-28",
           "name": "Teknasyon ile Kesin Yaşanmıştır #14",
           "role": "Podcast",
           "spoken": "tr",
@@ -704,6 +710,7 @@
           }
         },
         {
+          "date": "2022-10-13",
           "name": "Devoxx Belgium 2022",
           "place": "antwerp",
           "url": "https://devoxx.be/",
@@ -781,6 +788,7 @@
       ],
       "2021": [
         {
+          "date": "2021-12-28",
           "name": "Bilim Sohbetleri, İzmir Özel Türk Koleji",
           "spoken": "tr",
           "talks": [
@@ -816,6 +824,7 @@
           }
         },
         {
+          "date": "2021-09-28",
           "name": "Junior Bile Değil #7",
           "role": "Podcast",
           "spoken": "tr",
@@ -847,6 +856,7 @@
           }
         },
         {
+          "date": "2021-07-14",
           "name": "Ruby Türkiye Akşam Oturması #10",
           "place": "online",
           "spoken": "tr",
@@ -864,6 +874,7 @@
           }
         },
         {
+          "date": "2021-04-03",
           "name": "Think. Design. Work Smart. with Alex Bolboaca",
           "role": "Podcast",
           "spoken": "en",
@@ -914,6 +925,7 @@
           }
         },
         {
+          "date": "2021-01-12",
           "name": "Üretim Bandı",
           "role": "Podcast",
           "spoken": "tr",
@@ -964,6 +976,7 @@
           }
         },
         {
+          "date": "2020-09-29",
           "name": "Üretim Bandı",
           "role": "Podcast",
           "spoken": "tr",
@@ -977,6 +990,7 @@
           ]
         },
         {
+          "date": "2020-09-12",
           "name": "Java Day Istanbul 2020",
           "place": "online",
           "url": "https://javaday.istanbul/",
@@ -1024,6 +1038,7 @@
           ]
         },
         {
+          "date": "2020-05-12",
           "name": "ITAKE Unconference 2020",
           "place": "online",
           "url": "https://itakeunconf.com/",
@@ -1071,23 +1086,7 @@
       ],
       "2019": [
         {
-          "name": "JetBrains Day Istanbul 2019",
-          "place": "istanbul",
-          "spoken": "tr",
-          "talks": [
-            {
-              "title": "Slow Down To Go Faster In Software Development",
-              "video": "https://www.youtube.com/watch?v=f9YXAIwuTro",
-              "summary": "Going fast without control is the biggest enemy of software development, and only a culture that slows down efficiently builds software faster.",
-              "themes": ["craftsmanship", "quality"]
-            }
-          ],
-          "photo": {
-            "file": "2019-jetbrains-day",
-            "alt": "Lemi in a black polo shirt with a lanyard and headset microphone, talking with a slight smile on a dark stage in front of a dark backdrop with the JetBrains name cut off at the edge"
-          }
-        },
-        {
+          "date": "2019-12-07",
           "name": "TEDxTarsusAmericanCollege",
           "place": "tarsus",
           "spoken": "tr",
@@ -1102,6 +1101,24 @@
           "photo": {
             "file": "2019-tedx-tarsus",
             "alt": "Lemi on the TEDx stage, the large letters of the event name along its front edge"
+          }
+        },
+        {
+          "date": "2019-11-30",
+          "name": "JetBrains Day Istanbul 2019",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Slow Down To Go Faster In Software Development",
+              "video": "https://www.youtube.com/watch?v=f9YXAIwuTro",
+              "summary": "Going fast without control is the biggest enemy of software development, and only a culture that slows down efficiently builds software faster.",
+              "themes": ["craftsmanship", "quality"]
+            }
+          ],
+          "photo": {
+            "file": "2019-jetbrains-day",
+            "alt": "Lemi in a black polo shirt with a lanyard and headset microphone, talking with a slight smile on a dark stage in front of a dark backdrop with the JetBrains name cut off at the edge"
           }
         },
         {
@@ -1124,6 +1141,7 @@
           }
         },
         {
+          "date": "2019-11-20",
           "name": "QaCast S1E8",
           "role": "Podcast",
           "spoken": "tr",
@@ -1136,21 +1154,7 @@
           ]
         },
         {
-          "name": "Yazılımcı Sohbetleri, Çay Kahve İnsan",
-          "role": "Interview",
-          "spoken": "tr",
-          "talks": [
-            {
-              "video": "https://www.youtube.com/watch?v=VaeGtoH4dhU",
-              "themes": ["career"]
-            }
-          ],
-          "photo": {
-            "file": "2019-cay-kahve-insan",
-            "alt": "Lemi smiling in a light blue polo shirt with a clip-on microphone, in an office with glass walls, city buildings and a large potted plant behind him"
-          }
-        },
-        {
+          "date": "2019-11-02",
           "name": "Devoxx Ukraine 2019",
           "place": "kyiv",
           "spoken": "en",
@@ -1166,6 +1170,22 @@
           "photo": {
             "file": "2019-devoxx-ukraine",
             "alt": "Lemi speaking at Devoxx Ukraine 2019 beside a slide about hiring developers"
+          }
+        },
+        {
+          "date": "2019-09-10",
+          "name": "Yazılımcı Sohbetleri, Çay Kahve İnsan",
+          "role": "Interview",
+          "spoken": "tr",
+          "talks": [
+            {
+              "video": "https://www.youtube.com/watch?v=VaeGtoH4dhU",
+              "themes": ["career"]
+            }
+          ],
+          "photo": {
+            "file": "2019-cay-kahve-insan",
+            "alt": "Lemi smiling in a light blue polo shirt with a clip-on microphone, in an office with glass walls, city buildings and a large potted plant behind him"
           }
         },
         {
@@ -1188,6 +1208,7 @@
           }
         },
         {
+          "date": "2019-03-04",
           "name": "Women Software Crafters Empowerment Program, Software Craftsmanship Turkey",
           "url": "https://github.com/scturkey/WSCEP",
           "role": "10-week program",
@@ -1200,6 +1221,24 @@
       ],
       "2018": [
         {
+          "date": "2018-12-08",
+          "name": "Kesişen Yollar",
+          "role": "Interview",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Software Expertise",
+              "video": "https://www.youtube.com/watch?v=RwyG2U7GuGA",
+              "themes": ["career"]
+            }
+          ],
+          "photo": {
+            "file": "2018-kesisen-yollar",
+            "alt": "Lemi smiling at the camera on a webcam, in a heather purple shirt, white bookshelves behind him"
+          }
+        },
+        {
+          "date": "2018-12-01",
           "name": "GrowIT Conference 2018",
           "place": "novi-sad",
           "spoken": "en",
@@ -1222,23 +1261,6 @@
           "photo": {
             "file": "2018-growit",
             "alt": "Lemi wearing a speaker badge in front of the GrowIT 2018 sponsor wall in Novi Sad"
-          }
-        },
-        {
-          "date": "2018-12-08",
-          "name": "Kesişen Yollar",
-          "role": "Interview",
-          "spoken": "tr",
-          "talks": [
-            {
-              "title": "Software Expertise",
-              "video": "https://www.youtube.com/watch?v=RwyG2U7GuGA",
-              "themes": ["career"]
-            }
-          ],
-          "photo": {
-            "file": "2018-kesisen-yollar",
-            "alt": "Lemi smiling at the camera on a webcam, in a heather purple shirt, white bookshelves behind him"
           }
         },
         {
@@ -1298,6 +1320,7 @@
           }
         },
         {
+          "date": "2018-06-07",
           "name": "ITAKE Unconference 2018",
           "place": "bucharest",
           "spoken": "en",
@@ -1316,6 +1339,7 @@
           }
         },
         {
+          "date": "2018-05-20",
           "name": "PHPKonf 2018",
           "place": "istanbul",
           "spoken": "tr",
@@ -1353,6 +1377,18 @@
           }
         },
         {
+          "date": "2018-05-05",
+          "name": "Java Day Istanbul 2018",
+          "place": "istanbul",
+          "url": "https://javaday.istanbul/",
+          "spoken": "tr",
+          "photo": {
+            "file": "2018-javaday",
+            "alt": "A crowded room of attendees gathered close around a session"
+          }
+        },
+        {
+          "date": "2018-04-22",
           "name": "Kodla.co 2018",
           "place": "trabzon",
           "url": "https://kodla.co/",
@@ -1372,16 +1408,7 @@
           }
         },
         {
-          "name": "Java Day Istanbul 2018",
-          "place": "istanbul",
-          "url": "https://javaday.istanbul/",
-          "spoken": "tr",
-          "photo": {
-            "file": "2018-javaday",
-            "alt": "A crowded room of attendees gathered close around a session"
-          }
-        },
-        {
+          "date": "2018-03-31",
           "name": "Women Techmakers Istanbul 2018",
           "place": "istanbul",
           "spoken": "tr",
@@ -1469,6 +1496,7 @@
           }
         },
         {
+          "date": "2017-12-20",
           "name": "Üretim Bandı",
           "role": "Podcast",
           "spoken": "tr",
@@ -1482,6 +1510,7 @@
           ]
         },
         {
+          "date": "2017-11-26",
           "name": "DevFest Istanbul 2017",
           "place": "istanbul",
           "url": "https://devfest.istanbul/",
@@ -1536,15 +1565,27 @@
           }
         },
         {
-          "name": "Bucharest Business Summit 2017",
-          "place": "bucharest",
+          "date": "2017-06-21",
+          "name": "Devoxx Poland 2017",
+          "place": "krakow",
+          "url": "https://devoxx.pl/",
           "spoken": "en",
+          "talks": [
+            {
+              "title": "Git Anti-Patterns: How To Mess Up With Git and Love It Again",
+              "slides": "https://speakerdeck.com/lemiorhan/git-anti-patterns-how-to-mess-up-with-git-and-love-it-again",
+              "video": "https://www.youtube.com/watch?v=m3ITI7tT_Qo",
+              "summary": "How git works behind the scenes explains the anti-patterns that lose work and tangle history, and the cure: commit early, perfect later, publish once.",
+              "themes": ["git"]
+            }
+          ],
           "photo": {
-            "file": "2017-bucharest",
-            "alt": "Lemi at the lectern, a speaker card and the Java Summit logo on the screen"
+            "file": "2017-devoxx-poland",
+            "alt": "The Git Anti Patterns title slide filling the Devoxx screen, Lemi small at the lectern"
           }
         },
         {
+          "date": "2017-06-05",
           "name": "Yazılım Ofisleri, Devnot",
           "role": "Interview",
           "spoken": "tr",
@@ -1558,6 +1599,16 @@
           ]
         },
         {
+          "date": "2017-05-26",
+          "name": "Bucharest Business Summit 2017",
+          "place": "bucharest",
+          "spoken": "en",
+          "photo": {
+            "file": "2017-bucharest",
+            "alt": "Lemi at the lectern, a speaker card and the Java Summit logo on the screen"
+          }
+        },
+        {
           "date": "2017-05-12",
           "name": "İzmir Ekonomi Üniversitesi",
           "place": "izmir",
@@ -1568,6 +1619,7 @@
           }
         },
         {
+          "date": "2017-05-06",
           "name": "Java Day Istanbul 2017",
           "place": "istanbul",
           "url": "https://javaday.istanbul/",
@@ -1588,25 +1640,6 @@
           "photo": {
             "file": "2017-javaday",
             "alt": "Wide view of a hotel ballroom, Lemi on stage between two screens showing Git Anti Patterns"
-          }
-        },
-        {
-          "name": "Devoxx Poland 2017",
-          "place": "krakow",
-          "url": "https://devoxx.pl/",
-          "spoken": "en",
-          "talks": [
-            {
-              "title": "Git Anti-Patterns: How To Mess Up With Git and Love It Again",
-              "slides": "https://speakerdeck.com/lemiorhan/git-anti-patterns-how-to-mess-up-with-git-and-love-it-again",
-              "video": "https://www.youtube.com/watch?v=m3ITI7tT_Qo",
-              "summary": "How git works behind the scenes explains the anti-patterns that lose work and tangle history, and the cure: commit early, perfect later, publish once.",
-              "themes": ["git"]
-            }
-          ],
-          "photo": {
-            "file": "2017-devoxx-poland",
-            "alt": "The Git Anti Patterns title slide filling the Devoxx screen, Lemi small at the lectern"
           }
         },
         {
@@ -1680,28 +1713,6 @@
           }
         },
         {
-          "name": "Devnot",
-          "role": "Interview",
-          "spoken": "tr",
-          "talks": [
-            {
-              "title": "The Master–Apprentice Relationship in Software",
-              "video": "https://www.youtube.com/watch?v=q_AIH90dEvw",
-              "summary": "A conversation about master and apprentice in software: imitate first, then question, then surpass, while masters learn by teaching and developers own their growth.",
-              "themes": ["craftsmanship"]
-            },
-            {
-              "title": "Why Is TDD Hard to Practice?",
-              "video": "https://www.youtube.com/watch?v=pX8wsryhRKo",
-              "themes": ["testing"]
-            }
-          ],
-          "photo": {
-            "file": "2017-devnot-ustalik",
-            "alt": "Lemi smiling on a grey sofa in a purple polo shirt with a clip-on microphone, against a plain cream wall"
-          }
-        },
-        {
           "date": "2017-03-20",
           "name": "Bahçeşehir Üniversitesi",
           "place": "istanbul",
@@ -1744,6 +1755,29 @@
           }
         },
         {
+          "date": "2017-03-13",
+          "name": "Devnot",
+          "role": "Interview",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "The Master–Apprentice Relationship in Software",
+              "video": "https://www.youtube.com/watch?v=q_AIH90dEvw",
+              "summary": "A conversation about master and apprentice in software: imitate first, then question, then surpass, while masters learn by teaching and developers own their growth.",
+              "themes": ["craftsmanship"]
+            },
+            {
+              "title": "Why Is TDD Hard to Practice?",
+              "video": "https://www.youtube.com/watch?v=pX8wsryhRKo",
+              "themes": ["testing"]
+            }
+          ],
+          "photo": {
+            "file": "2017-devnot-ustalik",
+            "alt": "Lemi smiling on a grey sofa in a purple polo shirt with a clip-on microphone, against a plain cream wall"
+          }
+        },
+        {
           "name": "Gebze Geek Day 2017",
           "place": "gebze",
           "spoken": "tr",
@@ -1755,6 +1789,7 @@
       ],
       "2016": [
         {
+          "date": "2016-12-04",
           "name": "DevFest Istanbul 2016",
           "place": "istanbul",
           "url": "https://devfest.istanbul/",
@@ -1774,6 +1809,7 @@
           }
         },
         {
+          "date": "2016-11-27",
           "name": "DevFest İzmir 2016",
           "place": "izmir",
           "spoken": "tr"
@@ -1793,6 +1829,7 @@
           ]
         },
         {
+          "date": "2016-10-22",
           "name": "Global Day of Coderetreat 2016",
           "place": "istanbul",
           "url": "https://www.coderetreat.org/",
@@ -1800,21 +1837,7 @@
           "spoken": "tr"
         },
         {
-          "name": "Yönetim 2.0, Gelecekhane",
-          "spoken": "tr",
-          "talks": [
-            {
-              "title": "Agile Management: The Third Generation of Management Philosophy",
-              "video": "https://www.youtube.com/watch?v=25xGWtgfYYA",
-              "themes": ["agile"]
-            }
-          ],
-          "photo": {
-            "file": "2016-gelecekhane",
-            "alt": "Lemi in a striped shirt with a lanyard and headset microphone, talking toward the camera in front of a white wall with a grey geometric logo"
-          }
-        },
-        {
+          "date": "2016-10-15",
           "name": "Bosnia Agile Day 2016",
           "place": "sarajevo",
           "role": "Keynote",
@@ -1851,6 +1874,22 @@
           }
         },
         {
+          "date": "2016-09-29",
+          "name": "Yönetim 2.0, Gelecekhane",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Agile Management: The Third Generation of Management Philosophy",
+              "video": "https://www.youtube.com/watch?v=25xGWtgfYYA",
+              "themes": ["agile"]
+            }
+          ],
+          "photo": {
+            "file": "2016-gelecekhane",
+            "alt": "Lemi in a striped shirt with a lanyard and headset microphone, talking toward the camera in front of a white wall with a grey geometric logo"
+          }
+        },
+        {
           "date": "2016-06-02",
           "name": "Agile Talks, Agile Türkiye",
           "place": "ankara",
@@ -1869,23 +1908,6 @@
           }
         },
         {
-          "name": "Agile Middle East 2016",
-          "place": "dubai",
-          "spoken": "en",
-          "talks": [
-            {
-              "title": "Let the Elephants Leave the Room: Tips for Making Development Life Leaner",
-              "video": "https://www.youtube.com/watch?v=osU3UR9Y_o0",
-              "summary": "Hard work that produces little is a hamster wheel of waste, hiding in code, offices, processes and management, and removing it makes development leaner.",
-              "themes": ["lean"]
-            }
-          ],
-          "photo": {
-            "file": "2016-agile-middle-east",
-            "alt": "Lemi in a blue shirt and lanyard gesturing with both arms beside a flipchart, the Agile ME logo in the corner and the audience in front"
-          }
-        },
-        {
           "date": "2016-04-12",
           "name": "Agile Buluşmalar, Agile Türkiye",
           "spoken": "tr",
@@ -1901,6 +1923,24 @@
           "photo": {
             "file": "2016-agile-bulusmalar",
             "alt": "Lemi in a striped shirt standing in front of a slide titled Manage Your Brand, beside an AgileTurkey banner"
+          }
+        },
+        {
+          "date": "2016-03-19",
+          "name": "Agile Middle East 2016",
+          "place": "dubai",
+          "spoken": "en",
+          "talks": [
+            {
+              "title": "Let the Elephants Leave the Room: Tips for Making Development Life Leaner",
+              "video": "https://www.youtube.com/watch?v=osU3UR9Y_o0",
+              "summary": "Hard work that produces little is a hamster wheel of waste, hiding in code, offices, processes and management, and removing it makes development leaner.",
+              "themes": ["lean"]
+            }
+          ],
+          "photo": {
+            "file": "2016-agile-middle-east",
+            "alt": "Lemi in a blue shirt and lanyard gesturing with both arms beside a flipchart, the Agile ME logo in the corner and the audience in front"
           }
         },
         {
@@ -1941,6 +1981,7 @@
       ],
       "2015": [
         {
+          "date": "2015-11-14",
           "name": "Global Day of Coderetreat 2015",
           "place": "istanbul",
           "url": "https://www.coderetreat.org/",
@@ -1948,6 +1989,7 @@
           "spoken": "tr"
         },
         {
+          "date": "2015-10-01",
           "name": "Agile Tour Kaunas 2015",
           "place": "kaunas",
           "spoken": "en",
@@ -1984,6 +2026,7 @@
           }
         },
         {
+          "date": "2015-07-26",
           "name": "PHPKonf 2015",
           "place": "istanbul",
           "url": "https://phpkonf.org/",
@@ -2027,6 +2070,7 @@
           ]
         },
         {
+          "date": "2015-04-17",
           "name": "Bilkent Mobile Days 2015",
           "place": "ankara",
           "spoken": "tr",
@@ -2066,6 +2110,22 @@
           }
         },
         {
+          "date": "2014-12-06",
+          "name": "DevFest Istanbul 2014",
+          "place": "istanbul",
+          "url": "https://devfest.istanbul/",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Software Craftsmanship: Building A Culture for The Future",
+              "video": "https://www.youtube.com/watch?v=Dy1EVPaZtYg",
+              "summary": "Culture, not individuals, makes teams succeed: software craftsmanship as a culture where developers build themselves as well as software.",
+              "themes": ["craftsmanship", "culture"]
+            }
+          ]
+        },
+        {
+          "date": "2014-12-05",
           "name": "Özgür Web Teknolojileri Günü 2014",
           "place": "istanbul",
           "spoken": "tr",
@@ -2125,6 +2185,20 @@
           }
         },
         {
+          "date": "2014-09-20",
+          "name": "GDG Istanbul meetup",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "A Gentle Introduction to Micro Services: From Theory into Practice",
+              "slides": "https://speakerdeck.com/lemiorhan/a-gentle-introduction-to-micro-services-from-theory-into-practice",
+              "summary": "Microservices as independently deployable services around business capabilities, traced from the layered monolith, with the teams, tooling and caution they demand.",
+              "themes": ["architecture"]
+            }
+          ]
+        },
+        {
           "date": "2014-09-13",
           "name": "BMO seminar",
           "place": "istanbul",
@@ -2158,33 +2232,6 @@
           }
         },
         {
-          "name": "DevFest Istanbul 2014",
-          "place": "istanbul",
-          "url": "https://devfest.istanbul/",
-          "spoken": "tr",
-          "talks": [
-            {
-              "title": "Software Craftsmanship: Building A Culture for The Future",
-              "video": "https://www.youtube.com/watch?v=Dy1EVPaZtYg",
-              "summary": "Culture, not individuals, makes teams succeed: software craftsmanship as a culture where developers build themselves as well as software.",
-              "themes": ["craftsmanship", "culture"]
-            }
-          ]
-        },
-        {
-          "name": "GDG Istanbul meetup",
-          "place": "istanbul",
-          "spoken": "tr",
-          "talks": [
-            {
-              "title": "A Gentle Introduction to Micro Services: From Theory into Practice",
-              "slides": "https://speakerdeck.com/lemiorhan/a-gentle-introduction-to-micro-services-from-theory-into-practice",
-              "summary": "Microservices as independently deployable services around business capabilities, traced from the layered monolith, with the teams, tooling and caution they demand.",
-              "themes": ["architecture"]
-            }
-          ]
-        },
-        {
           "date": "2014-05-04",
           "name": "PHPIst 2014",
           "place": "istanbul",
@@ -2204,6 +2251,7 @@
           }
         },
         {
+          "date": "2014-03-26",
           "name": "Kodcu.com webinar",
           "place": "online",
           "spoken": "tr",
@@ -2220,6 +2268,7 @@
       ],
       "2013": [
         {
+          "date": "2013-11-02",
           "name": "DevFest Istanbul 2013",
           "place": "istanbul",
           "url": "https://devfest.istanbul/",
@@ -2257,18 +2306,9 @@
           }
         },
         {
-          "name": "Agile Talks, Agile Türkiye",
-          "place": "ankara",
-          "spoken": "tr",
-          "talks": [
-            {
-              "title": "GMO'less Software Development Practices",
-              "slides": "https://speakerdeck.com/lemiorhan/gmoless-software-development-practices",
-              "video": "https://www.youtube.com/watch?v=TxJo4O9uHZ8",
-              "summary": "Projects fail because software is built against its own nature; agility and extreme programming practices are how to build it naturally.",
-              "themes": ["agile", "craftsmanship"]
-            }
-          ]
+          "date": "2013-09-25",
+          "name": "International Workshop on Agile Approaches 2013",
+          "spoken": "tr"
         },
         {
           "date": "2013-06-14",
@@ -2285,6 +2325,21 @@
             "file": "2013-yapikredi",
             "alt": "Rows of empty colourful chairs facing two screens that show the title slide The Elephant in the Room: Motivation, a lectern with a laptop on the left"
           }
+        },
+        {
+          "date": "2013-06-13",
+          "name": "Agile Talks, Agile Türkiye",
+          "place": "ankara",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "GMO'less Software Development Practices",
+              "slides": "https://speakerdeck.com/lemiorhan/gmoless-software-development-practices",
+              "video": "https://www.youtube.com/watch?v=TxJo4O9uHZ8",
+              "summary": "Projects fail because software is built against its own nature; agility and extreme programming practices are how to build it naturally.",
+              "themes": ["agile", "craftsmanship"]
+            }
+          ]
         },
         {
           "date": "2013-03-23",
@@ -2318,10 +2373,6 @@
             "file": "2013-marmara-alumni",
             "alt": "Three panelists seated at a table below a projected slide that reads CSE Club Mezun Sohbetleri and names Hasan Ünal, Onur Karadeli and Lemi Orhan Ergin, students in the foreground"
           }
-        },
-        {
-          "name": "International Workshop on Agile Approaches 2013",
-          "spoken": "tr"
         }
       ],
       "2012": [
@@ -2386,6 +2437,7 @@
           ]
         },
         {
+          "date": "2012-05-18",
           "name": "Marmara University, Faculty of Engineering",
           "place": "istanbul",
           "spoken": "tr",
