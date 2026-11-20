@@ -201,7 +201,22 @@
               "summary": "A conversation about developers who own product problems, not just technical ones, and why products, unlike projects, are measured by quality rather than deadlines.",
               "themes": ["product", "career"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2026-devnot-podcast",
+            "alt": "Podcast cover on a blue background: round photos of Öykü Kurtgöz and Lemi above the episode title and the Devnot logo"
+          }
+        },
+        {
+          "date": "2026-01-30",
+          "name": "Devnot Türkiye Yazılım Sektörü 2026 Raporu",
+          "place": "istanbul",
+          "role": "Opening talk",
+          "spoken": "tr",
+          "photo": {
+            "file": "2026-devnot-rapor",
+            "alt": "Lemi with a handheld microphone in front of a seated audience, the opening talk slide with his name and photo on the screen behind"
+          }
         },
         {
           "date": "2026-01-08",
@@ -338,7 +353,11 @@
               "summary": "Was agile pushed in the wrong direction soon after the manifesto was written?",
               "themes": ["agile"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2025-tech-leaders",
+            "alt": "Lemi with a headset microphone speaking to a hotel ballroom of seated attendees, a Devnot banner behind him and an agile slide on the stage monitor"
+          }
         }
       ],
       "2024": [
