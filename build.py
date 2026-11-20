@@ -273,6 +273,19 @@ def block_stages(b, page):
             + ['</dl>'])
 
 
+def block_by_year(b, page):
+    out = ['<dl class="by-year">']
+    for group in b['groups']:
+        out.append('  <div>')
+        out.append('    <dt>{}</dt>'.format(text(group['year'])))
+        out.append('    <dd>')
+        out += indent(points(group['items']), 6)
+        out.append('    </dd>')
+        out.append('  </div>')
+    out.append('</dl>')
+    return out
+
+
 def block_latest_talks(b, page):
     talks_page = Page('talks', load('talks'), page.site)
     every_talk = ((year, ev, t)
@@ -325,6 +338,7 @@ BLOCKS = {
     'stage-photo': block_stage_photo,
     'bio': block_bio,
     'stages': block_stages,
+    'by-year': block_by_year,
     'latest-talks': block_latest_talks,
 }
 

@@ -749,6 +749,58 @@ class BuiltSite(unittest.TestCase):
                 seen += 1
         self.assertGreaterEqual(seen, 2)
 
+    def test_by_year_lists_every_item_under_its_year_newest_first(self):
+        got_on = {}
+        for name, tree in self.trees.items():
+            blocks = blocks_of(read_json(ROOT, 'content', name + '.json'), 'by-year')
+            rendered = tree.find(lambda n: n.tag == 'dl' and 'by-year' in n.classes())
+            self.assertEqual(len(rendered), len(blocks), name)
+            for block, dl in zip(blocks, rendered):
+                rows = [c for c in dl.children if isinstance(c, Node)]
+                self.assertEqual({row.tag for row in rows}, {'div'}, name)
+                got = [(row.find(lambda n: n.tag == 'dt')[0].all_text(),
+                        [(li.find(lambda n: n.tag == 'strong')[0].all_text(), li.find(lambda n: n.tag == 'span')[0].all_text())
+                         for li in row.find(lambda n: n.tag == 'li')])
+                       for row in rows]
+                self.assertEqual(got, [(g['year'], [(plain(i['title']), plain(i['text'])) for i in g['items']])
+                                       for g in block['groups']], name)
+                years = [int(year) for year, _ in got]
+                self.assertEqual(years, sorted(set(years), reverse=True), name)
+                got_on.setdefault(name, []).extend(got)
+        honors, = self.trees['career'].find(lambda n: n.attrs.get('id') == 'honors')
+        self.assertEqual(honors.find(lambda n: n.tag == 'h2')[0].all_text(), 'Honors and awards')
+        self.assertEqual(len(honors.find(has_class('by-year'))), 1)
+        self.assertIn(('1999', ["Dean's Award", 'First Prize, Quality Improvement Teams Contest',
+                                'Second Prize, Quality Improvement Teams Contest', "Dean's Award"]),
+                      [(year, [title for title, _ in items]) for year, items in got_on['career']])
+
+    def test_by_year_puts_the_year_in_the_stages_year_column_with_a_rule_between_years(self):
+        with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
+            css = f.read()
+        self.assertTrue(self.trees['career'].find(lambda n: n.tag == 'dl' and n.classes() == ['by-year']))
+        stages = css_values(css, '.stages > div', 'grid-template-columns')
+        self.assertEqual(len(stages), 1, stages)
+        self.assertEqual(css_values(css, '.by-year > div', 'display'), ['grid'])
+        self.assertEqual(css_values(css, '.by-year > div', 'grid-template-columns'), stages)
+        self.assertEqual(css_values(css, '.by-year > div', 'border-top'), ['1px solid var(--rule)'])
+        self.assertEqual(css_values(css, '.by-year > div:first-child', 'border-top'), ['0'])
+
+    def test_facts_groups_keep_the_same_gap_in_one_column_and_in_two(self):
+        with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
+            css = f.read()
+        groups = blocks_of(read_json(ROOT, 'content', 'career.json'), 'facts')[0]['groups']
+        self.assertGreater(len(groups), 2, 'with two groups or fewer the two-column grid has no second row to space')
+        two = re.findall(r'@media \(min-width: ([\d.]+)rem\) \{\s*\.facts \{[^}]*row-gap: ([^;]+);', css)
+        one = re.findall(r'@media \(max-width: ([\d.]+)rem\) \{\s*\.facts > div \+ div \{[^}]*margin-top: ([^;]+);', css)
+        self.assertEqual(len(two), 1, two)
+        self.assertEqual(len(one), 1, one)
+        (wide, row_gap), (narrow, margin) = two[0], one[0]
+        self.assertEqual(row_gap, margin)
+        self.assertTrue(0 < float(wide) - float(narrow) < 0.1, (wide, narrow))
+        self.assertEqual(css_values(css, '.facts', 'row-gap'), [row_gap])
+        self.assertEqual(css_values(css, '.facts > div + div', 'margin-top'), [margin])
+        self.assertEqual([g.split()[0] for g in css_values(css, '.facts', 'gap')], ['0'])
+
     def test_flags_point_at_files_that_exist(self):
         seen = 0
         for name, tree in self.trees.items():

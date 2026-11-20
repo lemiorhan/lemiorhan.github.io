@@ -1,6 +1,6 @@
 {
   "title": "Career, Lemi Orhan Ergin",
-  "description": "Positions held by Lemi Orhan Ergin since 2001, from Sony to Craftgate, with education and certifications.",
+  "description": "Positions held by Lemi Orhan Ergin since 2001, from Sony to Craftgate, with education, certifications, honors and awards.",
   "head": {
     "heading": "Career",
     "cmd": "git log --graph",
@@ -60,28 +60,74 @@
               ]
             },
             {
-              "heading": "Honors and awards",
-              "items": [
-                { "title": "Second place, Inter-High School Basketball Championship", "text": "High school basketball team, 1994" },
-                { "title": "TÜBİTAK National Mathematics Project Competition", "text": "Took part with the project \"The computation of the unique formula of the divisibility rules of all natural numbers\", high school, 1996" },
-                { "title": "High Honour Student and Student Representative", "text": "High school, 1996" },
-                { "title": "Ranked in the first 1,000", "text": "Among 1.3 million candidates in the National University Entrance Examination, 1997" },
-                { "title": "Dean's Award", "text": "For TQM activities in the faculty, Marmara University, 1998" },
-                { "title": "Dean's Award", "text": "For TQM activities in the faculty, Marmara University, 1999" },
-                { "title": "First Prize, Quality Improvement Teams Contest", "text": "Marmara University, 1999" },
-                { "title": "Second Prize, Quality Improvement Teams Contest", "text": "Marmara University, 1999" },
-                { "title": "Dean's Award", "text": "For the work on the way to the EFQM 2000 finals, Marmara University, 1999" },
-                { "title": "Speaker, \"Quality and Ergonomics in Education\" symposium", "text": "KalDer, the Turkish Quality Association, 11 May 2000. Presented the work of Solak İnisiyatif, our university team, on improving how left-handed students sit at lecture-hall desks." },
-                { "title": "Speaker, \"Quality Improvement Teams\" training for medical institutions", "text": "TÜSSİDE, 2001" },
-                { "title": "Ranked in the first 1,000", "text": "Among 130,000 candidates in the National Postgraduate Education Entrance Exam, 2002" }
-              ]
-            },
-            {
               "heading": "Languages",
               "items": [
                 { "title": "Turkish", "text": "Native" },
                 { "title": "English", "text": "Professional working proficiency" },
                 { "title": "German", "text": "Elementary" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "honors",
+      "heading": "Honors and awards",
+      "blocks": [
+        {
+          "type": "by-year",
+          "groups": [
+            {
+              "year": "2002",
+              "items": [
+                { "title": "Ranked in the first 1,000", "text": "Among 130,000 candidates in the National Postgraduate Education Entrance Exam" }
+              ]
+            },
+            {
+              "year": "2001",
+              "items": [
+                { "title": "Speaker, \"Quality Improvement Teams\" training for medical institutions", "text": "TÜSSİDE" }
+              ]
+            },
+            {
+              "year": "2000",
+              "items": [
+                { "title": "Speaker, \"Quality and Ergonomics in Education\" symposium", "text": "KalDer, the Turkish Quality Association, 11 May. Presented the work of Solak İnisiyatif, our university team, on improving how left-handed students sit at lecture-hall desks." }
+              ]
+            },
+            {
+              "year": "1999",
+              "items": [
+                { "title": "Dean's Award", "text": "For TQM activities in the faculty, Marmara University" },
+                { "title": "First Prize, Quality Improvement Teams Contest", "text": "Marmara University" },
+                { "title": "Second Prize, Quality Improvement Teams Contest", "text": "Marmara University" },
+                { "title": "Dean's Award", "text": "For the work on the way to the EFQM 2000 finals, Marmara University" }
+              ]
+            },
+            {
+              "year": "1998",
+              "items": [
+                { "title": "Dean's Award", "text": "For TQM activities in the faculty, Marmara University" }
+              ]
+            },
+            {
+              "year": "1997",
+              "items": [
+                { "title": "Ranked in the first 1,000", "text": "Among 1.3 million candidates in the National University Entrance Examination" }
+              ]
+            },
+            {
+              "year": "1996",
+              "items": [
+                { "title": "TÜBİTAK National Mathematics Project Competition", "text": "Took part with the project \"The computation of the unique formula of the divisibility rules of all natural numbers\", high school" },
+                { "title": "High Honour Student and Student Representative", "text": "High school" }
+              ]
+            },
+            {
+              "year": "1994",
+              "items": [
+                { "title": "Second place, Inter-High School Basketball Championship", "text": "High school basketball team" }
               ]
             }
           ]
