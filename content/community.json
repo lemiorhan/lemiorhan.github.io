@@ -18,19 +18,116 @@
               "title": "Software Craftsmanship Turkey",
               "url": "https://kommunity.com/software-craftsmanship-turkey",
               "meta": "Founder, 2014 – now",
-              "text": "A community for developers who care about their craft. More than 200 free meetups so far, and code retreats, including the Global Day of Coderetreat, which I have facilitated since 2013."
+              "text": "A community for developers who care about their craft. More than 200 free meetups so far, and code retreats, including the Global Day of Coderetreat, which I have facilitated since 2013. In 2015 it ran CraftSummit, the first software craftsmanship conference in Türkiye."
             },
             {
               "title": "Agile Turkey",
               "url": "https://www.agileturkey.org",
               "meta": "Community lead & product owner, 2014 – 2016",
-              "text": "More than 50 free public meetups (Agile Buluşmalar) in two years. Product owner and organization lead of Agile Turkey Summit 2015 and 2016 and CraftSummit 2015."
+              "text": "Ran its two meetup.com groups, Agile Buluşmalar and Agile Talks. Product owner and organization lead of Agile Turkey Summit 2015 and 2016."
             },
             {
               "title": "Translations",
               "meta": "Turkish",
               "text": "Part of the team that translated the [Agile Manifesto](https://agilemanifesto.org/iso/tr/manifesto.html). Turkish translator of the [Software Craftsmanship Manifesto](https://manifesto.softwarecraftsmanship.org/#/tr), the [SOA Manifesto](http://www.soa-manifesto.org/default_turkish.html) and the Disciplined Agile Manifesto. One of the translators of the Nexus Guide, Scrum.org's guide to scaling Scrum, in 2016."
             }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scturkey",
+      "heading": "SCTurkey",
+      "cmd": "git log --stat",
+      "blocks": [
+        "I founded Software Craftsmanship Turkey (SCTurkey) on 7 March 2014, the fifth birthday of the Manifesto for Software Craftsmanship, as a non-profit, open community.[^1] By September 2016 [Erkan Erol](https://www.linkedin.com/in/erkanerol/) was organizing it with me,[^2] and by April 2019 [Aykut Bulgu](https://www.linkedin.com/in/mabulgu/) was too.[^3] Kommunity lists the three of us as its organizers today.[^4] The meetups ran on meetup.com from 2015 and moved to Kommunity in 2019. Kommunity also holds the meetup.com events, so the numbers below count the meetups that have an event page there.[^4][^5]",
+        {
+          "type": "infobox",
+          "items": [
+            { "label": "Event pages", "text": "62 meetups held with an event page, 2015 – 2021[^4]" },
+            { "label": "Rhythm", "text": "Wednesday evenings, mostly two weeks apart: 47 of the 52 meetups in 2017 – 2019 were on a Wednesday[^4]" },
+            { "label": "Formats", "text": "Talks, coding dojos and TDD katas, a Clean Code reading group, a panel, and the Global Day of Coderetreat every November from 2017 to 2019[^4]" },
+            { "label": "RSVPs", "text": "130 for a typical meetup (the median), 244 at most in person and 1,142 online; these are RSVPs, not head counts[^4]" },
+            { "label": "Members", "text": "4,092 on Kommunity in November 2026;[^4] 5,098 on meetup.com in October 2019[^5]" }
+          ]
+        },
+        { "type": "h3", "text": "Event pages by year" },
+        {
+          "type": "stages",
+          "items": [
+            { "year": "2015", "text": "1 meetup, a coding dojo with Alvaro Garcia at İTÜ ARI Teknokent, two days after CraftSummit" },
+            { "year": "2016", "text": "7, at İTÜ ARI Teknokent, Microsoft Türkiye, and KWORKS with iyzico" },
+            { "year": "2017", "text": "19, 15 of them at sahibinden.com, from May to December" },
+            { "year": "2018", "text": "17, 16 of them at Akasya AVM, from March to December" },
+            { "year": "2019", "text": "16, 15 of them at Koçfinans, from March to December" },
+            { "year": "2020", "text": "None" },
+            { "year": "2021", "text": "2, online" }
+          ]
+        },
+        { "type": "h3", "text": "CraftSummit 2015" },
+        "SCTurkey ran CraftSummit 2015, the first software craftsmanship conference in Türkiye.[^6] There has not been another one since. I was its product owner and organization lead. ACM, the company where I was a managing partner, was the organizing company.[^6]",
+        {
+          "type": "infobox",
+          "items": [
+            { "label": "When", "text": "30 May 2015, a one-day summit[^6]" },
+            { "label": "Where", "text": "Bahçeşehir University, Fazıl Say Conference Room, Beşiktaş, Istanbul[^6]" },
+            { "label": "Seats", "text": "300[^6]" },
+            { "label": "Talks", "text": "Sandro Mancuso, Alexandru Bolboaca and Alvaro Garcia in English; Özcan Acar, Armağan Amcalar and I in Turkish; J. B. Rainsberger on video[^6]" },
+            { "label": "My talk", "text": "[Unleashed Power Behind The Myths: Pair Programming](https://speakerdeck.com/lemiorhan/unleashed-power-behind-the-myths-pair-programming), in Turkish, the last session of the day; it is on the [Talks page](../talks/) too[^6]" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "agile-turkey",
+      "heading": "Agile Turkey",
+      "cmd": "git log --oneline",
+      "blocks": [
+        "Agile Turkey started Agile Buluşmalar in 2012 and held it every month: not a seminar but a conversation around a table, led by one person, with no slides.[^7] In 2015 and 2016 I ran its two meetup.com groups: Agile Buluşmalar in the evenings, and Agile Talks mostly in the afternoon.[^8][^9]",
+        {
+          "type": "infobox",
+          "items": [
+            { "label": "Agile Buluşmalar", "text": "30 on the group's past-meetups counter: 15 in 2015 and 15 in 2016, at least one of them cancelled[^8][^10]" },
+            { "label": "Agile Talks", "text": "7 meetups: 6 in 2015 and 1 in 2016[^9]" },
+            { "label": "Rhythm", "text": "Agile Buluşmalar on Tuesdays at 19:30; in the first half of 2016 mostly every two weeks, at İTÜ ARI Teknokent[^8][^11]" },
+            { "label": "October 2015", "text": "8 meetups in four days, 5 – 8 October, most of them The Agile Week of Agile Turkey Summit 2015[^7][^9][^12]" },
+            { "label": "Guests", "text": "Paul Ellarby online in August 2015;[^9] Michael Feathers in October and Dave Farley in December 2015, both with Istanbul Coders[^7][^8]" },
+            { "label": "Members", "text": "1,422 in Agile Buluşmalar in July 2016;[^11] 930 in Agile Talks in November 2016[^9]" }
+          ]
+        },
+        { "type": "h3", "text": "Agile Turkey Summit" },
+        "I was the product owner of Agile Turkey Summit for two years, 2015 and 2016. The 2016 summit's page names me as Agile Turkey's community lead and the summit's product owner.[^13] The summit had started in 2013, and 2016 was its fourth year.[^13]",
+        {
+          "type": "infobox",
+          "items": [
+            { "label": "2015", "text": "9 October, at Grand Cevahir Convention Center, Şişli, inside The Agile Week of trainings, workshops and meetups, 5 – 11 October.[^14] More than 600 people from 113 companies, 3 keynotes and 4 parallel tracks.[^13] Michael Feathers, Jurgen Appelo, Ahmed Sidky and Jonathan Rasmusson were among the speakers[^14]" },
+            { "label": "2016", "text": "6 October, at Wyndham Grand Levent, Şişli. The theme was “End to End Agile Mind Shift”, in four parallel tracks: DevOps, Agile in a Nutshell, The Mind Shift and Software Craftsmanship. Arie van Bennekum, a co-author of the Agile Manifesto, and Dave Farley were among the speakers, and the tickets sold out[^13]" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "references",
+      "heading": "References",
+      "blocks": [
+        {
+          "type": "sources",
+          "cited": true,
+          "items": [
+            "[Software Craftsmanship Turkey, About](https://web.archive.org/web/20161114202809/http://www.meetup.com/Software-Craftsmanship-Turkey/about/), meetup.com, archived 14 November 2016: the founding date",
+            "[Software Craftsmanship Turkey](https://web.archive.org/web/20160906201141/http://www.meetup.com/Software-Craftsmanship-Turkey/), meetup.com, archived 6 September 2016: the organizers",
+            "[Yazılım Ustalığında Çırak Olmak](https://web.archive.org/web/20190501020047/https://www.meetup.com/Software-Craftsmanship-Turkey/events/260696392/?utm_campaign=dijital-urunler&utm_medium=email&utm_source=Revue%20newsletter), meetup.com, 30 April 2019, archived 1 May 2019: its hosts, the organizer and two co-organizers",
+            "[Software Craftsmanship Turkey](https://kommunity.com/software-craftsmanship-turkey), Kommunity, read through its public API on 20 November 2026: the organizers, and 64 event pages, one of them a cancelled meetup and one a call for papers",
+            "[Software Craftsmanship Turkey](https://web.archive.org/web/20191019165323/https://www.meetup.com/software-craftsmanship-turkey/), meetup.com, archived 19 October 2019: 56 past meetups, the same as Kommunity's pages up to that day",
+            "[CraftSummit 2015](https://web.archive.org/web/20150609085952/http://www.craftsummit.org/), craftsummit.org, archived 9 June 2015: “First International Summit about Software Craftsmanship in Turkey”, the date, venue, seats, schedule and organizing company",
+            "[Agile Buluşmalar](https://web.archive.org/web/20151102090340/http://www.meetup.com/Agile-Bulusmalar/), meetup.com, archived 2 November 2015: the group's description, 13 past meetups, and Michael Feathers's meetup with Istanbul Coders",
+            "[Agile Buluşmalar](https://web.archive.org/web/20160131031939/http://www.meetup.com/Agile-Bulusmalar/), meetup.com, archived 31 January 2016: the organizers, 17 past meetups with two of them in January 2016, the Tuesday meetups at İTÜ ARI Teknokent, and Dave Farley's meetup with Istanbul Coders",
+            "[Agile Talks](https://web.archive.org/web/20161117215336/http://www.meetup.com/Agile-talks/), meetup.com, archived 17 November 2016: the organizer, 7 past meetups with the last in June 2016, their times, and the member count",
+            "[Agile Buluşmalar](https://web.archive.org/web/20170420142525/https://www.meetup.com/Agile-Bulusmalar/), meetup.com, archived 20 April 2017: 33 past meetups, three of them in 2017",
+            "[Agile Buluşmalar](https://web.archive.org/web/20160705154425/http://www.meetup.com/Agile-Bulusmalar/), meetup.com, archived 5 July 2016: the meetups of March to May 2016 and the member count",
+            "[Agile Buluşmalar](https://web.archive.org/web/20150902223621/http://www.meetup.com/Agile-Bulusmalar/), meetup.com, archived 2 September 2015: the meetups planned for The Agile Week",
+            "[Agile Turkey Summit 2016](https://web.archive.org/web/20161009032026/http://www.summit.agileturkey.org/), summit.agileturkey.org, archived 9 October 2016: my role, the date, theme, tracks, venue and speakers, the attendance of the 2015 summit, and the sold-out tickets",
+            "[Agile Turkey Summit 2015](https://web.archive.org/web/20151007083748/http://www.summit.agileturkey.org/), summit.agileturkey.org, archived 7 October 2015: the date, venue, speakers and The Agile Week"
           ]
         }
       ]
