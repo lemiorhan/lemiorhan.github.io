@@ -1189,6 +1189,18 @@
           }
         },
         {
+          "date": "2019-08-31",
+          "name": "mySEV Coding Bootcamp 2019",
+          "url": "https://www.capital.com.tr/sirket-panosu/sirket-panosu-haberleri/turkiyede-lise-seviyesinde-ilk-kodlama-kampi-acildi",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Professional Software Developer",
+              "themes": ["career", "craftsmanship"]
+            }
+          ]
+        },
+        {
           "name": "Kodla.co 2019",
           "place": "trabzon",
           "spoken": "tr",
@@ -2514,6 +2526,20 @@
               "slides": "https://speakerdeck.com/lemiorhan/professional-software-development-practices-and-ethics",
               "summary": "Software failures cost billions, so good software needs professional developers who combine agile and craftsmanship practices with a code of ethics.",
               "themes": ["ethics", "craftsmanship"]
+            }
+          ]
+        }
+      ],
+      "2000": [
+        {
+          "date": "2000-05-11",
+          "name": "Quality and Ergonomics in Education Symposium, KalDer",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Improving the Seating Ergonomics of Left-Handed Students",
+              "summary": "The work of Solak İnisiyatif, our student team at Marmara University, on improving how left-handed students sit at their desks.",
+              "themes": ["quality"]
             }
           ]
         }
