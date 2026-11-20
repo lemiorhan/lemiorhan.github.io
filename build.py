@@ -244,10 +244,32 @@ def block_toc(b, page):
     return out
 
 
-def block_mail(b, page):
-    return ['<p class="mail"><a class="mail-link" data-user="{u}" data-domain="{d}" href="#main">{u}'
-            '<span aria-hidden="true">@</span><span class="sr-only">{at}</span>{d}</a></p>'.format(
-                u=attr(b['user']), d=attr(b['domain']), at=text(b['at']))]
+WEB3FORMS = 'https://api.web3forms.com/submit'
+HCAPTCHA = 'https://js.hcaptcha.com/1/api.js?recaptchacompat=off'
+# Web3Forms verifies the captcha of a free-plan form against this shared hCaptcha sitekey, not one of ours.
+WEB3FORMS_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2'
+UUID = re.compile(r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', re.I)
+FORM_STATUS = ('captcha', 'sending', 'sent', 'failed')
+
+
+def block_form(b, page):
+    key = b.get('access_key')
+    if not isinstance(key, str) or not UUID.fullmatch(key):
+        page.fail('the form block needs the Web3Forms access_key of the form, a UUID; it has {!r}'.format(key))
+    labels = b['labels']
+    status = ''.join(' data-{}="{}"'.format(k, attr(b['status'][k])) for k in FORM_STATUS)
+    return ['<form class="contact-form" action="{}" method="post"{} hidden>'.format(WEB3FORMS, status),
+            '  <input type="hidden" name="access_key" value="{}">'.format(attr(key)),
+            '  <input type="hidden" name="subject" value="{}">'.format(attr(b['subject'])),
+            '  <input type="hidden" name="from_name" value="{}">'.format(attr(b['from_name'])),
+            '  <label>{}<input type="text" name="name" autocomplete="name" required></label>'.format(text(labels['name'])),
+            '  <label>{}<input type="email" name="email" autocomplete="email" required></label>'.format(text(labels['email'])),
+            '  <label>{}<textarea name="message" rows="7" required></textarea></label>'.format(text(labels['message'])),
+            '  <div class="h-captcha" data-sitekey="{}"></div>'.format(WEB3FORMS_SITEKEY),
+            '  <button class="send" type="submit">{}</button>'.format(text(b['submit'])),
+            '  <p class="form-status" role="status"></p>',
+            '</form>',
+            '<script src="{}" async defer></script>'.format(attr(HCAPTCHA))]
 
 
 def block_stage_photo(b, page):
@@ -334,7 +356,7 @@ BLOCKS = {
     'infobox': block_infobox,
     'contents': block_contents,
     'toc': block_toc,
-    'mail': block_mail,
+    'form': block_form,
     'stage-photo': block_stage_photo,
     'bio': block_bio,
     'stages': block_stages,

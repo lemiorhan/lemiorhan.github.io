@@ -1,8 +1,8 @@
 'use strict';
 
-// A DOM double for tests/git_game_dom_cli.js, tests/archive_dom_cli.js and
-// tests/maze_game_dom_cli.js, written by hand for what assets/git-game.js, the year archive in
-// assets/site.js and assets/maze-game.js use. There is no layout: every box measures 0 unless a
+// A DOM double for tests/git_game_dom_cli.js, tests/archive_dom_cli.js, tests/contact_dom_cli.js and
+// tests/maze_game_dom_cli.js, written by hand for what assets/git-game.js, the year archive and the
+// contact form in assets/site.js and assets/maze-game.js use. There is no layout: every box measures 0 unless a
 // driver places it on screen through `element._.rect`, and every scroll is only recorded, as is
 // each textContent write on an element, in `element._.writes`, the way a live region hears it. There is
 // no drawing either: a canvas gives no context, as in a browser that cannot make one. Reading,
@@ -331,11 +331,27 @@ class Element extends FakeNode {
     return strict({ x: 0, y: 0, width: 0, height: 0 }, 'SVGRect');
   }
 
-  get value() { only(this, ['input'], 'value'); return this._.value || ''; }
+  // Until something writes it, a field holds its default: the value attribute of an <input>, the
+  // text of a <textarea>. reset() on its form brings that default back.
+  get value() {
+    only(this, ['input', 'textarea'], 'value');
+    if (has(this._, 'value')) return this._.value;
+    return this._.tag === 'textarea' ? this.textContent : this.getAttribute('value') || '';
+  }
   set value(v) {
-    only(this, ['input'], 'value');
+    only(this, ['input', 'textarea'], 'value');
     this._.value = String(v);
     this._.selStart = this._.selEnd = this._.value.length;
+  }
+  get disabled() { only(this, ['button', 'input', 'textarea'], 'disabled'); return this.hasAttribute('disabled'); }
+  set disabled(value) {
+    only(this, ['button', 'input', 'textarea'], 'disabled');
+    if (value) this.setAttribute('disabled', '');
+    else this.removeAttribute('disabled');
+  }
+  reset() {
+    only(this, ['form'], 'reset');
+    this.querySelectorAll('input, textarea').forEach(function (field) { delete field._.value; });
   }
   get selectionStart() { only(this, ['input'], 'selectionStart'); return this._.selStart || 0; }
   get selectionEnd() { only(this, ['input'], 'selectionEnd'); return this._.selEnd || 0; }
@@ -437,7 +453,7 @@ function fire(target, type, init) {
   return { prevented: prevented, handled: handled };
 }
 
-// options: {narrow, reduceMotion, dark, storage, location: {origin, pathname}, document?}.
+// options: {narrow, reduceMotion, dark, storage, location: {origin, pathname}, document?, hcaptcha?}.
 function createWindow(options) {
   var media = {
     '(max-width: 40rem)': !!options.narrow,
@@ -455,6 +471,7 @@ function createWindow(options) {
     get GitEngine() { return engine; },
     set GitEngine(value) { engine = value; },
     get localStorage() { return options.storage; },
+    get hcaptcha() { return options.hcaptcha; },
     get location() { return location; },
     get document() {
       if (!options.document) throw new Error('fake DOM: window has no document');

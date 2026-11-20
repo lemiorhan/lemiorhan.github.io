@@ -306,6 +306,29 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
                     ev['place'] = 'online'
         self.assertRejected(self.edit('talks', online), 'needs at least one event at a place on the map')
 
+    # Contact form
+
+    @staticmethod
+    def contact_form(data):
+        return blocks_of(data, 'form')[0]
+
+    def test_a_contact_form_without_an_access_key(self):
+        self.assertRejected(self.edit('contact', lambda d: self.contact_form(d).pop('access_key')),
+                            'content/contact.json: the form block needs the Web3Forms access_key of the form, a UUID; it has None')
+
+    def test_a_contact_form_whose_access_key_is_not_a_uuid(self):
+        self.assertRejected(self.edit('contact', lambda d: self.contact_form(d).update(access_key='YOUR_ACCESS_KEY_HERE')),
+                            "the form block needs the Web3Forms access_key of the form, a UUID; it has 'YOUR_ACCESS_KEY_HERE'")
+
+    def test_a_contact_form_whose_access_key_is_a_uuid_with_a_newline_after_it(self):
+        key = '3e8b01e6-5277-4444-9f94-618c43765be8\n'
+        self.assertRejected(self.edit('contact', lambda d: self.contact_form(d).update(access_key=key)),
+                            'a UUID; it has {!r}'.format(key))
+
+    def test_a_contact_form_without_one_of_its_status_lines(self):
+        self.assertRejected(self.edit('contact', lambda d: self.contact_form(d)['status'].pop('failed')),
+                            "a 'form' block is missing 'failed'")
+
     # Sharing
 
     def test_a_share_image_without_its_size(self):
@@ -1532,6 +1555,92 @@ class BuiltSite(unittest.TestCase):
             read = set(re.findall(r'\bui\.([a-z_]+)', f.read()))
         self.assertIn('play', read)
         self.assertEqual(read, set(read_json(ROOT, 'content', '404.json')['maze']['ui']))
+
+    HCAPTCHA = 'https://js.hcaptcha.com/1/api.js?recaptchacompat=off'
+
+    def test_the_contact_form_sends_web3forms_the_fields_its_api_reads_and_waits_for_js(self):
+        block = blocks_of(read_json(ROOT, 'content', 'contact.json'), 'form')
+        self.assertEqual(len(block), 1)
+        block = block[0]
+        forms = self.trees['contact'].find(lambda n: n.tag == 'form')
+        self.assertEqual(len(forms), 1)
+        form = forms[0]
+        self.assertEqual(form.attrs.get('action'), 'https://api.web3forms.com/submit')
+        self.assertEqual(form.attrs.get('method'), 'post')
+        self.assertIn('hidden', form.attrs, 'the captcha needs JS, so without it the form could only fail')
+        fields = {n.attrs['name']: n for n in form.walk() if n.tag in ('input', 'textarea')}
+        self.assertEqual(sorted(fields), ['access_key', 'email', 'from_name', 'message', 'name', 'subject'])
+        for name in ('access_key', 'subject', 'from_name'):
+            self.assertEqual(fields[name].attrs.get('type'), 'hidden', name)
+            self.assertEqual(fields[name].attrs.get('value'), block[name], name)
+        # Web3Forms sets the reply-to of the mail it sends from the field named "email".
+        self.assertEqual(fields['email'].attrs.get('type'), 'email')
+        for name in ('name', 'email', 'message'):
+            self.assertIn('required', fields[name].attrs, name)
+            self.assertEqual((fields[name].parent.tag, fields[name].parent.text), ('label', block['labels'][name]), name)
+        captcha = form.find(has_class('h-captcha'))
+        self.assertEqual([c.attrs.get('data-sitekey') for c in captcha], ['50b2fe65-b00b-4b9e-ad62-3ba471098be2'])
+        self.assertEqual(len(form.find(lambda n: n.tag == 'button' and n.attrs.get('type') == 'submit' and 'send' in n.classes())), 1)
+        self.assertEqual(len(form.find(lambda n: 'form-status' in n.classes() and n.attrs.get('role') == 'status')), 1)
+
+    def test_the_contact_form_carries_every_status_line_site_js_says_and_no_other(self):
+        block = blocks_of(read_json(ROOT, 'content', 'contact.json'), 'form')[0]
+        with open(os.path.join(ROOT, 'assets', 'site.js'), encoding='utf-8') as f:
+            said = set(re.findall(r"\bsay\('([a-z]+)'\)", f.read()))
+        self.assertIn('sent', said)
+        self.assertEqual(said, set(block['status']))
+        form = self.trees['contact'].find(lambda n: n.tag == 'form')[0]
+        self.assertEqual({k: form.attrs.get('data-' + k) for k in said}, block['status'])
+
+    def test_only_the_contact_page_loads_hcaptcha_and_it_loads_it_once(self):
+        loading = {}
+        for name, tree in self.trees.items():
+            scripts = [n.attrs['src'] for n in tree.find(lambda n: n.tag == 'script' and 'hcaptcha' in n.attrs.get('src', ''))]
+            if scripts:
+                loading[name] = scripts
+        self.assertEqual(loading, {'contact': [self.HCAPTCHA]})
+
+    # The address as a reader or a scraper sees it: the local part, "@", the domain, "." and "org",
+    # where "@" and "." may be the character, a decimal, hex or named HTML entity, or the word, and
+    # only blanks, non-breaking spaces, brackets or tags stand between them. Each alternative has a
+    # spelling in the test below that needs it. Out of its reach: percent-encoding, full-width or
+    # zero-width characters, text a binary keeps as UTF-16 or compressed, and an address that JS
+    # assembles from parts, which the old renderer's markup names stand in for.
+    LOCAL, DOMAIN = 'lemiorhan', 'scturkey'
+    _GAP = r'(?:[\s\[\](){}]|<[^>]*>|&nbsp;|&#0*160;?|&#x0*a0;?)*'
+    _AT = r'(?:@|&#0*64;?|&#x0*40;?|&commat;|\bat\b)'
+    _DOT = r'(?:\.|&#0*46;?|&#x0*2e;?|&period;|\bdot\b)'
+    ADDRESS = re.compile(LOCAL + r'(?:' + _GAP + _AT + r')+' + _GAP + DOMAIN + _GAP + _DOT + _GAP + 'org', re.I)
+
+    def test_no_built_file_spells_out_the_mail_address_or_carries_the_old_renderers_split_of_it(self):
+        sources = {}
+        for folder, _, names in os.walk(self.out):
+            for name in names:
+                path = os.path.join(folder, name)
+                with open(path, 'rb') as f:
+                    raw = f.read()
+                try:
+                    sources[os.path.relpath(path, self.out)] = raw.decode('utf-8')
+                except UnicodeDecodeError:
+                    sources[os.path.relpath(path, self.out)] = raw.decode('latin-1')
+        for path, source in sources.items():
+            self.assertIsNone(self.ADDRESS.search(source), path)
+            for trace in ('mailto:', 'data-domain', 'mail-link'):
+                self.assertNotIn(trace, source, path)
+        self.assertLessEqual({page_file(n) for n in self.trees} | {os.path.join('assets', 'site.js'), os.path.join('assets', 'flags', 'LICENSE'),
+                                                                   os.path.join('assets', 'img', 'stage.jpg')},
+                             set(sources))
+        at = '@'
+        for between_local_and_domain, between_domain_and_org in (
+                (at, '.'), (' [at] ', ' [dot] '), (' (at) ', '.'), ('{at}', '.'),
+                ('&#64;', '&#46;'), ('&#64', '&#46'), ('&#x40;', '&#x2E;'), ('&#x40', '&#x2e'), ('&commat;', '&period;'),
+                ('&nbsp;' + at + '&#160;', '&#xa0;.'), ('&#160' + at, '&#xa0.'),
+                ('<span aria-hidden="true">' + at + '</span><span class="sr-only"> at </span>', '.')):
+            spelling = self.LOCAL + between_local_and_domain + self.DOMAIN + between_domain_and_org + 'org'
+            self.assertIsNotNone(self.ADDRESS.search(spelling), spelling)
+            self.assertIsNotNone(self.ADDRESS.search(spelling.upper()), spelling.upper())
+        for prose in ('@lemiorhan at SCTurkey', 'lemiorhan at SCTurkey meetups'):
+            self.assertIsNone(self.ADDRESS.search(prose), prose)
 
     BEACON = 'https://static.cloudflareinsights.com/beacon.min.js'
 

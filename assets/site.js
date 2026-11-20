@@ -44,12 +44,40 @@
     btn.hidden = false;
   }
 
-  function setupEmail() {
-    document.querySelectorAll('.mail-link').forEach(function (a) {
-      var address = a.dataset.user + '@' + a.dataset.domain;
-      a.href = 'mailto:' + address;
-      a.textContent = address;
+  function setupContactForm() {
+    var form = document.querySelector('.contact-form');
+    if (!form) return;
+    var status = form.querySelector('.form-status');
+    var button = form.querySelector('.send');
+    function say(key) { status.textContent = form.dataset[key]; }
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var data = Object.fromEntries(new FormData(form));
+      if (!data['h-captcha-response']) {
+        say('captcha');
+        return;
+      }
+      button.disabled = true;
+      say('sending');
+      fetch(form.getAttribute('action'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        if (result.success !== true) throw new Error('not sent');
+        form.reset();
+        say('sent');
+      }).catch(function () {
+        say('failed');
+      }).then(function () {
+        button.disabled = false;
+        // A token is spent by one request, sent or refused.
+        window.hcaptcha.reset();
+      });
     });
+    form.hidden = false;
   }
 
   function setupCopy() {
@@ -595,7 +623,7 @@
   }
 
   setupThemeToggle();
-  setupEmail();
+  setupContactForm();
   setupCopy();
   setupGraph();
   setupArchive();

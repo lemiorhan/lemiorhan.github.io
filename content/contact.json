@@ -10,8 +10,21 @@
     {
       "class": "contact",
       "blocks": [
-        { "type": "mail", "user": "lemiorhan", "domain": "scturkey.org", "at": " at " },
         "Write to me about talks, podcasts and community events. I no longer take on training or consulting work; my time goes to Craftgate. You can also reach me on [LinkedIn](https://www.linkedin.com/in/lemiorhan) or [X](https://x.com/lemiorhan).",
+        {
+          "type": "form",
+          "access_key": "3e8b01e6-5277-4444-9f94-618c43765be8",
+          "subject": "New message from lemiorhanergin.com",
+          "from_name": "lemiorhanergin.com",
+          "labels": { "name": "Name", "email": "Email", "message": "Message" },
+          "submit": "Send message",
+          "status": {
+            "captcha": "Please complete the captcha first. If it does not appear, reach me on LinkedIn or X.",
+            "sending": "Sending…",
+            "sent": "Thank you. Your message is on its way to me.",
+            "failed": "Your message could not be sent. Please try again, or reach me on LinkedIn or X."
+          }
+        },
         { "type": "p", "class": "meta", "text": "Istanbul, Türkiye" }
       ]
     }

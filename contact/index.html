@@ -74,8 +74,19 @@
 
     <section class="page-body contact">
       <div class="wrap">
-        <p class="mail"><a class="mail-link" data-user="lemiorhan" data-domain="scturkey.org" href="#main">lemiorhan<span aria-hidden="true">@</span><span class="sr-only"> at </span>scturkey.org</a></p>
         <p>Write to me about talks, podcasts and community events. I no longer take on training or consulting work; my time goes to Craftgate. You can also reach me on <a href="https://www.linkedin.com/in/lemiorhan">LinkedIn</a> or <a href="https://x.com/lemiorhan">X</a>.</p>
+        <form class="contact-form" action="https://api.web3forms.com/submit" method="post" data-captcha="Please complete the captcha first. If it does not appear, reach me on LinkedIn or X." data-sending="Sending…" data-sent="Thank you. Your message is on its way to me." data-failed="Your message could not be sent. Please try again, or reach me on LinkedIn or X." hidden>
+          <input type="hidden" name="access_key" value="3e8b01e6-5277-4444-9f94-618c43765be8">
+          <input type="hidden" name="subject" value="New message from lemiorhanergin.com">
+          <input type="hidden" name="from_name" value="lemiorhanergin.com">
+          <label>Name<input type="text" name="name" autocomplete="name" required></label>
+          <label>Email<input type="email" name="email" autocomplete="email" required></label>
+          <label>Message<textarea name="message" rows="7" required></textarea></label>
+          <div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"></div>
+          <button class="send" type="submit">Send message</button>
+          <p class="form-status" role="status"></p>
+        </form>
+        <script src="https://js.hcaptcha.com/1/api.js?recaptchacompat=off" async defer></script>
         <p class="meta">Istanbul, Türkiye</p>
       </div>
     </section>

@@ -680,7 +680,8 @@ a:hover { text-decoration-color: var(--accent); }
 .bio .sub { margin-top: 0; }
 .bio p { margin: 0; max-width: 40rem; }
 
-.copy {
+.copy,
+.send {
   margin-top: 1.25rem;
   padding: 0.55rem 1.1rem;
   font: inherit;
@@ -692,7 +693,8 @@ a:hover { text-decoration-color: var(--accent); }
   border-radius: 999px;
   cursor: pointer;
 }
-.copy:hover { background: var(--accent-text); }
+.copy:hover,
+.send:hover:not(:disabled) { background: var(--accent-text); }
 
 /* Career graph */
 
@@ -835,23 +837,40 @@ a:hover { text-decoration-color: var(--accent); }
 
 /* Contact */
 
-.mail {
-  margin: 0 0 1.5rem;
-  font-size: clamp(1.55rem, 0.9rem + 3.4vw, 3.25rem);
-  font-weight: 720;
-  font-stretch: 85%;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  overflow-wrap: anywhere;
-}
-.mail a {
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.2em;
-  text-decoration-color: var(--accent);
-}
-.mail a:hover { color: var(--accent-text); }
+.contact .wrap > p { margin: 0 0 1rem; max-width: 40rem; }
 
-.contact .wrap > p:not(.mail) { margin: 0 0 1rem; max-width: 40rem; }
+.contact-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 40rem;
+  margin: 1.5rem 0 2rem;
+}
+.contact-form label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+}
+.contact-form textarea { resize: vertical; min-height: 9rem; }
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+.contact-form .send { justify-self: start; margin-top: 0; }
+.contact-form .send:disabled { opacity: 0.6; cursor: progress; }
+.form-status { margin: 0; min-height: 1.6em; color: var(--ink-soft); }
 
 /* Subpages */
 
