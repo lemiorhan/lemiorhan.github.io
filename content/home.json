@@ -32,7 +32,7 @@
       "caption": "On stage at {event}"
     },
     "role": "Software crafter. Co-founder of [Craftgate](https://craftgate.io).",
-    "text": "I have been writing code since {since}, in technical leadership and coaching roles at Sony, eBay/GittiGidiyor, ACM and iyzico. Today I build Craftgate, a payment orchestration platform, as its Chief Software Crafter. I founded the Software Craftsmanship Turkey community in {founded}, and I talk about how good software gets made: craftsmanship, team culture, and what is still worth keeping now that code is cheap to generate.",
+    "text": "I have been writing code since {since}, in technical leadership and coaching roles at Sony, eBay/GittiGidiyor, ACM and iyzico. Today we build Craftgate, a payment orchestration platform, and I am its Chief Software Crafter. I founded the Software Craftsmanship Turkey community in {founded}, and I talk about how good software gets made: craftsmanship, team culture, and what is still worth keeping now that code is cheap to generate.",
     "community": "Software Craftsmanship Turkey",
     "actions": [
       { "label": "Play the git game", "url": "#play" },
