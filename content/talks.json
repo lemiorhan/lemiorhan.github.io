@@ -1320,6 +1320,23 @@
           }
         },
         {
+          "date": "2018-09-05",
+          "name": "HacknBreak 2018",
+          "place": "izmir",
+          "url": "https://hacknbreak.com/hnb2018/",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Agile for Startups",
+              "themes": ["agile"]
+            },
+            {
+              "title": "The Ethical Developer's Handbook",
+              "themes": ["ethics"]
+            }
+          ]
+        },
+        {
           "date": "2018-06-07",
           "name": "ITAKE Unconference 2018",
           "place": "bucharest",
@@ -1382,6 +1399,12 @@
           "place": "istanbul",
           "url": "https://javaday.istanbul/",
           "spoken": "tr",
+          "talks": [
+            {
+              "title": "How to Improve Motivation of Developers",
+              "themes": ["motivation"]
+            }
+          ],
           "photo": {
             "file": "2018-javaday",
             "alt": "A crowded room of attendees gathered close around a session"
@@ -1565,6 +1588,19 @@
           }
         },
         {
+          "date": "2017-08-20",
+          "name": "HacknBreak 2017",
+          "place": "izmir",
+          "url": "https://hacknbreak.com/hnb2017/",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "The Passionate Developer's Guide to the Galaxy: A Roadmap to Mastery in Software",
+              "themes": ["craftsmanship", "career"]
+            }
+          ]
+        },
+        {
           "date": "2017-06-21",
           "name": "Devoxx Poland 2017",
           "place": "krakow",
@@ -1603,6 +1639,12 @@
           "name": "Bucharest Business Summit 2017",
           "place": "bucharest",
           "spoken": "en",
+          "talks": [
+            {
+              "title": "Git Anti-Patterns: How To Mess Up With Git And Love It Again",
+              "themes": ["git"]
+            }
+          ],
           "photo": {
             "file": "2017-bucharest",
             "alt": "Lemi at the lectern, a speaker card and the Java Summit logo on the screen"
@@ -1812,7 +1854,13 @@
           "date": "2016-11-27",
           "name": "DevFest İzmir 2016",
           "place": "izmir",
-          "spoken": "tr"
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "On the Eve of Technical Agility: Building a Software Development Culture",
+              "themes": ["agile", "culture"]
+            }
+          ]
         },
         {
           "date": "2016-11-17",
@@ -2268,6 +2316,18 @@
       ],
       "2013": [
         {
+          "date": "2013-12-18",
+          "name": "Yeditepe Üniversitesi",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "From Novice to Professional Software Developer: A Transition Guide",
+              "themes": ["career", "craftsmanship"]
+            }
+          ]
+        },
+        {
           "date": "2013-11-02",
           "name": "DevFest Istanbul 2013",
           "place": "istanbul",
@@ -2308,7 +2368,14 @@
         {
           "date": "2013-09-25",
           "name": "International Workshop on Agile Approaches 2013",
-          "spoken": "tr"
+          "role": "Paper",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "On Building a Knowledge Sharing Culture in Agile Organizations",
+              "themes": ["culture", "agile"]
+            }
+          ]
         },
         {
           "date": "2013-06-14",

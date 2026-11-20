@@ -45,8 +45,8 @@
             {
               "heading": "Degrees",
               "items": [
-                { "title": "M.Sc., Computer Engineering", "text": "Marmara University, 2002 – 2005. Thesis: an XML-based content management engine." },
-                { "title": "B.Sc., Computer Engineering", "text": "Marmara University, 1997 – 2002. Thesis: a task-scheduling algorithm for M-Tasks and S-Tasks in heterogeneous systems." }
+                { "title": "M.Sc., Computer Engineering", "text": "Marmara University, 2002 – 2005. Thesis: [Example Project: XML Based Content Management Engine](https://web.archive.org/web/20260906174543/https://katalog.marmara.edu.tr/veriler/yordambt/cokluortam/5C/T0052086.pdf), October 2005, advised by Prof. Dr. M. Akif Eyler. A set of open-source Java frameworks for content-heavy web portals, built to work together or alone: JEWEL for page layout, navigation and role-based security, Quarry with JCategorizer for categorized content, and JConfiX for configuration." },
+                { "title": "B.Sc., Computer Engineering", "text": "Marmara University, 1997 – 2002. Thesis: a new task-scheduling algorithm in parallel processing, for M-Tasks and S-Tasks in heterogeneous systems." }
               ]
             },
             {
@@ -57,6 +57,23 @@
                 { "title": "Certified Kanban Practitioner", "text": "Lean Kanban University, 2013" },
                 { "title": "Management 3.0 Licensed Facilitator", "text": "Happy Melly, 2015" },
                 { "title": "PSD I", "text": "Scrum.org, 2015" }
+              ]
+            },
+            {
+              "heading": "Honors and awards",
+              "items": [
+                { "title": "Second place, Inter-High School Basketball Championship", "text": "High school basketball team, 1994" },
+                { "title": "TÜBİTAK National Mathematics Project Competition", "text": "Took part with the project \"The computation of the unique formula of the divisibility rules of all natural numbers\", high school, 1996" },
+                { "title": "High Honour Student and Student Representative", "text": "High school, 1996" },
+                { "title": "Ranked in the first 1,000", "text": "Among 1.3 million candidates in the National University Entrance Examination, 1997" },
+                { "title": "Dean's Award", "text": "For TQM activities in the faculty, Marmara University, 1998" },
+                { "title": "Dean's Award", "text": "For TQM activities in the faculty, Marmara University, 1999" },
+                { "title": "First Prize, Quality Improvement Teams Contest", "text": "Marmara University, 1999" },
+                { "title": "Second Prize, Quality Improvement Teams Contest", "text": "Marmara University, 1999" },
+                { "title": "Dean's Award", "text": "For the work on the way to the EFQM 2000 finals, Marmara University, 1999" },
+                { "title": "Speaker, \"Quality and Ergonomics in Education\" symposium", "text": "KalDer, 2000" },
+                { "title": "Speaker, \"Quality Improvement Teams\" training for medical institutions", "text": "TÜSSİDE, 2001" },
+                { "title": "Ranked in the first 1,000", "text": "Among 130,000 candidates in the National Postgraduate Education Entrance Exam, 2002" }
               ]
             },
             {
