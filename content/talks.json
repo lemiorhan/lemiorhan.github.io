@@ -180,6 +180,7 @@
               "title": "Rebirth of Software Craftsmanship in the AI Era",
               "slides": "https://speakerdeck.com/lemiorhan/rebirth-of-software-craftsmanship-in-the-ai-era",
               "video": "https://www.youtube.com/watch?v=EcBrbOEPclM",
+              "summary": "AI makes developers braver, not faster: as code turns cheap, the craft moves to verification, domain knowledge, modularity and the decisions behind the code.",
               "themes": ["ai", "craftsmanship"]
             }
           ],
@@ -196,6 +197,7 @@
             {
               "title": "Product Developer: From Writing Code to Building Products",
               "video": "https://www.youtube.com/watch?v=8EXXkeweFWA",
+              "summary": "A conversation about developers who own product problems, not just technical ones, and why products, unlike projects, are measured by quality rather than deadlines.",
               "themes": ["product", "career"]
             }
           ]
@@ -209,6 +211,7 @@
             {
               "title": "“We Have Tests” Is Not Enough: Unit Testing for Reliable Code",
               "video": ["https://www.youtube.com/watch?v=HutPyJs23WI", "https://www.youtube.com/watch?v=N6tSrpE2XhY"],
+              "summary": "Tests that lock in code structure block refactoring, so unit tests should verify behavior, which takes an architecture that isolates the domain from technology.",
               "themes": ["testing"]
             }
           ],
@@ -228,6 +231,7 @@
             {
               "title": "Unlearn Unit Testing",
               "video": "https://www.youtube.com/watch?v=QzbSRiru4gg",
+              "summary": "A unit is a behavior, not a method: test whole flows with fakes behind ports instead of line-by-line mocks, and refactoring and TDD become possible.",
               "themes": ["testing"]
             }
           ],
@@ -297,6 +301,7 @@
             {
               "title": "Product Management, Product Development and AI from a Co-founder's Perspective",
               "video": "https://www.youtube.com/watch?v=oqQnI2JRV3s",
+              "summary": "A conversation about B2B product building: staying close to customers, developers and product managers sharing one mindset, and using AI where it pays off.",
               "themes": ["product", "ai"]
             }
           ],
@@ -313,6 +318,7 @@
             {
               "title": "Adaptation over Perfection: A Guide for the Modern Developer",
               "video": "https://www.youtube.com/watch?v=IdBSKIbfAtk",
+              "summary": "A conversation about learning by committing to teach, building systems that change fast instead of chasing perfection, and AI as a tool developers still direct.",
               "themes": ["career"]
             }
           ]
@@ -372,6 +378,7 @@
             {
               "title": "Unlearn OOP: Back To Origins",
               "slides": "https://speakerdeck.com/lemiorhan/unlearn-oop-back-to-origins",
+              "summary": "Anemic models, giant services and mocking hell miss the original idea of OOP: objects as cells that guard their state and communicate through messages.",
               "themes": ["design"]
             }
           ],
@@ -389,6 +396,7 @@
             {
               "title": "Unlearn Modularity",
               "slides": "https://speakerdeck.com/lemiorhan/unlearn-modularity",
+              "summary": "Modularity is not folders, layers or microservices: software entropy stays low by balancing coupling across the strength, distance and volatility of shared knowledge.",
               "themes": ["architecture", "design"]
             }
           ],
@@ -406,6 +414,7 @@
             {
               "title": "Shape of Code: What Makes Your Code Beautiful",
               "video": "https://www.youtube.com/watch?v=yQMG-bwFXUY",
+              "summary": "Code is beautiful when its shape shows loosely coupled, cohesive modules within bounded contexts, because code quality means adapting easily to constant change.",
               "themes": ["design"]
             }
           ],
@@ -422,6 +431,7 @@
             {
               "title": "Software Behind the Scenes, and Its Finer Points",
               "video": "https://www.youtube.com/watch?v=0c3WJuUIypo",
+              "summary": "A conversation about product versus project thinking, and why team culture grows slowly from within and cannot be dictated.",
               "themes": ["career"]
             }
           ],
@@ -439,11 +449,13 @@
             {
               "title": "The Disturbing Truth: Why Do Most Software Projects Suck?",
               "slides": "https://speakerdeck.com/lemiorhan/the-disturbing-truth-why-do-most-software-projects-suck",
+              "summary": "Deadline rush, per-person metrics and fixed plans come with project thinking, and products need different team structures and long-term purpose.",
               "themes": ["product", "quality"]
             },
             {
               "title": "Unlearn Software Quality & Excellence",
               "slides": "https://speakerdeck.com/lemiorhan/unlearn-software-quality-and-excellence",
+              "summary": "Quality is sustainable customer satisfaction, more than bug-free code, and cannot be added later: it grows from people, design, tests and direct customer feedback.",
               "themes": ["quality"]
             }
           ],
@@ -460,6 +472,7 @@
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=YTf9xrVWd6k",
+              "summary": "Software development is a profession of unknown unknowns and inevitable mistakes, where catching errors early beats big upfront design and every answer depends on context.",
               "themes": ["career", "craftsmanship"]
             }
           ],
@@ -476,6 +489,7 @@
             {
               "title": "The Presentation Wizard",
               "video": "https://www.youtube.com/watch?v=aS_bQhcI06M",
+              "summary": "A conversation about production crises handled without blame, questioning customer requests against the roadmap, pair programming, learning by unlearning, and work-life balance.",
               "themes": ["career", "speaking"]
             }
           ],
@@ -496,6 +510,7 @@
               "title": "Fixing The Typos in Softvare Devlopment",
               "slides": "https://speakerdeck.com/lemiorhan/fixing-the-typo-in-softvare-devlopment-devfest-izmir-2023",
               "video": "https://www.youtube.com/watch?v=2Mu0O-VyeUQ",
+              "summary": "Common software beliefs turned around: deploy early and often, treat microservices as a deployment strategy, and design from the customer, not the database.",
               "themes": ["craftsmanship", "culture"]
             }
           ],
@@ -515,6 +530,7 @@
               "title": "SOLID Is Dead, Long Live SOLID",
               "slides": "https://speakerdeck.com/lemiorhan/solid-is-dead-long-live-solid",
               "video": "https://www.youtube.com/watch?v=agkgb6mJFFs",
+              "summary": "Coupling and cohesion are the real laws of software design, and SOLID, reread through them, is about keeping the cost of change under control.",
               "themes": ["design"]
             }
           ],
@@ -534,6 +550,7 @@
               "title": "Code Is Cheap, Show Me The Purpose",
               "slides": "https://speakerdeck.com/lemiorhan/code-is-cheap-show-me-the-purpose",
               "video": "https://www.youtube.com/watch?v=GJIprRgnjJM",
+              "summary": "Legacy code and deadline rush come from building software as a project rather than a product with long-term purpose.",
               "themes": ["product", "craftsmanship"]
             }
           ],
@@ -551,6 +568,7 @@
             {
               "title": "The Lost Chapter: Rediscovering Foundations in Software Design",
               "slides": "https://speakerdeck.com/lemiorhan/the-lost-chapter-rediscovering-foundations-in-software-design",
+              "summary": "A payment API's growing pains show that rewrites are unnecessary: refactoring toward high cohesion and low coupling, the forgotten laws of design, is enough.",
               "themes": ["design"]
             }
           ],
@@ -567,6 +585,7 @@
             {
               "title": "I Disclosed a Flaw in Apple and Made the News Worldwide!",
               "video": "https://www.youtube.com/watch?v=rLR9bdSc1AE",
+              "summary": "Career war stories: a project shut down after launch, a reviewed and tested bug that still broke production, and disclosing Apple's root login flaw.",
               "themes": ["security", "career"]
             }
           ],
@@ -585,6 +604,7 @@
               "title": "AI Ethics: Problems, Questions, Hopes, Regrets",
               "slides": "https://speakerdeck.com/lemiorhan/ai-ethics-problems-questions-hopes-regrets",
               "video": "https://www.youtube.com/watch?v=D3vVJWyBqn8",
+              "summary": "The AI revolution, like the industrial one before it, brings ethical problems of privacy, bias and trust that only ethics and regulation can contain.",
               "themes": ["ai", "ethics"]
             }
           ],
@@ -604,6 +624,7 @@
               "title": "Modeling Complexity: Using Modularization and Bounded Contexts in Domain Driven Design",
               "slides": "https://speakerdeck.com/lemiorhan/modeling-complexity-using-modularization-and-bounded-contexts-in-domain-driven-design",
               "video": "https://www.youtube.com/watch?v=qE0J-t-ZXmA",
+              "summary": "Complexity piles up like cables in a box, and modules everywhere do not help: bounded contexts that hide their data and connect loosely do.",
               "themes": ["architecture"]
             }
           ],
@@ -623,6 +644,7 @@
             {
               "title": "Domain Driven Modular Architecture",
               "video": "https://www.youtube.com/watch?v=EKiQNh_X5uU",
+              "summary": "Microservices are a deployment strategy, not modularity: independent modules come from well-defined, extensible bounded contexts that talk through messages.",
               "themes": ["architecture"]
             }
           ]
@@ -638,6 +660,7 @@
               "title": "Unlearn Unit Testing",
               "slides": "https://speakerdeck.com/lemiorhan/unlearn-unit-testing",
               "video": "https://www.youtube.com/watch?v=pjx06exON7g",
+              "summary": "A unit is a behavior, not a method: test whole flows with fakes behind ports instead of line-by-line mocks, and refactoring and TDD become possible.",
               "themes": ["testing"]
             }
           ],
@@ -657,6 +680,7 @@
               "title": "Unlearn Software Quality: Redefine What Should Be Really Cared",
               "slides": "https://speakerdeck.com/lemiorhan/unlearn-software-quality-redefine-what-should-be-really-cared",
               "video": "https://www.youtube.com/watch?v=EruxW-pSg1U",
+              "summary": "Quality is sustainable customer satisfaction, more than bug-free code, and cannot be added later: it grows from people, design, tests and direct customer feedback.",
               "themes": ["quality", "testing"]
             }
           ]
@@ -670,6 +694,7 @@
             {
               "title": "Fixing the Typo in Softvare Devlpment",
               "slides": "https://speakerdeck.com/lemiorhan/fixing-the-typo-in-softvare-devlpment",
+              "summary": "Common software beliefs turned around: deploy early and often, treat microservices as a deployment strategy, and design from the customer, not the database.",
               "themes": ["craftsmanship", "culture"]
             }
           ],
@@ -688,6 +713,7 @@
               "title": "Pure Agile: Building a Culture Without Scrum, Kanban and XP",
               "slides": "https://speakerdeck.com/lemiorhan/pure-agile-building-a-culture-without-scrum-kanban-and-xp",
               "video": "https://www.youtube.com/watch?v=6pim0Mbcteg",
+              "summary": "No framework makes a team agile: an organization designs its own culture around product, customers and team, keeping only practices that solve real problems.",
               "themes": ["agile", "culture"]
             }
           ],
@@ -705,6 +731,7 @@
             {
               "title": "Software Craftsmanship Culture",
               "video": "https://www.youtube.com/watch?v=aHhWUFW8Ec8",
+              "summary": "A conversation about craftsmanship as a journey of mastery: teams without seniority titles, pair programming, and depth in fundamentals and the domain over shallow breadth.",
               "themes": ["craftsmanship", "culture"]
             }
           ],
@@ -724,6 +751,7 @@
               "title": "Domain Driven Modular Architecture",
               "slides": "https://speakerdeck.com/lemiorhan/domain-driven-modular-architecture",
               "video": "https://www.youtube.com/watch?v=tH1sQsR0Crk",
+              "summary": "Microservices are a deployment strategy, not modularity: independent modules come from well-defined, extensible bounded contexts that talk through messages.",
               "themes": ["architecture"]
             }
           ],
@@ -741,6 +769,7 @@
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=WzC_J4VLFH4",
+              "summary": "A panel on what agility means to software practitioners: not a template of rituals, but each company solving its own problems with its own model.",
               "themes": ["agile"]
             }
           ],
@@ -758,6 +787,7 @@
             {
               "title": "The Developer: How Ordinary People Become Craftspeople Who Build Technology",
               "video": "https://www.youtube.com/watch?v=s3L_Cux2RFs",
+              "summary": "Software as both engineering and craft, where fundamentals, practice, communication, teamwork, focus and hard work outweigh talent on the way to mastery.",
               "themes": ["craftsmanship", "career"]
             }
           ],
@@ -776,6 +806,7 @@
               "title": "Unlearn OOP: Deleted Scenes, Misconceptions, Unspoken Truths",
               "slides": "https://speakerdeck.com/lemiorhan/unlearn-oop-deleted-scenes-misconceptions-unspoken-truths",
               "video": "https://www.youtube.com/watch?v=zsmzO1aT0mA",
+              "summary": "Everyday OOP problems stem from a term with two meanings: Alan Kay's messaging points to use cases, decoupled modules and domain models with behavior.",
               "themes": ["design"]
             }
           ],
@@ -792,6 +823,7 @@
             {
               "title": "The Past and Future of Software",
               "video": "https://www.youtube.com/watch?v=mBPx4ZtsMmM",
+              "summary": "A conversation about two decades of software: the shift from pure technology to teamwork and agility, people problems that persist, and learning outside working hours.",
               "themes": ["career", "speaking"]
             }
           ]
@@ -805,6 +837,7 @@
             {
               "title": "Escaping Mock Hell in Tests",
               "video": "https://www.youtube.com/watch?v=MdLlJEhODkE",
+              "summary": "Mocks tie tests to implementation and block refactoring, while use cases tested against an isolated domain need no mocking framework.",
               "themes": ["testing"]
             }
           ],
@@ -821,6 +854,7 @@
             {
               "title": "The Evolution of Software Toward Modular Design",
               "video": "https://www.youtube.com/watch?v=ixN8LeAs_ZI",
+              "summary": "Layered and microservice code drifts into spaghetti; separating a domain of use cases from integration adapters makes it modular and its behavior testable without mocks.",
               "themes": ["architecture"]
             }
           ],
@@ -836,6 +870,7 @@
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=jksb10dcYB8",
+              "summary": "A conversation about engineering culture built on values and continuous adaptation, TDD as a design practice, git branching and commit habits, and returning to fundamentals.",
               "themes": ["git", "culture", "design"]
             }
           ],
@@ -852,6 +887,7 @@
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=tVdaiOtraD4&t=2508s",
+              "summary": "A conversation with students about a career path and its lessons: pick first jobs for learning, grow under good mentors, and study fundamentals over frameworks.",
               "themes": ["career"]
             }
           ],
@@ -868,6 +904,7 @@
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=FFYDNTWG-JI",
+              "summary": "Surviving remote work takes asking early, staying visible, pairing and mobbing, guarding focus and health, and a rhythm the whole team agrees on.",
               "themes": ["culture"]
             }
           ],
@@ -884,6 +921,7 @@
             {
               "title": "Technical: Code Review Processes",
               "video": "https://www.youtube.com/watch?v=x5lGD81HGyw",
+              "summary": "A conversation about code review as shared understanding rather than bug hunting, with a method that fits each team.",
               "themes": ["code-review"]
             }
           ]
@@ -897,6 +935,7 @@
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=VBWS1-ngCKo",
+              "summary": "Professional success comes less from talent than from hard work, finishing what is started, knowing the domain, caring for quality and learning from failure.",
               "themes": ["career"]
             }
           ],
@@ -915,6 +954,7 @@
               "title": "It is not SOLID Anymore",
               "slides": "https://speakerdeck.com/lemiorhan/it-is-not-solid-anymore",
               "video": "https://www.youtube.com/watch?v=pdtpWYNBzqM",
+              "summary": "SOLID is less about good design than about managing dependencies, and reads best through separation of concerns, information hiding and inversion of control.",
               "themes": ["design"]
             }
           ],
@@ -931,6 +971,7 @@
             {
               "title": "Technical: How Does Craftbase Build Software?",
               "video": "https://www.youtube.com/watch?v=9SxmASl_Wpc",
+              "summary": "A conversation about a team without titles that designs, codes and reviews together through mob and pair programming.",
               "themes": ["craftsmanship", "architecture"]
             }
           ]
@@ -944,6 +985,7 @@
             {
               "title": "Beyti Code: Growing Hexagonal Microservices with TDD",
               "video": "https://www.youtube.com/watch?v=ZMB-Xlh5Rj0",
+              "summary": "Layered architecture scatters the domain, so hexagonal ports and adapters isolate it from infrastructure, let it grow test-first, and prepare a modular monolith for microservices.",
               "themes": ["architecture", "testing"]
             }
           ],
@@ -962,6 +1004,7 @@
               "title": "Modular Architecture for Pragmatic Developers",
               "slides": "https://speakerdeck.com/lemiorhan/modular-architecture-for-pragmatic-developers",
               "video": "https://www.youtube.com/watch?v=aWOHq6AHNjU&t=10832s",
+              "summary": "Layered monoliths and small microservices decay alike without internal modularity: low coupling, high cohesion and inverted dependencies that keep the domain at the center.",
               "themes": ["architecture"]
             }
           ]
@@ -975,6 +1018,7 @@
               "title": "Finding The Invisible Gorilla At Your Product Development Journey",
               "slides": "https://speakerdeck.com/lemiorhan/finding-the-invisible-gorilla-at-your-product-development-journey",
               "video": "https://www.youtube.com/watch?v=g0-Lramjn3A",
+              "summary": "Focused on deadlines, teams miss the gorillas in plain sight: building projects instead of products, sidelining technical practices and misreading agile rituals.",
               "themes": ["product", "agile"]
             }
           ]
@@ -988,6 +1032,7 @@
             {
               "title": "10 Faulty Behaviors of Code Review",
               "slides": "https://speakerdeck.com/lemiorhan/10-faulty-behaviors-of-code-review-itake-unconference",
+              "summary": "Code review works when it is small, early and egoless, and breaks down without team agreements.",
               "themes": ["code-review"]
             }
           ]
@@ -1001,6 +1046,7 @@
             {
               "title": "Git: Not What You Think",
               "video": "https://www.youtube.com/watch?v=OOmsCltczCA",
+              "summary": "Git stops being frightening once seen as a graph of snapshots: every command moves pointers on it, and committed code is almost never lost.",
               "themes": ["git"]
             }
           ]
@@ -1032,6 +1078,7 @@
             {
               "title": "Slow Down To Go Faster In Software Development",
               "video": "https://www.youtube.com/watch?v=f9YXAIwuTro",
+              "summary": "Going fast without control is the biggest enemy of software development, and only a culture that slows down efficiently builds software faster.",
               "themes": ["craftsmanship", "quality"]
             }
           ],
@@ -1067,6 +1114,7 @@
             {
               "title": "10 Exclusive Development Practice Every Developer Should Consider",
               "slides": "https://speakerdeck.com/lemiorhan/10-exclusive-development-practice-every-developer-should-consider",
+              "summary": "Practices for coupled, hard-to-test code: mono-repos, modular monoliths before microservices, hexagonal design, walking skeletons, frequent releases and mob programming.",
               "themes": ["craftsmanship"]
             }
           ],
@@ -1082,6 +1130,7 @@
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=IkOc-hr5NWQ",
+              "summary": "A conversation about what software quality means, the role of testing and QA, and the team and engineering culture around them.",
               "themes": ["quality"]
             }
           ]
@@ -1110,6 +1159,7 @@
             {
               "title": "Slow Down To Go Faster Than Ever, But How?",
               "video": "https://www.youtube.com/watch?v=sLDKsjK4kEw",
+              "summary": "Rushing to catch deadlines destroys quality and speed alike, so lasting speed comes from slowing down in hiring, knowledge sharing, modular design and testing.",
               "themes": ["craftsmanship", "quality"]
             }
           ],
@@ -1128,6 +1178,7 @@
               "title": "Start the Journey of Craftsmanship in Your Startup",
               "slides": "https://speakerdeck.com/lemiorhan/start-the-journey-of-craftsmanship-in-your-startup",
               "video": "https://www.youtube.com/watch?v=T_fzUxfEQL8",
+              "summary": "A startup lives on execution, not ideas: the right hires, a culture that never accepts dysfunction, and technical practices that push defects down early.",
               "themes": ["craftsmanship"]
             }
           ],
@@ -1156,12 +1207,14 @@
               "title": "Slow Down To Go Faster Than Ever, But How?",
               "slides": "https://speakerdeck.com/lemiorhan/slow-down-to-go-faster-than-ever-but-how",
               "video": "https://www.youtube.com/watch?v=sxf-DpYrJfk",
+              "summary": "Rushing to catch deadlines destroys quality and speed alike, so lasting speed comes from slowing down in hiring, knowledge sharing, modular design and testing.",
               "themes": ["craftsmanship", "quality"]
             },
             {
               "title": "10 Git Anti-Patterns You Should Be Aware Of",
               "slides": "https://speakerdeck.com/lemiorhan/10-git-anti-patterns-you-should-be-aware-of",
               "video": "https://www.youtube.com/watch?v=X3QZ_nY5ufU",
+              "summary": "Git habits that work against the tool, from pushing every commit to long-lived branches and cherry-picked releases, and the cure: commit early, perfect later, publish once.",
               "themes": ["git"]
             }
           ],
@@ -1234,6 +1287,7 @@
             {
               "title": "Who Will Save the World from Software?",
               "slides": "https://speakerdeck.com/lemiorhan/kodlama-ogrenmek-gercekten-gerekli-mi",
+              "summary": "Software is everywhere, so coding, a way of thinking in patterns that brings ideas to life, is something everyone, children included, should learn.",
               "themes": ["career"]
             }
           ],
@@ -1251,6 +1305,7 @@
             {
               "title": "10 Git Anti Patterns You Should be Aware of",
               "slides": "https://speakerdeck.com/lemiorhan/10-git-anti-patterns-you-should-be-aware-of",
+              "summary": "Git habits that work against the tool, from pushing every commit to long-lived branches and cherry-picked releases, and the cure: commit early, perfect later, publish once.",
               "themes": ["git"]
             }
           ],
@@ -1268,6 +1323,7 @@
             {
               "title": "Clean Software Design: The Practices to Make The Design Simple",
               "slides": "https://speakerdeck.com/lemiorhan/clean-software-design-the-practices-to-make-the-design-simple",
+              "summary": "Source code is the real software design, kept clean by tests, refactoring and review that lower coupling and raise cohesion so it can keep changing.",
               "themes": ["design"]
             }
           ],
@@ -1286,6 +1342,7 @@
               "title": "10 Faulty Behaviors of Code Review",
               "slides": "https://speakerdeck.com/lemiorhan/10-faulty-behaviors-of-code-review",
               "video": "https://www.youtube.com/watch?v=d20ol4iJwNM",
+              "summary": "Code review works when it is small, early and egoless, and breaks down without team agreements.",
               "themes": ["code-review"]
             }
           ],
@@ -1304,6 +1361,7 @@
               "title": "Next-Generation Software Culture: Better Professionals, Better Software, More Agile Teams",
               "slides": "https://speakerdeck.com/lemiorhan/yeni-nesil-yazilim-kulturu-daha-iyi-profesyoneller-daha-kaliteli-yazilim-daha-cevik-ekip",
               "video": "https://www.youtube.com/watch?v=5k8YSGzFrvc",
+              "summary": "Company success rests on a culture that cannot be faked, only grown slowly through ownership, code review, frequent releases, feedback loops and lifelong apprenticeship.",
               "themes": ["craftsmanship", "culture"]
             }
           ],
@@ -1417,6 +1475,7 @@
             {
               "title": "How Does iyzico Build Products?",
               "video": "https://www.youtube.com/watch?v=jOnvWQPgUE8",
+              "summary": "A conversation about how iyzico changed its product development process at different stages of the company and moved to several product teams.",
               "themes": ["product"]
             }
           ]
@@ -1430,6 +1489,7 @@
             {
               "title": "Git Anti-Patterns: How To Mess Up With Git And Love It Again",
               "video": "https://www.youtube.com/watch?v=07Q96cNYzPQ",
+              "summary": "Git's power is untamed: misused branches, merges, rebases and commits mess up history in seconds, and knowing the anti-patterns keeps teams out of those traps.",
               "themes": ["git"]
             }
           ],
@@ -1449,12 +1509,14 @@
               "title": "Git Anti Patterns",
               "slides": "https://speakerdeck.com/lemiorhan/git-anti-patterns-1",
               "video": "https://www.youtube.com/watch?v=J_JYrAjX05Y",
+              "summary": "How git works behind the scenes explains the anti-patterns that lose work and tangle history, and the cure: commit early, perfect later, publish once.",
               "themes": ["git"]
             },
             {
               "title": "Fighting with Waste Driven Development: Lean Thinking for Software Developers",
               "slides": "https://speakerdeck.com/lemiorhan/fighting-with-waste-driven-development-lean-thinking-for-software-developers",
               "video": "https://www.youtube.com/watch?v=Iw3I_nALH6s",
+              "summary": "Teams learn to live with waste like debugging, manual deployments and unmerged branches: lean thinking means maximizing customer value by removing it.",
               "themes": ["lean"]
             }
           ],
@@ -1489,6 +1551,7 @@
             {
               "title": "iyzico",
               "video": "https://www.youtube.com/watch?v=rg54C7Ki3tQ",
+              "summary": "A conversation about how iyzico's teams keep quality high through weekly sprints, mandatory code review, heavy pair programming and automated tests that give fast feedback.",
               "themes": ["culture", "product"]
             }
           ]
@@ -1512,6 +1575,7 @@
             {
               "title": "Git Anti-Patterns: How To Mess Up With Git And Love It Again",
               "video": "https://www.youtube.com/watch?v=bEXuYvry3_o",
+              "summary": "How git works behind the scenes explains the anti-patterns that lose work and tangle history, and the cure: commit early, perfect later, publish once.",
               "themes": ["git"]
             },
             {
@@ -1535,6 +1599,7 @@
               "title": "Git Anti-Patterns: How To Mess Up With Git and Love It Again",
               "slides": "https://speakerdeck.com/lemiorhan/git-anti-patterns-how-to-mess-up-with-git-and-love-it-again",
               "video": "https://www.youtube.com/watch?v=m3ITI7tT_Qo",
+              "summary": "How git works behind the scenes explains the anti-patterns that lose work and tangle history, and the cure: commit early, perfect later, publish once.",
               "themes": ["git"]
             }
           ],
@@ -1588,6 +1653,7 @@
               "title": "Clean Software Design",
               "slides": "https://speakerdeck.com/lemiorhan/clean-software-design-1",
               "video": "https://www.youtube.com/watch?v=7m88T8-96X4",
+              "summary": "Source code is the real software design, kept clean by tests, refactoring and review that lower coupling and raise cohesion so it can keep changing.",
               "themes": ["design"]
             }
           ],
@@ -1620,6 +1686,7 @@
             {
               "title": "The Master–Apprentice Relationship in Software",
               "video": "https://www.youtube.com/watch?v=q_AIH90dEvw",
+              "summary": "A conversation about master and apprentice in software: imitate first, then question, then surpass, while masters learn by teaching and developers own their growth.",
               "themes": ["craftsmanship"]
             },
             {
@@ -1696,6 +1763,7 @@
               "title": "Test Driven Design",
               "slides": "https://speakerdeck.com/lemiorhan/test-driven-design",
               "video": "https://www.youtube.com/watch?v=ayqLzN78PsU",
+              "summary": "Source code is the real design, and without tests driving refactoring toward low coupling it decays like a dying star into a total rewrite.",
               "themes": ["testing", "design"]
             }
           ],
@@ -1718,6 +1786,7 @@
             {
               "title": "On fighting elephants in the room",
               "video": "https://www.youtube.com/watch?v=Di-dsOBgrdY",
+              "summary": "Waste survives because developers tolerate it; a team manifesto, internal meetups and egoless programming build the discipline and passion to remove it.",
               "themes": ["agile", "craftsmanship"]
             }
           ]
@@ -1754,6 +1823,7 @@
               "title": "Let The Elephants Leave The Room: Remove Waste in Software Development",
               "slides": "https://speakerdeck.com/lemiorhan/let-the-elephants-leave-the-room-remove-waste-in-software-development",
               "video": "https://www.youtube.com/watch?v=OUJKu9ZHLis",
+              "summary": "Unneeded code, upfront design, manual testing and deployment are waste teams have learned to ignore; a lean mindset finds and removes it together.",
               "themes": ["lean"]
             }
           ],
@@ -1770,6 +1840,7 @@
             {
               "title": "Lemi's Way About Preparing and Presenting Talks",
               "slides": "https://speakerdeck.com/lemiorhan/lemis-way-about-preparing-and-presenting-talks",
+              "summary": "From choosing a topic that excites the speaker to handling stress, timing, trolls and the mishaps that happen in front of an audience.",
               "themes": ["speaking"]
             }
           ],
@@ -1787,6 +1858,7 @@
             {
               "title": "Coding Agility: The Building Blocks of Technical Agility and DevOps Culture",
               "video": "https://www.youtube.com/watch?v=l1DqBlddbeQ",
+              "summary": "Projects keep getting rewritten despite agile processes because technical agility is missing: shared standards, teams that run what they build, automation and TDD.",
               "themes": ["agile", "culture"]
             }
           ],
@@ -1803,6 +1875,7 @@
             {
               "title": "Let the Elephants Leave the Room: Tips for Making Development Life Leaner",
               "video": "https://www.youtube.com/watch?v=osU3UR9Y_o0",
+              "summary": "Hard work that produces little is a hamster wheel of waste, hiding in code, offices, processes and management, and removing it makes development leaner.",
               "themes": ["lean"]
             }
           ],
@@ -1820,6 +1893,7 @@
               "title": "Happy Developer's Guide to the Galaxy: Thinking About Motivation of Developers",
               "slides": "https://speakerdeck.com/lemiorhan/happy-developers-guide-to-the-galaxy-thinking-about-motivation-of-developers",
               "video": "https://www.youtube.com/watch?v=naq49KIEVls",
+              "summary": "Managers cannot motivate developers directly, but they can build an environment of trust, learning and craftsmanship where passionate developers motivate themselves.",
               "themes": ["motivation"]
             }
           ],
@@ -1845,6 +1919,7 @@
             {
               "title": "Git: Not What You Think",
               "slides": "https://speakerdeck.com/lemiorhan/git-bildiginiz-gibi-degil",
+              "summary": "Git stops being frightening once seen as a graph of snapshots: every command moves pointers on it, and committed code is almost never lost.",
               "themes": ["git"]
             }
           ]
@@ -1857,6 +1932,7 @@
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=j5Or2ZjguS8",
+              "summary": "A conversation about agility as adapting to constant change, and the craft behind it: test-first design, refactoring, pair programming and trust in teams.",
               "themes": ["craftsmanship"]
             }
           ]
@@ -1879,6 +1955,7 @@
               "title": "Code Your Agility: Tips for Boosting Technical Agility in Your Organization",
               "slides": "https://speakerdeck.com/lemiorhan/code-your-agility-tips-for-boosting-technical-agility-in-your-organization",
               "video": "https://www.youtube.com/watch?v=_om9fwD_eNk",
+              "summary": "No process makes a team agile on bad code: technical agility comes from a development culture of agreed practices, a foreman, TDD and shared knowledge.",
               "themes": ["agile", "craftsmanship"]
             }
           ],
@@ -1896,6 +1973,7 @@
               "title": "Lost in Motivation in an Agile World",
               "slides": "https://speakerdeck.com/lemiorhan/lost-in-motivation-in-an-agile-world",
               "video": "https://www.youtube.com/watch?v=GnWbFTQPNHY",
+              "summary": "Money does not buy engagement: motivation comes from a human-centric agile mindset of trust, mastery goals and shared purpose, not from tools and rituals.",
               "themes": ["motivation", "agile"]
             }
           ],
@@ -1914,6 +1992,7 @@
             {
               "title": "TDD: Inevitable Challenge for Software Developers",
               "slides": "https://speakerdeck.com/lemiorhan/tdd-inevitable-challenge-for-software-developers",
+              "summary": "Living software needs continuous refactoring, testing and evolutionary design, and TDD is a design practice, not a testing one, that lowers the cost of change.",
               "themes": ["testing"]
             }
           ]
@@ -1927,6 +2006,7 @@
             {
               "title": "Unleashed Power Behind The Myths: Pair Programming",
               "slides": "https://speakerdeck.com/lemiorhan/unleashed-power-behind-the-myths-pair-programming",
+              "summary": "Working alone, hoarding knowledge and skipping feedback are risks that erode team culture, and disciplined pair programming spreads knowledge and raises quality.",
               "themes": ["craftsmanship"]
             }
           ]
@@ -1940,6 +2020,7 @@
             {
               "title": "Trespassing The Forgotten and Abandoned: Ethics in Software Development",
               "slides": "https://speakerdeck.com/lemiorhan/trespassing-the-forgotten-and-abandoned-ethics-in-software-development",
+              "summary": "Like the unspoken rules of traffic, minimum standards of security, honesty, quality and teamwork are what turn software development into a real profession.",
               "themes": ["ethics"]
             }
           ]
@@ -1991,6 +2072,7 @@
             {
               "title": "Microservices from Theory into Practice",
               "slides": "https://speakerdeck.com/lemiorhan/teoriden-pratige-mikroservisler",
+              "summary": "Microservices as independently deployable services around business capabilities, traced from the layered monolith, with the teams, tooling and caution they demand.",
               "themes": ["architecture"]
             }
           ]
@@ -2005,6 +2087,7 @@
           "talks": [
             {
               "slides": "https://speakerdeck.com/lemiorhan/global-day-of-coderetreat-istanbul-event-2014",
+              "summary": "Developers improve their craft by practicing: a day of 45-minute pair programming, test-first sessions on Conway's Game of Life, with no pressure to finish.",
               "themes": ["craftsmanship"]
             }
           ]
@@ -2018,6 +2101,7 @@
             {
               "title": "Let The Elephants Leave The Room: Tips For Making Your Development Life Leaner",
               "slides": "https://speakerdeck.com/lemiorhan/let-the-elephants-leave-the-room-tips-for-making-your-development-life-leaner",
+              "summary": "Development drowns in waste, from unneeded code and technical debt to task switching and waiting; visualizing the flow with Kanban exposes it for removal.",
               "themes": ["lean"]
             }
           ]
@@ -2030,6 +2114,7 @@
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=Af1ymJzPjIo",
+              "summary": "A conversation about why Scrum needs XP practices, from tests and trust to paying technical debt, and why agile lives in culture, not rituals.",
               "themes": ["agile"]
             }
           ],
@@ -2080,6 +2165,7 @@
             {
               "title": "Software Craftsmanship: Building A Culture for The Future",
               "video": "https://www.youtube.com/watch?v=Dy1EVPaZtYg",
+              "summary": "Culture, not individuals, makes teams succeed: software craftsmanship as a culture where developers build themselves as well as software.",
               "themes": ["craftsmanship", "culture"]
             }
           ]
@@ -2092,6 +2178,7 @@
             {
               "title": "A Gentle Introduction to Micro Services: From Theory into Practice",
               "slides": "https://speakerdeck.com/lemiorhan/a-gentle-introduction-to-micro-services-from-theory-into-practice",
+              "summary": "Microservices as independently deployable services around business capabilities, traced from the layered monolith, with the teams, tooling and caution they demand.",
               "themes": ["architecture"]
             }
           ]
@@ -2106,6 +2193,7 @@
               "title": "Fix Your Broken Windows With Code Reviews",
               "slides": "https://speakerdeck.com/lemiorhan/fix-your-broken-windows-with-code-reviews",
               "video": "https://www.youtube.com/watch?v=fSCcTTaSvNM",
+              "summary": "Working, tested code can still smell: code reviews catch defects earlier and cheaper than testing, when run with clear rules and a respectful tone.",
               "themes": ["code-review"]
             }
           ],
@@ -2123,6 +2211,7 @@
               "title": "Java Exception Handling Best Practices",
               "slides": "https://speakerdeck.com/lemiorhan/java-exception-handling-best-practices",
               "video": "https://www.youtube.com/watch?v=mpx5lEcXxt0",
+              "summary": "Exceptions signal abnormal states, not control flow: throw early, catch late, never swallow or blindly rethrow, keep the cause, and log with care.",
               "themes": ["design"]
             }
           ]
@@ -2139,6 +2228,7 @@
               "title": "Git and Git Workflow Models as Catalysts of Software Development",
               "slides": "https://speakerdeck.com/lemiorhan/git-and-git-workflow-models-as-catalysts-of-software-development",
               "video": "https://www.youtube.com/watch?v=fmFQ4jF3J10",
+              "summary": "Git is a tool for designing workflows: main branches, short-lived feature, release and hotfix branches, and disciplined commit, rebase and merge habits.",
               "themes": ["git"]
             }
           ],
@@ -2156,6 +2246,7 @@
               "title": "How Do You Build Software? Software Engineering Practices of an Agile Developer",
               "slides": "https://speakerdeck.com/lemiorhan/how-do-you-build-software-software-engineering-practices-of-an-agile-developer",
               "video": "https://www.youtube.com/watch?v=O3otp9iPISA",
+              "summary": "Projects fail when software is built against its nature; tests, code review, continuous delivery and passionate, disciplined developers are what make it work.",
               "themes": ["agile", "craftsmanship"]
             }
           ],
@@ -2173,6 +2264,7 @@
               "title": "GMO'less Software Development Practices",
               "slides": "https://speakerdeck.com/lemiorhan/gmoless-software-development-practices",
               "video": "https://www.youtube.com/watch?v=TxJo4O9uHZ8",
+              "summary": "Projects fail because software is built against its own nature; agility and extreme programming practices are how to build it naturally.",
               "themes": ["agile", "craftsmanship"]
             }
           ]
@@ -2204,6 +2296,7 @@
             {
               "title": "The Key to Successful Projects: Agile Software Development Practices",
               "slides": "https://speakerdeck.com/lemiorhan/basarili-projelerin-anahtari-cevik-yazilim-gelistirme-pratikleri",
+              "summary": "Software projects fail for many reasons, and agile practices such as short cycles, TDD, refactoring, continuous integration and pair programming make them succeed.",
               "themes": ["agile"]
             }
           ]
@@ -2286,6 +2379,7 @@
             {
               "title": "Professional Code of Ethics in Software Engineering",
               "slides": "https://speakerdeck.com/lemiorhan/professional-code-of-ethics-in-software-engineering",
+              "summary": "Is software engineering a profession, and what do codes of ethics such as the joint IEEE-CS and ACM code ask of those who practice it?",
               "themes": ["ethics"]
             }
           ]
@@ -2298,6 +2392,7 @@
             {
               "title": "Professional Software Development, Practices and Ethics",
               "slides": "https://speakerdeck.com/lemiorhan/professional-software-development-practices-and-ethics",
+              "summary": "Software failures cost billions, so good software needs professional developers who combine agile and craftsmanship practices with a code of ethics.",
               "themes": ["ethics", "craftsmanship"]
             }
           ]
