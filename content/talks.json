@@ -126,6 +126,7 @@
           "talks": [
             {
               "title": "How AI Is Changing Our Software Development Culture",
+              "summary": "AI does not transform a team, it amplifies it: the roles of developers, teams and leaders shift, and trust has to be built outside the model, in tests and verification.",
               "themes": ["ai", "culture"]
             }
           ],
@@ -161,6 +162,7 @@
           "talks": [
             {
               "title": "Software Development in the Age of AI: Redefining Architecture, Quality and Culture",
+              "summary": "Software development in the age of AI: how architecture, quality and engineering culture are redefined once code itself becomes cheap.",
               "themes": ["ai", "architecture", "quality", "culture"]
             }
           ],
@@ -283,6 +285,7 @@
           "talks": [
             {
               "title": "Unlearn OOP: Back To Origins",
+              "summary": "Anemic models, giant services and mocking hell miss the original idea of OOP: objects as cells that guard their state and communicate through messages.",
               "themes": ["design"]
             }
           ],
@@ -339,7 +342,11 @@
               "summary": "A conversation about learning by committing to teach, building systems that change fast instead of chasing perfection, and AI as a tool developers still direct.",
               "themes": ["career"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2025-enderinko",
+            "alt": "Illustrated podcast cover: cartoon Lemi in a Craftgate polo beside the host in headphones, both at microphones, with the Enderinko podcast badge"
+          }
         },
         {
           "date": "2025-02-27",
@@ -1094,6 +1101,7 @@
             {
               "title": "Revolutionary Hexagonal Architecture",
               "video": "https://www.youtube.com/watch?v=B5SRBoubjao&t=21700s",
+              "summary": "Hexagonal architecture puts the domain at the center and pushes frameworks, databases and APIs out to adapters behind ports, so the core can be tested and changed on its own.",
               "themes": ["architecture"]
             }
           ],
@@ -1199,6 +1207,7 @@
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=VaeGtoH4dhU",
+              "summary": "A conversation about a career in software development, the lessons learned along the way, and advice for developers who are just starting out.",
               "themes": ["career"]
             }
           ],
@@ -1215,6 +1224,7 @@
           "talks": [
             {
               "title": "Professional Software Developer",
+              "summary": "Writing code is only the start: a professional developer owns the quality of their work, keeps learning, works as part of a team and holds to a code of ethics.",
               "themes": ["career", "craftsmanship"]
             }
           ]
@@ -1260,6 +1270,7 @@
             {
               "title": "Software Expertise",
               "video": "https://www.youtube.com/watch?v=RwyG2U7GuGA",
+              "summary": "A conversation about what it takes to become an expert in software, and how developers build depth through fundamentals, practice and learning from others.",
               "themes": ["career"]
             }
           ],
@@ -1304,6 +1315,7 @@
             {
               "title": "Is Agile Over? Let's Get Some Work Done",
               "video": "https://www.youtube.com/watch?v=9vVZLskBFBc",
+              "summary": "A panel on whether agile is over, and what teams need once the debate about process gives way to getting work done.",
               "themes": ["agile"]
             }
           ],
@@ -1359,10 +1371,12 @@
           "talks": [
             {
               "title": "Agile for Startups",
+              "summary": "Startups live in chaos: short iterations, fast customer feedback and technical practices that keep code easy to change are how that chaos turns into agility.",
               "themes": ["agile"]
             },
             {
               "title": "The Ethical Developer's Handbook",
+              "summary": "Developers hold power the people they serve barely understand, so an ethical developer sets standards of honesty, quality and care for users, and owns their mistakes.",
               "themes": ["ethics"]
             }
           ]
@@ -1433,6 +1447,7 @@
           "talks": [
             {
               "title": "How to Improve Motivation of Developers",
+              "summary": "Money and rituals do not motivate developers: trust, autonomy, mastery and a shared purpose build the environment where they motivate themselves.",
               "themes": ["motivation"]
             }
           ],
@@ -1487,6 +1502,7 @@
           "talks": [
             {
               "title": "Clean Software Design",
+              "summary": "Source code is the real software design, kept clean by tests, refactoring and review that lower coupling and raise cohesion so it can keep changing.",
               "themes": ["design"]
             }
           ],
@@ -1505,6 +1521,7 @@
             {
               "title": "Next-Generation Software Culture",
               "video": "https://www.youtube.com/watch?v=DRGnkTJqBzQ",
+              "summary": "Company success rests on a culture that cannot be faked, only grown slowly through ownership, code review, frequent releases, feedback loops and lifelong apprenticeship.",
               "themes": ["craftsmanship", "culture"]
             }
           ],
@@ -1522,6 +1539,7 @@
             {
               "title": "How to Prepare for Technical Interviews",
               "video": "https://www.youtube.com/watch?v=H1fapuTjCs4",
+              "summary": "How students can prepare for technical interviews, from strengthening their fundamentals and solving problems to showing how they think.",
               "themes": ["career"]
             }
           ],
@@ -1541,6 +1559,7 @@
             {
               "title": "Agile For Startups: How to Turn Chaos into Agility at Startups",
               "video": "https://www.youtube.com/watch?v=I9IDIXLN5Uc",
+              "summary": "Startups live in chaos: short iterations, fast customer feedback and technical practices that keep code easy to change are how that chaos turns into agility.",
               "themes": ["agile"]
             }
           ],
@@ -1627,6 +1646,7 @@
           "talks": [
             {
               "title": "The Passionate Developer's Guide to the Galaxy: A Roadmap to Mastery in Software",
+              "summary": "A roadmap from novice to master in software: strong fundamentals, deliberate practice, mentors and communities, and the passion that keeps a developer learning.",
               "themes": ["craftsmanship", "career"]
             }
           ]
@@ -1673,6 +1693,7 @@
           "talks": [
             {
               "title": "Git Anti-Patterns: How To Mess Up With Git And Love It Again",
+              "summary": "How git works behind the scenes explains the anti-patterns that lose work and tangle history, and the cure: commit early, perfect later, publish once.",
               "themes": ["git"]
             }
           ],
@@ -1707,6 +1728,7 @@
             {
               "title": "Interview",
               "video": "https://www.youtube.com/watch?v=KAHKXbIW-2M",
+              "summary": "A conversation about software development culture, and how craftsmanship, knowledge sharing and communities help developers and teams grow.",
               "themes": ["culture"]
             }
           ],
@@ -1724,6 +1746,7 @@
           "talks": [
             {
               "title": "Agile Testing Tools & Technologies",
+              "summary": "A panel on the tools and technologies of testing in agile teams, and on testing as part of development rather than a phase after it.",
               "themes": ["testing", "agile"]
             }
           ],
@@ -1742,6 +1765,7 @@
             {
               "title": "Agile Transformation Panel",
               "video": "https://www.youtube.com/watch?v=YZsAdA9HCFw",
+              "summary": "A panel on agile transformation, and why change starts with working with the right people and the culture they build.",
               "themes": ["agile"]
             }
           ],
@@ -1777,6 +1801,7 @@
           "talks": [
             {
               "title": "Fighting with Waste Driven Development",
+              "summary": "Teams learn to live with waste like debugging, manual deployments and unmerged branches: lean thinking means maximizing customer value by removing it.",
               "themes": ["lean"]
             }
           ],
@@ -1793,6 +1818,7 @@
           "talks": [
             {
               "title": "Crafting Professional Development",
+              "summary": "Professional development as a craft: clean code, tests, code review and continuous learning turn developers into professionals who take pride in their work.",
               "themes": ["craftsmanship"]
             }
           ],
@@ -1809,6 +1835,7 @@
           "talks": [
             {
               "title": "Agile Culture and Scrum",
+              "summary": "Scrum gives a team its rhythm, but agility comes from the culture behind it: trust, collaboration, transparency and short feedback loops.",
               "themes": ["agile"]
             }
           ],
@@ -1842,6 +1869,7 @@
             {
               "title": "Why Is TDD Hard to Practice?",
               "video": "https://www.youtube.com/watch?v=pX8wsryhRKo",
+              "summary": "A conversation about why TDD is hard to practice, and why it is a design discipline rather than a testing technique, one that takes patience and practice to learn.",
               "themes": ["testing"]
             }
           ],
@@ -1889,6 +1917,7 @@
           "talks": [
             {
               "title": "On the Eve of Technical Agility: Building a Software Development Culture",
+              "summary": "No process makes a team agile on its own: technical agility grows from a development culture of shared practices, clean code, tests and continuous learning.",
               "themes": ["agile", "culture"]
             }
           ]
@@ -1960,6 +1989,7 @@
             {
               "title": "Agile Management: The Third Generation of Management Philosophy",
               "video": "https://www.youtube.com/watch?v=25xGWtgfYYA",
+              "summary": "Management is entering its third generation: away from command and control, toward leaders who give self-organizing teams trust, autonomy and a shared purpose.",
               "themes": ["agile"]
             }
           ],
@@ -2158,6 +2188,7 @@
             {
               "title": "Searching The Missing Single Quote",
               "video": "https://www.youtube.com/watch?v=U2DA3a_hurk",
+              "summary": "Hours spent searching for a missing single quote are waste: craftsmanship practices like tests, clean code and review keep defects out instead of hunting them later.",
               "themes": ["craftsmanship", "quality"]
             }
           ],
@@ -2181,6 +2212,7 @@
           "talks": [
             {
               "title": "Software Development Practices",
+              "summary": "The everyday practices of professional software development, from version control, tests and continuous integration to code review and pair programming.",
               "themes": ["craftsmanship"]
             }
           ],
@@ -2286,6 +2318,7 @@
           "talks": [
             {
               "title": "“Even More Efficient” Software Development Processes",
+              "summary": "Making development more efficient is less about adding process than removing waste: short iterations, fast feedback and engineering practices that keep quality high.",
               "themes": ["agile"]
             }
           ],
@@ -2303,6 +2336,7 @@
           "talks": [
             {
               "title": "Use Git Like a Master",
+              "summary": "A hands-on training on Git: how commits, branches and merges really work, and the workflows and habits that keep a team's history clean.",
               "themes": ["git"]
             }
           ],
@@ -2355,6 +2389,7 @@
           "talks": [
             {
               "title": "From Novice to Professional Software Developer: A Transition Guide",
+              "summary": "What changes on the way from student to professional developer: fundamentals over tools, practice, mentors, and caring about the quality of what you build.",
               "themes": ["career", "craftsmanship"]
             }
           ]
@@ -2405,6 +2440,7 @@
           "talks": [
             {
               "title": "On Building a Knowledge Sharing Culture in Agile Organizations",
+              "summary": "Knowledge sharing has to be built into how an agile organization works, through code review, pair programming, brown bag sessions, internal tech days and coding katas.",
               "themes": ["culture", "agile"]
             }
           ]
@@ -2417,6 +2453,7 @@
           "talks": [
             {
               "title": "The Elephant in the Room: Motivation",
+              "summary": "Motivation is the problem everyone sees and no one names: deadlines and pressure wear it down, and trust, learning and room to grow bring it back.",
               "themes": ["motivation"]
             }
           ],
@@ -2465,6 +2502,7 @@
           "talks": [
             {
               "title": "Career Journey",
+              "summary": "A panel of computer engineering alumni sharing their career journeys with students, from first jobs to the lessons learned along the way.",
               "themes": ["career"]
             }
           ],
@@ -2483,6 +2521,7 @@
           "talks": [
             {
               "title": "The Elephant in the Room: Motivation",
+              "summary": "Motivation is the problem everyone sees and no one names: deadlines and pressure wear it down, and trust, learning and room to grow bring it back.",
               "themes": ["motivation"]
             }
           ],
@@ -2499,6 +2538,7 @@
           "talks": [
             {
               "video": "https://www.youtube.com/watch?v=MrIj53lFoSw",
+              "summary": "Code review as a daily team discipline that catches defects early, spreads knowledge across the team and builds a culture of shared ownership.",
               "themes": ["code-review", "culture"]
             }
           ],
@@ -2514,6 +2554,7 @@
           "talks": [
             {
               "title": "Agile and Scrum",
+              "summary": "An introduction to agile and Scrum: short sprints, self-organizing teams and continuous feedback, with the engineering practices that keep quality high.",
               "themes": ["agile"]
             }
           ],
