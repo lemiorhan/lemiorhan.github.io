@@ -998,16 +998,25 @@ def event(ev, archive, page):
             li = '<li data-themes="{}">'.format(attr(' '.join(keys))) if keys else '<li>'
             out.append('      ' + li + ' '.join(parts) + '</li>')
         out.append('    </ul>')
-    if ev.get('photo'):
-        out += indent(event_photo(ev, page), 4)
+    if 'photo' in ev:
+        out += indent(event_photos(ev, page), 4)
     out += ['  </div>', '</li>']
     return out
 
 
-def event_photo(ev, page):
-    photo = ev['photo']
-    if not photo.get('file') or not photo.get('alt'):
-        page.fail('photo of {!r} needs both "file" and "alt"'.format(ev['name']))
+def event_photos(ev, page):
+    photos = ev['photo'] if isinstance(ev['photo'], list) else [ev['photo']]
+    if not photos or not all(isinstance(p, dict) for p in photos):
+        page.fail('photo of {!r} must be an object or a list of objects'.format(ev['name']))
+    out = ['<div class="ev-photos">']
+    for photo in photos:
+        out += indent(event_photo(ev, photo, page), 2)
+    return out + ['</div>']
+
+
+def event_photo(ev, photo, page):
+    if not all(isinstance(photo.get(k), str) and photo[k] for k in ('file', 'alt')):
+        page.fail('photo of {!r} needs "file" and "alt" as non-empty strings'.format(ev['name']))
     name = photo['file']
     for suffix in ('', '-640'):
         if not os.path.isfile(os.path.join(ROOT, 'assets', 'talks', name + suffix + '.jpg')):

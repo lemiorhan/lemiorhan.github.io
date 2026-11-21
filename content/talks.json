@@ -1257,24 +1257,23 @@
               "slides": "https://speakerdeck.com/lemiorhan/10-exclusive-development-practice-every-developer-should-consider",
               "summary": "Practices for coupled, hard-to-test code: mono-repos, modular monoliths before microservices, hexagonal design, walking skeletons, frequent releases and mob programming.",
               "themes": ["craftsmanship"]
+            },
+            {
+              "title": "Panel",
+              "summary": "A panel on entrepreneurship and managing teams.",
+              "themes": ["career", "culture"]
             }
           ],
-          "photo": {
-            "file": "2019-devfest-istanbul",
-            "alt": "Lemi on the DevFest Istanbul 2019 stage with a terminal on the screen behind"
-          }
-        },
-        {
-          "date": "2019-11-24",
-          "name": "DevFest Istanbul 2019",
-          "place": "istanbul",
-          "url": "https://devfest.istanbul/",
-          "role": "Panel",
-          "spoken": "tr",
-          "photo": {
-            "file": "2019-devfest-istanbul-panel",
-            "alt": "Lemi in a black polo shirt speaking into a handheld microphone from a blue armchair, two panelists beside him and orange balloons behind"
-          }
+          "photo": [
+            {
+              "file": "2019-devfest-istanbul",
+              "alt": "Lemi on the DevFest Istanbul 2019 stage with a terminal on the screen behind"
+            },
+            {
+              "file": "2019-devfest-istanbul-panel",
+              "alt": "Lemi in a black polo shirt speaking into a handheld microphone from a blue armchair, two panelists beside him and orange balloons behind"
+            }
+          ]
         },
         {
           "date": "2019-11-20",

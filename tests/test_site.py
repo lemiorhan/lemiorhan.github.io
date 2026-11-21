@@ -357,6 +357,37 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
         return next(t for ev in self.events(d) if ev['name'] == 'Karabük Üniversitesi Programlama Günleri 2016'
                     for t in ev['talks'] if t.get('title') == 'Git: Not What You Think')
 
+    def list_photo_event(self, d):
+        return next(ev for ev in self.events(d) if isinstance(ev.get('photo'), list))
+
+    def test_a_photo_in_a_list_whose_file_or_alt_is_not_a_non_empty_string(self):
+        name = self.list_photo_event(read_json(ROOT, 'content', 'talks.json'))['name']
+        for key in ('file', 'alt'):
+            for value in (None, '', 7, ['a']):
+                def odd(d):
+                    photo = self.list_photo_event(d)['photo'][-1]
+                    if value is None:
+                        photo.pop(key)
+                    else:
+                        photo[key] = value
+                with self.subTest(key=key, value=value):
+                    self.assertRejected(self.edit('talks', odd),
+                                        'photo of {!r} needs "file" and "alt" as non-empty strings'.format(name))
+
+    def test_a_photo_in_a_list_whose_file_does_not_exist(self):
+        name = self.list_photo_event(read_json(ROOT, 'content', 'talks.json'))['name']
+
+        def nowhere(d):
+            self.list_photo_event(d)['photo'][-1]['file'] = 'nowhere'
+        self.assertRejected(self.edit('talks', nowhere), 'photo of {!r}: assets/talks/nowhere.jpg does not exist'.format(name))
+
+    def test_a_talk_photo_that_is_neither_an_object_nor_a_list_of_objects(self):
+        for photo in ('x', 7, ['x'], [7], []):
+            def odd(d):
+                next(ev for ev in self.events(d) if ev['name'] == 'Havelsan')['photo'] = photo
+            with self.subTest(photo=photo):
+                self.assertRejected(self.edit('talks', odd), "photo of 'Havelsan' must be an object or a list of objects")
+
     def test_a_titled_talk_without_themes(self):
         self.assertRejected(self.edit('talks', lambda d: self.git_talk(d).pop('themes')),
                             "talk 'Git: Not What You Think' at 'Karabük Üniversitesi Programlama Günleri 2016' needs \"themes\"")
@@ -1221,7 +1252,8 @@ class BuiltSite(unittest.TestCase):
 
     def test_every_talk_photo_is_the_size_its_thumbnail_declares(self):
         photos = self.trees['talks'].find(has_class('ev-photo'))
-        expected = sum(1 for evs in self.talks['events'].values() for ev in evs if ev.get('photo'))
+        expected = sum(len(ev['photo']) if isinstance(ev['photo'], list) else 1
+                       for evs in self.talks['events'].values() for ev in evs if ev.get('photo'))
         self.assertEqual(len(photos), expected)
         self.assertGreater(expected, 1)
         for a in photos:
@@ -1229,6 +1261,47 @@ class BuiltSite(unittest.TestCase):
             declared = (int(img.attrs['width']), int(img.attrs['height']))
             self.assertEqual(jpeg_size(os.path.join(self.out, 'talks', img.attrs['src'])), declared, img.attrs['src'])
             self.assertTrue(os.path.isfile(os.path.join(self.out, 'talks', a.attrs['href'])), a.attrs['href'])
+
+    def test_an_event_with_a_list_of_photos_shows_each_one_in_order(self):
+        rows = self.trees['talks'].find(has_class('ev'))
+
+        def day(li):
+            times = li.find(lambda n: n.tag == 'time')
+            return times[0].attrs['datetime'] if times else None
+        seen = 0
+        for evs in self.talks['events'].values():
+            for ev in evs:
+                if not isinstance(ev.get('photo'), list):
+                    continue
+                row = [li for li in rows if li.find(has_class('ev-name'))[0].all_text() == ev['name']
+                       and day(li) == ev.get('date')]
+                self.assertEqual(len(row), 1, ev['name'])
+                shown = [a.find(lambda n: n.tag == 'img')[0].attrs['src'].rsplit('/', 1)[-1]
+                         for a in row[0].find(has_class('ev-photo'))]
+                self.assertEqual(shown, [p['file'] + '-640.jpg' for p in ev['photo']], ev['name'])
+                seen += 1
+        self.assertGreater(seen, 0)
+
+    def test_event_photos_sit_in_a_wrapping_row_of_capped_width(self):
+        rows = [li for li in self.trees['talks'].find(has_class('ev')) if li.find(has_class('ev-photo'))]
+        self.assertGreater(len(rows), 1)
+        self.assertTrue(any(len(li.find(has_class('ev-photo'))) > 1 for li in rows),
+                        'without an event of several photos the grouping below has nothing to check')
+        for li in rows:
+            name = li.find(has_class('ev-name'))[0].all_text()
+            wrappers = li.find(has_class('ev-photos'))
+            self.assertEqual([w.tag for w in wrappers], ['div'], name)
+            self.assertTrue(all(a.parent is wrappers[0] for a in li.find(has_class('ev-photo'))), name)
+        with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
+            css = f.read()
+        self.assertEqual(css_values(css, '.ev-photos', 'display'), ['flex'])
+        self.assertEqual(css_values(css, '.ev-photos', 'flex-wrap'), ['wrap'])
+        length = r'^(?!0+(\.0+)?(rem|px)$)[\d.]+(rem|px)$'
+        for selector, prop in (('.ev-photos', 'margin-top'), ('.ev-photos', 'gap'), ('.ev-photo', 'max-width')):
+            values = css_values(css, selector, prop)
+            self.assertEqual(len(values), 1, selector + ' ' + prop)
+            self.assertRegex(values[0], length, selector + ' ' + prop)
+        self.assertRegex(''.join(css_values(css, '.ev-photo', 'flex')), r'^1 1 (?!0+(\.0+)?rem$)[\d.]+rem$')
 
     def test_every_file_in_assets_talks_is_used_by_a_built_page(self):
         folder = os.path.join(ROOT, 'assets', 'talks')
