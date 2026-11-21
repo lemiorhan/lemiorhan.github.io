@@ -475,7 +475,7 @@
           ],
           "photo": {
             "file": "2024-tutsu-sektor",
-            "alt": "Lemi in a black polo shirt seated in a beige armchair in front of a white curtain, hands clasped"
+            "alt": "Lemi in a black polo shirt talking with both hands from a beige armchair, the host holding a notebook across a small wooden table with a microphone, a white curtain behind them"
           }
         },
         {
@@ -991,6 +991,7 @@
       ],
       "2020": [
         {
+          "date": "2020-12-13",
           "name": "The Unspoken Rules of a Better Professional Life",
           "place": "online",
           "spoken": "tr",
