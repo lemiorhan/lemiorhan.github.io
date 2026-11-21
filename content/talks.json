@@ -1400,6 +1400,7 @@
           }
         },
         {
+          "date": "2019-04-27",
           "name": "Kodla.co 2019",
           "place": "trabzon",
           "spoken": "tr",
@@ -1757,6 +1758,24 @@
           }
         },
         {
+          "date": "2017-12-13",
+          "name": "Software Craftsmanship Turkey meetup",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Lemi's Way About Preparing and Presenting Talks",
+              "slides": "https://speakerdeck.com/lemiorhan/lemis-way-about-preparing-and-presenting-talks",
+              "summary": "From choosing a topic that excites the speaker to handling stress, timing, trolls and the mishaps that happen in front of an audience.",
+              "themes": ["speaking"]
+            }
+          ],
+          "photo": {
+            "file": "2016-sc-turkey",
+            "alt": "Lemi speaking to a seated audience in a concrete-walled room painted with dancing silhouettes"
+          }
+        },
+        {
           "date": "2017-11-26",
           "name": "DevFest Istanbul 2017",
           "place": "istanbul",
@@ -1930,6 +1949,7 @@
           }
         },
         {
+          "date": "2017-04-14",
           "name": "Dinamikler 2017",
           "place": "istanbul",
           "url": "https://www.dinamikler.org/",
@@ -2053,6 +2073,7 @@
           }
         },
         {
+          "date": "2017-02-25",
           "name": "Gebze Geek Day 2017",
           "place": "gebze",
           "spoken": "tr",
@@ -2139,23 +2160,6 @@
           }
         },
         {
-          "name": "Software Craftsmanship Turkey meetup",
-          "place": "istanbul",
-          "spoken": "tr",
-          "talks": [
-            {
-              "title": "Lemi's Way About Preparing and Presenting Talks",
-              "slides": "https://speakerdeck.com/lemiorhan/lemis-way-about-preparing-and-presenting-talks",
-              "summary": "From choosing a topic that excites the speaker to handling stress, timing, trolls and the mishaps that happen in front of an audience.",
-              "themes": ["speaking"]
-            }
-          ],
-          "photo": {
-            "file": "2016-sc-turkey",
-            "alt": "Lemi speaking to a seated audience in a concrete-walled room painted with dancing silhouettes"
-          }
-        },
-        {
           "date": "2016-09-29",
           "name": "Yönetim 2.0, Gelecekhane",
           "spoken": "tr",
@@ -2209,6 +2213,16 @@
           }
         },
         {
+          "date": "2016-04-01",
+          "name": "Boğaziçi University Tech Summit 2016",
+          "place": "istanbul",
+          "spoken": "tr",
+          "photo": {
+            "file": "2016-bogazici-tech-summit",
+            "alt": "Lemi on a small stage in a room of red seats, seen from the back rows"
+          }
+        },
+        {
           "date": "2016-03-19",
           "name": "Agile Middle East 2016",
           "place": "dubai",
@@ -2227,15 +2241,7 @@
           }
         },
         {
-          "name": "Boğaziçi University Tech Summit 2016",
-          "place": "istanbul",
-          "spoken": "tr",
-          "photo": {
-            "file": "2016-bogazici-tech-summit",
-            "alt": "Lemi on a small stage in a room of red seats, seen from the back rows"
-          }
-        },
-        {
+          "date": "2016-02-26",
           "name": "Karabük Üniversitesi Programlama Günleri 2016",
           "place": "karabuk",
           "spoken": "tr",
@@ -2372,6 +2378,7 @@
           }
         },
         {
+          "date": "2015-04-10",
           "name": "Boğaziçi University Exit Days 2015",
           "place": "istanbul",
           "spoken": "tr"
