@@ -392,6 +392,14 @@
           "name": "MacTech Teknoloji ve Yazılım Zirvesi 2024, Marmara Üniversitesi",
           "place": "istanbul",
           "spoken": "tr",
+          "talks": [
+            {
+              "title": "Things About Software Development Not Taught In School",
+              "slides": "https://speakerdeck.com/lemiorhan/things-about-software-development-not-taught-in-school",
+              "summary": "What school leaves out about the profession: products are not projects, coding is a small part of a thinking job, untested and untidied code rots, and building the wrong thing is the biggest trap.",
+              "themes": ["career", "craftsmanship"]
+            }
+          ],
           "photo": {
             "file": "2024-mactech",
             "alt": "Lemi with a handheld microphone on stage, beside a lectern carrying the MacTech logo"
@@ -679,7 +687,11 @@
               "summary": "Microservices are a deployment strategy, not modularity: independent modules come from well-defined, extensible bounded contexts that talk through messages.",
               "themes": ["architecture"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2022-devfest-izmir",
+            "alt": "Lemi on a wide stage lined with gold and white balloons, a Microlith slide about the distributed big ball of mud on the screen behind"
+          }
         },
         {
           "date": "2022-12-11",
@@ -715,7 +727,11 @@
               "summary": "Quality is sustainable customer satisfaction, more than bug-free code, and cannot be added later: it grows from people, design, tests and direct customer feedback.",
               "themes": ["quality", "testing"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2022-test-summit",
+            "alt": "Lemi smiling on camera from home, a black microphone in the foreground and bookshelves behind him"
+          }
         },
         {
           "date": "2022-10-15",
@@ -861,7 +877,11 @@
               "summary": "A conversation about two decades of software: the shift from pure technology to teamwork and agility, people problems that persist, and learning outside working hours.",
               "themes": ["career", "speaking"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2021-junior-bile-degil",
+            "alt": "Podcast cover on a purple background: a pixel-art plumber above the words Junior Bile Değil in an old computer window"
+          }
         },
         {
           "date": "2021-08-13",
@@ -962,7 +982,11 @@
               "summary": "A conversation about code review as shared understanding rather than bug hunting, with a method that fits each team.",
               "themes": ["code-review"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "uretim-bandi",
+            "alt": "Podcast cover on a coral background: a white B logo above the words Üretim Bandı"
+          }
         }
       ],
       "2020": [
@@ -1013,7 +1037,11 @@
               "summary": "A conversation about a team without titles that designs, codes and reviews together through mob and pair programming.",
               "themes": ["craftsmanship", "architecture"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "uretim-bandi",
+            "alt": "Podcast cover on a coral background: a white B logo above the words Üretim Bandı"
+          }
         },
         {
           "date": "2020-09-12",
@@ -1047,7 +1075,11 @@
               "summary": "Layered monoliths and small microservices decay alike without internal modularity: low coupling, high cohesion and inverted dependencies that keep the domain at the center.",
               "themes": ["architecture"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2020-devnot-ddd",
+            "alt": "Lemi smiling on webcam with earphones under the Devnot Microservices & DDD Konferansı banner, his Modular Architecture for Pragmatic Developers title slide beside him"
+          }
         },
         {
           "name": "Online Agile Talks 2020 #3, Agile Türkiye",
@@ -1061,7 +1093,11 @@
               "summary": "Focused on deadlines, teams miss the gorillas in plain sight: building projects instead of products, sidelining technical practices and misreading agile rituals.",
               "themes": ["product", "agile"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2020-online-agile-talks",
+            "alt": "Video call screenshot: a slide with a race car reading Building software is a journey to generate business value from complexity, and Lemi's webcam tile among blurred participants"
+          }
         },
         {
           "date": "2020-05-12",
@@ -1076,7 +1112,11 @@
               "summary": "Code review works when it is small, early and egoless, and breaks down without team agreements.",
               "themes": ["code-review"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2020-itake",
+            "alt": "Lemi at his home desk with earphones, the 10 Faulty Behaviors of Code Review title slide on his laptop and speaker notes with a 45-minute timer on the monitor beside it"
+          }
         },
         {
           "date": "2020-04-15",
@@ -1090,7 +1130,11 @@
               "summary": "Git stops being frightening once seen as a graph of snapshots: every command moves pointers on it, and committed code is almost never lost.",
               "themes": ["git"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2020-acik-seminer-git",
+            "alt": "Video call screenshot: a commit graph with master, a tag and a typofix branch under HEAD, hand-drawn arrows sketching a rebase, and Lemi's webcam tile in the corner"
+          }
         },
         {
           "date": "2020-02-22",
@@ -1112,6 +1156,42 @@
         }
       ],
       "2019": [
+        {
+          "date": "2019-12-18",
+          "name": "Software Craftsmanship Turkey meetup",
+          "place": "istanbul",
+          "url": "https://kommunity.com/software-craftsmanship-turkey/events/panel-yazilimcinin-yolu",
+          "role": "Panel",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "The Developer's Path",
+              "summary": "A panel with Samet Atdag and Aykut M. Bulgu, moderated by Erkan Erol, on the challenges, doubts and crossroads of a developer's career, and the past, present and future of the software industry.",
+              "themes": ["career"]
+            }
+          ],
+          "photo": {
+            "file": "2019-sc-turkey-panel",
+            "alt": "A moderator holding notes and three panelists, Lemi speaking into a handheld microphone, seated on red chairs on a low stage beside a Koçfinans banner"
+          }
+        },
+        {
+          "date": "2019-12-12",
+          "name": "Marmara University, Computer Engineering",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Next-Gen Engineering Culture: Guide for Building the Right Products Right",
+              "summary": "A guide to building the right products right, and the engineering culture it takes.",
+              "themes": ["culture"]
+            }
+          ],
+          "photo": {
+            "file": "2019-marmara",
+            "alt": "Lemi standing at the back of a classroom among smiling students seated at wooden desks"
+          }
+        },
         {
           "date": "2019-12-07",
           "name": "TEDxTarsusAmericanCollege",
@@ -1149,6 +1229,23 @@
           }
         },
         {
+          "date": "2019-11-25",
+          "name": "Havelsan",
+          "place": "ankara",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Next-Gen Engineering Culture: Guide for Building the Right Products Right",
+              "summary": "A guide to building the right products right, and the engineering culture it takes.",
+              "themes": ["culture"]
+            }
+          ],
+          "photo": {
+            "file": "2019-havelsan",
+            "alt": "Lemi in front of a seated audience on red banquet chairs, the title slide with an elephant drawing projected behind him and a Havelsan lectern to the side"
+          }
+        },
+        {
           "date": "2019-11-24",
           "name": "DevFest Istanbul 2019",
           "place": "istanbul",
@@ -1168,6 +1265,18 @@
           }
         },
         {
+          "date": "2019-11-24",
+          "name": "DevFest Istanbul 2019",
+          "place": "istanbul",
+          "url": "https://devfest.istanbul/",
+          "role": "Panel",
+          "spoken": "tr",
+          "photo": {
+            "file": "2019-devfest-istanbul-panel",
+            "alt": "Lemi in a black polo shirt speaking into a handheld microphone from a blue armchair, two panelists beside him and orange balloons behind"
+          }
+        },
+        {
           "date": "2019-11-20",
           "name": "QaCast S1E8",
           "role": "Podcast",
@@ -1178,7 +1287,11 @@
               "summary": "A conversation about what software quality means, the role of testing and QA, and the team and engineering culture around them.",
               "themes": ["quality"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2019-qacast",
+            "alt": "Episode cover: Lemi's name on a yellow band across a desk with a turntable, headphones, a laptop and vinyl records, the QaCast label in the corner"
+          }
         },
         {
           "date": "2019-11-02",
@@ -1197,6 +1310,24 @@
           "photo": {
             "file": "2019-devoxx-ukraine",
             "alt": "Lemi speaking at Devoxx Ukraine 2019 beside a slide about hiring developers"
+          }
+        },
+        {
+          "date": "2019-10-24",
+          "name": "Agile Turkey Summit 2019",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "How Engineering Drives Agility",
+              "slides": "https://speakerdeck.com/lemiorhan/how-engineering-drives-agility",
+              "summary": "With Hakan Erdoğan and Sabri Onur Tüzün: no agile framework saves a team weak in engineering, so agility grows in phases, from long-lived branches to continuous delivery where done means verified in production.",
+              "themes": ["agile", "craftsmanship"]
+            }
+          ],
+          "photo": {
+            "file": "2019-agile-turkey-summit",
+            "alt": "Lemi pointing at a Phase 3: Continuously Delivering Value slide with a Darth Vader helmet drawing, two co-speakers standing at the side of a hotel ballroom"
           }
         },
         {
@@ -1227,7 +1358,47 @@
               "summary": "Writing code is only the start: a professional developer owns the quality of their work, keeps learning, works as part of a team and holds to a code of ethics.",
               "themes": ["career", "craftsmanship"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2019-mysev",
+            "alt": "Lemi in a black t-shirt and shorts talking to high school students seated in a semicircle with laptops, a video camera on a tripod recording"
+          }
+        },
+        {
+          "date": "2019-08-25",
+          "name": "HacknBreak 2019",
+          "place": "izmir",
+          "url": "https://hacknbreak.com/hnb2019/",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Programmers' Zen",
+              "summary": "Principles about code, career and life from one developer's journey: programming, teamwork, technical and technology choices, deciding to quit and founding a company.",
+              "themes": ["career"]
+            }
+          ],
+          "photo": {
+            "file": "2019-hacknbreak",
+            "alt": "Lemi speaking beside a projection screen under a large shade tent, a crowd on white plastic chairs and HacknBreak and Open Campus banners behind him"
+          }
+        },
+        {
+          "date": "2019-08-21",
+          "name": "Software Craftsmanship Turkey meetup",
+          "place": "istanbul",
+          "url": "https://kommunity.com/software-craftsmanship-turkey/events/zen-of-programming-career-principles-about-code-career-and-life",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Programmers' Zen",
+              "summary": "Principles about code, career and life from one developer's journey: programming, teamwork, technical and technology choices, deciding to quit and founding a company.",
+              "themes": ["career"]
+            }
+          ],
+          "photo": {
+            "file": "2019-sc-turkey-zen",
+            "alt": "Lemi speaking in front of a projection screen to a packed audience seated in an atrium, Koçfinans and TechSquare banners around the stage"
+          }
         },
         {
           "name": "Kodla.co 2019",
@@ -1580,7 +1751,11 @@
               "summary": "A conversation about how iyzico changed its product development process at different stages of the company and moved to several product teams.",
               "themes": ["product"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "uretim-bandi",
+            "alt": "Podcast cover on a coral background: a white B logo above the words Üretim Bandı"
+          }
         },
         {
           "date": "2017-11-26",
