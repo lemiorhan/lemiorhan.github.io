@@ -1083,24 +1083,6 @@
           }
         },
         {
-          "name": "Online Agile Talks 2020 #3, Agile Türkiye",
-          "place": "online",
-          "spoken": "tr",
-          "talks": [
-            {
-              "title": "Finding The Invisible Gorilla At Your Product Development Journey",
-              "slides": "https://speakerdeck.com/lemiorhan/finding-the-invisible-gorilla-at-your-product-development-journey",
-              "video": "https://www.youtube.com/watch?v=g0-Lramjn3A",
-              "summary": "Focused on deadlines, teams miss the gorillas in plain sight: building projects instead of products, sidelining technical practices and misreading agile rituals.",
-              "themes": ["product", "agile"]
-            }
-          ],
-          "photo": {
-            "file": "2020-online-agile-talks",
-            "alt": "Video call screenshot: a slide with a race car reading Building software is a journey to generate business value from complexity, and Lemi's webcam tile among blurred participants"
-          }
-        },
-        {
           "date": "2020-05-12",
           "name": "ITAKE Unconference 2020",
           "place": "online",
@@ -1117,6 +1099,25 @@
           "photo": {
             "file": "2020-itake",
             "alt": "Lemi at his home desk with earphones, the 10 Faulty Behaviors of Code Review title slide on his laptop and speaker notes with a 45-minute timer on the monitor beside it"
+          }
+        },
+        {
+          "date": "2020-04-25",
+          "name": "Online Agile Talks 2020 #3, Agile Türkiye",
+          "place": "online",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Finding The Invisible Gorilla At Your Product Development Journey",
+              "slides": "https://speakerdeck.com/lemiorhan/finding-the-invisible-gorilla-at-your-product-development-journey",
+              "video": "https://www.youtube.com/watch?v=g0-Lramjn3A",
+              "summary": "Focused on deadlines, teams miss the gorillas in plain sight: building projects instead of products, sidelining technical practices and misreading agile rituals.",
+              "themes": ["product", "agile"]
+            }
+          ],
+          "photo": {
+            "file": "2020-online-agile-talks",
+            "alt": "Video call screenshot: a slide with a race car reading Building software is a journey to generate business value from complexity, and Lemi's webcam tile among blurred participants"
           }
         },
         {
@@ -1501,6 +1502,12 @@
           "name": "KoçFinans Lunch&Learn",
           "place": "istanbul",
           "spoken": "tr",
+          "talks": [
+            {
+              "summary": "A talk on engineering culture and the agile mindset.",
+              "themes": ["culture", "agile"]
+            }
+          ],
           "photo": {
             "file": "2018-kocfinans",
             "alt": "Two speakers at the front of an office lounge, the audience seated at tables"
@@ -1511,6 +1518,12 @@
           "name": "Agile Turkey Summit 2018",
           "place": "istanbul",
           "spoken": "tr",
+          "talks": [
+            {
+              "summary": "A talk on engineering culture and the agile mindset.",
+              "themes": ["culture", "agile"]
+            }
+          ],
           "photo": {
             "file": "2018-agile-turkey",
             "alt": "Three speakers at the front of a room beside a slide about building a healthy company culture"
@@ -1551,7 +1564,11 @@
               "summary": "Developers hold power the people they serve barely understand, so an ethical developer sets standards of honesty, quality and care for users, and owns their mistakes.",
               "themes": ["ethics"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2018-hacknbreak",
+            "alt": "Lemi in a black polo shirt and khaki shorts pointing at the audience under a large shade tent, students seated on wooden benches and plastic chairs with trees behind them"
+          }
         },
         {
           "date": "2018-06-07",
@@ -1843,7 +1860,11 @@
               "summary": "A roadmap from novice to master in software: strong fundamentals, deliberate practice, mentors and communities, and the passion that keeps a developer learning.",
               "themes": ["craftsmanship", "career"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2017-hacknbreak",
+            "alt": "Lemi in a black t-shirt and speaker badge standing in front of a bright projection screen, seen from behind a seated audience"
+          }
         },
         {
           "date": "2017-06-21",
@@ -1877,7 +1898,11 @@
               "summary": "A conversation about how iyzico's teams keep quality high through weekly sprints, mandatory code review, heavy pair programming and automated tests that give fast feedback.",
               "themes": ["culture", "product"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2017-yazilim-ofisleri",
+            "alt": "Lemi in a red plaid shirt talking with the interviewer in front of the iyzico easy payment logo on a white wall, turquoise and grey sofas behind them"
+          }
         },
         {
           "date": "2017-05-26",
@@ -1901,6 +1926,12 @@
           "name": "İzmir Ekonomi Üniversitesi",
           "place": "izmir",
           "spoken": "tr",
+          "talks": [
+            {
+              "summary": "A talk on software development culture and the agile mindset.",
+              "themes": ["culture", "agile"]
+            }
+          ],
           "photo": {
             "file": "2017-izmir-ekonomi",
             "alt": "Lemi at the front of a classroom, students at their desks with laptops"
@@ -2078,6 +2109,12 @@
           "name": "Gebze Geek Day 2017",
           "place": "gebze",
           "spoken": "tr",
+          "talks": [
+            {
+              "title": "The Cornerstones of Writing Quality Code",
+              "themes": ["quality"]
+            }
+          ],
           "photo": {
             "file": "2017-gebze-geek-day",
             "alt": "Lemi presenting in a lecture hall, the title slide on the screen beside"
@@ -2746,19 +2783,6 @@
           }
         },
         {
-          "name": "Marmara University, Computer Engineering",
-          "place": "istanbul",
-          "spoken": "tr",
-          "talks": [
-            {
-              "title": "Professional Code of Ethics in Software Engineering",
-              "slides": "https://speakerdeck.com/lemiorhan/professional-code-of-ethics-in-software-engineering",
-              "summary": "Is software engineering a profession, and what do codes of ethics such as the joint IEEE-CS and ACM code ask of those who practice it?",
-              "themes": ["ethics"]
-            }
-          ]
-        },
-        {
           "date": "2012-05-18",
           "name": "Marmara University, Faculty of Engineering",
           "place": "istanbul",
@@ -2769,6 +2793,20 @@
               "slides": "https://speakerdeck.com/lemiorhan/professional-software-development-practices-and-ethics",
               "summary": "Software failures cost billions, so good software needs professional developers who combine agile and craftsmanship practices with a code of ethics.",
               "themes": ["ethics", "craftsmanship"]
+            }
+          ]
+        },
+        {
+          "date": "2012-03-28",
+          "name": "Marmara University, Computer Engineering",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Professional Code of Ethics in Software Engineering",
+              "slides": "https://speakerdeck.com/lemiorhan/professional-code-of-ethics-in-software-engineering",
+              "summary": "Is software engineering a profession, and what do codes of ethics such as the joint IEEE-CS and ACM code ask of those who practice it?",
+              "themes": ["ethics"]
             }
           ]
         }
