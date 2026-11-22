@@ -226,8 +226,9 @@ class SumoLive(unittest.TestCase):
             source = f.read()
         body = source[source.index('function setupSumoLive()'):source.index('function setupLightbox()')]
         self.assertEqual(set(re.findall(r'\btext\.(\w+)', body)) | {'noscript'}, set(build.SUMO_TEXT))
-        filled = {key: tuple(re.findall(r'(\w+):', values))
-                  for key, values in re.findall(r'\bfill\(text\.(\w+), \{([^}]*)\}\)', body)}
+        calls = re.findall(r'\bfill\(text\.(\w+), \{([^}]*)\}\)', body)
+        self.assertEqual(len(calls), len(re.findall(r'\bfill\(', body)), 'a fill() call of another shape escapes this scan')
+        filled = {key: tuple(re.findall(r'(\w+):', values)) for key, values in calls}
         self.assertEqual(filled, build.SUMO_TEMPLATES)
 
     def test_the_built_block_says_it_needs_javascript_and_site_js_replaces_that_with_loading(self):
@@ -331,6 +332,22 @@ class SumoLive(unittest.TestCase):
                 out = run(in_japan(2026, 11, 15, 10), kyushu_2026_after(7), settings={'leaders_max': limit})
                 self.assertEqual([t['rows'] for t in out['settled']['leaders']], [rows])
                 self.assertEqual(out['settled']['leaders'][0]['caption'], leaders_caption(7))
+
+    def test_when_the_leaders_alone_are_more_than_the_limit_no_leaderboard_is_shown(self):
+        # After day 1 twenty-one rikishi are 1-0.
+        out = run(in_japan(2026, 11, 9, 10), kyushu_2026_after(1))
+        self.assertEqual(out['settled']['facts'][-1], day_row(2))
+        self.assertEqual(out['settled']['leaders'], [])
+        self.assertEqual(out['settled']['order'], ['sumo-data', 'sumo-status', 'infobox', 'banzuke', 'sumo-note'])
+        top = run(in_japan(2026, 11, 9, 10), kyushu_2026_after(1), settings={'leaders_max': 21})
+        self.assertEqual([len(t['rows']) for t in top['settled']['leaders']], [1])
+        self.assertEqual(top['settled']['leaders'][0]['rows'][0][0], '1-0')
+
+    def test_the_day_by_day_fixture_adds_up_to_the_counts_the_api_gave_after_the_last_day(self):
+        def counts(banzuke):
+            return [(r['shikonaEn'], r['wins'], r['losses'], r['absences']) for r in banzuke['east'] + banzuke['west']]
+        self.assertEqual(counts(on_day(15)), counts(fixture('banzuke', '202611')))
+        self.assertGreater(len(counts(on_day(15))), 1)
 
     def test_on_the_first_morning_it_shows_the_day_and_no_leaders_yet(self):
         out = run(in_japan(2026, 11, 8, 10), kyushu_2026_after(0))

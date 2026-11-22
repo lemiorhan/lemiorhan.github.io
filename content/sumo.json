@@ -123,7 +123,7 @@
       "heading": "Son durum",
       "cmd": "curl sumo-api.com",
       "blocks": [
-        { "type": "p", "text": "Bu bölüm sayfa her açıldığında güncelleniyor. Sonuçlar ve banzuke [Sumo API](https://www.sumo-api.com/) üzerinden geliyor.[^17] Turnuva tarihleri Japonya Sumo Birliği'nin takviminden.[^18] Tabloda banzukenin yalnızca san'yaku seviyeleri var." },
+        { "type": "p", "text": "Bu bölüm sayfa her açıldığında güncelleniyor. Sonuçlar ve banzuke [Sumo API](https://www.sumo-api.com/) üzerinden geliyor.[^17] Turnuva tarihleri Japonya Sumo Birliği'nin takviminden.[^18] Banzuke tablosunda yalnızca san'yaku seviyeleri var." },
         {
           "type": "sumo-live",
           "api": "https://www.sumo-api.com/api",

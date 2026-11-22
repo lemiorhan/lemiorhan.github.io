@@ -632,6 +632,7 @@
       var top = Math.max.apply(null, all.map(function (r) { return r.wins; }));
       var near = all.filter(function (r) { return r.wins >= top - 1; });
       if (near.length > data.leaders_max) near = near.filter(function (r) { return r.wins === top; });
+      if (near.length > data.leaders_max) return;
       near.sort(function (a, b) { return b.wins - a.wins || a.losses - b.losses || a.absences - b.absences || a.rankValue - b.rankValue; });
       var groups = [];
       near.forEach(function (r) {
