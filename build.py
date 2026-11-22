@@ -285,6 +285,23 @@ def block_stage_photo(b, page):
             '</picture>']
 
 
+def block_photo(b, page):
+    if not all(isinstance(b.get(k), str) and b[k] for k in ('src', 'alt', 'caption')) or \
+            not all(isinstance(b.get(k), int) and b[k] > 0 for k in ('width', 'height')):
+        page.fail('a photo block needs "src", "alt" and "caption" as non-empty strings '
+                  'and "width" and "height" as positive whole numbers')
+    if not os.path.isfile(os.path.join(ROOT, b['src'])):
+        page.fail('photo block: {} does not exist'.format(b['src']))
+    src = page.prefix + attr(b['src'])
+    return ['<figure class="photo">',
+            '  <a href="{}" data-lightbox data-caption="{}">'.format(src, attr(b['caption'])),
+            '    <img src="{}" width="{}" height="{}" loading="lazy" alt="{}">'.format(
+                src, b['width'], b['height'], attr(b['alt'])),
+            '  </a>',
+            '  <figcaption>{}</figcaption>'.format(text(b['caption'])),
+            '</figure>']
+
+
 def block_bio(b, page):
     return ['<div class="bio">',
             '  <p id="bio-text">{}</p>'.format(text(b['text'])),
@@ -454,6 +471,7 @@ BLOCKS = {
     'toc': block_toc,
     'form': block_form,
     'stage-photo': block_stage_photo,
+    'photo': block_photo,
     'bio': block_bio,
     'stages': block_stages,
     'by-year': block_by_year,

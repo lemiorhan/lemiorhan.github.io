@@ -64,6 +64,14 @@
             { "year": "2021", "text": "2, online" }
           ]
         },
+        {
+          "type": "photo",
+          "src": "assets/community/2015-scturkey-first-meetup.jpg",
+          "width": 1512,
+          "height": 745,
+          "alt": "A group photo in two rows, the front row kneeling, in front of an office's glass walls with blinds",
+          "caption": "SCTurkey's first meetup: a coding dojo with Alvaro Garcia at İTÜ ARI Teknokent, 1 June 2015"
+        },
         { "type": "h3", "text": "CraftSummit 2015" },
         "SCTurkey ran CraftSummit 2015, the first software craftsmanship conference in Türkiye.[^6] There has not been another one since. I was its product owner and organization lead. ACM, the company where I was a managing partner, was the organizing company.[^6]",
         {
@@ -75,6 +83,16 @@
             { "label": "Talks", "text": "Sandro Mancuso, Alexandru Bolboaca and Alvaro Garcia in English; Özcan Acar, Armağan Amcalar and I in Turkish; J. B. Rainsberger on video[^6]" },
             { "label": "My talk", "text": "[Unleashed Power Behind The Myths: Pair Programming](https://speakerdeck.com/lemiorhan/unleashed-power-behind-the-myths-pair-programming), in Turkish, the last session of the day; it is on the [Talks page](../talks/) too[^6]" }
           ]
+        },
+        { "type": "h3", "text": "London, June 2015" },
+        "On 24 June 2015 I crossed paths with two of my masters, the world-renowned Robert C. Martin and Sandro Mancuso, at Robert's meetup in London. It is one of the dates that matter to me.",
+        {
+          "type": "photo",
+          "src": "assets/community/2015-london.jpg",
+          "width": 1512,
+          "height": 1134,
+          "alt": "Robert C. Martin, Lemi and Sandro Mancuso smiling on a London street corner",
+          "caption": "With Robert C. Martin and Sandro Mancuso in London, 24 June 2015"
         }
       ]
     },
@@ -103,6 +121,14 @@
             { "label": "2015", "text": "9 October, at Grand Cevahir Convention Center, Şişli, inside The Agile Week of trainings, workshops and meetups, 5 – 11 October.[^14] More than 600 people from 113 companies, 3 keynotes and 4 parallel tracks.[^13] Michael Feathers, Jurgen Appelo, Ahmed Sidky and Jonathan Rasmusson were among the speakers[^14]" },
             { "label": "2016", "text": "6 October, at Wyndham Grand Levent, Şişli. The theme was “End to End Agile Mind Shift”, in four parallel tracks: DevOps, Agile in a Nutshell, The Mind Shift and Software Craftsmanship. Arie van Bennekum, a co-author of the Agile Manifesto, and Dave Farley were among the speakers, and the tickets sold out[^13]" }
           ]
+        },
+        {
+          "type": "photo",
+          "src": "assets/community/2015-agile-turkey-summit.jpg",
+          "width": 1280,
+          "height": 960,
+          "alt": "Lemi and one other person taking a selfie on stage, a waving audience filling the hall behind them",
+          "caption": "Agile Turkey Summit 2015, Grand Cevahir Convention Center, 9 October 2015"
         }
       ]
     },

@@ -6,6 +6,7 @@ the build with a message, and the pages it writes hold together.
 import json
 import math
 import os
+import posixpath
 import re
 import shutil
 import subprocess
@@ -457,6 +458,36 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
                 with self.subTest(key=key, value=value):
                     self.assertRejected(self.edit('talks', odd),
                                         'photo of {!r} needs "file" and "alt" as non-empty strings'.format(name))
+
+    def test_a_photo_block_without_the_strings_it_needs(self):
+        for key, value in (('src', None), ('alt', None), ('caption', None), ('alt', ''), ('caption', 7)):
+            def odd(d, key=key, value=value):
+                b = blocks_of(d, 'photo')[0]
+                if value is None:
+                    del b[key]
+                else:
+                    b[key] = value
+            with self.subTest(key=key, value=value):
+                self.assertRejected(self.edit('community', odd),
+                                    'content/community.json: a photo block needs "src", "alt" and "caption" as non-empty strings')
+
+    def test_a_photo_block_whose_size_is_not_a_positive_whole_number(self):
+        for key, value in (('width', None), ('height', 0), ('width', '1512'), ('height', 745.5)):
+            def odd(d, key=key, value=value):
+                b = blocks_of(d, 'photo')[0]
+                if value is None:
+                    del b[key]
+                else:
+                    b[key] = value
+            with self.subTest(key=key, value=value):
+                self.assertRejected(self.edit('community', odd),
+                                    'and "width" and "height" as positive whole numbers')
+
+    def test_a_photo_block_whose_file_does_not_exist(self):
+        def nowhere(d):
+            blocks_of(d, 'photo')[0]['src'] = 'assets/community/nowhere.jpg'
+        self.assertRejected(self.edit('community', nowhere),
+                            'content/community.json: photo block: assets/community/nowhere.jpg does not exist')
 
     def test_a_photo_in_a_list_whose_file_does_not_exist(self):
         name = self.list_photo_event(read_json(ROOT, 'content', 'talks.json'))['name']
@@ -1511,21 +1542,62 @@ class BuiltSite(unittest.TestCase):
             self.assertRegex(values[0], length, selector + ' ' + prop)
         self.assertRegex(''.join(css_values(css, '.ev-photo', 'flex')), r'^1 1 (?!0+(\.0+)?rem$)[\d.]+rem$')
 
+    def referenced_paths(self):
+        paths = set()
+        for name, tree in self.trees.items():
+            base = posixpath.dirname(page_file(name))
+            for node in tree.walk():
+                refs = [node.attrs.get('src'), node.attrs.get('href')]
+                refs += [part.split()[0] for part in (node.attrs.get('srcset') or '').split(',') if part.strip()]
+                for ref in filter(None, refs):
+                    ref = ref.split('#')[0]
+                    paths.add(ref[1:] if ref.startswith('/') else posixpath.normpath(posixpath.join(base, ref)))
+        return paths
+
+    def files_unused_by_the_built_pages(self, folder):
+        top = os.path.join(ROOT, *folder.split('/'))
+        files = {posixpath.join(folder, os.path.relpath(os.path.join(d, f), top).replace(os.sep, '/'))
+                 for d, _, names in os.walk(top) for f in names if not f.startswith('.')}
+        return files, files - self.referenced_paths()
+
     def test_every_file_in_assets_talks_is_used_by_a_built_page(self):
-        folder = os.path.join(ROOT, 'assets', 'talks')
-        files = {f for f in os.listdir(folder) if not f.startswith('.')}
+        files, unused = self.files_unused_by_the_built_pages('assets/talks')
         self.assertGreater(len(files), 1)
-        unused = {f for f in files if not any('assets/talks/' + f in html for html in self.html.values())}
         self.assertEqual(unused, set())
 
     def test_every_file_in_assets_sharing_is_used_by_a_built_page(self):
-        folder = os.path.join(ROOT, 'assets', 'sharing')
-        files = {os.path.relpath(os.path.join(d, f), folder).replace(os.sep, '/')
-                 for d, _, names in os.walk(folder) for f in names if not f.startswith('.')}
+        files, unused = self.files_unused_by_the_built_pages('assets/sharing')
         for kind in ('decks', 'videos'):
-            self.assertGreater(len([f for f in files if f.startswith(kind + '/')]), 1, kind)
-        unused = {f for f in files if not any('assets/sharing/' + f in html for html in self.html.values())}
+            self.assertGreater(len([f for f in files if f.startswith('assets/sharing/' + kind + '/')]), 1, kind)
         self.assertEqual(unused, set())
+
+    def test_every_file_in_assets_community_is_used_by_a_built_page(self):
+        files, unused = self.files_unused_by_the_built_pages('assets/community')
+        self.assertGreater(len(files), 1)
+        self.assertEqual(unused, set())
+
+    def test_every_photo_block_shows_its_file_at_the_size_it_declares(self):
+        shown = 0
+        for name, tree in self.trees.items():
+            blocks = blocks_of(read_json(ROOT, 'content', name + '.json'), 'photo')
+            figures = tree.find(lambda n: n.tag == 'figure' and 'photo' in n.classes())
+            self.assertEqual(len(figures), len(blocks), name)
+            base = posixpath.dirname(page_file(name))
+            for b, figure in zip(blocks, figures):
+                link = figure.find(lambda n: n.tag == 'a')[0]
+                img = figure.find(lambda n: n.tag == 'img')[0]
+                caption = figure.find(lambda n: n.tag == 'figcaption')[0]
+                for ref in (link.attrs['href'], img.attrs['src']):
+                    self.assertEqual(posixpath.normpath(posixpath.join(base, ref)), b['src'])
+                declared = (int(img.attrs['width']), int(img.attrs['height']))
+                self.assertEqual(declared, (b['width'], b['height']), b['src'])
+                self.assertEqual(jpeg_size(os.path.join(self.out, b['src'])), declared, b['src'])
+                self.assertIn('data-lightbox', link.attrs)
+                self.assertEqual(link.attrs['data-caption'], b['caption'])
+                self.assertEqual(caption.all_text(), b['caption'])
+                self.assertEqual(img.attrs['alt'], b['alt'])
+                shown += 1
+        self.assertGreater(shown, 1)
 
     # Sharing
 
