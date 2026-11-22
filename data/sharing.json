@@ -1,0 +1,84 @@
+{
+ "decks": [
+  {
+   "url": "https://speakerdeck.com/lemiorhan/when-code-becomes-disposible-dot-dot-dot",
+   "title": "When Code Becomes Disposible...",
+   "width": 480,
+   "height": 270
+  },
+  {
+   "url": "https://speakerdeck.com/lemiorhan/rebirth-of-software-craftsmanship-in-the-ai-era",
+   "title": "Rebirth of Software Craftsmanship in the AI Era",
+   "width": 480,
+   "height": 280
+  },
+  {
+   "url": "https://speakerdeck.com/lemiorhan/conways-law-never-lies",
+   "title": "Conway's Law Never Lies",
+   "width": 480,
+   "height": 270
+  },
+  {
+   "url": "https://speakerdeck.com/lemiorhan/fixing-the-typos-in-engineering-culture",
+   "title": "Fixing The Typos in Engineering Culture",
+   "width": 480,
+   "height": 270
+  },
+  {
+   "url": "https://speakerdeck.com/lemiorhan/everything-you-know-about-agile-is-wrong",
+   "title": "Everything You Know About Agile Is Wrong",
+   "width": 480,
+   "height": 270
+  },
+  {
+   "url": "https://speakerdeck.com/lemiorhan/unlearn-product-development-unleashed-edition",
+   "title": "Unlearn Product Development - Unleashed Edition",
+   "width": 480,
+   "height": 270
+  }
+ ],
+ "recordings": [
+  {
+   "url": "https://www.youtube.com/watch?v=EcBrbOEPclM",
+   "title": "The Rebirth of Software Craftsmanship in the AI Era_Lemi Orhan Ergin",
+   "channel": "Java Day Istanbul",
+   "width": 480,
+   "height": 270
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=8EXXkeweFWA",
+   "title": "Product Developer: Kod Yazmaktan Ürün Geliştirmeye",
+   "channel": "Devnot Tech Events",
+   "width": 480,
+   "height": 270
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=QzbSRiru4gg",
+   "title": "Lemi Orhan Ergin - Unlearn Unit Testing - #devfestizmir25",
+   "channel": "GDG İzmir",
+   "width": 480,
+   "height": 270
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=N6tSrpE2XhY",
+   "title": "“Test Var” Demek Yetmez: Güvenilir Kod için Unit Testing | Lemi Orhan Ergin, Akın Kaldıroğlu",
+   "channel": "Backendguru Academy",
+   "width": 480,
+   "height": 270
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=HutPyJs23WI",
+   "title": "Kodun Doğru Çalıştığını Nereden Biliyorsun? | Unit Testing Canlı Lemi Orhan Ergin, Akın Kaldıroğlu",
+   "channel": "Backendguru Academy",
+   "width": 480,
+   "height": 270
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=6pim0Mbcteg",
+   "title": "Pure Agile: Building a Culture Without Scrum by Kanban & XP by Lemi Orhan Ergin",
+   "channel": "Devoxx",
+   "width": 480,
+   "height": 270
+  }
+ ]
+}

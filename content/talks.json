@@ -142,7 +142,7 @@
           "spoken": "tr",
           "talks": [
             {
-              "title": "When Code Becomes Disposible...",
+              "title": "When Code Becomes Disposable...",
               "slides": "https://speakerdeck.com/lemiorhan/when-code-becomes-disposible-dot-dot-dot",
               "summary": "AI makes code cheap to write and harder to trust. On regenerative software, where the implementation can be rebuilt and the behavior survives.",
               "themes": ["ai", "architecture"]
@@ -215,6 +215,12 @@
           "place": "istanbul",
           "role": "Opening talk",
           "spoken": "tr",
+          "talks": [
+            {
+              "summary": "How AI is transforming software development: where software is heading, and how the way teams are structured is changing.",
+              "themes": ["ai", "culture"]
+            }
+          ],
           "photo": {
             "file": "2026-devnot-rapor",
             "alt": "Lemi with a handheld microphone in front of a seated audience, the opening talk slide with his name and photo on the screen behind"
@@ -2313,7 +2319,17 @@
           "place": "istanbul",
           "url": "https://www.coderetreat.org/",
           "role": "Facilitator",
-          "spoken": "tr"
+          "spoken": "tr",
+          "talks": [
+            {
+              "summary": "A day facilitated end to end: participants solve the Game of Life kata and learn the TDD approach along the way.",
+              "themes": ["testing", "craftsmanship"]
+            }
+          ],
+          "photo": {
+            "file": "2015-coderetreat",
+            "alt": "Lemi presenting the organizers and facilitators slide to participants at their laptops, Agile Turkey banners on both sides"
+          }
         },
         {
           "date": "2015-10-01",
@@ -2366,7 +2382,26 @@
               "summary": "Living software needs continuous refactoring, testing and evolutionary design, and TDD is a design practice, not a testing one, that lowers the cost of change.",
               "themes": ["testing"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2015-phpkonf",
+            "alt": "Lemi on a wide stage beside a slide titled Don't Blame Testing!, the PHPKonf sponsor wall behind it"
+          }
+        },
+        {
+          "date": "2015-06-16",
+          "name": "Agile Buluşmalar, Agile Türkiye",
+          "spoken": "tr",
+          "talks": [
+            {
+              "summary": "A conversation on Scrum versus Kanban.",
+              "themes": ["agile"]
+            }
+          ],
+          "photo": {
+            "file": "2015-agile-bulusmalar",
+            "alt": "People talking over tea and pastries in a white room, photographs hung on the wall behind them"
+          }
         },
         {
           "date": "2015-05-30",
@@ -2381,7 +2416,11 @@
               "summary": "Working alone, hoarding knowledge and skipping feedback are risks that erode team culture, and disciplined pair programming spreads knowledge and raises quality.",
               "themes": ["craftsmanship"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2015-craftsummit",
+            "alt": "Lemi in an ACM T-shirt holding up a Craft Summit 2015 photo frame in a Bahçeşehir University hall"
+          }
         },
         {
           "date": "2015-05-09",
@@ -2395,7 +2434,11 @@
               "summary": "Like the unspoken rules of traffic, minimum standards of security, honesty, quality and teamwork are what turn software development into a real profession.",
               "themes": ["ethics"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2015-voxxed-days",
+            "alt": "Lemi speaking beside a Voxxed Days Istanbul banner, the slide behind reads Software development is a profession"
+          }
         },
         {
           "date": "2015-04-17",
@@ -2419,7 +2462,11 @@
           "date": "2015-04-10",
           "name": "Boğaziçi University Exit Days 2015",
           "place": "istanbul",
-          "spoken": "tr"
+          "spoken": "tr",
+          "photo": {
+            "file": "2015-bogazici-exit-days",
+            "alt": "A group photo in a university classroom, everyone standing in front of the whiteboards behind rows of desks"
+          }
         }
       ],
       "2014": [

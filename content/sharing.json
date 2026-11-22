@@ -1,14 +1,38 @@
 {
   "title": "Sharing, Lemi Orhan Ergin",
-  "description": "Everything Lemi Orhan Ergin shares in public: code on GitHub, talk recordings, the Lemi'nin Not Defteri podcast, slides, articles and social media accounts.",
+  "description": "Everything Lemi Orhan Ergin shares in public: talk slides and recordings, code on GitHub, the Lemi'nin Not Defteri podcast, articles and social media accounts.",
   "head": {
     "heading": "Sharing",
     "cmd": "git remote -v",
     "blocks": [
-      { "type": "p", "class": "intro", "text": "Everything I share in public, in one place: code, recordings, my podcast, slides, articles, and the accounts I post from." }
+      { "type": "p", "class": "intro", "text": "Everything I share in public, in one place: the slides and recordings of my talks, code, my podcast, articles, and the accounts I post from." }
     ]
   },
   "sections": [
+    {
+      "id": "slides",
+      "heading": "Slides",
+      "cmd": "ls *.pdf",
+      "blocks": [
+        { "type": "p", "class": "sub-note", "text": "My latest decks. All of them are on [Speaker Deck](https://speakerdeck.com/lemiorhan)." },
+        { "type": "decks" }
+      ]
+    },
+    {
+      "id": "video",
+      "heading": "Video",
+      "cmd": "ls *.mp4",
+      "blocks": [
+        { "type": "p", "class": "sub-note", "text": "From the top of my [playlist of talk recordings](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdvUVfv0M55mRbTB8CMYT9R) on YouTube, which also has the ones published on conference channels. There is also one on [modularity](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdK0lBBfpGhwX1ppqq128WD)." },
+        { "type": "recordings" },
+        {
+          "type": "entries",
+          "items": [
+            { "kind": "TEDx, 2019", "title": "The Apple That Made Me Famous Overnight", "url": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma", "text": "In Turkish, at TEDxTarsusAmericanCollege: the night a macOS root login bug made me known worldwide, and what it says about professional ethics. The [root bug page](../root-bug/) has the whole story." }
+          ]
+        }
+      ]
+    },
     {
       "id": "code",
       "heading": "Code",
@@ -28,21 +52,6 @@
       ]
     },
     {
-      "id": "video",
-      "heading": "Video",
-      "cmd": "ls *.mp4",
-      "blocks": [
-        {
-          "type": "entries",
-          "items": [
-            { "kind": "YouTube", "title": "My channel, @lemiorhan", "url": "https://www.youtube.com/@lemiorhan", "text": "With a playlist of [recordings of my talks](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdvUVfv0M55mRbTB8CMYT9R), including the ones published on conference channels, and one on [modularity](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdK0lBBfpGhwX1ppqq128WD)." },
-            { "kind": "TEDx, 2019", "title": "The Apple That Made Me Famous Overnight","url": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma", "text": "In Turkish, at TEDxTarsusAmericanCollege: the night a macOS root login bug made me known worldwide, and what it says about professional ethics. The [root bug page](../root-bug/) has the whole story." },
-            { "kind": "Since 2012", "title": "Lemi's all Youtube presence", "url": "https://www.youtube.com/watch?v=EcBrbOEPclM&list=PLQTv1b9jwvWdvUVfv0M55mRbTB8CMYT9R", "text": "Lemi's all Youtube presence in one list" }
-          ]
-        }
-      ]
-    },
-    {
       "id": "audio",
       "heading": "Audio",
       "cmd": "ls *.mp3",
@@ -54,19 +63,6 @@
             { "kind": "Guest, 2020", "title": "Technical: How Does Craftbase Build Software?","url": "https://open.spotify.com/episode/3x1FiEoaDg0VW59bPVGy2d", "text": "On the Üretim Bandı podcast, about how we built software at Craftbase." },
             { "kind": "Guest, 2017", "title": "How Does iyzico Build Products?","url": "https://open.spotify.com/episode/3Pb7IUoSRMTR32C5Hqk0BO", "text": "On the Üretim Bandı podcast, about how iyzico builds products." },
             { "kind": "Guest, 2016", "title": "On fighting elephants in the room", "url": "https://podcasts.apple.com/us/podcast/on-fighting-elephants-in-the-room-with-lemi-orhan-ergin/id936476881?i=1000377992398", "text": "On the IT Serbia Podcast, in English." }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "slides",
-      "heading": "Slides",
-      "cmd": "ls *.pdf",
-      "blocks": [
-        {
-          "type": "entries",
-          "items": [
-            { "kind": "Speaker Deck", "title": "speakerdeck.com/lemiorhan", "url": "https://speakerdeck.com/lemiorhan", "text": "The slides of my talks. The [Talks page](../talks/) links each deck next to its event." }
           ]
         }
       ]

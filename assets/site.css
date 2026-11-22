@@ -635,6 +635,59 @@ a:hover { text-decoration-color: var(--accent); }
   .entries .kind { padding-top: 0.25rem; }
 }
 
+/* Cover cards: slides, recordings */
+
+.media-grid {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem 1rem;
+}
+@media (min-width: 40rem) {
+  .media-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.9rem 1.25rem; }
+}
+
+.media-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.media-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+  transition: border-color 0.15s ease;
+}
+.media-card:hover img { border-color: var(--accent); }
+.media-title {
+  display: block;
+  margin-top: 0.6rem;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.15s ease;
+}
+.media-card:hover .media-title { text-decoration-color: var(--accent); }
+.media-meta {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+.media-meta .spoken { font-size: 0.7rem; line-height: 1.3rem; }
+.media-grid + .entries { margin-top: 2rem; }
+
 .more {
   display: flex;
   flex-wrap: wrap;

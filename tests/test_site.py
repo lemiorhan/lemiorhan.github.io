@@ -12,6 +12,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import urllib.parse
 from collections import Counter
 from html.parser import HTMLParser
 
@@ -151,6 +152,53 @@ def jpeg_size(path):
             return int.from_bytes(data[i + 6:i + 8], 'big'), int.from_bytes(data[i + 4:i + 6], 'big')
         i += 1 + length
     raise AssertionError(path + ' has no frame header')
+
+
+CHOSEN = {
+    'decks': [{'url': 'https://speakerdeck.com/lemiorhan/10-git-anti-patterns-you-should-be-aware-of', 'title': 'Git deck'},
+              {'url': 'https://speakerdeck.com/lemiorhan/unlearn-modularity', 'title': 'Modularity deck'},
+              {'url': 'https://speakerdeck.com/lemiorhan/a-deck-no-talk-links', 'title': 'A deck no talk links'},
+              {'url': 'https://speakerdeck.com/lemiorhan/unlearn-unit-testing', 'title': 'Unit testing deck'}],
+    'recordings': [{'url': 'https://www.youtube.com/watch?v=HutPyJs23WI', 'title': 'Part one', 'channel': 'Backendguru'},
+                   {'url': 'https://www.youtube.com/watch?v=N6tSrpE2XhY', 'title': 'Part two', 'channel': 'Backendguru'},
+                   {'url': 'https://www.youtube.com/watch?v=aWOHq6AHNjU', 'title': 'A long stream', 'channel': 'Devnot'},
+                   {'url': 'https://www.youtube.com/watch?v=AAAAAAAAAAA', 'title': 'A video no talk links', 'channel': 'A channel'},
+                   {'url': 'https://www.youtube.com/watch?v=BBBBBBBBBBB', 'title': 'A video with no channel', 'channel': ''},
+                   {'url': 'https://www.youtube.com/watch?v=VBWS1-ngCKo', 'title': 'An untitled talk', 'channel': 'Somebody'}],
+}
+
+
+def choose(site):
+    """Lists CHOSEN in the copy's snapshot, each with a thumbnail, so the cards a test needs do not depend on
+    which items the sources list first today."""
+    videos = os.path.join(site, 'assets', 'sharing', 'videos')
+    cover = os.path.join(videos, sorted(os.listdir(videos))[0])
+    width, height = jpeg_size(cover)
+    for item in CHOSEN['decks']:
+        shutil.copy(cover, os.path.join(site, 'assets', 'sharing', 'decks', item['url'].rsplit('/', 1)[1] + '.jpg'))
+    for item in CHOSEN['recordings']:
+        shutil.copy(cover, os.path.join(videos, item['url'][-11:] + '.jpg'))
+    snapshot = {kind: [dict(item, width=width, height=height) for item in items] for kind, items in CHOSEN.items()}
+    with open(os.path.join(site, 'data', 'sharing.json'), 'w', encoding='utf-8') as f:
+        json.dump(snapshot, f, ensure_ascii=False)
+    return snapshot
+
+
+def media_key(url):
+    parts = urllib.parse.urlsplit(url)
+    return urllib.parse.parse_qs(parts.query)['v'][0] if parts.netloc == 'www.youtube.com' else url
+
+
+def media_cards(tree, section_id):
+    section = tree.find(lambda n: n.attrs.get('id') == section_id)[0]
+    return [li for li in section.find(lambda n: n.tag == 'li') if li.find(has_class('media-card'))]
+
+
+def card_parts(li):
+    a = li.find(has_class('media-card'))[0]
+    title = a.find(has_class('media-title'))[0].all_text()
+    meta = li.find(has_class('media-meta'))
+    return a, title, (meta[0].all_text() if meta else '')
 
 
 def webp_size(path):
@@ -350,6 +398,42 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
         def gone(d):
             d['person']['image'] = 'assets/img/nowhere.jpg'
         self.assertRejected(self.edit('home', gone), 'person image assets/img/nowhere.jpg does not exist')
+
+    # Slides and recordings on the sharing page
+
+    REFRESH = 'run python3 tools/sharing_sources.py'
+
+    @staticmethod
+    def snapshot(fn):
+        def change(site):
+            path = os.path.join(site, 'data', 'sharing.json')
+            data = read_json(path)
+            fn(data)
+            with open(path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False)
+        return change
+
+    def test_a_sharing_item_whose_thumbnail_is_missing(self):
+        url = read_json(ROOT, 'data', 'sharing.json')['recordings'][0]['url']
+        path = 'assets/sharing/videos/{}.jpg'.format(url[-11:])
+
+        def gone(site):
+            os.remove(os.path.join(site, path))
+        self.assertRejected(gone, 'data/sharing.json: {} has no thumbnail at {}; '.format(url, path) + self.REFRESH)
+
+    def test_a_snapshot_with_no_decks(self):
+        self.assertRejected(self.snapshot(lambda d: d.update(decks=[])),
+                            'data/sharing.json lists no decks; ' + self.REFRESH)
+
+    def test_a_snapshot_item_without_its_thumbnail_size(self):
+        for key in ('width', 'height'):
+            self.assertRejected(self.snapshot(lambda d: d['recordings'][3].pop(key)),
+                                'data/sharing.json: every one of its recordings needs "url", "title", "width" and "height"')
+
+    def test_a_snapshot_item_without_a_link_or_a_title(self):
+        for change in (lambda item: item.pop('url'), lambda item: item.update(title='')):
+            self.assertRejected(self.snapshot(lambda d: change(d['decks'][0])),
+                                'data/sharing.json: every one of its decks needs "url", "title", "width" and "height"')
 
     # Themes
 
@@ -651,6 +735,19 @@ class ContentRendersAsText(unittest.TestCase):
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False)
         cls.maze = data['maze']
+        path = os.path.join(site, 'data', 'sharing.json')
+        cls.snapshot = cls.plant(choose(site))
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(cls.snapshot, f, ensure_ascii=False)
+        path = os.path.join(site, 'content', 'talks.json')
+        data = read_json(path)
+        for evs in data['archive']['events'].values():
+            for ev in evs:
+                ev['name'] += ' ' + cls.MARK
+        data['archive']['video_n'] += ' ' + cls.MARK
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False)
+        cls.video_n = data['archive']['video_n']
         out = os.path.join(cls.tmp.name, 'out')
         result = run_build(site, out)
         if result.returncode:
@@ -660,10 +757,36 @@ class ContentRendersAsText(unittest.TestCase):
         cls.tree = Tree(cls.source).root
         with open(os.path.join(out, '404.html'), encoding='utf-8') as f:
             cls.not_found = f.read()
+        with open(os.path.join(out, 'sharing', 'index.html'), encoding='utf-8') as f:
+            cls.sharing = Tree(f.read()).root
 
     @classmethod
     def tearDownClass(cls):
         cls.tmp.cleanup()
+
+    def test_the_titles_and_channels_a_source_gives_render_as_text_on_the_sharing_page(self):
+        self.assertEqual(self.sharing.find(lambda n: n.tag == 'xmark'), [])
+        source = {i['url']: i for items in self.snapshot.values() for i in items}
+        planted = {'title': 0, 'channel': 0}
+        for a in self.sharing.find(has_class('media-card')):
+            item = source.get(a.attrs['href'])
+            meta = a.parent.find(has_class('media-meta'))
+            if not item or (meta and meta[0].find(lambda n: n.tag == 'time')):
+                continue
+            self.assertEqual(a.find(has_class('media-title'))[0].all_text(), item['title'])
+            planted['title'] += 1
+            if item.get('channel'):
+                self.assertEqual(meta[0].all_text(), item['channel'])
+                planted['channel'] += 1
+        self.assertIn(self.MARK, next(iter(source.values()))['title'])
+        self.assertGreater(planted['title'], 1)
+        self.assertGreater(planted['channel'], 1)
+
+    def test_the_event_names_and_video_labels_of_talks_render_as_text_on_the_sharing_page(self):
+        self.assertEqual(self.sharing.find(lambda n: n.tag == 'xmark'), [])
+        metas = [n.all_text() for n in self.sharing.find(has_class('media-meta'))]
+        self.assertGreater(len([m for m in metas if self.MARK + ', ' in m]), 1)
+        self.assertGreater(len([m for m in metas if self.video_n.format(n=1) in m]), 0)
 
     def test_the_hero_role_is_escaped_and_keeps_its_link_and_unbroken_words(self):
         self.assertEqual([line.strip() for line in self.source.splitlines() if 'class="hero-role"' in line],
@@ -718,6 +841,91 @@ class ContentRendersAsText(unittest.TestCase):
         self.assertNotIn('<', body)
         self.assertEqual(json.loads(body), {'ui': self.maze['ui']})
         self.assertIn(self.MARK, self.maze['ui']['over'])
+
+
+class SharingCardsOfChosenItems(unittest.TestCase):
+    UNDATED = 'Devnot Developer Summit 2024'
+    ENGLISH = 'Devoxx Belgium 2022'
+
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = tempfile.TemporaryDirectory()
+        site = copy_site(cls.tmp.name)
+        choose(site)
+        path = os.path.join(site, 'content', 'talks.json')
+        data = read_json(path)
+        events = [ev for evs in data['archive']['events'].values() for ev in evs]
+        undated = [ev for ev in events if ev['name'] == cls.UNDATED]
+        for ev in undated:
+            del ev['date']
+        english = [ev for ev in events if ev['name'] == cls.ENGLISH]
+        for ev in english:
+            ev['talks'][0]['slides'] = CHOSEN['decks'][3]['url']
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False)
+        cls.undated, cls.english = len(undated), len(english)
+        out = os.path.join(cls.tmp.name, 'out')
+        result = run_build(site, out)
+        if result.returncode:
+            raise AssertionError(result.stderr)
+        with open(os.path.join(out, 'sharing', 'index.html'), encoding='utf-8') as f:
+            cls.tree = Tree(f.read()).root
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.tmp.cleanup()
+
+    def card(self, section_id, url):
+        return next(li for li in media_cards(self.tree, section_id)
+                    if media_key(card_parts(li)[0].attrs['href']) == media_key(url))
+
+    @staticmethod
+    def times(li):
+        return [(n.attrs['datetime'], n.all_text()) for n in li.find(lambda n: n.tag == 'time')]
+
+    def test_a_deck_given_at_two_events_in_one_language_names_both_and_the_language_once(self):
+        li = self.card('slides', CHOSEN['decks'][0]['url'])
+        _, title, meta = card_parts(li)
+        self.assertEqual((title, meta), ('10 Git Anti-Patterns You Should Be Aware Of',
+                                         'GrowIT Conference 2018, Dec 2018; ITAKE Unconference 2018, Jun 2018 English'))
+        self.assertEqual(self.times(li), [('2018-12-01', 'Dec 2018'), ('2018-06-07', 'Jun 2018')])
+        self.assertEqual([n.all_text() for n in li.find(has_class('spoken'))], ['English'])
+
+    def test_each_video_of_a_talk_in_several_parts_names_its_part(self):
+        for n, item in enumerate(CHOSEN['recordings'][:2], 1):
+            self.assertEqual(card_parts(self.card('video', item['url']))[1:],
+                             ('“We Have Tests” Is Not Enough: Unit Testing for Reliable Code',
+                              'Backendguru Academy webinar, Jan 2026, Video {} Turkish'.format(n)))
+
+    def test_a_deck_given_in_two_languages_names_both_in_the_order_the_archive_lists_them(self):
+        li = self.card('slides', CHOSEN['decks'][3]['url'])
+        self.assertEqual(card_parts(li)[1:], ('Unlearn Unit Testing',
+                                              'DevFest Istanbul 2022, Dec 2022; Devoxx Belgium 2022, Oct 2022 Turkish English'))
+        self.assertEqual([n.all_text() for n in li.find(has_class('spoken'))], ['Turkish', 'English'])
+        self.assertEqual(self.english, 1)
+
+    def test_a_card_of_an_untitled_talk_is_named_by_its_event_and_does_not_repeat_it(self):
+        li = self.card('video', CHOSEN['recordings'][5]['url'])
+        self.assertEqual(card_parts(li)[1:], ('The Unspoken Rules of a Better Professional Life', 'Dec 2020 Turkish'))
+        self.assertEqual(self.times(li), [('2020-12-13', 'Dec 2020')])
+
+    def test_a_card_of_an_event_with_no_day_gives_its_year(self):
+        li = self.card('slides', CHOSEN['decks'][1]['url'])
+        self.assertEqual((card_parts(li)[2], self.times(li)), ('Devnot Developer Summit 2024, 2024 Turkish', [('2024', '2024')]))
+        self.assertEqual(self.undated, 1)
+
+    def test_a_card_opens_a_talk_video_at_the_start_time_the_talk_links(self):
+        a = card_parts(self.card('video', CHOSEN['recordings'][2]['url']))[0]
+        self.assertEqual(a.attrs['href'], 'https://www.youtube.com/watch?v=aWOHq6AHNjU&t=10832s')
+
+    def test_a_card_no_talk_links_keeps_the_title_and_channel_its_source_gives(self):
+        for section_id, item in (('slides', CHOSEN['decks'][2]), ('video', CHOSEN['recordings'][3]),
+                                 ('video', CHOSEN['recordings'][4])):
+            li = self.card(section_id, item['url'])
+            a, title, meta = card_parts(li)
+            self.assertEqual((a.attrs['href'], title, meta), (item['url'], item['title'], item.get('channel', '')))
+            self.assertEqual(self.times(li), [])
+        self.assertEqual(self.card('video', CHOSEN['recordings'][4]['url']).find(has_class('media-meta')), [])
 
 
 class NotFoundWithoutAMaze(unittest.TestCase):
@@ -1310,6 +1518,15 @@ class BuiltSite(unittest.TestCase):
         unused = {f for f in files if not any('assets/talks/' + f in html for html in self.html.values())}
         self.assertEqual(unused, set())
 
+    def test_every_file_in_assets_sharing_is_used_by_a_built_page(self):
+        folder = os.path.join(ROOT, 'assets', 'sharing')
+        files = {os.path.relpath(os.path.join(d, f), folder).replace(os.sep, '/')
+                 for d, _, names in os.walk(folder) for f in names if not f.startswith('.')}
+        for kind in ('decks', 'videos'):
+            self.assertGreater(len([f for f in files if f.startswith(kind + '/')]), 1, kind)
+        unused = {f for f in files if not any('assets/sharing/' + f in html for html in self.html.values())}
+        self.assertEqual(unused, set())
+
     # Sharing
 
     def test_every_page_shares_an_image_of_the_size_it_declares(self):
@@ -1368,6 +1585,76 @@ class BuiltSite(unittest.TestCase):
                 else:
                     # Apple's touch icon is 180 px square and the link names no size.
                     self.assertEqual('{}x{}'.format(*png_size(path)), link.attrs.get('sizes', '180x180'), path)
+
+    # Slides and recordings on the sharing page
+
+    MEDIA = (('slides', 'decks'), ('video', 'recordings'))
+
+    def cards(self, section_id):
+        return media_cards(self.trees['sharing'], section_id)
+
+    def talk_uses(self, kind):
+        uses = {}
+        for year, evs in self.talks['events'].items():
+            for ev in evs:
+                for t in ev.get('talks', []):
+                    if kind == 'decks':
+                        urls = [t['slides']] if t.get('slides') else []
+                    else:
+                        urls = t['video'] if isinstance(t.get('video'), list) else [t['video']] if t.get('video') else []
+                    for n, url in enumerate(urls, 1):
+                        uses.setdefault(media_key(url), []).append((ev, t, url, n if len(urls) > 1 else None, year))
+        return uses
+
+    def test_the_sharing_page_shows_every_snapshot_item_once_in_the_snapshot_order(self):
+        snapshot = read_json(ROOT, 'data', 'sharing.json')
+        for section_id, kind in self.MEDIA:
+            shown = [media_key(card_parts(li)[0].attrs['href']) for li in self.cards(section_id)]
+            self.assertEqual(shown, [media_key(i['url']) for i in snapshot[kind]], kind)
+            self.assertGreater(len(shown), 1, kind)
+
+    def test_a_card_of_a_talk_shows_its_title_and_where_when_and_in_what_language_it_was_given(self):
+        snapshot = read_json(ROOT, 'data', 'sharing.json')
+        months = read_json(ROOT, 'content', 'site.json')['months']
+        matched = 0
+        for section_id, kind in self.MEDIA:
+            uses = self.talk_uses(kind)
+            for item, li in zip(snapshot[kind], self.cards(section_id)):
+                found = uses.get(media_key(item['url']))
+                if not found:
+                    continue
+                matched += 1
+                _, title, meta = card_parts(li)
+                ev, t, _, _, _ = found[0]
+                self.assertEqual(title, t.get('title') or ev['name'], item['url'])
+                times, parts, spoken = [], [], []
+                for ev, _, _, part, year in found:
+                    date = ev.get('date', year)
+                    when = '{} {}'.format(months[int(date[5:7]) - 1], date[:4]) if len(date) > 4 else date
+                    times.append((date, when))
+                    parts.append(('' if ev['name'] == title else ev['name'] + ', ') + when
+                                 + (', ' + self.talks['video_n'].format(n=part) if part else ''))
+                    label = self.talks['spoken'][ev['spoken']]
+                    if label not in spoken:
+                        spoken.append(label)
+                node = li.find(has_class('media-meta'))[0]
+                self.assertEqual([(n.attrs['datetime'], n.all_text()) for n in node.find(lambda n: n.tag == 'time')],
+                                 times, item['url'])
+                self.assertEqual([n.all_text() for n in node.find(has_class('spoken'))], spoken, item['url'])
+                self.assertEqual(meta, '; '.join(parts) + ' ' + ' '.join(spoken), item['url'])
+        self.assertGreater(matched, 0)
+
+    def test_each_cover_is_decorative_lazy_and_declares_the_size_of_its_file(self):
+        snapshot = read_json(ROOT, 'data', 'sharing.json')
+        covers = 0
+        for section_id, _ in self.MEDIA:
+            for li in self.cards(section_id):
+                img = li.find(lambda n: n.tag == 'img')[0]
+                self.assertEqual((img.attrs['alt'], img.attrs['loading']), ('', 'lazy'))
+                declared = (int(img.attrs['width']), int(img.attrs['height']))
+                self.assertEqual(jpeg_size(os.path.join(self.out, 'sharing', img.attrs['src'])), declared, img.attrs['src'])
+                covers += 1
+        self.assertEqual(covers, len(snapshot['decks']) + len(snapshot['recordings']))
 
     # Home: hero and git game
 
