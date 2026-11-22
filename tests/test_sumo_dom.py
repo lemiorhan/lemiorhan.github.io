@@ -310,7 +310,7 @@ class SumoLive(unittest.TestCase):
         ])
 
     def test_rikishi_on_the_same_record_share_one_row_whatever_their_rank(self):
-        out = run(in_japan(2026, 11, 20, 10), atamifuji_absent_on_day_12())
+        out = run(in_japan(2026, 11, 19, 10), atamifuji_absent_on_day_12())
         self.assertEqual(out['settled']['leaders'][0]['rows'], [
             ['10-1', 'Wakamotoharu (Maegashira 7)'],
             ['9-2', 'Onosato (Yokozuna 1), Kinbozan (Maegashira 7)'],
@@ -318,7 +318,8 @@ class SumoLive(unittest.TestCase):
         ])
 
     def test_the_leaders_caption_names_the_furthest_day_any_rikishi_has_reached(self):
-        out = run(in_japan(2026, 11, 20, 10), atamifuji_absent_on_day_12())
+        # The clock says 11 days are over; Atamifuji's counts say 12.
+        out = run(in_japan(2026, 11, 19, 10), atamifuji_absent_on_day_12())
         self.assertEqual(out['settled']['leaders'][0]['caption'], leaders_caption(12))
 
     def test_when_the_leaders_and_those_one_behind_are_more_than_the_limit_only_the_leaders_are_listed(self):
