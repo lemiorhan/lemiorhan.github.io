@@ -228,8 +228,8 @@ class SumoLive(unittest.TestCase):
         self.assertEqual(set(re.findall(r'\btext\.(\w+)', body)) | {'noscript'}, set(build.SUMO_TEXT))
         calls = re.findall(r'\bfill\(text\.(\w+), \{([^}]*)\}\)', body)
         self.assertEqual(len(calls), len(re.findall(r'\bfill\(', body)), 'a fill() call of another shape escapes this scan')
-        filled = {key: tuple(re.findall(r'(\w+):', values)) for key, values in calls}
-        self.assertEqual(filled, build.SUMO_TEMPLATES)
+        filled = sorted((key, tuple(re.findall(r'(\w+):', values))) for key, values in calls)
+        self.assertEqual(filled, sorted(build.SUMO_TEMPLATES.items()))
 
     def test_the_built_block_says_it_needs_javascript_and_site_js_replaces_that_with_loading(self):
         status = next(c for c in BUILT['tree'][1]['children'] if isinstance(c, dict) and c['tag'] == 'p')
@@ -339,6 +339,8 @@ class SumoLive(unittest.TestCase):
         self.assertEqual(out['settled']['facts'][-1], day_row(2))
         self.assertEqual(out['settled']['leaders'], [])
         self.assertEqual(out['settled']['order'], ['sumo-data', 'sumo-status', 'infobox', 'banzuke', 'sumo-note'])
+        one_short = run(in_japan(2026, 11, 9, 10), kyushu_2026_after(1), settings={'leaders_max': 20})
+        self.assertEqual(one_short['settled']['leaders'], [])
         top = run(in_japan(2026, 11, 9, 10), kyushu_2026_after(1), settings={'leaders_max': 21})
         self.assertEqual([len(t['rows']) for t in top['settled']['leaders']], [1])
         self.assertEqual(top['settled']['leaders'][0]['rows'][0][0], '1-0')
