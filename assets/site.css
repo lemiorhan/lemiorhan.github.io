@@ -1224,13 +1224,18 @@ a:hover { text-decoration-color: var(--accent); }
   .years.has-bars .bar { transition: height 0.3s ease; }
 }
 
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: 1.5rem;
+}
 .filters {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 1.5rem;
 }
-.filters button {
+.filter-bar button {
   padding: 0.45rem 0.95rem;
   font: inherit;
   font-size: 0.9rem;
@@ -1241,8 +1246,8 @@ a:hover { text-decoration-color: var(--accent); }
   border-radius: 999px;
   cursor: pointer;
 }
-.filters button:hover { border-color: var(--ink-soft); }
-.filters button[aria-pressed="true"] {
+.filter-bar button:hover { border-color: var(--ink-soft); }
+.filter-bar button[aria-pressed="true"] {
   color: var(--paper);
   background: var(--ink);
   border-color: var(--ink);
@@ -1500,7 +1505,7 @@ a:hover { text-decoration-color: var(--accent); }
     --ink-soft: #333;
     --rule: #bbb;
   }
-  .site-header, .skip, .theme-toggle, .copy, .stage, .cmd, .years-nav, .years-mini, .filters, .tmap { display: none !important; }
+  .site-header, .skip, .theme-toggle, .copy, .stage, .cmd, .years-nav, .years-mini, .filter-bar, .tmap { display: none !important; }
   .section { padding-block: 1.5rem; break-inside: avoid-page; }
   .section-head { position: static; }
   a { text-decoration: none; }

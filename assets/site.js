@@ -246,15 +246,16 @@
     var sections = Array.prototype.slice.call(archive.querySelectorAll('section.year'));
     var strip = archive.querySelector('.years');
     var mini = buildMiniStrip(strip);
-    var filters = archive.querySelector('.filters');
-    var buttons = Array.prototype.slice.call(filters.querySelectorAll('button'));
+    var bar = archive.querySelector('.filter-bar');
+    var buttons = Array.prototype.slice.call(bar.querySelectorAll('.filters button'));
+    var university = bar.querySelector('button[data-university]');
     var status = archive.querySelector('.filter-status');
     var empty = archive.querySelector('.empty-note');
     var total = archive.querySelectorAll('.ev').length;
     var cloud = archive.querySelector('.themes');
     var themeButtons = Array.prototype.slice.call(archive.querySelectorAll('button[data-theme]'));
 
-    var state = { media: 'all', country: '', region: '', theme: '' };
+    var state = { media: 'all', country: '', region: '', theme: '', university: false };
 
     function plural(n) { return fill(n === 1 ? ui.event_one : ui.event_many, { n: n }); }
 
@@ -264,6 +265,7 @@
 
     function matches(ev) {
       if (state.media !== 'all' && !ev.hasAttribute('data-' + state.media)) return false;
+      if (state.university && !ev.hasAttribute('data-university')) return false;
       if (state.theme && !about(ev)) return false;
       if (state.country && ev.dataset.country !== state.country) return false;
       return !state.region || ev.dataset.region === state.region;
@@ -308,6 +310,7 @@
       buttons.forEach(function (b) {
         b.setAttribute('aria-pressed', String(b.dataset.filter === state.media));
       });
+      university.setAttribute('aria-pressed', String(state.university));
       themeButtons.forEach(function (b) {
         b.setAttribute('aria-pressed', String(b.dataset.theme === state.theme));
       });
@@ -381,6 +384,11 @@
       });
     });
 
+    university.addEventListener('click', function () {
+      state.university = !state.university;
+      refresh();
+    });
+
     themeButtons.forEach(function (b) {
       b.addEventListener('click', function () {
         var talk = b.closest('.ev-talks > li');
@@ -396,7 +404,7 @@
     archive.querySelectorAll('.ev-themes').forEach(function (tags) { tags.hidden = false; });
     strip.classList.add('has-bars');
     mini.strip.classList.add('has-bars');
-    filters.hidden = false;
+    bar.hidden = false;
     window.addEventListener('scroll', queue, { passive: true });
     window.addEventListener('resize', queue);
     onScroll();

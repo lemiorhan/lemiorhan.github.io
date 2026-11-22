@@ -1104,21 +1104,33 @@ def archive_controls(archive, page):
              '<span class="yr" aria-hidden="true"><span class="yr-c">{1}</span>{2}</span></a></li>'.format(y, y[:2], y[2:])
              for y, _ in reversed(archive_years(archive, page))]
     f = archive['filters']
+    if not any(at_university(ev, page) for _, events in archive_years(archive, page) for ev in events):
+        page.fail('archive.filters offers "university", but no event is marked "university": true')
     return (['', '<nav class="years-nav" aria-label="{}">'.format(attr(archive['years_label'])), '  <ol class="years">']
             + indent(strip, 4) + ['  </ol>', '</nav>', '',
-                                  '<div class="filters" role="group" aria-label="{}" hidden>'.format(attr(archive['filters_label'])),
-                                  '  <button type="button" data-filter="all" aria-pressed="true">{}</button>'.format(text(f['all'])),
-                                  '  <button type="button" data-filter="video" aria-pressed="false">{}</button>'.format(text(f['video'])),
-                                  '  <button type="button" data-filter="slides" aria-pressed="false">{}</button>'.format(text(f['slides'])),
+                                  '<div class="filter-bar" hidden>',
+                                  '  <div class="filters" role="group" aria-label="{}">'.format(attr(archive['filters_label'])),
+                                  '    <button type="button" data-filter="all" aria-pressed="true">{}</button>'.format(text(f['all'])),
+                                  '    <button type="button" data-filter="video" aria-pressed="false">{}</button>'.format(text(f['video'])),
+                                  '    <button type="button" data-filter="slides" aria-pressed="false">{}</button>'.format(text(f['slides'])),
+                                  '  </div>',
+                                  '  <button type="button" data-university aria-pressed="false">{}</button>'.format(text(f['university'])),
                                   '</div>',
                                   '<p class="filter-status sr-only" aria-live="polite"></p>'])
+
+
+def at_university(ev, page):
+    if 'university' in ev and ev['university'] is not True:
+        page.fail('"university" of event {!r} must be true, or left out'.format(ev['name']))
+    return 'university' in ev
 
 
 def event(ev, archive, page):
     talks = ev.get('talks', [])
     themes = [talk_themes(t, ev, archive, page) for t in talks]
     flags = (' data-slides' if any(t.get('slides') for t in talks) else '') + \
-            (' data-video' if any(t.get('video') for t in talks) else '')
+            (' data-video' if any(t.get('video') for t in talks) else '') + \
+            (' data-university' if at_university(ev, page) else '')
     union = sorted({k for keys in themes for k in keys})
     if union:
         flags += ' data-themes="{}"'.format(attr(' '.join(union)))

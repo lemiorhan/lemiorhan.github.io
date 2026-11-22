@@ -766,6 +766,21 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
                     t['themes'] = ['Code Review' if k == 'code-review' else k for k in t.get('themes', [])]
         self.assertRejected(self.edit('talks', spaced), "theme key 'Code Review' must be lowercase words joined by hyphens")
 
+    def test_a_university_mark_that_is_not_true(self):
+        for value in (False, 'yes', 1, None):
+            def odd(d, value=value):
+                next(ev for ev in self.events(d) if ev['name'] == 'Bahçeşehir Üniversitesi')['university'] = value
+            with self.subTest(value=value):
+                self.assertRejected(self.edit('talks', odd),
+                                    'content/talks.json: "university" of event \'Bahçeşehir Üniversitesi\' must be true, or left out')
+
+    def test_a_university_filter_with_no_event_marked_for_it(self):
+        def unmarked(d):
+            for ev in self.events(d):
+                ev.pop('university', None)
+        self.assertRejected(self.edit('talks', unmarked),
+                            'content/talks.json: archive.filters offers "university", but no event is marked "university": true')
+
     # Hero
 
     def test_hero_text_asking_for_a_number_nobody_computes(self):
@@ -1732,6 +1747,23 @@ class BuiltSite(unittest.TestCase):
         self.assertEqual(len(spans), talks)
         self.assertEqual([s.all_text() for s in spans if 'hidden' not in s.attrs], [], 'without JS these buttons would do nothing')
         self.assertGreater(talks, 1)
+
+    def test_an_event_carries_data_university_exactly_when_talks_json_marks_it(self):
+        expected = [(ev['name'], ev.get('university') is True)
+                    for _, evs in sorted(self.talks['events'].items(), reverse=True) for ev in evs]
+        events = self.trees['talks'].find(lambda n: n.tag == 'li' and 'ev' in n.classes())
+        self.assertEqual([(ev.find(has_class('ev-name'))[0].all_text(), 'data-university' in ev.attrs) for ev in events], expected)
+        marked = sum(at for _, at in expected)
+        self.assertTrue(1 < marked < len(expected), marked)
+
+    def test_the_university_toggle_waits_for_js_beside_the_media_filters_and_outside_their_group(self):
+        bar, = self.trees['talks'].find(has_class('filter-bar'))
+        self.assertIn('hidden', bar.attrs, 'without JS the buttons would show and do nothing')
+        group, = bar.find(has_class('filters'))
+        toggles = self.trees['talks'].find(lambda n: n.tag == 'button' and 'data-university' in n.attrs)
+        self.assertEqual([(b.all_text(), b.attrs.get('aria-pressed'), b.parent is bar) for b in toggles],
+                         [(self.talks['filters']['university'], 'false', True)])
+        self.assertEqual([b.attrs.get('data-filter') for b in group.find(lambda n: n.tag == 'button')], ['all', 'video', 'slides'])
 
     def test_the_talks_page_gives_every_ui_string_site_js_reads(self):
         with open(os.path.join(ROOT, 'assets', 'site.js'), encoding='utf-8') as f:

@@ -115,12 +115,14 @@ def where(ev):
     return (place['country'], place.get('province', ''))
 
 
-def shown(theme='', media='all', country='', region=''):
+def shown(theme='', media='all', country='', region='', university=False):
     """The events the page should show, each with which of its talks stay visible."""
     out = []
     for year, ev in EVENTS:
         talks = ev.get('talks', [])
         if media != 'all' and not any(t.get(media) for t in talks):
+            continue
+        if university and ev.get('university') is not True:
             continue
         if theme and not any(about(t, theme) for t in talks):
             continue
@@ -244,6 +246,52 @@ class ThemeFilter(unittest.TestCase):
         place = 'İstanbul, ' + ARCHIVE['countries']['TR']
         self.assertEqual(look['status'], fill(UI['theme_place_status'], events=plural(len(want)), theme=LABELS['agile'], place=place))
         self.assertEqual(look['mapStatus'], fill(UI['place_status'], events=plural(len(want)), place=place))
+
+
+UNIVERSITY = '.filter-bar button[data-university]'
+TURKIYE = '.tmap-controls button[data-country="TR"]'
+
+
+class UniversityFilter(unittest.TestCase):
+    def test_on_load_the_toggle_appears_off_with_every_event_shown(self):
+        look, = run(['look'])
+        self.assertFalse(look['barHidden'])
+        self.assertEqual(look['university'], 'false')
+        self.assertEqual(look['events'], shown())
+
+    def test_the_toggle_shows_exactly_the_events_at_a_university_and_a_second_click_brings_everything_back(self):
+        before, on, off = run(['look'], ['click', UNIVERSITY], ['look'], ['click', UNIVERSITY], ['look'])
+        want = shown(university=True)
+        self.assertTrue(1 < len(want) < len(EVENTS))
+        self.assertEqual(on['events'], want)
+        self.assertEqual(on['years'], years(want))
+        self.assertEqual((on['university'], on['media'], on['themes']), ('true', ['all'], ['']))
+        self.assertEqual(on['status'], fill(UI['showing_some'], visible=len(want), events=plural(len(EVENTS))))
+        self.assertEqual(off, before)
+
+    def test_the_toggle_and_each_other_filter_narrow_each_other_and_the_other_stays_when_the_toggle_goes(self):
+        istanbul = 'İstanbul, ' + ARCHIVE['countries']['TR']
+        others = (
+            ('ethics', [['click', '.cloud button[data-theme="ethics"]']], {'theme': 'ethics'},
+             lambda n: fill(UI['theme_status'], events=plural(n), theme=LABELS['ethics'])),
+            ('online', [['click', '.tmap-controls button[data-country="online"]']], {'country': 'online'},
+             lambda n: fill(UI['place_status'], events=plural(n), place=ARCHIVE['online'])),
+            ('istanbul', [['click', TURKIYE], ['click', '.tmap-controls button[data-region="TR-34"]']], {'region': 'TR-34'},
+             lambda n: fill(UI['place_status'], events=plural(n), place=istanbul)),
+            ('slides', [['click', '.filters button[data-filter="slides"]']], {'media': 'slides'},
+             lambda n: fill(UI['showing_some'], visible=n, events=plural(len(EVENTS)))),
+        )
+        for name, choose, other, status in others:
+            with self.subTest(other=name):
+                both, alone = run(*choose, ['click', UNIVERSITY], ['look'], ['click', UNIVERSITY], ['look'])
+                want, rest = shown(university=True, **other), shown(**other)
+                self.assertTrue(0 < len(want) < min(len(rest), len(shown(university=True))))
+                self.assertEqual(both['events'], want)
+                self.assertEqual(both['years'], years(want))
+                self.assertEqual(both['status'], status(len(want)))
+                self.assertEqual(alone['events'], rest)
+                self.assertEqual(alone['status'], status(len(rest)))
+                self.assertEqual(alone['university'], 'false')
 
 
 if __name__ == '__main__':
