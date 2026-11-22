@@ -1175,14 +1175,19 @@ def check_strings(fail, key, value):
         fail('"{}" must be an object whose values are non-empty strings'.format(key))
 
 
+def check_image(fail, image):
+    if not all(type(image.get(k)) is int and image[k] > 0 for k in ('width', 'height')):
+        fail('share image {} needs "width" and "height" in pixels'.format(image.get('src')))
+    if not os.path.isfile(os.path.join(ROOT, image['src'])):
+        fail('share image {} does not exist'.format(image['src']))
+
+
 def shell(page, body):
     d, site, p = page.data, page.site, page.prefix
     title = d['title']
     image = d.get('image', site['image'])
-    if not all(type(image.get(k)) is int and image[k] > 0 for k in ('width', 'height')):
-        page.fail('share image {} needs "width" and "height" in pixels'.format(image.get('src')))
-    if not os.path.isfile(os.path.join(ROOT, image['src'])):
-        page.fail('share image {} does not exist'.format(image['src']))
+    if 'image' in d:
+        check_image(page.fail, image)
     nav = ['<a href="{}{}"{}>{}</a>'.format(p, attr(item['path']), ' aria-current="page"' if item['path'] == page.path else '',
                                              text(item['label'])) for item in site['nav']]
     extra = []
@@ -1332,7 +1337,7 @@ def check_refs(html_text, page):
 def render_not_found(page):
     d = page.data
     if 'lang' in d or 'ui' in d:
-        page.fail('the not-found page takes its "lang" and "ui" from site.json')
+        page.fail('the not-found page takes "lang" from site.json and shows no "ui" strings')
     maze = d.get('maze')
     maze_head, maze_body = [], []
     if maze:
@@ -1394,6 +1399,7 @@ def build(out):
         raise BuildError('content/site.json: {}'.format(message))
     check_lang(site_fail, site.get('lang'))
     check_strings(site_fail, 'ui', site.get('ui'))
+    check_image(site_fail, site['image'])
     names = sorted(f[:-5] for f in os.listdir(CONTENT) if f.endswith('.json') and f != 'site.json')
     written = []
     for name in names:

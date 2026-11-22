@@ -382,18 +382,27 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
 
     def test_a_share_image_without_its_size(self):
         self.assertRejected(self.edit('site', lambda d: d['image'].pop('height')),
-                            'share image assets/img/social.jpg needs "width" and "height" in pixels')
+                            'content/site.json: share image assets/img/social.jpg needs "width" and "height" in pixels')
 
     def test_a_share_image_that_does_not_exist(self):
         def gone(d):
             d['image']['src'] = 'assets/img/nowhere.jpg'
-        self.assertRejected(self.edit('site', gone), 'share image assets/img/nowhere.jpg does not exist')
+        self.assertRejected(self.edit('site', gone), 'content/site.json: share image assets/img/nowhere.jpg does not exist')
 
     def test_a_share_image_whose_size_is_not_a_number(self):
         def flag(d):
             d['image']['width'] = True
         self.assertRejected(self.edit('site', flag),
-                            'share image assets/img/social.jpg needs "width" and "height" in pixels')
+                            'content/site.json: share image assets/img/social.jpg needs "width" and "height" in pixels')
+
+    def test_a_page_share_image_that_is_broken_is_blamed_on_the_page(self):
+        def gone(d):
+            d['image']['src'] = 'assets/img/nowhere.jpg'
+        for change, message in ((lambda d: d['image'].pop('height'),
+                                 'share image assets/img/stage-share.jpg needs "width" and "height" in pixels'),
+                                (gone, 'share image assets/img/nowhere.jpg does not exist')):
+            with self.subTest(message=message):
+                self.assertRejected(self.edit('talks', change), 'content/talks.json: ' + message)
 
     def test_a_person_image_that_does_not_exist(self):
         def gone(d):
@@ -530,7 +539,7 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
         for key, value in (('lang', 'tr'), ('ui', {'close': 'Kapat'})):
             with self.subTest(key=key):
                 self.assertRejected(self.edit('404', lambda d, key=key, value=value: d.update({key: value})),
-                                    'content/404.json: the not-found page takes its "lang" and "ui" from site.json')
+                                    'content/404.json: the not-found page takes "lang" from site.json and shows no "ui" strings')
 
     def test_a_page_whose_ui_is_not_an_object_of_non_empty_strings(self):
         for value in (None, ['close'], 'close', {'close': 5}, {'close': ''}):

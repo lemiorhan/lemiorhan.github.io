@@ -649,6 +649,7 @@
           "talks": [
             {
               "title": "Evolving from Services to Product",
+              "summary": "A talk on evolving from services to product.",
               "themes": ["product"]
             }
           ],
@@ -858,6 +859,7 @@
           "talks": [
             {
               "title": "Ethics in Software Engineering",
+              "summary": "A seminar for computer engineering students on ethics in software engineering.",
               "themes": ["ethics"]
             }
           ],
@@ -1220,6 +1222,7 @@
           "talks": [
             {
               "title": "Zen of Programming Career",
+              "summary": "A talk on the zen of a programming career.",
               "themes": ["career"]
             }
           ],
@@ -1501,6 +1504,7 @@
           "talks": [
             {
               "title": "How to Build a Technology Company",
+              "summary": "A talk on how to build a technology company.",
               "themes": ["culture"]
             }
           ],
@@ -1667,6 +1671,7 @@
             {
               "title": "Who Will Save the World from Software?",
               "slides": "https://speakerdeck.com/lemiorhan/kodlama-ogrenmek-gercekten-gerekli-mi",
+              "summary": "Software is everywhere, so coding, a way of thinking in patterns that brings ideas to life, is something everyone, children included, should learn.",
               "themes": ["career"]
             }
           ],
@@ -1912,6 +1917,7 @@
           "talks": [
             {
               "title": "Ethics in Software Engineering",
+              "summary": "A talk for computer engineering students on ethics in software engineering.",
               "themes": ["ethics"]
             }
           ],
@@ -1946,6 +1952,12 @@
           "url": "https://www.coderetreat.org/",
           "role": "Organizer",
           "spoken": "tr",
+          "talks": [
+            {
+              "summary": "Developers improve their craft by practicing: a day of 45-minute pair programming, test-first sessions on Conway's Game of Life, with no pressure to finish.",
+              "themes": ["testing", "craftsmanship"]
+            }
+          ],
           "photo": {
             "file": "2017-coderetreat",
             "alt": "Developers coding in pairs at rows of white desks in an office room with iyzico and Sony banners, a video call with other coderetreat cities on the screen"
@@ -1986,6 +1998,7 @@
           "talks": [
             {
               "title": "Git Anti-Patterns",
+              "summary": "How git works behind the scenes explains the anti-patterns that lose work and tangle history, and the cure: commit early, perfect later, publish once.",
               "themes": ["git"]
             }
           ],
@@ -2046,6 +2059,7 @@
             {
               "title": "Git Anti-Patterns: How To Mess Up With Git and Love It Again",
               "slides": "https://speakerdeck.com/lemiorhan/git-anti-patterns-how-to-mess-up-with-git-and-love-it-again",
+              "summary": "How git works behind the scenes explains the anti-patterns that lose work and tangle history, and the cure: commit early, perfect later, publish once.",
               "themes": ["git"]
             }
           ],
@@ -2300,6 +2314,7 @@
           "talks": [
             {
               "title": "The Cornerstones of Writing Quality Code",
+              "summary": "A talk on the cornerstones of writing quality code.",
               "themes": ["quality"]
             }
           ],
@@ -2372,6 +2387,12 @@
           "url": "https://www.coderetreat.org/",
           "role": "Facilitator",
           "spoken": "tr",
+          "talks": [
+            {
+              "summary": "Developers improve their craft by practicing: a day of 45-minute pair programming, test-first sessions on Conway's Game of Life, with no pressure to finish.",
+              "themes": ["testing", "craftsmanship"]
+            }
+          ],
           "photo": {
             "file": "2016-coderetreat",
             "alt": "Participants coding on laptops at rows of white desks in a bright office room, Shift Happens Be Agile bags on some of the chairs"
@@ -2473,6 +2494,7 @@
           "talks": [
             {
               "title": "Passionate Developer's Guide to the Galaxy",
+              "summary": "A guide for passionate developers.",
               "themes": ["motivation"]
             }
           ],
@@ -2562,7 +2584,7 @@
           "spoken": "tr",
           "talks": [
             {
-              "summary": "A day facilitated end to end: participants solve the Game of Life kata and learn the TDD approach along the way.",
+              "summary": "Developers improve their craft by practicing: a day of 45-minute pair programming, test-first sessions on Conway's Game of Life, with no pressure to finish.",
               "themes": ["testing", "craftsmanship"]
             }
           ],
@@ -2687,6 +2709,19 @@
           }
         },
         {
+          "date": "2015-05-07",
+          "name": "Türk Hava Kurumu University",
+          "place": "ankara",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Guide for Evolving from Novices to Professional Software Developers",
+              "summary": "A guide to evolving from novice to professional software developer.",
+              "themes": ["career", "craftsmanship"]
+            }
+          ]
+        },
+        {
           "date": "2015-04-17",
           "name": "Bilkent Mobile Days 2015",
           "place": "ankara",
@@ -2709,13 +2744,69 @@
           "name": "Boğaziçi University Exit Days 2015",
           "place": "istanbul",
           "spoken": "tr",
+          "talks": [
+            {
+              "title": "Software Craftsmanship: Building A Culture For The Future",
+              "summary": "Culture, not individuals, makes teams succeed: software craftsmanship as a culture where developers build themselves as well as software.",
+              "themes": ["craftsmanship", "culture"]
+            }
+          ],
           "photo": {
             "file": "2015-bogazici-exit-days",
-            "alt": "A group photo in a university classroom, everyone standing in front of the whiteboards behind rows of desks"
+            "alt": "Lemi on a dark stage in front of a slide that reads Software Craftsmanship: Building A Culture For The Future, Boğaziçi Üniversitesi EXIT'15"
+          }
+        },
+        {
+          "date": "2015-02-23",
+          "name": "Agile Talks, Avea",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Agile Engineering Practices",
+              "summary": "A talk on agile engineering practices, at Avea's office.",
+              "themes": ["agile"]
+            }
+          ],
+          "photo": {
+            "file": "2015-agile-talks-avea",
+            "alt": "Lemi speaking in a hall with tall curtained windows, beside a slide that reads Everyone hates previous developer"
+          }
+        },
+        {
+          "date": "2015-02-06",
+          "name": "Türkiye Finans Katılım Bankası technology team",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Agile Engineering Practices",
+              "summary": "A talk with the bank's technology team on agile engineering practices.",
+              "themes": ["agile"]
+            }
+          ],
+          "photo": {
+            "file": "2015-turkiye-finans",
+            "alt": "Lemi beside the Agile Engineering Practices title slide at the front of a meeting room, rows of people on black chairs facing him"
           }
         }
       ],
       "2014": [
+        {
+          "date": "2014-12-25",
+          "name": "Agile Buluşmalar, Agile Türkiye",
+          "spoken": "tr",
+          "talks": [
+            {
+              "summary": "A conversation on lean software development.",
+              "themes": ["lean"]
+            }
+          ],
+          "photo": {
+            "file": "2014-agile-bulusmalar",
+            "alt": "A large circle of people on chairs in a café, paper cups on the low tables between them"
+          }
+        },
         {
           "date": "2014-12-18",
           "name": "İstanbul Kültür University, BMO Seminar",
@@ -2801,7 +2892,11 @@
               "summary": "Development drowns in waste, from unneeded code and technical debt to task switching and waiting; visualizing the flow with Kanban exposes it for removal.",
               "themes": ["lean"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2014-lean-kanban",
+            "alt": "Lemi at a BAU lectern on a wooden stage, beside a slide contrasting a Frankenstein face with a clean-shaven one: develop and bug fix against develop and refactor, manual testing against fully automated testing"
+          }
         },
         {
           "date": "2014-09-24",
@@ -2821,7 +2916,7 @@
           }
         },
         {
-          "date": "2014-09-20",
+          "date": "2014-09-18",
           "name": "GDG Istanbul meetup",
           "place": "istanbul",
           "spoken": "tr",
@@ -2835,7 +2930,7 @@
           ],
           "photo": {
             "file": "2014-gdg-istanbul-meetup",
-            "alt": "Lemi at a BAU lectern on a wooden stage, beside a slide contrasting a Frankenstein face with a clean-shaven one: develop and bug fix against develop and refactor, manual testing against fully automated testing"
+            "alt": "The title slide of A Gentle Introduction to Microservices: From Theory into Practice, a ladybug on a green leaf below the title and Lemi's name in the corner"
           }
         },
         {
@@ -2891,6 +2986,23 @@
           }
         },
         {
+          "date": "2014-05-07",
+          "name": "Marmara University, Computer Engineering",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Ethics in Software Development",
+              "summary": "A talk with computer engineering students on ethics in software development.",
+              "themes": ["ethics"]
+            }
+          ],
+          "photo": {
+            "file": "2014-marmara-ethics",
+            "alt": "Lemi taking a selfie at the front of a lecture hall with red seats, students in the rows behind him"
+          }
+        },
+        {
           "date": "2014-05-04",
           "name": "PHPIst 2014",
           "place": "istanbul",
@@ -2936,6 +3048,7 @@
           "talks": [
             {
               "title": "Agile Engineering Practices",
+              "summary": "A talk on agile engineering practices.",
               "themes": ["agile"]
             }
           ],
