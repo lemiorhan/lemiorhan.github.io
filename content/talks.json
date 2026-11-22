@@ -2715,7 +2715,11 @@
               "summary": "A guide to evolving from novice to professional software developer.",
               "themes": ["career", "craftsmanship"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2015-thk-university",
+            "alt": "Lemi speaking in front of the talk's title slide, which shows Lemi's name and contact details"
+          }
         },
         {
           "date": "2015-04-17",
@@ -3149,7 +3153,11 @@
               "summary": "Projects fail because software is built against its own nature; agility and extreme programming practices are how to build it naturally.",
               "themes": ["agile", "craftsmanship"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2013-agile-talks",
+            "alt": "Lemi speaking beside a slide of a crowd surfer that says software development is a social activity"
+          }
         },
         {
           "date": "2013-03-23",
