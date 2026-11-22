@@ -541,6 +541,141 @@
     return { nav: nav, strip: copy };
   }
 
+  function setupSumoLive() {
+    var box = document.querySelector('.sumo-live');
+    if (!box) return;
+    var data = JSON.parse(box.querySelector('.sumo-data').textContent);
+    var text = data.text;
+    var status = box.querySelector('.sumo-status');
+    // Tournament days are days in Japan, which is nine hours ahead of UTC.
+    var today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+
+    function step(id, months) {
+      var n = Number(id.slice(0, 4)) * 12 + Number(id.slice(4)) - 1 + months;
+      return String(Math.floor(n / 12) * 100 + n % 12 + 1);
+    }
+    function month(id) { return data.months[Number(id.slice(4)) - 1]; }
+    function bashoName(id) { return data.names[id.slice(4)] + ', ' + month(id) + ' ' + id.slice(0, 4); }
+    function day(date) { return Number(date.slice(8)) + ' ' + month(date.slice(0, 4) + date.slice(5, 7)) + ' ' + date.slice(0, 4); }
+    function bashoId(entry) { return entry.start.slice(0, 4) + entry.start.slice(5, 7); }
+
+    function get(path) {
+      return fetch(data.api + path).then(function (response) {
+        if (!response.ok) throw new Error(path + ' answered ' + response.status);
+        return response.json();
+      });
+    }
+    function champion(basho) {
+      return (basho.yusho || []).filter(function (y) { return y.type === 'Makuuchi'; })[0];
+    }
+    // A tournament the API does not have yet comes back as 200 with empty fields.
+    function lastFinished(id, tries) {
+      return get('/basho/' + id).then(function (basho) {
+        if (champion(basho)) return basho;
+        if (tries === 1) throw new Error('no finished tournament up to ' + id);
+        return lastFinished(step(id, -2), tries - 1);
+      });
+    }
+    function banzukeOf(id) {
+      return get('/basho/' + id + '/banzuke/Makuuchi').then(function (banzuke) {
+        return banzuke.east ? banzuke : null;
+      });
+    }
+    function everyone(banzuke) { return banzuke.east.concat(banzuke.west); }
+    function record(r) { return r.wins + '-' + r.losses + (r.absences ? '-' + r.absences : ''); }
+
+    function el(tag, content, className) {
+      var node = document.createElement(tag);
+      if (content) node.textContent = content;
+      if (className) node.className = className;
+      return node;
+    }
+    function upcoming(finishedId) {
+      var entry = data.schedule.filter(function (e) { return e.end >= today && bashoId(e) !== finishedId; })[0];
+      if (!entry) return [];
+      var span = data.names[entry.start.slice(5, 7)] + ' · ' + Number(entry.start.slice(8)) + '–' + day(entry.end) + ' · ' + entry.place;
+      var items = [[entry.start <= today ? text.running : text.next, span]];
+      if (entry.banzuke > today) items.push([text.banzuke_day, day(entry.banzuke)]);
+      return items;
+    }
+    function infobox(items) {
+      if (!items.length) return;
+      var dl = el('dl', '', 'infobox');
+      items.forEach(function (item) {
+        var row = dl.appendChild(el('div'));
+        row.appendChild(el('dt', item[0]));
+        row.appendChild(el('dd', item[1]));
+      });
+      box.appendChild(dl);
+    }
+    function table(banzuke, finishedId) {
+      var rows = {};
+      var order = [];
+      [['east', banzuke.east], ['west', banzuke.west]].forEach(function (side) {
+        side[1].forEach(function (r) {
+          var words = r.rank.split(' ');
+          if (!Object.prototype.hasOwnProperty.call(data.ranks, words[0])) return;
+          var key = words[0] + ' ' + words[1];
+          if (!rows[key]) {
+            rows[key] = { value: r.rankValue, name: data.ranks[words[0]] };
+            order.push(key);
+          }
+          rows[key][side[0]] = r;
+        });
+      });
+      order.sort(function (a, b) { return rows[a].value - rows[b].value; });
+      var counted = everyone(banzuke).some(function (r) { return r.wins + r.losses + r.absences > 0; });
+      var t = el('table', '', 'banzuke');
+      t.appendChild(el('caption', fill(text.banzuke, { basho: bashoName(banzuke.bashoId) })));
+      var head = t.appendChild(el('thead')).appendChild(el('tr'));
+      [text.east, text.rank, text.west].forEach(function (label) {
+        head.appendChild(el('th', label)).setAttribute('scope', 'col');
+      });
+      var body = t.appendChild(el('tbody'));
+      var absent = false;
+      function cell(r) {
+        var td = el('td', r ? r.shikonaEn : '');
+        if (r && counted) {
+          td.appendChild(el('span', record(r), 'rec'));
+          absent = absent || r.absences > 0;
+        }
+        return td;
+      }
+      order.forEach(function (key) {
+        var tr = body.appendChild(el('tr'));
+        tr.appendChild(cell(rows[key].east));
+        tr.appendChild(el('th', rows[key].name)).setAttribute('scope', 'row');
+        tr.appendChild(cell(rows[key].west));
+      });
+      box.appendChild(t);
+      if (counted) {
+        var note = banzuke.bashoId === finishedId ? text.record : text.record_live;
+        box.appendChild(el('p', absent ? note + ' ' + text.absences : note, 'sumo-note'));
+      }
+    }
+
+    var month0 = Number(today.slice(5, 7));
+    var current = today.slice(0, 4) + ('0' + (month0 - (month0 % 2 ? 0 : 1))).slice(-2);
+    status.textContent = text.loading;
+    lastFinished(current, 3).then(function (basho) {
+      return Promise.all([banzukeOf(step(basho.date, 2)), banzukeOf(basho.date)]).then(function (both) {
+        var yusho = champion(basho);
+        var winner = everyone(both[1]).filter(function (r) { return r.rikishiID === yusho.rikishiId; })[0];
+        var items = [[text.last, bashoName(basho.date)], [text.champion, yusho.shikonaEn + ', ' + record(winner)]];
+        var prizes = (basho.specialPrizes || []).map(function (p) {
+          return p.shikonaEn + ' (' + data.prizes[p.type] + ')';
+        });
+        if (prizes.length) items.push([text.prizes, prizes.join(', ')]);
+        status.hidden = true;
+        infobox(items.concat(upcoming(basho.date)));
+        table(both[0] || both[1], basho.date);
+      });
+    }).catch(function () {
+      status.textContent = text.failed;
+      infobox(upcoming(null));
+    });
+  }
+
   function setupLightbox() {
     var links = Array.prototype.slice.call(document.querySelectorAll('a[data-lightbox]'));
     if (!links.length || typeof HTMLDialogElement !== 'function') return;
@@ -627,5 +762,6 @@
   setupCopy();
   setupGraph();
   setupArchive();
+  setupSumoLive();
   setupLightbox();
 })();

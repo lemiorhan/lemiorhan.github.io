@@ -378,6 +378,93 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
         self.assertRejected(self.edit('contact', lambda d: self.contact_form(d)['status'].pop('failed')),
                             "a 'form' block is missing 'failed'")
 
+    # Sumo live block
+
+    # A schedule of the tests' own, so that adding next year's dates to content/sumo.json or dropping
+    # past ones leaves these tests as they are.
+    SUMO_SCHEDULE = [{'start': '2099-01-11', 'end': '2099-01-25', 'banzuke': '2098-12-21', 'place': 'Tokyo, Kokugikan'},
+                     {'start': '2099-03-08', 'end': '2099-03-22', 'banzuke': '2099-02-23', 'place': 'Osaka, EDION Arena Osaka'}]
+
+    @classmethod
+    def sumo_live(cls, fn):
+        def change(d):
+            b = blocks_of(d, 'sumo-live')[0]
+            b['schedule'] = [dict(e) for e in cls.SUMO_SCHEDULE]
+            fn(b)
+        return BrokenContentStopsTheBuild.edit('sumo', change)
+
+    def test_the_sumo_schedule_the_tests_break_builds_as_it_is(self):
+        result = self.build_with(self.sumo_live(lambda b: None))
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_a_sumo_schedule_with_no_tournament_left_to_end(self):
+        def past(b):
+            b['schedule'] = [{'start': '2020-01-12', 'end': '2020-01-26', 'banzuke': '2019-12-24', 'place': 'Tokyo'}]
+        self.assertRejected(self.sumo_live(past), 'content/sumo.json: the sumo-live schedule has no tournament that ends today or later')
+
+    def test_a_sumo_tournament_starting_outside_a_tournament_month(self):
+        self.assertRejected(self.sumo_live(lambda b: b['schedule'][-1].update(start='2099-04-12', end='2099-04-26')),
+                            'the sumo-live tournament starting 2099-04-12 must start in a tournament month')
+
+    def test_a_sumo_tournament_ending_before_it_starts(self):
+        self.assertRejected(self.sumo_live(lambda b: b['schedule'][-1].update(end='2099-03-01')),
+                            'the sumo-live tournament starting 2099-03-08 must start in a tournament month, end in that month')
+
+    def test_a_sumo_tournament_ending_in_the_next_month(self):
+        self.assertRejected(self.sumo_live(lambda b: b['schedule'][-1].update(end='2099-04-05')),
+                            'the sumo-live tournament starting 2099-03-08 must start in a tournament month, end in that month')
+
+    def test_a_sumo_banzuke_announced_once_its_tournament_has_started(self):
+        self.assertRejected(self.sumo_live(lambda b: b['schedule'][-1].update(banzuke='2099-03-08')),
+                            'the sumo-live tournament starting 2099-03-08 must start in a tournament month')
+
+    def test_a_sumo_date_that_is_not_a_date(self):
+        for day in ('26 Kasım 2099', '2099-02-30'):
+            with self.subTest(day=day):
+                self.assertRejected(self.sumo_live(lambda b: b['schedule'][-1].update(end=day)),
+                                    "the sumo-live schedule gives end {!r}, which is not a YYYY-MM-DD date".format(day))
+
+    def test_a_sumo_date_python_reads_but_not_in_the_dashed_form_site_js_reads(self):
+        for day in ('20990322', '2099-W12-7'):
+            with self.subTest(day=day):
+                self.assertRejected(self.sumo_live(lambda b: b['schedule'][-1].update(end=day)),
+                                    "the sumo-live schedule gives end {!r}, which is not a YYYY-MM-DD date".format(day))
+
+    def test_a_sumo_tournament_with_no_place(self):
+        self.assertRejected(self.sumo_live(lambda b: b['schedule'][-1].update(place='')),
+                            'the sumo-live tournament starting 2099-03-08 has no place')
+
+    def test_a_sumo_schedule_out_of_order(self):
+        self.assertRejected(self.sumo_live(lambda b: b['schedule'].reverse()),
+                            'the sumo-live schedule must list tournaments in the order they start')
+
+    def test_sumo_tournament_names_missing_a_month(self):
+        self.assertRejected(self.sumo_live(lambda b: b['names'].pop('07')),
+                            'sumo-live "names" must name the tournament of each month in 01, 03, 05, 07, 09, 11')
+
+    def test_sumo_months_that_are_not_twelve(self):
+        self.assertRejected(self.sumo_live(lambda b: b['months'].pop()), 'sumo-live "months" must name the twelve months')
+
+    def test_a_sumo_month_left_empty(self):
+        self.assertRejected(self.sumo_live(lambda b: b['months'].__setitem__(3, '')),
+                            'sumo-live "months" must name the twelve months')
+
+    def test_a_sumo_string_left_empty(self):
+        for key, name in (('text', 'failed'), ('names', '07'), ('ranks', 'Ozeki'), ('prizes', 'Kanto-sho')):
+            with self.subTest(key=key):
+                self.assertRejected(self.sumo_live(lambda b: b[key].update({name: ''})),
+                                    '"sumo-live {}" must be an object whose values are non-empty strings'.format(key))
+
+    def test_a_sumo_text_line_or_prize_name_site_js_reads_left_out(self):
+        for key, name in (('text', 'banzuke'), ('text', 'noscript'), ('prizes', 'Gino-sho')):
+            with self.subTest(name=name):
+                self.assertRejected(self.sumo_live(lambda b: b[key].pop(name)),
+                                    "a 'sumo-live' block is missing '{}'".format(name))
+
+    def test_a_sumo_api_that_is_not_https(self):
+        self.assertRejected(self.sumo_live(lambda b: b.update(api='http://www.sumo-api.com/api')),
+                            'sumo-live "api" must be an https:// URL')
+
     # Sharing
 
     def test_a_share_image_without_its_size(self):
@@ -837,6 +924,16 @@ class ContentRendersAsText(unittest.TestCase):
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False)
         cls.video_n = data['archive']['video_n']
+        path = os.path.join(site, 'content', 'sumo.json')
+        data = read_json(path)
+        live = blocks_of(data, 'sumo-live')[0]
+        for key in ('names', 'months', 'ranks', 'prizes', 'text'):
+            live[key] = cls.plant(live[key])
+        for entry in live['schedule']:
+            entry['place'] += ' ' + cls.MARK
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False)
+        cls.sumo_live = live
         out = os.path.join(cls.tmp.name, 'out')
         result = run_build(site, out)
         if result.returncode:
@@ -848,10 +945,30 @@ class ContentRendersAsText(unittest.TestCase):
             cls.not_found = f.read()
         with open(os.path.join(out, 'sharing', 'index.html'), encoding='utf-8') as f:
             cls.sharing = Tree(f.read()).root
+        with open(os.path.join(out, 'sumo', 'index.html'), encoding='utf-8') as f:
+            cls.sumo = f.read()
 
     @classmethod
     def tearDownClass(cls):
         cls.tmp.cleanup()
+
+    def test_the_sumo_live_island_holds_no_angle_bracket_and_carries_its_strings_unchanged(self):
+        start = self.sumo.index('<script type="application/json" class="sumo-data">')
+        start = self.sumo.index('>', start) + 1
+        body = self.sumo[start:self.sumo.index('</script>', start)]
+        self.assertNotIn('<', body)
+        island = json.loads(body)
+        self.assertEqual({k: island[k] for k in ('names', 'months', 'ranks', 'prizes', 'text')},
+                         {k: self.sumo_live[k] for k in ('names', 'months', 'ranks', 'prizes', 'text')})
+        self.assertEqual([e['place'] for e in island['schedule']], [e['place'] for e in self.sumo_live['schedule']])
+        self.assertIn(self.MARK, island['text']['banzuke'])
+
+    def test_the_sumo_live_line_shown_without_javascript_renders_as_text(self):
+        tree = Tree(self.sumo).root
+        self.assertEqual(tree.find(lambda n: n.tag == 'xmark'), [])
+        status = tree.find(has_class('sumo-status'))
+        self.assertEqual([n.all_text() for n in status], [self.sumo_live['text']['noscript']])
+        self.assertIn(self.MARK, self.sumo_live['text']['noscript'])
 
     def test_the_titles_and_channels_a_source_gives_render_as_text_on_the_sharing_page(self):
         self.assertEqual(self.sharing.find(lambda n: n.tag == 'xmark'), [])
