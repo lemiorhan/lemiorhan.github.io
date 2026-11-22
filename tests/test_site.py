@@ -1765,6 +1765,21 @@ class BuiltSite(unittest.TestCase):
                          [(self.talks['filters']['university'], 'false', True)])
         self.assertEqual([b.attrs.get('data-filter') for b in group.find(lambda n: n.tag == 'button')], ['all', 'video', 'slides'])
 
+    def test_the_university_toggle_takes_its_look_from_the_media_buttons_and_print_leaves_both_out(self):
+        with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
+            css = re.sub(r'/\*.*?\*/', '', f.read(), flags=re.S)
+        selectors = [s.strip() for group in re.findall(r'([^{}@;]+)\{', css) for s in group.split(',')]
+        one_side = re.compile(r'\.filters(?![\w-])|\[data-filter|\[data-university')
+        self.assertEqual([s for s in selectors if one_side.search(s)], ['.filters'],
+                         'a rule naming a mark only the media buttons or only the toggle carries could style them apart')
+        self.assertEqual([s for s in selectors if s.startswith('.filter-bar button')],
+                         ['.filter-bar button', '.filter-bar button:hover', '.filter-bar button[aria-pressed="true"]'])
+        printed = css[css.index('@media print'):]
+        hidden = [s.strip() for group, body in re.findall(r'([^{}@;]+)\{([^{}]*)\}', printed) if 'display: none' in body
+                  for s in group.split(',')]
+        self.assertIn('.filter-bar', hidden)
+        self.assertIn('.tmap', hidden, 'the print rules this reads should be the ones that leave the other controls out')
+
     def test_the_talks_page_gives_every_ui_string_site_js_reads(self):
         with open(os.path.join(ROOT, 'assets', 'site.js'), encoding='utf-8') as f:
             read = set(re.findall(r'\bui\.([a-z_]+)', f.read()))
