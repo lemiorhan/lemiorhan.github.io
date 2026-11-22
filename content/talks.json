@@ -1014,6 +1014,23 @@
       ],
       "2020": [
         {
+          "date": "2020-12-18",
+          "name": "MBA Talks, Işık Üniversitesi",
+          "place": "online",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "The Zen of Mastery: The Unwritten Guide to Professional Life",
+              "summary": "The Unspoken Rules of a Better Professional Life again, five days later and under a new title.",
+              "themes": ["career"]
+            }
+          ],
+          "photo": {
+            "file": "2020-isik-mba-talks",
+            "alt": "Video call screenshot: the title slide Unspoken Rules of a Better Professional Life above the name lemi orhan ergin, and a row of five video tiles below, Lemi in glasses in the middle one"
+          }
+        },
+        {
           "date": "2020-12-13",
           "name": "The Unspoken Rules of a Better Professional Life",
           "place": "online",
@@ -1177,6 +1194,22 @@
           "photo": {
             "file": "2020-bilmok",
             "alt": "Lemi in a black long-sleeved polo shirt on a wooden stage, talking with a handheld microphone in one hand and gesturing with the other"
+          }
+        },
+        {
+          "date": "2020-02-05",
+          "name": "Prisync meetup",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Zen of Programming Career",
+              "themes": ["career"]
+            }
+          ],
+          "photo": {
+            "file": "2020-prisync",
+            "alt": "Lemi in glasses and a black polo shirt in front of a slide with a poop icon, a camera on a tripod in the foreground and a Prisync banner on the right"
           }
         }
       ],
@@ -1718,10 +1751,16 @@
               "themes": ["design"]
             }
           ],
-          "photo": {
-            "file": "2018-fsm",
-            "alt": "Lemi talking to a full classroom of students"
-          }
+          "photo": [
+            {
+              "file": "2018-fsm",
+              "alt": "Lemi talking to a full classroom of students"
+            },
+            {
+              "file": "2018-fsm-clean-design",
+              "alt": "Lemi standing at the front of a full classroom, the title slide Clean Software Design on the screen behind him and Fatih Sultan Mehmet banners on both sides"
+            }
+          ]
         },
         {
           "date": "2018-03-11",
@@ -2604,7 +2643,11 @@
               "summary": "Developers improve their craft by practicing: a day of 45-minute pair programming, test-first sessions on Conway's Game of Life, with no pressure to finish.",
               "themes": ["craftsmanship"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2014-coderetreat",
+            "alt": "Rows of developers with lanyards working in pairs at their laptops in a bright room with tall windows"
+          }
         },
         {
           "date": "2014-11-08",

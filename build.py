@@ -1188,14 +1188,19 @@ def shell(page, body):
         data = json.dumps(person, ensure_ascii=False, indent=2).replace('</', '<\\/')
         jsonld = ['', '  <script type="application/ld+json">'] + indent(data.split('\n'), 2) + ['  </script>']
     lang = d.get('lang', site['lang'])
+    if not isinstance(lang, str) or not lang:
+        page.fail('"lang" must be a non-empty string')
+    page_ui = d.get('ui', {})
+    if not isinstance(page_ui, dict) or not all(isinstance(v, str) and v for v in page_ui.values()):
+        page.fail('"ui" must be an object whose values are non-empty strings')
     chrome = '' if lang == site['lang'] else ' lang="{}"'.format(attr(site['lang']))
     ui = dict(site['ui'])
     ui.update(d.get('archive', {}).get('ui', {}))
-    unknown = sorted(set(d.get('ui', {})) - set(site['ui']))
+    unknown = sorted(set(page_ui) - set(site['ui']))
     if unknown:
         page.fail('ui gives {}, which site.json\'s ui does not have; a page can only translate the site\'s strings'.format(
             ', '.join(unknown)))
-    ui.update(d.get('ui', {}))
+    ui.update(page_ui)
     ui_json = json.dumps(ui, ensure_ascii=False).replace('</', '<\\/')
     main_class = ' class="archive"' if d.get('archive') else ''
     game_css, game_js = [], []

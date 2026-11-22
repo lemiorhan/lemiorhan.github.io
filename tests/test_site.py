@@ -498,8 +498,24 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
                                     'content/community.json: a photo block\'s "small" must be true or false')
 
     def test_a_page_translating_a_string_the_site_does_not_have(self):
-        self.assertRejected(self.edit('bio', lambda d: d.setdefault('ui', {}).update({'clsoe': 'Kapat'})),
-                            "content/bio.json: ui gives clsoe, which site.json's ui does not have")
+        self.assertIn('event_one', read_json(ROOT, 'content', 'talks.json')['archive']['ui'],
+                      'the talks case needs a key only the page\'s own archive ui has')
+        for name, key in (('bio', 'clsoe'), ('talks', 'event_one')):
+            with self.subTest(name=name, key=key):
+                self.assertRejected(self.edit(name, lambda d, key=key: d.setdefault('ui', {}).update({key: 'x'})),
+                                    "content/{}.json: ui gives {}, which site.json's ui does not have".format(name, key))
+
+    def test_a_page_whose_lang_is_not_a_non_empty_string(self):
+        for value in (None, 5, ''):
+            with self.subTest(value=value):
+                self.assertRejected(self.edit('sumo', lambda d, value=value: d.update(lang=value)),
+                                    'content/sumo.json: "lang" must be a non-empty string')
+
+    def test_a_page_whose_ui_is_not_an_object_of_non_empty_strings(self):
+        for value in (None, ['close'], 'close', {'close': 5}, {'close': ''}):
+            with self.subTest(value=value):
+                self.assertRejected(self.edit('sumo', lambda d, value=value: d.update(ui=value)),
+                                    'content/sumo.json: "ui" must be an object whose values are non-empty strings')
 
     def test_a_photo_in_a_list_whose_file_does_not_exist(self):
         name = self.list_photo_event(read_json(ROOT, 'content', 'talks.json'))['name']
@@ -989,6 +1005,45 @@ class NotFoundWithoutAMaze(unittest.TestCase):
         self.assertEqual([n.all_text() for n in Tree(html).root.find(lambda n: n.tag == 'h1')], [data['heading']])
 
 
+def assert_pages_in_their_language(case, trees, content, site_lang):
+    seen = Counter()
+    for name, tree in trees.items():
+        html, = tree.find(lambda n: n.tag == 'html')
+        chrome = tree.find(lambda n: n.tag in ('header', 'footer') or 'skip' in n.classes())
+        if name == '404':
+            case.assertEqual(html.attrs.get('lang'), site_lang, name)
+            case.assertEqual(chrome, [], name)
+            continue
+        lang = read_json(content, name + '.json').get('lang', site_lang)
+        case.assertEqual(html.attrs.get('lang'), lang, name)
+        case.assertEqual([n.tag for n in chrome], ['a', 'header', 'footer'], name)
+        case.assertEqual([n.attrs.get('lang') for n in chrome], [None if lang == site_lang else site_lang] * 3, name)
+        seen[lang == site_lang] += 1
+    case.assertGreater(seen[True], 0)
+    case.assertGreater(seen[False], 0)
+
+
+class SiteLanguageIsTheDefault(unittest.TestCase):
+    def test_a_site_in_another_language_puts_it_on_every_page_without_its_own_and_on_the_chrome(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            site = copy_site(tmp)
+            path = os.path.join(site, 'content', 'site.json')
+            data = read_json(path)
+            self.assertNotEqual(data['lang'], 'de', 'the copy must change the site language')
+            data['lang'] = 'de'
+            with open(path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False)
+            out = os.path.join(tmp, 'out')
+            result = run_build(site, out)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            content = os.path.join(site, 'content')
+            trees = {}
+            for name in sorted(f[:-5] for f in os.listdir(content) if f.endswith('.json') and f != 'site.json'):
+                with open(os.path.join(out, page_file(name)), encoding='utf-8') as f:
+                    trees[name] = Tree(f.read()).root
+            assert_pages_in_their_language(self, trees, content, 'de')
+
+
 class BuiltSite(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -1023,21 +1078,8 @@ class BuiltSite(unittest.TestCase):
         self.assertNotEqual([p for p in pages if p not in nav], [], 'no page is reached from the home page alone')
 
     def test_every_page_is_in_its_own_language_and_marks_the_site_chrome_when_that_differs(self):
-        site_lang = read_json(ROOT, 'content', 'site.json')['lang']
-        seen = Counter()
-        for name, tree in self.trees.items():
-            lang = read_json(ROOT, 'content', name + '.json').get('lang', site_lang)
-            html, = tree.find(lambda n: n.tag == 'html')
-            self.assertEqual(html.attrs.get('lang'), lang, name)
-            chrome = tree.find(lambda n: n.tag in ('header', 'footer') or 'skip' in n.classes())
-            if name == '404':
-                self.assertEqual(chrome, [], name)
-                continue
-            self.assertEqual([n.tag for n in chrome], ['a', 'header', 'footer'], name)
-            self.assertEqual([n.attrs.get('lang') for n in chrome], [None if lang == site_lang else site_lang] * 3, name)
-            seen[lang == site_lang] += 1
-        self.assertGreater(seen[True], 0)
-        self.assertGreater(seen[False], 0)
+        assert_pages_in_their_language(self, self.trees, os.path.join(ROOT, 'content'),
+                                       read_json(ROOT, 'content', 'site.json')['lang'])
 
     def test_a_page_translates_the_site_strings_it_names_and_keeps_the_rest(self):
         site_ui = read_json(ROOT, 'content', 'site.json')['ui']
@@ -1047,7 +1089,7 @@ class BuiltSite(unittest.TestCase):
                 continue
             data = read_json(ROOT, 'content', name + '.json')
             island, = tree.find(lambda n: n.attrs.get('id') == 'ui-text')
-            want = dict(site_ui, **data.get('archive', {}).get('ui', {}), **data.get('ui', {}))
+            want = {**site_ui, **data.get('archive', {}).get('ui', {}), **data.get('ui', {})}
             self.assertEqual(json.loads(island.all_text()), want, name)
             translated += sum(want[k] != site_ui[k] for k in data.get('ui', {}))
         self.assertGreater(translated, 0)
@@ -1609,6 +1651,10 @@ class BuiltSite(unittest.TestCase):
         widths = css_values(css, '.photo-small', 'max-width')
         self.assertEqual(len(widths), 1, widths)
         self.assertRegex(widths[0], r'^(?!0+(\.0+)?rem$)[\d.]+rem$')
+        page = css_values(css, '.wrap', 'max-width')
+        self.assertEqual(len(page), 1, page)
+        self.assertRegex(page[0], r'^[\d.]+rem$')
+        self.assertLess(float(widths[0][:-3]), float(page[0][:-3]), 'a cap no narrower than the page caps nothing')
 
     def referenced_paths(self):
         paths = set()
