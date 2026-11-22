@@ -2159,7 +2159,11 @@
               "summary": "No process makes a team agile on its own: technical agility grows from a development culture of shared practices, clean code, tests and continuous learning.",
               "themes": ["agile", "culture"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2016-devfest-izmir",
+            "alt": "Lemi walking across a wooden stage with a microphone, a GDG İzmir banner behind him and orange seats along the right"
+          }
         },
         {
           "date": "2016-11-17",
@@ -2173,7 +2177,11 @@
               "summary": "Waste survives because developers tolerate it; a team manifesto, internal meetups and egoless programming build the discipline and passion to remove it.",
               "themes": ["agile", "craftsmanship"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2016-it-serbia-podcast",
+            "alt": "The episode's cover, reading On fighting elephants in the room with Lemi Orhan Ergin over a city riverside at night"
+          }
         },
         {
           "date": "2016-10-22",
@@ -2181,7 +2189,11 @@
           "place": "istanbul",
           "url": "https://www.coderetreat.org/",
           "role": "Facilitator",
-          "spoken": "tr"
+          "spoken": "tr",
+          "photo": {
+            "file": "2016-coderetreat",
+            "alt": "Participants coding on laptops at rows of white desks in a bright office room, Shift Happens Be Agile bags on some of the chairs"
+          }
         },
         {
           "date": "2016-10-15",
@@ -2201,6 +2213,21 @@
           "photo": {
             "file": "2016-bosnia-agile-day",
             "alt": "Lemi holding a microphone in front of a Radical Transparency slide"
+          }
+        },
+        {
+          "date": "2016-10-03",
+          "name": "Agile Buluşmalar, Agile Türkiye",
+          "spoken": "tr",
+          "talks": [
+            {
+              "summary": "The SOLID principles of object-oriented design.",
+              "themes": ["design"]
+            }
+          ],
+          "photo": {
+            "file": "2016-agile-bulusmalar-solid",
+            "alt": "A full hall seen from the back rows, two screens showing the same slide and Lemi far off at the front"
           }
         },
         {
@@ -2261,6 +2288,12 @@
           "name": "Boğaziçi University Tech Summit 2016",
           "place": "istanbul",
           "spoken": "tr",
+          "talks": [
+            {
+              "title": "Passionate Developer's Guide to the Galaxy",
+              "themes": ["motivation"]
+            }
+          ],
           "photo": {
             "file": "2016-bogazici-tech-summit",
             "alt": "Lemi on a small stage in a room of red seats, seen from the back rows"
@@ -2296,7 +2329,28 @@
               "summary": "Git stops being frightening once seen as a graph of snapshots: every command moves pointers on it, and committed code is almost never lost.",
               "themes": ["git"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2016-karabuk",
+            "alt": "A large group photo on the steps of a university hall, the front row crouching and several people wearing lanyards"
+          }
+        },
+        {
+          "date": "2016-02-24",
+          "name": "Agile Buluşmalar, Agile Türkiye",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Lost in Motivation in an Agile World",
+              "slides": "https://speakerdeck.com/lemiorhan/lost-in-motivation-in-an-agile-world",
+              "summary": "The first version of the talk that became Happy Developer's Guide to the Galaxy in April: motivation comes from trust, mastery goals and shared purpose, not from money or rituals.",
+              "themes": ["motivation", "agile"]
+            }
+          ],
+          "photo": {
+            "file": "2016-agile-bulusmalar-february",
+            "alt": "Lemi talking to people seated around a lounge under chrome ceiling lights, a screen beside him showing a Guide to the Galaxy slide"
+          }
         },
         {
           "date": "2016-01-11",
@@ -2309,7 +2363,11 @@
               "summary": "A conversation about agility as adapting to constant change, and the craft behind it: test-first design, refactoring, pair programming and trust in teams.",
               "themes": ["craftsmanship"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2016-devpod",
+            "alt": "Lemi and two others around a café table at night, coffee cups and a small vase of flowers between them"
+          }
         }
       ],
       "2015": [
