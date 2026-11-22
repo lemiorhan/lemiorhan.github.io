@@ -489,6 +489,18 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
         self.assertRejected(self.edit('community', nowhere),
                             'content/community.json: photo block: assets/community/nowhere.jpg does not exist')
 
+    def test_a_photo_block_whose_small_is_not_true_or_false(self):
+        for value in ('yes', 1, None):
+            def odd(d, value=value):
+                blocks_of(d, 'photo')[0]['small'] = value
+            with self.subTest(value=value):
+                self.assertRejected(self.edit('community', odd),
+                                    'content/community.json: a photo block\'s "small" must be true or false')
+
+    def test_a_page_translating_a_string_the_site_does_not_have(self):
+        self.assertRejected(self.edit('bio', lambda d: d.setdefault('ui', {}).update({'clsoe': 'Kapat'})),
+                            "content/bio.json: ui gives clsoe, which site.json's ui does not have")
+
     def test_a_photo_in_a_list_whose_file_does_not_exist(self):
         name = self.list_photo_event(read_json(ROOT, 'content', 'talks.json'))['name']
 
@@ -1002,6 +1014,43 @@ class BuiltSite(unittest.TestCase):
         self.assertIn('talks', self.trees)
         self.assertIn('bio', self.trees)
         self.assertIn('root-bug', self.trees)
+
+    def test_every_page_is_linked_from_the_site_nav_or_the_home_page(self):
+        nav = {item['path'] for item in read_json(ROOT, 'content', 'site.json')['nav']}
+        home = {a.attrs['href'] for a in self.trees['home'].find(lambda n: n.tag == 'a' and n.attrs.get('href'))}
+        pages = [name + '/' for name in self.trees if name not in ('home', '404')]
+        self.assertEqual([p for p in pages if p not in home], [])
+        self.assertNotEqual([p for p in pages if p not in nav], [], 'no page is reached from the home page alone')
+
+    def test_every_page_is_in_its_own_language_and_marks_the_site_chrome_when_that_differs(self):
+        site_lang = read_json(ROOT, 'content', 'site.json')['lang']
+        seen = Counter()
+        for name, tree in self.trees.items():
+            lang = read_json(ROOT, 'content', name + '.json').get('lang', site_lang)
+            html, = tree.find(lambda n: n.tag == 'html')
+            self.assertEqual(html.attrs.get('lang'), lang, name)
+            chrome = tree.find(lambda n: n.tag in ('header', 'footer') or 'skip' in n.classes())
+            if name == '404':
+                self.assertEqual(chrome, [], name)
+                continue
+            self.assertEqual([n.tag for n in chrome], ['a', 'header', 'footer'], name)
+            self.assertEqual([n.attrs.get('lang') for n in chrome], [None if lang == site_lang else site_lang] * 3, name)
+            seen[lang == site_lang] += 1
+        self.assertGreater(seen[True], 0)
+        self.assertGreater(seen[False], 0)
+
+    def test_a_page_translates_the_site_strings_it_names_and_keeps_the_rest(self):
+        site_ui = read_json(ROOT, 'content', 'site.json')['ui']
+        translated = 0
+        for name, tree in self.trees.items():
+            if name == '404':
+                continue
+            data = read_json(ROOT, 'content', name + '.json')
+            island, = tree.find(lambda n: n.attrs.get('id') == 'ui-text')
+            want = dict(site_ui, **data.get('archive', {}).get('ui', {}), **data.get('ui', {}))
+            self.assertEqual(json.loads(island.all_text()), want, name)
+            translated += sum(want[k] != site_ui[k] for k in data.get('ui', {}))
+        self.assertGreater(translated, 0)
 
     def test_fragment_links_reach_a_unique_id_on_their_page(self):
         for name, tree in self.trees.items():
@@ -1542,6 +1591,25 @@ class BuiltSite(unittest.TestCase):
             self.assertRegex(values[0], length, selector + ' ' + prop)
         self.assertRegex(''.join(css_values(css, '.ev-photo', 'flex')), r'^1 1 (?!0+(\.0+)?rem$)[\d.]+rem$')
 
+    def test_a_photo_block_marked_small_is_capped_and_the_others_keep_the_column_width(self):
+        small = Counter()
+        for name, tree in self.trees.items():
+            if name == '404':
+                continue
+            blocks = blocks_of(read_json(ROOT, 'content', name + '.json'), 'photo')
+            figures = tree.find(lambda n: n.tag == 'figure' and 'photo' in n.classes())
+            self.assertEqual([f.classes() for f in figures],
+                             [['photo', 'photo-small'] if b.get('small') else ['photo'] for b in blocks], name)
+            small.update(bool(b.get('small')) for b in blocks)
+        self.assertGreater(small[True], 0)
+        self.assertGreater(small[False], 0)
+        with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
+            css = f.read()
+        self.assertEqual(css_values(css, '.photo', 'max-width'), [])
+        widths = css_values(css, '.photo-small', 'max-width')
+        self.assertEqual(len(widths), 1, widths)
+        self.assertRegex(widths[0], r'^(?!0+(\.0+)?rem$)[\d.]+rem$')
+
     def referenced_paths(self):
         paths = set()
         for name, tree in self.trees.items():
@@ -1571,10 +1639,13 @@ class BuiltSite(unittest.TestCase):
             self.assertGreater(len([f for f in files if f.startswith('assets/sharing/' + kind + '/')]), 1, kind)
         self.assertEqual(unused, set())
 
-    def test_every_file_in_assets_community_is_used_by_a_built_page(self):
-        files, unused = self.files_unused_by_the_built_pages('assets/community')
-        self.assertGreater(len(files), 1)
-        self.assertEqual(unused, set())
+    def test_every_file_in_a_folder_photo_blocks_use_is_used_by_a_built_page(self):
+        folders = {posixpath.dirname(b['src']) for name in self.trees
+                   for b in blocks_of(read_json(ROOT, 'content', name + '.json'), 'photo')}
+        self.assertGreater(len(folders), 1)
+        for folder in sorted(folders):
+            files, unused = self.files_unused_by_the_built_pages(folder)
+            self.assertEqual(unused, set(), folder)
 
     def test_every_photo_block_shows_its_file_at_the_size_it_declares(self):
         shown = 0

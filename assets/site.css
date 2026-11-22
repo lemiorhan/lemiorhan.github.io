@@ -1327,6 +1327,7 @@ a:hover { text-decoration-color: var(--accent); }
   object-fit: cover;
 }
 .photo { margin: 1.5rem 0; }
+.photo-small { max-width: 18rem; }
 .photo a {
   display: block;
   border-radius: 0.6rem;

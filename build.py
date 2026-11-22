@@ -292,8 +292,10 @@ def block_photo(b, page):
                   'and "width" and "height" as positive whole numbers')
     if not os.path.isfile(os.path.join(ROOT, b['src'])):
         page.fail('photo block: {} does not exist'.format(b['src']))
+    if not isinstance(b.get('small', False), bool):
+        page.fail('a photo block\'s "small" must be true or false')
     src = page.prefix + attr(b['src'])
-    return ['<figure class="photo">',
+    return ['<figure class="photo{}">'.format(' photo-small' if b.get('small') else ''),
             '  <a href="{}" data-lightbox data-caption="{}">'.format(src, attr(b['caption'])),
             '    <img src="{}" width="{}" height="{}" loading="lazy" alt="{}">'.format(
                 src, b['width'], b['height'], attr(b['alt'])),
@@ -1185,8 +1187,15 @@ def shell(page, body):
         person['image'] = site['url'] + person['image']
         data = json.dumps(person, ensure_ascii=False, indent=2).replace('</', '<\\/')
         jsonld = ['', '  <script type="application/ld+json">'] + indent(data.split('\n'), 2) + ['  </script>']
+    lang = d.get('lang', site['lang'])
+    chrome = '' if lang == site['lang'] else ' lang="{}"'.format(attr(site['lang']))
     ui = dict(site['ui'])
     ui.update(d.get('archive', {}).get('ui', {}))
+    unknown = sorted(set(d.get('ui', {})) - set(site['ui']))
+    if unknown:
+        page.fail('ui gives {}, which site.json\'s ui does not have; a page can only translate the site\'s strings'.format(
+            ', '.join(unknown)))
+    ui.update(d.get('ui', {}))
     ui_json = json.dumps(ui, ensure_ascii=False).replace('</', '<\\/')
     main_class = ' class="archive"' if d.get('archive') else ''
     game_css, game_js = [], []
@@ -1197,7 +1206,7 @@ def shell(page, body):
     lines = [
         '<!doctype html>',
         GENERATED,
-        '<html lang="en">',
+        '<html lang="{}">'.format(attr(lang)),
         '<head>',
         '  <meta charset="utf-8">',
         '  <meta name="viewport" content="width=device-width, initial-scale=1">',
@@ -1244,9 +1253,9 @@ def shell(page, body):
     ] + game_js + jsonld + [
         '</head>',
         '<body>',
-        '  <a class="skip" href="#main">{}</a>'.format(text(site['skip'])),
+        '  <a class="skip" href="#main"{}>{}</a>'.format(chrome, text(site['skip'])),
         '',
-        '  <header class="site-header">',
+        '  <header class="site-header"{}>'.format(chrome),
         '    <div class="wrap header-row">',
         '      <a class="brand" href="{}">{}</a>'.format(p or './', text(site['name'])),
         '      <nav class="site-nav" aria-label="{}">'.format(attr(site['nav_label'])),
@@ -1262,7 +1271,7 @@ def shell(page, body):
         body,
         '  </main>',
         '',
-        '  <footer class="site-footer">',
+        '  <footer class="site-footer"{}>'.format(chrome),
         '    <div class="wrap footer-row">',
     ] + ['      <p>{}</p>'.format(text(line)) for line in site['footer']] + [
         '    </div>',
@@ -1322,7 +1331,7 @@ def render_not_found(page):
     lines = [
         '<!doctype html>',
         GENERATED,
-        '<html lang="en">',
+        '<html lang="{}">'.format(attr(page.site['lang'])),
         '<head>',
         '  <meta charset="utf-8">',
         '  <meta name="viewport" content="width=device-width, initial-scale=1">',

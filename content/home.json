@@ -388,6 +388,7 @@
             { "path": "community/", "name": "Community", "text": "Software Craftsmanship Turkey, Agile Turkey, and manifesto translations." },
             { "path": "sharing/", "name": "Sharing", "text": "Everything I share in public: code, recordings, the podcast, slides, articles and my accounts." },
             { "path": "root-bug/", "name": "The macOS root bug", "text": "The night in 2017 I asked Apple, on Twitter, whether it knew anyone could log in as root on a Mac. The fix came the next day; the story, the press and what I learned from it." },
+            { "path": "sumo/", "name": "Sumo", "text": "A Turkish introduction to sumo: the rules, the six divisions, the ranks from yokozuna down to maegashira, the six tournaments a year, and two wrestlers I like, Hakuhō and Ura." },
             { "path": "contact/", "name": "Contact", "text": "For talks, podcasts and community events." }
           ]
         }

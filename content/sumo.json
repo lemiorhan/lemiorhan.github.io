@@ -1,0 +1,199 @@
+{
+  "lang": "tr",
+  "title": "Sumo, Lemi Orhan Ergin",
+  "description": "Sumoya Türkçe bir giriş: kurallar, altı lig, yokozunadan maegashiraya seviyeler, yılda altı turnuva ve Lemi Orhan Ergin'in sevdiği iki güreşçi, Hakuhō ile Ura.",
+  "ui": {
+    "photo_viewer": "Fotoğraf görüntüleyici",
+    "close": "Kapat",
+    "previous_photo": "Önceki fotoğraf",
+    "next_photo": "Sonraki fotoğraf"
+  },
+  "head": {
+    "heading": "Sumo",
+    "cmd": "man sumo",
+    "blocks": [
+      { "type": "p", "class": "intro", "text": "Sumoya ayrı bir ilgim var. Türkçe sumo içerik üreten birkaç kişiden biriyim. X'teki (eski adıyla Twitter) [@sumo_turk](https://x.com/sumo_turk) hesabında sumo paylaşıyorum. Bu sayfa, sumoyu ilk kez izleyecek biri için bir başlangıç olsun." },
+      { "type": "contents", "label": "Bu sayfada" }
+    ]
+  },
+  "sections": [
+    {
+      "id": "bir-bakista",
+      "heading": "Bir bakışta",
+      "blocks": [
+        {
+          "type": "infobox",
+          "items": [
+            { "label": "Ring", "text": "Kilden yükseltilmiş bir zemin (dohyō); halkanın çapı 4,55 metre[^2]" },
+            { "label": "Kazanan", "text": "Rakibini halkanın dışına çıkaran ya da ayak tabanları dışında bir yerini yere değdiren güreşçi[^1]" },
+            { "label": "Siklet", "text": "Yok; bir güreşçi kendi kilosunun iki katı bir rakiple karşılaşabilir[^1]" },
+            { "label": "Teknik", "text": "82 resmî kazanma tekniği (kimarite)[^3]" },
+            { "label": "Lig", "text": "Altı lig, en üstte makuuchi[^1]" },
+            { "label": "Turnuva", "text": "Yılda altı turnuva, her biri 15 gün[^11]" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kurallar",
+      "heading": "Kurallar",
+      "cmd": "cat RULES.md",
+      "class": "prose",
+      "blocks": [
+        "İki güreşçi (rikishi), kilden yükseltilmiş bir zeminin (dohyō) üstündeki halkada karşılaşır. Halkanın çapı 4,55 metre.[^2] Halkanın dışına ilk basan ya da ayak tabanları dışında bir yeriyle yere ilk değen güreşçi maçı kaybeder.[^1]",
+        "Sumoda siklet yok. Bir güreşçi kendi kilosunun iki katı bir rakiple karşılaşabilir.[^1]",
+        {
+          "type": "photo",
+          "small": true,
+          "src": "assets/sumo/hakuho-2008.jpg",
+          "width": 1200,
+          "height": 1200,
+          "alt": "Hakuhō halkada öne eğilmiş, rakibi Dejima sırtüstü kumun üstüne düşüyor; solda altın desenli kıyafetiyle hakem, arkada kollarını kavuşturmuş oturan bir güreşçi ve siyah kimonolu adamlar",
+          "caption": "Hakuhō, Ocak 2008 turnuvasının ilk gününde Dejima'yı yeniyor. Fotoğraf: Eckhard Pecher, CC BY 3.0"
+        },
+        "Maçı halkanın içinde bir hakem (gyōji) yönetir. Halkanın çevresinde beş hakem (shimpan) daha oturur. Bu beş hakem gyōji kararına itiraz edip bir toplantı (mono-ii) çağırabilir. Toplantıda kararı onaylar, tersine çevirir ya da maçı yeniden yaptırırlar.[^5]",
+        "Kazanma tekniklerine kimarite denir. 2001'den beri 82 teknik resmî olarak tanınıyor. Beş durum da teknik sayılmayan galibiyet olarak kayda geçiyor.[^3]",
+        "Bazı hareketler yasak (kinjite): kapalı yumrukla vurmak, saçtan tutmak, göze ya da mide çukuruna parmakla dürtmek, iki avuçla iki kulağa aynı anda vurmak, kasıktan tutmak ya da çekmek, boğazdan tutmak, göğse ya da bele tekme atmak ve rakibin parmaklarını geriye bükmek. Bunlardan birini yapan güreşçi diskalifiye olur ve maçı kaybeder (hansoku). Kuşağı (mawashi) çözülen güreşçi de aynı şekilde kaybeder.[^4]"
+      ]
+    },
+    {
+      "id": "ligler",
+      "heading": "Ligler",
+      "cmd": "ls -d */",
+      "blocks": [
+        { "type": "p", "text": "Profesyonel sumoda altı lig var. Yukarıdan aşağı sıralanışları şöyle:[^1]" },
+        {
+          "type": "points",
+          "items": [
+            { "title": "Makuuchi", "text": "En üst lig. 2004'ten beri 42 güreşçi.[^7]" },
+            { "title": "Jūryō", "text": "28 güreşçi.[^1] Maaşın ve bütün ayrıcalıkların başladığı ilk lig.[^8]" },
+            { "title": "Makushita", "text": "120 güreşçi.[^1]" },
+            { "title": "Sandanme", "text": "160 güreşçi. Mart 2022'ye kadar 200, Ocak 2025'e kadar 180 güreşçiydi.[^6]" },
+            { "title": "Jonidan", "text": "Sabit bir sayısı yok; genellikle 200 ile 250 arası güreşçi.[^6]" },
+            { "title": "Jonokuchi", "text": "En alt lig; 40 ile 90 arası güreşçi.[^6]" }
+          ]
+        },
+        { "type": "p", "text": "İlk iki ligin güreşçilerine sekitori denir. Sekitori turnuvada her gün bir maç yapar, 15 günde 15 maç. Alt liglerdeki güreşçiler turnuva boyunca yedi maç yapar.[^1][^8]" }
+      ]
+    },
+    {
+      "id": "seviyeler",
+      "heading": "Seviyeler",
+      "cmd": "cat banzuke",
+      "blocks": [
+        { "type": "p", "text": "Makuuchi kendi içinde beş seviyeye ayrılır. Yukarıdan aşağı: yokozuna, ōzeki, sekiwake, komusubi ve maegashira. İlk dördüne san'yaku denir.[^1][^7]" },
+        { "type": "p", "text": "Turnuvayı galibiyetlerin çoğunluğuyla bitirmeye kachi-koshi denir: 15 maçta en az 8, yedi maçta en az 4 galibiyet. Kachi-koshi genellikle bir sonraki turnuvada yükselmek, tersi olan make-koshi ise düşmek demektir.[^8]" },
+        {
+          "type": "points",
+          "items": [
+            { "title": "Yokozuna", "text": "En yüksek seviye. Bu seviyeye çıkmak için bir ōzekinin üst üste iki turnuva kazanması ya da buna denk bir başarı göstermesi beklenir.[^1] Yokozuna Değerlendirme Kurulu önerir, Japonya Sumo Birliği'nin yönetim kurulu karar verir. Bu seviyeden düşülmez.[^7]" },
+            { "title": "Ōzeki", "text": "Bir turnuvayı make-koshi ile bitiren ōzeki kadoban olur. Bir sonraki turnuva da make-koshi ile biterse sekiwake seviyesine düşer; orada 10 galibiyet alırsa ōzeki seviyesine geri döner. Bu seviyeye yükselmenin kesin bir kuralı yok.[^7]" },
+            { "title": "Sekiwake", "text": "Ōzekinin bir altı. Üst üste iki make-koshi alan ōzeki bu seviyeye iner.[^7]" },
+            { "title": "Komusubi", "text": "San'yaku seviyelerinin en altı.[^1]" },
+            { "title": "Maegashira", "text": "San'yaku dışındaki bütün makuuchi güreşçileri. Yukarıdan aşağı numaralanır: maegashira 1'den yaklaşık maegashira 16 ya da 17'ye kadar.[^1][^7] Bir maegashira bir yokozunayı yenerse altın yıldız (kinboshi) kazanır. Her kinboshi, güreşçinin sekitori kaldığı sürece aldığı primi artırır.[^1][^10]" }
+          ]
+        },
+        { "type": "p", "text": "Her seviyede iki taraf var: doğu ve batı. Aynı seviyede doğu, batıdan bir basamak yukarıda sayılır; liste doğu 1, batı 1, doğu 2, batı 2 diye iner.[^1][^7]" },
+        { "type": "p", "text": "Bütün bu sıralamanın yazılı hâline banzuke denir. Yeni banzuke genellikle turnuvadan 13 gün önceki pazartesi açıklanır.[^9]" }
+      ]
+    },
+    {
+      "id": "turnuvalar",
+      "heading": "Turnuvalar",
+      "cmd": "cal -y",
+      "blocks": [
+        { "type": "p", "text": "1958'den beri yılda altı resmî turnuva (honbasho) yapılıyor. Her biri pazar günü başlıyor ve 15 gün sürüyor. Takvim şöyle:[^1][^11]" },
+        {
+          "type": "points",
+          "items": [
+            { "title": "Ocak · Hatsu Basho", "text": "Tokyo, Kokugikan" },
+            { "title": "Mart · Haru Basho", "text": "Osaka; Osaka Basho diye de bilinir" },
+            { "title": "Mayıs · Natsu Basho", "text": "Tokyo, Kokugikan" },
+            { "title": "Temmuz · Nagoya Basho", "text": "Nagoya" },
+            { "title": "Eylül · Aki Basho", "text": "Tokyo, Kokugikan" },
+            { "title": "Kasım · Kyūshū Basho", "text": "Fukuoka" }
+          ]
+        },
+        { "type": "p", "text": "Turnuvayı en çok galibiyetle bitiren güreşçi şampiyonluğu (yūshō) kazanır. Makuuchi şampiyonu İmparator Kupası'nı alır. İki güreşçi eşit galibiyetle bitirirse ek bir maç yapılır. Üç güreşçi eşitse ikişerli maçlar, biri üst üste iki maç kazanana kadar sürer.[^1][^11]" },
+        { "type": "p", "text": "Yokozuna ve ōzeki dışındaki makuuchi güreşçileri turnuvayı kachi-koshi ile bitirirse üç özel ödüle (sanshō) aday olur: üstün performans (shukun-shō), mücadele azmi (kantō-shō) ve teknik (ginō-shō).[^1][^12]" }
+      ]
+    },
+    {
+      "id": "guresciler",
+      "heading": "Sevdiğim iki güreşçi",
+      "cmd": "finger hakuho ura",
+      "class": "prose",
+      "blocks": [
+        "Her güreşçi bir ahıra (heya) bağlı. Ahır, bir ya da birkaç kıdemlinin (oyakata) yönetiminde.[^15][^16] Ben Hakuhō ve Ura'yı severim.",
+        { "type": "h3", "text": "Hakuhō Shō" },
+        "11 Mart 1985'te Moğolistan'ın başkenti Ulan Batur'da doğdu. Miyagino ahırında güreşti. Mart 2001'de ilk maçına çıktı, Mayıs 2007'de yokozuna oldu.[^13]",
+        "Makuuchi liginde 45 şampiyonlukla rekorun sahibi. Bunların 16'sı yenilgisiz (zenshō yūshō), bu da bir rekor. En çok kariyer galibiyeti (1.187) ve en çok makuuchi galibiyeti (1.093) rekorları da onda.[^13]",
+        "Eylül 2021'de emekli oldu. Haziran 2025'te Japonya Sumo Birliği'nden ayrıldı. Ekim 2026'da Uluslararası Sumo Federasyonu'nun başına geçti.[^13]",
+        {
+          "type": "photo",
+          "small": true,
+          "src": "assets/sumo/hakuho-2012.jpg",
+          "width": 1200,
+          "height": 1600,
+          "alt": "Hakuhō kollarını göğsünün önünde birleştirmiş duruyor; belinde zikzak beyaz kâğıt şeritler sarkan kalın beyaz bir halat, altında Japonca yazılı lacivert bir tören önlüğü var",
+          "caption": "Hakuhō, Ocak 2012 turnuvasında yokozuna halka töreninde (dohyō-iri). Fotoğraf: FourTildes, CC BY-SA 3.0"
+        },
+        { "type": "h3", "text": "Ura Kazuki" },
+        "22 Haziran 1992'de Osaka'nın Neyagawa şehrinde doğdu. Kise ahırında güreşiyor. Çoğunlukla iterek güreşir ama maçları akrobatiktir; izori, tasukizori ve tsutaezori gibi tekniklerle kazandığı maçlar var.[^14]",
+        "Temmuz 2017'de sağ dizini sakatladı ve üç lig düştü; Eylül 2018'de sandanme liginin alt sıralarından geri döndü. Ocak 2019'da aynı diz yeniden sakatlandı. Bu kez Kasım 2019'da jonidan liginin en altından, ilk turnuvasından beri en düşük seviyesinden başladı.[^14]",
+        "Kasım 2021'de teknik ödülünü (ginō-shō) aldı. Ocak 2024'te kariyerinin en yüksek seviyesine, komusubi seviyesine çıktı. Kasım 2026'ya kadar üç kinboshi kazandı: 2017'de Harumafuji'yi, 2022'de Terunofuji'yi, Kasım 2026'da Hōshōryū'yu yendi.[^14]",
+        {
+          "type": "photo",
+          "small": true,
+          "src": "assets/sumo/ura-2022.jpg",
+          "width": 1200,
+          "height": 1600,
+          "alt": "Ura pembe kuşağını iki eliyle tutarak ayakta duruyor; arkasında maskeli seyirciler",
+          "caption": "Ura, Ocak 2022 turnuvasının yedinci gününde. Fotoğraf: TSUBAME98, CC BY-SA 4.0"
+        }
+      ]
+    },
+    {
+      "id": "kaynaklar",
+      "heading": "Kaynaklar",
+      "blocks": [
+        {
+          "type": "sources",
+          "cited": true,
+          "items": [
+            "[Sumo](https://en.wikipedia.org/wiki/Sumo), İngilizce Wikipedia",
+            "[Dohyō](https://en.wikipedia.org/wiki/Dohy%C5%8D), İngilizce Wikipedia",
+            "[Kimarite](https://en.wikipedia.org/wiki/Kimarite), İngilizce Wikipedia",
+            "[Kinjite](https://en.wikipedia.org/wiki/Kinjite), İngilizce Wikipedia",
+            "[Judge (sumo)](https://en.wikipedia.org/wiki/Judge_%28sumo%29), İngilizce Wikipedia",
+            "[Professional sumo divisions](https://en.wikipedia.org/wiki/Professional_sumo_divisions), İngilizce Wikipedia",
+            "[Makuuchi](https://en.wikipedia.org/wiki/Makuuchi), İngilizce Wikipedia",
+            "[Glossary of sumo terms](https://en.wikipedia.org/wiki/Glossary_of_sumo_terms), İngilizce Wikipedia",
+            "[Banzuke](https://en.wikipedia.org/wiki/Banzuke), İngilizce Wikipedia",
+            "[Kinboshi](https://en.wikipedia.org/wiki/Kinboshi), İngilizce Wikipedia",
+            "[Honbasho](https://en.wikipedia.org/wiki/Honbasho), İngilizce Wikipedia",
+            "[Sanshō (sumo)](https://en.wikipedia.org/wiki/Sansh%C5%8D_%28sumo%29), İngilizce Wikipedia",
+            "[Hakuhō Shō](https://en.wikipedia.org/wiki/Hakuh%C5%8D_Sh%C5%8D), İngilizce Wikipedia",
+            "[Ura Kazuki](https://en.wikipedia.org/wiki/Ura_Kazuki), İngilizce Wikipedia; Kasım 2026 turnuvasına kadar",
+            "[Heya (sumo)](https://en.wikipedia.org/wiki/Heya_%28sumo%29), İngilizce Wikipedia",
+            "[Toshiyori](https://en.wikipedia.org/wiki/Toshiyori), İngilizce Wikipedia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fotograflar",
+      "heading": "Fotoğraflar",
+      "blocks": [
+        {
+          "type": "sources",
+          "items": [
+            "Hakuhō, Ocak 2008: [Hakuho fight Jan08.jpg](https://commons.wikimedia.org/wiki/File:Hakuho_fight_Jan08.jpg), Eckhard Pecher, Wikimedia Commons, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/deed.tr); kırpıldı ve küçültüldü",
+            "Hakuhō, Ocak 2012: [Hakuho 2012 January.JPG](https://commons.wikimedia.org/wiki/File:Hakuho_2012_January.JPG), FourTildes, Wikimedia Commons, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.tr); kırpıldı ve küçültüldü",
+            "Ura, Ocak 2022: [Ura Kazuki20220115-1.jpg](https://commons.wikimedia.org/wiki/File:Ura_Kazuki20220115-1.jpg), TSUBAME98, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.tr); kırpıldı ve küçültüldü"
+          ]
+        }
+      ]
+    }
+  ]
+}

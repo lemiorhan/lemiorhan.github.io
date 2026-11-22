@@ -641,6 +641,23 @@
           }
         },
         {
+          "date": "2023-06-22",
+          "name": "SaaS Night, Product Hunt Istanbul Meetup",
+          "place": "istanbul",
+          "role": "Panel",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Evolving from Services to Product",
+              "themes": ["product"]
+            }
+          ],
+          "photo": {
+            "file": "2023-product-hunt-saas-night",
+            "alt": "Lemi, second from left in a black polo shirt, seated with three other panelists in front of a screen reading Product Hunt SaaS Night, Hanspaces Piyalepaşa, 22 Haziran 19:30"
+          }
+        },
+        {
           "date": "2023-06-08",
           "name": "Iqra – Okuyun",
           "place": "online",

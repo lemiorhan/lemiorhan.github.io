@@ -35,7 +35,15 @@
       "heading": "Early life and education",
       "class": "prose",
       "blocks": [
-        "Lemi is from İzmir, on Türkiye's Aegean coast. He studied computer engineering at Marmara University in Istanbul, where he earned a bachelor's degree in 2002 and a master's degree in 2005.[^1] His first job, in the summer of 2001, was as a software engineer at TÜSSİDE, and in 2002 he worked as a laboratory assistant at the university.[^1]"
+        "Lemi is from İzmir, on Türkiye's Aegean coast. He studied computer engineering at Marmara University in Istanbul, where he earned a bachelor's degree in 2002 and a master's degree in 2005.[^1] His first job, in the summer of 2001, was as a software engineer at TÜSSİDE, and in 2002 he worked as a laboratory assistant at the university.[^1]",
+        {
+          "type": "photo",
+          "src": "assets/bio/childhood.jpg",
+          "width": 934,
+          "height": 1119,
+          "alt": "Lemi as a boy at home with his father, mother and older sister, the two children in navy school uniforms",
+          "caption": "Lemi as a child with his mother, father and older sister"
+        }
       ]
     },
     {
@@ -80,7 +88,15 @@
       "heading": "Personal life",
       "class": "prose",
       "blocks": [
-        "Lemi lives in Istanbul with his wife, an academic in the Computer Engineering Department of Marmara University, and their two sons. An İzmir native, he supports Göztepe, the İzmir football club."
+        "Lemi lives in Istanbul with his wife, an academic in the Computer Engineering Department of Marmara University, and their two sons. An İzmir native, he supports Göztepe, the İzmir football club.",
+        {
+          "type": "photo",
+          "src": "assets/bio/family.jpg",
+          "width": 1512,
+          "height": 1134,
+          "alt": "Lemi taking a night-time selfie with his wife and their two sons, the moon in the sky above them",
+          "caption": "Lemi with his wife and their two sons"
+        }
       ]
     },
     {
