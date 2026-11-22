@@ -1165,6 +1165,16 @@ def archive_sections(archive, page):
 
 # Documents
 
+def check_lang(fail, lang):
+    if not isinstance(lang, str) or not lang:
+        fail('"lang" must be a non-empty string')
+
+
+def check_strings(fail, key, value):
+    if not isinstance(value, dict) or not all(isinstance(v, str) and v for v in value.values()):
+        fail('"{}" must be an object whose values are non-empty strings'.format(key))
+
+
 def shell(page, body):
     d, site, p = page.data, page.site, page.prefix
     title = d['title']
@@ -1188,11 +1198,9 @@ def shell(page, body):
         data = json.dumps(person, ensure_ascii=False, indent=2).replace('</', '<\\/')
         jsonld = ['', '  <script type="application/ld+json">'] + indent(data.split('\n'), 2) + ['  </script>']
     lang = d.get('lang', site['lang'])
-    if not isinstance(lang, str) or not lang:
-        page.fail('"lang" must be a non-empty string')
+    check_lang(page.fail, lang)
     page_ui = d.get('ui', {})
-    if not isinstance(page_ui, dict) or not all(isinstance(v, str) and v for v in page_ui.values()):
-        page.fail('"ui" must be an object whose values are non-empty strings')
+    check_strings(page.fail, 'ui', page_ui)
     chrome = '' if lang == site['lang'] else ' lang="{}"'.format(attr(site['lang']))
     ui = dict(site['ui'])
     ui.update(d.get('archive', {}).get('ui', {}))
@@ -1290,6 +1298,8 @@ def shell(page, body):
 
 def render_page(page):
     d = page.data
+    if 'archive' in d:
+        check_strings(page.fail, 'archive.ui', d['archive'].get('ui'))
     parts = []
     if d.get('hero'):
         parts.append(hero(d['hero'], page))
@@ -1321,6 +1331,8 @@ def check_refs(html_text, page):
 
 def render_not_found(page):
     d = page.data
+    if 'lang' in d or 'ui' in d:
+        page.fail('the not-found page takes its "lang" and "ui" from site.json')
     maze = d.get('maze')
     maze_head, maze_body = [], []
     if maze:
@@ -1377,6 +1389,11 @@ def render_not_found(page):
 
 def build(out):
     site = load('site')
+
+    def site_fail(message):
+        raise BuildError('content/site.json: {}'.format(message))
+    check_lang(site_fail, site.get('lang'))
+    check_strings(site_fail, 'ui', site.get('ui'))
     names = sorted(f[:-5] for f in os.listdir(CONTENT) if f.endswith('.json') and f != 'site.json')
     written = []
     for name in names:

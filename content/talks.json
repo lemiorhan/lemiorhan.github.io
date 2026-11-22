@@ -849,6 +849,22 @@
             "file": "2022-agile-donusumleri",
             "alt": "Lemi talking to his webcam on a video call, in glasses and a black polo shirt with white earbuds, a black office chair and a white wall behind him"
           }
+        },
+        {
+          "date": "2022-01-14",
+          "name": "Marmara University, Computer Engineering",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Ethics in Software Engineering",
+              "themes": ["ethics"]
+            }
+          ],
+          "photo": {
+            "file": "2022-marmara",
+            "alt": "Lemi in glasses taking a selfie in front of a tiered lecture hall full of students, most of them wearing face masks"
+          }
         }
       ],
       "2021": [
@@ -1478,6 +1494,22 @@
           }
         },
         {
+          "date": "2019-03-24",
+          "name": "Women Techmakers Istanbul 2019",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "How to Build a Technology Company",
+              "themes": ["culture"]
+            }
+          ],
+          "photo": {
+            "file": "2019-women-techmakers",
+            "alt": "Lemi on the Kadir Has University stage among teal balloons and big WTM and GDG letters, under a slide of a cat in a shirt and tie titled How to Build a Technology Company"
+          }
+        },
+        {
           "date": "2019-03-04",
           "name": "Women Software Crafters Empowerment Program, Software Craftsmanship Turkey",
           "url": "https://github.com/scturkey/WSCEP",
@@ -1624,6 +1656,23 @@
           "photo": {
             "file": "2018-hacknbreak",
             "alt": "Lemi in a black polo shirt and khaki shorts pointing at the audience under a large shade tent, students seated on wooden benches and plastic chairs with trees behind them"
+          }
+        },
+        {
+          "date": "2018-08-13",
+          "name": "İzmir Özel Türk Koleji",
+          "place": "izmir",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Who Will Save the World from Software?",
+              "slides": "https://speakerdeck.com/lemiorhan/kodlama-ogrenmek-gercekten-gerekli-mi",
+              "themes": ["career"]
+            }
+          ],
+          "photo": {
+            "file": "2018-izmir-turk-koleji",
+            "alt": "Lemi in black on a wide wooden stage seen from the balcony, a Turkish flag on the left and the title slide with a dragon on the screen behind him"
           }
         },
         {
@@ -1856,6 +1905,22 @@
           }
         },
         {
+          "date": "2017-12-08",
+          "name": "Marmara University, Computer Engineering",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Ethics in Software Engineering",
+              "themes": ["ethics"]
+            }
+          ],
+          "photo": {
+            "file": "2017-marmara-ethics",
+            "alt": "Lemi in a black polo shirt at the front of a full lecture hall, a slide headed Security on the screen beside him"
+          }
+        },
+        {
           "date": "2017-11-26",
           "name": "DevFest Istanbul 2017",
           "place": "istanbul",
@@ -1872,6 +1937,18 @@
           "photo": {
             "file": "2017-devfest-istanbul",
             "alt": "Lemi in a pink polo shirt on a dark stage beside a Kadir Has University lectern, under a GDG DevFest Istanbul 2017 banner"
+          }
+        },
+        {
+          "date": "2017-11-18",
+          "name": "Global Day of Coderetreat 2017",
+          "place": "istanbul",
+          "url": "https://www.coderetreat.org/",
+          "role": "Organizer",
+          "spoken": "tr",
+          "photo": {
+            "file": "2017-coderetreat",
+            "alt": "Developers coding in pairs at rows of white desks in an office room with iyzico and Sony banners, a video call with other coderetreat cities on the screen"
           }
         },
         {
@@ -1902,12 +1979,44 @@
           }
         },
         {
+          "date": "2017-09-26",
+          "name": "ETSTur technology team",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Git Anti-Patterns",
+              "themes": ["git"]
+            }
+          ],
+          "photo": {
+            "file": "2017-etstur",
+            "alt": "Lemi in a checked shirt in front of a slide titled Taming the Power of Git, a room full of developers on red chairs"
+          }
+        },
+        {
           "date": "2017-09-16",
           "name": "Turkcell Agile Talks",
           "spoken": "tr",
           "photo": {
             "file": "2017-turkcell",
             "alt": "Lemi speaking in front of a screen showing Lemi's name and speaker bio"
+          }
+        },
+        {
+          "date": "2017-09-12",
+          "name": "Anadolu Sigorta technology teams",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "summary": "A talk on software development culture.",
+              "themes": ["culture"]
+            }
+          ],
+          "photo": {
+            "file": "2017-anadolu-sigorta",
+            "alt": "Lemi in a pink polo shirt speaking to a room of people on colourful chairs, his name on the screen behind him"
           }
         },
         {
@@ -1926,6 +2035,23 @@
           "photo": {
             "file": "2017-hacknbreak",
             "alt": "Lemi in a black t-shirt and speaker badge standing in front of a bright projection screen, seen from behind a seated audience"
+          }
+        },
+        {
+          "date": "2017-07-12",
+          "name": "Software Craftsmanship Turkey meetup",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Git Anti-Patterns: How To Mess Up With Git and Love It Again",
+              "slides": "https://speakerdeck.com/lemiorhan/git-anti-patterns-how-to-mess-up-with-git-and-love-it-again",
+              "themes": ["git"]
+            }
+          ],
+          "photo": {
+            "file": "2017-sc-turkey-git",
+            "alt": "Lemi speaking to a packed room under the Git Anti Patterns title slide, dancing silhouettes painted on the concrete wall behind him"
           }
         },
         {
@@ -2440,10 +2566,16 @@
               "themes": ["testing", "craftsmanship"]
             }
           ],
-          "photo": {
-            "file": "2015-coderetreat",
-            "alt": "Lemi presenting the organizers and facilitators slide to participants at their laptops, Agile Turkey banners on both sides"
-          }
+          "photo": [
+            {
+              "file": "2015-coderetreat",
+              "alt": "Lemi presenting the organizers and facilitators slide to participants at their laptops, Agile Turkey banners on both sides"
+            },
+            {
+              "file": "2015-coderetreat-room",
+              "alt": "Participants at their laptops watching a video on the screen, an Agile Turkey banner beside it and Conway's Game of Life handouts on the empty desks"
+            }
+          ]
         },
         {
           "date": "2015-10-01",
@@ -2614,7 +2746,11 @@
               "summary": "Culture, not individuals, makes teams succeed: software craftsmanship as a culture where developers build themselves as well as software.",
               "themes": ["craftsmanship", "culture"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2014-devfest-istanbul",
+            "alt": "Lemi in glasses and a light blue shirt with a speaker badge, beside a wall that reads I was at GDG DevFest, Istanbul, December 6, 2014"
+          }
         },
         {
           "date": "2014-12-05",
@@ -2628,7 +2764,11 @@
               "summary": "Microservices as independently deployable services around business capabilities, traced from the layered monolith, with the teams, tooling and caution they demand.",
               "themes": ["architecture"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2014-ozgur-web",
+            "alt": "A crowded foyer with sponsor stands and standing tables, an Özgür Yazılım A.Ş. banner on the left and tall windows at the back"
+          }
         },
         {
           "date": "2014-11-15",
@@ -2692,7 +2832,11 @@
               "summary": "Microservices as independently deployable services around business capabilities, traced from the layered monolith, with the teams, tooling and caution they demand.",
               "themes": ["architecture"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2014-gdg-istanbul-meetup",
+            "alt": "Lemi at a BAU lectern on a wooden stage, beside a slide contrasting a Frankenstein face with a clean-shaven one: develop and bug fix against develop and refactor, manual testing against fully automated testing"
+          }
         },
         {
           "date": "2014-09-13",
@@ -2709,6 +2853,23 @@
           "photo": {
             "file": "2014-bmo-seminar",
             "alt": "Lemi in a checked shirt standing on the right, about fifteen people on office chairs around a projector in a small room with striped blinds"
+          }
+        },
+        {
+          "date": "2014-08-27",
+          "name": "Brown Bag Session #100, Sony Europe",
+          "place": "istanbul",
+          "role": "Organizer",
+          "spoken": "tr",
+          "talks": [
+            {
+              "summary": "The Sony Europe team's hundredth brown bag session, with Hakan Erdoğan as our guest speaker.",
+              "themes": ["culture"]
+            }
+          ],
+          "photo": {
+            "file": "2014-sony-bbs-100",
+            "alt": "A speaker in a light blue polo shirt in front of a slide reading The only way is to build atmosphere based on collaboration culture, a full room of people on white chairs with laptops"
           }
         },
         {
@@ -2761,7 +2922,27 @@
               "summary": "Exceptions signal abnormal states, not control flow: throw early, catch late, never swallow or blindly rethrow, keep the cause, and log with care.",
               "themes": ["design"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2014-kodcu-webinar",
+            "alt": "A webinar still of Lemi's about-me slide: a childhood photo of him in a mustard knit vest beside his name and a list that starts with Developing since 2001 and Principal Software Engineer at Sony Europe"
+          }
+        },
+        {
+          "date": "2014-02-01",
+          "name": "Software Craftsmanship Turkey meetup",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Agile Engineering Practices",
+              "themes": ["agile"]
+            }
+          ],
+          "photo": {
+            "file": "2014-sc-turkey",
+            "alt": "Lemi with a microphone beside the screen at the front of a packed auditorium with red seats, a video camera on a tripod at the back"
+          }
         }
       ],
       "2013": [

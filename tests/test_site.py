@@ -511,6 +511,27 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
                 self.assertRejected(self.edit('sumo', lambda d, value=value: d.update(lang=value)),
                                     'content/sumo.json: "lang" must be a non-empty string')
 
+    def test_a_site_whose_lang_or_ui_is_bad_is_named_as_the_culprit(self):
+        for key, value, message in (('lang', None, '"lang" must be a non-empty string'),
+                                    ('lang', 5, '"lang" must be a non-empty string'),
+                                    ('ui', None, '"ui" must be an object whose values are non-empty strings'),
+                                    ('ui', {'close': 5}, '"ui" must be an object whose values are non-empty strings')):
+            with self.subTest(key=key, value=value):
+                self.assertRejected(self.edit('site', lambda d, key=key, value=value: d.update({key: value})),
+                                    'content/site.json: ' + message)
+
+    def test_an_archive_ui_that_is_not_an_object_of_non_empty_strings(self):
+        for value in (None, ['x'], {'event_one': 5}, {'event_one': ''}):
+            with self.subTest(value=value):
+                self.assertRejected(self.edit('talks', lambda d, value=value: d['archive'].update(ui=value)),
+                                    'content/talks.json: "archive.ui" must be an object whose values are non-empty strings')
+
+    def test_a_not_found_page_with_its_own_lang_or_ui(self):
+        for key, value in (('lang', 'tr'), ('ui', {'close': 'Kapat'})):
+            with self.subTest(key=key):
+                self.assertRejected(self.edit('404', lambda d, key=key, value=value: d.update({key: value})),
+                                    'content/404.json: the not-found page takes its "lang" and "ui" from site.json')
+
     def test_a_page_whose_ui_is_not_an_object_of_non_empty_strings(self):
         for value in (None, ['close'], 'close', {'close': 5}, {'close': ''}):
             with self.subTest(value=value):
@@ -1651,10 +1672,10 @@ class BuiltSite(unittest.TestCase):
         widths = css_values(css, '.photo-small', 'max-width')
         self.assertEqual(len(widths), 1, widths)
         self.assertRegex(widths[0], r'^(?!0+(\.0+)?rem$)[\d.]+rem$')
-        page = css_values(css, '.wrap', 'max-width')
-        self.assertEqual(len(page), 1, page)
-        self.assertRegex(page[0], r'^[\d.]+rem$')
-        self.assertLess(float(widths[0][:-3]), float(page[0][:-3]), 'a cap no narrower than the page caps nothing')
+        columns = css_values(css, '.section-grid', 'grid-template-columns')
+        text_column = [float(w) for c in columns for w in re.findall(r'minmax\(0, ([\d.]+)rem\)', c)]
+        self.assertEqual(len(text_column), 1, columns)
+        self.assertLess(float(widths[0][:-3]), text_column[0], 'a cap no narrower than the text column caps nothing')
 
     def referenced_paths(self):
         paths = set()
