@@ -461,6 +461,20 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
                 self.assertRejected(self.sumo_live(lambda b: b[key].pop(name)),
                                     "a 'sumo-live' block is missing '{}'".format(name))
 
+    def test_a_sumo_template_without_a_placeholder_site_js_fills(self):
+        for key, value, missing in (('banzuke', 'Son banzuke', '{basho}'), ('day_of', '{day}. gün', '{days}'),
+                                    ('leaders', 'Liderlik tablosu', '{day}')):
+            with self.subTest(key=key):
+                self.assertRejected(self.sumo_live(lambda b: b['text'].update({key: value})),
+                                    'sumo-live text {!r} must carry {}'.format(key, missing))
+
+    def test_a_sumo_leaders_max_that_is_not_a_whole_number_of_one_or_more(self):
+        for value in (0, 2.5, '10', True):
+            with self.subTest(value=value):
+                self.assertRejected(self.sumo_live(lambda b: b.update(leaders_max=value)),
+                                    'sumo-live "leaders_max" must be a whole number of rikishi, 1 or more')
+        self.assertRejected(self.sumo_live(lambda b: b.pop('leaders_max')), "a 'sumo-live' block is missing 'leaders_max'")
+
     def test_a_sumo_api_that_is_not_https(self):
         self.assertRejected(self.sumo_live(lambda b: b.update(api='http://www.sumo-api.com/api')),
                             'sumo-live "api" must be an https:// URL')

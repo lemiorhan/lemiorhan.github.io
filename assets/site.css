@@ -1010,17 +1010,19 @@ a:hover { text-decoration-color: var(--accent); }
 }
 
 .sumo-status, .sumo-note { color: var(--ink-soft); font-size: 0.95rem; }
-.banzuke {
+.banzuke, .leaders {
   width: 100%;
   max-width: 40rem;
   margin-top: 1.75rem;
   border-collapse: collapse;
   font-variant-numeric: tabular-nums;
 }
-.banzuke caption { padding-bottom: 0.6rem; text-align: left; font-weight: 650; }
-.banzuke th, .banzuke td { padding: 0.55rem 0.5rem 0.55rem 0; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: baseline; }
-.banzuke thead th { border-top: 1px solid var(--rule); font-size: 0.9rem; font-weight: 650; color: var(--ink-soft); }
-.banzuke tbody th { width: 28%; font-weight: 500; color: var(--ink-soft); }
+.banzuke caption, .leaders caption { padding-bottom: 0.6rem; text-align: left; font-weight: 650; }
+.banzuke th, .banzuke td, .leaders th, .leaders td { padding: 0.55rem 0.5rem 0.55rem 0; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: baseline; }
+.banzuke thead th, .leaders thead th { border-top: 1px solid var(--rule); font-size: 0.9rem; font-weight: 650; color: var(--ink-soft); }
+.banzuke tbody th, .leaders tbody th { font-weight: 500; color: var(--ink-soft); }
+.banzuke tbody th { width: 28%; }
+.leaders tbody th { width: 5rem; white-space: nowrap; }
 .banzuke td { width: 36%; }
 .banzuke .rec { display: inline-block; margin-left: 0.4rem; font-size: 0.9rem; color: var(--ink-soft); }
 

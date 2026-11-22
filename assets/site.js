@@ -595,9 +595,13 @@
       if (!entry) return [];
       var span = data.names[entry.start.slice(5, 7)] + ' · ' + Number(entry.start.slice(8)) + '–' + day(entry.end) + ' · ' + entry.place;
       var items = [[entry.start <= today ? text.running : text.next, span]];
+      if (entry.start <= today) {
+        items.push([text.day, fill(text.day_of, { day: daysBetween(entry.start, today) + 1, days: daysBetween(entry.start, entry.end) + 1 })]);
+      }
       if (entry.banzuke > today) items.push([text.banzuke_day, day(entry.banzuke)]);
       return items;
     }
+    function daysBetween(from, to) { return (Date.parse(to) - Date.parse(from)) / 86400000; }
     function infobox(items) {
       if (!items.length) return;
       var dl = el('dl', '', 'infobox');
@@ -607,6 +611,39 @@
         row.appendChild(el('dd', item[1]));
       });
       box.appendChild(dl);
+    }
+    function rankName(r) {
+      var words = r.rank.split(' ');
+      var name = Object.prototype.hasOwnProperty.call(data.ranks, words[0]) ? data.ranks[words[0]] : words[0];
+      return name + ' ' + words[1];
+    }
+    function leaders(banzuke, finishedId) {
+      var all = everyone(banzuke);
+      var done = Math.max.apply(null, all.map(function (r) { return r.wins + r.losses + r.absences; }));
+      if (banzuke.bashoId === finishedId || !done) return;
+      var top = Math.max.apply(null, all.map(function (r) { return r.wins; }));
+      var near = all.filter(function (r) { return r.wins >= top - 1; });
+      if (near.length > data.leaders_max) near = near.filter(function (r) { return r.wins === top; });
+      near.sort(function (a, b) { return b.wins - a.wins || a.losses - b.losses || a.absences - b.absences || a.rankValue - b.rankValue; });
+      var groups = [];
+      near.forEach(function (r) {
+        var last = groups[groups.length - 1];
+        if (!last || last.record !== record(r)) groups.push(last = { record: record(r), names: [] });
+        last.names.push(r.shikonaEn + ' (' + rankName(r) + ')');
+      });
+      var t = el('table', '', 'leaders');
+      t.appendChild(el('caption', fill(text.leaders, { day: done })));
+      var head = t.appendChild(el('thead')).appendChild(el('tr'));
+      [text.score, text.wrestlers].forEach(function (label) {
+        head.appendChild(el('th', label)).setAttribute('scope', 'col');
+      });
+      var body = t.appendChild(el('tbody'));
+      groups.forEach(function (g) {
+        var tr = body.appendChild(el('tr'));
+        tr.appendChild(el('th', g.record)).setAttribute('scope', 'row');
+        tr.appendChild(el('td', g.names.join(', ')));
+      });
+      box.appendChild(t);
     }
     function table(banzuke, finishedId) {
       var rows = {};
@@ -668,6 +705,7 @@
         if (prizes.length) items.push([text.prizes, prizes.join(', ')]);
         status.hidden = true;
         infobox(items.concat(upcoming(basho.date)));
+        leaders(both[0] || both[1], basho.date);
         table(both[0] || both[1], basho.date);
       });
     }).catch(function () {

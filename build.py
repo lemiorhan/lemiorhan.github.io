@@ -32,8 +32,10 @@ HYPHENATED = re.compile(r'(?<![\w/.-])(\w+-\w+)(?![\w/.-])')
 
 SUMO_MONTHS = ['01', '03', '05', '07', '09', '11']
 SUMO_PRIZES = ('Shukun-sho', 'Kanto-sho', 'Gino-sho')
-SUMO_TEXT = ('noscript', 'loading', 'failed', 'last', 'champion', 'prizes', 'running', 'next', 'banzuke_day',
-             'banzuke', 'east', 'rank', 'west', 'record', 'record_live', 'absences')
+SUMO_TEXT = ('noscript', 'loading', 'failed', 'last', 'champion', 'prizes', 'running', 'next', 'day', 'day_of',
+             'banzuke_day', 'banzuke', 'leaders', 'score', 'wrestlers', 'east', 'rank', 'west', 'record', 'record_live',
+             'absences')
+SUMO_TEMPLATES = {'day_of': ('day', 'days'), 'banzuke': ('basho',), 'leaders': ('day',)}
 SUMO_DAY = re.compile(r'\d{4}-\d{2}-\d{2}')
 
 MAP_WIDTH = 1000
@@ -254,7 +256,13 @@ def block_sumo_live(b, page):
         check_strings(page.fail, 'sumo-live ' + key, b[key])
     data = {'api': b['api'], 'names': b['names'], 'months': b['months'], 'ranks': b['ranks'],
             'prizes': {k: b['prizes'][k] for k in SUMO_PRIZES}, 'text': {k: b['text'][k] for k in SUMO_TEXT},
-            'schedule': b['schedule']}
+            'leaders_max': b['leaders_max'], 'schedule': b['schedule']}
+    for key, names in SUMO_TEMPLATES.items():
+        missing = ['{' + n + '}' for n in names if '{' + n + '}' not in data['text'][key]]
+        if missing:
+            page.fail('sumo-live text {!r} must carry {}'.format(key, ', '.join(missing)))
+    if type(data['leaders_max']) is not int or data['leaders_max'] < 1:
+        page.fail('sumo-live "leaders_max" must be a whole number of rikishi, 1 or more')
     if not isinstance(data['api'], str) or not data['api'].startswith('https://'):
         page.fail('sumo-live "api" must be an https:// URL; the page that fetches from it is served over https')
     if sorted(b['names']) != SUMO_MONTHS:
