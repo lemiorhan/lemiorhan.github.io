@@ -3112,8 +3112,9 @@
         },
         {
           "date": "2013-09-25",
-          "name": "International Workshop on Agile Approaches 2013",
-          "role": "Paper",
+          "name": "International Workshop on Agile Approaches 2013, 7. Ulusal Yazılım Mühendisliği Sempozyumu (UYMS'13)",
+          "place": "izmir",
+          "role": "Paper and talk",
           "spoken": "tr",
           "talks": [
             {
@@ -3164,7 +3165,6 @@
           "name": "Dinamikler 2013",
           "place": "istanbul",
           "url": "https://www.dinamikler.org/",
-          "role": "Panel",
           "spoken": "tr",
           "talks": [
             {
@@ -3173,7 +3173,11 @@
               "summary": "Software projects fail for many reasons, and agile practices such as short cycles, TDD, refactoring, continuous integration and pair programming make them succeed.",
               "themes": ["agile"]
             }
-          ]
+          ],
+          "photo": {
+            "file": "2013-dinamikler",
+            "alt": "Lemi speaking with a clicker in hand in front of the Dinamikler 2013 backdrop, beside a lectern with a laptop"
+          }
         },
         {
           "date": "2013-02-28",
