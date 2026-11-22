@@ -265,6 +265,18 @@
           }
         },
         {
+          "date": "2025-12-10",
+          "name": "Marmara University, Faculty of Engineering",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Modularity in Software World",
+              "themes": ["architecture", "design"]
+            }
+          ]
+        },
+        {
           "date": "2025-12-07",
           "name": "DevFest Istanbul 2025",
           "place": "istanbul",
@@ -355,6 +367,40 @@
           }
         },
         {
+          "date": "2025-05-21",
+          "name": "Karadeniz Technical University, Computer Engineering",
+          "place": "online",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "A Modern Look at SOLID Principles",
+              "summary": "A deep look at a new generation of SOLID principles, and how they open the way to sustainable, readable and flexible software design.",
+              "themes": ["design"]
+            }
+          ],
+          "photo": {
+            "file": "2025-ktu",
+            "alt": "Event poster titled SOLID Prensiplerine Modern Bir Bakış with the Karadeniz Teknik Üniversitesi and Craftgate logos, a short description and a smiling photo of Lemi in a Craftgate polo"
+          }
+        },
+        {
+          "date": "2025-04-30",
+          "name": "Kocaeli University, Artificial Intelligence and Machine Learning",
+          "place": "online",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Things About Software Development Not Taught In School",
+              "summary": "What school leaves out about the profession: products are not projects, coding is a small part of a thinking job, untested and untidied code rots, and building the wrong thing is the biggest trap.",
+              "themes": ["career", "craftsmanship"]
+            }
+          ],
+          "photo": {
+            "file": "2025-kocaeli",
+            "alt": "A lecture hall screen showing the title slide Yazılım Geliştirme Hakkında Okulda Bahsedilmeyenler in a video call, Lemi in a small video tile beside it, a Turkish flag and a Kocaeli Üniversitesi lectern to the right"
+          }
+        },
+        {
           "date": "2025-02-27",
           "name": "Tech Leaders Summit 2025",
           "place": "istanbul",
@@ -374,6 +420,18 @@
         }
       ],
       "2024": [
+        {
+          "date": "2024-12-17",
+          "name": "Karadeniz Technical University, Computer Engineering",
+          "place": "online",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "A Completely Different OOP",
+              "themes": ["design"]
+            }
+          ]
+        },
         {
           "date": "2024-12-07",
           "name": "DevFest İzmir 2024",
@@ -545,6 +603,18 @@
         }
       ],
       "2023": [
+        {
+          "date": "2023-12-08",
+          "name": "Marmara University, Computer Engineering",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Professional Ethics in Software World",
+              "themes": ["ethics"]
+            }
+          ]
+        },
         {
           "date": "2023-12-02",
           "name": "DevFest İzmir 2023",
@@ -2789,6 +2859,18 @@
             "file": "2015-turkiye-finans",
             "alt": "Lemi beside the Agile Engineering Practices title slide at the front of a meeting room, rows of people on black chairs facing him"
           }
+        },
+        {
+          "date": "2015-01-14",
+          "name": "Yemeksepeti",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "The Agile Metamorphosis",
+              "themes": ["agile"]
+            }
+          ]
         }
       ],
       "2014": [
@@ -3041,6 +3123,19 @@
           }
         },
         {
+          "date": "2014-03-07",
+          "name": "Marmara University, Computer Engineering",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "Guide for Evolving from Novices to Professional Software Developers",
+              "summary": "A guide to evolving from novice to professional software developer.",
+              "themes": ["career", "craftsmanship"]
+            }
+          ]
+        },
+        {
           "date": "2014-02-01",
           "name": "Software Craftsmanship Turkey meetup",
           "place": "istanbul",
@@ -3073,6 +3168,18 @@
           ]
         },
         {
+          "date": "2013-11-26",
+          "name": "İstanbul Bilgi University, Computer Engineering",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "A Guide to Entering the Software World",
+              "themes": ["career"]
+            }
+          ]
+        },
+        {
           "date": "2013-11-02",
           "name": "DevFest Istanbul 2013",
           "place": "istanbul",
@@ -3091,6 +3198,19 @@
             "file": "2013-devfest-istanbul",
             "alt": "Lemi in a striped shirt beside a slide titled Git Workflow Model, seen over the heads of the audience"
           }
+        },
+        {
+          "date": "2013-10-25",
+          "name": "Marmara University, Computer Engineering",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "GMO'less Software Development Practices",
+              "summary": "Projects fail because software is built against its own nature; agility and extreme programming practices are how to build it naturally.",
+              "themes": ["agile", "craftsmanship"]
+            }
+          ]
         },
         {
           "date": "2013-10-10",
@@ -3159,6 +3279,20 @@
             "file": "2013-agile-talks",
             "alt": "Lemi speaking beside a slide of a crowd surfer that says software development is a social activity"
           }
+        },
+        {
+          "date": "2013-05-14",
+          "name": "Marmara University, Faculty of Engineering",
+          "place": "istanbul",
+          "spoken": "tr",
+          "talks": [
+            {
+              "title": "The Engines of Software Development: Testing and Test Driven Development",
+              "slides": "https://www.slideshare.net/slideshow/the-engines-of-software-development-testing-and-test-driven-development/13235919",
+              "summary": "How to write testable code, test at several levels, integrate continuously, drive development with tests, and test legacy software.",
+              "themes": ["testing"]
+            }
+          ]
         },
         {
           "date": "2013-03-23",
