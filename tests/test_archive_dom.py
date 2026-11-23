@@ -15,6 +15,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from collections import Counter
 from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -59,20 +60,23 @@ class ArchivePage(HTMLParser):
             self.open[-1]['children'].append(data)
 
 
-def setUpModule():
-    tmp = tempfile.TemporaryDirectory()
-    BUILT['tmp'] = tmp
-    result = subprocess.run([sys.executable, os.path.join(ROOT, 'build.py'), '--out', tmp.name],
-                            capture_output=True, text=True)
+def build_talks(site, out):
+    result = subprocess.run([sys.executable, os.path.join(site, 'build.py'), '--out', out], capture_output=True, text=True)
     if result.returncode:
         raise AssertionError(result.stderr)
     page = ArchivePage()
-    with open(os.path.join(tmp.name, 'talks', 'index.html'), encoding='utf-8') as f:
+    with open(os.path.join(out, 'talks', 'index.html'), encoding='utf-8') as f:
         page.feed(f.read())
     page.close()
     if [t['tag'] for t in page.trees] != ['script', 'main']:
         raise AssertionError('the built talks page should give the ui-text island and then the archive')
-    BUILT['tree'] = page.trees
+    return page.trees
+
+
+def setUpModule():
+    tmp = tempfile.TemporaryDirectory()
+    BUILT['tmp'] = tmp
+    BUILT['tree'] = build_talks(ROOT, tmp.name)
     BUILT['script'] = os.path.join(tmp.name, 'assets', 'site.js')
 
 
@@ -80,12 +84,12 @@ def tearDownModule():
     BUILT['tmp'].cleanup()
 
 
-def run(*actions):
+def run(*actions, tree=None):
     path = shutil.which('node')
     if not path:
         raise AssertionError('node is not on PATH. The archive tests need Node.js '
                              '(it ships on the ubuntu-latest CI runner); install node to run them.')
-    request = {'tree': BUILT['tree'], 'script': BUILT['script'], 'actions': [list(a) for a in actions]}
+    request = {'tree': tree or BUILT['tree'], 'script': BUILT['script'], 'actions': [list(a) for a in actions]}
     proc = subprocess.run([path, CLI], input=json.dumps(request).encode('utf-8'), capture_output=True, timeout=120)
     if proc.returncode != 0:
         raise AssertionError('archive_dom_cli.js exited {}:\n{}'.format(proc.returncode, proc.stderr.decode('utf-8', 'replace')))
@@ -115,14 +119,14 @@ def where(ev):
     return (place['country'], place.get('province', ''))
 
 
-def shown(theme='', media='all', country='', region='', university=False):
+def shown(theme='', media='all', country='', region='', location_type='', events=None):
     """The events the page should show, each with which of its talks stay visible."""
     out = []
-    for year, ev in EVENTS:
+    for year, ev in events or EVENTS:
         talks = ev.get('talks', [])
         if media != 'all' and not any(t.get(media) for t in talks):
             continue
-        if university and ev.get('university') is not True:
+        if location_type and ev.get('locationType') != location_type:
             continue
         if theme and not any(about(t, theme) for t in talks):
             continue
@@ -248,28 +252,83 @@ class ThemeFilter(unittest.TestCase):
         self.assertEqual(look['mapStatus'], fill(UI['place_status'], events=plural(len(want)), place=place))
 
 
-UNIVERSITY = '.filter-bar button[data-university]'
 TURKIYE = '.tmap-controls button[data-country="TR"]'
+KINDS = ARCHIVE['locationTypes']['items']
 
 
-class UniversityFilter(unittest.TestCase):
-    def test_on_load_the_toggle_appears_off_with_every_event_shown(self):
+def chip(kind):
+    return '.filter-bar .location-types button[data-location-type="{}"]'.format(kind)
+
+
+def chip_counts(tree):
+    """(location type, count on its chip) for every chip of a built talks page."""
+    def walk(node):
+        if isinstance(node, str):
+            return
+        attrs = dict(node['attrs'])
+        if node['tag'] == 'button' and 'data-location-type' in attrs:
+            n = next(c for c in node['children'] if not isinstance(c, str) and dict(c['attrs']).get('class') == 'n')
+            yield attrs['data-location-type'], int(''.join(n['children']))
+        for c in node['children']:
+            yield from walk(c)
+    return [kc for t in tree for kc in walk(t)]
+
+
+class LocationTypeFilter(unittest.TestCase):
+    def test_on_load_every_chip_appears_off_with_every_event_shown(self):
         look, = run(['look'])
         self.assertFalse(look['barHidden'])
-        self.assertEqual(look['university'], 'false')
+        self.assertEqual(look['locationTypes'], [])
         self.assertEqual(look['events'], shown())
 
-    def test_the_toggle_shows_exactly_the_events_at_a_university_and_a_second_click_brings_everything_back(self):
-        before, on, off = run(['look'], ['click', UNIVERSITY], ['look'], ['click', UNIVERSITY], ['look'])
-        want = shown(university=True)
-        self.assertTrue(1 < len(want) < len(EVENTS))
-        self.assertEqual(on['events'], want)
-        self.assertEqual(on['years'], years(want))
-        self.assertEqual((on['university'], on['media'], on['themes']), ('true', ['all'], ['']))
-        self.assertEqual(on['status'], fill(UI['showing_some'], visible=len(want), events=plural(len(EVENTS))))
-        self.assertEqual(off, before)
+    def test_a_chip_shows_exactly_the_events_of_its_type_and_a_second_click_brings_everything_back(self):
+        for kind in KINDS:
+            with self.subTest(kind=kind):
+                before, on, off = run(['look'], ['click', chip(kind)], ['look'], ['click', chip(kind)], ['look'])
+                want = shown(location_type=kind)
+                self.assertTrue(0 < len(want) < len(EVENTS))
+                self.assertEqual(on['events'], want)
+                self.assertEqual(on['years'], years(want))
+                self.assertEqual((on['locationTypes'], on['media'], on['themes']), ([kind], ['all'], ['']))
+                self.assertEqual(on['status'], fill(UI['showing_some'], visible=len(want), events=plural(len(EVENTS))))
+                self.assertEqual(off, before)
+        self.assertGreater(len(KINDS), 0)
 
-    def test_the_toggle_and_each_other_filter_narrow_each_other_and_the_other_stays_when_the_toggle_goes(self):
+    def test_choosing_another_type_switches_to_it_and_each_chip_counts_its_own_events(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            site = os.path.join(tmp, 'site')
+            os.mkdir(site)
+            shutil.copy(os.path.join(ROOT, 'build.py'), site)
+            for d in ('content', 'assets', 'data'):
+                shutil.copytree(os.path.join(ROOT, d), os.path.join(site, d))
+            path = os.path.join(site, 'content', 'talks.json')
+            with open(path, encoding='utf-8') as f:
+                data = json.load(f)
+            labels = data['archive']['locationTypes']['items']
+            labels['company'] = 'Workplaces'
+            events = [('y' + year, ev) for year, evs in sorted(data['archive']['events'].items(), reverse=True) for ev in evs]
+            companies = [ev for _, ev in events if 'locationType' not in ev][:3]
+            for ev in companies:
+                ev['locationType'] = 'company'
+            with open(path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False)
+            tree = build_talks(site, os.path.join(tmp, 'out'))
+        count = Counter(ev['locationType'] for _, ev in events if 'locationType' in ev)
+        by_label = sorted(count.items(), key=lambda kc: labels[kc[0]].lower())
+        self.assertEqual(chip_counts(tree), by_label)
+        self.assertNotEqual(by_label, sorted(count.items()), 'the labels should sort apart from the keys')
+        universities, firms, both_off = run(['click', chip('university')], ['look'], ['click', chip('company')], ['look'],
+                                            ['click', chip('company')], ['look'], tree=tree)
+        self.assertEqual(len(shown(location_type='company', events=events)), len(companies))
+        self.assertEqual(universities['events'], shown(location_type='university', events=events))
+        self.assertEqual(universities['locationTypes'], ['university'])
+        self.assertEqual(firms['events'], shown(location_type='company', events=events))
+        self.assertEqual(firms['locationTypes'], ['company'])
+        self.assertEqual(both_off['events'], shown(events=events))
+        self.assertEqual(both_off['locationTypes'], [])
+
+    def test_the_chip_and_each_other_filter_narrow_each_other_and_the_other_stays_when_the_chip_goes(self):
+        kind = max(KINDS, key=lambda k: len(shown(location_type=k)))
         istanbul = 'İstanbul, ' + ARCHIVE['countries']['TR']
         others = (
             ('ethics', [['click', '.cloud button[data-theme="ethics"]']], {'theme': 'ethics'},
@@ -283,15 +342,15 @@ class UniversityFilter(unittest.TestCase):
         )
         for name, choose, other, status in others:
             with self.subTest(other=name):
-                both, alone = run(*choose, ['click', UNIVERSITY], ['look'], ['click', UNIVERSITY], ['look'])
-                want, rest = shown(university=True, **other), shown(**other)
-                self.assertTrue(0 < len(want) < min(len(rest), len(shown(university=True))))
+                both, alone = run(*choose, ['click', chip(kind)], ['look'], ['click', chip(kind)], ['look'])
+                want, rest = shown(location_type=kind, **other), shown(**other)
+                self.assertTrue(0 < len(want) < min(len(rest), len(shown(location_type=kind))))
                 self.assertEqual(both['events'], want)
                 self.assertEqual(both['years'], years(want))
                 self.assertEqual(both['status'], status(len(want)))
                 self.assertEqual(alone['events'], rest)
                 self.assertEqual(alone['status'], status(len(rest)))
-                self.assertEqual(alone['university'], 'false')
+                self.assertEqual(alone['locationTypes'], [])
 
 
 if __name__ == '__main__':

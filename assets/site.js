@@ -248,14 +248,14 @@
     var mini = buildMiniStrip(strip);
     var bar = archive.querySelector('.filter-bar');
     var buttons = Array.prototype.slice.call(bar.querySelectorAll('.filters button'));
-    var university = bar.querySelector('button[data-university]');
+    var kinds = Array.prototype.slice.call(bar.querySelectorAll('button[data-location-type]'));
     var status = archive.querySelector('.filter-status');
     var empty = archive.querySelector('.empty-note');
     var total = archive.querySelectorAll('.ev').length;
     var cloud = archive.querySelector('.themes');
     var themeButtons = Array.prototype.slice.call(archive.querySelectorAll('button[data-theme]'));
 
-    var state = { media: 'all', country: '', region: '', theme: '', university: false };
+    var state = { media: 'all', country: '', region: '', theme: '', locationType: '' };
 
     function plural(n) { return fill(n === 1 ? ui.event_one : ui.event_many, { n: n }); }
 
@@ -265,7 +265,7 @@
 
     function matches(ev) {
       if (state.media !== 'all' && !ev.hasAttribute('data-' + state.media)) return false;
-      if (state.university && !ev.hasAttribute('data-university')) return false;
+      if (state.locationType && ev.dataset.locationType !== state.locationType) return false;
       if (state.theme && !about(ev)) return false;
       if (state.country && ev.dataset.country !== state.country) return false;
       return !state.region || ev.dataset.region === state.region;
@@ -310,7 +310,9 @@
       buttons.forEach(function (b) {
         b.setAttribute('aria-pressed', String(b.dataset.filter === state.media));
       });
-      university.setAttribute('aria-pressed', String(state.university));
+      kinds.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.locationType === state.locationType));
+      });
       themeButtons.forEach(function (b) {
         b.setAttribute('aria-pressed', String(b.dataset.theme === state.theme));
       });
@@ -384,9 +386,11 @@
       });
     });
 
-    university.addEventListener('click', function () {
-      state.university = !state.university;
-      refresh();
+    kinds.forEach(function (b) {
+      b.addEventListener('click', function () {
+        state.locationType = state.locationType === b.dataset.locationType ? '' : b.dataset.locationType;
+        refresh();
+      });
     });
 
     themeButtons.forEach(function (b) {

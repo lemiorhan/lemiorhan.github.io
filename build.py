@@ -1104,8 +1104,20 @@ def archive_controls(archive, page):
              '<span class="yr" aria-hidden="true"><span class="yr-c">{1}</span>{2}</span></a></li>'.format(y, y[:2], y[2:])
              for y, _ in reversed(archive_years(archive, page))]
     f = archive['filters']
-    if not any(at_university(ev, page) for _, events in archive_years(archive, page) for ev in events):
-        page.fail('archive.filters offers "university", but no event is marked "university": true')
+    kinds = archive['locationTypes']
+    items = kinds.get('items')
+    check_strings(page.fail, 'archive.locationTypes.items', items)
+    if not items:
+        page.fail('archive.locationTypes.items must name at least one location type')
+    for key in items:
+        if not THEME_KEY.match(key):
+            page.fail('location type key {!r} must be lowercase words joined by hyphens'.format(key))
+    count = Counter(location_type(ev, archive, page) for _, events in archive_years(archive, page) for ev in events)
+    unused = sorted(k for k in items if not count[k])
+    if unused:
+        page.fail('archive.locationTypes.items defines {}, but no event has that locationType'.format(', '.join(unused)))
+    chips = ['    <button type="button" data-location-type="{}" aria-pressed="false">{} <span class="n">{}</span></button>'.format(
+                 attr(k), text(items[k]), count[k]) for k in sorted(items, key=lambda k: items[k].lower())]
     return (['', '<nav class="years-nav" aria-label="{}">'.format(attr(archive['years_label'])), '  <ol class="years">']
             + indent(strip, 4) + ['  </ol>', '</nav>', '',
                                   '<div class="filter-bar" hidden>',
@@ -1114,23 +1126,29 @@ def archive_controls(archive, page):
                                   '    <button type="button" data-filter="video" aria-pressed="false">{}</button>'.format(text(f['video'])),
                                   '    <button type="button" data-filter="slides" aria-pressed="false">{}</button>'.format(text(f['slides'])),
                                   '  </div>',
-                                  '  <button type="button" data-university aria-pressed="false">{}</button>'.format(text(f['university'])),
-                                  '</div>',
-                                  '<p class="filter-status sr-only" aria-live="polite"></p>'])
+                                  '  <div class="location-types" role="group" aria-label="{}">'.format(attr(kinds['label']))]
+            + chips + ['  </div>',
+                       '</div>',
+                       '<p class="filter-status sr-only" aria-live="polite"></p>'])
 
 
-def at_university(ev, page):
-    if 'university' in ev and ev['university'] is not True:
-        page.fail('"university" of event {!r} must be true, or left out'.format(ev['name']))
-    return 'university' in ev
+def location_type(ev, archive, page):
+    if 'locationType' not in ev:
+        return ''
+    key = ev['locationType']
+    if not isinstance(key, str) or key not in archive['locationTypes']['items']:
+        page.fail('event {!r} has locationType {!r}, which archive.locationTypes.items does not define'.format(ev['name'], key))
+    return key
 
 
 def event(ev, archive, page):
     talks = ev.get('talks', [])
     themes = [talk_themes(t, ev, archive, page) for t in talks]
     flags = (' data-slides' if any(t.get('slides') for t in talks) else '') + \
-            (' data-video' if any(t.get('video') for t in talks) else '') + \
-            (' data-university' if at_university(ev, page) else '')
+            (' data-video' if any(t.get('video') for t in talks) else '')
+    kind = location_type(ev, archive, page)
+    if kind:
+        flags += ' data-location-type="{}"'.format(attr(kind))
     union = sorted({k for keys in themes for k in keys})
     if union:
         flags += ' data-themes="{}"'.format(attr(' '.join(union)))

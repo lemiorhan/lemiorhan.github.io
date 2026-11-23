@@ -34,8 +34,13 @@
     "filters": {
       "all": "Everything",
       "video": "With a recording",
-      "slides": "With slides",
-      "university": "At universities"
+      "slides": "With slides"
+    },
+    "locationTypes": {
+      "label": "Show talks at",
+      "items": {
+        "university": "Universities"
+      }
     },
     "slides": "Slides",
     "slides_hidden": " for {title}",
@@ -268,7 +273,7 @@
         {
           "date": "2025-12-10",
           "name": "Marmara University, Faculty of Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -300,7 +305,7 @@
         {
           "date": "2025-12-03",
           "name": "MacTech 2025, Marmara Üniversitesi",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -372,7 +377,7 @@
         {
           "date": "2025-05-21",
           "name": "Karadeniz Technical University, Computer Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "online",
           "spoken": "tr",
           "talks": [
@@ -390,7 +395,7 @@
         {
           "date": "2025-04-30",
           "name": "Kocaeli University, Artificial Intelligence and Machine Learning",
-          "university": true,
+          "locationType": "university",
           "place": "online",
           "spoken": "tr",
           "talks": [
@@ -428,7 +433,7 @@
         {
           "date": "2024-12-17",
           "name": "Karadeniz Technical University, Computer Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "online",
           "spoken": "tr",
           "talks": [
@@ -460,7 +465,7 @@
         {
           "date": "2024-12-06",
           "name": "MacTech Teknoloji ve Yazılım Zirvesi 2024, Marmara Üniversitesi",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -576,7 +581,7 @@
         {
           "date": "2024-03-02",
           "name": "8. Ulusal Yönetim Bilişim Zirvesi, Dokuz Eylül Üniversitesi",
-          "university": true,
+          "locationType": "university",
           "place": "izmir",
           "spoken": "tr",
           "talks": [
@@ -614,7 +619,7 @@
         {
           "date": "2023-12-08",
           "name": "Marmara University, Computer Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -933,7 +938,7 @@
         {
           "date": "2022-01-14",
           "name": "Marmara University, Computer Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -1114,7 +1119,7 @@
         {
           "date": "2020-12-18",
           "name": "MBA Talks, Işık Üniversitesi",
-          "university": true,
+          "locationType": "university",
           "place": "online",
           "spoken": "tr",
           "talks": [
@@ -1280,7 +1285,7 @@
         {
           "date": "2020-02-22",
           "name": "BİLMÖK 2020, Yeditepe Üniversitesi",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -1337,7 +1342,7 @@
         {
           "date": "2019-12-12",
           "name": "Marmara University, Computer Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -1879,7 +1884,7 @@
         {
           "date": "2018-03-23",
           "name": "FSM Vakıf Üniversitesi",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -1899,7 +1904,7 @@
         {
           "date": "2018-03-11",
           "name": "BİLMÖK 2018, Yeditepe Üniversitesi",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "url": "https://bilmok.org/",
@@ -1919,7 +1924,7 @@
         {
           "date": "2018-03-06",
           "name": "Koç Üniversitesi Girişimcilik Araştırma Merkezi",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -1940,7 +1945,7 @@
         {
           "date": "2017-12-28",
           "name": "Koç Üniversitesi Girişimcilik Araştırma Merkezi",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -1995,7 +2000,7 @@
         {
           "date": "2017-12-08",
           "name": "Marmara University, Computer Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -2210,7 +2215,7 @@
         {
           "date": "2017-05-12",
           "name": "İzmir Ekonomi Üniversitesi",
-          "university": true,
+          "locationType": "university",
           "place": "izmir",
           "spoken": "tr",
           "talks": [
@@ -2326,7 +2331,7 @@
         {
           "date": "2017-03-20",
           "name": "Bahçeşehir Üniversitesi",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -2344,7 +2349,7 @@
         {
           "date": "2017-03-17",
           "name": "Arel Üniversitesi, Bilişim, Teknoloji ve Endüstri 4.0 Günü",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -2362,7 +2367,7 @@
         {
           "date": "2017-03-15",
           "name": "FSM Vakıf Üniversitesi",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "photo": {
@@ -2577,7 +2582,7 @@
         {
           "date": "2016-04-01",
           "name": "Boğaziçi University Tech Summit 2016",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -2613,7 +2618,7 @@
         {
           "date": "2016-02-26",
           "name": "Karabük Üniversitesi Programlama Günleri 2016",
-          "university": true,
+          "locationType": "university",
           "place": "karabuk",
           "spoken": "tr",
           "talks": [
@@ -2801,7 +2806,7 @@
         {
           "date": "2015-05-07",
           "name": "Türk Hava Kurumu University",
-          "university": true,
+          "locationType": "university",
           "place": "ankara",
           "spoken": "tr",
           "talks": [
@@ -2837,7 +2842,7 @@
         {
           "date": "2015-04-10",
           "name": "Boğaziçi University Exit Days 2015",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -2918,7 +2923,7 @@
         {
           "date": "2014-12-18",
           "name": "İstanbul Kültür University, BMO Seminar",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -3097,7 +3102,7 @@
         {
           "date": "2014-05-07",
           "name": "Marmara University, Computer Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -3153,7 +3158,7 @@
         {
           "date": "2014-03-07",
           "name": "Marmara University, Computer Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -3186,7 +3191,7 @@
         {
           "date": "2013-12-18",
           "name": "Yeditepe Üniversitesi",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -3200,7 +3205,7 @@
         {
           "date": "2013-11-26",
           "name": "İstanbul Bilgi University, Computer Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -3233,7 +3238,7 @@
         {
           "date": "2013-10-25",
           "name": "Marmara University, Computer Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -3315,7 +3320,7 @@
         {
           "date": "2013-05-14",
           "name": "Marmara University, Faculty of Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -3349,7 +3354,7 @@
         {
           "date": "2013-02-28",
           "name": "Marmara University, Computer Engineering Alumni Panel",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "role": "Panel",
           "spoken": "tr",
@@ -3420,7 +3425,7 @@
         {
           "date": "2012-05-18",
           "name": "Marmara University, Faculty of Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [
@@ -3435,7 +3440,7 @@
         {
           "date": "2012-03-28",
           "name": "Marmara University, Computer Engineering",
-          "university": true,
+          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "talks": [

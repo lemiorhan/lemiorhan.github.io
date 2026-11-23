@@ -766,20 +766,44 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
                     t['themes'] = ['Code Review' if k == 'code-review' else k for k in t.get('themes', [])]
         self.assertRejected(self.edit('talks', spaced), "theme key 'Code Review' must be lowercase words joined by hyphens")
 
-    def test_a_university_mark_that_is_not_true(self):
-        for value in (False, 'yes', 1, None):
+    def test_a_location_type_the_vocabulary_does_not_define(self):
+        for value in ('company', 'University', True, None):
             def odd(d, value=value):
-                next(ev for ev in self.events(d) if ev['name'] == 'Bahçeşehir Üniversitesi')['university'] = value
+                next(ev for ev in self.events(d) if ev['name'] == 'Bahçeşehir Üniversitesi')['locationType'] = value
             with self.subTest(value=value):
                 self.assertRejected(self.edit('talks', odd),
-                                    'content/talks.json: "university" of event \'Bahçeşehir Üniversitesi\' must be true, or left out')
+                                    "content/talks.json: event 'Bahçeşehir Üniversitesi' has locationType {!r}, "
+                                    'which archive.locationTypes.items does not define'.format(value))
 
-    def test_a_university_filter_with_no_event_marked_for_it(self):
-        def unmarked(d):
+    def test_a_location_type_no_event_has(self):
+        def unused(d):
+            d['archive']['locationTypes']['items']['company'] = 'Companies'
+        self.assertRejected(self.edit('talks', unused),
+                            'content/talks.json: archive.locationTypes.items defines company, but no event has that locationType')
+
+    def test_no_location_types_at_all(self):
+        def empty(d):
+            d['archive']['locationTypes']['items'] = {}
             for ev in self.events(d):
-                ev.pop('university', None)
-        self.assertRejected(self.edit('talks', unmarked),
-                            'content/talks.json: archive.filters offers "university", but no event is marked "university": true')
+                ev.pop('locationType', None)
+        self.assertRejected(self.edit('talks', empty),
+                            'content/talks.json: archive.locationTypes.items must name at least one location type')
+
+    def test_a_location_type_key_that_is_not_lowercase_words(self):
+        def spaced(d):
+            items = d['archive']['locationTypes']['items']
+            items['Big University'] = items.pop('university')
+            for ev in self.events(d):
+                if ev.get('locationType') == 'university':
+                    ev['locationType'] = 'Big University'
+        self.assertRejected(self.edit('talks', spaced),
+                            "content/talks.json: location type key 'Big University' must be lowercase words joined by hyphens")
+
+    def test_a_location_type_label_that_is_empty(self):
+        def blank(d):
+            d['archive']['locationTypes']['items']['university'] = ''
+        self.assertRejected(self.edit('talks', blank),
+                            'content/talks.json: "archive.locationTypes.items" must be an object whose values are non-empty strings')
 
     # Hero
 
@@ -1748,32 +1772,49 @@ class BuiltSite(unittest.TestCase):
         self.assertEqual([s.all_text() for s in spans if 'hidden' not in s.attrs], [], 'without JS these buttons would do nothing')
         self.assertGreater(talks, 1)
 
-    def test_an_event_carries_data_university_exactly_when_talks_json_marks_it(self):
-        expected = [(ev['name'], ev.get('university') is True)
+    def test_an_event_carries_data_location_type_exactly_as_talks_json_gives_it(self):
+        expected = [(ev['name'], ev.get('locationType'))
                     for _, evs in sorted(self.talks['events'].items(), reverse=True) for ev in evs]
         events = self.trees['talks'].find(lambda n: n.tag == 'li' and 'ev' in n.classes())
-        self.assertEqual([(ev.find(has_class('ev-name'))[0].all_text(), 'data-university' in ev.attrs) for ev in events], expected)
-        marked = sum(at for _, at in expected)
-        self.assertTrue(1 < marked < len(expected), marked)
+        self.assertEqual([(ev.find(has_class('ev-name'))[0].all_text(), ev.attrs.get('data-location-type')) for ev in events],
+                         expected)
+        typed = sum(kind is not None for _, kind in expected)
+        self.assertTrue(1 < typed < len(expected), typed)
 
-    def test_the_university_toggle_waits_for_js_beside_the_media_filters_and_outside_their_group(self):
+    def test_every_location_type_gets_a_chip_with_its_event_count_beside_the_media_filters_waiting_for_js(self):
         bar, = self.trees['talks'].find(has_class('filter-bar'))
         self.assertIn('hidden', bar.attrs, 'without JS the buttons would show and do nothing')
-        group, = bar.find(has_class('filters'))
-        toggles = self.trees['talks'].find(lambda n: n.tag == 'button' and 'data-university' in n.attrs)
-        self.assertEqual([(b.all_text(), b.attrs.get('aria-pressed'), b.parent is bar) for b in toggles],
-                         [(self.talks['filters']['university'], 'false', True)])
-        self.assertEqual([b.attrs.get('data-filter') for b in group.find(lambda n: n.tag == 'button')], ['all', 'video', 'slides'])
+        media, = bar.find(has_class('filters'))
+        self.assertEqual([b.attrs.get('data-filter') for b in media.find(lambda n: n.tag == 'button')], ['all', 'video', 'slides'])
+        group, = bar.find(has_class('location-types'))
+        self.assertIs(group.parent, bar)
+        self.assertEqual(group.attrs.get('aria-label'), self.talks['locationTypes']['label'])
+        count = Counter(ev['locationType'] for evs in self.talks['events'].values() for ev in evs if 'locationType' in ev)
+        items = self.talks['locationTypes']['items']
+        expected = sorted(((k, '{} {}'.format(items[k], count[k]), str(count[k]), 'false') for k in count),
+                          key=lambda chip: items[chip[0]].lower())
+        chips = self.trees['talks'].find(lambda n: n.tag == 'button' and 'data-location-type' in n.attrs)
+        self.assertEqual([(b.attrs['data-location-type'], ' '.join(b.all_text().split()), b.find(has_class('n'))[0].all_text(),
+                           b.attrs.get('aria-pressed')) for b in chips], expected)
+        self.assertTrue(all(b.parent is group for b in chips))
+        self.assertGreater(len(chips), 0)
 
-    def test_the_university_toggle_takes_its_look_from_the_media_buttons_and_print_leaves_both_out(self):
+    def test_the_location_type_chips_take_their_look_from_the_media_buttons_and_print_leaves_both_out(self):
         with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
             css = re.sub(r'/\*.*?\*/', '', f.read(), flags=re.S)
-        selectors = [s.strip() for group in re.findall(r'([^{}@;]+)\{', css) for s in group.split(',')]
-        one_side = re.compile(r'\.filters(?![\w-])|\[data-filter|\[data-university')
-        self.assertEqual([s for s in selectors if one_side.search(s)], ['.filters'],
-                         'a rule naming a mark only the media buttons or only the toggle carries could style them apart')
+        groups = [[s.strip() for s in group.split(',')] for group in re.findall(r'([^{}@;]+)\{', css)]
+        selectors = [s for group in groups for s in group]
+        one_side = re.compile(r'\.filters(?![\w-])|\.location-types|\[data-filter|\[data-location-type')
+        self.assertEqual([s for s in selectors if one_side.search(s)], ['.filters', '.location-types'],
+                         'a rule naming a mark only the media buttons or only the chips carry could style them apart')
         self.assertEqual([s for s in selectors if s.startswith('.filter-bar button')],
-                         ['.filter-bar button', '.filter-bar button:hover', '.filter-bar button[aria-pressed="true"]'])
+                         ['.filter-bar button[aria-pressed="true"] .n',
+                          '.filter-bar button', '.filter-bar button:hover', '.filter-bar button[aria-pressed="true"]'])
+        for theme, bar in (('.chips .n', '.filter-bar .n'),
+                           ('.chips button[aria-pressed="true"] .n', '.filter-bar button[aria-pressed="true"] .n')):
+            with self.subTest(count=bar):
+                self.assertEqual([g for g in groups if bar in g], [[theme, bar]],
+                                 'the count on a location type chip should look like the count on a theme chip')
         printed = css[css.index('@media print'):]
         hidden = [s.strip() for group, body in re.findall(r'([^{}@;]+)\{([^{}]*)\}', printed) if 'display: none' in body
                   for s in group.split(',')]

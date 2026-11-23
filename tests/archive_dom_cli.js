@@ -36,7 +36,7 @@ function look(doc, scrolls) {
     themes: pressed('button[data-theme]', 'data-theme'),
     media: pressed('.filters button', 'data-filter'),
     barHidden: archive.querySelector('.filter-bar').hidden,
-    university: archive.querySelector('button[data-university]').getAttribute('aria-pressed'),
+    locationTypes: pressed('button[data-location-type]', 'data-location-type'),
     scrolls: scrolls
   };
 }

@@ -1157,12 +1157,12 @@ a:hover { text-decoration-color: var(--accent); }
   background: var(--ink);
   border-color: var(--ink);
 }
-.chips .n {
+.chips .n, .filter-bar .n {
   margin-left: 0.4em;
   color: var(--ink-soft);
   font-variant-numeric: tabular-nums;
 }
-.chips button[aria-pressed="true"] .n { color: inherit; opacity: 0.75; }
+.chips button[aria-pressed="true"] .n, .filter-bar button[aria-pressed="true"] .n { color: inherit; opacity: 0.75; }
 .chips .flag { margin-right: 0.35em; vertical-align: 0; }
 
 .tmap-status { margin: 0.75rem 0 0; font-size: 0.95rem; color: var(--ink-soft); }
@@ -1230,7 +1230,7 @@ a:hover { text-decoration-color: var(--accent); }
   gap: 0.5rem 1.25rem;
   margin-top: 1.5rem;
 }
-.filters {
+.filters, .location-types {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
