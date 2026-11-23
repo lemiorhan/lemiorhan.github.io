@@ -767,7 +767,7 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
         self.assertRejected(self.edit('talks', spaced), "theme key 'Code Review' must be lowercase words joined by hyphens")
 
     def test_a_location_type_the_vocabulary_does_not_define(self):
-        for value in ('company', 'University', True, None):
+        for value in ('nowhere', 'University', True, None):
             def odd(d, value=value):
                 next(ev for ev in self.events(d) if ev['name'] == 'Bahçeşehir Üniversitesi')['locationType'] = value
             with self.subTest(value=value):
@@ -777,9 +777,9 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
 
     def test_a_location_type_no_event_has(self):
         def unused(d):
-            d['archive']['locationTypes']['items']['company'] = 'Companies'
+            d['archive']['locationTypes']['items']['nowhere'] = 'Nowhere'
         self.assertRejected(self.edit('talks', unused),
-                            'content/talks.json: archive.locationTypes.items defines company, but no event has that locationType')
+                            'content/talks.json: archive.locationTypes.items defines nowhere, but no event has that locationType')
 
     def test_no_location_types_at_all(self):
         def empty(d):

@@ -39,7 +39,11 @@
     "locationTypes": {
       "label": "Show talks at",
       "items": {
-        "university": "Universities"
+        "university": "Universities",
+        "company": "Companies",
+        "interview": "Interviews",
+        "podcast": "Podcasts",
+        "webinar": "Webinars"
       }
     },
     "slides": "Slides",
@@ -201,6 +205,7 @@
           "date": "2026-04-07",
           "name": "Devnot",
           "role": "Podcast",
+          "locationType": "podcast",
           "spoken": "tr",
           "talks": [
             {
@@ -236,6 +241,7 @@
           "date": "2026-01-08",
           "name": "Backendguru Academy webinar",
           "place": "online",
+          "locationType": "webinar",
           "spoken": "tr",
           "talks": [
             {
@@ -342,6 +348,7 @@
           "date": "2025-09-18",
           "name": "weproduct",
           "role": "Interview",
+          "locationType": "interview",
           "spoken": "tr",
           "talks": [
             {
@@ -360,6 +367,7 @@
           "date": "2025-07-16",
           "name": "Enderinko",
           "role": "Podcast",
+          "locationType": "podcast",
           "spoken": "tr",
           "talks": [
             {
@@ -522,6 +530,7 @@
           "date": "2024-04-25",
           "name": "Türkiye Java Community",
           "place": "online",
+          "locationType": "webinar",
           "spoken": "tr",
           "talks": [
             {
@@ -540,6 +549,7 @@
           "date": "2024-03-30",
           "name": "Tütsü Sektör",
           "role": "Podcast",
+          "locationType": "podcast",
           "spoken": "tr",
           "talks": [
             {
@@ -600,6 +610,7 @@
           "date": "2024-02-06",
           "name": "PeaksOnTheBack #2",
           "role": "Podcast",
+          "locationType": "podcast",
           "spoken": "tr",
           "talks": [
             {
@@ -710,6 +721,7 @@
           "date": "2023-07-28",
           "name": "Teknasyon ile Kesin Yaşanmıştır #14",
           "role": "Podcast",
+          "locationType": "podcast",
           "spoken": "tr",
           "talks": [
             {
@@ -746,6 +758,7 @@
           "date": "2023-06-08",
           "name": "Iqra – Okuyun",
           "place": "online",
+          "locationType": "webinar",
           "spoken": "tr",
           "talks": [
             {
@@ -883,6 +896,7 @@
           "date": "2022-06-10",
           "name": "Türkiye Java Community",
           "place": "online",
+          "locationType": "webinar",
           "spoken": "tr",
           "talks": [
             {
@@ -995,6 +1009,7 @@
           "date": "2021-09-28",
           "name": "Junior Bile Değil #7",
           "role": "Podcast",
+          "locationType": "podcast",
           "spoken": "tr",
           "talks": [
             {
@@ -1013,6 +1028,7 @@
           "date": "2021-08-13",
           "name": "Teknasyon Tech Meetup #2",
           "place": "online",
+          "locationType": "company",
           "spoken": "tr",
           "talks": [
             {
@@ -1031,6 +1047,7 @@
           "date": "2021-07-14",
           "name": "Ruby Türkiye Akşam Oturması #10",
           "place": "online",
+          "locationType": "webinar",
           "spoken": "tr",
           "talks": [
             {
@@ -1049,6 +1066,7 @@
           "date": "2021-04-03",
           "name": "Think. Design. Work Smart. with Alex Bolboaca",
           "role": "Podcast",
+          "locationType": "podcast",
           "spoken": "en",
           "talks": [
             {
@@ -1065,7 +1083,7 @@
         {
           "date": "2021-03-14",
           "name": "CS TechTalks Alumni, IEEE Marmara",
-          "place": "online",
+          "place": "istanbul",
           "spoken": "tr",
           "talks": [
             {
@@ -1100,6 +1118,7 @@
           "date": "2021-01-12",
           "name": "Üretim Bandı",
           "role": "Podcast",
+          "locationType": "podcast",
           "spoken": "tr",
           "talks": [
             {
@@ -1138,6 +1157,7 @@
           "date": "2020-12-13",
           "name": "The Unspoken Rules of a Better Professional Life",
           "place": "online",
+          "locationType": "webinar",
           "spoken": "tr",
           "talks": [
             {
@@ -1174,6 +1194,7 @@
           "date": "2020-09-29",
           "name": "Üretim Bandı",
           "role": "Podcast",
+          "locationType": "podcast",
           "spoken": "tr",
           "talks": [
             {
@@ -1444,6 +1465,7 @@
           "date": "2019-11-20",
           "name": "QaCast S1E8",
           "role": "Podcast",
+          "locationType": "podcast",
           "spoken": "tr",
           "talks": [
             {
@@ -1498,6 +1520,7 @@
           "date": "2019-09-10",
           "name": "Yazılımcı Sohbetleri, Çay Kahve İnsan",
           "role": "Interview",
+          "locationType": "interview",
           "spoken": "tr",
           "talks": [
             {
@@ -1515,6 +1538,7 @@
           "date": "2019-08-31",
           "name": "mySEV Coding Bootcamp 2019",
           "url": "https://www.capital.com.tr/sirket-panosu/sirket-panosu-haberleri/turkiyede-lise-seviyesinde-ilk-kodlama-kampi-acildi",
+          "locationType": "company",
           "spoken": "tr",
           "talks": [
             {
@@ -1618,6 +1642,7 @@
           "date": "2018-12-08",
           "name": "Kesişen Yollar",
           "role": "Interview",
+          "locationType": "interview",
           "spoken": "tr",
           "talks": [
             {
@@ -1681,6 +1706,7 @@
           "date": "2018-11-14",
           "name": "KoçFinans Lunch&Learn",
           "place": "istanbul",
+          "locationType": "company",
           "spoken": "tr",
           "talks": [
             {
@@ -1754,6 +1780,7 @@
           "date": "2018-08-13",
           "name": "İzmir Özel Türk Koleji",
           "place": "izmir",
+          "locationType": "company",
           "spoken": "tr",
           "talks": [
             {
@@ -1904,7 +1931,6 @@
         {
           "date": "2018-03-11",
           "name": "BİLMÖK 2018, Yeditepe Üniversitesi",
-          "locationType": "university",
           "place": "istanbul",
           "spoken": "tr",
           "url": "https://bilmok.org/",
@@ -1965,6 +1991,7 @@
           "date": "2017-12-20",
           "name": "Üretim Bandı",
           "role": "Podcast",
+          "locationType": "podcast",
           "spoken": "tr",
           "talks": [
             {
@@ -2083,6 +2110,7 @@
           "date": "2017-09-26",
           "name": "ETSTur technology team",
           "place": "istanbul",
+          "locationType": "company",
           "spoken": "tr",
           "talks": [
             {
@@ -2109,6 +2137,7 @@
           "date": "2017-09-12",
           "name": "Anadolu Sigorta technology teams",
           "place": "istanbul",
+          "locationType": "company",
           "spoken": "tr",
           "talks": [
             {
@@ -2181,6 +2210,7 @@
           "date": "2017-06-05",
           "name": "Yazılım Ofisleri, Devnot",
           "role": "Interview",
+          "locationType": "interview",
           "spoken": "tr",
           "talks": [
             {
@@ -2379,6 +2409,7 @@
           "date": "2017-03-13",
           "name": "Devnot",
           "role": "Interview",
+          "locationType": "interview",
           "spoken": "tr",
           "talks": [
             {
@@ -2459,6 +2490,7 @@
           "date": "2016-11-17",
           "name": "IT Serbia Podcast",
           "role": "Podcast",
+          "locationType": "podcast",
           "spoken": "en",
           "talks": [
             {
@@ -2655,6 +2687,7 @@
           "date": "2016-01-11",
           "name": "DevPod",
           "role": "Podcast",
+          "locationType": "podcast",
           "spoken": "tr",
           "talks": [
             {
@@ -2895,6 +2928,7 @@
           "date": "2015-01-14",
           "name": "Yemeksepeti",
           "place": "istanbul",
+          "locationType": "company",
           "spoken": "tr",
           "talks": [
             {
@@ -3086,6 +3120,7 @@
           "name": "Sherpa",
           "place": "istanbul",
           "role": "Training",
+          "locationType": "company",
           "spoken": "tr",
           "talks": [
             {
@@ -3285,6 +3320,7 @@
           "date": "2013-06-14",
           "name": "YapıKredi Seminars",
           "place": "istanbul",
+          "locationType": "company",
           "spoken": "tr",
           "talks": [
             {

@@ -305,11 +305,12 @@ class LocationTypeFilter(unittest.TestCase):
             with open(path, encoding='utf-8') as f:
                 data = json.load(f)
             labels = data['archive']['locationTypes']['items']
-            labels['company'] = 'Workplaces'
+            self.assertNotIn('bootcamp', labels)
+            labels['bootcamp'] = 'Training camps'
             events = [('y' + year, ev) for year, evs in sorted(data['archive']['events'].items(), reverse=True) for ev in evs]
-            companies = [ev for _, ev in events if 'locationType' not in ev][:3]
-            for ev in companies:
-                ev['locationType'] = 'company'
+            camps = [ev for _, ev in events if 'locationType' not in ev][:3]
+            for ev in camps:
+                ev['locationType'] = 'bootcamp'
             with open(path, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False)
             tree = build_talks(site, os.path.join(tmp, 'out'))
@@ -317,13 +318,13 @@ class LocationTypeFilter(unittest.TestCase):
         by_label = sorted(count.items(), key=lambda kc: labels[kc[0]].lower())
         self.assertEqual(chip_counts(tree), by_label)
         self.assertNotEqual(by_label, sorted(count.items()), 'the labels should sort apart from the keys')
-        universities, firms, both_off = run(['click', chip('university')], ['look'], ['click', chip('company')], ['look'],
-                                            ['click', chip('company')], ['look'], tree=tree)
-        self.assertEqual(len(shown(location_type='company', events=events)), len(companies))
+        universities, camped, both_off = run(['click', chip('university')], ['look'], ['click', chip('bootcamp')], ['look'],
+                                             ['click', chip('bootcamp')], ['look'], tree=tree)
+        self.assertEqual(len(shown(location_type='bootcamp', events=events)), len(camps))
         self.assertEqual(universities['events'], shown(location_type='university', events=events))
         self.assertEqual(universities['locationTypes'], ['university'])
-        self.assertEqual(firms['events'], shown(location_type='company', events=events))
-        self.assertEqual(firms['locationTypes'], ['company'])
+        self.assertEqual(camped['events'], shown(location_type='bootcamp', events=events))
+        self.assertEqual(camped['locationTypes'], ['bootcamp'])
         self.assertEqual(both_off['events'], shown(events=events))
         self.assertEqual(both_off['locationTypes'], [])
 
