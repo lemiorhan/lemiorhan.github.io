@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="13" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="warp" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="13" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <g id="book">
+      <path d="M0 0 L84 0 L98 -26 L14 -26 Z" fill="#F2EDE3"/>
+      <path d="M0 0 L84 0 L84 14 L0 14 Z" fill="url(#hatch)"/>
+      <path d="M84 0 L98 -26 L98 -12 L84 14 Z" fill="#F6F1E6"/>
+      <path d="M86 6 L96 -14 M88 10 L97 -8" stroke-width="0.9" opacity="0.6"/>
+      <path d="M12 -6 L70 -6" stroke-width="1" opacity="0.5"/>
+    </g>
+    <g id="open-book">
+      <path d="M0 0 C -24 -10, -58 -8, -84 2 L -76 -30 C -52 -40, -22 -38, 0 -28 Z" fill="#F6F1E6"/>
+      <path d="M0 0 C 24 -10, 58 -8, 84 2 L 76 -30 C 52 -40, 22 -38, 0 -28 Z" fill="#F6F1E6"/>
+      <path d="M0 0 L0 -28" stroke-width="1.4"/>
+      <path d="M-14 -24 C -32 -30, -52 -30, -68 -26 M-16 -16 C -34 -22, -52 -22, -70 -18 M14 -24 C 32 -30, 52 -30, 68 -26 M16 -16 C 34 -22, 52 -22, 70 -18" stroke-width="0.9" opacity="0.55"/>
+      <path d="M-84 2 L -84 8 C -58 -2, -24 -4, 0 6 C 24 -4, 58 -2, 84 8 L 84 2" fill="url(#hatch)" stroke-width="1.4"/>
+    </g>
+    <path id="b-sleeve" d="M820 312 L566 270 L562 354 L820 476 Z"/>
+    <path id="b-cuff" d="M524 262 L568 268 L564 356 L520 348 Z"/>
+    <path id="b-hand" d="M526 268 C 490 258, 440 250, 396 252 L 376 300 L 372 362 C 420 368, 490 362, 522 348 Z"/>
+    <path id="b-tips" d="M296 358 C 288 342, 292 322, 304 322 C 314 322, 318 334, 318 346 C 318 332, 324 320, 336 320 C 346 320, 350 332, 348 346 C 350 332, 356 322, 366 324 C 376 326, 378 340, 376 358 C 350 368, 318 368, 296 358 Z"/>
+    <path id="a-sleeve" d="M-20 326 L238 266 L242 352 L-20 480 Z"/>
+    <path id="a-cuff" d="M234 264 L278 258 L282 342 L238 354 Z"/>
+    <path id="a-hand" d="M278 264 C 310 258, 340 254, 372 256 L 376 346 C 340 348, 310 344, 282 340 Z"/>
+    <path id="a-fingers" d="M370 256 L 441 275 C 453 278, 455 300, 443 297 L 372 278 Z M372 278 L 449 299 C 461 302, 462 324, 450 321 L 373 300 Z M373 300 L 444 319 C 456 322, 457 344, 445 341 L 374 322 Z M374 322 L 432 338 C 444 341, 445 363, 433 360 L 376 346 Z"/>
+    <path id="a-thumb" d="M300 266 C 324 238, 392 228, 446 238 C 464 242, 462 260, 444 260 C 408 256, 372 258, 342 270 Z"/>
+    <clipPath id="hands-clip">
+      <use href="#b-sleeve"/><use href="#b-cuff"/><use href="#b-hand"/><use href="#b-tips"/>
+      <use href="#a-sleeve"/><use href="#a-cuff"/><use href="#a-hand"/><use href="#a-fingers"/><use href="#a-thumb"/>
+    </clipPath>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <path d="M232 72 L568 72 L568 104 L232 104 Z" opacity="0.35"/>
+    <path d="M176 478 L624 478 L650 500 L150 500 Z" opacity="0.32"/>
+    <ellipse cx="250" cy="600" rx="52" ry="8" opacity="0.3"/>
+    <ellipse cx="530" cy="606" rx="52" ry="8" opacity="0.3"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 480 L780 480" stroke-width="1.3" opacity="0.4"/>
+
+    <path d="M196 40 L604 40 L604 480 L196 480 Z" fill="#F2EDE3" stroke-width="2.6"/>
+    <path d="M232 72 L568 72 L568 438 L232 438 Z" fill="url(#hatch-light)" stroke-width="1.4" fill-opacity="0.6"/>
+    <path d="M214 58 L232 72 L232 438 L214 452 Z M586 58 L568 72 L568 438 L586 452 Z" fill="url(#hatch)" fill-opacity="0.7" stroke-width="1.6"/>
+    <path d="M214 58 L586 58 L586 452 L214 452 Z" stroke-width="2.2"/>
+    <path d="M214 58 L232 72 M586 58 L568 72 M214 452 L232 438 M586 452 L568 438" stroke-width="1.4"/>
+    <path d="M214 172 L586 172 L586 186 L214 186 Z M214 384 L586 384 L586 398 L214 398 Z" fill="#E7E0D2" stroke-width="2"/>
+    <path d="M232 172 L568 172 L568 160 L232 160 Z M232 384 L568 384 L568 372 L232 372 Z" fill="#F6F1E6" stroke-width="1.2"/>
+    <path d="M232 186 L568 186 L568 200 L232 200 Z M232 398 L568 398 L568 412 L232 412 Z" fill="url(#hatch)" stroke="none" opacity="0.6"/>
+    <path d="M196 452 L604 452 M214 452 L214 480 M586 452 L586 480" stroke-width="2"/>
+    <path d="M214 458 L586 458 L586 480 L214 480 Z" fill="url(#hatch-light)" stroke="none" opacity="0.6"/>
+
+    <use href="#book" transform="translate(196 606) rotate(-6)" stroke-width="2"/>
+    <use href="#book" transform="translate(484 616) rotate(5)" stroke-width="2"/>
+    <use href="#book" transform="translate(248 536) rotate(12)" stroke-width="2"/>
+    <use href="#open-book" transform="translate(400 584) rotate(-4)" stroke-width="2"/>
+    <use href="#book" transform="translate(510 548) rotate(-16) scale(0.9)" stroke-width="2.2"/>
+    <use href="#book" transform="translate(618 584) rotate(18) scale(0.85)" stroke-width="2.3"/>
+    <path d="M340 520 L354 474 L376 478 L362 524 Z" fill="#F2EDE3" stroke-width="2"/>
+    <path d="M354 474 L376 478 L380 470 L358 466 Z" fill="url(#hatch)" stroke-width="1.4"/>
+  </g>
+
+  <g filter="url(#warp)" fill="#F2EDE3">
+    <use href="#b-sleeve"/><use href="#b-cuff"/><use href="#b-hand"/>
+  </g>
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#b-sleeve" stroke-width="2.6"/>
+    <use href="#b-sleeve" fill="url(#hatch-light)" stroke="none" opacity="0.8"/>
+    <path d="M760 336 C 700 326, 650 316, 610 300 M740 424 C 690 404, 640 384, 600 352" stroke-width="1.2" opacity="0.55"/>
+    <use href="#b-cuff" fill="#E7E0D2" stroke-width="2.4"/>
+    <path d="M532 266 L528 350" stroke-width="1.1" opacity="0.6"/>
+    <circle cx="548" cy="310" r="4" fill="#F2EDE3" stroke-width="1.6"/>
+    <use href="#b-hand" stroke-width="2.4"/>
+    <use href="#b-hand" fill="url(#hatch-light)" stroke="none" opacity="0.7"/>
+    <path d="M492 270 C 496 290, 496 316, 490 340" stroke-width="1.1" opacity="0.5"/>
+  </g>
+
+  <g filter="url(#warp)" fill="#F2EDE3">
+    <use href="#a-sleeve"/><use href="#a-cuff"/><use href="#a-hand"/><use href="#a-fingers"/>
+  </g>
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#a-sleeve" stroke-width="2.6"/>
+    <path d="M40 348 C 100 328, 160 310, 200 290 M30 444 C 90 414, 150 384, 210 352 M120 362 C 140 352, 160 348, 180 342" stroke-width="1.2" opacity="0.55"/>
+    <path d="M-20 424 L242 332 L242 352 L-20 480 Z" fill="url(#hatch-light)" stroke="none" opacity="0.8"/>
+    <use href="#a-cuff" fill="#F6F1E6" stroke-width="2.4"/>
+    <path d="M270 260 L274 342" stroke-width="1.1" opacity="0.6"/>
+    <circle cx="256" cy="306" r="4" fill="#F2EDE3" stroke-width="1.6"/>
+    <use href="#a-hand" stroke-width="2.6"/>
+    <path d="M306 288 C 324 292, 344 294, 362 292 M300 306 C 318 310, 338 312, 360 310" stroke-width="1" opacity="0.45"/>
+    <use href="#a-fingers" stroke-width="2.2"/>
+    <path d="M404 268 C 408 272, 407 280, 402 284 M410 290 C 414 294, 413 302, 408 306 M406 311 C 410 315, 409 323, 404 327 M400 331 C 404 335, 403 343, 398 347" stroke-width="1.1" opacity="0.6"/>
+    <path d="M374 322 L 432 338 C 444 341, 445 363, 433 360 L 376 346 Z" fill="url(#hatch-light)" stroke="none" opacity="0.8"/>
+  </g>
+
+  <g filter="url(#warp)" fill="#F2EDE3">
+    <use href="#b-tips"/><use href="#a-thumb"/>
+  </g>
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#b-tips" stroke-width="2.2"/>
+    <path d="M296 358 C 318 368, 350 368, 376 358 L 376 346 C 350 352, 318 352, 294 346 Z" fill="url(#hatch)" stroke="none" opacity="0.55"/>
+    <path d="M318 346 L 318 356 M348 346 L 348 358" stroke-width="1.2" opacity="0.7"/>
+    <use href="#a-thumb" stroke-width="2.4"/>
+    <path d="M436 240 C 430 246, 430 254, 436 259" stroke-width="1.2" opacity="0.7"/>
+  </g>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3" clip-path="url(#hands-clip)"/>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

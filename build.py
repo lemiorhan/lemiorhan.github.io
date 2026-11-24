@@ -431,6 +431,80 @@ def block_photo(b, page):
             '</figure>']
 
 
+ZEN_ID = re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*')
+ZEN_STORY_WORDS = (90, 170)
+VIEWBOX = re.compile(r'<svg\b[^>]*\bviewBox="0 0 (\d+) (\d+)"')
+
+
+def zen_size(src, page):
+    path = os.path.join(ROOT, src)
+    if not src.endswith('.svg') or not os.path.isfile(path):
+        page.fail('zen image {} is not an .svg file that exists'.format(src))
+    with open(path, encoding='utf-8') as f:
+        m = VIEWBOX.search(f.read())
+    if not m:
+        page.fail('zen image {} has no viewBox="0 0 <width> <height>" on its <svg>'.format(src))
+    return m.group(1), m.group(2)
+
+
+def zen_items(b, page):
+    items = b.get('items')
+    if not isinstance(items, list) or not items:
+        page.fail('a zen block needs "items", a non-empty list')
+    seen = set()
+    for n, item in enumerate(items, 1):
+        zid = item.get('id') if isinstance(item, dict) else None
+        if not isinstance(zid, str) or not ZEN_ID.fullmatch(zid):
+            page.fail('zen item {} needs an "id" of lowercase words joined by hyphens; it has {!r}'.format(n, zid))
+        if zid in seen:
+            page.fail('zen id {!r} is used twice'.format(zid))
+        seen.add(zid)
+        image, story = item.get('image'), item.get('story')
+        image = image if isinstance(image, dict) else {}
+        if not all(isinstance(v, str) and v.strip() for v in (item.get('zen'), item.get('source'), image.get('src'), image.get('alt'))) \
+                or not isinstance(story, list) or not story or not all(isinstance(p, str) and p.strip() for p in story):
+            page.fail('zen item {!r} needs "zen", "source", "image.src" and "image.alt" as non-empty strings '
+                      'and "story" as a list of non-empty paragraphs'.format(zid))
+        words = sum(len(p.split()) for p in story)
+        low, high = ZEN_STORY_WORDS
+        if not low <= words <= high:
+            page.fail('the story of zen item {!r} has {} words; ZEN_STORY_WORDS allows {} to {}'.format(zid, words, low, high))
+    return items
+
+
+def block_zen(b, page):
+    top = b.get('top')
+    if not isinstance(top, str) or not top.strip():
+        page.fail('a zen block needs "top", the text of the link back to the top of the page')
+    out = ['<div class="zen-list">']
+    for n, item in enumerate(zen_items(b, page), 1):
+        width, height = zen_size(item['image']['src'], page)
+        out += ['  <article class="zen" id="{0}" aria-labelledby="{0}-title">'.format(attr(item['id'])),
+                '    <figure class="zen-art">',
+                '      <img src="{}{}" width="{}" height="{}" loading="lazy" alt="{}">'.format(
+                    page.prefix, attr(item['image']['src']), width, height, attr(item['image']['alt'])),
+                '    </figure>',
+                '    <div class="zen-text">',
+                '      <p class="zen-n">{:02d}</p>'.format(n),
+                '      <h2 id="{}-title">{}</h2>'.format(attr(item['id']), text(item['zen']))]
+        out += ['      <p>{}</p>'.format(inline(p)) for p in item['story']]
+        out += ['      <p class="zen-source">{}</p>'.format(inline(item['source'])),
+                '      <p class="zen-top"><a href="#top">{}</a></p>'.format(text(top)),
+                '    </div>',
+                '  </article>']
+    out.append('</div>')
+    return out
+
+
+def block_zen_index(b, page):
+    zens = blocks_in(page.data, 'zen')
+    if len(zens) != 1:
+        page.fail('a page with a zen-index block needs exactly one zen block; it has {}'.format(len(zens)))
+    items = ['    <li><a href="#{}"><span class="zen-n">{:02d}</span><span>{}</span></a></li>'.format(
+        attr(item['id']), n, text(item['zen'])) for n, item in enumerate(zen_items(zens[0], page), 1)]
+    return ['<nav class="zen-index" aria-label="{}">'.format(attr(b['label'])), '  <ol>'] + items + ['  </ol>', '</nav>']
+
+
 def block_bio(b, page):
     return ['<div class="bio">',
             '  <p id="bio-text">{}</p>'.format(text(b['text'])),
@@ -607,6 +681,8 @@ BLOCKS = {
     'decks': block_decks,
     'recordings': block_recordings,
     'sumo-live': block_sumo_live,
+    'zen': block_zen,
+    'zen-index': block_zen_index,
 }
 
 

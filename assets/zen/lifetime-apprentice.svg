@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="31" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <path id="cover" d="M280 180 L 500 180 L 500 470 L 280 470 Z"/>
+    <path id="old-hand" d="M498 376 C 516 366, 548 368, 570 384 C 594 402, 616 420, 650 436 L 700 456 L 690 552 L 640 530 C 600 512, 560 492, 532 468 C 516 454, 504 440, 498 428 Z"/>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <path d="M300 560 C 360 540, 520 520, 600 530 C 540 560, 380 580, 300 560 Z" opacity="0.18"/>
+  </g>
+
+  <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="rotate(-6 400 320)">
+      <path d="M280 180 L 500 180 L 522 162 L 302 162 Z" fill="#F6F1E6" stroke-width="2.2"/>
+      <path d="M296 171 L 512 171 M300 167 L 516 167" fill="none" stroke-width="0.8" opacity="0.6"/>
+      <path d="M500 180 L 522 162 L 522 452 L 500 470 Z" fill="#F6F1E6" stroke-width="2.2"/>
+      <path d="M505 176 L 505 466 M510 172 L 510 462 M515 168 L 515 458" fill="none" stroke-width="0.8" opacity="0.6"/>
+
+      <path d="M340 100 C 340 66, 370 50, 404 50 C 440 50, 468 68, 468 100 C 468 128, 446 144, 420 146 C 416 156, 414 166, 414 176 L 398 176 C 396 166, 390 154, 382 143 C 358 138, 340 124, 340 100 Z" fill="#F6F1E6" stroke-width="2.6"/>
+      <path d="M280 180 L 500 180 L 511 171 L 291 171 Z" fill="#F6F1E6" stroke="none"/>
+      <path d="M291 171 L 511 171 M286 176 L 506 176" fill="none" stroke-width="0.9" opacity="0.7"/>
+
+      <use href="#cover" fill="#E7E0D2" stroke-width="2.8"/>
+      <use href="#cover" fill="url(#hatch)" stroke="none" opacity="0.85"/>
+      <use href="#cover" fill="url(#hatch-cross)" stroke="none" opacity="0.35"/>
+      <path d="M298 184 L 298 466" fill="none" stroke="#F2EDE3" stroke-width="2.4" opacity="0.7"/>
+      <path d="M304 184 L 304 466" fill="none" stroke-width="1.2" opacity="0.8"/>
+      <path d="M322 226 L 462 226 L 462 300 L 322 300 Z" fill="#F6F1E6" stroke-width="1.8"/>
+      <path d="M340 252 L 444 252 M354 276 L 430 276" fill="none" stroke-width="1.3" opacity="0.6"/>
+
+      <use href="#old-hand" fill="#F2EDE3" stroke-width="2.4"/>
+      <path d="M500 392 C 484 386, 462 378, 446 380 C 432 382, 430 398, 444 404 C 462 412, 484 420, 500 426 Z" fill="#F2EDE3" stroke-width="2.2"/>
+      <path d="M453 383 C 442 385, 440 398, 450 401 C 447 395, 447 389, 453 383 Z" fill="#F6F1E6" stroke-width="1.3"/>
+      <path d="M474 386 C 471 393, 472 402, 477 410 M481 388 C 478 395, 479 404, 484 412 M506 432 C 514 436, 520 444, 522 452 M512 426 C 520 430, 528 438, 532 448 M520 420 C 528 426, 534 432, 540 440 M528 372 C 534 368, 542 368, 548 372 M652 444 C 648 470, 650 500, 658 524 M664 448 C 660 474, 662 502, 670 530" fill="none" stroke-width="1.1" opacity="0.75"/>
+      <path d="M560 400 C 574 412, 588 414, 602 428 C 620 444, 640 446, 660 454 M548 420 C 566 436, 586 440, 600 458 C 616 474, 632 480, 650 488" fill="none" stroke-width="1.6" opacity="0.75"/>
+      <path d="M536 380 C 540 386, 548 388, 556 386 M541 376 C 546 381, 553 382, 560 380 M590 470 C 596 466, 604 466, 610 470 M596 480 C 602 476, 610 476, 616 480 M462 392 C 464 398, 466 404, 470 406" fill="none" stroke-width="1" opacity="0.7"/>
+      <g fill="#24211e" stroke="none" opacity="0.5">
+        <circle cx="584" cy="424" r="3"/><circle cx="606" cy="446" r="2.2"/><circle cx="566" cy="446" r="2"/>
+      </g>
+      <path d="M690 448 L 718 444 L 714 560 L 686 556 Z" fill="#F6F1E6" stroke-width="2.2"/>
+      <circle cx="702" cy="500" r="5" fill="#24211e" fill-opacity="0.5" stroke-width="1.4"/>
+      <path d="M714 436 L 830 412 L 830 600 L 710 572 Z" fill="#E7E0D2" stroke-width="2.4"/>
+      <path d="M714 436 L 830 412 L 830 600 L 710 572 Z" fill="url(#hatch-cross)" stroke="none" opacity="0.55"/>
+    </g>
+
+    <g transform="translate(110 566) scale(1.12) translate(-110 -566)">
+    <path d="M-10 520 L 80 526 L 76 612 L -10 620 Z" fill="#E7E0D2" stroke-width="2.2"/>
+    <path d="M-10 520 L 80 526 L 76 612 L -10 620 Z" fill="url(#hatch-light)" stroke="none"/>
+    <path d="M76 528 L 112 534 L 112 600 L 72 606 Z" fill="#F2EDE3" stroke-width="2.2"/>
+    <path d="M84 530 L 82 604 M92 531 L 90 603 M100 532 L 99 602 M106 533 L 106 601" fill="none" stroke-width="1" opacity="0.6"/>
+    <path d="M110 542 C 140 540, 172 536, 196 528 C 210 516, 226 500, 244 492 C 254 488, 260 496, 254 502 C 244 512, 234 524, 230 536 C 250 538, 276 536, 294 534 C 304 536, 304 546, 296 550 C 276 562, 250 572, 226 576 C 190 584, 150 590, 110 592 Z" fill="#F6F1E6" stroke-width="2.4"/>
+    <path d="M234 548 C 256 546, 276 544, 294 542 M232 560 C 254 556, 274 552, 292 547 M168 556 C 188 552, 206 548, 226 546 M214 532 C 220 524, 226 518, 232 512" fill="none" stroke-width="1.2" opacity="0.6"/>
+    </g>
+  </g>
+
+  <g transform="rotate(-6 400 320)" fill="#24211e" font-family="'Bradley Hand', 'Segoe Print', 'Comic Sans MS', cursive" font-weight="bold">
+    <text x="404" y="124" font-size="72" text-anchor="middle">?</text>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="13" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <g id="ivy">
+      <path d="M0 -1 Q -8 2, -15 -3 Q -14 -7, -10 -8 Q -17 -10, -16 -15 Q -10 -17, -6 -15 Q -6 -24, 0 -30 Q 6 -24, 6 -15 Q 10 -17, 16 -15 Q 17 -10, 10 -8 Q 14 -7, 15 -3 Q 8 2, 0 -1 Z"/>
+      <path d="M0 -1 L0 -24 M0 -4 L-12 -12 M0 -4 L12 -12 M0 -2 L-11 -3 M0 -2 L11 -3 M0 0 L0 4" fill="none" stroke-width="0.8"/>
+    </g>
+    <path id="bed" d="M170 442 C 176 428, 240 422, 330 426 C 360 427, 380 423, 400 422 C 470 418, 600 424, 632 440 C 656 476, 674 515, 684 556 C 600 566, 470 560, 400 564 C 300 568, 200 560, 116 556 C 126 515, 146 476, 170 442 Z"/>
+    <g id="stone">
+      <path d="M20 -12 L20 -167 A80 80 0 0 1 180 -167 L180 -12 Z" fill="url(#hatch)" stroke-width="2.2"/>
+      <path d="M0 0 L0 -155 A80 80 0 0 1 160 -155 L160 0 Z" fill="#F6F1E6" stroke-width="2.8"/>
+      <path d="M0 0 L0 -155 A80 80 0 0 1 160 -155 L160 0 Z" fill="url(#hatch-light)" stroke="none" opacity="0.3"/>
+      <path d="M38.8 -223.6 L58.8 -235.6 M160 0 L180 -12" stroke-width="1.8"/>
+      <path d="M138 -140 L138 -20 M146 -170 L146 -10" stroke-width="0.9" opacity="0.35"/>
+      <path d="M32 -180 l 5 3 M96 -125 l 3 4 M52 -66 l 6 1 M118 -86 l 2 5 M60 -212 l 4 -2 M28 -106 l 4 4" stroke-width="1.3" opacity="0.6"/>
+    </g>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <use href="#bed" opacity="0.4"/>
+    <path d="M360 424 L430 410 L428 420 L368 432 Z M610 424 L670 412 L668 420 L618 432 Z" opacity="0.3"/>
+    <ellipse cx="620" cy="608" rx="62" ry="9" opacity="0.45"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 352 C 200 348, 600 356, 776 350" stroke-width="1.3" opacity="0.4"/>
+    <path d="M60 380 l 30 0 M690 372 l 34 1 M40 600 l 44 0 M150 616 l 36 0 M300 600 l 40 0 M440 612 l 34 0 M720 620 l 40 0 M60 470 l 22 0 M720 470 l 26 0" stroke-width="1.1" opacity="0.4"/>
+
+    <use href="#stone" x="195" y="425"/>
+    <use href="#stone" x="445" y="425"/>
+
+    <use href="#bed" fill="url(#hatch-cross)" stroke="none" opacity="0.9"/>
+    <use href="#bed" fill="url(#hatch)" stroke="none" opacity="0.5"/>
+
+    <path d="M200 426 C 206 404, 198 386, 206 368 C 212 354, 206 342, 212 328 M600 426 C 594 404, 602 386, 596 368 C 592 356, 598 344, 594 332 M362 426 C 368 410, 362 398, 368 384 M450 426 C 446 410, 454 398, 452 384" stroke-width="1.5"/>
+    <g stroke-width="1.6" fill="#F6F1E6">
+      <use href="#ivy" transform="translate(204 398) rotate(-24) scale(0.72)"/>
+      <use href="#ivy" transform="translate(206 366) rotate(-52) scale(0.66)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(212 332) rotate(26) scale(0.6)"/>
+      <use href="#ivy" transform="translate(598 398) rotate(22) scale(0.72)"/>
+      <use href="#ivy" transform="translate(596 366) rotate(48) scale(0.66)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(594 336) rotate(-26) scale(0.6)"/>
+      <use href="#ivy" transform="translate(367 388) rotate(30) scale(0.62)"/>
+      <use href="#ivy" transform="translate(452 388) rotate(-34) scale(0.62)" fill="url(#hatch)"/>
+    </g>
+
+    <g stroke-width="1.3" fill="#F6F1E6">
+      <use href="#ivy" transform="translate(156 556) rotate(199) scale(1.3)"/>
+      <use href="#ivy" transform="translate(231 556) rotate(187) scale(1.3)"/>
+      <use href="#ivy" transform="translate(337 556) rotate(205) scale(1.3)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(420 556) rotate(211) scale(1.3)"/>
+      <use href="#ivy" transform="translate(515 556) rotate(208) scale(1.3)"/>
+      <use href="#ivy" transform="translate(603 556) rotate(173) scale(1.3)"/>
+      <use href="#ivy" transform="translate(665 556) rotate(166) scale(1.3)"/>
+      <use href="#ivy" transform="translate(184 429) rotate(9) scale(0.9)"/>
+      <use href="#ivy" transform="translate(209 420) rotate(15) scale(0.9)"/>
+      <use href="#ivy" transform="translate(229 420) rotate(7) scale(0.9)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(246 428) rotate(38) scale(0.9)"/>
+      <use href="#ivy" transform="translate(274 423) rotate(7) scale(0.9)"/>
+      <use href="#ivy" transform="translate(297 420) rotate(-49) scale(0.9)"/>
+      <use href="#ivy" transform="translate(314 418) rotate(-20) scale(0.9)"/>
+      <use href="#ivy" transform="translate(343 422) rotate(25) scale(0.9)"/>
+      <use href="#ivy" transform="translate(363 426) rotate(13) scale(0.9)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(381 426) rotate(2) scale(0.9)"/>
+      <use href="#ivy" transform="translate(413 428) rotate(40) scale(0.9)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(433 424) rotate(-47) scale(0.9)"/>
+      <use href="#ivy" transform="translate(456 423) rotate(-13) scale(0.9)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(480 428) rotate(-50) scale(0.9)"/>
+      <use href="#ivy" transform="translate(502 419) rotate(-2) scale(0.9)"/>
+      <use href="#ivy" transform="translate(520 419) rotate(30) scale(0.9)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(545 422) rotate(-11) scale(0.9)"/>
+      <use href="#ivy" transform="translate(570 427) rotate(-35) scale(0.9)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(590 418) rotate(9) scale(0.9)"/>
+      <use href="#ivy" transform="translate(607 425) rotate(7) scale(0.9)"/>
+      <use href="#ivy" transform="translate(178 451) rotate(-1) scale(1.05)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(200 449) rotate(-16) scale(1.05)"/>
+      <use href="#ivy" transform="translate(232 453) rotate(-48) scale(1.05)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(253 456) rotate(32) scale(1.05)"/>
+      <use href="#ivy" transform="translate(275 448) rotate(6) scale(1.05)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(309 450) rotate(-13) scale(1.05)"/>
+      <use href="#ivy" transform="translate(328 449) rotate(31) scale(1.05)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(360 450) rotate(8) scale(1.05)"/>
+      <use href="#ivy" transform="translate(386 456) rotate(-33) scale(1.05)"/>
+      <use href="#ivy" transform="translate(408 448) rotate(-21) scale(1.05)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(435 448) rotate(44) scale(1.05)"/>
+      <use href="#ivy" transform="translate(464 454) rotate(-1) scale(1.05)"/>
+      <use href="#ivy" transform="translate(491 451) rotate(-37) scale(1.05)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(516 449) rotate(44) scale(1.05)"/>
+      <use href="#ivy" transform="translate(540 456) rotate(26) scale(1.05)"/>
+      <use href="#ivy" transform="translate(569 457) rotate(-42) scale(1.05)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(595 454) rotate(28) scale(1.05)"/>
+      <use href="#ivy" transform="translate(619 457) rotate(-24) scale(1.05)"/>
+      <use href="#ivy" transform="translate(148 481) rotate(-45) scale(1.2)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(178 485) rotate(-34) scale(1.2)"/>
+      <use href="#ivy" transform="translate(205 483) rotate(-8) scale(1.2)"/>
+      <use href="#ivy" transform="translate(241 485) rotate(-33) scale(1.2)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(273 484) rotate(-5) scale(1.2)"/>
+      <use href="#ivy" transform="translate(304 478) rotate(31) scale(1.2)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(325 482) rotate(-33) scale(1.2)"/>
+      <use href="#ivy" transform="translate(355 485) rotate(44) scale(1.2)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(393 487) rotate(-34) scale(1.2)"/>
+      <use href="#ivy" transform="translate(423 482) rotate(37) scale(1.2)"/>
+      <use href="#ivy" transform="translate(445 488) rotate(-47) scale(1.2)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(480 485) rotate(-2) scale(1.2)"/>
+      <use href="#ivy" transform="translate(504 479) rotate(-39) scale(1.2)"/>
+      <use href="#ivy" transform="translate(544 489) rotate(43) scale(1.2)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(573 486) rotate(8) scale(1.2)"/>
+      <use href="#ivy" transform="translate(602 479) rotate(46) scale(1.2)"/>
+      <use href="#ivy" transform="translate(627 479) rotate(-48) scale(1.2)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(146 519) rotate(12) scale(1.35)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(175 516) rotate(36) scale(1.35)"/>
+      <use href="#ivy" transform="translate(213 521) rotate(-7) scale(1.35)"/>
+      <use href="#ivy" transform="translate(246 523) rotate(-9) scale(1.35)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(278 520) rotate(46) scale(1.35)"/>
+      <use href="#ivy" transform="translate(318 517) rotate(24) scale(1.35)"/>
+      <use href="#ivy" transform="translate(345 514) rotate(-6) scale(1.35)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(386 521) rotate(-15) scale(1.35)"/>
+      <use href="#ivy" transform="translate(412 518) rotate(-23) scale(1.35)"/>
+      <use href="#ivy" transform="translate(448 518) rotate(36) scale(1.35)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(487 524) rotate(7) scale(1.35)"/>
+      <use href="#ivy" transform="translate(520 515) rotate(27) scale(1.35)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(553 519) rotate(-11) scale(1.35)"/>
+      <use href="#ivy" transform="translate(585 520) rotate(1) scale(1.35)"/>
+      <use href="#ivy" transform="translate(614 522) rotate(-20) scale(1.35)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(655 524) rotate(-36) scale(1.35)"/>
+      <use href="#ivy" transform="translate(135 556) rotate(-41) scale(1.5)"/>
+      <use href="#ivy" transform="translate(168 552) rotate(-28) scale(1.5)"/>
+      <use href="#ivy" transform="translate(211 552) rotate(-46) scale(1.5)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(244 550) rotate(39) scale(1.5)"/>
+      <use href="#ivy" transform="translate(284 558) rotate(-30) scale(1.5)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(324 557) rotate(-39) scale(1.5)"/>
+      <use href="#ivy" transform="translate(363 551) rotate(7) scale(1.5)"/>
+      <use href="#ivy" transform="translate(398 557) rotate(-2) scale(1.5)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(435 552) rotate(-7) scale(1.5)"/>
+      <use href="#ivy" transform="translate(473 548) rotate(42) scale(1.5)"/>
+      <use href="#ivy" transform="translate(512 557) rotate(-35) scale(1.5)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(550 558) rotate(-11) scale(1.5)"/>
+      <use href="#ivy" transform="translate(587 550) rotate(41) scale(1.5)"/>
+      <use href="#ivy" transform="translate(620 547) rotate(6) scale(1.5)" fill="url(#hatch)"/>
+      <use href="#ivy" transform="translate(658 549) rotate(-47) scale(1.5)"/>
+    </g>
+
+    <path d="M576 520 L572 600 C 590 612, 650 612, 668 600 L664 520 Z" fill="#F6F1E6" stroke-width="2.4"/>
+    <path d="M646 522 L664 520 L668 600 C 662 605, 656 607, 650 608 Z" fill="url(#hatch)" stroke="none" opacity="0.75"/>
+    <path d="M574 560 C 592 569, 648 569, 666 560 M573 590 C 592 599, 648 599, 667 590" stroke-width="1.2" opacity="0.6"/>
+    <ellipse cx="620" cy="520" rx="44" ry="10" fill="#E7E0D2" stroke-width="2.2"/>
+    <ellipse cx="638" cy="518" rx="16" ry="4.5" fill="url(#hatch)" stroke-width="1.4"/>
+    <path d="M571 595 L497 525 L503 519 L583 581 Z" fill="#F6F1E6" stroke-width="2"/>
+    <path d="M503 519 L500 506 L484 524 L497 525 Z" fill="#F6F1E6" stroke-width="1.8"/>
+    <ellipse cx="492" cy="515" rx="4" ry="12" transform="rotate(40.6 492 515)" fill="#E7E0D2" stroke-width="1.8"/>
+    <path d="M584 518 C 580 458, 660 452, 660 512 L648 513 C 648 468, 594 472, 596 517 Z" fill="#F6F1E6" stroke-width="2"/>
+    <path d="M486 532 C 488 536, 489 538, 486 541 C 483 538, 484 536, 486 532 Z M478 552 C 480 556, 481 558, 478 561 C 475 558, 476 556, 478 552 Z" fill="#F6F1E6" stroke-width="1.2"/>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="13" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <path id="bird-tail" d="M-19 -11 L-34 -6 L-31 -2 L-16 -6 Z"/>
+    <path id="bird-body" d="M-22 -12 C -18 -22, -6 -24, 1 -24 C 2 -31, 8 -34, 13 -32 C 18 -30, 18 -23, 15 -19 C 15 -12, 12 -4, 4 -2 C -6 1, -18 -3, -22 -12 Z"/>
+    <g id="bird">
+      <use href="#bird-tail" fill="url(#hatch)"/>
+      <use href="#bird-body" fill="#F2EDE3"/>
+      <path d="M-14 -14 C -6 -19, 2 -17, 5 -11 C -3 -8, -10 -8, -14 -14 Z" fill="url(#hatch-light)"/>
+      <path d="M16 -29 L23 -26 L16 -24 Z" fill="#24211e"/>
+      <circle cx="11" cy="-27" r="1.8" fill="#24211e"/>
+      <path d="M0 -2 L-1 1 M5 -2 L6 1"/>
+    </g>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <path d="M160 570 L640 570 L676 602 L124 602 Z" opacity="0.32"/>
+    <path d="M610 556 L700 562 L716 580 L620 574 Z" opacity="0.22"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 586 C 200 582, 600 590, 780 584" stroke-width="1.3" opacity="0.4"/>
+    <path d="M50 616 l 40 0 M240 624 l 36 0 M520 618 l 46 0 M690 610 l 40 0" stroke-width="1.1" opacity="0.4"/>
+
+    <path d="M180 520 L180 270 C 180 170, 286 102, 400 102 C 514 102, 620 170, 620 270 L620 520 C 620 538, 510 548, 400 548 C 290 548, 180 538, 180 520 Z M562 420 A 100 100 0 1 0 362 420 A 100 100 0 1 0 562 420 Z" fill="url(#hatch-light)" fill-rule="evenodd" stroke="none" opacity="0.6"/>
+    <path d="M562 420 A 100 100 0 1 0 362 420 A 100 100 0 1 0 562 420 Z M528 420 A 66 66 0 1 0 396 420 A 66 66 0 1 0 528 420 Z" fill="url(#hatch-light)" fill-rule="evenodd" stroke="none" opacity="0.28"/>
+    <path d="M180 520 C 180 502, 290 492, 400 492 C 510 492, 620 502, 620 520 M180 270 C 180 252, 290 242, 400 242 C 510 242, 620 252, 620 270" stroke-width="1.4" opacity="0.4"/>
+
+    <g stroke-width="1.6">
+      <use href="#bird" transform="translate(348 498) scale(1.1)"/>
+      <use href="#bird" transform="translate(538 496) scale(-1.1 1.1)"/>
+    </g>
+    <path d="M390 440 L390 446 C 390 453, 490 453, 490 446 L490 440" fill="url(#hatch)" stroke-width="1.8"/>
+    <ellipse cx="440" cy="440" rx="50" ry="11" fill="#F6F1E6" stroke-width="2.2"/>
+    <path d="M436 452 L436 508 M444 452 L444 508" stroke-width="1.8"/>
+    <ellipse cx="440" cy="510" rx="20" ry="5" fill="url(#hatch)" stroke-width="1.6"/>
+    <path d="M476 437 L476 406" stroke-width="2"/>
+    <ellipse cx="476" cy="437" rx="9" ry="3" fill="#24211e" stroke-width="1.4"/>
+    <path d="M463 392 L489 392 L497 407 L455 407 Z" fill="url(#hatch)" stroke-width="2"/>
+    <path d="M459 414 L450 426 M476 414 L476 428 M493 414 L502 426" stroke-width="1.3" opacity="0.7"/>
+    <g stroke-width="1.4" transform="translate(422 440) scale(-1.55 1.55)">
+      <path d="M-10 -16 C -10 -32, -4 -46, 6 -56 C 11 -53, 13 -49, 11 -45 C 16 -43, 17 -38, 12 -35 C 15 -32, 13 -27, 6 -24 C 2 -20, -4 -16, -10 -16 Z" fill="#F6F1E6"/>
+      <path d="M-6 -22 C -4 -34, 0 -44, 6 -52 M-2 -22 C 2 -30, 6 -36, 11 -41" stroke-width="0.9" opacity="0.7"/>
+      <use href="#bird-tail" fill="url(#hatch)"/>
+      <use href="#bird-body" fill="#F2EDE3"/>
+      <path d="M16 -30 L25 -32 L16 -26 Z M16 -23 L23 -19 L15 -21 Z" fill="#24211e"/>
+      <circle cx="11" cy="-28" r="1.8" fill="#24211e"/>
+      <path d="M0 -2 L-1 1 M5 -2 L6 1"/>
+    </g>
+    <g stroke-width="1.6">
+      <use href="#bird" transform="translate(282 520) scale(1.3)"/>
+      <use href="#bird" transform="translate(572 518) scale(-1.3 1.3)"/>
+      <use href="#bird" transform="translate(338 544) scale(1.3)"/>
+      <use href="#bird" transform="translate(534 544) scale(-1.3 1.3)"/>
+      <use href="#bird" transform="translate(436 546) scale(1.3)"/>
+    </g>
+
+    <path d="M400 548 L400 110 M354 547.4 L354 297.4 C 354 187.4, 374.7 104, 393.6 110 M310 545.6 L310 295.6 C 310 185.6, 350.5 104, 387.4 110 M271 542.7 L271 292.7 C 271 182.7, 329 104, 382 110 M236.5 538.7 L236.5 288.7 C 236.5 178.7, 310 104, 377.1 110 M209.5 534 L209.5 284 C 209.5 174, 295.2 104, 373.3 110 M191 528.7 L191 278.7 C 191 168.7, 285 104, 370.7 110" stroke-width="2.2"/>
+    <path d="M446 331.4 L446 297.4 C 446 187.4, 425.3 104, 406.4 110 M490 329.6 L490 295.6 C 490 185.6, 449.5 104, 412.6 110 M529 326.7 L529 292.7 C 529 182.7, 471 104, 418 110 M563.5 538.7 L563.5 288.7 C 563.5 178.7, 490 104, 422.9 110 M590.5 534 L590.5 284 C 590.5 174, 504.8 104, 426.7 110 M609 528.7 L609 278.7 C 609 168.7, 515 104, 429.3 110" stroke-width="2.2"/>
+    <path d="M180 520 L180 270 C 180 170, 286 102, 400 102 C 514 102, 620 170, 620 270 L620 520" stroke-width="2.6"/>
+    <path d="M180 270 C 180 288, 290 298, 400 298 C 510 298, 620 288, 620 270" stroke-width="2.6"/>
+    <path d="M400 332 C 450 332, 520 328, 563.5 322.7 M400 332 L400 548 M563.5 322.7 L563.5 538.7" stroke-width="3"/>
+
+    <path d="M180 520 C 180 538, 290 548, 400 548 C 510 548, 620 538, 620 520 L628 550 C 628 568, 515 580, 400 580 C 285 580, 172 568, 172 550 Z" fill="#F2EDE3" stroke-width="2.4"/>
+    <path d="M180 520 C 180 538, 290 548, 400 548 C 510 548, 620 538, 620 520 L628 550 C 628 568, 515 580, 400 580 C 285 580, 172 568, 172 550 Z" fill="url(#hatch)" stroke="none" opacity="0.75"/>
+    <path d="M176 535 C 176 553, 288 563, 400 563 C 512 563, 624 553, 624 535" stroke-width="1.3" opacity="0.8"/>
+
+    <ellipse cx="400" cy="106" rx="34" ry="9" fill="url(#hatch)" stroke-width="2.2"/>
+    <ellipse cx="400" cy="90" rx="8" ry="7" fill="#F2EDE3" stroke-width="2"/>
+    <circle cx="400" cy="64" r="18" stroke-width="3"/>
+
+    <path d="M563.5 322.7 L692 306 L692 560 L563.5 538.7 M595.6 318.5 L595.6 544 M627.8 314.4 L627.8 549.4 M659.9 310.2 L659.9 554.7" stroke-width="2.4"/>
+    <path d="M563.5 430.7 L692 433" stroke-width="1.8"/>
+    <path d="M692 426 C 704 424, 708 436, 698 440" stroke-width="2"/>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

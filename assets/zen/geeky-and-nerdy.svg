@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="21" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-80%" width="140%" height="260%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <pattern id="keys" width="18" height="20" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="20" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <path id="balloon" d="M594 30h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM562 46h14v14h-14zM594 46h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM546 62h14v14h-14zM594 62h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM546 78h14v14h-14zM578 78h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM530 94h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM530 110h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM530 126h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM546 142h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM546 158h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM562 174h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM578 190h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM594 206h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM610 222h14v14h-14z"/>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <rect x="214" y="540" width="334" height="16" opacity="0.45"/>
+    <ellipse cx="654" cy="514" rx="60" ry="7" opacity="0.45"/>
+    <ellipse cx="178" cy="448" rx="62" ry="5" opacity="0.4"/>
+    <path d="M24 566 C 70 560, 160 560, 206 566 L 206 574 L 24 574 Z" opacity="0.3"/>
+    <path d="M502 444 L 560 444 L 548 452 L 502 452 Z" opacity="0.35"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M60 420 L740 420" stroke-width="1.6" opacity="0.7"/>
+    <path d="M60 420 L10 576 M740 420 L790 576" stroke-width="1.8"/>
+    <path d="M90 440 C 260 436, 520 444, 712 438 M60 520 C 220 516, 560 526, 752 518 M560 470 C 600 468, 640 471, 700 468" stroke-width="0.9" opacity="0.4"/>
+    <path d="M10 576 L790 576 L790 598 L10 598 Z" fill="url(#hatch)" stroke-width="2.2"/>
+    <path d="M24 598 L24 640 M776 598 L776 640" stroke-width="2.2"/>
+    <path d="M24 598 L776 598 L776 640 L24 640 Z" fill="url(#hatch-light)" stroke="none" opacity="0.45"/>
+
+    <path d="M34 472 C 64 465, 96 466, 118 474 L 114 566 C 90 558, 58 556, 20 562 Z" fill="#F6F1E6" stroke-width="2"/>
+    <path d="M118 474 C 140 466, 168 464, 192 470 L 202 562 C 176 556, 142 558, 114 566 Z" fill="#F6F1E6" stroke-width="2"/>
+    <path d="M110 476 L 106 564 L 114 566 L 118 474 Z" fill="url(#hatch)" stroke="none" opacity="0.7"/>
+    <path d="M38 486 h8 m5 0 h40 M36 495 h8 m5 0 h54 M35 504 h8 m5 0 h30 M34 513 h8 m5 0 h48 M32 522 h8 m5 0 h58 M31 531 h8 m5 0 h36 M29 540 h8 m5 0 h50 M28 549 h8 m5 0 h44" stroke-width="1.3" opacity="0.7"/>
+    <path d="M170 482 h14 M170 491 h16 M170 500 h10 M126 518 h8 m5 0 h44 M127 527 h8 m5 0 h30 M127 536 h8 m5 0 h50 M128 545 h8 m5 0 h38" stroke-width="1.3" opacity="0.7"/>
+
+    <path d="M122 372 L228 372 Q234 372, 234 378 L234 440 Q234 446, 228 446 L122 446 Q116 446, 116 440 L116 378 Q116 372, 122 372 Z" fill="#F2EDE3" stroke-width="2.2"/>
+    <path d="M122 372 L228 372 Q234 372, 234 378 L234 440 Q234 446, 228 446 L122 446 Q116 446, 116 440 L116 378 Q116 372, 122 372 Z" fill="url(#hatch-light)" stroke="none" opacity="0.7"/>
+    <rect x="126" y="380" width="98" height="40" rx="3" fill="#F6F1E6" stroke-width="1.5"/>
+    <path d="M134 389 C 148 386, 160 391, 176 388 S 196 387, 204 389" stroke-width="1.3" opacity="0.7"/>
+    <rect x="140" y="398" width="70" height="18" rx="7" fill="url(#hatch)" stroke-width="1.5"/>
+    <circle cx="153" cy="407" r="8" fill="#F6F1E6" stroke-width="1.5"/>
+    <circle cx="197" cy="407" r="8" fill="#F6F1E6" stroke-width="1.5"/>
+    <path d="M150 407 h6 M153 404 v6 M194 407 h6 M197 404 v6" stroke-width="1.3"/>
+    <path d="M146 446 L154 430 L196 430 L204 446" stroke-width="1.6"/>
+    <circle cx="166" cy="438" r="2.6" fill="#24211e" stroke-width="1"/>
+    <circle cx="184" cy="438" r="2.6" fill="#24211e" stroke-width="1"/>
+
+    <path d="M262 188 L490 188 L502 202 L250 202 Z" fill="url(#hatch-light)" stroke-width="1.8"/>
+    <path d="M266 202 L486 202 Q502 202, 502 218 L502 448 L250 448 L250 218 Q250 202, 266 202 Z" fill="#F2EDE3" stroke-width="2.6"/>
+    <path d="M466 210 L496 210 L496 444 L466 444 Z" fill="url(#hatch-light)" stroke="none" opacity="0.6"/>
+    <path d="M282 222 Q 362 216, 442 222 Q 456 226, 454 240 Q 458 315, 454 390 Q 456 404, 442 406 Q 362 412, 282 406 Q 268 404, 270 390 Q 266 315, 270 240 Q 268 226, 282 222 Z" fill="#F2EDE3" stroke-width="2.4"/>
+    <path d="M282 222 Q 362 216, 442 222 Q 456 226, 454 240 Q 458 315, 454 390 Q 456 404, 442 406 Q 362 412, 282 406 Q 268 404, 270 390 Q 266 315, 270 240 Q 268 226, 282 222 Z" fill="url(#hatch)" stroke="none" opacity="0.55"/>
+    <path d="M286 250 C 290 236, 302 232, 318 232" stroke="#F2EDE3" stroke-width="3.2" opacity="0.7"/>
+    <circle cx="481" cy="250" r="11" fill="#F6F1E6" stroke-width="2"/>
+    <path d="M481 241 L481 250" stroke-width="1.8"/>
+    <circle cx="481" cy="290" r="9" fill="#F6F1E6" stroke-width="2"/>
+    <path d="M475 296 L481 290" stroke-width="1.8"/>
+    <path d="M470 336 h22 M470 346 h22 M470 356 h22 M470 366 h22 M470 376 h22 M470 386 h22" stroke-width="1.4" opacity="0.8"/>
+
+    <path d="M212 522 L 226 458 Q 230 448, 242 448 L 510 448 Q 522 448, 526 458 L 540 522 Z" fill="#F2EDE3" stroke-width="2.6"/>
+    <path d="M212 522 L 226 458 Q 230 448, 242 448 L 510 448 Q 522 448, 526 458 L 540 522 Z" fill="url(#hatch-light)" stroke="none" opacity="0.55"/>
+    <path d="M212 522 L540 522 L540 538 Q540 544, 534 544 L218 544 Q212 544, 212 538 Z" fill="url(#hatch)" stroke-width="2.4"/>
+    <g stroke-width="1.4">
+      <rect x="248" y="456" width="256" height="10" rx="2" fill="#F6F1E6"/>
+      <rect x="244" y="470" width="264" height="11" rx="2" fill="#F6F1E6"/>
+      <rect x="240" y="485" width="272" height="11" rx="2" fill="#F6F1E6"/>
+      <rect x="236" y="500" width="280" height="12" rx="2" fill="#F6F1E6"/>
+      <rect x="318" y="515" width="124" height="5" rx="2" fill="#F6F1E6"/>
+    </g>
+    <g stroke="none" opacity="0.75">
+      <rect x="248" y="456" width="256" height="10" fill="url(#keys)"/>
+      <rect x="244" y="470" width="264" height="11" fill="url(#keys)" transform="translate(-9 0)"/>
+      <rect x="240" y="485" width="272" height="11" fill="url(#keys)" transform="translate(-4 0)"/>
+      <rect x="236" y="500" width="280" height="12" fill="url(#keys)" transform="translate(-13 0)"/>
+    </g>
+    <rect x="224" y="510" width="7" height="4" fill="#24211e" stroke-width="1"/>
+
+    <path d="M606 470 L694 470 L706 490 L596 490 Z" fill="#F2EDE3" stroke-width="2.2"/>
+    <path d="M596 490 L706 490 L706 508 Q706 512, 702 512 L600 512 Q596 512, 596 508 Z" fill="url(#hatch)" stroke-width="2.2"/>
+    <ellipse cx="618" cy="479" rx="9" ry="4.5" fill="#24211e" stroke-width="1.4"/>
+    <ellipse cx="653" cy="481" rx="15" ry="5.5" fill="url(#hatch-light)" stroke-width="1.6"/>
+    <path d="M648 481 L656 424 L664 424 L658 481 Z" fill="#24211e" stroke-width="1.4"/>
+    <path d="M653 426 L654 396 Q 655 384, 662 384 Q 670 384, 670 396 L 668 426 Z" fill="#24211e" stroke-width="1.6"/>
+    <path d="M598 500 C 578 506, 560 494, 536 490" stroke-width="2"/>
+  </g>
+
+  <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#balloon" transform="translate(50 470) scale(0.16)" fill="#24211e" stroke="none" opacity="0.75"/>
+    <path d="M322 352h14v14h-14z" fill="#F6F1E6" stroke-width="1.4" opacity="0.4"/>
+    <path d="M356 318h14v14h-14z" fill="#F6F1E6" stroke-width="1.4" opacity="0.6"/>
+    <path d="M390 284h14v14h-14z" fill="#F6F1E6" stroke-width="1.4" opacity="0.8"/>
+    <path d="M424 250h14v14h-14z" fill="#F6F1E6" stroke-width="1.5"/>
+    <path d="M480 166h14v14h-14z" fill="url(#hatch)" stroke-width="1.5" opacity="0.7"/>
+    <path d="M510 144h14v14h-14z" fill="url(#hatch)" stroke-width="1.5" opacity="0.85"/>
+
+    <use href="#balloon" fill="url(#hatch)" stroke-width="1.6"/>
+    <use href="#balloon" fill="url(#hatch-cross)" stroke="none" opacity="0.8"/>
+    <path d="M642 46h14v14h-14zm16 0h14v14h-14zM658 62h14v14h-14zm16 0h14v14h-14zM658 78h14v14h-14zm16 0h14v14h-14zM658 94h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM658 110h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM642 126h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM626 142h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM610 158h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM594 174h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM594 190h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zm16 0h14v14h-14zM610 206h14v14h-14zm16 0h14v14h-14zM610 222h14v14h-14z" fill="#24211e" stroke="none" opacity="0.5"/>
+    <path d="M578 46h14v14h-14zM562 62h14v14h-14zm16 0h14v14h-14zM562 78h14v14h-14z" fill="#F6F1E6" stroke-width="1.6"/>
+
+    <path d="M617 236 C 600 284, 650 310, 638 350 S 650 390, 655 398" fill="none" stroke-width="2.4"/>
+    <ellipse cx="662" cy="400" rx="10" ry="3.5" fill="none" stroke-width="1.8"/>
+    <path d="M671 400 C 680 395, 686 404, 677 407 M671 401 C 678 407, 676 414, 684 420" fill="none" stroke-width="1.6"/>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="13" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <filter id="shade" x="-10%" y="-30%" width="120%" height="160%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.2 0 0 0 1.85" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <linearGradient id="fade" x1="0" x2="0" y1="1" y2="0">
+      <stop offset="0" stop-color="#24211e" stop-opacity="1"/>
+      <stop offset="1" stop-color="#24211e" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="night" cx="38%" cy="57%" r="74%">
+      <stop offset="34%" stop-color="#24211e" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#24211e" stop-opacity="0.32"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <path id="tick" d="M0 -48 V-56"/>
+    <g id="stub">
+      <path d="M-19 0 C -19 -4, -8 -6, 0 -5.5 C 10 -6, 19 -3, 18 1 C 17 5, 6 6, -3 5.5 C -12 6, -19 4, -19 0 Z" fill="#E7E0D2" stroke-width="1.5"/>
+      <path d="M-5 0 V-8 C -5 -11, 5 -11, 5 -8 V0 C 5 2, -5 2, -5 0 Z" fill="#F6F1E6" stroke-width="1.6"/>
+      <path d="M-5 -5 L5 -7" stroke-width="1" opacity="0.7"/>
+      <path d="M0 -9 C 1 -12, -2 -14, 1 -18" stroke-width="2.6"/>
+      <circle cx="1" cy="-18" r="1.8" fill="#24211e" stroke="none"/>
+    </g>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-10" y="-10" width="820" height="516" fill="url(#hatch)" stroke="none" opacity="0.42"/>
+    <rect x="-10" y="506" width="820" height="150" fill="url(#hatch)" stroke="none" opacity="0.3"/>
+    <path d="M-10 506 C 200 504, 600 508, 810 505" stroke-width="2"/>
+    <path d="M-10 552 C 200 550, 600 554, 810 551 M-10 604 C 200 602, 600 606, 810 603" stroke-width="1.1" opacity="0.4"/>
+
+    <path d="M630 92 H784 V506 H630 Z" fill="#F2EDE3" stroke-width="2.6"/>
+    <path d="M642 104 H772 V506 H642 Z" fill="#E7E0D2" stroke-width="2"/>
+    <path d="M642 104 H772 V506 H642 Z" fill="url(#hatch)" stroke="none" opacity="0.45"/>
+    <path d="M672 130 H750 V290 H672 Z M672 320 H750 V480 H672 Z" stroke-width="1.6" opacity="0.8"/>
+    <circle cx="657" cy="316" r="7" fill="#F6F1E6" stroke-width="2"/>
+
+    <path d="M80 370 L520 370 L580 500 L20 500 Z" fill="#F6F1E6" stroke-width="2.4"/>
+    <path d="M80 370 L520 370 L580 500 L20 500 Z" fill="url(#hatch-light)" stroke="none" opacity="0.6"/>
+    <path d="M20 500 H580 V522 H20 Z M30 522 H52 V634 H30 Z M548 522 H570 V634 H548 Z M90 522 H104 V588 H90 Z M496 522 H510 V588 H496 Z" fill="#E7E0D2" stroke-width="2.2"/>
+    <path d="M20 500 H580 V522 H20 Z M30 522 H52 V634 H30 Z M548 522 H570 V634 H548 Z M90 522 H104 V588 H90 Z M496 522 H510 V588 H496 Z" fill="url(#hatch)" stroke="none" opacity="0.8"/>
+  </g>
+
+  <g filter="url(#shade)" fill="#24211e">
+    <ellipse cx="312" cy="442" rx="206" ry="44" opacity="0.32"/>
+    <ellipse cx="668" cy="526" rx="78" ry="8" opacity="0.4"/>
+    <circle cx="198" cy="148" r="64" opacity="0.22"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="300" cy="436" rx="200" ry="46" fill="#F6F1E6" stroke-width="2.2"/>
+    <path d="M100 436 C 100 462, 190 484, 300 484 C 410 484, 500 462, 500 436 L 500 442 C 500 468, 410 490, 300 490 C 190 490, 100 468, 100 442 Z" fill="url(#hatch)" stroke-width="1.6"/>
+
+    <path d="M140 318 V418 A160 40 0 0 0 460 418 V318 Z" fill="#F6F1E6" stroke-width="2.6"/>
+    <path d="M400 350 C 420 352, 440 342, 460 330 V418 C 446 440, 420 452, 392 456 Z" fill="url(#hatch-light)" stroke="none" opacity="0.8"/>
+    <path d="M140 372 C 200 396, 400 396, 460 372" stroke-width="1.2" opacity="0.45"/>
+    <path d="M140 318 L140 323 L143 331 C143 352, 152 360, 152 338 L167 345 C167 377, 187 383, 187 351 L211 356 C211 372, 239 376, 239 360 L269 362 C269 399, 300 400, 300 363 L331 362 C331 386, 361 384, 361 360 L389 356 C389 391, 413 386, 413 351 L433 345 C433 364, 448 357, 448 338 L457 331 C457 357, 460 350, 460 323 L460 318 A160 40 0 0 0 140 318 Z" fill="#F6F1E6" stroke-width="1.8"/>
+    <ellipse cx="300" cy="318" rx="160" ry="40" fill="#F6F1E6" stroke-width="2.4"/>
+
+    <path d="M254 339 C 252 352, 252 368, 253 382 C 253 389, 262 389, 261 382 C 260 368, 260 352, 263 339 Z M341 341 C 339 352, 339 362, 340 372 C 340 379, 349 379, 348 372 C 347 362, 347 352, 350 341 Z" fill="#E7E0D2" stroke-width="1.4"/>
+    <use href="#stub" transform="translate(226 312) scale(1.3)"/>
+    <use href="#stub" transform="translate(300 300) scale(1.3)"/>
+    <use href="#stub" transform="translate(374 312) scale(1.3)"/>
+    <use href="#stub" transform="translate(258 336) scale(1.3)"/>
+    <use href="#stub" transform="translate(344 338) scale(1.3)"/>
+
+    <path d="M600 446 L716 446 L728 452 L728 528 L716 524 Z" fill="url(#hatch-cross)" stroke-width="2"/>
+    <rect x="600" y="440" width="116" height="84" rx="8" fill="#E7E0D2" stroke-width="2.4"/>
+    <rect x="600" y="440" width="116" height="84" rx="8" fill="url(#hatch)" stroke="none" opacity="0.8"/>
+    <path d="M600 468 H716" stroke-width="1.6"/>
+    <path d="M622 462 h12 v12 h-12 Z M682 462 h12 v12 h-12 Z" fill="#F6F1E6" stroke-width="1.6"/>
+    <path d="M636 440 C 636 416, 680 416, 680 440" stroke-width="3.2"/>
+    <path d="M644 440 C 644 427, 672 427, 672 440" stroke-width="1.4"/>
+
+    <circle cx="192" cy="140" r="64" fill="#F6F1E6" stroke-width="3"/>
+    <circle cx="192" cy="140" r="58" stroke-width="1.2" opacity="0.6"/>
+    <g transform="translate(192 140)" stroke-width="2">
+      <use href="#tick" stroke-width="3.2"/>
+      <use href="#tick" transform="rotate(30)"/>
+      <use href="#tick" transform="rotate(60)"/>
+      <use href="#tick" transform="rotate(90)" stroke-width="3.2"/>
+      <use href="#tick" transform="rotate(120)"/>
+      <use href="#tick" transform="rotate(150)"/>
+      <use href="#tick" transform="rotate(180)" stroke-width="3.2"/>
+      <use href="#tick" transform="rotate(210)"/>
+      <use href="#tick" transform="rotate(240)"/>
+      <use href="#tick" transform="rotate(270)" stroke-width="3.2"/>
+      <use href="#tick" transform="rotate(300)"/>
+      <use href="#tick" transform="rotate(330)"/>
+      <path d="M0 0 L-23 -23" stroke-width="3.4"/>
+      <path d="M0 0 L0 44" stroke-width="2.4"/>
+      <circle r="4.5" fill="#24211e"/>
+    </g>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="url(#fade)" stroke-linecap="round">
+    <path d="M301 275 C 293 256, 313 242, 303 220 C 295 202, 311 188, 305 168" stroke-width="1.8"/>
+    <path d="M375 287 C 385 268, 367 252, 379 232 C 389 216, 375 202, 381 186" stroke-width="1.5"/>
+  </g>
+
+  <g filter="url(#smudge)">
+    <rect width="800" height="640" fill="url(#night)"/>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

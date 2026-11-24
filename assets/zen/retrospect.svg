@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="13" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <path id="road" vector-effect="non-scaling-stroke" d="M136 502 L191 478 241 462 284 449 323 439 357 430 387 423 412 416 432 411 445 406 453 402 456 399 456 397 453 393 444 389 428 384 406 379 378 373 349 368 319 362 291 357 267 352 250 347 239 343 237 338 243 334 257 331 276 328 300 325 327 323 355 321 384 319 411 317 436 315 458 313 475 312 487 311 494 309 495 308 490 307 480 306 465 305 447 304 425 303 402 302 379 302 357 301 337 300 321 299 309 299 303 298 301 298 305 297 314 297 326 296 343 296 361 295 381 295 401 295 421 294 438 294 453 294 464 294 471 293 474 293 473 293 L480 293 482 293 479 293 472 294 461 294 447 294 430 294 411 295 392 295 373 295 355 296 340 296 329 297 322 297 319 298 322 298 329 299 342 299 359 300 379 301 402 301 427 302 451 303 475 304 497 305 516 306 530 307 538 308 540 310 536 311 526 313 510 315 490 316 467 318 442 320 417 323 394 325 374 327 360 329 351 332 347 334 349 336 356 339 370 342 389 345 414 348 443 351 477 355 513 360 551 365 590 371 630 378 669 386 705 397 734 409 753 423 762 439 760 455 750 473 735 491 717 510 699 528 685 545 677 559 675 567 674 566 Z"/>
+    <g id="scene">
+      <path d="M-20 291 C 200 289, 600 292, 820 290 L820 600 L-20 600 Z" fill="url(#hatch-light)" stroke="none" opacity="0.18"/>
+      <path d="M-20 290 C 40 268, 110 258, 170 276 C 210 288, 250 270, 300 266 C 350 262, 384 282, 424 288 M520 290 C 560 270, 620 254, 690 266 C 740 274, 780 284, 820 282" fill="none" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
+      <path d="M-20 291 C 200 289, 600 292, 820 290" fill="none" stroke-width="1.2" opacity="0.7" vector-effect="non-scaling-stroke"/>
+      <use href="#road" fill="#F6F1E6" stroke-width="2"/>
+      <use href="#road" fill="url(#hatch)" stroke="none" opacity="0.65"/>
+      <path d="M464 470 L514 451 533 451 486 470 Z M572 424 L584 410 598 410 587 424 Z M559 390 L520 379 530 379 571 390 Z M435 364 L381 356 389 356 444 364 Z M314 345 L294 339 300 339 321 345 Z M302 331 L329 327 334 327 307 331 Z M396 321 L440 317 443 317 399 321 Z M496 313 L514 310 516 310 499 313 Z" fill="#F6F1E6" stroke="none"/>
+    </g>
+    <path id="cabin" d="M-10 -10 H810 V38 C 600 52, 200 52, -10 38 Z M-10 30 L96 40 L30 480 L-10 480 Z M810 30 L704 40 L770 480 L810 480 Z M-10 472 C 40 466, 80 462, 100 462 C 120 430, 340 428, 372 456 C 500 448, 650 455, 810 472 L810 650 L-10 650 Z"/>
+    <clipPath id="glass">
+      <rect x="246" y="70" width="308" height="104" rx="26"/>
+    </clipPath>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#scene"/>
+  </g>
+
+  <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#cabin" fill="#E7E0D2" stroke-width="2.6"/>
+    <use href="#cabin" fill="url(#hatch)" stroke="none" opacity="0.9"/>
+    <use href="#cabin" fill="url(#hatch-cross)" stroke="none" opacity="0.3"/>
+  </g>
+
+  <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M84 52 L24 470 M716 52 L776 470 M40 488 C 220 466, 580 466, 760 488 M100 462 C 200 456, 300 454, 372 456" fill="none" stroke-width="1.2" opacity="0.6"/>
+
+    <path d="M10 750 A230 230 0 1 1 470 750 A230 230 0 1 1 10 750 Z M38 750 A202 202 0 1 0 442 750 A202 202 0 1 0 38 750 Z" fill="#F6F1E6" fill-rule="evenodd" stroke-width="2.6"/>
+    <path d="M10 750 A230 230 0 1 1 470 750 A230 230 0 1 1 10 750 Z M38 750 A202 202 0 1 0 442 750 A202 202 0 1 0 38 750 Z" fill="url(#hatch-light)" fill-rule="evenodd" stroke="none" opacity="0.8"/>
+
+    <path d="M393 34 L407 34 L409 64 L391 64 Z" fill="#24211e" stroke-width="1.6"/>
+    <rect x="232" y="58" width="336" height="128" rx="38" fill="#24211e" fill-opacity="0.88" stroke-width="2.4"/>
+    <rect x="246" y="70" width="308" height="104" rx="26" fill="#F6F1E6" stroke-width="1.6"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <g clip-path="url(#glass)">
+      <use href="#scene" transform="translate(400 96) scale(0.42) translate(-400 -290)"/>
+    </g>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

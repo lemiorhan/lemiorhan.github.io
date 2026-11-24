@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="41" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <path id="box-fill" d="M0 60 L 0 0 L 12 -14 L 112 -14 L 112 46 L 100 60 Z"/>
+    <g id="box">
+      <path d="M0 0 L 100 0 L 100 60 L 0 60 Z" fill="#E7E0D2"/>
+      <path d="M0 0 L 100 0 L 100 60 L 0 60 Z" fill="url(#hatch-light)" stroke="none" opacity="0.45"/>
+      <path d="M0 0 L 12 -14 L 112 -14 L 100 0 Z" fill="#F2EDE3"/>
+      <path d="M100 0 L 112 -14 L 112 46 L 100 60 Z" fill="url(#hatch)"/>
+      <path d="M50 0 L 50 60 M0 30 L 100 30 M50 0 L 62 -14 M6 -7 L 106 -7 M106 -7 L 106 53" stroke-width="1.6"/>
+      <path d="M56 -7 C 46 -18, 40 -10, 54 -6 M56 -7 C 66 -18, 72 -10, 58 -6" stroke-width="1.3"/>
+      <path d="M10 38 L 42 38 L 42 54 L 10 54 Z" fill="#F6F1E6" stroke-width="1.2"/>
+      <path d="M14 43 L 36 43 M14 49 L 30 49" stroke-width="0.9"/>
+      <path d="M74 6 L 92 6 L 92 24 L 74 24 Z" stroke-width="1.2" stroke-dasharray="2 2"/>
+    </g>
+    <g id="slip">
+      <path d="M-17 -11 L 17 -11 L 17 11 L -17 11 Z" fill="#F6F1E6" stroke-width="1.4"/>
+      <path d="M-11 -4 L 9 -4 M-11 3 L 2 3" stroke-width="1"/>
+      <path d="M6 3 l 3 4 l 6 -9" stroke-width="1.2"/>
+    </g>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-10 -10 L 98 -10 L 98 650 L -10 650 Z M702 -10 L 810 -10 L 810 650 L 702 650 Z" fill="url(#hatch)" stroke="none" opacity="0.55"/>
+    <path d="M-10 -10 L 98 -10 L 98 650 L -10 650 Z M702 -10 L 810 -10 L 810 650 L 702 650 Z" fill="url(#hatch-cross)" stroke="none" opacity="0.3"/>
+    <path d="M0 120 L 98 120 M0 300 L 98 300 M0 480 L 98 480 M702 120 L 800 120 M702 300 L 800 300 M702 480 L 800 480" stroke-width="1.6" opacity="0.6"/>
+    <path d="M120 -200 L 270 41 L 530 41 L 680 -200 Z" fill="url(#hatch)" stroke="none" opacity="0.6"/>
+    <path d="M270 41 L 530 41 L 530 422 L 270 422 Z" fill="url(#hatch-light)" stroke="none" opacity="0.35"/>
+    <path d="M120 -200 L 270 41 L 270 422 L 120 620 Z M680 -200 L 530 41 L 530 422 L 680 620 Z" fill="url(#hatch-light)" stroke="none" opacity="0.2"/>
+    <path d="M270 41 L 270 422 M530 41 L 530 422" stroke-width="1.6"/>
+
+    <path d="M120 -200 L 270 41 M120 -60 L 270 106 M120 80 L 270 171 M120 220 L 270 236 M120 360 L 270 301 M120 500 L 270 366 M120 620 L 270 422 M680 -200 L 530 41 M680 -60 L 530 106 M680 80 L 530 171 M680 220 L 530 236 M680 360 L 530 301 M680 500 L 530 366 M680 620 L 530 422 M270 41 L 530 41 M270 106 L 530 106 M270 171 L 530 171 M270 236 L 530 236 M270 301 L 530 301 M270 366 L 530 366 M270 422 L 530 422" stroke-width="2.2" opacity="0.75"/>
+
+    <path d="M120 -60 L 120 -146 L 129 -133 L 129 -50 M157 -20 L 157 -123 L 168 -106 L 168 -7 M168 -7 L 168 -74 L 182 -54 L 182 9 M183 9 L 183 -56 L 190 -46 L 190 17 M191 19 L 191 -59 L 199 -47 L 199 27 M210 40 L 210 -26 L 222 -9 L 222 53 M223 54 L 223 -4 L 232 9 L 232 64 M234 66 L 234 4 L 242 16 L 242 75 M243 76 L 243 25 L 255 42 L 255 89 M120 80 L 120 -27 L 126 -21 L 126 84 M127 85 L 127 -5 L 140 7 L 140 92 M141 93 L 141 2 L 152 12 L 152 100 M165 107 L 165 5 L 176 17 L 176 114 M195 126 L 195 60 L 202 67 L 202 130 M204 131 L 204 62 L 211 69 L 211 135 M225 144 L 225 71 L 234 81 L 234 149 M255 162 L 255 108 L 264 117 L 264 167 M120 220 L 120 115 L 130 120 L 130 221 M130 221 L 130 113 L 144 120 L 144 223 M191 228 L 191 165 L 200 168 L 200 229 M212 230 L 212 169 L 221 173 L 221 231 M221 231 L 221 154 L 227 158 L 227 231 M228 232 L 228 182 L 238 186 L 238 233 M253 234 L 253 176 L 261 179 L 261 235 M120 360 L 120 271 L 129 271 L 129 357 M130 356 L 130 247 L 143 247 L 143 351 M144 350 L 144 258 L 152 258 L 152 347 M160 344 L 160 260 L 174 260 L 174 339 M189 333 L 189 267 L 197 266 L 197 330 M199 329 L 199 258 L 211 257 L 211 324 M213 324 L 213 252 L 219 252 L 219 321 M234 315 L 234 248 L 243 248 L 243 312 M244 311 L 244 245 L 253 245 L 253 308 M253 308 L 253 263 L 260 262 L 260 305 M120 500 L 120 386 L 127 382 L 127 493 M137 485 L 137 384 L 151 377 L 151 472 M153 471 L 153 368 L 162 364 L 162 462 M181 445 L 181 368 L 190 363 L 190 437 M192 436 L 192 348 L 201 344 L 201 427 M202 427 L 202 370 L 213 364 L 213 417 M220 411 L 220 345 L 232 339 L 232 400 M244 389 L 244 339 L 252 334 L 252 382 M253 381 L 253 323 L 263 318 L 263 372 M120 620 L 120 535 L 131 524 L 131 606 M132 604 L 132 521 L 142 512 L 142 591 M143 589 L 143 499 L 155 487 L 155 574 M155 573 L 155 485 L 166 475 L 166 559 M174 549 L 174 475 L 181 469 L 181 540 M182 538 L 182 466 L 189 458 L 189 528 M204 509 L 204 449 L 214 440 L 214 496 M215 494 L 215 440 L 222 432 L 222 485 M223 484 L 223 434 L 231 426 L 231 474" stroke-width="1.3" opacity="0.6"/>
+    <path d="M129 -50 L 129 -142 L 139 -127 L 139 -39 Z M140 -38 L 140 -128 L 146 -119 L 146 -31 Z M147 -31 L 147 -134 L 156 -119 L 156 -20 Z M199 28 L 199 -31 L 210 -16 L 210 39 Z M255 90 L 255 32 L 265 46 L 265 100 Z M154 100 L 154 6 L 164 16 L 164 106 Z M177 114 L 177 29 L 186 38 L 186 120 Z M186 120 L 186 56 L 194 63 L 194 125 Z M212 136 L 212 58 L 225 71 L 225 144 Z M235 150 L 235 97 L 242 104 L 242 154 Z M243 155 L 243 104 L 254 114 L 254 161 Z M145 223 L 145 135 L 154 139 L 154 224 Z M155 224 L 155 152 L 162 155 L 162 224 Z M162 225 L 162 155 L 171 159 L 171 225 Z M171 225 L 171 148 L 178 151 L 178 226 Z M180 226 L 180 159 L 191 164 L 191 228 Z M202 229 L 202 158 L 212 163 L 212 230 Z M240 233 L 240 171 L 252 177 L 252 234 Z M152 347 L 152 267 L 159 266 L 159 345 Z M175 338 L 175 262 L 189 262 L 189 333 Z M221 320 L 221 257 L 233 256 L 233 316 Z M128 492 L 128 393 L 137 388 L 137 485 Z M163 462 L 163 384 L 171 380 L 171 455 Z M172 454 L 172 375 L 180 370 L 180 447 Z M213 417 L 213 342 L 219 339 L 219 412 Z M233 400 L 233 332 L 243 327 L 243 390 Z M166 559 L 166 490 L 173 482 L 173 549 Z M190 528 L 190 451 L 203 439 L 203 511 Z M231 474 L 231 424 L 241 413 L 241 460 Z M242 459 L 242 411 L 253 399 L 253 444 Z M254 442 L 254 389 L 267 377 L 267 426 Z" fill="url(#hatch)" stroke-width="1.3" opacity="0.5"/>
+
+    <path d="M673 -53 L 673 -167 L 664 -153 L 664 -42 M663 -42 L 663 -153 L 656 -141 L 656 -34 M655 -32 L 655 -107 L 648 -97 L 648 -25 M647 -24 L 647 -129 L 641 -118 L 641 -16 M631 -6 L 631 -83 L 621 -69 L 621 5 M620 7 L 620 -60 L 611 -48 L 611 16 M604 24 L 604 -43 L 595 -30 L 595 34 M595 35 L 595 -26 L 585 -11 L 585 46 M584 46 L 584 -7 L 576 4 L 576 55 M575 56 L 575 -6 L 568 5 L 568 64 M568 64 L 568 6 L 555 24 L 555 78 M554 80 L 554 25 L 544 38 L 544 90 M543 92 L 543 34 L 534 47 L 534 102 M663 90 L 663 -18 L 657 -11 L 657 94 M595 132 L 595 76 L 589 81 L 589 135 M588 136 L 588 67 L 577 78 L 577 142 M576 143 L 576 70 L 565 82 L 565 150 M564 150 L 564 100 L 550 113 L 550 159 M549 159 L 549 99 L 543 105 L 543 163 M680 220 L 680 106 L 670 111 L 670 221 M668 221 L 668 109 L 658 115 L 658 222 M648 223 L 648 122 L 641 126 L 641 224 M640 224 L 640 132 L 629 137 L 629 225 M629 225 L 629 135 L 616 141 L 616 227 M616 227 L 616 164 L 604 168 L 604 228 M604 228 L 604 162 L 597 165 L 597 229 M597 229 L 597 144 L 585 151 L 585 230 M584 230 L 584 159 L 574 164 L 574 231 M562 233 L 562 180 L 550 185 L 550 234 M550 234 L 550 186 L 543 188 L 543 235 M542 235 L 542 188 L 530 193 L 530 236 M680 360 L 680 276 L 670 275 L 670 356 M655 350 L 655 241 L 643 241 L 643 345 M633 342 L 633 257 L 626 257 L 626 339 M626 339 L 626 258 L 613 257 L 613 334 M612 333 L 612 245 L 604 245 L 604 330 M604 330 L 604 257 L 598 257 L 598 328 M597 328 L 597 261 L 590 261 L 590 325 M589 324 L 589 249 L 583 249 L 583 322 M582 322 L 582 250 L 569 250 L 569 316 M568 316 L 568 259 L 559 258 L 559 313 M541 305 L 541 260 L 533 259 L 533 302 M680 500 L 680 380 L 671 376 L 671 492 M670 491 L 670 377 L 658 372 L 658 481 M658 480 L 658 405 L 646 398 L 646 469 M633 458 L 633 388 L 619 380 L 619 446 M619 445 L 619 359 L 610 355 L 610 438 M610 437 L 610 369 L 599 362 L 599 427 M589 419 L 589 359 L 579 353 L 579 410 M558 391 L 558 325 L 547 320 L 547 382 M547 381 L 547 328 L 537 323 L 537 373 M680 620 L 680 543 L 673 536 L 673 611 M673 611 L 673 523 L 663 513 L 663 598 M663 597 L 663 526 L 654 517 L 654 586 M654 585 L 654 497 L 640 483 L 640 567 M640 567 L 640 488 L 634 481 L 634 559 M633 558 L 633 502 L 622 490 L 622 543 M620 541 L 620 464 L 608 452 L 608 525 M607 524 L 607 470 L 600 463 L 600 515 M599 513 L 599 447 L 586 434 L 586 495 M573 479 L 573 417 L 565 409 L 565 469 M565 468 L 565 423 L 558 415 L 558 458 M557 457 L 557 418 L 549 410 L 549 448 M548 446 L 548 406 L 539 397 L 539 434 M539 434 L 539 392 L 531 384 L 531 423" stroke-width="1.3" opacity="0.6"/>
+    <path d="M680 -60 L 680 -172 L 674 -162 L 674 -53 Z M639 -15 L 639 -113 L 632 -103 L 632 -7 Z M611 16 L 611 -48 L 604 -39 L 604 24 Z M680 80 L 680 -14 L 671 -5 L 671 86 Z M670 86 L 670 -21 L 664 -14 L 664 90 Z M656 95 L 656 13 L 647 21 L 647 100 Z M646 100 L 646 14 L 639 21 L 639 105 Z M637 106 L 637 19 L 624 33 L 624 114 Z M622 115 L 622 41 L 613 49 L 613 120 Z M613 121 L 613 45 L 603 54 L 603 127 Z M602 127 L 602 62 L 596 68 L 596 131 Z M542 164 L 542 107 L 530 118 L 530 171 Z M657 223 L 657 149 L 649 152 L 649 223 Z M573 231 L 573 180 L 562 185 L 562 233 Z M670 356 L 670 242 L 656 242 L 656 351 Z M642 345 L 642 242 L 634 242 L 634 342 Z M558 312 L 558 257 L 549 257 L 549 309 Z M549 309 L 549 248 L 542 248 L 542 306 Z M645 469 L 645 376 L 633 369 L 633 458 Z M598 427 L 598 366 L 590 362 L 590 420 Z M577 408 L 577 354 L 568 349 L 568 400 Z M567 399 L 567 350 L 559 345 L 559 392 Z M584 494 L 584 436 L 575 427 L 575 481 Z" fill="url(#hatch)" stroke-width="1.3" opacity="0.5"/>
+
+    <path d="M288 106 L 288 56 L 303 56 L 303 106 M303 106 L 303 56 L 315 56 L 315 106 M329 106 L 329 61 L 340 61 L 340 106 M340 106 L 340 55 L 355 55 L 355 106 M355 106 L 355 64 L 371 64 L 371 106 M420 106 L 420 62 L 428 62 L 428 106 M430 106 L 430 50 L 444 50 L 444 106 M444 106 L 444 51 L 454 51 L 454 106 M454 106 L 454 62 L 467 62 L 467 106 M478 106 L 478 67 L 494 67 L 494 106 M494 106 L 494 54 L 505 54 L 505 106 M506 106 L 506 60 L 514 60 L 514 106 M516 106 L 516 62 L 526 62 L 526 106 M272 171 L 272 119 L 283 119 L 283 171 M283 171 L 283 133 L 292 133 L 292 171 M292 171 L 292 117 L 306 117 L 306 171 M336 171 L 336 122 L 351 122 L 351 171 M351 171 L 351 125 L 361 125 L 361 171 M363 171 L 363 130 L 374 130 L 374 171 M375 171 L 375 131 L 390 131 L 390 171 M392 171 L 392 119 L 407 119 L 407 171 M407 171 L 407 127 L 418 127 L 418 171 M428 171 L 428 124 L 436 124 L 436 171 M453 171 L 453 125 L 462 125 L 462 171 M463 171 L 463 126 L 473 126 L 473 171 M474 171 L 474 118 L 488 118 L 488 171 M488 171 L 488 129 L 503 129 L 503 171 M518 171 L 518 117 L 527 117 L 527 171 M272 236 L 272 180 L 283 180 L 283 236 M284 236 L 284 187 L 298 187 L 298 236 M298 236 L 298 184 L 310 184 L 310 236 M321 236 L 321 188 L 336 188 L 336 236 M354 236 L 354 197 L 369 197 L 369 236 M381 236 L 381 188 L 391 188 L 391 236 M391 236 L 391 193 L 399 193 L 399 236 M400 236 L 400 196 L 410 196 L 410 236 M411 236 L 411 198 L 420 198 L 420 236 M435 236 L 435 194 L 446 194 L 446 236 M448 236 L 448 188 L 459 188 L 459 236 M460 236 L 460 180 L 475 180 L 475 236 M491 236 L 491 184 L 502 184 L 502 236 M311 301 L 311 245 L 327 245 L 327 301 M327 301 L 327 257 L 342 257 L 342 301 M344 301 L 344 261 L 358 261 L 358 301 M359 301 L 359 248 L 370 248 L 370 301 M370 301 L 370 257 L 380 257 L 380 301 M381 301 L 381 260 L 390 260 L 390 301 M392 301 L 392 253 L 400 253 L 400 301 M400 301 L 400 262 L 415 262 L 415 301 M416 301 L 416 258 L 429 258 L 429 301 M430 301 L 430 252 L 441 252 L 441 301 M442 301 L 442 252 L 450 252 L 450 301 M451 301 L 451 249 L 465 249 L 465 301 M478 301 L 478 256 L 487 256 L 487 301 M487 301 L 487 263 L 500 263 L 500 301 M502 301 L 502 263 L 514 263 L 514 301 M514 301 L 514 262 L 528 262 L 528 301" stroke-width="1.2" opacity="0.6"/>
+    <path d="M272 106 L 272 60 L 287 60 L 287 106 Z M316 106 L 316 52 L 329 52 L 329 106 Z M371 106 L 371 55 L 381 55 L 381 106 Z M383 106 L 383 66 L 395 66 L 395 106 Z M396 106 L 396 51 L 409 51 L 409 106 Z M410 106 L 410 51 L 420 51 L 420 106 Z M468 106 L 468 70 L 477 70 L 477 106 Z M307 171 L 307 123 L 322 123 L 322 171 Z M324 171 L 324 129 L 334 129 L 334 171 Z M418 171 L 418 120 L 427 120 L 427 171 Z M438 171 L 438 115 L 453 115 L 453 171 Z M504 171 L 504 131 L 518 131 L 518 171 Z M312 236 L 312 194 L 320 194 L 320 236 Z M337 236 L 337 191 L 352 191 L 352 236 Z M370 236 L 370 192 L 380 192 L 380 236 Z M421 236 L 421 198 L 434 198 L 434 236 Z M475 236 L 475 196 L 489 196 L 489 236 Z M504 236 L 504 196 L 516 196 L 516 236 Z M517 236 L 517 182 L 528 182 L 528 236 Z M272 301 L 272 255 L 283 255 L 283 301 Z M284 301 L 284 246 L 296 246 L 296 301 Z M297 301 L 297 246 L 311 246 L 311 301 Z M465 301 L 465 262 L 477 262 L 477 301 Z" fill="url(#hatch)" stroke-width="1.2" opacity="0.5"/>
+
+    <path d="M98 -10 L 120 -10 L 120 650 L 98 650 Z M680 -10 L 702 -10 L 702 650 L 680 650 Z" fill="#F2EDE3" stroke-width="2.4"/>
+    <path d="M110 -10 L 120 -10 L 120 650 L 110 650 Z M680 -10 L 690 -10 L 690 650 L 680 650 Z" fill="url(#hatch-light)" stroke="none" opacity="0.6"/>
+    <path d="M120 620 L 680 620 M137 640 L 160 620 M263 640 L 272 620 M400 640 L 400 620 M537 640 L 528 620 M663 640 L 640 620" stroke-width="1.4" opacity="0.6"/>
+  </g>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <path d="M196 500 L 604 500 L 640 616 L 160 616 Z" opacity="0.55"/>
+  </g>
+
+  <g fill="#F2EDE3">
+    <path d="M294 353 L 506 353 L 607 452 L 607 506 L 193 506 L 193 452 Z"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M200 506 L 600 506 L 600 598 L 200 598 Z" fill="url(#hatch)" stroke="none" opacity="0.7"/>
+    <path d="M290 424 L 290 246 M510 424 L 510 246 M290 258 C 340 240, 460 240, 510 258 M290 312 L 510 312" stroke-width="6"/>
+    <path d="M290 424 L 290 246 M510 424 L 510 246 M290 258 C 340 240, 460 240, 510 258 M290 312 L 510 312" stroke="#F2EDE3" stroke-width="2.6"/>
+    <path d="M330 251 L 330 352 M365 246 L 365 352 M400 245 L 400 352 M435 246 L 435 352 M470 251 L 470 352" stroke-width="1.8"/>
+    <circle cx="290" cy="240" r="6" fill="#F2EDE3" stroke-width="2"/>
+    <circle cx="510" cy="240" r="6" fill="#F2EDE3" stroke-width="2"/>
+    <path d="M294 353 L 506 353 L 607 452 L 193 452 Z" fill="#F2EDE3" stroke-width="2.2"/>
+    <path d="M193 452 L 607 452 L 607 489 L 193 489 Z" fill="#F2EDE3" stroke-width="2.4"/>
+    <path d="M318 352 C 316 336, 330 330, 360 330 L 440 330 C 470 330, 484 336, 482 352 C 470 360, 330 360, 318 352 Z" fill="#F6F1E6" stroke-width="2"/>
+    <path d="M252 390 L 548 390 L 614 452 L 616 508 C 572 516, 520 502, 470 512 C 420 520, 370 504, 320 514 C 270 522, 222 506, 184 512 L 186 452 Z" fill="#F2EDE3" stroke-width="2.4"/>
+    <path d="M252 390 L 548 390 L 614 452 L 616 508 C 572 516, 520 502, 470 512 C 420 520, 370 504, 320 514 C 270 522, 222 506, 184 512 L 186 452 Z" fill="url(#hatch-light)" stroke="none" opacity="0.5"/>
+    <path d="M252 390 L 548 390 L 558 402 L 242 402 Z" fill="#F6F1E6" stroke-width="1.8"/>
+    <path d="M186 452 L 614 452" stroke-width="1.4" opacity="0.6"/>
+    <path d="M226 462 C 236 480, 232 496, 240 512 M574 462 C 566 480, 572 496, 566 510 M400 462 C 404 480, 398 496, 404 514" stroke-width="1.2" opacity="0.6"/>
+  </g>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <path d="M210 452 L 600 452 L 588 430 L 222 430 Z" opacity="0.3"/>
+  </g>
+
+  <g fill="#F2EDE3">
+    <use href="#box-fill" transform="translate(214 392) scale(0.95 0.93)"/>
+    <use href="#box-fill" transform="translate(312 384) scale(1 1.07)"/>
+    <use href="#box-fill" transform="translate(416 390) scale(0.9 0.97)"/>
+    <use href="#box-fill" transform="translate(598 394) scale(-0.86 0.9)"/>
+    <use href="#box-fill" transform="translate(250 340) scale(0.9 0.8)"/>
+    <use href="#box-fill" transform="translate(352 330) scale(0.95 0.9)"/>
+    <use href="#box-fill" transform="translate(560 342) scale(-0.95 0.78)"/>
+    <use href="#box-fill" transform="translate(372 290) rotate(-6) scale(0.66 0.62)"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#box" transform="translate(214 392) scale(0.95 0.93)"/>
+    <use href="#box" transform="translate(312 384) scale(1 1.07)"/>
+    <use href="#box" transform="translate(416 390) scale(0.9 0.97)"/>
+    <use href="#box" transform="translate(598 394) scale(-0.86 0.9)"/>
+    <use href="#box" transform="translate(250 340) scale(0.9 0.8)"/>
+    <use href="#box" transform="translate(352 330) scale(0.95 0.9)"/>
+    <use href="#box" transform="translate(560 342) scale(-0.95 0.78)"/>
+    <use href="#box" transform="translate(372 290) rotate(-6) scale(0.66 0.62)"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M186 602 L 186 446 M614 602 L 614 446" stroke-width="9"/>
+    <path d="M186 602 L 186 446 M614 602 L 614 446" stroke="#F2EDE3" stroke-width="4.6"/>
+    <path d="M186 460 C 300 451, 500 451, 614 460 M186 514 L 614 514" stroke-width="6.4"/>
+    <path d="M186 460 C 300 451, 500 451, 614 460 M186 514 L 614 514" stroke="#F2EDE3" stroke-width="2.8"/>
+    <path d="M246 457 L 246 512 M306 455 L 306 512 M366 454 L 366 512 M434 454 L 434 512 M494 455 L 494 512 M554 457 L 554 512" stroke-width="2.2"/>
+    <circle cx="186" cy="438" r="8.5" fill="#F2EDE3" stroke-width="2.2"/>
+    <circle cx="614" cy="438" r="8.5" fill="#F2EDE3" stroke-width="2.2"/>
+  </g>
+
+  <g fill="#F2EDE3">
+    <use href="#box-fill" transform="translate(560 542) scale(-1 0.95)"/>
+    <use href="#box-fill" transform="translate(232 556) scale(0.7 0.68)"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#box" transform="translate(560 542) scale(-1 0.95)"/>
+    <use href="#box" transform="translate(232 556) scale(0.7 0.68)"/>
+
+    <use href="#slip" transform="translate(205 480) rotate(8)"/>
+    <use href="#slip" transform="translate(598 482) rotate(-14)"/>
+    <use href="#slip" transform="translate(286 428) rotate(-8)"/>
+    <use href="#slip" transform="translate(548 428) rotate(12)"/>
+    <use href="#slip" transform="translate(300 370) rotate(-6)"/>
+    <use href="#slip" transform="translate(512 372) rotate(10)"/>
+    <use href="#slip" transform="translate(440 316) rotate(6)"/>
+    <use href="#slip" transform="translate(330 618) rotate(10)"/>
+    <use href="#slip" transform="translate(400 630) rotate(-6)"/>
+    <use href="#slip" transform="translate(644 620) rotate(-12)"/>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

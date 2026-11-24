@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <clipPath id="glass"><circle cx="430" cy="250" r="112"/></clipPath>
+
+    <path id="w28" d="M0 0 q3 -9 6 -1 q3 7 6 1 q3 -8 6 -1 q2 6 5 1 q2 -5 5 0"/>
+    <path id="w44" d="M0 0 q3 -9 6 -1 q3 7 6 1 q3 -8 6 -1 q3 6 6 1 q3 -10 6 -1 q3 7 6 1 q3 -7 6 -1 q1 4 2 1"/>
+    <path id="w62" d="M0 0 q3 -8 6 -1 q3 7 6 1 q3 -10 6 -1 q3 6 6 1 q3 -8 6 -1 q3 7 6 1 q3 -9 6 -1 q3 6 6 1 q3 -7 6 -1 q3 6 6 1 q1 -3 2 0"/>
+    <path id="bc" d="M0 -10 C 6 -10, 2 -2, 7 -1 C 2 0, 6 10, 0 10"/>
+    <g id="code" transform="rotate(-3 380 326)">
+      <use href="#w44" x="250" y="76"/><use href="#w62" x="388" y="76"/><use href="#bc" transform="translate(466 76) scale(-1 1)"/>
+      <use href="#w44" x="220" y="110"/><use href="#w28" x="272" y="110"/><use href="#w62" x="308" y="110"/>
+      <use href="#w28" x="220" y="178"/><use href="#w62" x="256" y="178"/><use href="#w44" x="326" y="178"/><use href="#bc" transform="translate(386 178) scale(-1 1)"/>
+      <use href="#w62" x="250" y="212"/><use href="#w44" x="320" y="212"/><use href="#w62" x="372" y="212"/><use href="#w28" x="442" y="212"/>
+      <use href="#w28" x="250" y="246"/><use href="#w44" x="286" y="246"/><use href="#w62" x="338" y="246"/><use href="#w44" x="408" y="246"/><use href="#w28" x="460" y="246"/>
+      <use href="#w44" x="250" y="280"/><use href="#w62" x="302" y="280"/><use href="#w28" x="372" y="280"/><use href="#w44" x="408" y="280"/>
+      <use href="#bc" x="222" y="314"/>
+      <use href="#w28" x="220" y="382"/><use href="#w44" x="256" y="382"/>
+      <use href="#w28" x="220" y="450"/><use href="#w62" x="256" y="450"/><use href="#w44" x="326" y="450"/><use href="#bc" transform="translate(386 450) scale(-1 1)"/>
+      <use href="#w44" x="250" y="484"/><use href="#w62" x="302" y="484"/><use href="#w28" x="372" y="484"/>
+      <use href="#w28" x="250" y="518"/><use href="#w44" x="286" y="518"/><use href="#w62" x="338" y="518"/>
+      <use href="#bc" x="222" y="552"/>
+      <use href="#bc" x="192" y="586"/>
+    </g>
+
+    <path id="rim" d="M304 250 a126 126 0 1 0 252 0 a126 126 0 1 0 -252 0 Z M318 250 a112 112 0 1 0 224 0 a112 112 0 1 0 -224 0 Z"/>
+
+    <path id="a-sleeve" d="M92 61 L210 297 L149 327 L31 91 Z"/>
+    <path id="a-cuff" d="M81 48 L92 61 L31 91 L27 75 Z"/>
+    <path id="a-back" d="M12 -46 C 34 -52, 54 -36, 56 -10 L 81 48 L 27 75 L 10 34 Z"/>
+    <path id="a-f1" d="M18 -44 L -24 -44 C -40 -44, -40 -24, -24 -24 L 18 -24 Z"/>
+    <path id="a-f2" d="M18 -24 L -28 -24 C -44 -24, -44 -4, -28 -4 L 18 -4 Z"/>
+    <path id="a-f3" d="M18 -4 L -26 -4 C -42 -4, -42 16, -26 16 L 18 16 Z"/>
+    <path id="a-f4" d="M16 16 L -20 16 C -34 16, -34 33, -20 33 L 14 33 Z"/>
+    <path id="a-thumb" d="M44 -40 C 30 -58, -2 -62, -22 -54 C -34 -50, -32 -38, -20 -38 C 0 -42, 22 -36, 36 -26 Z"/>
+    <path id="a-handle" d="M-10 -100 L10 -100 L10 62 C 10 72, -10 72, -10 62 Z"/>
+    <path id="a-collar" d="M-15 -126 L15 -126 L15 -100 L-15 -100 Z"/>
+
+    <path id="b-sleeve" d="M-260 -52 L-26 -44 L-26 44 L-260 54 Z"/>
+    <path id="b-cuff" d="M-30 -44 L4 -40 L4 38 L-30 42 Z"/>
+    <path id="b-hand" d="M0 -30 C 26 -40, 58 -40, 86 -32 L 172 -31 C 187 -31, 187 -9, 172 -9 L 112 -9 C 125 -6, 125 8, 110 9 C 121 12, 121 26, 106 26 C 115 30, 111 42, 96 40 C 66 44, 30 40, 0 32 Z"/>
+    <path id="b-thumb" d="M30 -18 C 56 -24, 90 -20, 110 -12 C 115 -6, 108 -1, 98 -3 C 76 -7, 52 -6, 30 -2 Z"/>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#pencil)">
+    <rect x="-10" y="-10" width="820" height="660" fill="url(#hatch-light)" opacity="0.35"/>
+  </g>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <rect x="164" y="40" width="460" height="600" transform="rotate(-3 380 326)" opacity="0.35"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="150" y="26" width="460" height="620" transform="rotate(-3 380 326)" fill="#F6F1E6" stroke-width="2.2"/>
+    <use href="#code" stroke-width="1.5" opacity="0.8"/>
+  </g>
+
+  <g fill="#24211e" font-family="'Bradley Hand', 'Segoe Print', 'Comic Sans MS', cursive" transform="rotate(-3 380 326)">
+    <text x="190" y="82" font-size="22" opacity="0.85">class</text>
+    <text x="302" y="82" font-size="22" opacity="0.85">extends</text>
+    <text x="310" y="390" font-size="27" font-weight="bold">{ }</text>
+  </g>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <use href="#rim" transform="translate(16 20)" fill-rule="evenodd" opacity="0.3"/>
+  </g>
+
+  <circle cx="430" cy="250" r="114" fill="#F6F1E6"/>
+  <g clip-path="url(#glass)">
+    <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+      <use href="#code" transform="translate(430 250) scale(1.55) translate(-430 -250)" stroke-width="1.4" opacity="0.9"/>
+      <path d="M318 250 a112 112 0 0 1 112 -112 L 430 160 a90 90 0 0 0 -90 90 Z" fill="url(#hatch-light)" stroke="none" opacity="0.55"/>
+      <path d="M352 196 C 366 172, 388 158, 410 152" stroke="#F6F1E6" stroke-width="3.4" opacity="0.9"/>
+    </g>
+  </g>
+
+  <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#rim" fill="url(#hatch)" fill-rule="evenodd" stroke-width="2.4"/>
+    <use href="#rim" fill="url(#hatch-cross)" fill-rule="evenodd" stroke="none" opacity="0.7"/>
+    <circle cx="430" cy="250" r="119" fill="none" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <g transform="translate(584 447) rotate(-38)">
+    <g fill="#F2EDE3">
+      <use href="#a-collar"/><use href="#a-handle"/><use href="#a-sleeve"/><use href="#a-cuff"/><use href="#a-back"/>
+      <use href="#a-f1"/><use href="#a-f2"/><use href="#a-f3"/><use href="#a-f4"/><use href="#a-thumb"/>
+    </g>
+    <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+      <use href="#a-handle" fill="url(#hatch)" stroke-width="2.2"/>
+      <use href="#a-handle" fill="url(#hatch-cross)" stroke="none" opacity="0.6"/>
+      <use href="#a-collar" fill="#E7E0D2" stroke-width="2.2"/>
+      <path d="M-15 -113 L15 -113" stroke-width="1.2" opacity="0.7"/>
+      <use href="#a-sleeve" fill="url(#hatch)" stroke-width="2.4"/>
+      <use href="#a-sleeve" fill="url(#hatch-cross)" stroke="none" opacity="0.7"/>
+      <use href="#a-cuff" fill="#E7E0D2" stroke-width="2.2"/>
+      <path d="M33 74 L86 51 M35 82 L89 57" stroke-width="1" opacity="0.6"/>
+      <use href="#a-back" fill="#F2EDE3" stroke-width="2.4"/>
+      <path d="M40 -30 C 50 -10, 54 20, 66 44 L 81 48 L 56 -10 C 54 -24, 48 -34, 40 -40 Z" fill="url(#hatch-light)" stroke="none"/>
+      <use href="#a-f4" fill="#F2EDE3" stroke-width="2.2"/>
+      <use href="#a-f3" fill="#F2EDE3" stroke-width="2.2"/>
+      <use href="#a-f2" fill="#F2EDE3" stroke-width="2.2"/>
+      <use href="#a-f1" fill="#F2EDE3" stroke-width="2.2"/>
+      <path d="M-4 30 L14 30 M-6 13 L16 13 M-6 -7 L16 -7" stroke-width="1" opacity="0.45"/>
+      <use href="#a-thumb" fill="#F2EDE3" stroke-width="2.2"/>
+      <path d="M-18 -52 C -26 -50, -26 -42, -19 -40" fill="none" stroke-width="1.3"/>
+    </g>
+  </g>
+
+  <g transform="translate(158 498) rotate(-24)">
+    <g fill="#F2EDE3">
+      <use href="#b-sleeve"/><use href="#b-cuff"/><use href="#b-hand"/>
+    </g>
+    <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+      <use href="#b-sleeve" fill="url(#hatch-light)" stroke-width="2.2"/>
+      <path d="M-250 -20 L-40 -18 M-250 12 L-40 14" fill="none" stroke-width="1" opacity="0.5"/>
+      <use href="#b-cuff" fill="#F6F1E6" stroke-width="2.2"/>
+      <circle cx="-14" cy="22" r="3.4" fill="#24211e" stroke-width="1"/>
+      <use href="#b-hand" fill="#F2EDE3" stroke-width="2.4"/>
+      <path d="M60 30 C 80 34, 96 30, 104 24 M86 -32 C 100 -28, 108 -20, 112 -9" fill="none" stroke-width="1.1" opacity="0.55"/>
+      <use href="#b-thumb" fill="#F2EDE3" stroke-width="2"/>
+      <path d="M164 -27 C 173 -26, 177 -22, 176 -16" fill="none" stroke-width="1.4"/>
+      <path d="M140 -30 C 142 -24, 142 -16, 140 -10" fill="none" stroke-width="1" opacity="0.5"/>
+    </g>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

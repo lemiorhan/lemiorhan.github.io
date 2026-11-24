@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="21" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <filter id="shade" x="-20%" y="-30%" width="140%" height="160%">
+      <feGaussianBlur stdDeviation="1.1" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.2 0 0 0 1.85" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <linearGradient id="far" gradientUnits="userSpaceOnUse" x1="0" y1="196" x2="0" y2="360">
+      <stop offset="0" stop-color="#24211e" stop-opacity="0"/>
+      <stop offset="1" stop-color="#24211e" stop-opacity="1"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <g id="sole">
+      <path d="M0 -27 C 8 -27, 10 -18, 10 -10 C 10 -2, 6 4, 6 10 C 6 18, 8 27, 0 27 C -8 27, -7 18, -7 10 C -7 4, -10 -2, -10 -10 C -10 -18, -8 -27, 0 -27 Z"/>
+      <path d="M-8 -19 L 8 -19 M-9 -12 L 9 -12 M-9 -5 L 8 -5 M-6 13 L 6 13 M-6 20 L 6 20" stroke="#F2EDE3" stroke-width="2.4"/>
+    </g>
+    <path id="shoe-sole" d="M-152 34 L 160 34 C 164 48, 154 62, 132 62 L -134 62 C -150 62, -156 50, -152 34 Z"/>
+    <path id="shoe-upper" d="M-150 34 C -158 0, -156 -30, -146 -52 C -116 -44, -76 -40, -50 -42 C -46 -54, -40 -64, -30 -68 C -22 -60, -18 -54, -12 -50 C 24 -36, 64 -20, 104 -10 C 140 -2, 162 14, 160 34 Z"/>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 172 C 120 168, 260 172, 400 170 S 660 168, 800 171" stroke-width="1.3" opacity="0.45"/>
+    <path d="M0 550 L 800 550 M0 423 L 800 423 M0 360 L 800 360 M0 322 L 800 322 M0 297 L 800 297 M0 279 L 800 279 M0 265 L 800 265 M0 246 L 800 246 M0 233 L 800 233 M0 224 L 800 224 M0 217 L 800 217" stroke="url(#far)" stroke-width="1.2" opacity="0.36"/>
+    <path d="M310 200 L -1010 640 M325 200 L -775 640 M340 200 L -540 640 M355 200 L -305 640 M370 200 L -70 640 M385 200 L 165 640 M400 200 L 400 640 M415 200 L 635 640 M430 200 L 870 640 M445 200 L 1105 640 M460 200 L 1340 640 M475 200 L 1575 640 M490 200 L 1810 640" stroke="url(#far)" stroke-width="1.1" opacity="0.28"/>
+    <path d="M150 600 l 18 -8 l 10 10 M612 400 l 10 8 l 2 14 M92 470 l 16 4" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <g filter="url(#shade)" fill="#24211e">
+    <use href="#sole" transform="translate(287 474) scale(1.216 0.9) rotate(186)" opacity="0.66"/>
+    <use href="#sole" transform="translate(344 415) scale(0.981 0.586) rotate(174)" opacity="0.2"/>
+    <use href="#sole" transform="translate(331 355) scale(0.741 0.335) rotate(186)" opacity="0.64"/>
+    <use href="#sole" transform="translate(363 332) scale(0.647 0.255) rotate(174)" opacity="0.2"/>
+    <use href="#sole" transform="translate(351 303) scale(0.533 0.173) rotate(186)" opacity="0.62"/>
+    <use href="#sole" transform="translate(372 291) scale(0.483 0.142) rotate(174)" opacity="0.2"/>
+    <use href="#sole" transform="translate(362 274) scale(0.416 0.106) rotate(186)" opacity="0.6"/>
+    <use href="#sole" transform="translate(378 266) scale(0.385 0.09) rotate(174)" opacity="0.2"/>
+    <use href="#sole" transform="translate(368 255) scale(0.342 0.071) rotate(186)" opacity="0.58"/>
+    <use href="#sole" transform="translate(382 250) scale(0.32 0.062) rotate(174)" opacity="0.2"/>
+    <use href="#sole" transform="translate(373 242) scale(0.29 0.051) rotate(186)" opacity="0.56"/>
+    <use href="#sole" transform="translate(384 238) scale(0.274 0.046) rotate(174)" opacity="0.2"/>
+    <use href="#sole" transform="translate(377 233) scale(0.251 0.038) rotate(186)" opacity="0.54"/>
+    <use href="#sole" transform="translate(380 225) scale(0.21 0.03) rotate(186)" opacity="0.52"/>
+    <use href="#sole" transform="translate(382 220) scale(0.19 0.026) rotate(186)" opacity="0.5"/>
+    <use href="#sole" transform="translate(383 215) scale(0.17 0.022) rotate(186)" opacity="0.48"/>
+    <use href="#sole" transform="translate(385 211) scale(0.15 0.019) rotate(186)" opacity="0.46"/>
+    <use href="#sole" transform="translate(387 207) scale(0.13 0.016) rotate(186)" opacity="0.44"/>
+    <ellipse cx="530" cy="553" rx="200" ry="12" opacity="0.32"/>
+    <ellipse cx="690" cy="553" rx="13" ry="3.5" opacity="0.55"/>
+  </g>
+
+  <g transform="translate(540 464) rotate(152) scale(1.3)">
+    <use href="#shoe-sole" fill="#F2EDE3"/>
+    <use href="#shoe-upper" fill="#F2EDE3"/>
+    <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+      <use href="#shoe-sole" fill="#F2EDE3" stroke-width="2.4"/>
+      <path d="M-151 48 L 159 48 C 156 56, 146 62, 132 62 L -134 62 C -146 62, -152 56, -151 48 Z" fill="url(#hatch)" stroke="none" opacity="0.6"/>
+      <path d="M-128 62 l 0 5 l 12 0 l 0 -5 M-100 62 l 0 5 l 12 0 l 0 -5 M-72 62 l 0 5 l 12 0 l 0 -5 M-44 62 l 0 5 l 12 0 l 0 -5 M-16 62 l 0 5 l 12 0 l 0 -5 M12 62 l 0 5 l 12 0 l 0 -5 M40 62 l 0 5 l 12 0 l 0 -5 M68 62 l 0 5 l 12 0 l 0 -5 M96 62 l 0 5 l 12 0 l 0 -5" stroke-width="1.6"/>
+      <use href="#shoe-upper" fill="#F2EDE3" stroke-width="2.6"/>
+      <path d="M-148 18 C -60 24, 60 24, 156 20 L 160 34 L -150 34 Z" fill="url(#hatch-light)" stroke="none" opacity="0.7"/>
+      <path d="M-146 -52 C -114 -62, -72 -60, -50 -42 C -78 -40, -114 -44, -146 -52 Z" fill="#24211e" fill-opacity="0.88" stroke-width="1.8"/>
+      <path d="M-153 -10 C -124 -6, -112 14, -114 34" stroke-width="1.8"/>
+      <path d="M-146 -50 C -156 -58, -154 -70, -142 -66" stroke-width="1.8"/>
+      <path d="M-30 -68 C -26 -76, -16 -76, -12 -66" stroke-width="1.8"/>
+      <path d="M-46 -40 C -10 -30, 40 -14, 84 -4" stroke-width="1.4"/>
+      <path d="M88 -8 C 102 4, 108 20, 108 34" stroke-width="1.8"/>
+      <path d="M-138 26 C -60 28, 60 28, 150 26" stroke-width="1.1" stroke-dasharray="4 4" opacity="0.7"/>
+      <path d="M50 -22 C 54 -12, 52 -2, 56 8 M66 -16 C 70 -6, 68 2, 72 12" stroke-width="1.1" opacity="0.6"/>
+      <g fill="#F2EDE3" stroke-width="1.6">
+        <circle cx="-20" cy="-52" r="3.2"/><circle cx="-2" cy="-46" r="3.2"/><circle cx="16" cy="-40" r="3.2"/><circle cx="34" cy="-33" r="3.2"/>
+      </g>
+      <path d="M-20 -52 L -2 -42 M-2 -46 L 16 -36 M16 -40 L 34 -29" stroke-width="1.4"/>
+      <path d="M-20 -52 C -40 -74, -6 -80, -16 -58 M-20 -52 C -36 -38, -50 -48, -38 -58 M-20 -52 C -24 -40, -18 -26, -28 -14" stroke-width="1.6"/>
+    </g>
+  </g>
+
+  <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M690 496 C 700 495, 706 502, 705 510 C 704 519, 696 524, 687 523 C 678 522, 673 515, 675 507 C 676 501, 682 496, 690 496 Z" fill="#24211e" fill-opacity="0.8" stroke-width="2"/>
+    <path d="M681 504 C 683 501, 687 500, 691 500" fill="none" stroke="#F2EDE3" stroke-width="1.4"/>
+    <path d="M682 474 L 682 486 M692 472 L 692 487 M701 476 L 701 488" fill="none" stroke-width="1.4" opacity="0.75"/>
+    <circle cx="670" cy="524" r="1.6" fill="#24211e"/><circle cx="712" cy="532" r="1.3" fill="#24211e"/><circle cx="696" cy="538" r="1.1" fill="#24211e"/>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

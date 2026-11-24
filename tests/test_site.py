@@ -16,6 +16,7 @@ import unittest
 import urllib.parse
 from collections import Counter
 from html.parser import HTMLParser
+from xml.etree import ElementTree
 
 import i18n
 from i18n import LANGS, lang_dir, localized, page_file, read_json
@@ -126,6 +127,17 @@ def not_found_in(source, lang):
     source = re.sub(r'(?s)(<main [^>]*>\n).*?(\n  </main>)', lambda m: m.group(1) + templates[lang] + m.group(2), source)
     source = re.sub(r'<html lang="[^"]*">', '<html lang="{}">'.format(lang), source)
     return re.sub(r'<title>[^<]*</title>', '<title>{}</title>'.format(titles[lang]), source)
+
+
+def zen_story_words():
+    with open(os.path.join(ROOT, 'build.py'), encoding='utf-8') as f:
+        low, high = re.search(r'^ZEN_STORY_WORDS = \((\d+), (\d+)\)$', f.read(), re.M).groups()
+    return int(low), int(high)
+
+
+def svg_size(path):
+    x, y, width, height = ElementTree.parse(path).getroot().get('viewBox').split()
+    return width, height
 
 
 def path_box(d):
@@ -403,6 +415,99 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
     def test_a_contact_form_without_one_of_its_status_lines(self):
         self.assertRejected(self.edit('contact', lambda d: self.contact_form(d)['status'].pop('failed')),
                             "a 'form' block is missing 'failed'")
+
+    # Personal Zen
+
+    @staticmethod
+    def zen_items(fn):
+        return BrokenContentStopsTheBuild.edit('personal-zen', lambda d: fn(blocks_of(d, 'zen')[0]['items']))
+
+    def zen_story(self, words):
+        return self.zen_items(lambda items: items[0].update(story=[' '.join(['word'] * (words - 2)), 'two words']))
+
+    def test_zen_stories_at_both_ends_of_the_word_range_build(self):
+        low, high = zen_story_words()
+        for words in (low, high):
+            with self.subTest(words=words):
+                result = self.build_with(self.zen_story(words))
+                self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_a_zen_story_one_word_short_of_the_range(self):
+        low, high = zen_story_words()
+        self.assertRejected(self.zen_story(low - 1),
+                            "the story of zen item 'help' has {} words; ZEN_STORY_WORDS allows {} to {}".format(low - 1, low, high))
+
+    def test_a_zen_story_one_word_over_the_range(self):
+        low, high = zen_story_words()
+        self.assertRejected(self.zen_story(high + 1),
+                            "the story of zen item 'help' has {} words; ZEN_STORY_WORDS allows {} to {}".format(high + 1, low, high))
+
+    def test_a_zen_block_with_no_items_or_items_that_are_not_a_list(self):
+        for items in ([], {'id': 'help'}, 'help'):
+            with self.subTest(items=items):
+                self.assertRejected(self.edit('personal-zen', lambda d, items=items: blocks_of(d, 'zen')[0].update(items=items)),
+                                    'a zen block needs "items", a non-empty list')
+
+    def test_a_zen_block_without_the_text_of_its_back_to_top_link(self):
+        for name, fn in (('missing', lambda b: b.pop('top')), ('blank', lambda b: b.update(top='  ')),
+                         ('a number', lambda b: b.update(top=7))):
+            with self.subTest(top=name):
+                self.assertRejected(self.edit('personal-zen', lambda d, fn=fn: fn(blocks_of(d, 'zen')[0])),
+                                    'a zen block needs "top", the text of the link back to the top of the page')
+
+    def test_a_zen_index_on_a_page_with_no_zen_block(self):
+        def drop(d):
+            d['sections'] = [s for s in d['sections'] if not any(isinstance(b, dict) and b.get('type') == 'zen' for b in s['blocks'])]
+        self.assertRejected(self.edit('personal-zen', drop), 'a page with a zen-index block needs exactly one zen block; it has 0')
+
+    def test_a_zen_index_on_a_page_with_two_zen_blocks(self):
+        def twice(d):
+            d['sections'].append(json.loads(json.dumps(d['sections'][0])))
+        self.assertRejected(self.edit('personal-zen', twice), 'a page with a zen-index block needs exactly one zen block; it has 2')
+
+    def test_a_zen_item_with_no_id_or_that_is_not_an_object(self):
+        cases = {'no id': (lambda items: items[0].pop('id'), None), 'a number': (lambda items: items[0].update(id=7), 7),
+                 'a string item': (lambda items: items.__setitem__(0, 'help'), None)}
+        for name, (fn, has) in cases.items():
+            with self.subTest(case=name):
+                self.assertRejected(self.zen_items(fn),
+                                    'zen item 1 needs an "id" of lowercase words joined by hyphens; it has {!r}'.format(has))
+
+    def test_a_zen_id_used_twice(self):
+        def twice(items):
+            items[1]['id'] = items[0]['id']
+        self.assertRejected(self.zen_items(twice), "zen id 'help' is used twice")
+
+    def test_a_zen_id_that_is_not_lowercase_words_joined_by_hyphens(self):
+        for bad in ('Help', 'help me', 'help--me', '-help', ''):
+            with self.subTest(id=bad):
+                self.assertRejected(self.zen_items(lambda items, bad=bad: items[0].update(id=bad)),
+                                    'zen item 1 needs an "id" of lowercase words joined by hyphens')
+
+    def test_a_zen_item_missing_one_of_its_fields(self):
+        missing = {'zen': lambda i: i.pop('zen'), 'source': lambda i: i.pop('source'),
+                   'image.src': lambda i: i['image'].pop('src'), 'image.alt': lambda i: i['image'].update(alt=''),
+                   'story': lambda i: i.update(story=[]), 'paragraph': lambda i: i['story'].append(''),
+                   'blank zen': lambda i: i.update(zen='   '), 'blank paragraph': lambda i: i['story'].append('   '),
+                   'image as a string': lambda i: i.update(image=i['image']['src']),
+                   'story as a string': lambda i: i.update(story='w' * 120)}
+        for name, fn in missing.items():
+            with self.subTest(field=name):
+                self.assertRejected(self.zen_items(lambda items, fn=fn: fn(items[0])),
+                                    'zen item \'help\' needs "zen", "source", "image.src" and "image.alt" as non-empty strings')
+
+    def test_a_zen_image_that_does_not_exist_or_is_not_svg(self):
+        for src in ('assets/zen/no-such-drawing.svg', 'assets/img/social.jpg'):
+            with self.subTest(src=src):
+                self.assertRejected(self.zen_items(lambda items, src=src: items[0]['image'].update(src=src)),
+                                    'zen image {} is not an .svg file that exists'.format(src))
+
+    def test_a_zen_image_without_a_viewbox(self):
+        def change(site):
+            with open(os.path.join(site, 'assets', 'zen', 'bare.svg'), 'w', encoding='utf-8') as f:
+                f.write('<svg xmlns="http://www.w3.org/2000/svg" width="800" height="640"></svg>')
+            self.zen_items(lambda items: items[0]['image'].update(src='assets/zen/bare.svg'))(site)
+        self.assertRejected(change, 'zen image assets/zen/bare.svg has no viewBox="0 0 <width> <height>" on its <svg>')
 
     # Sumo live block
 
@@ -1046,6 +1151,19 @@ class ContentRendersAsText(unittest.TestCase):
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False)
         cls.sumo_live = live
+        path = os.path.join(site, 'content', 'personal-zen.json')
+        data = read_json(path)
+        zen = blocks_of(data, 'zen')[0]['items'][0]
+        for key in ('zen', 'source'):
+            zen[key] += ' ' + cls.MARK
+        zen['story'][0] += ' ' + cls.MARK
+        zen['image']['alt'] += ' ' + cls.MARK
+        blocks_of(data, 'zen-index')[0]['label'] += ' ' + cls.MARK
+        blocks_of(data, 'zen')[0]['top'] += ' ' + cls.MARK
+        cls.zen_top = blocks_of(data, 'zen')[0]['top']
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False)
+        cls.zen, cls.zen_label = zen, blocks_of(data, 'zen-index')[0]['label']
         out = os.path.join(cls.tmp.name, 'out')
         result = run_build(site, out)
         if result.returncode:
@@ -1059,10 +1177,27 @@ class ContentRendersAsText(unittest.TestCase):
             cls.sharing = Tree(f.read()).root
         with open(os.path.join(out, 'sumo', 'index.html'), encoding='utf-8') as f:
             cls.sumo = f.read()
+        with open(os.path.join(out, 'personal-zen', 'index.html'), encoding='utf-8') as f:
+            cls.zen_page = Tree(f.read()).root
 
     @classmethod
     def tearDownClass(cls):
         cls.tmp.cleanup()
+
+    def test_the_zen_title_story_source_alt_index_and_back_to_top_link_render_as_text(self):
+        self.assertEqual(self.zen_page.find(lambda n: n.tag == 'xmark'), [])
+        article, = self.zen_page.find(lambda n: n.tag == 'article' and n.attrs.get('id') == self.zen['id'])
+        self.assertEqual([n.all_text() for n in article.find(lambda n: n.tag == 'h2')], [self.zen['zen']])
+        self.assertEqual(article.find(lambda n: n.tag == 'p' and not n.classes())[0].all_text(), plain(self.zen['story'][0]))
+        self.assertEqual([n.all_text() for n in article.find(has_class('zen-source'))], [plain(self.zen['source'])])
+        self.assertEqual([n.attrs.get('alt') for n in article.find(lambda n: n.tag == 'img')], [self.zen['image']['alt']])
+        index, = self.zen_page.find(has_class('zen-index'))
+        self.assertEqual((index.attrs.get('aria-label'), index.find(lambda n: n.tag == 'a')[0].all_text()),
+                         (self.zen_label, '01' + self.zen['zen']))
+        self.assertEqual([n.all_text() for n in article.find(has_class('zen-top'))], [self.zen_top])
+        for planted in (self.zen['zen'], self.zen['story'][0], self.zen['source'], self.zen['image']['alt'], self.zen_label,
+                        self.zen_top):
+            self.assertIn(self.MARK, planted)
 
     def test_the_sumo_live_island_holds_no_angle_bracket_and_carries_its_strings_unchanged(self):
         start = self.sumo.index('<script type="application/json" class="sumo-data">')
@@ -1673,7 +1808,7 @@ class BuiltSite(unittest.TestCase):
             ids = [n.attrs['id'] for n in tree.walk() if n.attrs.get('id')]
             self.assertEqual([i for i, c in Counter(ids).items() if c > 1], [], name)
             targets = [n.attrs['href'][1:] for n in tree.walk() if (n.attrs.get('href') or '').startswith('#')]
-            self.assertEqual(sorted(set(t for t in targets if t not in ids)), [], name)
+            self.assertEqual(sorted(set(t for t in targets if t not in ids and t != 'top')), [], name)
         for name in ('bio', 'root-bug'):
             refs = re.findall(r'href="#ref-\d+"', self.html[name])
             contents = self.trees[name].find(lambda n: n.tag == 'a' and n.parent and n.parent.tag == 'li'
@@ -2928,6 +3063,81 @@ class BuiltSite(unittest.TestCase):
         self.assertEqual([(a.attrs.get('href'), a.all_text()) for a in lists[0].find(lambda n: n.tag == 'a')],
                          [(p['url'], p['label']) for p in hero['profiles']])
         self.assertTrue(hero['profiles'])
+
+    # Personal Zen
+
+    def zen_items(self):
+        return blocks_of(self.content('personal-zen'), 'zen')[0]['items']
+
+    def test_every_zen_is_an_article_with_its_number_drawing_story_source_and_back_to_top_link(self):
+        items = self.zen_items()
+        top, = [b['top'] for b in blocks_of(self.content('personal-zen'), 'zen')]
+        folder = posixpath.dirname(page_file('personal-zen', self.lang))
+        self.assertEqual(self.trees['personal-zen'].find(lambda n: n.attrs.get('id') == 'top'), [],
+                         'a "#top" link goes to the top of the document only while no element has that id')
+        articles = self.trees['personal-zen'].find(lambda n: n.tag == 'article' and 'zen' in n.classes())
+        self.assertTrue(items)
+        self.assertEqual([a.attrs.get('id') for a in articles], [i['id'] for i in items])
+        for n, (item, article) in enumerate(zip(items, articles), 1):
+            with self.subTest(id=item['id']):
+                heading, = article.find(lambda x: x.tag == 'h2')
+                self.assertEqual((heading.all_text(), heading.attrs.get('id')), (item['zen'], article.attrs.get('aria-labelledby')))
+                self.assertEqual([x.all_text() for x in article.find(has_class('zen-n'))], ['{:02d}'.format(n)])
+                image, = article.find(lambda x: x.tag == 'img')
+                self.assertEqual((image.attrs.get('src'), image.attrs.get('alt')), (posixpath.relpath(item['image']['src'], folder), item['image']['alt']))
+                self.assertEqual((image.attrs.get('width'), image.attrs.get('height')), svg_size(os.path.join(ROOT, item['image']['src'])))
+                self.assertEqual([x.all_text() for x in article.find(lambda x: x.tag == 'p' and not x.classes())],
+                                 [plain(p) for p in item['story']])
+                self.assertEqual([x.all_text() for x in article.find(has_class('zen-source'))], [plain(item['source'])])
+                self.assertEqual([(a.attrs.get('href'), a.all_text()) for p in article.find(has_class('zen-top'))
+                                  for a in p.find(lambda x: x.tag == 'a')], [('#top', top)])
+
+    def test_the_zen_index_links_to_every_zen_in_order(self):
+        items = self.zen_items()
+        index, = self.trees['personal-zen'].find(lambda n: n.tag == 'nav' and 'zen-index' in n.classes())
+        self.assertTrue(items)
+        self.assertEqual([(a.attrs.get('href'), a.all_text()) for a in index.find(lambda n: n.tag == 'a')],
+                         [('#' + i['id'], '{:02d}{}'.format(n, i['zen'])) for n, i in enumerate(items, 1)])
+        label, = [b['label'] for b in blocks_of(self.content('personal-zen'), 'zen-index')]
+        self.assertEqual(index.attrs.get('aria-label'), label)
+
+    def test_every_zen_drawing_is_used_once_and_none_sits_unused(self):
+        used = [i['image']['src'] for i in self.zen_items()]
+        drawn = sorted('assets/zen/' + f for f in os.listdir(os.path.join(ROOT, 'assets', 'zen')) if f.endswith('.svg'))
+        self.assertTrue(drawn)
+        self.assertEqual(sorted(used), drawn)
+
+    def test_print_leaves_the_zen_index_and_back_to_top_links_out_and_undoes_the_tilt_shadow_and_dimming_of_every_drawing(self):
+        with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
+            css = re.sub(r'/\*.*?\*/', '', f.read(), flags=re.S)
+        printed = css[css.index('@media print'):]
+        rules = [(s.strip(), body) for group, body in re.findall(r'([^{}@;]+)\{([^{}]*)\}', printed) for s in group.split(',')]
+        hidden = [s for s, body in rules if 'display: none' in body]
+        self.assertIn('.zen-index', hidden)
+        self.assertIn('.zen-top', hidden)
+        for prop in ('rotate', 'box-shadow', 'filter'):
+            with self.subTest(prop=prop):
+                self.assertEqual(css_values(printed, '.zen-art img', prop), ['none !important'],
+                                 'the even tilt and the dark shadow and dimming rules are more specific than this print rule, '
+                                 'so only !important lets print undo them')
+
+    def test_the_zen_layout_keeps_its_gaps_full_width_two_columns_and_dark_dimming(self):
+        with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
+            css = re.sub(r'/\*.*?\*/', '', f.read(), flags=re.S)
+        self.assertEqual(css_values(css, '.zen-text p.zen-source', 'margin-top'), ['1.5rem'])
+        self.assertLess(css.index('.zen-text p:not(.zen-n) {'), css.index('.zen-text p.zen-source {'),
+                        'both rules weigh (0,2,1), so only coming later lets the source line keep its own top margin')
+        self.assertEqual(css_values(css, '.zen-text .zen-n', 'margin-bottom'), ['0'])
+        self.assertEqual(css_values(css, '.page-body .wrap > .zen-list', 'max-width'), ['none'])
+        wide = ''.join(re.findall(r'@media \(min-width: 56rem\) \{(.*?)\n\}', css, re.S))
+        self.assertEqual(css_values(wide, '.zen', 'grid-template-columns'), ['minmax(0, 5fr) minmax(0, 6fr)'])
+        self.assertEqual(css_values(wide, '.zen:nth-child(even) .zen-art', 'order'), ['2'])
+        prefers_dark = r'@media \(prefers-color-scheme: dark\) \{(.*?)\n\}'
+        system = ''.join(re.findall(prefers_dark, css, re.S))
+        self.assertEqual(css_values(system, ':root:not([data-theme="light"]) .zen-art img', 'filter'), ['brightness(0.9)'])
+        chosen = re.sub(prefers_dark, '', css, flags=re.S)
+        self.assertEqual(css_values(chosen, ':root[data-theme="dark"] .zen-art img', 'filter'), ['brightness(0.9)'],
+                         'a reader who picked dark on a light system matches no prefers-color-scheme block')
 
 
 class BuiltSiteInTurkish(BuiltSite):

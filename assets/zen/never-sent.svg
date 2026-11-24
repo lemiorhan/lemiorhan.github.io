@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="13" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <linearGradient id="fade" x1="0" x2="0" y1="1" y2="0">
+      <stop offset="0" stop-color="#24211e" stop-opacity="1"/>
+      <stop offset="1" stop-color="#24211e" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <rect x="214" y="292" width="372" height="78" opacity="0.75"/>
+    <path d="M200 590 L612 590 L640 612 L176 612 Z" opacity="0.3"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M60 96 L740 96 L780 250 L20 250 Z" fill="#F2EDE3" stroke-width="2.2"/>
+    <path d="M90 130 C 260 126, 520 134, 712 128 M70 172 C 300 168, 480 178, 728 170 M50 214 C 240 210, 560 220, 752 212 M180 150 C 240 148, 300 152, 360 150 M470 196 C 540 193, 600 198, 660 194" stroke-width="0.9" opacity="0.45"/>
+    <path d="M20 250 L780 250 L780 276 L20 276 Z" fill="url(#hatch)" stroke-width="2.2"/>
+    <path d="M36 276 L36 640 M764 276 L764 640" stroke-width="2.2"/>
+    <path d="M36 276 L764 276 L764 640 L36 640 Z" fill="url(#hatch-light)" stroke="none" opacity="0.5"/>
+    <path d="M214 292 L586 292 L586 372 L214 372 Z" fill="url(#hatch-cross)" stroke-width="2.2" opacity="0.9"/>
+
+    <path d="M214 372 L196 470 M586 372 L604 470" stroke-width="2.4"/>
+    <path d="M224 372 L576 372 L594 462 L206 462 Z" fill="#E7E0D2" stroke-width="1.6"/>
+    <path d="M214 372 L224 372 L206 462 L196 470 Z M586 372 L576 372 L594 462 L604 470 Z" fill="url(#hatch)" stroke-width="1.6"/>
+
+    <path d="M182 470 L618 470 L618 590 L182 590 Z" fill="#F2EDE3" stroke-width="2.6"/>
+    <path d="M182 470 L618 470" stroke-width="3.2"/>
+    <path d="M182 556 L618 556 L618 590 L182 590 Z" fill="url(#hatch-light)" stroke="none" opacity="0.8"/>
+    <path d="M196 482 L604 482 L604 578 L196 578 Z" stroke-width="1.1" opacity="0.6"/>
+    <ellipse cx="400" cy="530" rx="15" ry="11" fill="#F2EDE3" stroke-width="2.2"/>
+    <path d="M393 534 C 398 539, 406 538, 410 533" stroke-width="1.4"/>
+
+    <path d="M296 386 L516 382 L530 450 L286 455 Z" fill="#F6F1E6" stroke-width="2.2"/>
+    <path d="M296 386 L408 424 L516 382" stroke-width="1.6"/>
+    <path d="M286 455 L382 420 M530 450 L432 418" stroke-width="1.1" opacity="0.6"/>
+    <circle cx="408" cy="424" r="10" fill="#24211e" stroke-width="1.5"/>
+    <path d="M320 440 C 340 434, 352 444, 372 437" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <g fill="#24211e" font-family="'Bradley Hand', 'Segoe Print', 'Comic Sans MS', cursive" font-style="italic">
+    <text x="0" y="0" font-size="14" transform="translate(318 410) rotate(-1.2)" opacity="0.85">To Gen. Meade,</text>
+    <text x="0" y="0" font-size="13" transform="translate(432 446) rotate(-1.2)" opacity="0.85">never sent, or signed.</text>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="url(#fade)" stroke-linecap="round">
+    <path d="M378 380 C 360 346, 398 322, 380 290 C 362 258, 404 236, 388 204 C 376 180, 396 160, 392 140" stroke-width="2.6"/>
+    <path d="M412 376 C 430 344, 398 318, 418 286 C 436 256, 404 230, 424 198 C 436 178, 420 160, 428 132" stroke-width="2.2"/>
+    <path d="M446 380 C 462 352, 440 330, 454 304 C 466 282, 448 262, 460 238" stroke-width="1.8"/>
+  </g>
+
+  <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M520 214 L676 160 C 684 157, 690 168, 682 172 L528 226 C 520 229, 512 218, 520 214 Z" fill="#24211e"/>
+    <path d="M676 160 L708 150 L686 172 Z" fill="#F2EDE3" stroke-width="1.6"/>
+    <path d="M708 150 L716 147" stroke-width="1.4"/>
+    <path d="M560 206 L640 178" stroke="#F2EDE3" stroke-width="1.2" opacity="0.5"/>
+    <path d="M110 188 L170 188 L176 236 L104 236 Z" fill="#24211e" fill-opacity="0.85" stroke-width="2"/>
+    <path d="M124 170 L156 170 L158 188 L122 188 Z" fill="#F2EDE3" stroke-width="2"/>
+    <path d="M118 196 L122 228" stroke="#F2EDE3" stroke-width="1.6" opacity="0.6"/>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

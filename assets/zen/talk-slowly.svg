@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="13" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g transform="translate(0 -22)">
+  <g filter="url(#smudge)" fill="#24211e">
+    <path d="M16 604 L336 604 L372 626 L-8 626 Z" opacity="0.3"/>
+    <path d="M292 446 L318 446 L328 466 L292 466 Z" opacity="0.35"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 610 C 200 606, 500 613, 780 608" stroke-width="1.3" opacity="0.4"/>
+    <path d="M420 628 l 34 0 M560 622 l 44 0 M680 630 l 30 0" stroke-width="1.1" opacity="0.4"/>
+    <path d="M66 488 L68 596 M262 488 L260 596" stroke-width="1.6" opacity="0.6"/>
+    <path d="M34 488 L50 488 L48 610 L40 610 Z M290 488 L306 488 L300 610 L292 610 Z" fill="url(#hatch-light)" stroke-width="2"/>
+    <path d="M34 452 L306 452 L326 470 L14 470 Z" fill="#F2EDE3" stroke="none"/>
+    <path d="M34 452 L48 452 M292 452 L306 452 L326 470 M34 452 L14 470" stroke-width="2"/>
+    <path d="M14 470 L326 470 L326 488 L14 488 Z" fill="url(#hatch)" stroke-width="2.2"/>
+
+    <path d="M48 462 L292 462 L292 446 L48 446 Z" fill="#F2EDE3" stroke-width="2.2"/>
+    <path d="M48 462 L292 462 L292 446 L48 446 Z" fill="url(#hatch)" stroke="none" opacity="0.7"/>
+    <path d="M62 446 L62 300 C 62 214, 118 172, 170 172 C 222 172, 278 214, 278 300 L278 446 Z" fill="#F2EDE3" stroke-width="2.6"/>
+    <path d="M62 446 L62 300 C 62 214, 118 172, 170 172 C 222 172, 278 214, 278 300 L278 446 Z" fill="url(#hatch-light)" stroke="none" opacity="0.55"/>
+    <path d="M258 446 L258 304 C 258 252, 236 216, 206 200 C 248 212, 278 250, 278 300 L278 446 Z" fill="url(#hatch)" stroke="none" opacity="0.6"/>
+    <path d="M82 404 L82 304 C 82 238, 126 196, 170 196 C 214 196, 258 238, 258 304 L258 404 Z" fill="#F6F1E6" stroke-width="1.8"/>
+    <path d="M152 392 L152 262 C 152 240, 160 226, 170 216 C 180 226, 188 240, 188 262 L188 392 Z M100 392 L100 306 C 100 278, 112 256, 136 238 C 140 252, 140 266, 140 280 L140 392 Z M240 392 L240 306 C 240 278, 228 256, 204 238 C 200 252, 200 266, 200 280 L200 392 Z" fill="url(#hatch-cross)" stroke-width="1.8"/>
+    <path d="M152 392 L152 262 C 152 240, 160 226, 170 216 C 180 226, 188 240, 188 262 L188 392 Z M100 392 L100 306 C 100 278, 112 256, 136 238 C 140 252, 140 266, 140 280 L140 392 Z M240 392 L240 306 C 240 278, 228 256, 204 238 C 200 252, 200 266, 200 280 L200 392 Z" fill="url(#hatch)" stroke="none" opacity="0.55"/>
+    <path d="M144 436 A 26 26 0 0 1 196 436 Z" fill="#F6F1E6" stroke-width="1.8"/>
+    <path d="M150 430 L154 431 M155 419 L159 422 M170 412 L170 417 M185 419 L181 422 M190 430 L186 431" stroke-width="1.2"/>
+    <path d="M170 436 L181 417" stroke-width="1.8"/>
+    <circle cx="108" cy="426" r="12" fill="url(#hatch)" stroke-width="2"/>
+    <circle cx="232" cy="426" r="12" fill="url(#hatch)" stroke-width="2"/>
+    <path d="M72 430 C 74 380, 70 340, 74 310 M266 420 C 268 380, 264 350, 268 320" stroke-width="0.9" opacity="0.45"/>
+
+    <path d="M290 300 Q296 284, 302 300 Q308 340, 314 300 Q320 216, 326 300 Q332 432, 338 300 Q344 184, 350 300 Q356 452, 362 300 Q368 196, 374 300 Q380 420, 386 300 Q392 232, 398 300 Q404 336, 410 300 Q416 288, 422 300" stroke-width="2.6"/>
+    <path d="M575 300 Q581 288, 587 300 Q593 332, 599 300 Q605 240, 611 300 Q617 348, 623 300 Q629 276, 635 300 Q641 344, 647 300 Q653 200, 659 300 Q665 460, 671 300 Q677 160, 683 300 Q689 408, 695 300 Q701 240, 707 300 Q713 388, 719 300 Q725 228, 731 300 Q737 336, 743 300 Q749 288, 755 300" stroke-width="2.6"/>
+  </g>
+
+  <g fill="#24211e" font-family="'Bradley Hand', 'Segoe Print', 'Comic Sans MS', cursive" font-style="italic" text-anchor="middle">
+    <text x="0" y="0" font-size="32" transform="translate(356 432) rotate(-1.5)" opacity="0.9">This</text>
+    <text x="0" y="0" font-size="32" transform="translate(665 432) rotate(-1.5)" opacity="0.9">is London</text>
+  </g>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

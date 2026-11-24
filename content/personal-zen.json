@@ -1,0 +1,675 @@
+{
+  "title": "Personal Zen, Lemi Orhan Ergin",
+  "description": "The principles Lemi Orhan Ergin lives and works by, each with a charcoal drawing.",
+  "head": {
+    "heading": "Personal Zen",
+    "cmd": "import this",
+    "blocks": [
+      {
+        "type": "p",
+        "class": "intro",
+        "text": "I wrote these principles down in August 2017, in a [GitHub repository](https://github.com/lemiorhan/personal-zen), mostly for my kids. They are how I look at life, work and family, so it is fine if you disagree with some of them. New ones join the list as I learn them."
+      },
+      {
+        "type": "p",
+        "class": "intro",
+        "text": "Around 2010 I paid for a training course out of my own pocket, almost half of my salary. There were eleven of us in the room. Everyone except me and one other person had been sent by their company. The two of us wrote down every word the trainer said and kept asking questions. We made every penny count. Then it hit me: I was there because I wanted to be, the others because someone had sent them. From then on I depended on no one to choose what I learn."
+      },
+      { "type": "zen-index", "label": "The list" }
+    ]
+  },
+  "sections": [
+    {
+      "blocks": [
+        {
+          "type": "zen",
+          "top": "Back to the top",
+          "items": [
+            {
+              "id": "help",
+              "zen": "If someone asks for help, help",
+              "image": {
+                "src": "assets/zen/help.svg",
+                "alt": "Charcoal drawing of a young, crooked sapling tied with strips of cloth to a straight wooden stake. On the ground, the two of them cast the long shadow of a full-grown tree."
+              },
+              "story": [
+                "Around 2005, when I was still very young, I made myself a rule. If someone asks me for help while I am in the middle of my own work, I put it down and help. The only exception is something truly critical, like a problem in production.",
+                "I have kept that rule ever since and never saw it do me harm. Now and then it meant working a little longer to finish my own task. In return it made me more valuable to the people around me, and it carried the whole team further.",
+                "Who is the most valuable person on a team: the one who works the hardest, the one who writes the most code, or the one who helps teammates the most? Each has its strengths, but in my eyes it is the one who helps."
+              ],
+              "source": "Told at [CS TechTalks Alumni, IEEE Marmara](https://www.youtube.com/watch?v=tVdaiOtraD4&t=5273s) in March 2021, and at [Agile Buluşmalar, Agile Türkiye](https://www.youtube.com/watch?v=naq49KIEVls&t=3581s) in April 2016."
+            },
+            {
+              "id": "quality",
+              "zen": "Focus on the quality of what you produce",
+              "image": {
+                "src": "assets/zen/quality.svg",
+                "alt": "Charcoal drawing of two piles of light wooden blocks, a collapsed heap on the left and a tall freshly stacked tower on the right, with the same dark, cracked block at the bottom of both."
+              },
+              "story": [
+                "Years ago my team had been building the same product for a long time, and even small changes were hard. If someone asked for a button, we said two weeks, thirteen story points. So we decided to rewrite the product from scratch, with the newest technologies.",
+                "I called my manager abroad and told him. About thirty seconds of silence followed. I thought the line had dropped. Then he asked if he had understood me: this team had written the product so badly that the same team now had to write it again? I said yes. Then why didn't you write it well in the first place, he asked.",
+                "Flashbacks went through my head: the deadline pressure, the tests we skipped as long as we could ship. Teams mess up the room and tidy it, again and again, until one day they want to move house. The new house gets the same people."
+              ],
+              "source": "Told at [Hepsiburada JSKonf](https://www.youtube.com/watch?v=GJIprRgnjJM&t=27s) in November 2023, and at [Test Summit](https://www.youtube.com/watch?v=EruxW-pSg1U&t=29s) in November 2022."
+            },
+            {
+              "id": "practice",
+              "zen": "Practice a lot to master on your craft",
+              "image": {
+                "src": "assets/zen/practice.svg",
+                "alt": "Charcoal drawing of a gleaming hammered copper jug with a bird on a branch worked into its belly, standing on a heap of crumpled, dented, lopsided jugs, with a small hammer lying on the ground beside the heap."
+              },
+              "story": [
+                "My father had a shop in Kemeraltı, in İzmir. One of our neighbours was a coppersmith, and his shop is still there.",
+                "He shapes copper pots with a hammer, blow after blow, tapping small dents into the metal until a tree, a bird or a parrot appears. Watch him and you think, I could do that, it looks so simple. Then you try. Hit too hard or too softly and the mark goes wrong. Each blow needs the right force, and the next must land in the right place.",
+                "People say quality is slow and expensive. Masters make quality things fast. Our coppersmith practised for years and made some very bad shapes along the way. That is why his pots are wonderful now. The only way to do something both fast and well is to practise until you master it."
+              ],
+              "source": "Told at [The Unspoken Rules of a Better Professional Life](https://www.youtube.com/watch?v=VBWS1-ngCKo&t=3466s) in December 2020, and at [Türkiye Java Community](https://www.youtube.com/watch?v=aHhWUFW8Ec8&t=743s) in June 2022."
+            },
+            {
+              "id": "mediocrity-trap",
+              "zen": "Do not fall into mediocrity trap",
+              "image": {
+                "src": "assets/zen/mediocrity-trap.svg",
+                "alt": "Charcoal drawing of a desk with a laptop and a chair inside a small pale chalk circle on the floor, a stub of chalk lying just inside the line, while a stack of books, a globe, a server rack and a telescope stand outside it."
+              },
+              "story": [
+                "Around 2008 I was the candidate in a job interview. The interviewer asked about scalability. One server is not enough, so you add a second. What do you do so the sessions do not get mixed up? To most of his questions my answer was the same: we do not do that at my company, it is not my job, I have never heard of it.",
+                "Did you never look it up on Wikipedia, he asked. Did you never watch a single video? What your company does is not the point.",
+                "It stung, because he was right. I was expected to write code, so I wrote code, as well as I could. About everything else I had no idea, and I was not even curious. It took the interviewer to show me how narrow I had become. Since then I keep a mind map of topics I want to learn, and I make time for them."
+              ],
+              "source": "Told at [PeaksOnTheBack #2](https://www.youtube.com/watch?v=aS_bQhcI06M&t=1764s) in February 2024, and at [Türkiye Java Community](https://www.youtube.com/watch?v=aHhWUFW8Ec8&t=1558s) in June 2022."
+            },
+            {
+              "id": "lifetime-apprentice",
+              "zen": "Be a lifetime apprentice, follow your sensei",
+              "image": {
+                "src": "assets/zen/lifetime-apprentice.svg",
+                "alt": "Charcoal drawing of an older hand in a tweed sleeve holding out a closed hardback book toward a younger open hand, with a speech bubble holding a question mark sticking out of the top of its pages like a bookmark."
+              },
+              "story": [
+                "At Sony I had a tech lead who still has a very important place in my life. One day, as our team was about to write RESTful web services, we asked him how they work. He handed us a book. Read it over the weekend, he said, and on Monday we will write the code.",
+                "On Monday I went to him with a question. I had not finished the book. He said he would not answer, because the answer was in the book, and clearly I had not read it. Read it, then come, and then we will talk. I spent the next few nights reading it, and I learned a great deal.",
+                "Over the years many of my masters sent me messages like that. When a master tells an apprentice to read a book, the apprentice reads the book. First you do what the master says. Then you ask why."
+              ],
+              "source": "Told at [Devnot](https://www.youtube.com/watch?v=q_AIH90dEvw&t=184s) in March 2017, and at [Türkiye Java Community](https://www.youtube.com/watch?v=yQMG-bwFXUY&t=2982s) in April 2024."
+            },
+            {
+              "id": "give-back",
+              "zen": "Give back to the community",
+              "image": {
+                "src": "assets/zen/give-back.svg",
+                "alt": "Charcoal drawing of an older hand in a dark jacket sleeve holding up a short, lit candle, while a younger hand tips its own lit candle so the flame touches the wick of the first of four unlit candles standing on a shelf."
+              },
+              "story": [
+                "I spent ten years at Sony. There I learned what it means to grow as an apprentice under good masters, and somewhere along the way I felt a strong need to share. In 2008 I spoke at my first meetup and gave my first talk to students at Marmara University, where my wife was an academic. Then I started writing to communities: if you are looking for a speaker, I can talk about this.",
+                "It did not flow one way. To explain something well, I first had to learn it much better.",
+                "On 7 March 2014, the fifth birthday of the Manifesto for Software Craftsmanship, I founded Software Craftsmanship Turkey as a non-profit, open community. Its meetups are free, mostly on Wednesday evenings. What my masters had given me, I wanted to pass on."
+              ],
+              "source": "Told at [CS TechTalks Alumni, IEEE Marmara](https://www.youtube.com/watch?v=tVdaiOtraD4&t=3375s) in March 2021, and at [Craftbase Talks](https://www.youtube.com/watch?v=XYvf0NJKhpQ&t=124s) in April 2020. More about SCTurkey is on the [Community](../community/) page."
+            },
+            {
+              "id": "share-for-free",
+              "zen": "Share your knowledge for free",
+              "image": {
+                "src": "assets/zen/share-for-free.svg",
+                "alt": "Charcoal drawing of a tall dandelion seed head with one side blown bare, its seeds drifting in a long arc across the sky to the far right, where a few have landed and grown into small new dandelions."
+              },
+              "story": [
+                "For a while I worked hard in communities. I founded one and gave about two years to another. Listening to other people's talks and being in the room with them motivated me enormously. One day I asked myself why.",
+                "It was not the Java code I write, or a design. It was the small touch on someone's life: a teammate, someone I mentor, a stranger watching my talk on YouTube. Nobody remembers their kindergarten PE teacher's name, yet a small touch from such a teacher can steer a child's life. Leave aside those who teach for the money. The special teachers I have known wanted to touch children's lives, and that moves me too.",
+                "So one talk takes me sixty or eighty hours, many of them at night, from eleven until one or two, after my family is asleep. If I am going to touch someone, it should be my best work."
+              ],
+              "source": "Told at [Tütsü Sektör](https://www.youtube.com/watch?v=0c3WJuUIypo&t=4946s) in March 2024, and at [Junior Bile Değil #7](https://www.youtube.com/watch?v=mBPx4ZtsMmM&t=2026s) in September 2021."
+            },
+            {
+              "id": "principles-behind-practices",
+              "zen": "Learn the principles behind practices",
+              "image": {
+                "src": "assets/zen/principles-behind-practices.svg",
+                "alt": "Charcoal drawing of a snow-covered frozen lake ringed by pine trees, crossed by a winding line of boot prints that bends away from every faint patch of cracked ice under the snow."
+              },
+              "story": [
+                "When I first learned test-driven development, I wrote a big pile of tests for everything before a single line of production code existed. Then I had to write code for all of them at once. It was exhausting.",
+                "So I changed course and leaned on mocks, writing a few big ones first and working out the flow with them. That did not last either. I kept changing my mind as I developed, and tests written minutes or hours earlier went to waste. Whenever I refactored, the tests had to change too.",
+                "Then I saw that TDD is more about design than testing, and I started learning the real reasons behind design principles. I read Corey Haines on the four rules of simple design, then dug into SOLID and refactoring. Everyone says SOLID is good. Ask people how they use it in their code, and many say they know it but rarely use it."
+              ],
+              "source": "Told at [Think. Design. Work Smart. with Alex Bolboaca](https://www.youtube.com/watch?v=jksb10dcYB8&t=1775s) in April 2021."
+            },
+            {
+              "id": "be-on-time",
+              "zen": "Be on time",
+              "image": {
+                "src": "assets/zen/be-on-time.svg",
+                "alt": "Charcoal drawing of a wooden stage floor below a curtain, with a pale circle worn into the boards and twelve marks around it like a clock face, and a dark tablet lying face down near the stage edge."
+              },
+              "story": [
+                "In December 2019 I spoke at TEDxTarsusAmericanCollege. It was being filmed for the TEDx site, and I had eighteen minutes. They put a tablet in front of me that counted down from eighteen. One minute in, its battery died. They cut you off sharply at eighteen minutes. For a moment I was thrown, and I even stumbled over my words.",
+                "From there on I had only my rehearsals. I spoke for eighteen minutes and finished in eighteen minutes. Without those rehearsals I would have been lost.",
+                "What I fear most has happened to me a few times. I start a talk, set my watch, and soon have no idea which minute I am in. Did we start at eleven? It is a nightmare. So I split every talk into checkpoints and look at my watch every five minutes. Run over, and people drift away."
+              ],
+              "source": "Told at [Tütsü Sektör](https://www.youtube.com/watch?v=0c3WJuUIypo&t=4571s) in March 2024."
+            },
+            {
+              "id": "find-waste",
+              "zen": "Find waste and eliminate",
+              "image": {
+                "src": "assets/zen/find-waste.svg",
+                "alt": "Charcoal drawing of a lone leafy tree in an open field, with a small wooden sign nailed to its trunk that reads TREE."
+              },
+              "story": [
+                "For my first five years as a developer, I held a strong opinion: code must have comments. I wrote them above every method, even above getters and setters.",
+                "Then one day I noticed a plugin for IntelliJ IDEA that generated comments for getters and setters automatically, and I was shocked. That was what I had been spending my time on. Above the getTicket method I had written get ticket. Anyone who read my comments to understand my code would learn that getTicket gets a ticket.",
+                "It was waste, and I had been producing it for years without seeing it. Workarounds, patches and magic numbers are not natural, and when one has to stay, it needs a comment. Everything else is the code's job, and clean code and tests help it do that job."
+              ],
+              "source": "Told at [Bosnia Agile Day](https://www.youtube.com/watch?v=OUJKu9ZHLis&t=1783s) in October 2016."
+            },
+            {
+              "id": "team-mate",
+              "zen": "Be a real team mate",
+              "image": {
+                "src": "assets/zen/team-mate.svg",
+                "alt": "Charcoal drawing of a desk holding one monitor showing code, one keyboard and a round kitchen timer, with three wooden chairs pulled up side by side against its edge."
+              },
+              "story": [
+                "A new colleague joined our team. Not long after, an important project came up and we had a module of it to write, so the newcomer joined us and made three. We went into a room and set a timer for twenty minutes or half an hour. When it rang, the keyboard passed to the next person.",
+                "We wrote code like that for three weeks. The newcomer was writing code from the very first day. Slowly at first, of course, with us saying let us do this one this way, that one that way. Three weeks later we were somewhere else entirely.",
+                "For three years, most of my pairing was full time. We went to lunch together and even drank water at the same time, so that our breaks fell together too. A teammate is not the person at the next desk. It is the one who hands you the keyboard."
+              ],
+              "source": "Told at [Türkiye Java Community](https://www.youtube.com/watch?v=aHhWUFW8Ec8&t=4274s) in June 2022, and at [GrowIT Conference](https://www.youtube.com/watch?v=sxf-DpYrJfk&t=1006s) in December 2018."
+            },
+            {
+              "id": "trust-by-default",
+              "zen": "Trust by default",
+              "image": {
+                "src": "assets/zen/trust-by-default.svg",
+                "alt": "Charcoal drawing of two forearms in buttoned shirt cuffs shaking hands in front of an empty bookshelf, its books lying scattered on the floor below."
+              },
+              "story": [
+                "One day I typed truncate table. A colleague asked what I was doing. I thought I was clearing my local database. I was not. I was connected to another environment, and two gigabytes of data were gone. Getting it back would take three days at the very least.",
+                "I went to my manager. I deleted it, I said, I am sorry, the data is gone. I remember clearly what happened next. My manager stood up, shook my hand and said: “Lemi, welcome to the club. The best system admin is the one who has run sudo rm -rf once in their life. You have done it. From now on, you won't.”",
+                "Where everyone points a finger and says you are to blame, nobody can be open about a mistake. I walked in with an apology and walked out with a handshake. It is one of the events that changed my life."
+              ],
+              "source": "Told at [Agile Talks, Agile Türkiye](https://www.youtube.com/watch?v=l1DqBlddbeQ&t=2298s) in June 2016."
+            },
+            {
+              "id": "empathy",
+              "zen": "Before you respond, develop empathy",
+              "image": {
+                "src": "assets/zen/empathy.svg",
+                "alt": "Charcoal drawing of a dark room where a closed laptop sits on a desk beside a desk lamp turned away from it, lighting an empty chair beside the desk."
+              },
+              "story": [
+                "One of my old managers at Sony was always at the computer. Whenever I went over, the same thing happened. The screen shut with a snap. No leaving it half open, no tapping away at an email while saying go on, I'm listening. Snap, and then: “I'm listening.” It gave me an unbelievable amount of motivation, because I could feel that I was valued.",
+                "Now picture the opposite. You are watching a football match, and your spouse starts telling you about something that happened to them. You keep your eyes on the game and say, look at that. Whatever you answer next, you have already said: sorry, the match matters more. The person in front of you feels worthless before your answer has even begun."
+              ],
+              "source": "Told at [Agile Buluşmalar, Agile Türkiye](https://www.youtube.com/watch?v=naq49KIEVls&t=631s) in April 2016."
+            },
+            {
+              "id": "salute-and-smile",
+              "zen": "Always salute and smile",
+              "image": {
+                "src": "assets/zen/salute-and-smile.svg",
+                "alt": "Charcoal drawing of a street hot dog cart under a striped umbrella, with a hand rising from behind it in a wave, while in the foreground a passer-by seen from behind raises a hand and waves back."
+              },
+              "story": [
+                "When Gillian Sandstrom changed tracks to study psychology in Toronto, she was ten years older than her fellow students and felt she did not fit in. On her daily walk between university buildings she passed a hot dog stand. She never bought a hot dog. But every time she passed, she smiled and waved at the woman there, and the woman smiled and waved back. She felt better after seeing her, and worse when she was not there.",
+                "Years later she tested that feeling. Sixty people outside a Starbucks in Vancouver were given gift cards. Some were told to order as efficiently as possible. Others were told to make eye contact, smile and have a little chat with the barista. Those who chatted came out in a better mood, with a greater sense of belonging. The hot dog lady had only waved back. It was enough."
+              ],
+              "source": "From [Why a stranger's hello can do more than just brighten your day](https://www.npr.org/sections/goatsandsoda/2023/08/23/1193148718/why-a-strangers-hello-can-do-more-than-just-brighten-your-day), NPR."
+            },
+            {
+              "id": "think-twice",
+              "zen": "Be aware of your words, think twice before you talk",
+              "image": {
+                "src": "assets/zen/think-twice.svg",
+                "alt": "Charcoal drawing of a hand reaching out of a lit window high on a building at night and letting go of a tiny paper aeroplane, while far below a huge aeroplane-shaped shadow spreads across the roofs of the city."
+              },
+              "story": [
+                "On 28 November 2017 our infrastructure team showed me a flaw: on macOS High Sierra, anyone could log in as root with an empty password. They had reported it to Apple and got nowhere. That night I wrote to Apple Support on Twitter with one hand. With the other, I was trying to get a baby to sleep.",
+                "I knew the bug was serious. I did not know how far a few words could travel. By the next day it was in newspapers from the United States to China, and Apple had shipped a fix. At half past one at night I was still messaging the BBC when my wife told me to come and help, and go to bed. One email opened with “moron”. I taped over my camera. It took me weeks to recover.",
+                "I still think pressing the alarm was right. But I had sent those words naively, and words go further than the hand that types them."
+              ],
+              "source": "Told at [Teknasyon ile Kesin Yaşanmıştır #14](https://www.youtube.com/watch?v=rLR9bdSc1AE&t=2102s) in July 2023, and at [Think. Design. Work Smart. with Alex Bolboaca](https://www.youtube.com/watch?v=jksb10dcYB8&t=3398s) in April 2021. The dates and the press are on [the macOS root bug](../root-bug/) page."
+            },
+            {
+              "id": "role-model",
+              "zen": "Be a role model",
+              "image": {
+                "src": "assets/zen/role-model.svg",
+                "alt": "Charcoal drawing of a blackboard showing 7×8=54 crossed out with 56 written beside it, above two rows of school desks whose open notebooks all show the same crossed-out line and correction."
+              },
+              "story": [
+                "For years I explained integration tests one way, in talks and in the trainings I gave. An integration test, I said, covers more than one unit and walks out to the external dependencies, the places a unit test cannot reach.",
+                "Then, on stage, in the middle of a talk, I stopped and told the hall: “I think I was wrong, friends. I'm sorry, I would not have wanted to say this. I apologize to everyone who took my trainings in the past.” I had not meant it that way, and now I understood it was not so.",
+                "Three years later, in another talk, I came back to it. I had given trainings on developer tests for years, and I regretted it. A role model is not someone who was never wrong. It is someone who says so in front of the people who learned it from them."
+              ],
+              "source": "Told at [DevFest Istanbul](https://www.youtube.com/watch?v=pjx06exON7g&t=821s) in December 2022, and at [DevFest İzmir](https://www.youtube.com/watch?v=QzbSRiru4gg&t=1001s) in December 2025."
+            },
+            {
+              "id": "geeky-and-nerdy",
+              "zen": "Love geeky and nerdy stuff",
+              "image": {
+                "src": "assets/zen/geeky-and-nerdy.svg",
+                "alt": "Charcoal drawing of a 1980s home computer on a desk with a small TV on top, a cassette and an open magazine beside it, and a big balloon made of square pixels floating outside the screen, its string tied to a joystick."
+              },
+              "story": [
+                "My journey started with a Commodore 64. Like every kid who met one in the nineties, I learned BASIC on it in middle school. There was a picture of a balloon, and I tried to make it fly across the screen by typing in its code line by line, without understanding any of it. I doubt there was ever a child who made that balloon fly and was not excited.",
+                "For three years I copied games and programs out of Commodore 64 magazines, reading from the page and typing them in, and saved them on cassettes.",
+                "Then I left İzmir to study computer engineering in Istanbul. By the 2000s, writing software had become my profession."
+              ],
+              "source": "Told at [Bilim Sohbetleri, İzmir Özel Türk Koleji](https://www.youtube.com/watch?v=s3L_Cux2RFs&t=611s) in December 2021, and at [Tütsü Sektör](https://www.youtube.com/watch?v=0c3WJuUIypo&t=220s) in March 2024."
+            },
+            {
+              "id": "coding-better",
+              "zen": "Always search for coding better",
+              "image": {
+                "src": "assets/zen/coding-better.svg",
+                "alt": "Charcoal drawing of two identical parcels side by side, the left one bound in criss-crossing string under a huge tangled knot, the right one tied with one string each way and a single plain bow."
+              },
+              "story": [
+                "At one point my job at Sony was to review code across our projects, including code I had never worked on, in frameworks I did not know. Scrolling through one project, I came across a fifteen-line method called validatePackage, and I could not scroll past it.",
+                "It was in production and it worked. It had unit tests. Still I went through it line by line. It built a message string, added a note if the package was null and another if it was empty. Then, if the message had been set, it threw a runtime exception, caught it straight away and returned false. Otherwise it returned true.",
+                "I rewrote it. With the logging left to the caller, the whole method fit on a single line. Both versions worked. Then I looked at my own code and found the same kind of gaps there. Working is not enough."
+              ],
+              "source": "Told at [Devnot Developer Summit](https://www.youtube.com/watch?v=7m88T8-96X4&t=2s) in April 2017, and at [Kodcu.com webinar](https://www.youtube.com/watch?v=mpx5lEcXxt0&t=1824s) in March 2014."
+            },
+            {
+              "id": "politics-and-religion",
+              "zen": "Never talk about politics and religions in public",
+              "image": {
+                "src": "assets/zen/politics-and-religion.svg",
+                "alt": "Charcoal drawing of a half-open door; through it a telescope on a table points out of a window at a starry sky, and just outside the door a small table holds a folded newspaper and a closed, plain book."
+              },
+              "story": [
+                "About the year 1645, John Wallis was living in London. The civil wars had badly interrupted studies at both of England's universities. Wallis talked about theology with eminent divines. He also met every week with a group curious about the new experimental philosophy, sometimes at Dr. Goddard's lodgings in Wood Street, where an operator ground glasses for telescopes and microscopes, sometimes in Cheapside or at Gresham College. One of them, John Wilkins, would later become Bishop of Chester.",
+                "Their business was medicine, anatomy, geometry, astronomy, navigation, magnetism, chemistry and mechanics. Wallis later wrote down their rule: “we barred all discourses of divinity, of state affairs, and of news, other than what concerned our business of Philosophy.” In 1662 the group was incorporated as the Royal Society.",
+                "Wallis did not give up theology. He kept it for the divines, and kept the weekly room for the work."
+              ],
+              "source": "From [Modern History Sourcebook: Dr. John Wallis: The Origin of The Royal Society, 1645-1662](https://sourcebooks.web.fordham.edu/mod/1662royalsociety.asp), Internet History Sourcebooks Project, Fordham University."
+            },
+            {
+              "id": "never-a-fanatic",
+              "zen": "Never be a fanatic",
+              "image": {
+                "src": "assets/zen/never-a-fanatic.svg",
+                "alt": "Charcoal drawing of a striped, fringed knitted scarf reading GIT FLOW, hanging folded on a single wall hook beside a closed door, under a shelf with a closed box of matches on it."
+              },
+              "story": [
+                "I started using Git Flow in 2009 and became a sincere fan. I believed it was critical, that teams really needed it. In 2013, at DevFest Istanbul, I presented it to a very crowded hall.",
+                "Over the years I noticed something. Git Flow is efficient for long release cycles. It is there to slow things down, so that nobody commits whatever they like and someone, an architect perhaps, gets a look first. A five-person team that goes live three to five times a week does not need develop branches, feature branches and a chain of approvals. One main branch is enough.",
+                "Search the internet and you will find documents calling Git Flow an anti-pattern. I do not say that. If you want slower deployments, it suits you well. Not everyone needs it. I stopped being its fan. I did not become its enemy."
+              ],
+              "source": "Told at [DevFest İzmir](https://www.youtube.com/watch?v=2Mu0O-VyeUQ&t=1449s) in December 2023, and at [Java Day Istanbul](https://www.youtube.com/watch?v=bEXuYvry3_o&t=1291s) in May 2017."
+            },
+            {
+              "id": "colors-in-between",
+              "zen": "Life has no white and no black, see the colors in between",
+              "image": {
+                "src": "assets/zen/colors-in-between.svg",
+                "alt": "Charcoal drawing of a white pawn and a black pawn standing at the two ends of a row of squares that shade, step by step, from white paper to deep black. A charcoal stick rests at the dark end of a long smudge."
+              },
+              "story": [
+                "For four years I worked in the same Scrum team. Around the company our team had a reputation: those guys are a bit odd, better not get too involved with them. They do things their own way. They keep bringing up problems.",
+                "We did keep bringing them up. We went to the managers and asked them to buy monitors for our teammates. We kept asking whether this or that could be done another way.",
+                "Yet when we looked at the results after those four years, our performance and the quality of our work were dramatically different from the other teams'. The team everyone called troublesome was the one that delivered. A label is black or white. The people under it never are."
+              ],
+              "source": "Told at the [Türk Telekom Group Agile Summit](https://www.youtube.com/watch?v=GnWbFTQPNHY&t=153s) in September 2015."
+            },
+            {
+              "id": "embrace-feedback",
+              "zen": "Embrace feedback even if they hurt",
+              "image": {
+                "src": "assets/zen/embrace-feedback.svg",
+                "alt": "Charcoal drawing of a dark jacket on a tailor's dummy, stuck with pins along its shoulders, waist, cuffs and hem beside dashed chalk lines, next to a stool holding a pincushion and a piece of tailor's chalk."
+              },
+              "story": [
+                "There was a place I wanted very much to work. I went through five interviews. They sent me a project, and I took annual leave to build it. I was proud of it: one hundred percent code coverage, functional, integration and unit tests, all of it working. They turned me down.",
+                "I could not understand why, so I pushed. I sent emails, called people, begged friends on the inside to find out. In the end a message came. My project was far below what they expected for the role. It was heavily over-engineered. They would not tell me what I had done wrong, because for that role they should not need to. I had to unlearn what I thought I knew.",
+                "It crushed me. Then I began to do exactly that. I set aside what I knew and learned it again from the start, and that road became talk after talk."
+              ],
+              "source": "Told at [Türkiye Java Community](https://www.youtube.com/watch?v=yQMG-bwFXUY&t=434s) in April 2024."
+            },
+            {
+              "id": "efficient-and-productive",
+              "zen": "Focus on how to be more efficient and productive",
+              "image": {
+                "src": "assets/zen/efficient-and-productive.svg",
+                "alt": "Charcoal drawing of a tiled pool edge with a ladder rising from the water, where wet footprints lead across the tiles to an open \"Learn to swim\" booklet spotted with water drops, beside worn goggles and a snorkel."
+              },
+              "story": [
+                "Since the very beginning of my career, I have worked with a tool used on Linux machines. Once, I bought a book about it, and a very basic one at that. My wife asked me why. You have spent your whole career using it, she said.",
+                "I told her I felt there were things in the fundamentals that I could not remember, or had never learned at all. Most of us were thrown into the pool before we knew how to swim. We learned by thrashing about. Nobody showed us how to put on the snorkel, or how to wear the goggles properly.",
+                "So we swim, but we could swim better. That is why the fundamentals always matter, however long you have been at it."
+              ],
+              "source": "Told at [The Unspoken Rules of a Better Professional Life](https://www.youtube.com/watch?v=VBWS1-ngCKo&t=3144s) in December 2020."
+            },
+            {
+              "id": "never-get-used-to-it",
+              "zen": "Never get used to the things you hate",
+              "image": {
+                "src": "assets/zen/never-get-used-to-it.svg",
+                "alt": "Charcoal drawing of a shoe tipped up on a paved square with a small stone dropping out of it, while a long trail of uneven footprints runs back to the horizon."
+              },
+              "story": [
+                "Once again I asked whether the company could buy me an IntelliJ licence. Once again I was told to use Eclipse. So I took out my own credit card and bought the 299 dollar licence. There was nothing else left to do.",
+                "Someone in the audience later asked whether that was running away from the fight. Yes, a little, I said. It does look like giving up. But I had no patience left to put up with it. I still pay for it, every time the licence runs out.",
+                "After I left that company, everyone on the team had an IntelliJ licence and a monitor. The credit goes to the colleagues who fought the same fight with me. They never gave up, and they convinced the managers. None of us got used to it. I paid, and they kept pushing."
+              ],
+              "source": "Told at [Agile Buluşmalar, Agile Türkiye](https://www.youtube.com/watch?v=naq49KIEVls&t=3726s) in April 2016."
+            },
+            {
+              "id": "money-and-relationships",
+              "zen": "Money cannot buy relationships",
+              "image": {
+                "src": "assets/zen/money-and-relationships.svg",
+                "alt": "Charcoal drawing of an open leather wallet on a table, its left half scuffed and cracked around a worn photo window with a faint sketch of two figures, its right half holding crisp banknotes in a clean, evenly stitched pocket."
+              },
+              "story": [
+                "In 1938, in the middle of the Great Depression, scientists began following the lives of 268 Harvard sophomores. They hoped the study would reveal clues to a healthy and happy life. One of them was the future president John F. Kennedy. Later, 456 people from Boston's inner city joined the study.",
+                "Some of the men became successful businessmen, doctors and lawyers. Others ended up with alcoholism or schizophrenia. In the end, relationships predicted a long and happy life better than social class, IQ or even genes. The people most satisfied in their relationships at 50 were the healthiest at 80.",
+                "“Close relationships, more than money or fame, are what keep people happy throughout their lives,” the Harvard Gazette wrote in 2017. “Loneliness kills,” said Robert Waldinger, the study's director. Money buys many things, but not the people who stay beside you."
+              ],
+              "source": "From [Good genes are nice, but joy is better](https://news.harvard.edu/gazette/story/2017/04/over-nearly-80-years-harvard-study-has-been-showing-how-to-live-a-healthy-and-happy-life/), Harvard Gazette."
+            },
+            {
+              "id": "someone-better",
+              "zen": "There always exists someone better than you",
+              "image": {
+                "src": "assets/zen/someone-better.svg",
+                "alt": "Charcoal drawing of a hand holding a magnifying glass over a page of scribbled code, while a second hand reaches in from the left and points at a short line ending in empty braces just below the lens."
+              },
+              "story": [
+                "I was giving a talk on the SOLID principles. When I reached the Interface Segregation Principle, I told the audience about something that had happened only two days earlier.",
+                "I was pair programming with my friend Mustafa. In our code, we were overriding a method and leaving its body empty, because that class had no use for what it did. Mustafa raised it. This is not very logical, he said. Would composition not make more sense here than inheritance?",
+                "It made far more sense. I was the one preparing to explain these principles to an audience, and he was the one who saw it in our code. However much you know, someone will see what you missed, and often they are sitting right beside you."
+              ],
+              "source": "Told at [Devnot Developer Summit Online](https://www.youtube.com/watch?v=pdtpWYNBzqM&t=1399s) in November 2020."
+            },
+            {
+              "id": "never-raise-your-voice",
+              "zen": "Never raise your voice, stop talking if you get too angry",
+              "image": {
+                "src": "assets/zen/never-sent.svg",
+                "alt": "Charcoal drawing of a desk with its drawer pulled open. Inside lies a sealed envelope addressed “To Gen. Meade, never sent, or signed.” Thin wisps rise from it and fade above the desk, where a pen and an inkwell rest."
+              },
+              "story": [
+                "In July 1863 Abraham Lincoln was angry with George Meade. His general had not pursued and destroyed Lee's army after the Battle of Gettysburg. On 14 July Lincoln wrote to him, and the letter holds nothing back: “Your golden opportunity is gone, and I am distressed immeasurably because of it.”",
+                "Then he put it in an envelope and wrote on it: “To Gen. Meade, never sent, or signed.” The American Battlefield Trust, which publishes the draft, says writing letters like this and storing them away was one of his favourite ways of coping.",
+                "The anger was real, and it got its words. It just never got a reader. Spoken words have no drawer to go into. When anger gets too loud, stop talking, and speak again once it has passed."
+              ],
+              "source": "From [Lincoln's unsent letter to George Meade](https://www.battlefields.org/learn/primary-sources/lincolns-unsent-letter-george-meade), American Battlefield Trust."
+            },
+            {
+              "id": "hear-both-voices",
+              "zen": "Always be fair, hear both voices to conclude",
+              "image": {
+                "src": "assets/zen/hear-both-voices.svg",
+                "alt": "Charcoal drawing of a balance scale with a level beam holding an identical clay jar at each end, each jar letting a thin stream of water fall into one wide shallow basin below."
+              },
+              "story": [
+                "In the law courts of classical Athens, time was kept with water. The klepsydra was a large clay vessel with a hole that drained into a second vessel set below it. Speaking time was divided evenly between the two parties, and the water measured it. A surviving clock of this kind, from the late fifth century BC, is marked for two choes, about 6.4 litres, which takes about six minutes to run out. When laws or witness testimony were read aloud, the flow was stopped.",
+                "Each juror swore an oath. One of its lines, in A. T. Murray's translation of Demosthenes, reads: “I will give impartial hearing to prosecutor and defendant alike.”",
+                "The Athenians did not leave fairness to a juror's patience. They poured it out in equal measures, one for each side."
+              ],
+              "source": "From [Discussion Series: Athenian Law Lectures](https://chs.harvard.edu/discussion-series-athenian-law-lectures-5/), Center for Hellenic Studies, Harvard University; [Fragmentary Waterclock (Klepsydra)](https://dcc.dickinson.edu/node/31749), Dickinson College Commentaries; and [Demosthenes, Against Timocrates, section 151](http://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.01.0074:speech=24:section=151), Perseus Digital Library."
+            },
+            {
+              "id": "produce-something",
+              "zen": "Produce something to feel you are living",
+              "image": {
+                "src": "assets/zen/produce-something.svg",
+                "alt": "Charcoal drawing of a yellowed envelope handwritten to \"TÜBİTAK, Ankara\" with a 1997 postmark, lying on a desk beside an open laptop whose dark screen reads \"It works.\""
+              },
+              "story": [
+                "When I turned 40, I went through a crisis. On my birthday at the office, colleagues said I looked very sad, nothing like a birthday boy. One question kept echoing in me: what is the purpose of our being here? My answer was to leave a trace.",
+                "In 1997 my high school maths project began as a search for a formula that tells whether a number is prime, and it turned into divisibility rules. With only a basic calculator, I found that they all came from a single pattern, but I could not prove it. I sent my notes to TÜBİTAK in an envelope. Nothing happened.",
+                "24 years later I found my papers, wrote the code and put it all on GitHub. It worked. A literature search later showed the result had been published long before I was born. Still, maybe the idea will help someone else's work one day. That would be a trace too."
+              ],
+              "source": "Told at [PeaksOnTheBack #2](https://www.youtube.com/watch?v=aS_bQhcI06M&t=3646s) in February 2024, and at [Bilim Sohbetleri, İzmir Özel Türk Koleji](https://www.youtube.com/watch?v=s3L_Cux2RFs&t=720s) in December 2021. The full write-up is in [Grand Unified Divisibility Rule](https://github.com/lemiorhan/grand-unified-divisibility-rule)."
+            },
+            {
+              "id": "shop-from-good-people",
+              "zen": "Do shopping from good people, even if they are expensive",
+              "image": {
+                "src": "assets/zen/shop-from-good-people.svg",
+                "alt": "Charcoal drawing of a narrow iron bed squeezed between tall bookshelves, its blanket piled high with string-tied parcels and ticked order slips, with more parcels under the bed and slips on the floor."
+              },
+              "story": [
+                "For decades, the Paris bookshop Shakespeare and Company has let writers sleep for free among its shelves, in exchange for a few hours of help. George Whitman, who opened the current shop in 1951, called them tumbleweeds. More than 30,000 have stayed there.",
+                "In 2020 the pandemic hit the shop hard. Sales fell almost 80 percent, and the savings were gone. Before the second lockdown, the shop wrote to its readers. It did not simply ask for money. It asked those who had the means to buy books from its website.",
+                "In one week about 5,000 orders came in, against around 100 in a normal week. One old tumbleweed ordered three Year of Reading subscriptions, €1,000 in all. Every one of those orders was a choice about whom to buy from."
+              ],
+              "source": "From [Virus-hit Paris bookshop Shakespeare and Co. appeals for help](https://www.pbs.org/newshour/arts/virus-hit-paris-bookshop-shakespeare-and-co-appeals-for-help), Associated Press via PBS NewsHour, and [Paris bookshop that Joyce frequented, Shakespeare and Company, begs for help](https://www.irishtimes.com/culture/books/paris-bookshop-that-joyce-frequented-shakespeare-and-company-begs-for-help-1.4394194), The Guardian via The Irish Times."
+            },
+            {
+              "id": "proud-of-your-profession",
+              "zen": "Be proud of your profession",
+              "image": {
+                "src": "assets/zen/proud-of-your-profession.svg",
+                "alt": "Charcoal drawing of a builder's hard hat resting on top of a tall stack of fanfold computer printouts, with one sheet of code and sprocket holes hanging down the front."
+              },
+              "story": [
+                "In the 1960s, Margaret Hamilton led the team writing the on-board flight software for Apollo at MIT's Instrumentation Laboratory. Programmers then learned the job by hands-on training. Universities had no computer science programmes yet.",
+                "Hamilton wanted the software, and the people building it, to get the respect other engineering fields had. So she started calling the work software engineering. “When I first came up with the term, no one had heard of it before, at least in our world,” she recalled. “It was an ongoing joke for a long time.”",
+                "She kept pushing for it. Then, in one meeting, a respected hardware expert said that building software was an engineering discipline too, just like hardware. She had asked for respect for the work by giving it a name. The name they joked about is now a job title."
+              ],
+              "source": "From [Margaret Hamilton - CHM](https://www.computerhistory.org/blog/margaret-hamilton/), Computer History Museum, and [“When I first came up with the term, no one had heard of it before”](https://techradar.com/pro/when-i-first-came-up-with-the-term-no-one-had-heard-of-it-before-quote-of-the-day-by-nasas-former-software-director-margaret-hamilton-on-the-birth-of-software-engineering), TechRadar."
+            },
+            {
+              "id": "leave-your-ego",
+              "zen": "Leave your ego",
+              "image": {
+                "src": "assets/zen/leave-your-ego.svg",
+                "alt": "Charcoal drawing of a sandcastle with three towers and a flag at the water's edge, a wave touching its base, a bucket and spade beside it, and a line of footprints walking away from it out of the picture."
+              },
+              "story": [
+                "I cook the mushiest pilaf and the soggiest pasta in the world, and I eat it with real pleasure, sometimes four plates. Nobody else at home eats my pasta. We love what we make, however bad it is, and we fall in love with the code we write.",
+                "At code retreats we get people writing a small game together with TDD. We have forty-five minutes, and then we delete the code. Once a participant refused: “I won't delete it. Nobody can make me delete code.” It would come in handy one day, the participant said, and they had never deleted code in their life. All we had written was two classes. I said I was living through a first.",
+                "Ego is not a bad thing, up to a point. When fifteen people are waiting on my commit, my hand shakes, because my ego tells me: Lemi, write good code. Too much of it, and two classes become impossible to let go."
+              ],
+              "source": "Told at [Agile Buluşmalar, Agile Türkiye](https://www.youtube.com/watch?v=naq49KIEVls&t=1797s) in April 2016."
+            },
+            {
+              "id": "not-dependent",
+              "zen": "Never be dependent on people, never be someone else's man",
+              "image": {
+                "src": "assets/zen/not-dependent.svg",
+                "alt": "Charcoal drawing of a beach where a line of wet bare footprints comes out of the sea across the sand, and beside the last footprint a coil of rope has just landed, its slack still arcing in from the right."
+              },
+              "story": [
+                "In 1747 Samuel Johnson faced years of work on an English dictionary. He approached Lord Chesterfield, a famous patron of young writers, hoping for support, and dedicated his plan of the dictionary to him. Chesterfield seems to have given him a few token payments, then lost interest.",
+                "In 1754, before the book came out, Chesterfield praised it in a magazine. Johnson wrote back on 7 February 1755. Seven years had passed, he said, since he had waited in Chesterfield's outer rooms. He had brought the work this far “without one Act of assistance, one word of encouragement, or one smile of favour.” He asked whether a patron is not “one who looks with unconcern on a Man struggling for Life in the water and when he has reached ground encumbers him with help.”",
+                "He had done the work without a patron, and would not let one claim it."
+              ],
+              "source": "From [Johnson's Letter to Chesterfield, 7 February 1755](https://jacklynch.net/Texts/letter55.html), edited by Jack Lynch."
+            },
+            {
+              "id": "respect-old-people",
+              "zen": "Show respect to old people",
+              "image": {
+                "src": "assets/zen/respect-old-people.svg",
+                "alt": "Charcoal drawing of a long, low table set with bowls and cups that starts in a tatami room with cushions on both sides, runs out through the open sliding doors past village roofs, and narrows until it climbs a far hill."
+              },
+              "story": [
+                "On 15 September 1947, the mayor of Nomadani, a village in Hyōgo Prefecture in Japan, hosted a dinner with entertainment for the village's older residents. It was meant to honour a generation of parents who had sent their children to war and carried the pain of it.",
+                "The next year Nomadani declared the day a holiday on its own. The idea spread, and in 1966 Respect for the Aged Day became a national holiday. Today, on that day, local governments across Japan hold events for older people, and families take their elderly relatives on outings and give them presents.",
+                "A country's holiday for its old people began as one mayor's dinner in one village."
+              ],
+              "source": "From [Respect for the Aged Day (Japan’s National Holidays)](https://www.nippon.com/en/guide-to-japan/gu051004/), Nippon.com."
+            },
+            {
+              "id": "kind-to-relatives",
+              "zen": "Always be kind and respectful to your relatives",
+              "image": {
+                "src": "assets/zen/kind-to-relatives.svg",
+                "alt": "Charcoal drawing of two plain, round-topped gravestones side by side behind one continuous bed of ivy that creeps up both their bases, with a watering can at the front edge, its spout over the leaves."
+              },
+              "story": [
+                "When Vincent van Gogh no longer had a paying job, his younger brother Theo sent him money. Later, as a manager at an art firm, Theo supported him so he could concentrate on his art. He gave him advice and argued for his work. Most of what we know about Vincent's life comes from his letters to Theo.",
+                "Vincent died in July 1890, with Theo there. Theo organised a memorial exhibition of his brother's work, then broke down and died early in 1891. His widow, Jo van Gogh-Bonger, worked to make her brother-in-law's work known, and in 1914 she published his letters to Theo. That same year she had her husband's remains moved from Utrecht to Auvers. The brothers lie side by side, under a single blanket of ivy.",
+                "Theo looked after his brother while he lived. Jo looked after both of them once they were gone."
+              ],
+              "source": "From [A brother like no other: Theo and Vincent van Gogh](https://artsandculture.google.com/story/FwXR3IqVOqNv_g), Van Gogh Museum on Google Arts & Culture, and [Where was Van Gogh originally buried? We still don’t know](https://www.theartnewspaper.com/2021/09/10/where-was-van-gogh-originally-buried-we-still-dont-know), The Art Newspaper."
+            },
+            {
+              "id": "never-lie",
+              "zen": "Never lie, but it might be not the right time to say the truth",
+              "image": {
+                "src": "assets/zen/never-lie.svg",
+                "alt": "Charcoal drawing of a narrow borehole in stony desert ground, with a sealed envelope resting against its rim, tied with a rope that runs to a coil lying nearby."
+              },
+              "story": [
+                "On 5 August 2010 a gold and copper mine collapsed in Chile, trapping 33 men about 700 metres underground. Weeks later a borehole reached their shelter. All of them were alive. Engineers predicted it would take up to four months to drill a hole large enough to bring them up.",
+                "The men were not told that at once. The rescue chief, André Sougarret, thought it more appropriate to tell them at a later stage. Within days, the health minister, Jaime Mañalich, said they had been told they would not be out before the national holiday on 18 September, and that the hope was to have them out before Christmas. He said they took it calmly. A NASA medical officer advising Chile said it was important not to build false hopes, and important to be honest.",
+                "Nobody had promised them an early date. They came up on 13 October, after 69 days."
+              ],
+              "source": "From [Chilean Miners' Underground Ordeal Could Last 'Til Christmas](https://www.pbs.org/newshour/show/chilean-miners-underground-ordeal-could-last-til-christmas), PBS NewsHour; [Trapped Chilean miners told rescue could take months](https://www.nbcnews.com/id/wbna38852964), NBC News; [Be frank with trapped miners, NASA tells Chile](https://phys.org/news/2010-08-frank-miners-nasa-chile.html), Phys.org; [Chilean miners told of rescue delay](https://www.aljazeera.com/news/2010/8/26/chilean-miners-told-of-rescue-delay), Al Jazeera; [Trapped Chile Miners Face 4-Month Mental, Physical Test](https://www.nationalgeographic.com/history/article/100825-chile-miners-psychological-mine-mental-health-science) and [33 Chilean Miners Were Buried Alive. These Are the Tactics That Kept Them Sane.](https://www.nationalgeographic.com/history/article/chilean-miners-rescue-psychological-strategy), National Geographic."
+            },
+            {
+              "id": "read-every-day",
+              "zen": "Read a lot, read every day",
+              "image": {
+                "src": "assets/zen/read-every-day.svg",
+                "alt": "Charcoal drawing of a cutaway stone well with a ladder whose rungs are books, thin new ones near the top and thick, worn old volumes lower down in the dark, where a lamp lights an open book on the well's floor."
+              },
+              "story": [
+                "While I was studying the SOLID principles, I came across a book claiming they were completely wrong. I bought it, read it to the last page and took notes all over it.",
+                "Then I read what the people behind each principle had written, Barbara Liskov and Larry Constantine among them. I found a book printed decades ago and read the chapters that explain the ideas. I wanted the whole picture: what the people who came up with these ideas really said, why their critics hate them, and how people use them today.",
+                "For five months I read almost every night. It was like doing military service. Afterwards I could look at my own projects and see where we might be doing things wrong, and where right. Nearly all of my Unlearn talks came out of that reading."
+              ],
+              "source": "Told at [PeaksOnTheBack #2](https://www.youtube.com/watch?v=aS_bQhcI06M&t=2882s) in February 2024."
+            },
+            {
+              "id": "write-every-day",
+              "zen": "Write a lot, write every day",
+              "image": {
+                "src": "assets/zen/write-every-day.svg",
+                "alt": "Charcoal drawing of an open pocket watch lying on a handwritten page, its face divided into four quarters, each filled to the rim with tiny handwriting instead of numbers."
+              },
+              "story": [
+                "From 1859 to 1871 Anthony Trollope lived at Waltham Cross. Until the autumn of 1867 he also worked as a surveyor for the General Post Office. Over and above his novels, he wrote articles for periodicals “without number.”",
+                "He put it all down to early hours. He was at his table every morning at 5.30. An old groom, paid £5 a year extra to wake him, was never once late with the coffee. Trollope began by reading the previous day's work. Then he wrote with his watch in front of him and asked himself for 250 words every quarter of an hour. He was finished before he dressed for breakfast.",
+                "Three hours a day, he believed, was as much as a man ought to write. The 250 words, he wrote, came “as regularly as my watch went.” He did not wait for a free day. He wrote every morning, before the day began."
+              ],
+              "source": "From [Anthony Trollope, An Autobiography, chapter XV](https://archive.org/details/autobiography00trol), Internet Archive."
+            },
+            {
+              "id": "your-name",
+              "zen": "Your name is your brand, manage your brand",
+              "image": {
+                "src": "assets/zen/your-name.svg",
+                "alt": "Charcoal drawing of a tall iron double gate between two stone pillars, chained shut with a heavy padlock, and in the padlock's keyhole a key folded from a sheet of paper with faint lines of handwriting."
+              },
+              "story": [
+                "I was out of work, with about a year of experience, when I heard Sony might have an opening at its office in Bağlarbaşı. I wrote a four-page CV with every university project in detail and took it there. Security would not let me in, so I asked the guard to take the CV inside. I had no hope.",
+                "The guard gave it to HR, HR to the manager, and the manager called me in. Normally, he said, a four-page CV went straight in the bin. He was curious about someone who could fill four pages with one year of experience.",
+                "That began ten years at Sony, across eight teams. I joined three times and resigned three times. The first farewell was a party, the second a cake. The third time I brought five litres of kısır, a bulgur salad, myself. Four pages opened the first door. My name opened the next two."
+              ],
+              "source": "Told at [Tütsü Sektör](https://www.youtube.com/watch?v=0c3WJuUIypo&t=436s) in March 2024, and at [Teknasyon ile Kesin Yaşanmıştır #14](https://www.youtube.com/watch?v=rLR9bdSc1AE&t=729s) in July 2023."
+            },
+            {
+              "id": "free-marketing",
+              "zen": "Free is the best marketing strategy of all time",
+              "image": {
+                "src": "assets/zen/free-marketing.svg",
+                "alt": "Charcoal drawing of a large domed birdcage with its side door swung wide open, while inside small birds sit in a ring around a tiny lamp-lit table where one bird stands with its beak open, talking."
+              },
+              "story": [
+                "In every company I joined, we started a weekly series of internal seminars: lunch and learn, brown bag, whatever the place called it. One hour, the same time and the same room every week, and one colleague shares something that matters to them. Attending was optional. Speaking was not. I went to juniors, new graduates and other colleagues and asked each of them to share.",
+                "I have never used JRuby, Python or Laravel, yet someone told me about each of them. My view of what can solve a problem grew wider.",
+                "Then a few colleagues told me something I have not forgotten. If they were still at the company, they said, it was because they were curious what they would learn next Wednesday. That hour was free for everyone, and it was what some people stayed for."
+              ],
+              "source": "Told at [Agile Buluşmalar, Agile Türkiye](https://www.youtube.com/watch?v=naq49KIEVls&t=4756s) in April 2016, and at the [Türk Telekom Group Agile Summit](https://www.youtube.com/watch?v=GnWbFTQPNHY&t=1938s) in September 2015."
+            },
+            {
+              "id": "nervous-not-scared",
+              "zen": "It is normal to feel nervous and excited when you talk in front of people, just don't be scared",
+              "image": {
+                "src": "assets/zen/nervous-not-scared.svg",
+                "alt": "Charcoal drawing of an open glass jar on a shelf with its lid beside it, butterflies tumbling out of its mouth in a loose cluster and, higher up, flying away in a neat V formation."
+              },
+              "story": [
+                "I had a phobia of speaking in front of people. In high school I would raise my hand, and when the teacher called on me I would be too nervous to talk. Many times all I could say was that I had raised my hand and forgotten what I wanted to say.",
+                "At university I stood at a microphone in front of 250 people for 35 seconds without a word, because I had forgotten everything. Introducing my friends, I could not remember their names, and I got a fit of giggles.",
+                "So I went to a theatre course, something I had dreamed of for years. During the play my hands and feet were shaking. That was when I noticed it starting to break. Even today, the first few minutes on a stage are stressful. After that, I do not want to come down."
+              ],
+              "source": "Told at [Craftbase Talks](https://www.youtube.com/watch?v=XYvf0NJKhpQ&t=32s) in April 2020."
+            },
+            {
+              "id": "talk-slowly",
+              "zen": "Talk slowly with high and lows in your words",
+              "image": {
+                "src": "assets/zen/talk-slowly.svg",
+                "alt": "Charcoal drawing of an old arched valve radio on a small table, with a line of peaks and valleys coming out of it, \"This\" written under the first burst, \"is London\" under the second, and blank paper between them."
+              },
+              "story": [
+                "In the late 1920s, at Washington State College, Edward R. Murrow took nineteen speech courses, most of them from Ida Lou Anderson. Polio had left her with serious physical handicaps, yet she excelled in speech and drama. She had her students read prose and poetry aloud and challenged them to say what they felt about the meaning of the words. She tutored Murrow privately for hours. “She taught me to speak,” he wrote.",
+                "Years later, before the United States entered the Second World War, Murrow reported on the Blitz from London rooftops. His reports opened with three words, and it was at Anderson's suggestion that he put a half-second pause after the first: “This ... is London.” He sent her the most powerful radio available so she could critique his broadcasts.",
+                "The words were ordinary. The pause between them became his signature."
+              ],
+              "source": "From [Edward R. Murrow graduates from Washington State College on June 2, 1930](https://www.historylink.org/file/7526), HistoryLink, and [Edward R. Murrow: Broadcasting History](https://www.nhpr.org/2004-05-06/edward-r-murrow-broadcasting-history), NPR, on NHPR."
+            },
+            {
+              "id": "body-language",
+              "zen": "Use body language when you speak",
+              "image": {
+                "src": "assets/zen/body-language.svg",
+                "alt": "Charcoal drawing of a horse in profile with one front hoof raised mid-tap, standing before a small blackboard chalked \"3 + 2 = ?\", while a dotted line runs from the horse's eye to the tilted brim of a man's hat at the edge of the frame."
+              },
+              "story": [
+                "By 1904 a horse called Hans seemed to solve problems in multiplication and division. His owner, von Osten, had once taught mathematics at a German gymnasium. He would ask a question, and Hans tapped out the answer with a forefoot. A commission looked into it and recommended further investigation.",
+                "From October to November that year, Oskar Pfungst ran careful tests. When large blinders kept Hans from seeing the questioner, he was at a loss. The answers were in the questioner's body. After asking, people bent their head and trunk forward, and Hans began to tap. When the count reached the right number, they gave a slight upward jerk of the head, and Hans stopped. In laboratory tests these movements were seldom as large as a millimetre. Nobody knew they were making them, and even after Pfungst found them, he still made them without meaning to.",
+                "An audience reads your body whether you mean it or not. Better to mean it."
+              ],
+              "source": "From [Clever Hans (The Horse of Mr. von Osten)](https://archive.org/details/cu31924024783973), Oskar Pfungst, Henry Holt and Company, 1911, Internet Archive."
+            },
+            {
+              "id": "keep-your-principles",
+              "zen": "Never smoke, never cheat, never try bad habits... do not betray your principles",
+              "image": {
+                "src": "assets/zen/keep-your-principles.svg",
+                "alt": "Charcoal drawing seen from above of a line of cars standing bumper to bumper on a motorway's hard shoulder beside the crash barrier, while a single car waits alone in the empty lane next to it."
+              },
+              "story": [
+                "After one of my talks, someone told me I had stolen an hour and a half of their life. I did not know them then. We became friends later. What I described was a dream world, they said. Maybe it happens in Silicon Valley or at Facebook, but in Turkey nobody can do it, nobody does it, nobody believes in it.",
+                "I said thank you. It was honest feedback, and we could argue about it. Then I told them I had seen these things work, in projects I was part of.",
+                "Everyone drives down the emergency lane. Fine. But let one person not do it. Let someone be the one who refuses. Someone has to believe that the right things can be done."
+              ],
+              "source": "Told at [Agile Buluşmalar, Agile Türkiye](https://www.youtube.com/watch?v=naq49KIEVls&t=2108s) in April 2016, and at [Agile Talks, Agile Türkiye](https://www.youtube.com/watch?v=l1DqBlddbeQ&t=752s) in June 2016."
+            },
+            {
+              "id": "retrospect",
+              "zen": "Retrospect your life regularly",
+              "image": {
+                "src": "assets/zen/retrospect.svg",
+                "alt": "Charcoal drawing from the driver's seat, where a rear-view mirror at the top of the windscreen shows a road winding back to the horizon and the road ahead through the windscreen winds in the same bends."
+              },
+              "story": [
+                "I keep evaluating myself. Years ago I sat down and looked back at the eleven large projects of my career, each at least six months long. Six of them, almost 55 percent, had gone to the bin. Some never even went live. My first big project took more than a year of my work. The knowledge stayed with me. The effort did not.",
+                "I did not stop at the number. I asked why, and wrote a list for myself, dozens of items long. Some reasons were company policies I could not change. Others were things we did against the nature of software, and those I could work on.",
+                "Years later, I looked back again. The pattern was still there. So today, building Craftgate, we develop warily, so that we do not fall into the same mistakes again."
+              ],
+              "source": "Told at [Agile Talks, Agile Türkiye](https://www.youtube.com/watch?v=TxJo4O9uHZ8&t=20s) in June 2013, and at [DevFest İzmir](https://www.youtube.com/watch?v=ohbwpy696Vg&t=20s) in December 2024."
+            },
+            {
+              "id": "family-first",
+              "zen": "Your family has the highest priority in your life",
+              "image": {
+                "src": "assets/zen/family-first.svg",
+                "alt": "Charcoal drawing of a birthday cake on a table in a dim room, its five candles burned down to stubs with thin smoke rising, while a wall clock shows half past ten and a briefcase stands by the door."
+              },
+              "story": [
+                "On my son's first birthday, I came home at half past ten at night. No father should miss his child's birthday. If family is your answer to what matters most in life, rising in your career on your family's shoulders is one thing. Running them over like a steamroller is not rising. It is unfairness, even selfishness.",
+                "Once I interviewed someone who had not worked for two or three years. I asked why. Their mother had been very ill, they said, and they had stopped working to look after her. To me, that is one of the most honourable things a person can do. They had answered the same question, and then lived by the answer.",
+                "I work late too, and often. But when I was asked what I would tell my younger self, I said: give more time to your private life. Success bought with your family is not success."
+              ],
+              "source": "Told at [The Unspoken Rules of a Better Professional Life](https://www.youtube.com/watch?v=VBWS1-ngCKo&t=2730s) in December 2020, and at [Think. Design. Work Smart. with Alex Bolboaca](https://www.youtube.com/watch?v=jksb10dcYB8&t=4493s) in April 2021."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

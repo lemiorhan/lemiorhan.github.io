@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="13" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <g id="bfly">
+      <path d="M0 1 C -10 2, -19 8, -17 16 C -13 21, -4 14, 0 4 Z M0 1 C 10 2, 19 8, 17 16 C 13 21, 4 14, 0 4 Z" fill="url(#hatch)"/>
+      <path d="M0 -1 C -4 -13, -17 -27, -32 -27 C -36 -18, -26 -3, 0 1 Z M0 -1 C 4 -13, 17 -27, 32 -27 C 36 -18, 26 -3, 0 1 Z" fill="#F2EDE3"/>
+      <path d="M-29 -24 C -22 -24, -14 -18, -10 -12 M29 -24 C 22 -24, 14 -18, 10 -12" stroke-width="1" opacity="0.7"/>
+      <path d="M-22 -17 m -3 0 a 3 3 0 1 0 6 0 a 3 3 0 1 0 -6 0 M22 -17 m -3 0 a 3 3 0 1 0 6 0 a 3 3 0 1 0 -6 0" fill="#24211e" stroke="none"/>
+      <path d="M0 -9 L0 12" stroke-width="3.2"/>
+      <path d="M-1 -9 C -3 -16, -6 -21, -11 -25 M1 -9 C 3 -16, 6 -21, 11 -25" stroke-width="1.2"/>
+    </g>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <path d="M10 612 L790 612 L790 634 L10 634 Z" opacity="0.22"/>
+    <path d="M118 568 L250 568 L250 584 L100 584 Z M330 566 L440 566 L446 584 L318 584 Z" opacity="0.3"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 520 C 260 518, 540 522, 780 519" stroke-width="1.4" opacity="0.45"/>
+    <path d="M10 592 L790 592 L790 612 L10 612 Z" fill="url(#hatch)" stroke-width="2.2"/>
+    <path d="M10 592 L790 592" stroke-width="2.8"/>
+
+    <path d="M282 404 C 300 410, 314 424, 314 446 L314 564 C 314 574, 304 578, 290 578 L272 578 C 284 540, 284 470, 282 404 Z" fill="url(#hatch-light)" stroke="none" opacity="0.5"/>
+    <path d="M198 386 L198 404 C 180 410, 166 424, 166 446 L166 564 C 166 574, 176 578, 190 578 L290 578 C 304 578, 314 574, 314 564 L314 446 C 314 424, 300 410, 282 404 L282 386" stroke-width="2.6"/>
+    <path d="M198 386 C 198 377, 282 377, 282 386" stroke-width="1.6" opacity="0.7"/>
+    <path d="M198 386 C 198 395, 282 395, 282 386" stroke-width="2.4"/>
+    <path d="M199 394 C 222 400, 260 400, 281 392 M199 401 C 222 407, 260 407, 281 399" stroke-width="1.4" opacity="0.8"/>
+    <path d="M172 566 C 190 572, 290 572, 308 566" stroke-width="1.4" opacity="0.7"/>
+    <path d="M184 452 C 182 490, 182 530, 186 556" stroke="#F6F1E6" stroke-width="3.4" opacity="0.9"/>
+    <path d="M296 458 L296 490" stroke="#F6F1E6" stroke-width="2.6" opacity="0.9"/>
+
+    <path d="M342 562 L342 572 C 342 580, 438 580, 438 572 L438 562" fill="url(#hatch)" stroke-width="2.2"/>
+    <ellipse cx="390" cy="562" rx="48" ry="10" fill="#F2EDE3" stroke-width="2.2"/>
+    <ellipse cx="390" cy="562" rx="36" ry="6.5" stroke-width="1.2" opacity="0.7"/>
+    <path d="M352 570 l 0 6 M364 572 l 0 6 M376 573 l 0 6 M390 573 l 0 6 M404 573 l 0 6 M416 572 l 0 6 M428 570 l 0 6" stroke-width="1.1" opacity="0.8"/>
+
+    <g stroke-width="1.8">
+      <use href="#bfly" transform="translate(228 370) rotate(-40) scale(0.7)"/>
+      <use href="#bfly" transform="translate(268 344) rotate(65) scale(0.75)"/>
+      <use href="#bfly" transform="translate(214 320) rotate(-55) scale(0.8)"/>
+      <use href="#bfly" transform="translate(264 298) rotate(32) scale(0.85)"/>
+      <use href="#bfly" transform="translate(312 314) rotate(-16) scale(0.9)"/>
+
+      <use href="#bfly" x="364" y="286"/>
+      <use href="#bfly" x="403" y="232"/>
+      <use href="#bfly" x="442" y="179"/>
+      <use href="#bfly" x="481" y="125"/>
+      <use href="#bfly" x="520" y="72"/>
+      <use href="#bfly" x="559" y="125"/>
+      <use href="#bfly" x="598" y="179"/>
+      <use href="#bfly" x="637" y="232"/>
+      <use href="#bfly" x="676" y="286"/>
+    </g>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

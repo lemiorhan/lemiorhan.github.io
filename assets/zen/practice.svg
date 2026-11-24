@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="17" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="shade" x="-10%" y="-60%" width="120%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.2 0 0 0 1.85" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <pattern id="dents" width="18" height="16" patternUnits="userSpaceOnUse">
+      <path d="M2 7 C 4 3, 10 3, 12 7 M11 15 C 13 11, 19 11, 21 15 M-7 15 C -5 11, 1 11, 3 15" fill="none" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <path id="pot-body" d="M352 398 C 300 380, 286 330, 292 290 C 298 236, 340 206, 362 184 C 368 172, 366 158, 358 146 C 352 138, 344 134, 340 128 L 460 128 C 456 134, 448 138, 442 146 C 434 158, 432 172, 438 184 C 460 206, 502 236, 508 290 C 514 330, 500 380, 448 398 Z"/>
+    <clipPath id="pot-clip"><use href="#pot-body"/></clipPath>
+    <path id="leaf" d="M0 0 C 7 -7, 19 -7, 26 0 C 19 7, 7 7, 0 0 Z"/>
+    <path id="spark" d="M0 -16 L0 16 M-16 0 L16 0 M-5 -5 L5 5 M-5 5 L5 -5"/>
+    <path id="bad-body" d="M-30 0 C -60 -6, -72 -36, -64 -60 L -52 -68 L -62 -84 C -56 -102, -38 -110, -22 -116 C -16 -124, -20 -134, -28 -142 L 24 -148 C 16 -138, 14 -128, 20 -118 C 42 -108, 60 -94, 62 -74 L 50 -62 L 64 -48 C 66 -22, 50 -4, 30 0 Z"/>
+    <g id="bad">
+      <path d="M20 -120 C 50 -134, 76 -118, 66 -98 L 74 -86 L 60 -72" fill="none" stroke-width="2.9"/>
+      <use href="#bad-body" fill="#E7E0D2" stroke-width="2.4"/>
+      <use href="#bad-body" fill="url(#hatch-light)" stroke="none"/>
+      <path d="M-52 -68 L -30 -60 L -38 -40 L -14 -28 M50 -62 L 28 -68 L 34 -42 L 10 -34 M-22 -116 L -8 -96 L -20 -80 M20 -118 L 8 -98" fill="none" stroke-width="1.3" opacity="0.8"/>
+      <path d="M-44 -30 C -38 -38, -26 -38, -22 -30 M14 -20 C 20 -28, 32 -28, 36 -20 M-6 -60 C 0 -68, 10 -68, 14 -60" fill="none" stroke-width="1.4"/>
+      <ellipse cx="-2" cy="-145" rx="30" ry="7.5" transform="rotate(-7 -2 -145)" fill="#E7E0D2" stroke-width="2.2"/>
+      <ellipse cx="-2" cy="-145" rx="22" ry="4" transform="rotate(-7 -2 -145)" fill="#24211e" fill-opacity="0.6" stroke="none"/>
+    </g>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round">
+    <path d="M24 478 C 180 474, 320 481, 460 476 S 680 473, 776 478" stroke-width="1.3" opacity="0.4"/>
+    <path d="M40 506 l 26 0 M720 512 l 34 1 M60 622 l 50 0 M240 630 l 40 0 M500 628 l 36 0 M690 630 l 48 0" stroke-width="1.1" opacity="0.4"/>
+  </g>
+
+  <g filter="url(#shade)" fill="#24211e">
+    <path d="M120 600 C 220 582, 580 582, 680 600 C 580 618, 220 620, 120 600 Z" opacity="0.4"/>
+    <path d="M660 618 C 690 610, 750 600, 780 598 C 750 610, 690 622, 660 618 Z" opacity="0.35"/>
+  </g>
+
+  <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#bad" transform="translate(330 478) rotate(-60)"/>
+    <use href="#bad" transform="translate(470 478) scale(-1 1) rotate(-60)"/>
+    <use href="#bad" transform="translate(332 470) rotate(90) scale(0.9)"/>
+
+    <use href="#pot-body" fill="#F6F1E6" stroke="none"/>
+    <g clip-path="url(#pot-clip)" stroke="none">
+      <rect x="280" y="120" width="240" height="290" fill="url(#dents)" opacity="0.6"/>
+      <rect x="452" y="120" width="70" height="290" fill="url(#hatch)" opacity="0.9"/>
+      <rect x="484" y="120" width="40" height="290" fill="url(#hatch-cross)" opacity="0.8"/>
+      <rect x="424" y="128" width="40" height="64" fill="url(#hatch)" opacity="0.6"/>
+      <rect x="284" y="120" width="20" height="290" fill="url(#hatch-light)" opacity="0.8"/>
+      <ellipse cx="400" cy="404" rx="130" ry="34" fill="url(#hatch-light)" opacity="0.7"/>
+      <path d="M326 238 C 312 272, 312 320, 330 358 L 344 352 C 330 316, 330 276, 342 242 Z" fill="#F6F1E6"/>
+      <path d="M369 150 L 372 182 L 380 182 L 377 150 Z" fill="#F6F1E6"/>
+    </g>
+    <use href="#pot-body" fill="none" stroke-width="2.8"/>
+    <path d="M362 184 C 380 191, 420 191, 438 184 M358 146 C 380 151, 420 151, 442 146 M318 226 C 360 240, 440 240, 482 226 M300 352 C 360 370, 440 370, 500 352" fill="none" stroke-width="1.5" opacity="0.8"/>
+    <ellipse cx="400" cy="128" rx="60" ry="11" fill="#F6F1E6" stroke-width="2.4"/>
+    <ellipse cx="400" cy="129" rx="48" ry="6.5" fill="#24211e" fill-opacity="0.55" stroke-width="1.4"/>
+    <path d="M356 396 L 352 410 C 380 419, 420 419, 448 410 L 444 396" fill="#E7E0D2" stroke-width="2.2"/>
+    <path d="M440 168 C 498 146, 552 190, 532 246 C 524 270, 512 284, 504 302 L 494 294 C 500 276, 510 262, 516 242 C 530 200, 490 172, 444 184 Z" fill="#E7E0D2" stroke-width="2.2"/>
+    <path d="M440 168 C 498 146, 552 190, 532 246 C 524 270, 512 284, 504 302 L 494 294 C 500 276, 510 262, 516 242 C 530 200, 490 172, 444 184 Z" fill="url(#hatch)" stroke="none"/>
+
+    <circle cx="398" cy="294" r="62" fill="none" stroke-width="3.2" stroke-dasharray="0.1 9"/>
+    <path d="M340 332 C 370 322, 420 330, 456 318" fill="none" stroke-width="2.6"/>
+    <use href="#leaf" transform="translate(448 320) rotate(-40)" fill="#F6F1E6" stroke-width="1.6"/>
+    <use href="#leaf" transform="translate(352 328) rotate(150)" fill="#F6F1E6" stroke-width="1.6"/>
+    <path d="M392 314 L 390 328 M402 314 L 404 326" fill="none" stroke-width="2"/>
+    <path d="M356 296 C 350 284, 356 272, 368 272 C 378 272, 384 280, 384 284 C 396 276, 412 276, 420 280 L 446 262 L 438 288 C 434 304, 414 316, 392 314 C 374 312, 362 306, 356 296 Z" fill="#F6F1E6" stroke-width="2.6"/>
+    <path d="M357 279 L 342 284 L 357 289 Z" fill="#24211e" stroke-width="1.4"/>
+    <circle cx="367" cy="281" r="2.6" fill="#24211e" stroke="none"/>
+    <path d="M384 292 C 396 285, 416 287, 428 296 C 414 301, 398 301, 384 292 Z" fill="url(#hatch)" stroke-width="1.6"/>
+
+    <g fill="none" stroke-width="1.8">
+      <use href="#spark" transform="translate(318 206)"/>
+      <use href="#spark" transform="translate(484 136) scale(0.7)"/>
+      <use href="#spark" transform="translate(276 268) scale(0.6)"/>
+    </g>
+
+    <use href="#bad" transform="translate(300 536) rotate(-90)"/>
+    <use href="#bad" transform="translate(500 536) scale(-1 1) rotate(-90)"/>
+    <use href="#bad" transform="translate(400 606) scale(1.15 0.7)"/>
+
+    <g transform="translate(662 612) rotate(-8) scale(0.85)">
+      <path d="M0 -5 L 118 -6 L 118 6 L 0 5 C -7 5, -7 -5, 0 -5 Z" fill="#F6F1E6" stroke-width="2"/>
+      <path d="M10 -1 C 40 -2, 70 1, 108 -1" fill="none" stroke-width="1" opacity="0.5"/>
+      <path d="M110 -30 L 138 -30 L 138 24 L 110 24 Z" fill="#24211e" fill-opacity="0.45" stroke-width="2.2"/>
+      <path d="M110 -30 L 138 -30 L 138 24 L 110 24 Z" fill="url(#hatch)" stroke="none"/>
+      <path d="M106 -34 L 142 -34 M106 28 L 142 28" fill="none" stroke-width="2"/>
+    </g>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

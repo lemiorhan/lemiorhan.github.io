@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="27" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <g id="seed">
+      <path d="M0 0 C 2 -2.4, 8 -2.4, 11 0 C 8 2.4, 2 2.4, 0 0 Z" fill="#24211e" stroke-width="0.8"/>
+      <path d="M11 0 L60 0" stroke-width="1.1"/>
+      <path d="M60 0 L73 -16 M60 0 L76 -12 M60 0 L78 -7 M60 0 L79 -2 M60 0 L79 3 M60 0 L78 8 M60 0 L76 12 M60 0 L73 16" stroke-width="0.9"/>
+    </g>
+    <g id="mini">
+      <path d="M3 0 L16 0 M2.8 1.1 L14.8 6.1 M2.1 2.1 L11.3 11.3 M1.1 2.8 L6.1 14.8 M0 3 L0 16 M-1.1 2.8 L-6.1 14.8 M-2.1 2.1 L-11.3 11.3 M-2.8 1.1 L-14.8 6.1 M-3 0 L-16 0 M-2.8 -1.1 L-14.8 -6.1 M-2.1 -2.1 L-11.3 -11.3 M-1.1 -2.8 L-6.1 -14.8 M0 -3 L0 -16 M1.1 -2.8 L6.1 -14.8 M2.1 -2.1 L11.3 -11.3 M2.8 -1.1 L14.8 -6.1" stroke-width="0.9"/>
+      <circle r="19" stroke-dasharray="1.5 2.5" stroke-width="1.6"/>
+      <circle r="3" fill="#24211e"/>
+    </g>
+    <path id="leaf" d="M0 0 C 10 -6, 20 -10, 30 -12 L26 -22 L50 -16 C 60 -18, 66 -20, 74 -22 L70 -32 L96 -22 C 106 -22, 114 -22, 120 -20 L118 -28 L140 -14 C 146 -8, 150 -3, 152 0 C 146 6, 136 12, 124 14 L128 22 L102 18 C 92 20, 84 20, 78 20 L82 30 L56 18 C 44 16, 34 14, 26 12 L30 22 L10 8 C 6 5, 2 3, 0 0 Z"/>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <ellipse cx="218" cy="568" rx="140" ry="18" opacity="0.4"/>
+    <ellipse cx="600" cy="510" rx="26" ry="5" opacity="0.35"/>
+    <ellipse cx="664" cy="496" rx="22" ry="4" opacity="0.35"/>
+    <ellipse cx="738" cy="516" rx="28" ry="5" opacity="0.35"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 470 C 200 466, 420 474, 600 469 S 740 468, 780 471" stroke-width="1.3" opacity="0.4"/>
+    <path d="M70 610 l 40 0 M180 624 l 34 1 M360 600 l 46 -1 M470 560 l 30 0 M540 590 l 44 0 M660 610 l 50 0 M420 520 l 26 0 M520 490 l 22 0 M90 500 l 26 0 M330 488 l 30 0 M690 540 l 30 0" stroke-width="1.1" opacity="0.4"/>
+    <g transform="translate(214 560) scale(1.12) translate(-214 -560)">
+    <g stroke-width="2.2">
+      <use href="#leaf" transform="translate(214 560) rotate(-172) scale(1.05 0.62)" fill="#F2EDE3"/>
+      <use href="#leaf" transform="translate(214 560) rotate(-8) scale(0.95 0.6)" fill="#F2EDE3"/>
+      <use href="#leaf" transform="translate(214 562) rotate(158) scale(0.85 0.6)" fill="url(#hatch)"/>
+      <use href="#leaf" transform="translate(214 562) rotate(24) scale(0.8 0.55)" fill="url(#hatch)"/>
+    </g>
+    <path d="M60 538 L210 560 M368 545 L218 560" stroke-width="1" opacity="0.6"/>
+
+    <path d="M236 232 C 234 330, 220 430, 210 560 L218 560 C 228 430, 242 330, 244 232 Z" fill="#F2EDE3" stroke-width="1.9"/>
+    <path d="M241 240 C 239 330, 227 430, 216 556" stroke-width="1" opacity="0.5"/>
+    <path d="M226 238 C 230 228, 250 228, 254 238" stroke-width="1.6"/>
+    <path d="M228 236 L222 252 M234 237 L231 254 M246 237 L250 254 M252 236 L258 250" stroke-width="1.3"/>
+
+    <circle cx="240" cy="218" r="14" fill="#F6F1E6" stroke-width="2"/>
+    <g fill="#24211e" stroke="none">
+      <circle cx="244" cy="210" r="1"/><circle cx="250" cy="214" r="1"/><circle cx="251" cy="221" r="1"/><circle cx="246" cy="226" r="1"/><circle cx="245" cy="218" r="1"/><circle cx="239" cy="223" r="1"/><circle cx="239" cy="213" r="1"/>
+    </g>
+
+    <g transform="translate(240 218)">
+      <use href="#seed" transform="rotate(70) translate(14 0)"/>
+      <use href="#seed" transform="rotate(80) translate(14 0)"/>
+      <use href="#seed" transform="rotate(90) translate(14 0)"/>
+      <use href="#seed" transform="rotate(100) translate(14 0)"/>
+      <use href="#seed" transform="rotate(110) translate(14 0)"/>
+      <use href="#seed" transform="rotate(120) translate(14 0)"/>
+      <use href="#seed" transform="rotate(130) translate(14 0)"/>
+      <use href="#seed" transform="rotate(140) translate(14 0)"/>
+      <use href="#seed" transform="rotate(150) translate(14 0)"/>
+      <use href="#seed" transform="rotate(160) translate(14 0)"/>
+      <use href="#seed" transform="rotate(170) translate(14 0)"/>
+      <use href="#seed" transform="rotate(180) translate(14 0)"/>
+      <use href="#seed" transform="rotate(190) translate(14 0)"/>
+      <use href="#seed" transform="rotate(200) translate(14 0)"/>
+      <use href="#seed" transform="rotate(210) translate(14 0)"/>
+      <use href="#seed" transform="rotate(220) translate(14 0)"/>
+      <use href="#seed" transform="rotate(230) translate(14 0)"/>
+      <use href="#seed" transform="rotate(240) translate(14 0)"/>
+      <use href="#seed" transform="rotate(250) translate(14 0)"/>
+      <use href="#seed" transform="rotate(260) translate(14 0)"/>
+      <use href="#seed" transform="rotate(270) translate(14 0)"/>
+      <use href="#seed" transform="rotate(280) translate(14 0)"/>
+      <use href="#seed" transform="rotate(290) translate(14 0)"/>
+      <use href="#seed" transform="rotate(305) translate(14 0)"/>
+      <use href="#seed" transform="rotate(48) translate(14 0)"/>
+      <use href="#seed" transform="rotate(330) translate(34 0)"/>
+      <use href="#seed" transform="rotate(352) translate(12 0) scale(0.72)"/>
+      <use href="#seed" transform="rotate(22) translate(10 0) scale(0.6)"/>
+      <use href="#seed" transform="rotate(318) translate(10 0) scale(0.55)"/>
+      <use href="#seed" transform="rotate(75) translate(12 0) scale(0.72)"/>
+      <use href="#seed" transform="rotate(95) translate(12 0) scale(0.72)"/>
+      <use href="#seed" transform="rotate(115) translate(12 0) scale(0.72)"/>
+      <use href="#seed" transform="rotate(135) translate(12 0) scale(0.72)"/>
+      <use href="#seed" transform="rotate(155) translate(12 0) scale(0.72)"/>
+      <use href="#seed" transform="rotate(175) translate(12 0) scale(0.72)"/>
+      <use href="#seed" transform="rotate(195) translate(12 0) scale(0.72)"/>
+      <use href="#seed" transform="rotate(215) translate(12 0) scale(0.72)"/>
+      <use href="#seed" transform="rotate(235) translate(12 0) scale(0.72)"/>
+      <use href="#seed" transform="rotate(255) translate(12 0) scale(0.72)"/>
+      <use href="#seed" transform="rotate(275) translate(12 0) scale(0.72)"/>
+      <use href="#seed" transform="rotate(105) translate(10 0) scale(0.5)"/>
+      <use href="#seed" transform="rotate(145) translate(10 0) scale(0.5)"/>
+      <use href="#seed" transform="rotate(185) translate(10 0) scale(0.5)"/>
+      <use href="#seed" transform="rotate(225) translate(10 0) scale(0.5)"/>
+      <use href="#seed" transform="rotate(265) translate(10 0) scale(0.5)"/>
+    </g>
+    </g>
+
+    <use href="#seed" transform="translate(374 178) rotate(-70) scale(0.95)"/>
+    <use href="#seed" transform="translate(416 144) rotate(-82) scale(0.9)"/>
+    <use href="#seed" transform="translate(462 118) rotate(-96) scale(0.85)"/>
+    <use href="#seed" transform="translate(508 112) rotate(-84) scale(0.85)"/>
+    <use href="#seed" transform="translate(562 116) rotate(-100) scale(0.8)"/>
+    <use href="#seed" transform="translate(612 142) rotate(-80) scale(0.8)"/>
+    <use href="#seed" transform="translate(652 192) rotate(-96) scale(0.75)"/>
+    <use href="#seed" transform="translate(684 254) rotate(-86) scale(0.75)"/>
+    <use href="#seed" transform="translate(706 326) rotate(-94) scale(0.7)"/>
+    <use href="#seed" transform="translate(720 402) rotate(-88) scale(0.7)"/>
+    <use href="#seed" transform="translate(440 222) rotate(-76) scale(0.8)"/>
+    <use href="#seed" transform="translate(548 188) rotate(-92) scale(0.75)"/>
+    <use href="#seed" transform="translate(606 76) rotate(-84) scale(0.7)"/>
+    <use href="#seed" transform="translate(574 268) rotate(-98) scale(0.7)"/>
+
+    <path d="M600 508 C 599 490, 601 466, 598 444" stroke-width="2"/>
+    <use href="#mini" transform="translate(598 428) scale(1.25)"/>
+    <use href="#leaf" transform="translate(600 508) rotate(-168) scale(0.32 0.22)" fill="#F2EDE3" stroke-width="3.4"/>
+    <use href="#leaf" transform="translate(600 508) rotate(-14) scale(0.3 0.22)" fill="url(#hatch)" stroke-width="3.4"/>
+
+    <path d="M664 494 C 663 478, 665 460, 662 446" stroke-width="2"/>
+    <path d="M653 443 C 653 433, 671 433, 671 443 Z" fill="#F2EDE3" stroke-width="1.6"/>
+    <path d="M662 440 L650 432 M662 440 L653 427 M662 440 L658 425 M662 440 L662 424 M662 440 L667 425 M662 440 L672 428 M662 440 L675 433" stroke-width="1.3"/>
+    <path d="M655 444 L659 452 L662 445 L665 452 L669 444" stroke-width="1.2"/>
+    <use href="#leaf" transform="translate(664 494) rotate(-160) scale(0.28 0.2)" fill="url(#hatch)" stroke-width="3.4"/>
+    <use href="#leaf" transform="translate(664 494) rotate(-22) scale(0.3 0.2)" fill="#F2EDE3" stroke-width="3.4"/>
+
+    <path d="M738 514 C 737 494, 740 472, 737 452" stroke-width="2"/>
+    <use href="#mini" transform="translate(737 436) scale(1.3)"/>
+    <use href="#leaf" transform="translate(738 514) rotate(-170) scale(0.34 0.24)" fill="#F2EDE3" stroke-width="3.4"/>
+    <use href="#leaf" transform="translate(738 514) rotate(-12) scale(0.32 0.22)" fill="url(#hatch)" stroke-width="3.4"/>
+
+    <path d="M632 516 L632 504 M632 506 C 626 498, 619 500, 617 505 C 623 507, 629 507, 632 506 M632 505 C 638 497, 645 499, 647 504 C 641 506, 635 506, 632 505" stroke-width="1.5"/>
+    <path d="M700 522 L700 512 M700 514 C 695 508, 690 509, 688 513 C 693 515, 697 515, 700 514 M700 513 C 705 507, 710 508, 712 512 C 707 514, 703 514, 700 513" stroke-width="1.4"/>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

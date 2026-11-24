@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="21" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="shade" x="-10%" y="-60%" width="120%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.2 0 0 0 1.85" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <g id="block">
+      <path d="M0 0 L120 0 L120 -48 L0 -48 Z" fill="#F2EDE3" stroke-width="2.2"/>
+      <path d="M120 0 L134 -10 L134 -58 L120 -48 Z" fill="#E7E0D2" stroke-width="2"/>
+      <path d="M120 0 L134 -10 L134 -58 L120 -48 Z" fill="url(#hatch-light)" stroke="none"/>
+      <path d="M0 -48 L14 -58 L134 -58 L120 -48 Z" fill="#F6F1E6" stroke-width="2"/>
+      <path d="M10 -14 C 40 -18, 70 -10, 110 -15 M16 -33 C 46 -29, 78 -37, 108 -31" fill="none" stroke-width="0.9" opacity="0.5"/>
+    </g>
+    <path id="crooked-front" d="M34 0 L118 0 L125 -56 L2 -50 L0 -34 L12 -27 L16 -14 L26 -10 Z"/>
+    <path id="crooked-side" d="M118 0 L132 -10 L139 -66 L125 -56 Z"/>
+    <g id="crooked">
+      <use href="#crooked-front" fill="#24211e" fill-opacity="0.42" stroke-width="3"/>
+      <use href="#crooked-front" fill="url(#hatch)" stroke="none"/>
+      <use href="#crooked-front" fill="url(#hatch-cross)" stroke="none"/>
+      <use href="#crooked-side" fill="#24211e" fill-opacity="0.6" stroke-width="2.6"/>
+      <use href="#crooked-side" fill="url(#hatch)" stroke="none"/>
+      <use href="#crooked-side" fill="url(#hatch-cross)" stroke="none"/>
+      <path d="M2 -50 L16 -60 L139 -66 L125 -56 Z" fill="#E7E0D2" stroke-width="2.4"/>
+      <path d="M2 -50 L16 -60 L139 -66 L125 -56 Z" fill="url(#hatch-light)" stroke="none"/>
+      <path d="M72 -53 L80 -40 L70 -29 L78 -17 L73 -3" fill="none" stroke="#F6F1E6" stroke-width="3"/>
+      <path d="M80 -40 L92 -36 M70 -29 L60 -24" fill="none" stroke="#F6F1E6" stroke-width="1.8"/>
+      <path d="M0 -34 L12 -27 L16 -14 L26 -10 L34 0 L22 0 L10 -8 L2 -20 Z" fill="#F6F1E6" stroke-width="1.8"/>
+    </g>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round">
+    <path d="M24 468 C 180 464, 320 471, 460 466 S 680 463, 776 468" stroke-width="1.3" opacity="0.4"/>
+    <path d="M70 496 l 26 0 M470 500 l 34 1 M720 492 l 30 -1 M60 616 l 50 0 M210 626 l 40 0 M470 618 l 36 0 M640 628 l 48 0 M716 596 l 30 0" stroke-width="1.1" opacity="0.4"/>
+  </g>
+
+  <g filter="url(#shade)" fill="#24211e">
+    <path d="M30 552 C 120 540, 360 540, 470 552 C 380 566, 120 566, 30 552 Z" opacity="0.4"/>
+    <path d="M60 604 C 100 598, 190 598, 230 604 C 190 612, 100 612, 60 604 Z M300 616 C 340 610, 420 610, 450 616 C 420 624, 340 624, 300 616 Z" opacity="0.35"/>
+    <path d="M522 552 C 560 542, 680 542, 712 552 C 680 562, 560 562, 522 552 Z" opacity="0.5"/>
+  </g>
+
+  <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#block" transform="translate(410 548) rotate(-68)"/>
+    <use href="#block" transform="translate(40 548)"/>
+    <use href="#block" transform="translate(306 548)"/>
+    <use href="#block" transform="translate(64 500) rotate(-11)"/>
+    <use href="#block" transform="translate(236 470) rotate(13)"/>
+    <use href="#block" transform="translate(120 452) rotate(-27)"/>
+    <use href="#crooked" transform="translate(172 548)"/>
+    <use href="#block" transform="translate(64 604) rotate(4)"/>
+    <use href="#block" transform="translate(312 616) rotate(-7)"/>
+
+    <g transform="translate(546 548)">
+      <use href="#crooked"/>
+      <g transform="translate(2 -50) rotate(-2.84)">
+        <use href="#block"/>
+        <use href="#block" transform="translate(3 -48) rotate(0.5)"/>
+        <use href="#block" transform="translate(-2 -96) rotate(-0.4)"/>
+        <use href="#block" transform="translate(4 -144) rotate(0.6)"/>
+        <use href="#block" transform="translate(1 -192)"/>
+        <use href="#block" transform="translate(-3 -240) rotate(-0.5)"/>
+        <use href="#block" transform="translate(2 -288) rotate(0.4)"/>
+        <use href="#block" transform="translate(0 -336) rotate(-0.3)"/>
+      </g>
+    </g>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <pattern id="stones" width="22" height="32" patternUnits="userSpaceOnUse" x="208" y="150">
+      <path d="M0 0 H22 M0 16 H22 M11 0 V16 M0 16 V32 M22 16 V32" fill="none" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <linearGradient id="deep" gradientUnits="userSpaceOnUse" x1="0" y1="200" x2="0" y2="360">
+      <stop offset="0" stop-color="#24211e" stop-opacity="0"/>
+      <stop offset="1" stop-color="#24211e" stop-opacity="0.42"/>
+    </linearGradient>
+    <clipPath id="shaft"><rect x="230" y="150" width="340" height="446"/></clipPath>
+    <path id="body-a" d="M-58 0 H58 V6 H-58 Z M-52 -6 H62 V0 H-52 Z"/>
+    <path id="body-b" d="M-60 0 H60 V8 H-60 Z M-55 -8 H64 V0 H-55 Z"/>
+    <path id="body-c" d="M-60 -10 H60 Q64 -10 64 -6 V6 Q64 10 60 10 H-60 Q-64 10 -64 6 V-6 Q-64 -10 -60 -10 Z"/>
+    <path id="body-d" d="M-64 -12 C -40 -14, 30 -13, 64 -11 C 68 -5, 68 6, 64 12 C 30 14, -40 13, -64 12 C -69 5, -69 -5, -64 -12 Z"/>
+    <g id="book-a">
+      <use href="#body-a" fill="#F6F1E6" stroke-width="1.8"/>
+      <path d="M-50 0 V6 M50 0 V6 M-44 -6 V0 M54 -6 V0 M-16 3 H16 M-6 -3 H22" fill="none" stroke-width="1.2"/>
+    </g>
+    <g id="book-b">
+      <use href="#body-b" fill="#F6F1E6" stroke-width="2"/>
+      <path d="M-60 0 H60 V8 H-60 Z" fill="url(#hatch-light)" stroke="none" opacity="0.6"/>
+      <path d="M-52 0 V8 M-48 0 V8 M48 0 V8 M52 0 V8 M-47 -8 V0 M-43 -8 V0 M52 -8 V0 M56 -8 V0" fill="none" stroke-width="1.3"/>
+      <path d="M-8 -6 H16 V-2 H-8 Z" fill="#F2EDE3" stroke-width="1.1"/>
+    </g>
+    <g id="book-c">
+      <use href="#body-c" fill="#F2EDE3" stroke-width="2.2"/>
+      <use href="#body-c" fill="url(#hatch-light)" stroke="none"/>
+      <path d="M-40 -10 V10 M-37 -10 V10 M-14 -10 V10 M-11 -10 V10 M11 -10 V10 M14 -10 V10 M37 -10 V10 M40 -10 V10" fill="none" stroke-width="1.5"/>
+      <path d="M-34 -4 H-17 V4 H-34 Z" fill="#F6F1E6" stroke-width="1.1"/>
+    </g>
+    <g id="book-d">
+      <use href="#body-d" fill="#F2EDE3" stroke-width="2.6"/>
+      <use href="#body-d" fill="url(#hatch)" stroke="none" opacity="0.8"/>
+      <path d="M-44 -13 V13 M-22 -13 V13 M0 -13 V13 M22 -13 V13 M44 -13 V13" fill="none" stroke-width="3"/>
+      <path d="M-58 -4 L-50 0 L-56 6 M30 -8 L36 -2 M54 3 L60 8" fill="none" stroke="#F2EDE3" stroke-width="1.6"/>
+    </g>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M208 150 L 112 150 C 88 200, 122 260, 100 320 C 82 380, 124 440, 96 500 C 84 550, 114 596, 148 616 C 172 624, 192 622, 208 618 Z" fill="url(#hatch-light)" stroke="none" opacity="0.35"/>
+    <path d="M592 150 L 688 150 C 712 200, 678 260, 700 320 C 718 380, 676 440, 704 500 C 716 550, 686 596, 652 616 C 628 624, 608 622, 592 618 Z" fill="url(#hatch-light)" stroke="none" opacity="0.35"/>
+    <path d="M116 252 C 142 244, 182 258, 208 248 M104 382 C 142 372, 182 388, 208 378 M106 504 C 142 494, 182 508, 208 498 M592 246 C 624 256, 664 242, 684 250 M592 380 C 624 390, 664 372, 696 382 M592 500 C 624 508, 664 494, 694 502" stroke-width="1.4" opacity="0.6"/>
+    <ellipse cx="154" cy="300" rx="7" ry="4" stroke-width="1.3"/>
+    <ellipse cx="180" cy="440" rx="9" ry="5" stroke-width="1.3"/>
+    <ellipse cx="138" cy="556" rx="8" ry="5" stroke-width="1.3"/>
+    <ellipse cx="642" cy="320" rx="8" ry="5" stroke-width="1.3"/>
+    <ellipse cx="664" cy="452" rx="6" ry="4" stroke-width="1.3"/>
+    <ellipse cx="622" cy="566" rx="9" ry="5" stroke-width="1.3"/>
+    <path d="M30 150 H196 M604 150 H770" stroke-width="2.2"/>
+    <path d="M60 148 l -5 -10 M66 148 l 2 -12 M72 148 l 7 -9 M140 148 l -4 -9 M146 148 l 3 -11 M650 148 l -5 -10 M656 148 l 2 -12 M662 148 l 7 -9 M730 148 l -4 -9 M736 148 l 3 -11" stroke-width="1.3"/>
+  </g>
+
+  <g clip-path="url(#shaft)">
+    <g filter="url(#pencil)" stroke="none">
+      <path d="M230 150 H570 V596 H230 Z M332 568 a130 90 0 1 0 260 0 a130 90 0 1 0 -260 0 Z" fill="url(#hatch-light)" fill-rule="evenodd"/>
+      <path d="M230 214 C 290 200, 340 226, 400 210 S 520 222, 570 204 V596 H230 Z M287 568 a175 130 0 1 0 350 0 a175 130 0 1 0 -350 0 Z" fill="url(#hatch)" fill-rule="evenodd"/>
+      <path d="M230 270 C 300 288, 360 258, 430 276 S 530 262, 570 280 V596 H230 Z M237 568 a225 175 0 1 0 450 0 a225 175 0 1 0 -450 0 Z" fill="url(#hatch-cross)" fill-rule="evenodd"/>
+    </g>
+    <g filter="url(#smudge)">
+      <path d="M220 190 H580 V610 H220 Z M302 572 a160 115 0 1 0 320 0 a160 115 0 1 0 -320 0 Z" fill="url(#deep)" fill-rule="evenodd"/>
+    </g>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M208 150 H230 V596 H208 Z M570 150 H592 V596 H570 Z" fill="url(#stones)" stroke-width="2"/>
+    <path d="M208 150 H230 V596 H208 Z M570 150 H592 V596 H570 Z" fill="url(#hatch-light)" stroke="none" opacity="0.5"/>
+    <path d="M196 124 H236 V150 H196 Z M564 124 H604 V150 H564 Z" fill="#F2EDE3" stroke-width="2.4"/>
+    <path d="M192 124 H240 M560 124 H608 M216 124 V150 M584 124 V150" stroke-width="2"/>
+    <path d="M208 596 H592 V616 H208 Z" fill="url(#hatch)" stroke-width="2"/>
+    <path d="M230 596 H570" stroke-width="2.6"/>
+  </g>
+
+  <g fill="#F2EDE3" stroke="none">
+    <path d="M264 596 L272 596 L352 92 L344 92 Z M348 596 L356 596 L436 92 L428 92 Z"/>
+    <use href="#body-a" transform="translate(385 128) rotate(-1)"/>
+    <use href="#body-a" transform="translate(378 170) rotate(1.5)"/>
+    <use href="#body-a" transform="translate(371 212) rotate(-1)"/>
+    <use href="#body-b" transform="translate(364 254) rotate(1)"/>
+    <use href="#body-b" transform="translate(358 296) rotate(-2)"/>
+    <use href="#body-b" transform="translate(351 338) rotate(1)"/>
+    <use href="#body-c" transform="translate(344 380) rotate(-1.5)"/>
+    <use href="#body-c" transform="translate(338 422) rotate(2)"/>
+    <use href="#body-c" transform="translate(331 464) rotate(-1)"/>
+    <use href="#body-d" transform="translate(324 506) rotate(2.5)"/>
+    <use href="#body-d" transform="translate(317 548) rotate(-2)"/>
+    <path d="M370 582 C 396 566, 428 566, 444 576 C 460 566, 492 566, 518 582 L 518 594 C 492 582, 460 584, 444 596 C 428 584, 396 582, 370 594 Z"/>
+  </g>
+
+  <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M264 596 L272 596 L352 92 L344 92 Z M348 596 L356 596 L436 92 L428 92 Z" fill="#F2EDE3" stroke-width="1.8"/>
+    <use href="#book-a" transform="translate(385 128) rotate(-1)"/>
+    <use href="#book-a" transform="translate(378 170) rotate(1.5)"/>
+    <use href="#book-a" transform="translate(371 212) rotate(-1)"/>
+    <use href="#book-b" transform="translate(364 254) rotate(1)"/>
+    <use href="#book-b" transform="translate(358 296) rotate(-2)"/>
+    <use href="#book-b" transform="translate(351 338) rotate(1)"/>
+    <use href="#book-c" transform="translate(344 380) rotate(-1.5)"/>
+    <use href="#book-c" transform="translate(338 422) rotate(2)"/>
+    <use href="#book-c" transform="translate(331 464) rotate(-1)"/>
+    <use href="#book-d" transform="translate(324 506) rotate(2.5)"/>
+    <use href="#book-d" transform="translate(317 548) rotate(-2)"/>
+
+    <path d="M522 584 H566 Q568 584 568 587 V593 Q568 596 566 596 H522 Q520 596 520 593 V587 Q520 584 522 584 Z" fill="url(#hatch)" stroke-width="2"/>
+    <path d="M526 572 H562 Q564 572 564 575 V581 Q564 584 562 584 H526 Q524 584 524 581 V575 Q524 572 526 572 Z" fill="url(#hatch-light)" stroke-width="2"/>
+    <path d="M530 584 V596 M540 584 V596 M550 584 V596 M560 584 V596 M534 572 V584 M544 572 V584 M554 572 V584" fill="none" stroke-width="2"/>
+    <path d="M546 569 L542 500 L514 470" fill="none" stroke-width="3.2"/>
+    <ellipse cx="546" cy="570" rx="14" ry="4" fill="#24211e" stroke-width="1.4"/>
+    <circle cx="542" cy="500" r="3.6" fill="#24211e" stroke-width="1.2"/>
+    <path d="M504 452 L528 472 L496 514 C 486 524, 458 506, 466 494 Z" fill="#24211e" stroke-width="1.8"/>
+    <path d="M466 494 C 458 506, 486 524, 496 514" fill="#F6F1E6" stroke-width="1.6"/>
+    <path d="M468 506 L 396 574 M494 518 L 500 574" fill="none" stroke-width="1.1" opacity="0.3"/>
+
+    <path d="M370 582 C 396 566, 428 566, 444 576 C 460 566, 492 566, 518 582 L 518 594 C 492 582, 460 584, 444 596 C 428 584, 396 582, 370 594 Z" fill="#F6F1E6" stroke-width="2.4"/>
+    <path d="M444 576 L444 596" stroke-width="1.6"/>
+    <path d="M382 582 C 400 574, 420 574, 434 579 M382 588 C 400 580, 420 580, 434 585 M454 579 C 470 574, 490 574, 506 582 M454 585 C 470 580, 490 580, 506 588" fill="none" stroke-width="1.2" opacity="0.6"/>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

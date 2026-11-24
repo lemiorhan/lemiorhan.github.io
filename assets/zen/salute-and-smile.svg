@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="31" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-80%" width="140%" height="260%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <path id="canopy-shape" d="M180 108 C 206 74, 270 44, 340 36 C 410 44, 474 74, 500 108 Q 480 120 460 108 Q 440 120 420 108 Q 400 120 380 108 Q 360 120 340 108 Q 320 120 300 108 Q 280 120 260 108 Q 240 120 220 108 Q 200 120 180 108 Z"/>
+    <clipPath id="canopy"><use href="#canopy-shape"/></clipPath>
+    <path id="fingers" d="M-11 -50 L -15 -88 M-2 -52 L -2 -96 M7 -51 L 10 -91 M15 -46 L 23 -78 M-17 -26 L -34 -50"/>
+    <path id="palm" d="M-18 4 C -22 -14, -22 -38, -16 -54 L 17 -52 C 22 -38, 22 -14, 17 4 Z"/>
+    <g id="hand">
+      <use href="#fingers" stroke="#24211e" stroke-width="13"/>
+      <use href="#palm" fill="#24211e" stroke="#24211e" stroke-width="3.4"/>
+      <use href="#fingers" stroke="#F6F1E6" stroke-width="9.6"/>
+      <use href="#palm" fill="#F6F1E6" stroke="none"/>
+    </g>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <ellipse cx="350" cy="524" rx="210" ry="10" opacity="0.45"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 522 C 200 519, 600 524, 800 520" stroke-width="1.3" opacity="0.45"/>
+    <path d="M0 596 C 250 594, 550 598, 800 595" stroke-width="1.8" opacity="0.6"/>
+    <path d="M0 608 C 250 606, 550 610, 800 607" stroke-width="1.2" opacity="0.4"/>
+    <path d="M90 524 l -6 70 M300 524 l -4 70 M520 524 l 4 70" stroke-width="1.1" opacity="0.35"/>
+
+    <path d="M340 108 L 340 318" stroke-width="3"/>
+    <path d="M343.5 112 L 343.5 316" stroke-width="1" opacity="0.5"/>
+    <use href="#canopy-shape" fill="#F6F1E6" stroke-width="2.4"/>
+    <g clip-path="url(#canopy)" stroke="none" fill="url(#hatch)" opacity="0.8">
+      <path d="M340 30 L 150 122 L 220 122 Z M340 30 L 260 122 L 300 122 Z M340 30 L 340 122 L 380 122 Z M340 30 L 420 122 L 460 122 Z"/>
+    </g>
+    <path d="M340 36 L 220 108 M340 36 L 260 108 M340 36 L 300 108 M340 36 L 340 108 M340 36 L 380 108 M340 36 L 420 108 M340 36 L 460 108" stroke-width="1.2" opacity="0.7"/>
+    <circle cx="340" cy="32" r="4.5" fill="#24211e" stroke-width="1.4"/>
+
+    <g transform="translate(262 272) rotate(8) scale(-1 1)">
+      <use href="#hand"/>
+      <path d="M-12 -18 C -4 -12, 8 -16, 13 -30 M-14 -38 C -4 -34, 8 -36, 16 -40" stroke-width="1.1" opacity="0.55"/>
+    </g>
+    <path d="M238 268 L 284 266 L 290 330 L 240 332 Z" fill="#F2EDE3" stroke-width="2.2"/>
+    <path d="M238 268 L 284 266 L 290 330 L 240 332 Z" fill="url(#hatch-light)" stroke="none" opacity="0.9"/>
+    <path d="M238 268 L 284 266 L 285 281 L 239 283 Z" fill="#F6F1E6" stroke-width="2"/>
+
+    <path d="M184 318 L 526 318 L 512 334 L 170 334 Z" fill="#E7E0D2" stroke-width="2.4"/>
+    <path d="M170 334 L 512 334 L 512 470 L 170 470 Z" fill="#F6F1E6" stroke-width="2.6"/>
+    <path d="M512 334 L 526 318 L 526 454 L 512 470 Z" fill="url(#hatch)" stroke-width="2.2"/>
+    <path d="M184 346 L 498 346 L 498 458 L 184 458 Z" stroke-width="1.2" opacity="0.55"/>
+    <path d="M171 446 L 511 446 L 511 469 L 171 469 Z" fill="url(#hatch-light)" stroke="none" opacity="0.7"/>
+    <path d="M170 346 L 116 356 M170 354 L 118 364 M116 356 C 108 358, 110 366, 118 364" stroke-width="2.4"/>
+
+    <path d="M272 396 C 276 376, 388 376, 392 396 Z" fill="#F6F1E6" stroke-width="2.2"/>
+    <path d="M262 399 L 398 399" stroke-width="20"/>
+    <path d="M262 399 L 398 399" stroke="#F6F1E6" stroke-width="15.6"/>
+    <path d="M262 399 L 398 399" stroke="url(#hatch)" stroke-width="15.6" opacity="0.5"/>
+    <path d="M282 396 l 7 -4 l 7 4 l 7 -4 l 7 4 l 7 -4 l 7 4 l 7 -4 l 7 4 l 7 -4 l 7 4 l 7 -4 l 7 4 l 7 -4 l 7 4" stroke-width="1.6"/>
+    <path d="M268 402 C 268 426, 396 426, 396 402 C 372 410, 292 410, 268 402 Z" fill="#F6F1E6" stroke-width="2.2"/>
+
+    <path d="M484 470 L 494 470 L 494 518 L 484 518 Z" fill="#F2EDE3" stroke-width="2"/>
+    <path d="M478 519 L 500 519" stroke-width="2.4"/>
+    <circle cx="232" cy="482" r="36" fill="#F2EDE3" stroke-width="2.6"/>
+    <circle cx="232" cy="482" r="29" stroke-width="1.2" opacity="0.7"/>
+    <path d="M232 453 L 232 511 M203 482 L 261 482 M211.5 461.5 L 252.5 502.5 M211.5 502.5 L 252.5 461.5" stroke-width="1.4"/>
+    <circle cx="232" cy="482" r="6.5" fill="#24211e" stroke-width="1.4"/>
+
+    <g transform="translate(456 326) scale(1.35) translate(-456 -326)">
+    <path d="M420 292 L 484 292 L 484 326 L 420 326 Z" fill="#F6F1E6" stroke-width="2.4"/>
+    <path d="M420 292 L 428 284 L 492 284 L 484 292 Z" fill="#E7E0D2" stroke-width="2.2"/>
+    <path d="M484 292 L 492 284 L 492 318 L 484 326 Z" fill="url(#hatch)" stroke-width="2.2"/>
+    <path d="M420 300 L 484 300 L 492 292" stroke-width="1.6"/>
+    <path d="M449 288 L 465 288" stroke-width="2.8"/>
+    <path d="M448 297 L 456 297 L 456 305 L 448 305 Z" stroke-width="1.4"/>
+    <path d="M446 310 C 446 300, 458 300, 458 310" stroke-width="2.2"/>
+    <path d="M442 309 L 462 309 L 462 324 L 442 324 Z" fill="url(#hatch-cross)" stroke-width="1.8"/>
+    <circle cx="452" cy="315" r="1.9" fill="#F6F1E6" stroke="none"/>
+    </g>
+
+    <g transform="translate(676 392) rotate(-8) scale(1.65)">
+      <use href="#hand"/>
+      <path d="M-15 -53 q 4 -3 8 0 M-6 -55 q 4 -3 8 0 M3 -54 q 4 -3 8 0 M11 -50 q 4 -3 8 0" stroke-width="1" opacity="0.6"/>
+      <path d="M-8 -8 L -11 -44 M0 -6 L -1 -46 M8 -8 L 8 -44" stroke-width="0.8" opacity="0.35"/>
+    </g>
+    <path d="M644 386 L 712 378 C 724 420, 738 456, 752 488 C 766 520, 780 548, 800 566 L 800 640 L 470 640 C 500 600, 560 576, 640 570 C 668 568, 690 560, 700 540 C 704 520, 694 506, 688 496 C 672 460, 656 424, 644 386 Z" fill="#F2EDE3" stroke-width="2.6"/>
+    <path d="M644 386 L 712 378 C 724 420, 738 456, 752 488 C 766 520, 780 548, 800 566 L 800 640 L 470 640 C 500 600, 560 576, 640 570 C 668 568, 690 560, 700 540 C 704 520, 694 506, 688 496 C 672 460, 656 424, 644 386 Z" fill="url(#hatch)" stroke="none" opacity="0.6"/>
+    <path d="M644 386 L 712 378 C 724 420, 738 456, 752 488 C 766 520, 780 548, 800 566 L 800 640 L 470 640 C 500 600, 560 576, 640 570 C 668 568, 690 560, 700 540 C 704 520, 694 506, 688 496 C 672 460, 656 424, 644 386 Z" fill="url(#hatch-cross)" stroke="none" opacity="0.3"/>
+    <path d="M644 386 L 712 378 L 715 396 L 648 404 Z" fill="#F6F1E6" stroke-width="2"/>
+    <path d="M700 504 C 712 512, 728 512, 742 502 M560 604 C 610 590, 660 586, 700 576 M720 560 C 740 580, 760 600, 770 630" stroke-width="1.3" opacity="0.6"/>
+
+    <path d="M214 196 C 206 210, 206 226, 214 240 M200 190 C 190 208, 190 230, 200 248" stroke-width="1.6" opacity="0.6"/>
+    <path d="M590 236 C 580 252, 580 272, 588 288 M574 228 C 562 248, 562 276, 572 296 M740 226 C 750 242, 752 262, 744 280" stroke-width="1.6" opacity="0.6"/>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

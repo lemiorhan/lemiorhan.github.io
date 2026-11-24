@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="33" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <filter id="shade" x="-20%" y="-30%" width="140%" height="160%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.2 0 0 0 1.85" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <path d="M424 532 L 778 532 L 790 556 L 412 556 Z" opacity="0.35"/>
+    <path d="M26 412 L 402 394 L 420 550 L 42 568 Z" opacity="0.3"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 232 C 200 229, 560 235, 800 231" stroke-width="1.4" opacity="0.5"/>
+    <path d="M0 576 L 800 576" stroke-width="2.8"/>
+    <path d="M0 576 L 800 576 L 800 600 L 0 600 Z" fill="url(#hatch)" stroke="none" opacity="0.8"/>
+    <path d="M0 600 L 800 600" stroke-width="2"/>
+    <path d="M0 600 L 800 600 L 800 640 L 0 640 Z" fill="url(#hatch-light)" stroke="none" opacity="0.6"/>
+    <path d="M30 280 C 120 276, 220 284, 330 279 M20 340 C 90 336, 170 342, 260 338 M60 300 C 140 296, 200 302, 280 298 M600 262 C 680 258, 740 264, 790 260 M540 290 C 600 286, 700 292, 780 288 M20 520 C 80 516, 140 522, 200 518" stroke-width="1" opacity="0.3"/>
+
+    <path d="M446 418 L 744 418 L 772 532 L 418 532 Z" fill="#F2EDE3" stroke-width="2.4"/>
+    <path d="M418 532 L 772 532 L 770 544 L 420 544 Z" fill="url(#hatch)" stroke-width="2"/>
+    <path d="M468 428 L 722 428 L 738 486 L 452 486 Z" fill="#E7E0D2" stroke-width="1.6"/>
+    <path d="M462 442 L 726 442 M458 456 L 730 456 M455 471 L 734 471" stroke-width="1" opacity="0.6"/>
+    <path d="M486 428 L 472 486 M504 428 L 493 486 M522 428 L 513 486 M541 428 L 534 486 M559 428 L 554 486 M577 428 L 574 486 M595 428 L 595 486 M613 428 L 615 486 M631 428 L 636 486 M649 428 L 656 486 M667 428 L 677 486 M686 428 L 697 486 M704 428 L 717 486" stroke-width="1" opacity="0.6"/>
+    <path d="M552 494 L 640 494 L 646 524 L 546 524 Z" stroke-width="1.6"/>
+
+    <path d="M446 418 L 744 418 L 752 156 L 438 156 Z" fill="#F2EDE3" stroke-width="2.6"/>
+    <path d="M462 402 L 728 402 L 734 174 L 456 174 Z" fill="#24211e" fill-opacity="0.86" stroke-width="1.8"/>
+    <path d="M462 402 L 728 402 L 734 174 L 456 174 Z" fill="url(#hatch-cross)" stroke="none" opacity="0.3"/>
+    <path d="M440 418 L 750 418" stroke-width="3.2"/>
+    <circle cx="595" cy="165" r="2.2" fill="#24211e"/>
+  </g>
+
+  <g font-family="'Bradley Hand', 'Segoe Print', 'Comic Sans MS', cursive" fill="#F2EDE3">
+    <text x="488" y="300" font-size="38">It works.</text>
+    <rect x="656" y="272" width="14" height="30" opacity="0.85"/>
+  </g>
+
+  <g transform="translate(214 470) scale(1.05 0.72) rotate(-4)">
+    <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M-176 -110 L 178 -110 C 180 -110, 180 -108, 180 -106 L 180 108 C 180 110, 178 110, 176 110 L -148 110 L -180 80 L -180 -106 C -180 -108, -178 -110, -176 -110 Z" fill="#E7E0D2" stroke-width="2.8"/>
+      <path d="M-176 -110 L 178 -110 L 180 108 L -148 110 L -180 80 L -180 -106 Z" fill="url(#hatch-light)" stroke="none" opacity="0.32"/>
+      <path d="M-180 80 L -148 110 L -144 76 Z" fill="#F2EDE3" stroke-width="1.8"/>
+      <path d="M8 -110 C 11 -40, 6 40, 11 110" stroke-width="1.1" opacity="0.4"/>
+      <path d="M-160 -88 L -96 -88 M-160 -74 L -116 -74" stroke-width="1.4" opacity="0.5"/>
+
+      <path d="M108 -98 L 168 -98 L 168 -26 L 108 -26 Z" fill="#F2EDE3" stroke-width="2.6" stroke-dasharray="3 3"/>
+      <path d="M114 -92 L 162 -92 L 162 -32 L 114 -32 Z" stroke-width="1.4"/>
+      <path d="M116 -40 C 126 -56, 136 -50, 146 -58 C 152 -62, 158 -56, 160 -52" stroke-width="1.4"/>
+      <circle cx="146" cy="-76" r="7" stroke-width="1.4"/>
+
+      <circle cx="62" cy="-56" r="38" stroke-width="2" opacity="0.85"/>
+      <circle cx="62" cy="-56" r="29" stroke-width="1.3" opacity="0.7"/>
+      <path d="M102 -76 C 112 -82, 122 -70, 132 -76 S 152 -82, 162 -76 S 172 -74, 176 -78 M102 -62 C 112 -68, 122 -56, 132 -62 S 152 -68, 162 -62 S 172 -60, 176 -64 M102 -48 C 112 -54, 122 -42, 132 -48 S 152 -54, 162 -48 S 172 -46, 176 -50" stroke-width="1.5" opacity="0.8"/>
+
+      <path d="M-112 30 C -80 27, -20 32, 40 28 M-112 54 C -70 51, -30 56, 20 52" stroke-width="1.4" opacity="0.65"/>
+    </g>
+    <g filter="url(#smudge)" fill="#24211e">
+      <circle cx="-120" cy="-30" r="5" opacity="0.3"/>
+      <circle cx="60" cy="80" r="6" opacity="0.3"/>
+      <circle cx="150" cy="40" r="4" opacity="0.3"/>
+      <circle cx="-40" cy="-90" r="4" opacity="0.3"/>
+      <path d="M-176 -106 L 176 -106 L 176 106 L -176 106 Z" fill="none" stroke="#24211e" stroke-width="10" opacity="0.14"/>
+    </g>
+    <g fill="#24211e" font-family="'Bradley Hand', 'Segoe Print', 'Comic Sans MS', cursive">
+      <text x="62" y="-49" font-size="21" text-anchor="middle" opacity="0.9">1997</text>
+      <text x="-112" y="14" font-size="42" opacity="0.9">TÜBİTAK</text>
+      <text x="-112" y="88" font-size="24" opacity="0.85">Ankara</text>
+    </g>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

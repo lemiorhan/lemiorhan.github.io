@@ -658,6 +658,7 @@
                 "@tr": "Herkese açık paylaştığım her şey: kod, kayıtlar, podcast, slaytlar, yazılar ve hesaplarım."
               }
             },
+            { "path": "personal-zen/", "name": "Personal Zen", "text": "The principles I live and work by, first written down for my kids in 2017, each with a charcoal drawing." },
             {
               "path": "root-bug/",
               "name": { "@en": "The macOS root bug", "@tr": "macOS root açığı" },

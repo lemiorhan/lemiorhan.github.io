@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="13" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hatch-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.1"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <path id="canopy" d="M630 193 C 646 201, 635 234, 617 230 C 632 242, 615 269, 598 260 C 608 278, 580 298, 567 282 C 575 316, 524 333, 511 301 C 511 338, 451 344, 444 308 C 446 345, 376 356, 367 320 C 355 351, 306 336, 313 304 C 303 339, 230 327, 231 290 C 214 305, 186 277, 199 259 C 178 269, 159 235, 179 222 C 164 226, 153 197, 166 190 C 153 182, 163 157, 178 162 C 158 155, 167 113, 187 115 C 174 88, 216 61, 234 85 C 224 45, 288 22, 305 61 C 306 27, 363 22, 369 55 C 370 25, 416 22, 421 52 C 430 13, 504 22, 503 62 C 515 35, 561 51, 555 79 C 576 59, 614 92, 596 116 C 620 96, 658 134, 638 158 C 655 164, 648 195, 630 193 Z"/>
+    <clipPath id="canopy-clip"><use href="#canopy"/></clipPath>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round">
+    <path d="M24 470 C 180 466, 320 473, 460 468 S 680 465, 776 470" stroke-width="1.3" opacity="0.4"/>
+    <path d="M60 500 l 26 0 M150 494 l 34 1 M610 486 l 36 0 M700 498 l 24 0 M84 560 l 34 0 M60 606 l 50 0 M180 620 l 40 0 M600 610 l 36 0 M660 572 l 48 0 M690 620 l 44 0" stroke-width="1.1" opacity="0.4"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M338 538 C 362 526, 372 500, 373 466 L 376 300 L 428 300 L 430 466 C 432 500, 442 526, 468 538" fill="#F2EDE3" stroke-width="2.8"/>
+    <path d="M408 300 L 410 466 C 412 502, 424 526, 444 538 L 468 538 C 442 526, 432 500, 430 466 L 428 300 Z" fill="url(#hatch)" stroke="none" opacity="0.85"/>
+    <path d="M384 522 C 386 470, 382 420, 386 340 M396 504 C 397 450, 393 390, 396 346 M420 516 C 419 450, 422 400, 419 344" stroke-width="1" opacity="0.55"/>
+    <path d="M338 538 l -16 -9 M348 538 l -6 -15 M458 538 l 6 -15 M470 538 l 16 -8 M402 540 l 2 -12" stroke-width="1.3"/>
+
+    <use href="#canopy" fill="#F2EDE3" stroke-width="2.8"/>
+    <g clip-path="url(#canopy-clip)" stroke="none">
+      <ellipse cx="470" cy="300" rx="260" ry="100" fill="url(#hatch-light)" opacity="0.9"/>
+      <ellipse cx="580" cy="230" rx="100" ry="100" fill="url(#hatch)" opacity="0.45"/>
+      <ellipse cx="420" cy="345" rx="170" ry="44" fill="url(#hatch-cross)" opacity="0.5"/>
+    </g>
+    <path d="M226 226 C 244 206, 274 204, 290 220 M318 120 C 336 100, 366 100, 380 118 M440 96 C 458 80, 488 82, 500 98 M520 232 C 538 212, 570 214, 584 232 M228 142 C 240 128, 262 126, 274 136 M424 214 C 442 196, 470 196, 484 214 M318 272 C 336 256, 364 256, 378 270 M540 146 C 554 132, 576 132, 588 144 M330 188 C 346 172, 370 172, 382 186 M460 156 C 476 142, 500 142, 512 156 M256 286 C 268 274, 288 274, 298 284 M444 284 C 458 272, 480 272, 492 284" stroke-width="1.4" opacity="0.6"/>
+    <g clip-path="url(#canopy-clip)">
+      <path d="M390 340 C 392 308, 372 288, 344 266 M414 340 C 414 306, 434 286, 466 266 M402 330 L 404 286" stroke-width="2.4"/>
+    </g>
+
+    <path d="M332 384 L 470 378 L 474 438 L 336 444 Z" fill="#E7E0D2" stroke-width="2.4"/>
+    <path d="M336 444 L 474 438 L 474 445 L 338 451 Z" fill="url(#hatch)" stroke-width="1.4"/>
+    <path d="M346 394 C 380 390, 420 392, 458 389 M348 430 C 390 427, 420 429, 462 426" stroke-width="0.9" opacity="0.45"/>
+    <circle cx="346" cy="412" r="3.2" fill="#24211e"/>
+    <circle cx="460" cy="408" r="3.2" fill="#24211e"/>
+  </g>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <ellipse cx="410" cy="542" rx="150" ry="13" opacity="0.38"/>
+    <ellipse cx="500" cy="262" rx="110" ry="40" opacity="0.16"/>
+  </g>
+
+  <text x="0" y="0" transform="translate(403 422) rotate(-2.6)" text-anchor="middle" font-size="34" font-weight="bold" fill="#24211e" font-family="'Bradley Hand', 'Segoe Print', 'Comic Sans MS', cursive" opacity="0.9">TREE</text>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

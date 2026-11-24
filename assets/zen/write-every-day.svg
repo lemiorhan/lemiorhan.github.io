@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="23" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2 0 0 0 1.8" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <path id="w1" fill="none" d="M0 0 l-1 -3 l2 -6 l4 -3 l4 3 l2 6 l-1 3 l-1 -3 l1 -7 l5 -3 l5 3 l2 7 l-1 3 l-2 6 l2 12 l6 6 l6 -6 l2 -12 l-2 -6M47 1 l-2 -7 l2 -15 l6 -7 l5 7 l2 15 l-1 7 l-2 6 l2 14 l6 6 l6 -6 l2 -14 l-2 -6 l-1 -7 l2 -13 l5 -7 l5 7 l2 13 l-1 7 l-1 -4 l1 -6 l5 -3 l5 3 l1 6 l-1 4 l-1 -3 l2 -6 l4 -3 l5 3 l1 6 l-1 3 l-1 -4 l2 -6 l4 -4 l5 4 l2 6 l-1 4M125 1 l-1 -4 l2 -8 l5 -3 l5 3 l2 8 l-2 4 l-1 -4 l2 -8 l4 -3 l5 3 l1 8 l-1 4 l-1 -4 l2 -7 l4 -4 l5 4 l2 7 l-1 4M173 1 l-2 -3 l2 -8 l5 -4 l5 4 l2 8 l-1 3 l-1 -3 l1 -6 l5 -3 l5 3 l1 6 l-1 3 l-1 -3 l2 -7 l6 -3 l6 3 l2 7 l-2 3 l-1 -3 l2 -8 l5 -3 l5 3 l2 8 l-2 3 l-1 -3 l2 -7 l5 -3 l6 3 l2 7 l-2 3 l-1 -3 l2 -8 l6 -4 l5 4 l2 8 l-1 3 l-2 -3 l2 -6 l6 -3 l5 3 l2 6 l-1 3M265 0 l-1 -3 l2 -7 l4 -4 l4 4 l2 7 l-1 3 l-2 -8 l3 -15 l5 -7 l6 7 l2 15 l-1 8 l-1 -3 l2 -7 l4 -3 l4 3 l2 7 l-1 3M312 1 l-1 -4 l2 -7 l4 -4 l5 4 l1 7 l-1 4 l-1 -4 l2 -8 l5 -3 l5 3 l2 8 l-1 4M348 0 l-2 -3 l2 -7 l5 -4 l5 4 l2 7 l-2 3 l-1 -3 l2 -8 l6 -4 l6 4 l2 8 l-2 3 l-1 -3 l2 -6 l6 -3 l5 3 l2 6 l-1 3 l-2 7 l2 13 l5 7 l5 -7 l2 -13 l-1 -7M408 -1 l-1 -3 l1 -7 l5 -3 l5 3 l2 7 l-1 3 l-2 -3 l2 -7 l5 -4 l6 4 l2 7 l-2 3 l-1 -3 l2 -7 l4 -3 l4 3 l2 7 l-1 3 l-2 6 l2 11 l6 5 l5 -5 l2 -11 l-2 -6 l-1 -4 l2 -7 l6 -4 l5 4 l2 7 l-1 4 l-2 -3 l2 -6 l6 -4 l6 4 l2 6 l-2 3M492 1 l-1 -4 l1 -7 l5 -3 l5 3 l1 7 l-1 4 l-1 6 l2 13 l4 7 l5 -7 l1 -13 l-1 -6M525 -1 l-2 -3 l2 -6 l5 -4 l4 4 l2 6 l-1 3 l-1 -3 l2 -7 l4 -4 l5 4 l2 7 l-1 3 l-2 -3 l2 -6 l5 -3 l5 3 l2 6 l-2 3M570 -1 l-2 7 l2 12 l6 6 l6 -6 l2 -12 l-1 -7 l-2 -3 l3 -7 l5 -3 l6 3 l2 7 l-1 3 l-1 6 l2 12 l4 6 l4 -6 l2 -12 l-2 -6"/>
+    <path id="w2" fill="none" d="M0 -1 l-1 -3 l2 -7 l5 -3 l6 3 l2 7 l-2 3 l-1 -3 l2 -7 l5 -3 l4 3 l2 7 l-1 3M33 -1 l-1 -3 l2 -7 l5 -3 l5 3 l2 7 l-1 3 l-1 -4 l2 -7 l5 -4 l5 4 l2 7 l-2 4 l-1 -3 l2 -7 l4 -3 l4 3 l2 7 l-1 3 l-1 -7 l2 -15 l4 -7 l5 7 l2 15 l-1 7 l-2 -4 l2 -7 l5 -4 l5 4 l2 7 l-1 4 l-1 -3 l1 -7 l5 -3 l4 3 l1 7 l-1 3 l-1 -3 l2 -6 l5 -3 l5 3 l2 6 l-1 3M127 0 l-2 -3 l2 -7 l5 -3 l5 3 l2 7 l-1 3 l-2 -4 l2 -7 l5 -4 l5 4 l2 7 l-2 4 l-1 -3 l2 -7 l6 -3 l5 3 l2 7 l-1 3 l-1 -4 l2 -7 l4 -4 l5 4 l2 7 l-1 4 l-1 -3 l2 -7 l4 -4 l5 4 l1 7 l-1 3 l-1 6 l2 12 l5 6 l5 -6 l2 -12 l-1 -6 l-2 -3 l2 -7 l5 -4 l5 4 l2 7 l-1 3M222 0 l-1 -3 l2 -8 l5 -3 l4 3 l2 8 l-1 3 l-1 6 l2 11 l5 6 l5 -6 l2 -11 l-1 -6 l-1 -8 l2 -16 l4 -7 l5 7 l2 16 l-1 8 l-2 -3 l2 -7 l6 -3 l6 3 l2 7 l-1 3M284 0 l-1 -3 l2 -7 l5 -4 l5 4 l1 7 l-1 3 l-1 -3 l2 -7 l5 -3 l4 3 l2 7 l-1 3 l-1 -4 l2 -7 l5 -4 l6 4 l2 7 l-2 4 l-1 -3 l2 -6 l6 -3 l5 3 l2 6 l-1 3 l-2 -3 l2 -6 l6 -3 l5 3 l2 6 l-2 3 l-1 -7 l2 -15 l5 -8 l6 8 l2 15 l-2 7M372 -1 l-2 6 l2 13 l6 7 l6 -7 l2 -13 l-1 -6 l-2 -8 l2 -16 l6 -8 l5 8 l2 16 l-1 8 l-1 -7 l1 -15 l5 -7 l5 7 l1 15 l-1 7 l-1 -7 l2 -14 l4 -6 l4 6 l2 14 l-1 7 l-1 -8 l1 -16 l5 -8 l5 8 l2 16 l-1 8 l-2 -8 l2 -16 l6 -8 l5 8 l2 16 l-1 8M454 0 l-1 -8 l2 -16 l4 -8 l4 8 l2 16 l-1 8 l-1 -7 l2 -15 l5 -7 l5 7 l2 15 l-1 7M492 -1 l-2 -3 l2 -6 l5 -4 l5 4 l2 6 l-1 3 l-1 -3 l2 -6 l4 -3 l5 3 l2 6 l-2 3M527 1 l-2 -4 l2 -6 l6 -3 l5 3 l2 6 l-2 4 l-1 -3 l2 -7 l5 -3 l5 3 l2 7 l-1 3 l-2 -3 l2 -7 l5 -3 l6 3 l1 7 l-1 3 l-1 -4 l2 -7 l4 -3 l5 3 l1 7 l-1 4 l-1 -4 l2 -6 l5 -3 l5 3 l2 6 l-1 4 l-2 -3 l2 -6 l6 -3 l5 3 l2 6 l-2 3M605 -1 l-1 -7 l2 -13 l5 -7 l5 7 l2 13 l-2 7 l-1 7 l2 13 l6 6 l5 -6 l2 -13 l-1 -7"/>
+    <path id="w3" fill="none" d="M0 0 l-1 -8 l2 -16 l5 -7 l5 7 l1 16 l-1 8 l-1 -3 l2 -7 l6 -4 l5 4 l2 7 l-1 3 l-1 -3 l2 -7 l4 -4 l5 4 l1 7 l-1 3M50 1 l-1 -4 l1 -7 l5 -3 l4 3 l2 7 l-1 4 l-1 -4 l1 -7 l5 -4 l6 4 l1 7 l-1 4 l-1 -4 l2 -7 l4 -3 l4 3 l2 7 l-1 4 l-1 -3 l1 -7 l5 -4 l5 4 l1 7 l-1 3 l-1 -8 l2 -16 l5 -7 l5 7 l2 16 l-2 8 l-1 -4 l2 -7 l5 -4 l6 4 l2 7 l-1 4M132 1 l-1 -4 l1 -8 l5 -4 l4 4 l2 8 l-1 4 l-1 -3 l1 -6 l5 -3 l5 3 l2 6 l-1 3 l-1 6 l2 12 l5 6 l6 -6 l2 -12 l-2 -6 l-1 -4 l2 -6 l6 -4 l5 4 l2 6 l-1 4 l-1 -4 l2 -7 l4 -3 l5 3 l2 7 l-1 4M201 1 l-2 -4 l2 -8 l6 -3 l6 3 l2 8 l-1 4 l-2 -4 l3 -6 l5 -3 l6 3 l2 6 l-1 4 l-2 -4 l2 -8 l5 -4 l5 4 l2 8 l-1 4 l-1 -4 l2 -6 l5 -3 l6 3 l2 6 l-1 4M265 -1 l-1 -4 l2 -7 l5 -3 l5 3 l2 7 l-2 4 l-1 -3 l2 -6 l6 -3 l6 3 l2 6 l-2 3 l-1 -7 l2 -15 l5 -7 l5 7 l1 15 l-1 7 l-1 -8 l2 -15 l5 -7 l6 7 l2 15 l-2 8M325 -1 l-1 -3 l2 -8 l5 -4 l5 4 l2 8 l-1 3 l-1 -3 l1 -6 l5 -3 l4 3 l1 6 l-1 3 l-1 -3 l2 -6 l4 -3 l5 3 l2 6 l-1 3 l-2 -3 l2 -7 l5 -4 l4 4 l2 7 l-2 3 l-1 -7 l2 -16 l5 -8 l4 8 l2 16 l-1 7 l-1 -3 l2 -8 l4 -4 l5 4 l2 8 l-1 3M402 0 l-2 -4 l2 -7 l4 -4 l5 4 l1 7 l-1 4 l-1 -4 l2 -7 l4 -4 l5 4 l2 7 l-1 4 l-2 -4 l2 -7 l6 -4 l6 4 l2 7 l-1 4 l-2 -4 l2 -6 l5 -3 l5 3 l1 6 l-1 4 l-1 -4 l2 -7 l6 -4 l6 4 l2 7 l-2 4 l-1 -4 l2 -6 l5 -4 l5 4 l2 6 l-1 4M481 0 l-1 -3 l2 -7 l4 -4 l5 4 l2 7 l-1 3 l-1 -3 l1 -7 l4 -4 l5 4 l1 7 l-1 3 l-1 -7 l2 -15 l6 -8 l5 8 l3 15 l-2 7 l-1 6 l2 12 l5 6 l5 -6 l2 -12 l-1 -6 l-1 -3 l1 -6 l5 -4 l5 4 l2 6 l-2 3 l-1 -3 l2 -7 l5 -4 l4 4 l2 7 l-1 3 l-1 -3 l1 -8 l5 -3 l4 3 l1 8 l-1 3M571 -1 l-1 -4 l1 -7 l5 -3 l5 3 l1 7 l-1 4 l-1 -4 l2 -7 l5 -3 l5 3 l2 7 l-1 4 l-1 -8 l2 -15 l6 -7 l5 7 l3 15 l-2 8 l-1 -3 l2 -7 l5 -3 l6 3 l2 7 l-1 3 l-2 -3 l2 -6 l6 -3 l5 3 l2 6 l-1 3 l-1 6 l1 12 l5 6 l5 -6 l1 -12 l-1 -6 l-1 -3 l2 -6 l6 -3 l5 3 l3 6 l-2 3"/>
+    <g id="block">
+      <use href="#w1" transform="translate(284 200) scale(0.5)"/>
+      <use href="#w2" transform="translate(290 218) scale(0.5)"/>
+      <use href="#w3" transform="translate(280 236) scale(0.5)"/>
+      <use href="#w1" transform="translate(294 254) scale(0.5)"/>
+      <use href="#w2" transform="translate(282 272) scale(0.5)"/>
+      <use href="#w3" transform="translate(288 290) scale(0.5)"/>
+      <use href="#w1" transform="translate(278 308) scale(0.5)"/>
+      <use href="#w2" transform="translate(292 326) scale(0.5)"/>
+      <use href="#w3" transform="translate(284 344) scale(0.5)"/>
+      <use href="#w1" transform="translate(290 362) scale(0.5)"/>
+      <use href="#w2" transform="translate(280 380) scale(0.5)"/>
+      <use href="#w3" transform="translate(294 398) scale(0.5)"/>
+      <use href="#w1" transform="translate(286 416) scale(0.5)"/>
+      <use href="#w2" transform="translate(282 434) scale(0.5)"/>
+      <use href="#w3" transform="translate(290 452) scale(0.5)"/>
+      <use href="#w1" transform="translate(278 470) scale(0.5)"/>
+      <use href="#w2" transform="translate(288 488) scale(0.5)"/>
+    </g>
+    <ellipse id="la" rx="6.5" ry="3.6" stroke-width="1.8"/>
+    <path id="lb" d="M-6.5 0 H6.5" stroke-width="2.8"/>
+    <clipPath id="q1"><path d="M446 334 L446 194 A146 146 0 0 1 586 334 Z"/></clipPath>
+    <clipPath id="q2"><path d="M446 346 L586 346 A146 146 0 0 1 446 486 Z"/></clipPath>
+    <clipPath id="q3"><path d="M434 346 L434 486 A146 146 0 0 1 294 346 Z"/></clipPath>
+    <clipPath id="q4"><path d="M434 334 L294 334 A146 146 0 0 1 434 194 Z"/></clipPath>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <rect x="112" y="54" width="600" height="560" transform="rotate(-3 400 320)" opacity="0.25"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-3 400 320)">
+    <rect x="100" y="40" width="600" height="560" fill="#F6F1E6" stroke-width="2"/>
+    <g stroke-width="1.6" opacity="0.32">
+      <use href="#w1" transform="translate(142 92) scale(0.8)"/>
+      <use href="#w2" transform="translate(150 126) scale(0.8)"/>
+      <use href="#w3" transform="translate(140 160) scale(0.8)"/>
+      <use href="#w1" transform="translate(148 194) scale(0.8)"/>
+      <use href="#w2" transform="translate(144 228) scale(0.8)"/>
+      <use href="#w3" transform="translate(152 262) scale(0.8)"/>
+      <use href="#w1" transform="translate(140 296) scale(0.8)"/>
+      <use href="#w2" transform="translate(146 330) scale(0.8)"/>
+      <use href="#w3" transform="translate(142 364) scale(0.8)"/>
+      <use href="#w1" transform="translate(150 398) scale(0.8)"/>
+      <use href="#w2" transform="translate(140 432) scale(0.8)"/>
+      <use href="#w3" transform="translate(148 466) scale(0.8)"/>
+      <use href="#w1" transform="translate(144 500) scale(0.8)"/>
+      <use href="#w2" transform="translate(152 534) scale(0.8)"/>
+      <use href="#w3" transform="translate(142 568) scale(0.8)"/>
+    </g>
+  </g>
+
+  <g filter="url(#smudge)" fill="#24211e">
+    <circle cx="456" cy="358" r="172" opacity="0.4"/>
+    <ellipse cx="220" cy="358" rx="64" ry="172" opacity="0.3"/>
+  </g>
+
+  <g fill="#F2EDE3">
+    <circle cx="440" cy="340" r="173"/>
+    <ellipse cx="206" cy="340" rx="63" ry="173"/>
+    <rect x="424" y="130" width="32" height="44"/>
+  </g>
+
+  <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="none">
+      <use href="#la" transform="translate(453 116) rotate(-35)"/>
+      <use href="#lb" transform="translate(462 109) rotate(-31)"/>
+      <use href="#la" transform="translate(472 104) rotate(-28)"/>
+      <use href="#lb" transform="translate(483 99) rotate(-24)"/>
+      <use href="#la" transform="translate(493 95) rotate(-20)"/>
+      <use href="#lb" transform="translate(504 91) rotate(-17)"/>
+      <use href="#la" transform="translate(515 88) rotate(-13)"/>
+      <use href="#lb" transform="translate(526 86) rotate(-9)"/>
+      <use href="#la" transform="translate(538 84) rotate(-5)"/>
+      <use href="#lb" transform="translate(549 84) rotate(-2)"/>
+      <use href="#la" transform="translate(561 84) rotate(3)"/>
+      <use href="#lb" transform="translate(572 85) rotate(7)"/>
+      <use href="#la" transform="translate(584 87) rotate(12)"/>
+      <use href="#lb" transform="translate(595 90) rotate(17)"/>
+      <use href="#la" transform="translate(605 93) rotate(22)"/>
+      <use href="#lb" transform="translate(616 98) rotate(28)"/>
+      <use href="#la" transform="translate(626 104) rotate(34)"/>
+      <use href="#lb" transform="translate(635 111) rotate(40)"/>
+      <use href="#la" transform="translate(643 119) rotate(47)"/>
+      <use href="#lb" transform="translate(651 128) rotate(55)"/>
+      <use href="#la" transform="translate(656 138) rotate(61)"/>
+      <use href="#lb" transform="translate(661 148) rotate(69)"/>
+      <use href="#la" transform="translate(665 159) rotate(75)"/>
+      <use href="#lb" transform="translate(667 170) rotate(80)"/>
+      <use href="#la" transform="translate(669 182) rotate(86)"/>
+      <use href="#lb" transform="translate(669 193) rotate(90)"/>
+      <use href="#la" transform="translate(669 205) rotate(94)"/>
+      <use href="#lb" transform="translate(667 216) rotate(97)"/>
+      <use href="#la" transform="translate(666 228) rotate(99)"/>
+      <use href="#lb" transform="translate(664 239) rotate(101)"/>
+      <use href="#la" transform="translate(661 250) rotate(102)"/>
+      <use href="#lb" transform="translate(659 262) rotate(102)"/>
+      <use href="#la" transform="translate(657 273) rotate(101)"/>
+      <use href="#lb" transform="translate(655 284) rotate(100)"/>
+      <use href="#la" transform="translate(653 295) rotate(98)"/>
+      <use href="#lb" transform="translate(652 307) rotate(95)"/>
+      <use href="#la" transform="translate(651 318) rotate(91)"/>
+      <use href="#lb" transform="translate(651 330) rotate(87)"/>
+      <use href="#la" transform="translate(652 341) rotate(82)"/>
+      <use href="#lb" transform="translate(654 352) rotate(77)"/>
+      <use href="#la" transform="translate(657 363) rotate(72)"/>
+      <use href="#lb" transform="translate(662 375) rotate(67)"/>
+      <use href="#la" transform="translate(666 385) rotate(66)"/>
+      <use href="#lb" transform="translate(671 395) rotate(68)"/>
+      <use href="#la" transform="translate(675 406) rotate(70)"/>
+      <use href="#lb" transform="translate(678 417) rotate(73)"/>
+      <use href="#la" transform="translate(681 428) rotate(76)"/>
+      <use href="#lb" transform="translate(684 439) rotate(80)"/>
+      <use href="#la" transform="translate(685 451) rotate(84)"/>
+      <use href="#lb" transform="translate(686 462) rotate(88)"/>
+      <use href="#la" transform="translate(686 474) rotate(93)"/>
+    </g>
+    <path d="M673 486 L699 482" fill="none" stroke-width="3.4"/>
+    <path d="M686 480 L686 485" fill="none" stroke-width="2.6"/>
+
+    <ellipse cx="206" cy="340" rx="62" ry="172" fill="#F2EDE3" stroke-width="2.6"/>
+    <ellipse cx="206" cy="340" rx="50" ry="152" fill="url(#hatch-light)" stroke-width="1.6"/>
+    <path d="M206 188 A50 152 0 0 0 206 492" fill="url(#hatch)" stroke="none" opacity="0.5"/>
+    <ellipse cx="206" cy="340" rx="30" ry="96" fill="none" stroke-width="1.2" opacity="0.6"/>
+    <path d="M262 318 L274 318 L274 362 L262 362 Z" fill="url(#hatch)" stroke-width="1.8"/>
+    <path d="M262 330 H274 M262 350 H274" stroke-width="1.4"/>
+
+    <path d="M432 152 L448 152 L448 170 L432 170 Z" fill="#F2EDE3" stroke-width="2"/>
+    <path d="M426 130 L454 130 L454 154 L426 154 Z" fill="#F2EDE3" stroke-width="2.2"/>
+    <path d="M431 130 V154 M436 130 V154 M441 130 V154 M446 130 V154 M451 130 V154" stroke-width="1.3"/>
+    <path d="M422 132 C 412 92, 468 92, 458 132" fill="none" stroke-width="3.4"/>
+    <path d="M427 131 C 420 101, 460 101, 453 131" fill="none" stroke-width="1.4"/>
+
+    <circle cx="440" cy="340" r="172" fill="#F2EDE3" stroke-width="2.8"/>
+    <path d="M561.6 218.4 A172 172 0 0 1 318.4 461.6 L 332.6 447.4 A152 152 0 0 0 547.4 232.6 Z" fill="url(#hatch-light)" stroke="none" opacity="0.8"/>
+    <circle cx="440" cy="340" r="160" fill="none" stroke-width="1.2" opacity="0.6"/>
+    <circle cx="440" cy="340" r="151" fill="#F6F1E6" stroke-width="2"/>
+  </g>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <g clip-path="url(#q1)"><use href="#block"/></g>
+    <g clip-path="url(#q2)"><use href="#block" transform="translate(-12 7)"/></g>
+    <g clip-path="url(#q3)"><use href="#block" transform="translate(10 -5)"/></g>
+    <g clip-path="url(#q4)"><use href="#block" transform="translate(-6 10)"/></g>
+  </g>
+
+  <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M440 189 V491 M289 340 H591" fill="none" stroke-width="3.4"/>
+    <path d="M-5 10 L-4 -72 L0 -84 L4 -72 L5 10 Z" transform="translate(440 340) rotate(212)" fill="#24211e" stroke="#F6F1E6" stroke-width="2.4"/>
+    <path d="M-5 10 L-4 -72 L0 -84 L4 -72 L5 10 Z" transform="translate(440 340) rotate(212)" fill="#24211e" stroke-width="1.2"/>
+    <path d="M-4 12 L-2.5 -122 L0 -130 L2.5 -122 L4 12 Z" transform="translate(440 340) rotate(68)" fill="#24211e" stroke="#F6F1E6" stroke-width="2.4"/>
+    <path d="M-4 12 L-2.5 -122 L0 -130 L2.5 -122 L4 12 Z" transform="translate(440 340) rotate(68)" fill="#24211e" stroke-width="1.2"/>
+    <circle cx="440" cy="340" r="9" fill="#24211e" stroke-width="1.4"/>
+    <circle cx="440" cy="340" r="3" fill="#F6F1E6" stroke="none"/>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>

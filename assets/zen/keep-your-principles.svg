@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  1.5 0 0 0 -0.62"/>
+    </filter>
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="13" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.05" result="ga"/>
+      <feComposite in="d" in2="ga" operator="in"/>
+    </filter>
+    <filter id="shade" x="-10%" y="-30%" width="120%" height="160%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.2 0 0 0 1.85" result="ga"/>
+      <feComposite in="b" in2="ga" operator="in"/>
+    </filter>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#24211e" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="hatch-light" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#24211e" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="rumble" width="12" height="10" patternUnits="userSpaceOnUse">
+      <line x1="6" y1="0" x2="6" y2="10" stroke="#24211e" stroke-width="1.4"/>
+    </pattern>
+    <radialGradient id="vignette" cx="50%" cy="48%" r="70%">
+      <stop offset="62%" stop-color="#3a3026" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#3a3026" stop-opacity="0.12"/>
+    </radialGradient>
+    <rect id="body" x="-75" y="-32" width="150" height="64" rx="18"/>
+    <g id="car">
+      <use href="#body"/>
+      <path d="M14 -26 L35 -28 C42 -14, 42 14, 35 28 L14 26 Z M-35 -26 L-51 -27 C-57 -12, -57 12, -51 27 L-35 26 Z" fill="url(#hatch)"/>
+      <path d="M-35 -26 L14 -26 M-35 26 L14 26" fill="none" stroke-width="1.2"/>
+      <path d="M19 -32 L23 -41 L33 -41 L32 -32 M19 32 L23 41 L33 41 L32 32" fill="#F6F1E6" stroke-width="1.6"/>
+      <path d="M44 -18 C 54 -14, 63 -14, 70 -18 M44 18 C 54 14, 63 14, 70 18" fill="none" stroke-width="1.1"/>
+    </g>
+  </defs>
+
+  <rect width="800" height="640" fill="#F2EDE3"/>
+  <rect width="800" height="640" filter="url(#paper)" opacity="0.3"/>
+
+  <g filter="url(#pencil)" fill="none" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-20" y="-20" width="840" height="112" fill="url(#hatch)" stroke="none" opacity="0.42"/>
+    <rect x="-20" y="104" width="840" height="436" fill="url(#hatch-light)" stroke="none" opacity="0.14"/>
+    <rect x="-20" y="568" width="840" height="92" fill="url(#hatch)" stroke="none" opacity="0.42"/>
+
+    <rect x="-20" y="92" width="840" height="12" fill="url(#hatch)" stroke-width="2.2"/>
+    <path d="M30 104 v6 M94 104 v6 M158 104 v6 M222 104 v6 M286 104 v6 M350 104 v6 M414 104 v6 M478 104 v6 M542 104 v6 M606 104 v6 M670 104 v6 M734 104 v6" stroke-width="3.2"/>
+    <rect x="-20" y="556" width="840" height="12" fill="url(#hatch)" stroke-width="2.2"/>
+    <path d="M30 550 v6 M94 550 v6 M158 550 v6 M222 550 v6 M286 550 v6 M350 550 v6 M414 550 v6 M478 550 v6 M542 550 v6 M606 550 v6 M670 550 v6 M734 550 v6" stroke-width="3.2"/>
+
+    <rect x="-20" y="205" width="840" height="10" fill="url(#rumble)" stroke="none" opacity="0.7"/>
+    <path d="M-20 220 H820 M-20 227 H820" stroke-width="2.6"/>
+    <path d="M-20 223.5 H820" stroke="#F6F1E6" stroke-width="3.4"/>
+    <path d="M-20 384 H820" stroke-width="3.4" stroke-dasharray="60 44"/>
+    <path d="M-20 540 H820" stroke-width="2.2"/>
+  </g>
+
+  <g filter="url(#shade)" fill="#24211e" opacity="0.4">
+    <use href="#body" transform="translate(-24 172) rotate(-2) scale(1.15)"/>
+    <use href="#body" transform="translate(168 172) rotate(1.5) scale(1.15)"/>
+    <use href="#body" transform="translate(360 172) rotate(-1) scale(1.15)"/>
+    <use href="#body" transform="translate(552 172) rotate(2) scale(1.15)"/>
+    <use href="#body" transform="translate(744 172) rotate(-1.5) scale(1.15)"/>
+    <use href="#body" transform="translate(306 313) scale(1.15)"/>
+  </g>
+
+  <g filter="url(#pencil)" stroke="#24211e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2">
+    <use href="#car" transform="translate(-30 164) rotate(-2) scale(1.15)" fill="#F6F1E6"/>
+    <use href="#car" transform="translate(162 164) rotate(1.5) scale(1.15)" fill="#F6F1E6"/>
+    <use href="#body" transform="translate(162 164) rotate(1.5) scale(1.15)" fill="url(#hatch-light)"/>
+    <use href="#car" transform="translate(354 164) rotate(-1) scale(1.15)" fill="#F6F1E6"/>
+    <use href="#car" transform="translate(546 164) rotate(2) scale(1.15)" fill="#F6F1E6"/>
+    <use href="#body" transform="translate(546 164) rotate(2) scale(1.15)" fill="url(#hatch-light)"/>
+    <use href="#car" transform="translate(738 164) rotate(-1.5) scale(1.15)" fill="#F6F1E6"/>
+    <use href="#car" transform="translate(300 305) scale(1.15)" fill="#F6F1E6"/>
+  </g>
+
+  <rect width="800" height="640" fill="url(#vignette)"/>
+</svg>
