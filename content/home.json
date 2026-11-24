@@ -658,7 +658,14 @@
                 "@tr": "Herkese açık paylaştığım her şey: kod, kayıtlar, podcast, slaytlar, yazılar ve hesaplarım."
               }
             },
-            { "path": "personal-zen/", "name": "Personal Zen", "text": "The principles I live and work by, first written down for my kids in 2017, each with a charcoal drawing." },
+            {
+              "path": "personal-zen/",
+              "name": "Personal Zen",
+              "text": {
+                "@en": "The principles I live and work by, first written down for my kids in 2017, each with a charcoal drawing.",
+                "@tr": "Hayatıma ve işime yön veren prensipler. İlk kez 2017'de çocuklarım için yazdım, her birinin bir kömür kalem çizimi var."
+              }
+            },
             {
               "path": "root-bug/",
               "name": { "@en": "The macOS root bug", "@tr": "macOS root açığı" },

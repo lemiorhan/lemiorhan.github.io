@@ -106,7 +106,7 @@ def has_class(name):
 
 
 def plain(markdown):
-    return re.sub(r'\[\^(\d+)\]', r'[\1]', re.sub(r'\[([^\]]+)\]\([^)\s]+\)', r'\1', markdown))
+    return re.sub(r'\[\^(\d+)\]', r'[\1]', re.sub(r'\[([^\]]+)\]\([^)\s]+\)(?:\{lang=[a-z]{2}\})?', r'\1', markdown))
 
 
 def blocks_of(data, kind):
@@ -131,7 +131,7 @@ def not_found_in(source, lang):
 
 def zen_story_words():
     with open(os.path.join(ROOT, 'build.py'), encoding='utf-8') as f:
-        low, high = re.search(r'^ZEN_STORY_WORDS = \((\d+), (\d+)\)$', f.read(), re.M).groups()
+        low, high = re.search(r"^ZEN_STORY_WORDS = \{'en': \((\d+), (\d+)\)\}$", f.read(), re.M).groups()
     return int(low), int(high)
 
 
@@ -435,12 +435,20 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
     def test_a_zen_story_one_word_short_of_the_range(self):
         low, high = zen_story_words()
         self.assertRejected(self.zen_story(low - 1),
-                            "the story of zen item 'help' has {} words; ZEN_STORY_WORDS allows {} to {}".format(low - 1, low, high))
+                            "the en story of zen item 'help' has {} words; ZEN_STORY_WORDS allows {} to {}".format(low - 1, low, high))
 
     def test_a_zen_story_one_word_over_the_range(self):
         low, high = zen_story_words()
         self.assertRejected(self.zen_story(high + 1),
-                            "the story of zen item 'help' has {} words; ZEN_STORY_WORDS allows {} to {}".format(high + 1, low, high))
+                            "the en story of zen item 'help' has {} words; ZEN_STORY_WORDS allows {} to {}".format(high + 1, low, high))
+
+    def test_a_zen_story_outside_the_word_range_only_in_another_language_builds(self):
+        low, _ = zen_story_words()
+
+        def short_turkish(d):
+            blocks_of(d, 'zen')[0]['items'][0]['story'] = [{'@en': ' '.join(['word'] * low), '@tr': 'kısa'}]
+        result = self.build_with(self.edit('personal-zen', short_turkish, read=read_json))
+        self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_a_zen_block_with_no_items_or_items_that_are_not_a_list(self):
         for items in ([], {'id': 'help'}, 'help'):
@@ -792,11 +800,20 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
                       {'@en': 'Since {since}', '@tr': '{year} yılından beri'},
                       {'@en': 'See [the talk](https://example.com/a)', '@tr': '[Konuşmaya](https://example.com/b) bakın'},
                       {'@en': 'Said so.[^1]', '@tr': 'Öyle dedi.[^2]'},
-                      {'@en': 'Said so.[^1]', '@tr': 'Öyle dedi.'}):
+                      {'@en': 'Said so.[^1]', '@tr': 'Öyle dedi.'},
+                      {'@en': 'See [the talk](https://example.com/a){lang=en}', '@tr': '[Konuşmaya](https://example.com/a) bakın'},
+                      {'@en': 'See [the talk](https://example.com/a){lang=en}',
+                       '@tr': '[Konuşmaya](https://example.com/a){lang=tr} bakın'}):
             with self.subTest(value=value):
                 self.assertRejected(self.edit('contact', lambda d, value=value: d.update(title=value), read=read_json),
                                     'content/contact.json: the translation at title must keep the same {placeholders}, '
-                                    'link URLs and [^n] refs in "@tr" as in "@en"')
+                                    'link URLs, link languages and [^n] refs in "@tr" as in "@en"')
+
+    def test_a_link_that_names_its_language_outside_a_zen_block(self):
+        text = 'Reach me on [LinkedIn](https://www.linkedin.com/in/lemiorhan){lang=en}.'
+        self.assertRejected(self.edit('contact', lambda d: d['sections'][0]['blocks'].__setitem__(0, text)),
+                            'a link names its language with {lang=…} only inside a zen block; this text has one: '
+                            + repr(text))
 
     def test_a_translation_may_move_its_placeholders_links_and_refs(self):
         def moved(d):
@@ -1152,7 +1169,7 @@ class ContentRendersAsText(unittest.TestCase):
             json.dump(data, f, ensure_ascii=False)
         cls.sumo_live = live
         path = os.path.join(site, 'content', 'personal-zen.json')
-        data = read_json(path)
+        data = read_in_root_language(path)
         zen = blocks_of(data, 'zen')[0]['items'][0]
         for key in ('zen', 'source'):
             zen[key] += ' ' + cls.MARK
@@ -3091,6 +3108,17 @@ class BuiltSite(unittest.TestCase):
                 self.assertEqual([x.all_text() for x in article.find(has_class('zen-source'))], [plain(item['source'])])
                 self.assertEqual([(a.attrs.get('href'), a.all_text()) for p in article.find(has_class('zen-top'))
                                   for a in p.find(lambda x: x.tag == 'a')], [('#top', top)])
+
+    def test_a_link_in_a_zen_source_carries_the_language_its_content_names_for_its_text(self):
+        stated, shown = [], []
+        articles = self.trees['personal-zen'].find(lambda n: n.tag == 'article' and 'zen' in n.classes())
+        for item, article in zip(self.zen_items(), articles):
+            stated += [(label, None if lang in ('', self.lang) else lang)
+                       for label, lang in re.findall(r'\[([^\]]+)\]\([^)\s"]+\)(?:\{lang=([a-z]{2})\})?', item['source'])]
+            shown += [(a.all_text(), a.attrs.get('lang')) for p in article.find(has_class('zen-source'))
+                      for a in p.find(lambda x: x.tag == 'a')]
+        self.assertEqual(shown, stated)
+        self.assertGreater(len([lang for _, lang in shown if lang]), 0)
 
     def test_the_zen_index_links_to_every_zen_in_order(self):
         items = self.zen_items()
