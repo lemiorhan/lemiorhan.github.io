@@ -18,12 +18,13 @@ import unittest
 from collections import Counter
 from html.parser import HTMLParser
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import i18n
+
+ROOT =os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLI = os.path.join(ROOT, 'tests', 'archive_dom_cli.js')
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'}
 
-with open(os.path.join(ROOT, 'content', 'talks.json'), encoding='utf-8') as f:
-    ARCHIVE = json.load(f)['archive']
+ARCHIVE = i18n.content('talks')['archive']
 UI = ARCHIVE['ui']
 LABELS = ARCHIVE['themes']['items']
 EVENTS = [('y' + year, ev) for year, evs in sorted(ARCHIVE['events'].items(), reverse=True) for ev in evs]
@@ -302,8 +303,7 @@ class LocationTypeFilter(unittest.TestCase):
             for d in ('content', 'assets', 'data'):
                 shutil.copytree(os.path.join(ROOT, d), os.path.join(site, d))
             path = os.path.join(site, 'content', 'talks.json')
-            with open(path, encoding='utf-8') as f:
-                data = json.load(f)
+            data = i18n.localized(i18n.read_json(path), i18n.LANGS[0])
             labels = data['archive']['locationTypes']['items']
             self.assertNotIn('bootcamp', labels)
             labels['bootcamp'] = 'Training camps'

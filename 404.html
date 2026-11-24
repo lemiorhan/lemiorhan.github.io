@@ -38,5 +38,19 @@
     </section>
     <script type="application/json" id="maze-data">{"ui": {"board": "Maze game. You are HEAD, the orange dot: collect the commits and keep away from the bugs.", "play": "Play", "start": "Move with the arrow keys or WASD. On a phone, swipe on the maze or use the arrows under it.", "caught": "A bug got you. Move to go on.", "next": "Next maze, faster bugs. Move to start.", "cleared": "nothing to commit, working tree clean", "over": "fatal: no lives left", "again": "Play again", "paused": "Paused", "resume": "Resume", "score": "Score", "best": "Best", "level": "Level", "lives": "Lives", "up": "Up", "down": "Down", "left": "Left", "right": "Right"}}</script>
   </main>
+  <template data-lang="tr" data-title="Sayfa bulunamadı, Lemi Orhan Ergin">
+    <div class="notfound-text">
+      <h1>Sayfa bulunamadı</h1>
+      <p><code>fatal: pathspec did not match any files</code></p>
+      <p>Bu sitede böyle bir adres yok.</p>
+      <p><a href="/tr/">Ana sayfaya gidin</a> ya da doğrudan <a href="/tr/talks/">Konuşmalar</a>, <a href="/tr/craftgate/">Craftgate</a> veya <a href="/tr/contact/">İletişim</a> sayfasına geçin.</p>
+    </div>
+    <section class="maze" aria-labelledby="maze-title" data-maze hidden>
+      <h2 id="maze-title">Madem buradasınız</h2>
+      <p class="maze-intro">Bu sayfaya bug'lar girmiş. Siz HEAD'siniz, turuncu nokta. Bütün commit'leri toplayın. Yeşil bir test kapın, etkisi sürerken bug'ları ezin.</p>
+    </section>
+    <script type="application/json" id="maze-data">{"ui": {"board": "Labirent oyunu. Siz HEAD'siniz, turuncu nokta: commit'leri toplayın, bug'lardan uzak durun.", "play": "Oyna", "start": "Ok tuşları ya da WASD ile hareket edin. Telefonda parmağınızı labirentin üstünde kaydırın ya da altındaki okları kullanın.", "caught": "Bir bug sizi yakaladı. Devam etmek için hareket edin.", "next": "Sıradaki labirent, daha hızlı bug'lar. Başlamak için hareket edin.", "cleared": "nothing to commit, working tree clean", "over": "fatal: no lives left", "again": "Tekrar oyna", "paused": "Duraklatıldı", "resume": "Devam et", "score": "Puan", "best": "Rekor", "level": "Seviye", "lives": "Can", "up": "Yukarı", "down": "Aşağı", "left": "Sol", "right": "Sağ"}}</script>
+  </template>
+  <script>document.querySelectorAll('template[data-lang]').forEach(function (t) { if (location.pathname.split('/')[1] !== t.dataset.lang) return; document.querySelector('main').replaceChildren(t.content); document.documentElement.lang = t.dataset.lang; document.title = t.dataset.title; });</script>
 </body>
 </html>

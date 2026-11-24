@@ -25,6 +25,8 @@ import unittest
 from datetime import datetime, timedelta, timezone
 from html.parser import HTMLParser
 
+import i18n
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 import build  # noqa: E402
@@ -34,8 +36,10 @@ FIXTURES = os.path.join(ROOT, 'tests', 'fixtures', 'sumo')
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'}
 JAPAN = timezone(timedelta(hours=9))
 
-with open(os.path.join(ROOT, 'content', 'sumo.json'), encoding='utf-8') as f:
-    BLOCK = next(b for s in json.load(f)['sections'] for b in s['blocks'] if isinstance(b, dict) and b.get('type') == 'sumo-live')
+# Lemi wrote this page in Turkish, and the strings the expectations below are written by hand from are the Turkish ones.
+LANG = 'tr'
+BLOCK = next(b for s in i18n.content('sumo', LANG)['sections'] for b in s['blocks']
+             if isinstance(b, dict) and b.get('type') == 'sumo-live')
 T = BLOCK['text']
 API = BLOCK['api']
 
@@ -130,7 +134,7 @@ def setUpModule():
     if result.returncode:
         raise AssertionError(result.stderr)
     page = SumoPage()
-    with open(os.path.join(tmp.name, 'sumo', 'index.html'), encoding='utf-8') as f:
+    with open(os.path.join(tmp.name, i18n.page_file('sumo', LANG)), encoding='utf-8') as f:
         page.feed(f.read())
     page.close()
     if [t['tag'] for t in page.trees] != ['script', 'div']:

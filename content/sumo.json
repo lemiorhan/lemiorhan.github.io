@@ -1,134 +1,303 @@
 {
-  "lang": "tr",
   "title": "Sumo, Lemi Orhan Ergin",
-  "description": "Sumoya Türkçe bir giriş: kurallar, altı lig, yokozunadan maegashiraya seviyeler, yılda altı turnuva ve Lemi Orhan Ergin'in sevdiği iki güreşçi, Hakuhō ile Ura.",
-  "ui": {
-    "photo_viewer": "Fotoğraf görüntüleyici",
-    "close": "Kapat",
-    "previous_photo": "Önceki fotoğraf",
-    "next_photo": "Sonraki fotoğraf"
+  "description": {
+    "@en": "An introduction to sumo: the rules, the six divisions, the ranks from yokozuna down to maegashira, the six tournaments a year, and the two wrestlers Lemi Orhan Ergin has a soft spot for, Hakuhō and Ura.",
+    "@tr": "Sumoya Türkçe bir giriş: kurallar, altı lig, yokozunadan maegashiraya seviyeler, yılda altı turnuva ve Lemi Orhan Ergin'in sevdiği iki güreşçi, Hakuhō ile Ura."
   },
   "head": {
     "heading": "Sumo",
     "cmd": "man sumo",
     "blocks": [
-      { "type": "p", "class": "intro", "text": "Sumoya ayrı bir ilgim var. Türkçe sumo içerik üreten birkaç kişiden biriyim. X'teki (eski adıyla Twitter) [@sumo_turk](https://x.com/sumo_turk) hesabında sumo paylaşıyorum. Bu sayfa, sumoyu ilk kez izleyecek biri için bir başlangıç olsun." },
-      { "type": "contents", "label": "Bu sayfada" }
+      {
+        "type": "p",
+        "class": "intro",
+        "text": {
+          "@en": "I have a special interest in sumo. I am one of the few people producing sumo content in Turkish. I post about sumo on my X (formerly Twitter) account, [@sumo_turk](https://x.com/sumo_turk). This page is meant as a starting point for anyone watching sumo for the first time.",
+          "@tr": "Sumoya ayrı bir ilgim var. Türkçe sumo içerik üreten birkaç kişiden biriyim. X'teki (eski adıyla Twitter) [@sumo_turk](https://x.com/sumo_turk) hesabında sumo paylaşıyorum. Bu sayfa, sumoyu ilk kez izleyecek biri için bir başlangıç olsun."
+        }
+      },
+      { "type": "contents", "label": { "@en": "On this page", "@tr": "Bu sayfada" } }
     ]
   },
   "sections": [
     {
       "id": "bir-bakista",
-      "heading": "Bir bakışta",
+      "heading": { "@en": "At a glance", "@tr": "Bir bakışta" },
       "blocks": [
         {
           "type": "infobox",
           "items": [
-            { "label": "Ring", "text": "Kilden yükseltilmiş bir zemin (dohyō); halkanın çapı 4,55 metre[^2]" },
-            { "label": "Kazanan", "text": "Rakibini halkanın dışına çıkaran ya da ayak tabanları dışında bir yerini yere değdiren güreşçi[^1]" },
-            { "label": "Siklet", "text": "Yok; bir güreşçi kendi kilosunun iki katı bir rakiple karşılaşabilir[^1]" },
-            { "label": "Teknik", "text": "82 resmî kazanma tekniği (kimarite)[^3]" },
-            { "label": "Lig", "text": "Altı lig, en üstte makuuchi[^1]" },
-            { "label": "Turnuva", "text": "Yılda altı turnuva, her biri 15 gün[^11]" }
+            {
+              "label": "Ring",
+              "text": {
+                "@en": "A raised platform of clay (dohyō); the ring is 4.55 meters in diameter[^2]",
+                "@tr": "Kilden yükseltilmiş bir zemin (dohyō); halkanın çapı 4,55 metre[^2]"
+              }
+            },
+            {
+              "label": { "@en": "Winner", "@tr": "Kazanan" },
+              "text": {
+                "@en": "The wrestler who forces the opponent out of the ring, or makes the opponent touch the ground with any part of the body other than the soles of the feet[^1]",
+                "@tr": "Rakibini halkanın dışına çıkaran ya da ayak tabanları dışında bir yerini yere değdiren güreşçi[^1]"
+              }
+            },
+            {
+              "label": { "@en": "Weight classes", "@tr": "Siklet" },
+              "text": {
+                "@en": "None; a wrestler can face an opponent twice his own weight[^1]",
+                "@tr": "Yok; bir güreşçi kendi kilosunun iki katı bir rakiple karşılaşabilir[^1]"
+              }
+            },
+            {
+              "label": { "@en": "Techniques", "@tr": "Teknik" },
+              "text": { "@en": "82 official winning techniques (kimarite)[^3]", "@tr": "82 resmî kazanma tekniği (kimarite)[^3]" }
+            },
+            {
+              "label": { "@en": "Divisions", "@tr": "Lig" },
+              "text": { "@en": "Six divisions, with makuuchi at the top[^1]", "@tr": "Altı lig, en üstte makuuchi[^1]" }
+            },
+            {
+              "label": { "@en": "Tournaments", "@tr": "Turnuva" },
+              "text": { "@en": "Six tournaments a year, 15 days each[^11]", "@tr": "Yılda altı turnuva, her biri 15 gün[^11]" }
+            }
           ]
         }
       ]
     },
     {
       "id": "kurallar",
-      "heading": "Kurallar",
+      "heading": { "@en": "Rules", "@tr": "Kurallar" },
       "cmd": "cat RULES.md",
       "class": "prose",
       "blocks": [
-        "İki güreşçi (rikishi), kilden yükseltilmiş bir zeminin (dohyō) üstündeki halkada karşılaşır. Halkanın çapı 4,55 metre.[^2] Halkanın dışına ilk basan ya da ayak tabanları dışında bir yeriyle yere ilk değen güreşçi maçı kaybeder.[^1]",
-        "Sumoda siklet yok. Bir güreşçi kendi kilosunun iki katı bir rakiple karşılaşabilir.[^1]",
+        {
+          "@en": "Two wrestlers (rikishi) meet in a ring on a raised platform of clay (dohyō). The ring is 4.55 meters in diameter.[^2] The first wrestler to step out of the ring, or to touch the ground with any part of his body other than the soles of his feet, loses the bout.[^1]",
+          "@tr": "İki güreşçi (rikishi), kilden yükseltilmiş bir zeminin (dohyō) üstündeki halkada karşılaşır. Halkanın çapı 4,55 metre.[^2] Halkanın dışına ilk basan ya da ayak tabanları dışında bir yeriyle yere ilk değen güreşçi maçı kaybeder.[^1]"
+        },
+        {
+          "@en": "Sumo has no weight classes. A wrestler can face an opponent twice his own weight.[^1]",
+          "@tr": "Sumoda siklet yok. Bir güreşçi kendi kilosunun iki katı bir rakiple karşılaşabilir.[^1]"
+        },
         {
           "type": "photo",
           "small": true,
           "src": "assets/sumo/hakuho-2008.jpg",
           "width": 1200,
           "height": 1200,
-          "alt": "Hakuhō halkada öne eğilmiş, rakibi Dejima sırtüstü kumun üstüne düşüyor; solda altın desenli kıyafetiyle hakem, arkada kollarını kavuşturmuş oturan bir güreşçi ve siyah kimonolu adamlar",
-          "caption": "Hakuhō, Ocak 2008 turnuvasının ilk gününde Dejima'yı yeniyor. Fotoğraf: Eckhard Pecher, CC BY 3.0"
+          "alt": {
+            "@en": "Hakuhō leaning forward in the ring as his opponent Dejima falls on his back onto the sand; on the left the referee in a gold-patterned robe, behind them a seated wrestler with folded arms and men in black kimonos",
+            "@tr": "Hakuhō halkada öne eğilmiş, rakibi Dejima sırtüstü kumun üstüne düşüyor; solda altın desenli kıyafetiyle hakem, arkada kollarını kavuşturmuş oturan bir güreşçi ve siyah kimonolu adamlar"
+          },
+          "caption": {
+            "@en": "Hakuhō beats Dejima on the first day of the January 2008 tournament. Photo: Eckhard Pecher, CC BY 3.0",
+            "@tr": "Hakuhō, Ocak 2008 turnuvasının ilk gününde Dejima'yı yeniyor. Fotoğraf: Eckhard Pecher, CC BY 3.0"
+          }
         },
-        "Maçı halkanın içinde bir hakem (gyōji) yönetir. Halkanın çevresinde beş hakem (shimpan) daha oturur. Bu beş hakem gyōji kararına itiraz edip bir toplantı (mono-ii) çağırabilir. Toplantıda kararı onaylar, tersine çevirir ya da maçı yeniden yaptırırlar.[^5]",
-        "Kazanma tekniklerine kimarite denir. 2001'den beri 82 teknik resmî olarak tanınıyor. Beş durum da teknik sayılmayan galibiyet olarak kayda geçiyor.[^3]",
-        "Bazı hareketler yasak (kinjite): kapalı yumrukla vurmak, saçtan tutmak, göze ya da mide çukuruna parmakla dürtmek, iki avuçla iki kulağa aynı anda vurmak, kasıktan tutmak ya da çekmek, boğazdan tutmak, göğse ya da bele tekme atmak ve rakibin parmaklarını geriye bükmek. Bunlardan birini yapan güreşçi diskalifiye olur ve maçı kaybeder (hansoku). Kuşağı (mawashi) çözülen güreşçi de aynı şekilde kaybeder.[^4]"
+        {
+          "@en": "A referee (gyōji) runs the bout inside the ring. Five judges (shimpan) sit around the ring. These five judges can dispute the gyōji's decision and call a conference (mono-ii). At the conference they confirm the decision, overturn it or order the bout to be fought again.[^5]",
+          "@tr": "Maçı halkanın içinde bir hakem (gyōji) yönetir. Halkanın çevresinde beş hakem (shimpan) daha oturur. Bu beş hakem gyōji kararına itiraz edip bir toplantı (mono-ii) çağırabilir. Toplantıda kararı onaylar, tersine çevirir ya da maçı yeniden yaptırırlar.[^5]"
+        },
+        {
+          "@en": "The winning techniques are called kimarite. Since 2001, 82 techniques have been officially recognized. Five more situations are also recorded as wins, though they do not count as techniques.[^3]",
+          "@tr": "Kazanma tekniklerine kimarite denir. 2001'den beri 82 teknik resmî olarak tanınıyor. Beş durum da teknik sayılmayan galibiyet olarak kayda geçiyor.[^3]"
+        },
+        {
+          "@en": "Some moves are forbidden (kinjite): striking with a closed fist, grabbing the hair, poking the eyes or the pit of the stomach with the fingers, striking both ears at once with the palms, grabbing or pulling the groin, grabbing the throat, kicking the chest or the waist, and bending the opponent's fingers back. A wrestler who does any of these is disqualified and loses the bout (hansoku). A wrestler whose belt (mawashi) comes undone loses the same way.[^4]",
+          "@tr": "Bazı hareketler yasak (kinjite): kapalı yumrukla vurmak, saçtan tutmak, göze ya da mide çukuruna parmakla dürtmek, iki avuçla iki kulağa aynı anda vurmak, kasıktan tutmak ya da çekmek, boğazdan tutmak, göğse ya da bele tekme atmak ve rakibin parmaklarını geriye bükmek. Bunlardan birini yapan güreşçi diskalifiye olur ve maçı kaybeder (hansoku). Kuşağı (mawashi) çözülen güreşçi de aynı şekilde kaybeder.[^4]"
+        }
       ]
     },
     {
       "id": "ligler",
-      "heading": "Ligler",
+      "heading": { "@en": "Divisions", "@tr": "Ligler" },
       "cmd": "ls -d */",
       "blocks": [
-        { "type": "p", "text": "Profesyonel sumoda altı lig var. Yukarıdan aşağı sıralanışları şöyle:[^1]" },
+        {
+          "type": "p",
+          "text": {
+            "@en": "Professional sumo has six divisions. From the top down, they are:[^1]",
+            "@tr": "Profesyonel sumoda altı lig var. Yukarıdan aşağı sıralanışları şöyle:[^1]"
+          }
+        },
         {
           "type": "points",
           "items": [
-            { "title": "Makuuchi", "text": "En üst lig. 2004'ten beri 42 güreşçi.[^7]" },
-            { "title": "Jūryō", "text": "28 güreşçi.[^1] Maaşın ve bütün ayrıcalıkların başladığı ilk lig.[^8]" },
-            { "title": "Makushita", "text": "120 güreşçi.[^1]" },
-            { "title": "Sandanme", "text": "160 güreşçi. Mart 2022'ye kadar 200, Ocak 2025'e kadar 180 güreşçiydi.[^6]" },
-            { "title": "Jonidan", "text": "Sabit bir sayısı yok; genellikle 200 ile 250 arası güreşçi.[^6]" },
-            { "title": "Jonokuchi", "text": "En alt lig; 40 ile 90 arası güreşçi.[^6]" }
+            { "title": "Makuuchi", "text": { "@en": "The top division. 42 wrestlers since 2004.[^7]", "@tr": "En üst lig. 2004'ten beri 42 güreşçi.[^7]" } },
+            {
+              "title": "Jūryō",
+              "text": {
+                "@en": "28 wrestlers.[^1] The first division that brings a salary and all the privileges.[^8]",
+                "@tr": "28 güreşçi.[^1] Maaşın ve bütün ayrıcalıkların başladığı ilk lig.[^8]"
+              }
+            },
+            { "title": "Makushita", "text": { "@en": "120 wrestlers.[^1]", "@tr": "120 güreşçi.[^1]" } },
+            {
+              "title": "Sandanme",
+              "text": {
+                "@en": "160 wrestlers. It had 200 until March 2022 and 180 until January 2025.[^6]",
+                "@tr": "160 güreşçi. Mart 2022'ye kadar 200, Ocak 2025'e kadar 180 güreşçiydi.[^6]"
+              }
+            },
+            {
+              "title": "Jonidan",
+              "text": {
+                "@en": "No fixed size; usually between 200 and 250 wrestlers.[^6]",
+                "@tr": "Sabit bir sayısı yok; genellikle 200 ile 250 arası güreşçi.[^6]"
+              }
+            },
+            {
+              "title": "Jonokuchi",
+              "text": { "@en": "The lowest division; between 40 and 90 wrestlers.[^6]", "@tr": "En alt lig; 40 ile 90 arası güreşçi.[^6]" }
+            }
           ]
         },
-        { "type": "p", "text": "İlk iki ligin güreşçilerine sekitori denir. Sekitori turnuvada her gün bir maç yapar, 15 günde 15 maç. Alt liglerdeki güreşçiler turnuva boyunca yedi maç yapar.[^1][^8]" }
+        {
+          "type": "p",
+          "text": {
+            "@en": "Wrestlers in the top two divisions are called sekitori. A sekitori fights one bout every day of a tournament, 15 bouts in 15 days. Wrestlers in the lower divisions fight seven bouts over a tournament.[^1][^8]",
+            "@tr": "İlk iki ligin güreşçilerine sekitori denir. Sekitori turnuvada her gün bir maç yapar, 15 günde 15 maç. Alt liglerdeki güreşçiler turnuva boyunca yedi maç yapar.[^1][^8]"
+          }
+        }
       ]
     },
     {
       "id": "seviyeler",
-      "heading": "Seviyeler",
+      "heading": { "@en": "Ranks", "@tr": "Seviyeler" },
       "cmd": "cat banzuke",
       "blocks": [
-        { "type": "p", "text": "Makuuchi kendi içinde beş seviyeye ayrılır. Yukarıdan aşağı: yokozuna, ōzeki, sekiwake, komusubi ve maegashira. İlk dördüne san'yaku denir.[^1][^7]" },
-        { "type": "p", "text": "Turnuvayı galibiyetlerin çoğunluğuyla bitirmeye kachi-koshi denir: 15 maçta en az 8, yedi maçta en az 4 galibiyet. Kachi-koshi genellikle bir sonraki turnuvada yükselmek, tersi olan make-koshi ise düşmek demektir.[^8]" },
+        {
+          "type": "p",
+          "text": {
+            "@en": "Makuuchi is divided into five ranks. From the top down: yokozuna, ōzeki, sekiwake, komusubi and maegashira. The first four are called san'yaku.[^1][^7]",
+            "@tr": "Makuuchi kendi içinde beş seviyeye ayrılır. Yukarıdan aşağı: yokozuna, ōzeki, sekiwake, komusubi ve maegashira. İlk dördüne san'yaku denir.[^1][^7]"
+          }
+        },
+        {
+          "type": "p",
+          "text": {
+            "@en": "Finishing a tournament with a majority of wins is called kachi-koshi: at least 8 wins out of 15 bouts, or at least 4 out of seven. Kachi-koshi usually means moving up for the next tournament, and its opposite, make-koshi, means moving down.[^8]",
+            "@tr": "Turnuvayı galibiyetlerin çoğunluğuyla bitirmeye kachi-koshi denir: 15 maçta en az 8, yedi maçta en az 4 galibiyet. Kachi-koshi genellikle bir sonraki turnuvada yükselmek, tersi olan make-koshi ise düşmek demektir.[^8]"
+          }
+        },
         {
           "type": "points",
           "items": [
-            { "title": "Yokozuna", "text": "En yüksek seviye. Bu seviyeye çıkmak için bir ōzekinin üst üste iki turnuva kazanması ya da buna denk bir başarı göstermesi beklenir.[^1] Yokozuna Değerlendirme Kurulu önerir, Japonya Sumo Birliği'nin yönetim kurulu karar verir. Bu seviyeden düşülmez.[^7]" },
-            { "title": "Ōzeki", "text": "Bir turnuvayı make-koshi ile bitiren ōzeki kadoban olur. Bir sonraki turnuva da make-koshi ile biterse sekiwake seviyesine düşer; orada 10 galibiyet alırsa ōzeki seviyesine geri döner. Bu seviyeye yükselmenin kesin bir kuralı yok.[^7]" },
-            { "title": "Sekiwake", "text": "Ōzekinin bir altı. Üst üste iki make-koshi alan ōzeki bu seviyeye iner.[^7]" },
-            { "title": "Komusubi", "text": "San'yaku seviyelerinin en altı.[^1]" },
-            { "title": "Maegashira", "text": "San'yaku dışındaki bütün makuuchi güreşçileri. Yukarıdan aşağı numaralanır: maegashira 1'den yaklaşık maegashira 16 ya da 17'ye kadar.[^1][^7] Bir maegashira bir yokozunayı yenerse altın yıldız (kinboshi) kazanır. Her kinboshi, güreşçinin sekitori kaldığı sürece aldığı primi artırır.[^1][^10]" }
+            {
+              "title": "Yokozuna",
+              "text": {
+                "@en": "The highest rank. To reach it, an ōzeki is expected to win two tournaments in a row or to achieve something equivalent.[^1] The Yokozuna Deliberation Council recommends the promotion, and the board of directors of the Japan Sumo Association decides. A yokozuna is never demoted.[^7]",
+                "@tr": "En yüksek seviye. Bu seviyeye çıkmak için bir ōzekinin üst üste iki turnuva kazanması ya da buna denk bir başarı göstermesi beklenir.[^1] Yokozuna Değerlendirme Kurulu önerir, Japonya Sumo Birliği'nin yönetim kurulu karar verir. Bu seviyeden düşülmez.[^7]"
+              }
+            },
+            {
+              "title": "Ōzeki",
+              "text": {
+                "@en": "An ōzeki who finishes a tournament with make-koshi becomes kadoban. If the next tournament also ends in make-koshi, he drops to sekiwake; if he then wins 10 bouts there, he returns to ōzeki. There is no fixed rule for promotion to this rank.[^7]",
+                "@tr": "Bir turnuvayı make-koshi ile bitiren ōzeki kadoban olur. Bir sonraki turnuva da make-koshi ile biterse sekiwake seviyesine düşer; orada 10 galibiyet alırsa ōzeki seviyesine geri döner. Bu seviyeye yükselmenin kesin bir kuralı yok.[^7]"
+              }
+            },
+            {
+              "title": "Sekiwake",
+              "text": {
+                "@en": "One rank below ōzeki. An ōzeki with two make-koshi in a row drops to this rank.[^7]",
+                "@tr": "Ōzekinin bir altı. Üst üste iki make-koshi alan ōzeki bu seviyeye iner.[^7]"
+              }
+            },
+            { "title": "Komusubi", "text": { "@en": "The lowest of the san'yaku ranks.[^1]", "@tr": "San'yaku seviyelerinin en altı.[^1]" } },
+            {
+              "title": "Maegashira",
+              "text": {
+                "@en": "Every makuuchi wrestler outside san'yaku. They are numbered from the top down, from maegashira 1 to about maegashira 16 or 17.[^1][^7] A maegashira who beats a yokozuna earns a gold star (kinboshi). Each kinboshi raises the bonus the wrestler is paid for as long as he stays sekitori.[^1][^10]",
+                "@tr": "San'yaku dışındaki bütün makuuchi güreşçileri. Yukarıdan aşağı numaralanır: maegashira 1'den yaklaşık maegashira 16 ya da 17'ye kadar.[^1][^7] Bir maegashira bir yokozunayı yenerse altın yıldız (kinboshi) kazanır. Her kinboshi, güreşçinin sekitori kaldığı sürece aldığı primi artırır.[^1][^10]"
+              }
+            }
           ]
         },
-        { "type": "p", "text": "Her seviyede iki taraf var: doğu ve batı. Aynı seviyede doğu, batıdan bir basamak yukarıda sayılır; liste doğu 1, batı 1, doğu 2, batı 2 diye iner.[^1][^7]" },
-        { "type": "p", "text": "Bütün bu sıralamanın yazılı hâline banzuke denir. Yeni banzuke genellikle turnuvadan 13 gün önceki pazartesi açıklanır.[^9]" }
+        {
+          "type": "p",
+          "text": {
+            "@en": "Each rank has two sides: east and west. Within the same rank, east counts as one step above west; the list runs down east 1, west 1, east 2, west 2.[^1][^7]",
+            "@tr": "Her seviyede iki taraf var: doğu ve batı. Aynı seviyede doğu, batıdan bir basamak yukarıda sayılır; liste doğu 1, batı 1, doğu 2, batı 2 diye iner.[^1][^7]"
+          }
+        },
+        {
+          "type": "p",
+          "text": {
+            "@en": "The written form of this whole ranking is called the banzuke. A new banzuke is usually announced on the Monday 13 days before a tournament.[^9]",
+            "@tr": "Bütün bu sıralamanın yazılı hâline banzuke denir. Yeni banzuke genellikle turnuvadan 13 gün önceki pazartesi açıklanır.[^9]"
+          }
+        }
       ]
     },
     {
       "id": "turnuvalar",
-      "heading": "Turnuvalar",
+      "heading": { "@en": "Tournaments", "@tr": "Turnuvalar" },
       "cmd": "cal -y",
       "blocks": [
-        { "type": "p", "text": "1958'den beri yılda altı resmî turnuva (honbasho) yapılıyor. Her biri pazar günü başlıyor ve 15 gün sürüyor. Takvim şöyle:[^1][^11]" },
+        {
+          "type": "p",
+          "text": {
+            "@en": "Since 1958 there have been six official tournaments (honbasho) a year. Each one starts on a Sunday and lasts 15 days. Here is the calendar:[^1][^11]",
+            "@tr": "1958'den beri yılda altı resmî turnuva (honbasho) yapılıyor. Her biri pazar günü başlıyor ve 15 gün sürüyor. Takvim şöyle:[^1][^11]"
+          }
+        },
         {
           "type": "points",
           "items": [
-            { "title": "Ocak · Hatsu Basho", "text": "Tokyo, Kokugikan" },
-            { "title": "Mart · Haru Basho", "text": "Osaka; Osaka Basho diye de bilinir" },
-            { "title": "Mayıs · Natsu Basho", "text": "Tokyo, Kokugikan" },
-            { "title": "Temmuz · Nagoya Basho", "text": "Nagoya" },
-            { "title": "Eylül · Aki Basho", "text": "Tokyo, Kokugikan" },
-            { "title": "Kasım · Kyūshū Basho", "text": "Fukuoka" }
+            { "title": { "@en": "January · Hatsu Basho", "@tr": "Ocak · Hatsu Basho" }, "text": "Tokyo, Kokugikan" },
+            { "title": { "@en": "March · Haru Basho", "@tr": "Mart · Haru Basho" }, "text": { "@en": "Osaka; also known as Osaka Basho", "@tr": "Osaka; Osaka Basho diye de bilinir" } },
+            { "title": { "@en": "May · Natsu Basho", "@tr": "Mayıs · Natsu Basho" }, "text": "Tokyo, Kokugikan" },
+            { "title": { "@en": "July · Nagoya Basho", "@tr": "Temmuz · Nagoya Basho" }, "text": "Nagoya" },
+            { "title": { "@en": "September · Aki Basho", "@tr": "Eylül · Aki Basho" }, "text": "Tokyo, Kokugikan" },
+            { "title": { "@en": "November · Kyūshū Basho", "@tr": "Kasım · Kyūshū Basho" }, "text": "Fukuoka" }
           ]
         },
-        { "type": "p", "text": "Turnuvayı en çok galibiyetle bitiren güreşçi şampiyonluğu (yūshō) kazanır. Makuuchi şampiyonu İmparator Kupası'nı alır. İki güreşçi eşit galibiyetle bitirirse ek bir maç yapılır. Üç güreşçi eşitse ikişerli maçlar, biri üst üste iki maç kazanana kadar sürer.[^1][^11]" },
-        { "type": "p", "text": "Yokozuna ve ōzeki dışındaki makuuchi güreşçileri turnuvayı kachi-koshi ile bitirirse üç özel ödüle (sanshō) aday olur: üstün performans (shukun-shō), mücadele azmi (kantō-shō) ve teknik (ginō-shō).[^1][^12]" }
+        {
+          "type": "p",
+          "text": {
+            "@en": "The wrestler who finishes the tournament with the most wins takes the championship (yūshō). The makuuchi champion receives the Emperor's Cup. If two wrestlers finish level on wins, a playoff bout decides it. If three are level, they fight in pairs until one of them wins two bouts in a row.[^1][^11]",
+            "@tr": "Turnuvayı en çok galibiyetle bitiren güreşçi şampiyonluğu (yūshō) kazanır. Makuuchi şampiyonu İmparator Kupası'nı alır. İki güreşçi eşit galibiyetle bitirirse ek bir maç yapılır. Üç güreşçi eşitse ikişerli maçlar, biri üst üste iki maç kazanana kadar sürer.[^1][^11]"
+          }
+        },
+        {
+          "type": "p",
+          "text": {
+            "@en": "Makuuchi wrestlers other than yokozuna and ōzeki who finish a tournament with kachi-koshi are in the running for three special prizes (sanshō): outstanding performance (shukun-shō), fighting spirit (kantō-shō) and technique (ginō-shō).[^1][^12]",
+            "@tr": "Yokozuna ve ōzeki dışındaki makuuchi güreşçileri turnuvayı kachi-koshi ile bitirirse üç özel ödüle (sanshō) aday olur: üstün performans (shukun-shō), mücadele azmi (kantō-shō) ve teknik (ginō-shō).[^1][^12]"
+          }
+        }
       ]
     },
     {
       "id": "son-durum",
-      "heading": "Son durum",
+      "heading": { "@en": "Latest", "@tr": "Son durum" },
       "cmd": "curl sumo-api.com",
       "blocks": [
-        { "type": "p", "text": "Bu bölüm sayfa her açıldığında güncelleniyor. Sonuçlar ve banzuke [Sumo API](https://www.sumo-api.com/) üzerinden geliyor.[^17] Turnuva tarihleri Japonya Sumo Birliği'nin takviminden.[^18] Banzuke tablosunda yalnızca san'yaku seviyeleri var." },
+        {
+          "type": "p",
+          "text": {
+            "@en": "This section updates every time the page is opened. The results and the banzuke come from [Sumo API](https://www.sumo-api.com/).[^17] The tournament dates come from the Japan Sumo Association's calendar.[^18] The banzuke table shows only the san'yaku ranks.",
+            "@tr": "Bu bölüm sayfa her açıldığında güncelleniyor. Sonuçlar ve banzuke [Sumo API](https://www.sumo-api.com/) üzerinden geliyor.[^17] Turnuva tarihleri Japonya Sumo Birliği'nin takviminden.[^18] Banzuke tablosunda yalnızca san'yaku seviyeleri var."
+          }
+        },
         {
           "type": "sumo-live",
           "api": "https://www.sumo-api.com/api",
           "names": { "01": "Hatsu Basho", "03": "Haru Basho", "05": "Natsu Basho", "07": "Nagoya Basho", "09": "Aki Basho", "11": "Kyūshū Basho" },
-          "months": ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
+          "months": [
+            { "@en": "January", "@tr": "Ocak" },
+            { "@en": "February", "@tr": "Şubat" },
+            { "@en": "March", "@tr": "Mart" },
+            { "@en": "April", "@tr": "Nisan" },
+            { "@en": "May", "@tr": "Mayıs" },
+            { "@en": "June", "@tr": "Haziran" },
+            { "@en": "July", "@tr": "Temmuz" },
+            { "@en": "August", "@tr": "Ağustos" },
+            { "@en": "September", "@tr": "Eylül" },
+            { "@en": "October", "@tr": "Ekim" },
+            { "@en": "November", "@tr": "Kasım" },
+            { "@en": "December", "@tr": "Aralık" }
+          ],
           "ranks": { "Yokozuna": "Yokozuna", "Ozeki": "Ōzeki", "Sekiwake": "Sekiwake", "Komusubi": "Komusubi" },
           "prizes": { "Shukun-sho": "shukun-shō", "Kanto-sho": "kantō-shō", "Gino-sho": "ginō-shō" },
           "leaders_max": 10,
@@ -148,106 +317,178 @@
             { "start": "2028-11-12", "end": "2028-11-26", "banzuke": "2028-10-30", "place": "Fukuoka, Fukuoka Kokusai Center" }
           ],
           "text": {
-            "noscript": "Bu bölüm tarayıcıda JavaScript ile dolduruluyor.",
-            "loading": "Turnuva verileri yükleniyor…",
-            "failed": "Sonuçlar ve banzuke şu an alınamadı.",
-            "last": "Son turnuva",
-            "champion": "Şampiyon (yūshō)",
-            "prizes": "Özel ödüller (sanshō)",
-            "running": "Süren turnuva",
-            "next": "Sıradaki turnuva",
-            "day": "Gün",
+            "noscript": { "@en": "This section is filled in by JavaScript in the browser.", "@tr": "Bu bölüm tarayıcıda JavaScript ile dolduruluyor." },
+            "loading": { "@en": "Loading tournament data…", "@tr": "Turnuva verileri yükleniyor…" },
+            "failed": { "@en": "The results and the banzuke could not be loaded right now.", "@tr": "Sonuçlar ve banzuke şu an alınamadı." },
+            "last": { "@en": "Last tournament", "@tr": "Son turnuva" },
+            "champion": { "@en": "Champion (yūshō)", "@tr": "Şampiyon (yūshō)" },
+            "prizes": { "@en": "Special prizes (sanshō)", "@tr": "Özel ödüller (sanshō)" },
+            "running": { "@en": "Current tournament", "@tr": "Süren turnuva" },
+            "next": { "@en": "Next tournament", "@tr": "Sıradaki turnuva" },
+            "day": { "@en": "Day", "@tr": "Gün" },
             "day_of": "{day} / {days}",
-            "banzuke_day": "Yeni banzuke",
-            "leaders": "Liderlik tablosu, {day}. gün sonunda",
-            "score": "Skor",
-            "wrestlers": "Güreşçiler",
-            "banzuke": "Son banzuke: {basho}",
-            "east": "Doğu",
-            "rank": "Seviye",
-            "west": "Batı",
-            "record": "Sayılar turnuvadaki galibiyet ve mağlubiyet sayısı.",
-            "record_live": "Turnuva sürüyor. Sayılar bugüne kadarki galibiyet ve mağlubiyet sayısı.",
-            "absences": "Üçüncü sayı, güreşçinin çıkmadığı gün sayısı."
+            "banzuke_day": { "@en": "New banzuke", "@tr": "Yeni banzuke" },
+            "leaders": { "@en": "Leaderboard after day {day}", "@tr": "Liderlik tablosu, {day}. gün sonunda" },
+            "score": { "@en": "Record", "@tr": "Skor" },
+            "wrestlers": { "@en": "Wrestlers", "@tr": "Güreşçiler" },
+            "banzuke": { "@en": "Latest banzuke: {basho}", "@tr": "Son banzuke: {basho}" },
+            "east": { "@en": "East", "@tr": "Doğu" },
+            "rank": { "@en": "Rank", "@tr": "Seviye" },
+            "west": { "@en": "West", "@tr": "Batı" },
+            "record": { "@en": "The numbers are wins and losses in the tournament.", "@tr": "Sayılar turnuvadaki galibiyet ve mağlubiyet sayısı." },
+            "record_live": {
+              "@en": "The tournament is under way. The numbers are wins and losses so far.",
+              "@tr": "Turnuva sürüyor. Sayılar bugüne kadarki galibiyet ve mağlubiyet sayısı."
+            },
+            "absences": { "@en": "The third number is how many days the wrestler was absent.", "@tr": "Üçüncü sayı, güreşçinin çıkmadığı gün sayısı." }
           }
         }
       ]
     },
     {
       "id": "guresciler",
-      "heading": "Sevdiğim iki güreşçi",
+      "heading": { "@en": "Two wrestlers I have a soft spot for", "@tr": "Sevdiğim iki güreşçi" },
       "cmd": "finger hakuho ura",
       "class": "prose",
       "blocks": [
-        "Her güreşçi bir kulübe (heya) bağlı. Kulüp, bir ya da birkaç antrenörün (oyakata) yönetiminde.[^15][^16] Ben Hakuhō ve Ura'yı ayrı severim.",
+        {
+          "@en": "Every wrestler belongs to a stable (heya). A stable is run by one or more coaches (oyakata).[^15][^16] I have a soft spot for Hakuhō and Ura.",
+          "@tr": "Her güreşçi bir kulübe (heya) bağlı. Kulüp, bir ya da birkaç antrenörün (oyakata) yönetiminde.[^15][^16] Ben Hakuhō ve Ura'yı ayrı severim."
+        },
         { "type": "h3", "text": "Hakuhō Shō" },
-        "11 Mart 1985'te Moğolistan'ın başkenti Ulan Batur'da doğdu. Miyagino kulübünde güreşti. Mart 2001'de ilk maçına çıktı, Mayıs 2007'de yokozuna oldu.[^13]",
-        "Makuuchi liginde 45 şampiyonlukla rekorun sahibi. Bunların 16'sı yenilgisiz (zenshō yūshō), bu da bir rekor. En çok kariyer galibiyeti (1.187) ve en çok makuuchi galibiyeti (1.093) rekorları da onda.[^13]",
-        "Eylül 2021'de emekli oldu. Haziran 2025'te Japonya Sumo Birliği'nden ayrıldı. Ekim 2026'da Uluslararası Sumo Federasyonu'nun başına geçti.[^13]",
+        {
+          "@en": "He was born on 11 March 1985 in Ulaanbaatar, the capital of Mongolia. He wrestled for the Miyagino stable. He fought his first bout in March 2001 and became yokozuna in May 2007.[^13]",
+          "@tr": "11 Mart 1985'te Moğolistan'ın başkenti Ulan Batur'da doğdu. Miyagino kulübünde güreşti. Mart 2001'de ilk maçına çıktı, Mayıs 2007'de yokozuna oldu.[^13]"
+        },
+        {
+          "@en": "He holds the record of 45 championships in the makuuchi division. 16 of them came without a single loss (zenshō yūshō), also a record. He also holds the records for most career wins (1,187) and most makuuchi wins (1,093).[^13]",
+          "@tr": "Makuuchi liginde 45 şampiyonlukla rekorun sahibi. Bunların 16'sı yenilgisiz (zenshō yūshō), bu da bir rekor. En çok kariyer galibiyeti (1.187) ve en çok makuuchi galibiyeti (1.093) rekorları da onda.[^13]"
+        },
+        {
+          "@en": "He retired in September 2021. He left the Japan Sumo Association in June 2025. In October 2026 he became head of the International Sumo Federation.[^13]",
+          "@tr": "Eylül 2021'de emekli oldu. Haziran 2025'te Japonya Sumo Birliği'nden ayrıldı. Ekim 2026'da Uluslararası Sumo Federasyonu'nun başına geçti.[^13]"
+        },
         {
           "type": "photo",
           "small": true,
           "src": "assets/sumo/hakuho-2012.jpg",
           "width": 1200,
           "height": 1600,
-          "alt": "Hakuhō kollarını göğsünün önünde birleştirmiş duruyor; belinde zikzak beyaz kâğıt şeritler sarkan kalın beyaz bir halat, altında Japonca yazılı lacivert bir tören önlüğü var",
-          "caption": "Hakuhō, Ocak 2012 turnuvasında yokozuna halka töreninde (dohyō-iri). Fotoğraf: FourTildes, CC BY-SA 3.0"
+          "alt": {
+            "@en": "Hakuhō standing with his arms brought together in front of his chest; around his waist a thick white rope hung with zigzag strips of white paper, and below it a navy ceremonial apron with Japanese writing",
+            "@tr": "Hakuhō kollarını göğsünün önünde birleştirmiş duruyor; belinde zikzak beyaz kâğıt şeritler sarkan kalın beyaz bir halat, altında Japonca yazılı lacivert bir tören önlüğü var"
+          },
+          "caption": {
+            "@en": "Hakuhō at the yokozuna ring-entering ceremony (dohyō-iri) of the January 2012 tournament. Photo: FourTildes, CC BY-SA 3.0",
+            "@tr": "Hakuhō, Ocak 2012 turnuvasında yokozuna halka töreninde (dohyō-iri). Fotoğraf: FourTildes, CC BY-SA 3.0"
+          }
         },
         { "type": "h3", "text": "Ura Kazuki" },
-        "22 Haziran 1992'de Osaka'nın Neyagawa şehrinde doğdu. Kise kulübünde güreşiyor. Çoğunlukla iterek güreşir ama maçları akrobatiktir; izori, tasukizori ve tsutaezori gibi tekniklerle kazandığı maçlar var.[^14]",
-        "Temmuz 2017'de sağ dizini sakatladı ve üç lig düştü; Eylül 2018'de sandanme liginin alt sıralarından geri döndü. Ocak 2019'da aynı diz yeniden sakatlandı. Bu kez Kasım 2019'da jonidan liginin en altından, ilk turnuvasından beri en düşük seviyesinden başladı.[^14]",
-        "Kasım 2021'de teknik ödülünü (ginō-shō) aldı. Ocak 2024'te kariyerinin en yüksek seviyesine, komusubi seviyesine çıktı. Kasım 2026'ya kadar üç kinboshi kazandı: 2017'de Harumafuji'yi, 2022'de Terunofuji'yi, Kasım 2026'da Hōshōryū'yu yendi.[^14]",
+        {
+          "@en": "He was born on 22 June 1992 in Neyagawa, Osaka. He wrestles for the Kise stable. He mostly wrestles by pushing, but his bouts are acrobatic; he has won bouts with techniques such as izori, tasukizori and tsutaezori.[^14]",
+          "@tr": "22 Haziran 1992'de Osaka'nın Neyagawa şehrinde doğdu. Kise kulübünde güreşiyor. Çoğunlukla iterek güreşir ama maçları akrobatiktir; izori, tasukizori ve tsutaezori gibi tekniklerle kazandığı maçlar var.[^14]"
+        },
+        {
+          "@en": "In July 2017 he injured his right knee and dropped three divisions; in September 2018 he came back from the lower part of sandanme. In January 2019 he injured the same knee again. This time, in November 2019, he started over from the very bottom of jonidan, his lowest rank since his first tournament.[^14]",
+          "@tr": "Temmuz 2017'de sağ dizini sakatladı ve üç lig düştü; Eylül 2018'de sandanme liginin alt sıralarından geri döndü. Ocak 2019'da aynı diz yeniden sakatlandı. Bu kez Kasım 2019'da jonidan liginin en altından, ilk turnuvasından beri en düşük seviyesinden başladı.[^14]"
+        },
+        {
+          "@en": "In November 2021 he won the technique prize (ginō-shō). In January 2024 he reached the highest rank of his career, komusubi. As of November 2026 he has won three kinboshi: he beat Harumafuji in 2017, Terunofuji in 2022 and Hōshōryū in November 2026.[^14]",
+          "@tr": "Kasım 2021'de teknik ödülünü (ginō-shō) aldı. Ocak 2024'te kariyerinin en yüksek seviyesine, komusubi seviyesine çıktı. Kasım 2026'ya kadar üç kinboshi kazandı: 2017'de Harumafuji'yi, 2022'de Terunofuji'yi, Kasım 2026'da Hōshōryū'yu yendi.[^14]"
+        },
         {
           "type": "photo",
           "small": true,
           "src": "assets/sumo/ura-2022.jpg",
           "width": 1200,
           "height": 1600,
-          "alt": "Ura pembe kuşağını iki eliyle tutarak ayakta duruyor; arkasında maskeli seyirciler",
-          "caption": "Ura, Ocak 2022 turnuvasının yedinci gününde. Fotoğraf: TSUBAME98, CC BY-SA 4.0"
+          "alt": {
+            "@en": "Ura standing and holding his pink belt with both hands; masked spectators behind him",
+            "@tr": "Ura pembe kuşağını iki eliyle tutarak ayakta duruyor; arkasında maskeli seyirciler"
+          },
+          "caption": {
+            "@en": "Ura on the seventh day of the January 2022 tournament. Photo: TSUBAME98, CC BY-SA 4.0",
+            "@tr": "Ura, Ocak 2022 turnuvasının yedinci gününde. Fotoğraf: TSUBAME98, CC BY-SA 4.0"
+          }
         }
       ]
     },
     {
       "id": "kaynaklar",
-      "heading": "Kaynaklar",
+      "heading": { "@en": "References", "@tr": "Kaynaklar" },
       "blocks": [
         {
           "type": "sources",
           "cited": true,
           "items": [
-            "[Sumo](https://en.wikipedia.org/wiki/Sumo), İngilizce Wikipedia",
-            "[Dohyō](https://en.wikipedia.org/wiki/Dohy%C5%8D), İngilizce Wikipedia",
-            "[Kimarite](https://en.wikipedia.org/wiki/Kimarite), İngilizce Wikipedia",
-            "[Kinjite](https://en.wikipedia.org/wiki/Kinjite), İngilizce Wikipedia",
-            "[Judge (sumo)](https://en.wikipedia.org/wiki/Judge_%28sumo%29), İngilizce Wikipedia",
-            "[Professional sumo divisions](https://en.wikipedia.org/wiki/Professional_sumo_divisions), İngilizce Wikipedia",
-            "[Makuuchi](https://en.wikipedia.org/wiki/Makuuchi), İngilizce Wikipedia",
-            "[Glossary of sumo terms](https://en.wikipedia.org/wiki/Glossary_of_sumo_terms), İngilizce Wikipedia",
-            "[Banzuke](https://en.wikipedia.org/wiki/Banzuke), İngilizce Wikipedia",
-            "[Kinboshi](https://en.wikipedia.org/wiki/Kinboshi), İngilizce Wikipedia",
-            "[Honbasho](https://en.wikipedia.org/wiki/Honbasho), İngilizce Wikipedia",
-            "[Sanshō (sumo)](https://en.wikipedia.org/wiki/Sansh%C5%8D_%28sumo%29), İngilizce Wikipedia",
-            "[Hakuhō Shō](https://en.wikipedia.org/wiki/Hakuh%C5%8D_Sh%C5%8D), İngilizce Wikipedia",
-            "[Ura Kazuki](https://en.wikipedia.org/wiki/Ura_Kazuki), İngilizce Wikipedia; Kasım 2026 turnuvasına kadar",
-            "[Heya (sumo)](https://en.wikipedia.org/wiki/Heya_%28sumo%29), İngilizce Wikipedia",
-            "[Toshiyori](https://en.wikipedia.org/wiki/Toshiyori), İngilizce Wikipedia",
-            "[Sumo API](https://www.sumo-api.com/), turnuva sonuçları ve banzuke; sayfa her açıldığında",
-            "[Grand Tournament Schedule](https://www.sumo.or.jp/EnTicket/year_schedule/), Japonya Sumo Birliği; 2027 ve 2028 takvimi"
+            { "@en": "[Sumo](https://en.wikipedia.org/wiki/Sumo), English Wikipedia", "@tr": "[Sumo](https://en.wikipedia.org/wiki/Sumo), İngilizce Wikipedia" },
+            { "@en": "[Dohyō](https://en.wikipedia.org/wiki/Dohy%C5%8D), English Wikipedia", "@tr": "[Dohyō](https://en.wikipedia.org/wiki/Dohy%C5%8D), İngilizce Wikipedia" },
+            { "@en": "[Kimarite](https://en.wikipedia.org/wiki/Kimarite), English Wikipedia", "@tr": "[Kimarite](https://en.wikipedia.org/wiki/Kimarite), İngilizce Wikipedia" },
+            { "@en": "[Kinjite](https://en.wikipedia.org/wiki/Kinjite), English Wikipedia", "@tr": "[Kinjite](https://en.wikipedia.org/wiki/Kinjite), İngilizce Wikipedia" },
+            {
+              "@en": "[Judge (sumo)](https://en.wikipedia.org/wiki/Judge_%28sumo%29), English Wikipedia",
+              "@tr": "[Judge (sumo)](https://en.wikipedia.org/wiki/Judge_%28sumo%29), İngilizce Wikipedia"
+            },
+            {
+              "@en": "[Professional sumo divisions](https://en.wikipedia.org/wiki/Professional_sumo_divisions), English Wikipedia",
+              "@tr": "[Professional sumo divisions](https://en.wikipedia.org/wiki/Professional_sumo_divisions), İngilizce Wikipedia"
+            },
+            { "@en": "[Makuuchi](https://en.wikipedia.org/wiki/Makuuchi), English Wikipedia", "@tr": "[Makuuchi](https://en.wikipedia.org/wiki/Makuuchi), İngilizce Wikipedia" },
+            {
+              "@en": "[Glossary of sumo terms](https://en.wikipedia.org/wiki/Glossary_of_sumo_terms), English Wikipedia",
+              "@tr": "[Glossary of sumo terms](https://en.wikipedia.org/wiki/Glossary_of_sumo_terms), İngilizce Wikipedia"
+            },
+            { "@en": "[Banzuke](https://en.wikipedia.org/wiki/Banzuke), English Wikipedia", "@tr": "[Banzuke](https://en.wikipedia.org/wiki/Banzuke), İngilizce Wikipedia" },
+            { "@en": "[Kinboshi](https://en.wikipedia.org/wiki/Kinboshi), English Wikipedia", "@tr": "[Kinboshi](https://en.wikipedia.org/wiki/Kinboshi), İngilizce Wikipedia" },
+            { "@en": "[Honbasho](https://en.wikipedia.org/wiki/Honbasho), English Wikipedia", "@tr": "[Honbasho](https://en.wikipedia.org/wiki/Honbasho), İngilizce Wikipedia" },
+            {
+              "@en": "[Sanshō (sumo)](https://en.wikipedia.org/wiki/Sansh%C5%8D_%28sumo%29), English Wikipedia",
+              "@tr": "[Sanshō (sumo)](https://en.wikipedia.org/wiki/Sansh%C5%8D_%28sumo%29), İngilizce Wikipedia"
+            },
+            {
+              "@en": "[Hakuhō Shō](https://en.wikipedia.org/wiki/Hakuh%C5%8D_Sh%C5%8D), English Wikipedia",
+              "@tr": "[Hakuhō Shō](https://en.wikipedia.org/wiki/Hakuh%C5%8D_Sh%C5%8D), İngilizce Wikipedia"
+            },
+            {
+              "@en": "[Ura Kazuki](https://en.wikipedia.org/wiki/Ura_Kazuki), English Wikipedia; up to the November 2026 tournament",
+              "@tr": "[Ura Kazuki](https://en.wikipedia.org/wiki/Ura_Kazuki), İngilizce Wikipedia; Kasım 2026 turnuvasına kadar"
+            },
+            {
+              "@en": "[Heya (sumo)](https://en.wikipedia.org/wiki/Heya_%28sumo%29), English Wikipedia",
+              "@tr": "[Heya (sumo)](https://en.wikipedia.org/wiki/Heya_%28sumo%29), İngilizce Wikipedia"
+            },
+            { "@en": "[Toshiyori](https://en.wikipedia.org/wiki/Toshiyori), English Wikipedia", "@tr": "[Toshiyori](https://en.wikipedia.org/wiki/Toshiyori), İngilizce Wikipedia" },
+            {
+              "@en": "[Sumo API](https://www.sumo-api.com/), tournament results and banzuke; every time the page is opened",
+              "@tr": "[Sumo API](https://www.sumo-api.com/), turnuva sonuçları ve banzuke; sayfa her açıldığında"
+            },
+            {
+              "@en": "[Grand Tournament Schedule](https://www.sumo.or.jp/EnTicket/year_schedule/), Japan Sumo Association; the 2027 and 2028 calendar",
+              "@tr": "[Grand Tournament Schedule](https://www.sumo.or.jp/EnTicket/year_schedule/), Japonya Sumo Birliği; 2027 ve 2028 takvimi"
+            }
           ]
         }
       ]
     },
     {
       "id": "fotograflar",
-      "heading": "Fotoğraflar",
+      "heading": { "@en": "Photos", "@tr": "Fotoğraflar" },
       "blocks": [
         {
           "type": "sources",
           "items": [
-            "Hakuhō, Ocak 2008: [Hakuho fight Jan08.jpg](https://commons.wikimedia.org/wiki/File:Hakuho_fight_Jan08.jpg), Eckhard Pecher, Wikimedia Commons, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/deed.tr); kırpıldı ve küçültüldü",
-            "Hakuhō, Ocak 2012: [Hakuho 2012 January.JPG](https://commons.wikimedia.org/wiki/File:Hakuho_2012_January.JPG), FourTildes, Wikimedia Commons, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.tr); kırpıldı ve küçültüldü",
-            "Ura, Ocak 2022: [Ura Kazuki20220115-1.jpg](https://commons.wikimedia.org/wiki/File:Ura_Kazuki20220115-1.jpg), TSUBAME98, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.tr); kırpıldı ve küçültüldü"
+            {
+              "@en": "Hakuhō, January 2008: [Hakuho fight Jan08.jpg](https://commons.wikimedia.org/wiki/File:Hakuho_fight_Jan08.jpg), Eckhard Pecher, Wikimedia Commons, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/deed.tr); cropped and resized",
+              "@tr": "Hakuhō, Ocak 2008: [Hakuho fight Jan08.jpg](https://commons.wikimedia.org/wiki/File:Hakuho_fight_Jan08.jpg), Eckhard Pecher, Wikimedia Commons, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/deed.tr); kırpıldı ve küçültüldü"
+            },
+            {
+              "@en": "Hakuhō, January 2012: [Hakuho 2012 January.JPG](https://commons.wikimedia.org/wiki/File:Hakuho_2012_January.JPG), FourTildes, Wikimedia Commons, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.tr); cropped and resized",
+              "@tr": "Hakuhō, Ocak 2012: [Hakuho 2012 January.JPG](https://commons.wikimedia.org/wiki/File:Hakuho_2012_January.JPG), FourTildes, Wikimedia Commons, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.tr); kırpıldı ve küçültüldü"
+            },
+            {
+              "@en": "Ura, January 2022: [Ura Kazuki20220115-1.jpg](https://commons.wikimedia.org/wiki/File:Ura_Kazuki20220115-1.jpg), TSUBAME98, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.tr); cropped and resized",
+              "@tr": "Ura, Ocak 2022: [Ura Kazuki20220115-1.jpg](https://commons.wikimedia.org/wiki/File:Ura_Kazuki20220115-1.jpg), TSUBAME98, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.tr); kırpıldı ve küçültüldü"
+            }
           ]
         }
       ]

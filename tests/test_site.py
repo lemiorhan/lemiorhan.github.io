@@ -17,6 +17,9 @@ import urllib.parse
 from collections import Counter
 from html.parser import HTMLParser
 
+import i18n
+from i18n import LANGS, lang_dir, localized, page_file, read_json
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'}
 
@@ -26,9 +29,15 @@ def run_build(site, out):
                           capture_output=True, text=True)
 
 
-def read_json(*parts):
-    with open(os.path.join(*parts), encoding='utf-8') as f:
-        return json.load(f)
+def write_json(path, data):
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+
+def read_in_root_language(path):
+    """A content file with every translation pair resolved to the root language, for a test that edits a copy
+    and reads only the root-language pages back."""
+    return localized(read_json(path), LANGS[0])
 
 
 def copy_site(tmp):
@@ -104,8 +113,19 @@ def blocks_of(data, kind):
     return [b for part in parts for b in part.get('blocks', []) if isinstance(b, dict) and b.get('type') == kind]
 
 
-def page_file(name):
-    return {'home': 'index.html', '404': '404.html'}.get(name, name + '/index.html')
+def not_found_in(source, lang):
+    """404.html as a reader of `lang` sees it: in the root language as written, with the other languages'
+    templates left out; in any other, with <main> holding that language's template, as the page's inline
+    script leaves it."""
+    templates = dict(re.findall(r'(?s)\n  <template data-lang="([^"]+)" data-title="[^"]*">\n(.*?)\n  </template>', source))
+    titles = dict(re.findall(r'<template data-lang="([^"]+)" data-title="([^"]*)">', source))
+    source = re.sub(r'(?s)\n  <template data-lang=.*?\n  </template>', '', source)
+    source = re.sub(r'\n  <script>document\.querySelectorAll\(\'template\[data-lang\]\'\).*?</script>', '', source)
+    if lang == LANGS[0]:
+        return source
+    source = re.sub(r'(?s)(<main [^>]*>\n).*?(\n  </main>)', lambda m: m.group(1) + templates[lang] + m.group(2), source)
+    source = re.sub(r'<html lang="[^"]*">', '<html lang="{}">'.format(lang), source)
+    return re.sub(r'<title>[^<]*</title>', '<title>{}</title>'.format(titles[lang]), source)
 
 
 def path_box(d):
@@ -195,6 +215,14 @@ def media_cards(tree, section_id):
     return [li for li in section.find(lambda n: n.tag == 'li') if li.find(has_class('media-card'))]
 
 
+def entry_items(value):
+    if isinstance(value, list):
+        return [i for v in value for i in entry_items(v)]
+    if not isinstance(value, dict):
+        return []
+    return value['items'] if value.get('type') == 'entries' else [i for v in value.values() for i in entry_items(v)]
+
+
 def card_parts(li):
     a = li.find(has_class('media-card'))[0]
     title = a.find(has_class('media-title'))[0].all_text()
@@ -252,21 +280,19 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
     # Content edits
 
     @staticmethod
-    def edit(name, fn):
+    def edit(name, fn, read=read_in_root_language):
         def change(site):
             path = os.path.join(site, 'content', name + '.json')
-            data = read_json(path)
+            data = read(path)
             fn(data)
-            with open(path, 'w', encoding='utf-8') as f:
-                json.dump(data, f, ensure_ascii=False)
+            write_json(path, data)
         return change
 
     @staticmethod
     def replace(name, old, new):
         def change(site):
             path = os.path.join(site, 'content', name + '.json')
-            with open(path, encoding='utf-8') as f:
-                source = f.read()
+            source = json.dumps(read_in_root_language(path), ensure_ascii=False, indent=2)
             assert old in source, old
             with open(path, 'w', encoding='utf-8') as f:
                 f.write(source.replace(old, new, 1))
@@ -518,7 +544,7 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
     def snapshot(fn):
         def change(site):
             path = os.path.join(site, 'data', 'sharing.json')
-            data = read_json(path)
+            data = read_in_root_language(path)
             fn(data)
             with open(path, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False)
@@ -556,7 +582,7 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
         return next(ev for ev in self.events(d) if isinstance(ev.get('photo'), list))
 
     def test_a_photo_in_a_list_whose_file_or_alt_is_not_a_non_empty_string(self):
-        name = self.list_photo_event(read_json(ROOT, 'content', 'talks.json'))['name']
+        name = self.list_photo_event(i18n.content('talks'))['name']
         for key in ('file', 'alt'):
             for value in (None, '', 7, ['a']):
                 def odd(d):
@@ -607,28 +633,73 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
                 self.assertRejected(self.edit('community', odd),
                                     'content/community.json: a photo block\'s "small" must be true or false')
 
-    def test_a_page_translating_a_string_the_site_does_not_have(self):
-        self.assertIn('event_one', read_json(ROOT, 'content', 'talks.json')['archive']['ui'],
-                      'the talks case needs a key only the page\'s own archive ui has')
-        for name, key in (('bio', 'clsoe'), ('talks', 'event_one')):
-            with self.subTest(name=name, key=key):
-                self.assertRejected(self.edit(name, lambda d, key=key: d.setdefault('ui', {}).update({key: 'x'})),
-                                    "content/{}.json: ui gives {}, which site.json's ui does not have".format(name, key))
+    def test_a_page_with_a_language_or_ui_strings_of_its_own(self):
+        for name in ('bio', 'sumo', '404'):
+            for key, value in (('lang', 'tr'), ('ui', {'close': 'Kapat'})):
+                with self.subTest(name=name, key=key):
+                    self.assertRejected(self.edit(name, lambda d, key=key, value=value: d.update({key: value})),
+                                        'content/{}.json: "{}" belongs in site.json: every page is built in each '
+                                        'language it lists'.format(name, key))
 
-    def test_a_page_whose_lang_is_not_a_non_empty_string(self):
-        for value in (None, 5, ''):
-            with self.subTest(value=value):
-                self.assertRejected(self.edit('sumo', lambda d, value=value: d.update(lang=value)),
-                                    'content/sumo.json: "lang" must be a non-empty string')
+    LANGUAGES_SHAPE = '"languages" must list each language as {"code", "name", "locale"}, the code in lowercase letters'
 
-    def test_a_site_whose_lang_or_ui_is_bad_is_named_as_the_culprit(self):
-        for key, value, message in (('lang', None, '"lang" must be a non-empty string'),
-                                    ('lang', 5, '"lang" must be a non-empty string'),
+    def test_a_site_whose_languages_or_ui_are_bad_is_named_as_the_culprit(self):
+        tr = {'code': 'tr', 'name': 'Türkçe', 'locale': 'tr_TR'}
+        for key, value, message in (('languages', None, self.LANGUAGES_SHAPE),
+                                    ('languages', [], self.LANGUAGES_SHAPE),
+                                    ('languages', ['en'], self.LANGUAGES_SHAPE),
+                                    ('languages', [dict(tr, code='TR')], self.LANGUAGES_SHAPE),
+                                    ('languages', [dict(tr, code='t')], self.LANGUAGES_SHAPE),
+                                    ('languages', [dict(tr, name='')], self.LANGUAGES_SHAPE),
+                                    ('languages', [{'code': 'tr', 'name': 'Türkçe'}], self.LANGUAGES_SHAPE),
+                                    ('languages', [tr, dict(tr, name='Turkish')], '"languages" lists a language twice'),
                                     ('ui', None, '"ui" must be an object whose values are non-empty strings'),
                                     ('ui', {'close': 5}, '"ui" must be an object whose values are non-empty strings')):
             with self.subTest(key=key, value=value):
                 self.assertRejected(self.edit('site', lambda d, key=key, value=value: d.update({key: value})),
                                     'content/site.json: ' + message)
+
+    def test_a_content_file_that_is_not_json_is_named_as_the_culprit(self):
+        for name in ('site', 'contact'):
+            def change(site, name=name):
+                with open(os.path.join(site, 'content', name + '.json'), 'w', encoding='utf-8') as f:
+                    f.write('{ "title": ')
+            with self.subTest(name=name):
+                self.assertRejected(change, 'content/{}.json: Expecting value'.format(name))
+
+    PAIR_SHAPE = ('content/contact.json: the translation at {} must give "@en", "@tr" as non-empty strings, '
+                  'and nothing else')
+
+    def test_a_translation_that_misses_a_language_or_gives_one_the_site_does_not_list(self):
+        for value in ({'@en': 'Contact'}, {'@tr': 'İletişim'}, {'@en': 'Contact', '@tr': 'İletişim', '@de': 'Kontakt'},
+                      {'@en': 'Contact', '@tr': ''}, {'@en': 'Contact', '@tr': 5}, {'@en': 'Contact', 'tr': 'İletişim'}):
+            with self.subTest(value=value):
+                self.assertRejected(self.edit('contact', lambda d, value=value: d.update(title=value), read=read_json),
+                                    self.PAIR_SHAPE.format('title'))
+
+    def test_a_translation_deep_in_a_page_is_named_by_its_path(self):
+        def odd(d):
+            d['sections'][0]['blocks'][0] = {'@en': 'Write to me.'}
+        self.assertRejected(self.edit('contact', odd, read=read_json), self.PAIR_SHAPE.format('sections[0].blocks[0]'))
+
+    def test_a_translation_whose_languages_differ_in_placeholders_link_urls_or_refs(self):
+        for value in ({'@en': 'Since {since}', '@tr': 'O zamandan beri'},
+                      {'@en': 'Since {since}', '@tr': '{year} yılından beri'},
+                      {'@en': 'See [the talk](https://example.com/a)', '@tr': '[Konuşmaya](https://example.com/b) bakın'},
+                      {'@en': 'Said so.[^1]', '@tr': 'Öyle dedi.[^2]'},
+                      {'@en': 'Said so.[^1]', '@tr': 'Öyle dedi.'}):
+            with self.subTest(value=value):
+                self.assertRejected(self.edit('contact', lambda d, value=value: d.update(title=value), read=read_json),
+                                    'content/contact.json: the translation at title must keep the same {placeholders}, '
+                                    'link URLs and [^n] refs in "@tr" as in "@en"')
+
+    def test_a_translation_may_move_its_placeholders_links_and_refs(self):
+        def moved(d):
+            d['sections'][0]['blocks'][0] = {
+                '@en': '{a} then {b}: [one](https://example.com/1), [two](https://example.com/2).',
+                '@tr': 'Önce {b}, sonra {a}: [iki](https://example.com/2), [bir](https://example.com/1).'}
+        result = self.build_with(self.edit('contact', moved, read=read_json))
+        self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_an_archive_ui_that_is_not_an_object_of_non_empty_strings(self):
         for value in (None, ['x'], {'event_one': 5}, {'event_one': ''}):
@@ -636,20 +707,8 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
                 self.assertRejected(self.edit('talks', lambda d, value=value: d['archive'].update(ui=value)),
                                     'content/talks.json: "archive.ui" must be an object whose values are non-empty strings')
 
-    def test_a_not_found_page_with_its_own_lang_or_ui(self):
-        for key, value in (('lang', 'tr'), ('ui', {'close': 'Kapat'})):
-            with self.subTest(key=key):
-                self.assertRejected(self.edit('404', lambda d, key=key, value=value: d.update({key: value})),
-                                    'content/404.json: the not-found page takes "lang" from site.json and shows no "ui" strings')
-
-    def test_a_page_whose_ui_is_not_an_object_of_non_empty_strings(self):
-        for value in (None, ['close'], 'close', {'close': 5}, {'close': ''}):
-            with self.subTest(value=value):
-                self.assertRejected(self.edit('sumo', lambda d, value=value: d.update(ui=value)),
-                                    'content/sumo.json: "ui" must be an object whose values are non-empty strings')
-
     def test_a_photo_in_a_list_whose_file_does_not_exist(self):
-        name = self.list_photo_event(read_json(ROOT, 'content', 'talks.json'))['name']
+        name = self.list_photo_event(i18n.content('talks'))['name']
 
         def nowhere(d):
             self.list_photo_event(d)['photo'][-1]['file'] = 'nowhere'
@@ -825,7 +884,7 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
 
     def test_a_stage_photo_whose_talk_was_given_at_several_events(self):
         talk = 'Unlearn Unit Testing'
-        names = [ev['name'] for ev in self.events(read_json(ROOT, 'content', 'talks.json'))
+        names = [ev['name'] for ev in self.events(i18n.content('talks'))
                  if any(t.get('title') == talk for t in ev.get('talks', []))]
         self.assertGreater(len(names), 1)
 
@@ -951,7 +1010,7 @@ class ContentRendersAsText(unittest.TestCase):
         cls.tmp = tempfile.TemporaryDirectory()
         site = copy_site(cls.tmp.name)
         path = os.path.join(site, 'content', 'home.json')
-        data = read_json(path)
+        data = read_in_root_language(path)
         data['hero']['role'] = cls.ROLE
         for part in ('hero', 'game'):
             data[part] = cls.plant(data[part])
@@ -959,7 +1018,7 @@ class ContentRendersAsText(unittest.TestCase):
             json.dump(data, f, ensure_ascii=False)
         cls.game = data['game']
         path = os.path.join(site, 'content', '404.json')
-        data = read_json(path)
+        data = read_in_root_language(path)
         data['maze'] = cls.plant(data['maze'])
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False)
@@ -969,7 +1028,7 @@ class ContentRendersAsText(unittest.TestCase):
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(cls.snapshot, f, ensure_ascii=False)
         path = os.path.join(site, 'content', 'talks.json')
-        data = read_json(path)
+        data = read_in_root_language(path)
         for evs in data['archive']['events'].values():
             for ev in evs:
                 ev['name'] += ' ' + cls.MARK
@@ -978,7 +1037,7 @@ class ContentRendersAsText(unittest.TestCase):
             json.dump(data, f, ensure_ascii=False)
         cls.video_n = data['archive']['video_n']
         path = os.path.join(site, 'content', 'sumo.json')
-        data = read_json(path)
+        data = read_in_root_language(path)
         live = blocks_of(data, 'sumo-live')[0]
         for key in ('names', 'months', 'ranks', 'prizes', 'text'):
             live[key] = cls.plant(live[key])
@@ -1112,7 +1171,7 @@ class SharingCardsOfChosenItems(unittest.TestCase):
         site = copy_site(cls.tmp.name)
         choose(site)
         path = os.path.join(site, 'content', 'talks.json')
-        data = read_json(path)
+        data = read_in_root_language(path)
         events = [ev for evs in data['archive']['events'].values() for ev in evs]
         undated = [ev for ev in events if ev['name'] == cls.UNDATED]
         for ev in undated:
@@ -1192,78 +1251,191 @@ class NotFoundWithoutAMaze(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             site = copy_site(tmp)
             path = os.path.join(site, 'content', '404.json')
-            data = read_json(path)
+            data = read_in_root_language(path)
             del data['maze']
-            with open(path, 'w', encoding='utf-8') as f:
-                json.dump(data, f, ensure_ascii=False)
+            write_json(path, data)
             out = os.path.join(tmp, 'out')
             result = run_build(site, out)
             self.assertEqual(result.returncode, 0, result.stderr)
             with open(os.path.join(out, '404.html'), encoding='utf-8') as f:
                 html = f.read()
         self.assertNotIn('maze', html)
-        self.assertEqual([n.all_text() for n in Tree(html).root.find(lambda n: n.tag == 'h1')], [data['heading']])
+        for lang in LANGS:
+            with self.subTest(lang=lang):
+                self.assertEqual([n.all_text() for n in Tree(not_found_in(html, lang)).root.find(lambda n: n.tag == 'h1')],
+                                 [data['heading']])
 
 
-def assert_pages_in_their_language(case, trees, content, site_lang):
-    seen = Counter()
-    for name, tree in trees.items():
-        html, = tree.find(lambda n: n.tag == 'html')
-        chrome = tree.find(lambda n: n.tag in ('header', 'footer') or 'skip' in n.classes())
-        if name == '404':
-            case.assertEqual(html.attrs.get('lang'), site_lang, name)
-            case.assertEqual(chrome, [], name)
-            continue
-        lang = read_json(content, name + '.json').get('lang', site_lang)
-        case.assertEqual(html.attrs.get('lang'), lang, name)
-        case.assertEqual([n.tag for n in chrome], ['a', 'header', 'footer'], name)
-        case.assertEqual([n.attrs.get('lang') for n in chrome], [None if lang == site_lang else site_lang] * 3, name)
-        seen[lang == site_lang] += 1
-    case.assertGreater(seen[True], 0)
-    case.assertGreater(seen[False], 0)
+class ChipsSortInTheirPagesAlphabet(unittest.TestCase):
+    TURKISH = ['Şirket', 'Zaman', 'İnsan', 'Çeviklik', 'Işık', 'cesaret', 'Öğrenme', 'Su', 'Organizasyon', 'Ilık']
+    ENGLISH = ['Zebra', 'apple', 'Mango', 'Ice', 'ivy', 'Cedar', 'oak', 'Umber', 'sand', 'Wren']
+
+    def test_the_theme_chips_follow_the_alphabet_of_the_page_they_are_on(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            site = copy_site(tmp)
+            path = os.path.join(site, 'content', 'talks.json')
+            data = read_json(path)
+            items = data['archive']['themes']['items']
+            self.assertGreaterEqual(len(items), len(self.TURKISH))
+            for key, en, tr in zip(sorted(items), self.ENGLISH, self.TURKISH):
+                items[key] = {'@en': en, '@tr': tr}
+            write_json(path, data)
+            out = os.path.join(tmp, 'out')
+            result = run_build(site, out)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            chips = {}
+            for lang, words in (('en', self.ENGLISH), ('tr', self.TURKISH)):
+                with open(os.path.join(out, page_file('talks', lang)), encoding='utf-8') as f:
+                    labels = re.findall(r'data-theme="[^"]+" data-label="([^"]+)"', f.read())
+                chips[lang] = [w for w in labels if w in words]
+        want = {'en': ['apple', 'Cedar', 'Ice', 'ivy', 'Mango', 'oak', 'sand', 'Umber', 'Wren', 'Zebra'],
+                'tr': ['cesaret', 'Çeviklik', 'Ilık', 'Işık', 'İnsan', 'Organizasyon', 'Öğrenme', 'Su', 'Şirket', 'Zaman']}
+        self.assertEqual(chips, want)
+        self.assertEqual({lang: sorted(words, key=i18n.alphabet_key(lang)) for lang, words in want.items()}, want,
+                         'the order the other chip tests expect is not the one a reader expects')
+
+    def test_country_and_city_chips_with_as_many_events_follow_the_alphabet_of_the_page_they_are_on(self):
+        """Every other country gets one event and its name planted, and one country gets one event in each of ten
+        planted cities, so the chips that tie on their count show the order of their names alone."""
+        with tempfile.TemporaryDirectory() as tmp:
+            site = copy_site(tmp)
+            path = os.path.join(site, 'content', 'talks.json')
+            data = read_json(path)
+            archive = data['archive']
+            abroad = sorted({p['country'] for p in archive['places'].values() if p['country'] != 'TR'})
+            host, others = abroad[0], abroad[1:8]
+            self.assertEqual(len(others), 7)
+            spot = next(p for p in archive['places'].values() if p['country'] == host)
+            events = [ev for evs in archive['events'].values() for ev in evs]
+            for ev in events:
+                ev.pop('place', None)
+            for i, (en, tr) in enumerate(zip(self.ENGLISH, self.TURKISH)):
+                archive['places']['planted-{}'.format(i)] = {'country': host, 'city': {'@en': en, '@tr': tr},
+                                                             'lat': spot['lat'], 'lon': spot['lon']}
+                events[i]['place'] = 'planted-{}'.format(i)
+            for ev, code, en, tr in zip(events[10:], others, self.ENGLISH, self.TURKISH):
+                archive['countries'][code] = {'@en': en, '@tr': tr}
+                ev['place'] = next(k for k, p in archive['places'].items() if p['country'] == code)
+            write_json(path, data)
+            out = os.path.join(tmp, 'out')
+            result = run_build(site, out)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            countries, cities = {}, {}
+            for lang in LANGS:
+                with open(os.path.join(out, page_file('talks', lang)), encoding='utf-8') as f:
+                    html = f.read()
+                countries[lang] = re.findall(r'data-country="[A-Z]{2}" data-label="([^"]+)"', html)[1:]
+                cities[lang] = [label.split(', ')[0] for label in
+                                re.findall(r'data-country="{}" data-region="[^"]+" data-label="([^"]+)"'.format(host), html)]
+        self.assertEqual(countries, {'en': ['apple', 'Cedar', 'Ice', 'ivy', 'Mango', 'oak', 'Zebra'],
+                                     'tr': ['cesaret', 'Çeviklik', 'Işık', 'İnsan', 'Öğrenme', 'Şirket', 'Zaman']})
+        self.assertEqual(cities, {'en': ['apple', 'Cedar', 'Ice', 'ivy', 'Mango', 'oak', 'sand', 'Umber', 'Wren', 'Zebra'],
+                                  'tr': ['cesaret', 'Çeviklik', 'Ilık', 'Işık', 'İnsan', 'Organizasyon', 'Öğrenme', 'Su',
+                                         'Şirket', 'Zaman']})
 
 
-class SiteLanguageIsTheDefault(unittest.TestCase):
-    def test_a_site_in_another_language_puts_it_on_every_page_without_its_own_and_on_the_chrome(self):
+class TheFirstLanguageIsAtTheRoot(unittest.TestCase):
+    def test_listing_the_languages_the_other_way_round_swaps_the_root_and_the_folder(self):
         with tempfile.TemporaryDirectory() as tmp:
             site = copy_site(tmp)
             path = os.path.join(site, 'content', 'site.json')
             data = read_json(path)
-            self.assertNotEqual(data['lang'], 'de', 'the copy must change the site language')
-            data['lang'] = 'de'
-            with open(path, 'w', encoding='utf-8') as f:
-                json.dump(data, f, ensure_ascii=False)
+            data['languages'].reverse()
+            first, second = [lg['code'] for lg in data['languages']]
+            write_json(path, data)
             out = os.path.join(tmp, 'out')
             result = run_build(site, out)
             self.assertEqual(result.returncode, 0, result.stderr)
-            content = os.path.join(site, 'content')
-            trees = {}
-            for name in sorted(f[:-5] for f in os.listdir(content) if f.endswith('.json') and f != 'site.json'):
-                with open(os.path.join(out, page_file(name)), encoding='utf-8') as f:
-                    trees[name] = Tree(f.read()).root
-            assert_pages_in_their_language(self, trees, content, 'de')
+            got = {}
+            for rel in ('index.html', 'bio/index.html', second + '/index.html', second + '/bio/index.html',
+                        first + '/index.html', '404.html'):
+                if os.path.exists(os.path.join(out, rel)):
+                    with open(os.path.join(out, rel), encoding='utf-8') as f:
+                        source = f.read()
+                    tree = Tree(source).root
+                    got[rel] = (tree.find(lambda n: n.tag == 'html')[0].attrs['lang'],
+                                tree.find(lambda n: n.tag == 'title')[0].all_text())
+            templates = re.findall(r'<template data-lang="([^"]+)"', source)
+        self.assertEqual(got, {'index.html': (first, i18n.content('home', first)['title']),
+                               'bio/index.html': (first, i18n.content('bio', first)['title']),
+                               second + '/index.html': (second, i18n.content('home', second)['title']),
+                               second + '/bio/index.html': (second, i18n.content('bio', second)['title']),
+                               '404.html': (first, i18n.content('404', first)['title'])})
+        self.assertEqual(templates, [second])
+
+
+_BUILT = {}
+
+
+class TurkishNamesCarryTheirLanguage(unittest.TestCase):
+    TURKISH_LETTER = re.compile('[çğıöşüÇĞİÖŞÜ]')
+    ENGLISH_ON_PURPOSE = {
+        'Agile Talks, Agile Türkiye', 'Boğaziçi University Exit Days 2015', 'Boğaziçi University Tech Summit 2016',
+        'DevFest İzmir 2016', 'DevFest İzmir 2022', 'DevFest İzmir 2023', 'DevFest İzmir 2024', 'DevFest İzmir 2025',
+        'GTÜ IEEE: BMO & Sony', 'KoçFinans Lunch&Learn', 'Online Agile Talks 2020 #3, Agile Türkiye',
+        'Türk Hava Kurumu University', 'Türk Telekom Group Agile Summit 2015',
+        'Türkiye Finans Katılım Bankası technology team', 'Türkiye Java Community', 'YapıKredi Seminars',
+        'İstanbul Bilgi University, Computer Engineering', 'İstanbul Kültür University, BMO Seminar'}
+    TURKISH_WITHOUT_A_TURKISH_LETTER = {'Dinamikler 2013', 'Dinamikler 2017', 'Iqra – Okuyun', "Lemi'nin Not Defteri",
+                                        'Agilistanbul'}
+
+    def names(self):
+        events = [ev for evs in read_json(ROOT, 'content', 'talks.json')['archive']['events'].values() for ev in evs]
+        out = [('event', ev['name'], ev.get('lang')) for ev in events]
+        out += [('talk', t['title'], t.get('lang')) for ev in events for t in ev.get('talks', []) if t.get('title')]
+        return out + [('entry', i['title'], i.get('lang'))
+                      for i in entry_items(read_json(ROOT, 'content', 'sharing.json'))]
+
+    def test_a_name_with_a_turkish_letter_is_marked_turkish_unless_it_is_english_on_purpose(self):
+        subjects = self.names()
+        names = [(n, lang) for _, n, lang in subjects]
+        self.assertEqual(sorted({(n, lang) for n, lang in names if self.TURKISH_LETTER.search(n)
+                                 and n not in self.ENGLISH_ON_PURPOSE and lang != 'tr'}), [])
+        self.assertTrue(any(self.TURKISH_LETTER.search(n) and lang == 'tr' for n, lang in names))
+        self.assertEqual({kind for kind, _, _ in subjects}, {'event', 'talk', 'entry'})
+
+    def test_the_names_the_letter_rule_cannot_judge_carry_the_language_they_are_listed_in(self):
+        names = [(n, lang) for _, n, lang in self.names()]
+        self.assertEqual({(n, lang) for n, lang in names if n in self.ENGLISH_ON_PURPOSE},
+                         {(n, None) for n in self.ENGLISH_ON_PURPOSE})
+        self.assertEqual({(n, lang) for n, lang in names if n in self.TURKISH_WITHOUT_A_TURKISH_LETTER},
+                         {(n, 'tr') for n in self.TURKISH_WITHOUT_A_TURKISH_LETTER})
+
+
+def built_site():
+    """The real content built once for every language's BuiltSite."""
+    if 'tmp' not in _BUILT:
+        tmp = tempfile.TemporaryDirectory()
+        result = run_build(ROOT, tmp.name)
+        if result.returncode:
+            raise AssertionError(result.stderr)
+        _BUILT['tmp'] = tmp
+    return _BUILT['tmp'].name
 
 
 class BuiltSite(unittest.TestCase):
+    lang = LANGS[0]
+
     @classmethod
     def setUpClass(cls):
-        cls.tmp = tempfile.TemporaryDirectory()
-        cls.out = cls.tmp.name
-        result = run_build(ROOT, cls.out)
-        if result.returncode:
-            raise AssertionError(result.stderr)
+        cls.out = built_site()
         names = sorted(f[:-5] for f in os.listdir(os.path.join(ROOT, 'content'))
                        if f.endswith('.json') and f != 'site.json')
         cls.html, cls.trees = {}, {}
         for name in names:
-            with open(os.path.join(cls.out, page_file(name)), encoding='utf-8') as f:
-                cls.html[name] = f.read()
+            with open(os.path.join(cls.out, page_file(name, cls.lang)), encoding='utf-8') as f:
+                source = f.read()
+            cls.html[name] = not_found_in(source, cls.lang) if name == '404' else source
             cls.trees[name] = Tree(cls.html[name]).root
-        cls.talks = read_json(ROOT, 'content', 'talks.json')['archive']
+        cls.talks = cls.content('talks')['archive']
+        cls.turkish, cls.english = cls.talks['spoken']['tr'], cls.talks['spoken']['en']
 
     @classmethod
-    def tearDownClass(cls):
-        cls.tmp.cleanup()
+    def content(cls, name):
+        return i18n.content(name, cls.lang)
+
+    def page_dir(self, name):
+        return os.path.join(self.out, os.path.dirname(page_file(name, self.lang)))
 
     def test_every_content_file_became_a_page(self):
         self.assertIn('talks', self.trees)
@@ -1271,28 +1443,230 @@ class BuiltSite(unittest.TestCase):
         self.assertIn('root-bug', self.trees)
 
     def test_every_page_is_linked_from_the_site_nav_or_the_home_page(self):
-        nav = {item['path'] for item in read_json(ROOT, 'content', 'site.json')['nav']}
+        nav = {item['path'] for item in self.content('site')['nav']}
         home = {a.attrs['href'] for a in self.trees['home'].find(lambda n: n.tag == 'a' and n.attrs.get('href'))}
         pages = [name + '/' for name in self.trees if name not in ('home', '404')]
         self.assertEqual([p for p in pages if p not in home], [])
         self.assertNotEqual([p for p in pages if p not in nav], [], 'no page is reached from the home page alone')
 
-    def test_every_page_is_in_its_own_language_and_marks_the_site_chrome_when_that_differs(self):
-        assert_pages_in_their_language(self, self.trees, os.path.join(ROOT, 'content'),
-                                       read_json(ROOT, 'content', 'site.json')['lang'])
+    def local(self, name):
+        return '' if name == 'home' else name + '/'
 
-    def test_a_page_translates_the_site_strings_it_names_and_keeps_the_rest(self):
-        site_ui = read_json(ROOT, 'content', 'site.json')['ui']
-        translated = 0
+    def test_every_page_is_in_the_language_it_was_built_for_chrome_and_all(self):
+        for name, tree in self.trees.items():
+            html, = tree.find(lambda n: n.tag == 'html')
+            self.assertEqual(html.attrs.get('lang'), self.lang, name)
+            head, = tree.find(lambda n: n.tag == 'head')
+            self.assertEqual([n.all_text() for n in head.find(lambda n: n.tag == 'title')], [self.content(name)['title']], name)
+            chrome = tree.find(lambda n: n.tag in ('header', 'footer') or 'skip' in n.classes())
+            self.assertEqual([n.tag for n in chrome], [] if name == '404' else ['a', 'header', 'footer'], name)
+            self.assertEqual([n.attrs.get('lang') for n in chrome if n.attrs.get('lang')], [], name)
+
+    def test_every_page_names_itself_and_its_counterpart_in_each_language_for_search_engines(self):
+        site = self.content('site')
+        locales = {lg['code']: lg['locale'] for lg in site['languages']}
+        for name, tree in self.trees.items():
+            if name == '404':
+                self.assertEqual(tree.find(lambda n: n.attrs.get('rel') == 'alternate'), [], name)
+                continue
+            links = tree.find(lambda n: n.tag == 'link' and n.attrs.get('rel') in ('canonical', 'alternate'))
+            got = [(n.attrs['rel'], n.attrs.get('hreflang'), n.attrs['href']) for n in links]
+            self.assertEqual(got, [('canonical', None, site['url'] + lang_dir(self.lang) + self.local(name))]
+                             + [('alternate', code, site['url'] + lang_dir(code) + self.local(name)) for code in LANGS]
+                             + [('alternate', 'x-default', site['url'] + self.local(name))], name)
+            for _, _, href in got:
+                self.assertTrue(os.path.isfile(os.path.join(self.out, href[len(site['url']):], 'index.html')), href)
+            og = [(n.attrs['property'], n.attrs['content']) for n in tree.find(
+                lambda n: n.tag == 'meta' and (n.attrs.get('property') or '').startswith('og:locale'))]
+            self.assertEqual(og, [('og:locale', locales[self.lang])]
+                             + [('og:locale:alternate', locales[code]) for code in LANGS if code != self.lang], name)
+
+    def test_the_language_switch_leads_to_the_same_page_in_each_other_language(self):
+        names = {lg['code']: lg['name'] for lg in self.content('site')['languages']}
+        for name, tree in self.trees.items():
+            switches = tree.find(has_class('lang-switch'))
+            if name == '404':
+                self.assertEqual(switches, [], name)
+                continue
+            here = '/' + lang_dir(self.lang) + self.local(name)
+            got = [(posixpath.normpath(posixpath.join(here, n.attrs['href'])), n.attrs.get('hreflang'), n.attrs.get('lang'),
+                    n.attrs.get('aria-label'), n.all_text()) for n in switches]
+            self.assertEqual(got, [(posixpath.normpath('/' + lang_dir(code) + self.local(name)), code, code, names[code],
+                                    code.upper()) for code in LANGS if code != self.lang], name)
+            self.assertEqual([s.parent.classes() for s in switches], [['wrap', 'header-row']] * len(switches), name)
+
+    def test_every_link_to_a_page_of_the_site_stays_in_the_pages_language(self):
+        others = [lang_dir(code) for code in LANGS if code != self.lang and lang_dir(code)]
+        checked = 0
+        for name, tree in self.trees.items():
+            here = '/' + (lang_dir(self.lang) + 'missing/' if name == '404' else lang_dir(self.lang) + self.local(name))
+            for a in tree.find(lambda n: n.tag == 'a' and n.attrs.get('href') and 'lang-switch' not in n.classes()):
+                parts = urllib.parse.urlsplit(a.attrs['href'])
+                if parts.scheme or parts.netloc or not parts.path:
+                    continue
+                path = posixpath.normpath(posixpath.join(here, parts.path)).strip('/')
+                path = path + '/' if path else ''
+                if path.startswith('assets/'):
+                    continue
+                self.assertTrue(path.startswith(lang_dir(self.lang)), (name, a.attrs['href']))
+                self.assertFalse([d for d in others if path.startswith(d)], (name, a.attrs['href']))
+                self.assertTrue(os.path.isfile(os.path.join(self.out, path, 'index.html'))
+                                or os.path.isfile(os.path.join(self.out, path.rstrip('/'))), (name, a.attrs['href']))
+                checked += 1
+        self.assertGreater(checked, len(self.trees))
+
+    def test_the_ui_island_gives_the_site_strings_in_the_pages_language(self):
+        site_ui = self.content('site')['ui']
         for name, tree in self.trees.items():
             if name == '404':
                 continue
-            data = read_json(ROOT, 'content', name + '.json')
             island, = tree.find(lambda n: n.attrs.get('id') == 'ui-text')
-            want = {**site_ui, **data.get('archive', {}).get('ui', {}), **data.get('ui', {})}
-            self.assertEqual(json.loads(island.all_text()), want, name)
-            translated += sum(want[k] != site_ui[k] for k in data.get('ui', {}))
-        self.assertGreater(translated, 0)
+            self.assertEqual(json.loads(island.all_text()), {**site_ui, **self.content(name).get('archive', {}).get('ui', {})},
+                             name)
+
+    def test_a_quote_names_its_original_only_on_a_page_in_another_language(self):
+        def quotes(value):
+            if isinstance(value, list):
+                return [q for v in value for q in quotes(v)]
+            if not isinstance(value, dict):
+                return []
+            return [value] if value.get('type') == 'quote' else [q for v in value.values() for q in quotes(v)]
+        with_original = 0
+        for name, tree in self.trees.items():
+            blocks = quotes(self.content(name).get('sections', []))
+            captions = [c for f in tree.find(has_class('pull')) for c in f.find(lambda n: n.tag == 'figcaption')]
+            self.assertEqual(len(captions), len(blocks), name)
+            for caption, b in zip(captions, blocks):
+                spans = [(n.attrs['lang'], n.all_text()) for n in caption.find(lambda n: n.tag == 'span' and 'lang' in n.attrs)]
+                shown = b.get('original') and b['original_lang'] != self.lang
+                self.assertEqual(spans, [(b['original_lang'], b['original'])] if shown else [], (name, b['caption']))
+                with_original += bool(b.get('original'))
+        self.assertGreater(with_original, 0)
+
+    ENGLISH_WORDS = {'the', 'and', 'of', 'with', 'for', 'to', 'in', 'is', 'by', 'from', 'that', 'this', 'was', 'are',
+                     'my', 'his', 'he', 'we', 'or', 'how', 'what', 'about', 'into', 'where', 'which'}
+    TURKISH_WORDS = {'ve', 'bir', 'bu', 'için', 'ile', 'da', 'de', 'ki', 'çok', 'gibi', 'olarak', 'daha', 'ya', 'ne',
+                     'ama', 'her', 'hem', 'şu', 'o', 'üniversitesi', 'günü', 'günleri', 'zirvesi', 'konferansı',
+                     'sempozyumu', 'sohbetleri', 'buluşmalar', 'buluşması', 'semineri', 'seminer', 'yazılım', 'yazılımcı',
+                     'bilişim', 'araştırma', 'merkezi', 'koleji', 'teknoloji', 'teknolojileri', 'sektörü', 'raporu'}
+
+    def mark(self, lang):
+        lang = lang or LANGS[0]
+        return None if lang == self.lang else lang
+
+    def lang_spans(self, node):
+        return [(n.attrs['lang'], n.all_text()) for n in node.find(lambda n: n.tag == 'span' and 'lang' in n.attrs)]
+
+    def talk_marks(self):
+        """Each event name and talk title with the lang marks this page's language gives it, from what the content
+        states; a name that two events share with different languages has both."""
+        marks = {}
+        for evs in self.talks['events'].values():
+            for ev in evs:
+                marks.setdefault(ev['name'], set()).add(self.mark(ev.get('lang')))
+                for t in ev.get('talks', []):
+                    if t.get('title'):
+                        marks.setdefault(t['title'], set()).add(self.mark(t.get('lang')))
+        return marks
+
+    def test_every_talk_title_and_event_name_carries_the_lang_mark_its_content_states(self):
+        marks = self.talk_marks()
+        shown = []
+        for name in ('home', 'talks'):
+            for n in self.trees[name].walk():
+                for kind in {'ev-title', 'entry-title', 'entry-meta'} & set(n.classes()):
+                    shown.append((kind, n.all_text(), n.attrs.get('lang')))
+                if 'ev-photo' in n.classes():
+                    shown.append(('ev-photo', n.attrs['data-caption'], n.attrs.get('data-caption-lang')))
+        self.assertEqual([s for s in shown if marks.get(s[1]) != {s[2]}], [])
+        self.assertEqual({kind for kind, _, _ in shown}, {'ev-title', 'entry-title', 'entry-meta', 'ev-photo'})
+
+    def test_every_entry_title_carries_the_lang_mark_its_item_states(self):
+        marks, scanned = set(), set()
+        for name, tree in self.trees.items():
+            items = entry_items(self.content(name).get('sections', []))
+            if not items:
+                continue
+            shown = [a for ol in tree.find(lambda n: n.tag == 'ol' and 'entries' in n.classes())
+                     for a in ol.find(has_class('entry-title'))]
+            self.assertEqual([(a.all_text(), a.attrs.get('lang')) for a in shown],
+                             [(i['title'], self.mark(i.get('lang'))) for i in items], name)
+            marks |= {self.mark(i.get('lang')) for i in items}
+            scanned.add(name)
+        self.assertGreater(len(marks - {None}), 1)
+        self.assertEqual(scanned, {'craftgate', 'root-bug', 'sharing'})
+
+    def test_text_marked_as_english_holds_no_turkish_word(self):
+        def marked(tree, lang):
+            return ([n.all_text() for n in tree.walk() if n.tag != 'html' and n.attrs.get('lang') == lang] +
+                    [n.attrs['data-caption'] for n in tree.walk() if n.attrs.get('data-caption-lang') == lang])
+
+        def turkish(s):
+            s = s.replace('’', "'").replace('I', 'ı').replace('İ', 'i').lower()
+            return {w.split("'")[0] for w in re.findall(r"[^\W\d_]+(?:'[^\W\d_]+)*", s)} & self.TURKISH_WORDS
+        if self.lang == 'en':
+            found = [s for tree in self.trees.values() for s in marked(tree, 'tr') if turkish(s)]
+            self.assertGreater(len(found), 0, 'the check finds no Turkish in what the English pages mark as Turkish')
+        else:
+            found = {name: [s for s in marked(tree, 'en') if turkish(s)] for name, tree in self.trees.items()}
+            self.assertEqual({name: texts for name, texts in found.items() if texts}, {})
+
+    def english_texts(self, tree):
+        """Text and labels outside every element that names a language other than the page's, which read as English:
+        three or more English function words, or one in five words or more with no Turkish letter or word. A talk
+        title is a name and is shown as given, and a “quoted” passage is verbatim from a slide, so both are set aside;
+        a suffix after an apostrophe (Craftgate'in) is not a word of its own."""
+        titles = sorted({t['title'] for evs in self.talks['events'].values() for ev in evs for t in ev.get('talks', [])
+                         if t.get('title')}, key=len, reverse=True)
+        found = []
+
+        def check(s):
+            for title in titles:
+                s = s.replace(title, '')
+            s = re.sub(r'“[^”]*”', '', s).replace('’', "'").lower()
+            words = [w.split("'")[0] for w in re.findall(r"[^\W\d_]+(?:'[^\W\d_]+)*", s)]
+            english = len([w for w in words if w in self.ENGLISH_WORDS])
+            turkish = re.search('[çğıöşü]', s) or any(w in self.TURKISH_WORDS for w in words)
+            if english >= 3 or (english and len(words) >= 5 and not turkish):
+                found.append(' '.join(s.split()))
+
+        def walk(node):
+            if node.attrs.get('lang', self.lang) != self.lang or node.tag in ('script', 'style', 'code', 'pre', 'svg'):
+                return
+            for k in ('alt', 'aria-label', 'title', 'content', 'data-label'):
+                if node.attrs.get(k):
+                    check(node.attrs[k])
+            for child in node.children:
+                if isinstance(child, str):
+                    check(child)
+                else:
+                    walk(child)
+        html, = tree.find(lambda n: n.tag == 'html')
+        for child in html.children:
+            if isinstance(child, Node):
+                walk(child)
+        return found
+
+    def test_a_card_that_names_a_talk_carries_the_language_of_its_title_beside_a_link_that_names_it_for_screen_readers(self):
+        langs = self.talk_marks()
+        cards = [(n.all_text(), n.attrs.get('lang')) for n in self.trees['sharing'].find(has_class('media-title'))
+                 if n.all_text() in langs]
+        self.assertGreater(len(cards), 0)
+        self.assertEqual([(title, lang) for title, lang in cards if langs[title] != {lang}], [])
+        names = sorted(langs, key=len, reverse=True)
+        hidden = [n for n in self.trees['talks'].find(has_class('sr-only')) if n.parent.tag == 'a']
+        self.assertGreater(len(hidden), 0)
+        for n in hidden:
+            name = next(k for k in names if n.all_text().endswith(k))
+            marked = [c.attrs.get('lang') for c in n.children if isinstance(c, Node)]
+            self.assertEqual({marked[0] if marked else None}, langs[name], n.all_text())
+
+    def test_a_page_outside_the_root_language_shows_no_english_it_does_not_mark_as_english(self):
+        found = {name: self.english_texts(tree) for name, tree in self.trees.items()}
+        if self.lang == 'en':
+            self.assertGreater(sum(map(len, found.values())), len(self.trees), 'the check finds no English on the English pages')
+        else:
+            self.assertEqual({name: texts for name, texts in found.items() if texts}, {})
 
     def test_fragment_links_reach_a_unique_id_on_their_page(self):
         for name, tree in self.trees.items():
@@ -1311,7 +1685,7 @@ class BuiltSite(unittest.TestCase):
     def test_contents_lists_every_section_heading_in_order(self):
         seen = 0
         for name, tree in self.trees.items():
-            data = read_json(ROOT, 'content', name + '.json')
+            data = self.content(name)
             for _ in blocks_of(data, 'contents'):
                 want = [('#' + s['id'], s['heading']) for s in data['sections'] if s.get('heading')]
                 nav = tree.find(lambda n: n.tag == 'nav' and 'contents' in n.classes())[0]
@@ -1322,7 +1696,7 @@ class BuiltSite(unittest.TestCase):
     def test_infobox_shows_every_item_of_its_block(self):
         seen = 0
         for name, tree in self.trees.items():
-            boxes = blocks_of(read_json(ROOT, 'content', name + '.json'), 'infobox')
+            boxes = blocks_of(self.content(name), 'infobox')
             rendered = tree.find(lambda n: n.tag == 'dl' and 'infobox' in n.classes())
             self.assertEqual(len(rendered), len(boxes), name)
             for box, dl in zip(boxes, rendered):
@@ -1336,7 +1710,7 @@ class BuiltSite(unittest.TestCase):
     def test_by_year_lists_every_item_under_its_year_newest_first(self):
         got_on = {}
         for name, tree in self.trees.items():
-            blocks = blocks_of(read_json(ROOT, 'content', name + '.json'), 'by-year')
+            blocks = blocks_of(self.content(name), 'by-year')
             rendered = tree.find(lambda n: n.tag == 'dl' and 'by-year' in n.classes())
             self.assertEqual(len(rendered), len(blocks), name)
             for block, dl in zip(blocks, rendered):
@@ -1352,11 +1726,15 @@ class BuiltSite(unittest.TestCase):
                 self.assertEqual(years, sorted(set(years), reverse=True), name)
                 got_on.setdefault(name, []).extend(got)
         honors, = self.trees['career'].find(lambda n: n.attrs.get('id') == 'honors')
-        self.assertEqual(honors.find(lambda n: n.tag == 'h2')[0].all_text(), 'Honors and awards')
+        heading, year_1999 = {
+            'en': ('Honors and awards', ["Dean's Award", 'First Prize, Quality Improvement Teams Contest',
+                                         'Second Prize, Quality Improvement Teams Contest', "Dean's Award"]),
+            'tr': ('Ödüller ve dereceler', ['Dekanlık Ödülü', 'Birincilik, Kalite İyileştirme Takımları Yarışması',
+                                            'İkincilik, Kalite İyileştirme Takımları Yarışması', 'Dekanlık Ödülü']),
+        }[self.lang]
+        self.assertEqual(honors.find(lambda n: n.tag == 'h2')[0].all_text(), heading)
         self.assertEqual(len(honors.find(has_class('by-year'))), 1)
-        self.assertIn(('1999', ["Dean's Award", 'First Prize, Quality Improvement Teams Contest',
-                                'Second Prize, Quality Improvement Teams Contest', "Dean's Award"]),
-                      [(year, [title for title, _ in items]) for year, items in got_on['career']])
+        self.assertIn(('1999', year_1999), [(year, [title for title, _ in items]) for year, items in got_on['career']])
 
     def test_by_year_puts_the_year_in_the_stages_year_column_with_a_rule_between_years(self):
         with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
@@ -1372,7 +1750,7 @@ class BuiltSite(unittest.TestCase):
     def test_facts_groups_keep_the_same_gap_in_one_column_and_in_two(self):
         with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
             css = f.read()
-        groups = blocks_of(read_json(ROOT, 'content', 'career.json'), 'facts')[0]['groups']
+        groups = blocks_of(self.content('career'), 'facts')[0]['groups']
         self.assertGreater(len(groups), 2, 'with two groups or fewer the two-column grid has no second row to space')
         two = re.findall(r'@media \(min-width: ([\d.]+)rem\) \{\s*\.facts \{[^}]*row-gap: ([^;]+);', css)
         one = re.findall(r'@media \(max-width: ([\d.]+)rem\) \{\s*\.facts > div \+ div \{[^}]*margin-top: ([^;]+);', css)
@@ -1389,7 +1767,7 @@ class BuiltSite(unittest.TestCase):
         seen = 0
         for name, tree in self.trees.items():
             for img in tree.find(lambda n: n.tag == 'img' and 'assets/flags/' in (n.attrs.get('src') or '')):
-                path = os.path.normpath(os.path.join(self.out, os.path.dirname(page_file(name)), img.attrs['src']))
+                path = os.path.normpath(os.path.join(self.page_dir(name), img.attrs['src']))
                 self.assertTrue(os.path.isfile(path), path)
                 seen += 1
         self.assertGreater(seen, 0)
@@ -1568,13 +1946,13 @@ class BuiltSite(unittest.TestCase):
         self.assertGreater(several, 0)
 
     def test_each_recent_talk_on_home_links_its_slides_or_else_its_first_video(self):
-        count = next(b['count'] for s in read_json(ROOT, 'content', 'home.json')['sections']
+        count = next(b['count'] for s in self.content('home')['sections']
                      for b in s['blocks'] if b['type'] == 'latest-talks')
         self.assertGreaterEqual(count, 4, 'the fixture below sets up four recent talks')
         with tempfile.TemporaryDirectory() as tmp:
             site = copy_site(tmp)
             path = os.path.join(site, 'content', 'talks.json')
-            data = read_json(path)
+            data = read_in_root_language(path)
             newest = [t for _, evs in sorted(data['archive']['events'].items(), reverse=True) for ev in evs for t in ev.get('talks', [])]
             for t in newest[:4]:
                 t.pop('slides', None)
@@ -1614,31 +1992,44 @@ class BuiltSite(unittest.TestCase):
             events.setdefault(ev.find(has_class('ev-name'))[0].all_text(), []).append(self.spoken_badges(ev))
         return events
 
-    def built_with_talks(self, change, page):
+    def built_with(self, changes, *pages):
         with tempfile.TemporaryDirectory() as tmp:
             site = copy_site(tmp)
-            path = os.path.join(site, 'content', 'talks.json')
-            data = read_json(path)
-            change(data)
-            with open(path, 'w', encoding='utf-8') as f:
-                json.dump(data, f, ensure_ascii=False)
+            for name, change in changes.items():
+                path = os.path.join(site, 'content', name + '.json')
+                data = read_json(path)
+                change(data)
+                write_json(path, data)
             out = os.path.join(tmp, 'out')
             result = run_build(site, out)
             self.assertEqual(result.returncode, 0, result.stderr)
-            with open(os.path.join(out, page), encoding='utf-8') as f:
-                return Tree(f.read()).root
+            trees = []
+            for page in pages:
+                with open(os.path.join(out, lang_dir(self.lang) + page), encoding='utf-8') as f:
+                    trees.append(Tree(f.read()).root)
+            return trees
+
+    def built_with_talks(self, change, page):
+        return self.built_with({'talks': change}, page)[0]
 
     def test_named_events_carry_the_badge_of_the_language_they_state(self):
         events = self.badges_by_event(self.trees['talks'])
-        self.assertEqual(events['Karabük Üniversitesi Programlama Günleri 2016'], [['Turkish']])
-        self.assertEqual(events['Devoxx Belgium 2022'], [['English']])
-        self.assertEqual(events['Agile Tour Kaunas 2015'], [['English']])
-        self.assertEqual(events['Teknasyon Tech Meetup #2'], [['Turkish']])
-        self.assertEqual(events['IT Serbia Podcast'], [['English']])
-        self.assertEqual(events['Kesişen Yollar'], [['Turkish']])
-        self.assertEqual(events['Etohum Developers Day 2013'], [['Turkish']], 'an event with no place and no role')
-        self.assertEqual(events['ITAKE Unconference 2020'], [['English']])
-        self.assertEqual(events['Turkcell Agile Talks'], [['Turkish']], 'an event with no place, no role and no talks')
+        self.assertEqual(events['Karabük Üniversitesi Programlama Günleri 2016'], [[self.turkish]])
+        self.assertEqual(events['Devoxx Belgium 2022'], [[self.english]])
+        self.assertEqual(events['Agile Tour Kaunas 2015'], [[self.english]])
+        self.assertEqual(events['Teknasyon Tech Meetup #2'], [[self.turkish]])
+        self.assertEqual(events['IT Serbia Podcast'], [[self.english]])
+        self.assertEqual(events['Kesişen Yollar'], [[self.turkish]])
+        self.assertEqual(events['Etohum Developers Day 2013'], [[self.turkish]], 'an event with no place and no role')
+        self.assertEqual(events['ITAKE Unconference 2020'], [[self.english]])
+        self.assertEqual(events['Turkcell Agile Talks'], [[self.turkish]], 'an event with no place, no role and no talks')
+
+    def test_an_event_name_in_another_language_than_the_pages_is_marked_with_it_and_unmarked_content_is_the_root_ones(self):
+        want = Counter((ev['name'], self.mark(ev.get('lang'))) for evs in self.talks['events'].values() for ev in evs)
+        got = Counter((h.all_text(), h.attrs.get('lang')) for h in self.trees['talks'].find(has_class('ev-name')))
+        self.assertEqual(got, want)
+        if self.lang != LANGS[0]:
+            self.assertIn(LANGS[0], {m for _, m in want}, 'no event is left in the root language, so its default is unchecked')
 
     def test_an_event_at_a_place_on_the_map_carries_the_language_it_states_not_its_countrys(self):
         def swap(data):
@@ -1646,11 +2037,11 @@ class BuiltSite(unittest.TestCase):
             next(ev for ev in every if ev['name'] == 'Devoxx Belgium 2022')['spoken'] = 'tr'
             next(ev for ev in every if ev['name'] == 'Karabük Üniversitesi Programlama Günleri 2016')['spoken'] = 'en'
         events = self.badges_by_event(self.built_with_talks(swap, os.path.join('talks', 'index.html')))
-        self.assertEqual(events['Devoxx Belgium 2022'], [['Turkish']])
-        self.assertEqual(events['Karabük Üniversitesi Programlama Günleri 2016'], [['English']])
+        self.assertEqual(events['Devoxx Belgium 2022'], [[self.turkish]])
+        self.assertEqual(events['Karabük Üniversitesi Programlama Günleri 2016'], [[self.english]])
 
     def test_every_event_carries_the_one_badge_its_spoken_language_names(self):
-        label = {'tr': 'Turkish', 'en': 'English'}
+        label = {'tr': self.turkish, 'en': self.english}
         want = Counter((ev['name'], label[ev['spoken']]) for evs in self.talks['events'].values() for ev in evs)
         got = Counter()
         for ev in self.trees['talks'].find(has_class('ev')):
@@ -1658,7 +2049,7 @@ class BuiltSite(unittest.TestCase):
             self.assertEqual(len(badges), 1, ev.all_text())
             got[ev.find(has_class('ev-name'))[0].all_text(), badges[0]] += 1
         self.assertEqual(got, want)
-        self.assertLessEqual({'Turkish', 'English'}, {b for _, b in want})
+        self.assertLessEqual({self.turkish, self.english}, {b for _, b in want})
 
     def test_every_event_at_a_place_on_the_map_states_turkish_in_turkiye_and_english_abroad(self):
         placed = [ev for evs in self.talks['events'].values() for ev in evs if ev.get('place') not in (None, 'online')]
@@ -1675,15 +2066,15 @@ class BuiltSite(unittest.TestCase):
         for b in badges:
             self.assertIn('ev-meta', b.parent.classes(), b.parent.all_text())
             self.assertIs([c for c in b.parent.children if not isinstance(c, str) or c.strip()][-1], b, b.parent.all_text())
-            self.assertEqual(self.langs_around(b), {'en'}, b.parent.all_text())
+            self.assertEqual(self.langs_around(b), {self.lang}, b.parent.all_text())
         self.assertTrue(any(b.parent.text.strip(' ·') for b in badges), 'no badge shares its line with a role, so its order against text is unchecked')
 
     def test_each_recent_talk_on_home_carries_the_badge_of_its_own_event_beside_its_title(self):
-        count = next(b['count'] for s in read_json(ROOT, 'content', 'home.json')['sections']
+        count = next(b['count'] for s in self.content('home')['sections']
                      for b in s['blocks'] if b['type'] == 'latest-talks')
         pattern = (('en', 'istanbul', True), ('tr', 'kyiv', False), ('en', 'online', False), ('tr', None, True))
         self.assertGreaterEqual(count, len(pattern), 'the fixture below needs a recent talk for each of its rows')
-        label = {'en': ['English'], 'tr': ['Turkish']}
+        label = {'en': [self.english], 'tr': [self.turkish]}
         want = []
         def mix(data):
             events = [ev for _, evs in sorted(data['archive']['events'].items(), reverse=True) for ev in evs if ev.get('talks')]
@@ -1710,9 +2101,9 @@ class BuiltSite(unittest.TestCase):
                 row = self.siblings(b)
                 self.assertGreater(row.index(b), 0, li.all_text())
                 self.assertIs(row[row.index(b) - 1], title, li.all_text())
-                self.assertEqual(self.langs_around(b), {'en'}, li.all_text())
+                self.assertEqual(self.langs_around(b), {self.lang}, li.all_text())
                 seen.add((title.tag, b.all_text()))
-        self.assertEqual(seen, {(tag, b) for tag in ('a', 'span') for b in ('English', 'Turkish')},
+        self.assertEqual(seen, {(tag, b) for tag in ('a', 'span') for b in (self.english, self.turkish)},
                          'the fixture should badge both a linked and an unlinked title in both languages')
 
     def test_theme_chips_count_the_events_about_each_theme(self):
@@ -1737,7 +2128,7 @@ class BuiltSite(unittest.TestCase):
         cloud, = section.find(has_class('cloud'))
         self.assertEqual((cloud.attrs.get('role'), cloud.attrs.get('aria-label')), ('group', th['label']))
         chips = cloud.find(lambda n: n.tag == 'button')[1:]
-        self.assertEqual([c.attrs['data-label'] for c in chips], sorted(th['items'].values(), key=str.lower))
+        self.assertEqual([c.attrs['data-label'] for c in chips], sorted(th['items'].values(), key=i18n.alphabet_key(self.lang)))
         self.assertEqual({c.attrs.get('aria-pressed') for c in chips}, {'false'})
         places = self.trees['talks'].find(has_class('tmap-controls'))[0].find(lambda n: n.attrs.get('role') == 'group')
         self.assertIn('chips', places[0].classes())
@@ -1792,7 +2183,7 @@ class BuiltSite(unittest.TestCase):
         count = Counter(ev['locationType'] for evs in self.talks['events'].values() for ev in evs if 'locationType' in ev)
         items = self.talks['locationTypes']['items']
         expected = sorted(((k, '{} {}'.format(items[k], count[k]), str(count[k]), 'false') for k in count),
-                          key=lambda chip: items[chip[0]].lower())
+                          key=lambda chip: i18n.alphabet_key(self.lang)(items[chip[0]]))
         chips = self.trees['talks'].find(lambda n: n.tag == 'button' and 'data-location-type' in n.attrs)
         self.assertEqual([(b.attrs['data-location-type'], ' '.join(b.all_text().split()), b.find(has_class('n'))[0].all_text(),
                            b.attrs.get('aria-pressed')) for b in chips], expected)
@@ -1838,8 +2229,8 @@ class BuiltSite(unittest.TestCase):
         for a in photos:
             img = a.find(lambda n: n.tag == 'img')[0]
             declared = (int(img.attrs['width']), int(img.attrs['height']))
-            self.assertEqual(jpeg_size(os.path.join(self.out, 'talks', img.attrs['src'])), declared, img.attrs['src'])
-            self.assertTrue(os.path.isfile(os.path.join(self.out, 'talks', a.attrs['href'])), a.attrs['href'])
+            self.assertEqual(jpeg_size(os.path.join(self.page_dir('talks'), img.attrs['src'])), declared, img.attrs['src'])
+            self.assertTrue(os.path.isfile(os.path.join(self.page_dir('talks'), a.attrs['href'])), a.attrs['href'])
 
     def test_an_event_with_a_list_of_photos_shows_each_one_in_order(self):
         rows = self.trees['talks'].find(has_class('ev'))
@@ -1887,7 +2278,7 @@ class BuiltSite(unittest.TestCase):
         for name, tree in self.trees.items():
             if name == '404':
                 continue
-            blocks = blocks_of(read_json(ROOT, 'content', name + '.json'), 'photo')
+            blocks = blocks_of(self.content(name), 'photo')
             figures = tree.find(lambda n: n.tag == 'figure' and 'photo' in n.classes())
             self.assertEqual([f.classes() for f in figures],
                              [['photo', 'photo-small'] if b.get('small') else ['photo'] for b in blocks], name)
@@ -1908,7 +2299,7 @@ class BuiltSite(unittest.TestCase):
     def referenced_paths(self):
         paths = set()
         for name, tree in self.trees.items():
-            base = posixpath.dirname(page_file(name))
+            base = posixpath.dirname(page_file(name, self.lang))
             for node in tree.walk():
                 refs = [node.attrs.get('src'), node.attrs.get('href')]
                 refs += [part.split()[0] for part in (node.attrs.get('srcset') or '').split(',') if part.strip()]
@@ -1936,7 +2327,7 @@ class BuiltSite(unittest.TestCase):
 
     def test_every_file_in_a_folder_photo_blocks_use_is_used_by_a_built_page(self):
         folders = {posixpath.dirname(b['src']) for name in self.trees
-                   for b in blocks_of(read_json(ROOT, 'content', name + '.json'), 'photo')}
+                   for b in blocks_of(self.content(name), 'photo')}
         self.assertGreater(len(folders), 1)
         for folder in sorted(folders):
             files, unused = self.files_unused_by_the_built_pages(folder)
@@ -1945,10 +2336,10 @@ class BuiltSite(unittest.TestCase):
     def test_every_photo_block_shows_its_file_at_the_size_it_declares(self):
         shown = 0
         for name, tree in self.trees.items():
-            blocks = blocks_of(read_json(ROOT, 'content', name + '.json'), 'photo')
+            blocks = blocks_of(self.content(name), 'photo')
             figures = tree.find(lambda n: n.tag == 'figure' and 'photo' in n.classes())
             self.assertEqual(len(figures), len(blocks), name)
-            base = posixpath.dirname(page_file(name))
+            base = posixpath.dirname(page_file(name, self.lang))
             for b, figure in zip(blocks, figures):
                 link = figure.find(lambda n: n.tag == 'a')[0]
                 img = figure.find(lambda n: n.tag == 'img')[0]
@@ -1968,7 +2359,7 @@ class BuiltSite(unittest.TestCase):
     # Sharing
 
     def test_every_page_shares_an_image_of_the_size_it_declares(self):
-        site = read_json(ROOT, 'content', 'site.json')
+        site = self.content('site')
         shared = 0
         for name, tree in self.trees.items():
             if name == '404':
@@ -1985,7 +2376,7 @@ class BuiltSite(unittest.TestCase):
             # Large cards are cropped to about 1.91:1, so an image at that ratio shows whole.
             self.assertAlmostEqual(size[0] / size[1], 1.91, delta=0.02, msg=(name, size))
             self.assertEqual(meta['og:site_name'], site['name'], name)
-            self.assertEqual(meta['og:url'], site['url'] + ('' if name == 'home' else name + '/'))
+            self.assertEqual(meta['og:url'], site['url'] + lang_dir(self.lang) + ('' if name == 'home' else name + '/'))
             canonical = tree.find(lambda n: n.tag == 'link' and n.attrs.get('rel') == 'canonical')
             self.assertEqual([c.attrs['href'] for c in canonical], [meta['og:url']], name)
             shared += 1
@@ -1993,8 +2384,8 @@ class BuiltSite(unittest.TestCase):
         self.assertGreater(shared, 1)
 
     def test_the_home_page_describes_lemi_with_an_image_on_this_site(self):
-        site = read_json(ROOT, 'content', 'site.json')
-        person = read_json(ROOT, 'content', 'home.json')['person']
+        site = self.content('site')
+        person = self.content('home')['person']
         blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', self.html['home'], re.S)
         self.assertEqual(len(blocks), 1)
         built = json.loads(blocks[0])
@@ -2012,7 +2403,7 @@ class BuiltSite(unittest.TestCase):
         for name, tree in self.trees.items():
             links = tree.find(lambda n: n.tag == 'link' and n.attrs.get('rel') in ('icon', 'apple-touch-icon'))
             self.assertEqual(sorted(link.attrs['rel'] for link in links), ['apple-touch-icon', 'icon', 'icon'], name)
-            here = os.path.dirname(os.path.join(self.out, page_file(name)))
+            here = self.page_dir(name)
             for link in links:
                 href = link.attrs['href']
                 path = os.path.join(self.out, href[1:]) if href.startswith('/') else os.path.join(here, href)
@@ -2053,7 +2444,7 @@ class BuiltSite(unittest.TestCase):
 
     def test_a_card_of_a_talk_shows_its_title_and_where_when_and_in_what_language_it_was_given(self):
         snapshot = read_json(ROOT, 'data', 'sharing.json')
-        months = read_json(ROOT, 'content', 'site.json')['months']
+        months = self.content('site')['months']
         matched = 0
         for section_id, kind in self.MEDIA:
             uses = self.talk_uses(kind)
@@ -2080,6 +2471,8 @@ class BuiltSite(unittest.TestCase):
                                  times, item['url'])
                 self.assertEqual([n.all_text() for n in node.find(has_class('spoken'))], spoken, item['url'])
                 self.assertEqual(meta, '; '.join(parts) + ' ' + ' '.join(spoken), item['url'])
+                marks = [(self.mark(ev.get('lang')), ev['name']) for ev, _, _, _, _ in found if ev['name'] != title]
+                self.assertEqual(self.lang_spans(node), [m for m in marks if m[0]], item['url'])
         self.assertGreater(matched, 0)
 
     def test_each_cover_is_decorative_lazy_and_declares_the_size_of_its_file(self):
@@ -2090,16 +2483,15 @@ class BuiltSite(unittest.TestCase):
                 img = li.find(lambda n: n.tag == 'img')[0]
                 self.assertEqual((img.attrs['alt'], img.attrs['loading']), ('', 'lazy'))
                 declared = (int(img.attrs['width']), int(img.attrs['height']))
-                self.assertEqual(jpeg_size(os.path.join(self.out, 'sharing', img.attrs['src'])), declared, img.attrs['src'])
+                self.assertEqual(jpeg_size(os.path.join(self.page_dir('sharing'), img.attrs['src'])), declared, img.attrs['src'])
                 covers += 1
         self.assertEqual(covers, len(snapshot['decks']) + len(snapshot['recordings']))
 
     # Home: hero and git game
 
-    @staticmethod
-    def career_stretches():
+    def career_stretches(self):
         """The career log, oldest item first, folded into one (year, org, side branch) per stretch at an org; newest first."""
-        log = blocks_of(read_json(ROOT, 'content', 'career.json'), 'log')[0]
+        log = blocks_of(self.content('career'), 'log')[0]
         rows = []
         for item in reversed(log['items']):
             row = (re.search(r'\d{4}', item['when']).group(), plain(item['org']), bool(item.get('branch')))
@@ -2115,16 +2507,16 @@ class BuiltSite(unittest.TestCase):
         want = self.career_stretches()
         self.assertEqual(got, want)
         self.assertGreater(sum(side for _, _, side in want), 0)
-        self.assertLess(len(want), len(blocks_of(read_json(ROOT, 'content', 'career.json'), 'log')[0]['items']))
+        self.assertLess(len(want), len(blocks_of(self.content('career'), 'log')[0]['items']))
 
     def test_every_number_in_the_hero_comes_from_the_content(self):
-        home = read_json(ROOT, 'content', 'home.json')['hero']
-        community = blocks_of(read_json(ROOT, 'content', 'community.json'), 'items')
+        home = self.content('home')['hero']
+        community = blocks_of(self.content('community'), 'items')
         meta = next(i['meta'] for b in community for i in b['items'] if i['title'] == home['community'])
         founded = re.search(r'\d{4}', meta).group()
         stretches = self.career_stretches()
         since = stretches[-1][0]
-        event = self.stage_photo_event()
+        event = self.stage_photo_event()['name']
         hero = self.trees['home'].find(has_class('hero'))[0]
         intro = hero.find(has_class('hero-intro'))[0].all_text()
         self.assertEqual(intro, plain(home['text']).replace('{since}', since).replace('{founded}', founded))
@@ -2141,26 +2533,28 @@ class BuiltSite(unittest.TestCase):
             if isinstance(value, list):
                 return [s for v in value for s in strings(v, key)]
             return [] if key == 'url' else [(key, value)]
-        found = strings(read_json(ROOT, 'content', 'home.json')['hero'])
+        found = strings(self.content('home')['hero'])
         self.assertIn('text', {key for key, _ in found})
         self.assertEqual([(key, s) for key, s in found if re.search(r'\d', s)], [])
 
     def stage_photo_event(self):
-        talk = read_json(ROOT, 'content', 'home.json')['hero']['photo']['talk']
-        names = [ev['name'] for evs in self.talks['events'].values() for ev in evs
-                 if any(t.get('title') == talk for t in ev.get('talks', []))]
-        self.assertEqual(len(names), 1, names)
-        return names[0]
+        talk = self.content('home')['hero']['photo']['talk']
+        events = [ev for evs in self.talks['events'].values() for ev in evs
+                  if any(t.get('title') == talk for t in ev.get('talks', []))]
+        self.assertEqual(len(events), 1, [ev['name'] for ev in events])
+        return events[0]
 
     def test_the_stage_photo_names_the_one_event_its_talk_was_given_at(self):
-        photo = read_json(ROOT, 'content', 'home.json')['hero']['photo']
+        photo = self.content('home')['hero']['photo']
         self.assertIn('{event}', photo['caption'])
         self.assertIn('{event}', photo['alt'])
-        event = self.stage_photo_event()
+        ev = self.stage_photo_event()
+        event, mark = ev['name'], self.mark(ev.get('lang'))
         heads = self.trees['home'].find(has_class('hero-head'))
         self.assertEqual([h.tag for h in heads], ['figure'])
         captions = heads[0].find(lambda n: n.tag == 'figcaption')
         self.assertEqual([c.all_text() for c in captions], [photo['caption'].replace('{event}', event)])
+        self.assertEqual(self.lang_spans(captions[0]), [(mark, event)] if mark else [])
         imgs = heads[0].find(lambda n: n.tag == 'img')
         self.assertEqual([i.attrs.get('alt') for i in imgs], [photo['alt'].replace('{event}', event)])
 
@@ -2180,7 +2574,7 @@ class BuiltSite(unittest.TestCase):
         self.assertEqual(source.attrs.get('sizes'), img.attrs['sizes'])
 
         def file_of(url):
-            path = os.path.normpath(os.path.join(self.out, url))
+            path = os.path.normpath(os.path.join(self.page_dir('home'), url))
             self.assertTrue(os.path.isfile(path), path)
             return path
 
@@ -2267,7 +2661,7 @@ class BuiltSite(unittest.TestCase):
         return json.loads(scripts[0].all_text())
 
     def test_the_game_island_carries_every_level_without_its_checks(self):
-        game = read_json(ROOT, 'content', 'home.json')['game']
+        game = self.content('home')['game']
         want = []
         for level in game['levels']:
             level = {k: v for k, v in level.items() if k != 'checks'}
@@ -2295,10 +2689,10 @@ class BuiltSite(unittest.TestCase):
     def test_only_pages_with_a_game_load_its_assets(self):
         with_game, without = [], 0
         for name, tree in self.trees.items():
-            folder = os.path.dirname(page_file(name))
+            folder = os.path.dirname(page_file(name, self.lang))
             loaded = [n for n in tree.find(lambda n: n.tag in ('link', 'script'))
                       if os.path.normpath(os.path.join(folder, n.attrs.get('href') or n.attrs.get('src') or '.')) in self.GAME_ASSETS]
-            if not read_json(ROOT, 'content', name + '.json').get('game'):
+            if not self.content(name).get('game'):
                 self.assertEqual(loaded, [], name)
                 without += 1
                 continue
@@ -2335,7 +2729,7 @@ class BuiltSite(unittest.TestCase):
             self.assertTrue(os.path.isfile(os.path.join(self.out, path.lstrip('/'))), path)
 
     def test_the_not_found_page_mounts_the_maze_hidden_with_the_ui_strings_404_json_gives(self):
-        maze = read_json(ROOT, 'content', '404.json')['maze']
+        maze = self.content('404')['maze']
         tree = self.trees['404']
         mounts = tree.find(lambda n: 'data-maze' in n.attrs)
         self.assertEqual(len(mounts), 1)
@@ -2352,12 +2746,12 @@ class BuiltSite(unittest.TestCase):
         with open(os.path.join(ROOT, 'assets', 'maze-game.js'), encoding='utf-8') as f:
             read = set(re.findall(r'\bui\.([a-z_]+)', f.read()))
         self.assertIn('play', read)
-        self.assertEqual(read, set(read_json(ROOT, 'content', '404.json')['maze']['ui']))
+        self.assertEqual(read, set(self.content('404')['maze']['ui']))
 
     HCAPTCHA = 'https://js.hcaptcha.com/1/api.js?recaptchacompat=off'
 
     def test_the_contact_form_sends_web3forms_the_fields_its_api_reads_and_waits_for_js(self):
-        block = blocks_of(read_json(ROOT, 'content', 'contact.json'), 'form')
+        block = blocks_of(self.content('contact'), 'form')
         self.assertEqual(len(block), 1)
         block = block[0]
         forms = self.trees['contact'].find(lambda n: n.tag == 'form')
@@ -2382,7 +2776,7 @@ class BuiltSite(unittest.TestCase):
         self.assertEqual(len(form.find(lambda n: 'form-status' in n.classes() and n.attrs.get('role') == 'status')), 1)
 
     def test_the_contact_form_carries_every_status_line_site_js_says_and_no_other(self):
-        block = blocks_of(read_json(ROOT, 'content', 'contact.json'), 'form')[0]
+        block = blocks_of(self.content('contact'), 'form')[0]
         with open(os.path.join(ROOT, 'assets', 'site.js'), encoding='utf-8') as f:
             said = set(re.findall(r"\bsay\('([a-z]+)'\)", f.read()))
         self.assertIn('sent', said)
@@ -2425,7 +2819,7 @@ class BuiltSite(unittest.TestCase):
             self.assertIsNone(self.ADDRESS.search(source), path)
             for trace in ('mailto:', 'data-domain', 'mail-link'):
                 self.assertNotIn(trace, source, path)
-        self.assertLessEqual({page_file(n) for n in self.trees} | {os.path.join('assets', 'site.js'), os.path.join('assets', 'flags', 'LICENSE'),
+        self.assertLessEqual({page_file(n, self.lang) for n in self.trees} | {os.path.join('assets', 'site.js'), os.path.join('assets', 'flags', 'LICENSE'),
                                                                    os.path.join('assets', 'img', 'stage.jpg')},
                              set(sources))
         at = '@'
@@ -2443,7 +2837,7 @@ class BuiltSite(unittest.TestCase):
     BEACON = 'https://static.cloudflareinsights.com/beacon.min.js'
 
     def test_every_page_loads_the_cloudflare_beacon_once_with_the_token_site_json_gives(self):
-        token = read_json(ROOT, 'content', 'site.json')['cloudflare_analytics_token']
+        token = self.content('site')['cloudflare_analytics_token']
         pages = sorted(os.path.relpath(os.path.join(folder, f), self.out)
                        for folder, _, files in os.walk(self.out) for f in files if f.endswith(('.html', '.htm')))
         for page in pages:
@@ -2455,7 +2849,7 @@ class BuiltSite(unittest.TestCase):
             self.assertEqual(json.loads(beacons[0].attrs['data-cf-beacon']), {'token': token}, page)
         self.assertIn('index.html', pages)
         self.assertIn('404.html', pages)
-        self.assertLessEqual({page_file(n) for n in self.trees}, set(pages))
+        self.assertLessEqual({page_file(n, self.lang) for n in self.trees}, set(pages))
 
     GAME_UI_KEYS_BUILT_BY_NAME = {'say_branch_new', 'say_branch_moved', 'say_branch_deleted',
                                   'say_tag_new', 'say_tag_moved', 'say_tag_deleted'}
@@ -2466,21 +2860,53 @@ class BuiltSite(unittest.TestCase):
         read = set(re.findall(r'\bui\.([a-z_]+)', source))
         self.assertIn('run', read)
         self.assertIn("ui['say_' + what + key]", source)
-        ui = set(read_json(ROOT, 'content', 'home.json')['game']['ui'])
+        ui = set(self.content('home')['game']['ui'])
         self.assertEqual(sorted(read - ui), [])
         self.assertEqual(ui - read, self.GAME_UI_KEYS_BUILT_BY_NAME)
 
     def test_the_game_intro_cites_the_talk_and_the_fallback_links_its_slides_first(self):
-        game = read_json(ROOT, 'content', 'home.json')['game']
+        game = self.content('home')['game']
         talk = game['talk']
         section = self.trees['home'].find(lambda n: n.attrs.get('id') == 'play')[0]
         intro = section.find(has_class('game-intro'))[0]
         self.assertNotIn('{', intro.all_text())
+        mark = self.mark(talk.get('lang'))
         self.assertEqual([(a.attrs, a.all_text()) for a in intro.find(lambda n: n.tag == 'a')],
-                         [({'href': talk['url']}, talk['title'])])
+                         [(dict({'href': talk['url']}, **{'lang': mark} if mark else {}), talk['title'])])
         fallback = section.find(has_class('gg-fallback'))[0]
         first = fallback.find(lambda n: n.tag == 'a')[0]
         self.assertEqual((first.attrs.get('href'), first.all_text()), (talk['url'], game['slides']))
+
+    def card_event(self):
+        """The name of an event in the root language that a sharing card names beside a talk title of its own."""
+        snapshot = read_json(ROOT, 'data', 'sharing.json')
+        for _, kind in self.MEDIA:
+            uses = self.talk_uses(kind)
+            for item in snapshot[kind]:
+                for ev, t, _, _, _ in uses.get(media_key(item['url']), [])[:1]:
+                    if t.get('title') not in (None, ev['name']) and not ev.get('lang'):
+                        return ev['name']
+        self.fail('no sharing card names an event beside its talk title')
+
+    def test_a_language_stated_on_the_stage_event_a_card_event_and_the_game_talk_marks_them_on_every_other_page(self):
+        planted, hero, card = LANGS[1], self.stage_photo_event()['name'], self.card_event()
+
+        def talks(data):
+            every = [ev for evs in data['archive']['events'].values() for ev in evs if ev['name'] in (hero, card)]
+            self.assertEqual({ev['name'] for ev in every}, {hero, card})
+            for ev in every:
+                ev['lang'] = planted
+
+        def home(data):
+            data['game']['talk']['lang'] = planted
+
+        index, sharing = self.built_with({'talks': talks, 'home': home}, 'index.html', os.path.join('sharing', 'index.html'))
+        mark = self.mark(planted)
+        self.assertEqual(self.lang_spans(index.find(has_class('hero-caption'))[0]), [(mark, hero)] if mark else [])
+        self.assertEqual([a.attrs.get('lang') for a in index.find(has_class('game-intro'))[0].find(lambda n: n.tag == 'a')], [mark])
+        metas = [m for m in sharing.find(has_class('media-meta')) if card in m.all_text()]
+        self.assertNotEqual(metas, [])
+        self.assertEqual({s for m in metas for s in self.lang_spans(m) if s[1] == card}, {(mark, card)} if mark else set())
 
     def test_the_hero_first_calls_to_play_the_game(self):
         hero = self.trees['home'].find(has_class('hero'))[0]
@@ -2489,19 +2915,28 @@ class BuiltSite(unittest.TestCase):
         self.assertEqual(len(self.trees['home'].find(lambda n: n.attrs.get('id') == 'play')), 1)
 
     def test_the_game_section_is_labelled_by_its_heading(self):
-        heading = read_json(ROOT, 'content', 'home.json')['game']['heading']
+        heading = self.content('home')['game']['heading']
         section = self.trees['home'].find(lambda n: n.attrs.get('id') == 'play')[0]
         label = section.attrs.get('aria-labelledby')
         self.assertEqual([(n.tag, n.all_text()) for n in self.trees['home'].find(lambda n: n.attrs.get('id') == label)],
                          [('h2', heading)])
 
     def test_the_hero_lists_every_profile(self):
-        hero = read_json(ROOT, 'content', 'home.json')['hero']
+        hero = self.content('home')['hero']
         lists = self.trees['home'].find(has_class('hero'))[0].find(has_class('profiles'))
         self.assertEqual([n.attrs.get('aria-label') for n in lists], [hero['profiles_label']])
         self.assertEqual([(a.attrs.get('href'), a.all_text()) for a in lists[0].find(lambda n: n.tag == 'a')],
                          [(p['url'], p['label']) for p in hero['profiles']])
         self.assertTrue(hero['profiles'])
+
+
+class BuiltSiteInTurkish(BuiltSite):
+    lang = 'tr'
+
+
+class EveryLanguageIsChecked(unittest.TestCase):
+    def test_each_language_of_the_site_has_its_built_site_checks(self):
+        self.assertEqual(sorted(c.lang for c in [BuiltSite] + BuiltSite.__subclasses__()), sorted(LANGS))
 
 
 def equal_earth(lon, lat):

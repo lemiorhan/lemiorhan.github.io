@@ -1,33 +1,45 @@
 {
-  "title": "Page not found, Lemi Orhan Ergin",
-  "heading": "Page not found",
+  "title": { "@en": "Page not found, Lemi Orhan Ergin", "@tr": "Sayfa bulunamadı, Lemi Orhan Ergin" },
+  "heading": { "@en": "Page not found", "@tr": "Sayfa bulunamadı" },
   "code": "fatal: pathspec did not match any files",
   "blocks": [
-    "This address does not exist on this site.",
-    "[Go to the home page](/), or straight to [Talks](/talks/), [Craftgate](/craftgate/) or [Contact](/contact/)."
+    { "@en": "This address does not exist on this site.", "@tr": "Bu sitede böyle bir adres yok." },
+    {
+      "@en": "[Go to the home page](/), or straight to [Talks](/talks/), [Craftgate](/craftgate/) or [Contact](/contact/).",
+      "@tr": "[Ana sayfaya gidin](/) ya da doğrudan [Konuşmalar](/talks/), [Craftgate](/craftgate/) veya [İletişim](/contact/) sayfasına geçin."
+    }
   ],
   "maze": {
-    "title": "While you are here",
-    "intro": "Bugs got into this page. You are HEAD, the orange dot. Collect every commit, and grab a green test to squash the bugs while it lasts.",
+    "title": { "@en": "While you are here", "@tr": "Madem buradasınız" },
+    "intro": {
+      "@en": "Bugs got into this page. You are HEAD, the orange dot. Collect every commit, and grab a green test to squash the bugs while it lasts.",
+      "@tr": "Bu sayfaya bug'lar girmiş. Siz HEAD'siniz, turuncu nokta. Bütün commit'leri toplayın. Yeşil bir test kapın, etkisi sürerken bug'ları ezin."
+    },
     "ui": {
-      "board": "Maze game. You are HEAD, the orange dot: collect the commits and keep away from the bugs.",
-      "play": "Play",
-      "start": "Move with the arrow keys or WASD. On a phone, swipe on the maze or use the arrows under it.",
-      "caught": "A bug got you. Move to go on.",
-      "next": "Next maze, faster bugs. Move to start.",
+      "board": {
+        "@en": "Maze game. You are HEAD, the orange dot: collect the commits and keep away from the bugs.",
+        "@tr": "Labirent oyunu. Siz HEAD'siniz, turuncu nokta: commit'leri toplayın, bug'lardan uzak durun."
+      },
+      "play": { "@en": "Play", "@tr": "Oyna" },
+      "start": {
+        "@en": "Move with the arrow keys or WASD. On a phone, swipe on the maze or use the arrows under it.",
+        "@tr": "Ok tuşları ya da WASD ile hareket edin. Telefonda parmağınızı labirentin üstünde kaydırın ya da altındaki okları kullanın."
+      },
+      "caught": { "@en": "A bug got you. Move to go on.", "@tr": "Bir bug sizi yakaladı. Devam etmek için hareket edin." },
+      "next": { "@en": "Next maze, faster bugs. Move to start.", "@tr": "Sıradaki labirent, daha hızlı bug'lar. Başlamak için hareket edin." },
       "cleared": "nothing to commit, working tree clean",
       "over": "fatal: no lives left",
-      "again": "Play again",
-      "paused": "Paused",
-      "resume": "Resume",
-      "score": "Score",
-      "best": "Best",
-      "level": "Level",
-      "lives": "Lives",
-      "up": "Up",
-      "down": "Down",
-      "left": "Left",
-      "right": "Right"
+      "again": { "@en": "Play again", "@tr": "Tekrar oyna" },
+      "paused": { "@en": "Paused", "@tr": "Duraklatıldı" },
+      "resume": { "@en": "Resume", "@tr": "Devam et" },
+      "score": { "@en": "Score", "@tr": "Puan" },
+      "best": { "@en": "Best", "@tr": "Rekor" },
+      "level": { "@en": "Level", "@tr": "Seviye" },
+      "lives": { "@en": "Lives", "@tr": "Can" },
+      "up": { "@en": "Up", "@tr": "Yukarı" },
+      "down": { "@en": "Down", "@tr": "Aşağı" },
+      "left": { "@en": "Left", "@tr": "Sol" },
+      "right": { "@en": "Right", "@tr": "Sağ" }
     }
   }
 }

@@ -1,58 +1,177 @@
 {
-  "title": "Career, Lemi Orhan Ergin",
-  "description": "Positions held by Lemi Orhan Ergin since 2001, from Sony to Craftgate, with education, certifications, honors and awards.",
+  "title": { "@en": "Career, Lemi Orhan Ergin", "@tr": "Kariyer, Lemi Orhan Ergin" },
+  "description": {
+    "@en": "Positions held by Lemi Orhan Ergin since 2001, from Sony to Craftgate, with education, certifications, honors and awards.",
+    "@tr": "Lemi Orhan Ergin'in 2001'den beri Sony'den Craftgate'e kadar üstlendiği pozisyonlar; eğitimi, sertifikaları, ödülleri ve dereceleri."
+  },
   "head": {
-    "heading": "Career",
+    "heading": { "@en": "Career", "@tr": "Kariyer" },
     "cmd": "git log --graph",
     "blocks": [
-      { "type": "p", "class": "intro", "text": "I have been writing code since 2001. The orange branches are the two times I left Sony and came back." }
+      {
+        "type": "p",
+        "class": "intro",
+        "text": {
+          "@en": "I have been writing code since 2001. The orange branches are the two times I left Sony and came back.",
+          "@tr": "2001'den beri kod yazıyorum. Turuncu branch'ler, Sony'den ayrılıp geri döndüğüm iki dönemi gösteriyor."
+        }
+      }
     ]
   },
   "sections": [
     {
       "id": "positions",
-      "heading": "Positions",
+      "heading": { "@en": "Positions", "@tr": "Pozisyonlar" },
       "blocks": [
         {
           "type": "log",
-          "label": "Positions, newest first",
+          "label": { "@en": "Positions, newest first", "@tr": "Pozisyonlar, en yenisi başta" },
           "items": [
-            { "when": "Jun 2020 – now", "title": "Co-founder & Chief Software Crafter", "org": "[Craftgate](https://craftgate.io)", "note": "A payment orchestration platform that connects online merchants to banks, payment providers and alternative payment methods through one integration." },
-            { "when": "Apr 2018 – Dec 2021", "title": "Co-founder & Software Crafter", "org": "Craftbase" },
-            { "when": "Jan 2017 – Apr 2018", "title": "Agile Practice Lead & Software Crafter", "org": "iyzico", "note": "Led the cultural transformation of iyzico engineering around agile and lean thinking and software craftsmanship." },
-            { "when": "Jan 2015 – Dec 2016", "title": "Managing Partner, Master Software Craftsman, Agile Coach & Trainer", "org": "ACM", "note": "Consulting and training for dozens of companies on agile culture and engineering practices." },
-            { "when": "Sep 2012 – Dec 2014", "title": "Principal Software Engineer, Technical Lead & Agile Practice Lead", "org": "Sony", "note": "Also Solution Architect (Dec 2013 – May 2014), then Technical Architect & Scrum Master (May – Dec 2014). Wrote a manifesto for software development at Sony, and organized its Brown Bag Sessions, the weekly trainings colleagues gave each other, along with code retreats and coding dojos." },
-            { "when": "Mar 2012 – Sep 2012", "title": "MTS1 Software Engineer", "org": "GittiGidiyor / eBay", "branch": true, "note": "Started GittiGidiyor's move from SVN to Git, set up its central Maven repository, and built its private shopping project from scratch." },
-            { "when": "Apr 2010 – Mar 2012", "title": "Expert Software Engineer", "org": "Sony", "note": "Backend services and infrastructure for Sony's marketing websites in the US, Canada and Europe." },
-            { "when": "May 2008 – Apr 2010", "title": "Technical Coordinator & Scrum Master", "org": "Sony", "note": "Technical lead and people manager of a team of six to seven that built the web services at the centre of Sony Europe's content hub, with shared libraries and backend services." },
-            { "when": "Aug 2007 – May 2008", "title": "Senior Software Engineer", "org": "Sony", "note": "Support modules for Sony's European marketing websites, and a common toolbar for all of Sony's European sites." },
-            { "when": "Aug 2006 – Jul 2007", "title": "Software Officer, Second Lieutenant", "org": "Turkish Air Force", "branch": true, "note": "In Konya, building military applications on a web framework I designed." },
-            { "when": "Oct 2004 – May 2006", "title": "Lead Software Engineer", "org": "Sony" },
-            { "when": "Aug 2003 – Sep 2004", "title": "Software Engineer", "org": "BYM" },
-            { "when": "Jun 2002 – Jan 2003", "title": "Laboratory Assistant", "org": "Marmara University" },
-            { "when": "Jun 2001 – Sep 2001", "title": "Software Engineer", "org": "TÜSSİDE" }
+            {
+              "when": { "@en": "Jun 2020 – now", "@tr": "Haz 2020 – bugün" },
+              "title": { "@en": "Co-founder & Chief Software Crafter", "@tr": "Kurucu Ortak & Chief Software Crafter" },
+              "org": "[Craftgate](https://craftgate.io)",
+              "note": {
+                "@en": "A payment orchestration platform that connects online merchants to banks, payment providers and alternative payment methods through one integration.",
+                "@tr": "Online üye işyerlerini tek bir entegrasyonla bankalara, ödeme kuruluşlarına ve alternatif ödeme yöntemlerine bağlayan bir ödeme orkestrasyonu platformu."
+              }
+            },
+            {
+              "when": { "@en": "Apr 2018 – Dec 2021", "@tr": "Nis 2018 – Ara 2021" },
+              "title": { "@en": "Co-founder & Software Crafter", "@tr": "Kurucu Ortak & Software Crafter" },
+              "org": "Craftbase"
+            },
+            {
+              "when": { "@en": "Jan 2017 – Apr 2018", "@tr": "Oca 2017 – Nis 2018" },
+              "title": "Agile Practice Lead & Software Crafter",
+              "org": "iyzico",
+              "note": {
+                "@en": "Led the cultural transformation of iyzico engineering around agile and lean thinking and software craftsmanship.",
+                "@tr": "iyzico mühendisliğinde agile ve lean düşünceye, yazılım zanaatkârlığına dayanan kültürel dönüşümü yönettim."
+              }
+            },
+            {
+              "when": { "@en": "Jan 2015 – Dec 2016", "@tr": "Oca 2015 – Ara 2016" },
+              "title": "Managing Partner, Master Software Craftsman, Agile Coach & Trainer",
+              "org": "ACM",
+              "note": {
+                "@en": "Consulting and training for dozens of companies on agile culture and engineering practices.",
+                "@tr": "Onlarca şirkete agile kültür ve mühendislik pratikleri üzerine danışmanlık ve eğitim verdim."
+              }
+            },
+            {
+              "when": { "@en": "Sep 2012 – Dec 2014", "@tr": "Eyl 2012 – Ara 2014" },
+              "title": "Principal Software Engineer, Technical Lead & Agile Practice Lead",
+              "org": "Sony",
+              "note": {
+                "@en": "Also Solution Architect (Dec 2013 – May 2014), then Technical Architect & Scrum Master (May – Dec 2014). Wrote a manifesto for software development at Sony, and organized its Brown Bag Sessions, the weekly trainings colleagues gave each other, along with code retreats and coding dojos.",
+                "@tr": "Aynı dönemde Solution Architect (Ara 2013 – May 2014), ardından Technical Architect & Scrum Master (May – Ara 2014) olarak da çalıştım. Sony'de yazılım geliştirme için bir manifesto yazdım. İş arkadaşlarının birbirine haftalık eğitim verdiği Brown Bag Sessions'ı, ayrıca code retreat'leri ve coding dojo'ları düzenledim."
+              }
+            },
+            {
+              "when": { "@en": "Mar 2012 – Sep 2012", "@tr": "Mar 2012 – Eyl 2012" },
+              "title": "MTS1 Software Engineer",
+              "org": "GittiGidiyor / eBay",
+              "branch": true,
+              "note": {
+                "@en": "Started GittiGidiyor's move from SVN to Git, set up its central Maven repository, and built its private shopping project from scratch.",
+                "@tr": "GittiGidiyor'un SVN'den Git'e geçişini başlattım, merkezi Maven repository'sini kurdum ve private shopping projesini sıfırdan geliştirdim."
+              }
+            },
+            {
+              "when": { "@en": "Apr 2010 – Mar 2012", "@tr": "Nis 2010 – Mar 2012" },
+              "title": "Expert Software Engineer",
+              "org": "Sony",
+              "note": {
+                "@en": "Backend services and infrastructure for Sony's marketing websites in the US, Canada and Europe.",
+                "@tr": "Sony'nin ABD, Kanada ve Avrupa'daki pazarlama siteleri için backend servisleri ve altyapı geliştirdim."
+              }
+            },
+            {
+              "when": { "@en": "May 2008 – Apr 2010", "@tr": "May 2008 – Nis 2010" },
+              "title": "Technical Coordinator & Scrum Master",
+              "org": "Sony",
+              "note": {
+                "@en": "Technical lead and people manager of a team of six to seven that built the web services at the centre of Sony Europe's content hub, with shared libraries and backend services.",
+                "@tr": "Altı yedi kişilik bir ekibin teknik lideri ve yöneticisiydim. Ekip, Sony Europe'un content hub'ının merkezindeki web servislerini, ortak kütüphaneleri ve backend servislerini geliştirdi."
+              }
+            },
+            {
+              "when": { "@en": "Aug 2007 – May 2008", "@tr": "Ağu 2007 – May 2008" },
+              "title": "Senior Software Engineer",
+              "org": "Sony",
+              "note": {
+                "@en": "Support modules for Sony's European marketing websites, and a common toolbar for all of Sony's European sites.",
+                "@tr": "Sony'nin Avrupa'daki pazarlama siteleri için destek modülleri, Sony'nin bütün Avrupa siteleri için de ortak bir toolbar geliştirdim."
+              }
+            },
+            {
+              "when": { "@en": "Aug 2006 – Jul 2007", "@tr": "Ağu 2006 – Tem 2007" },
+              "title": { "@en": "Software Officer, Second Lieutenant", "@tr": "Yazılım Subayı, Asteğmen" },
+              "org": { "@en": "Turkish Air Force", "@tr": "Türk Hava Kuvvetleri" },
+              "branch": true,
+              "note": {
+                "@en": "In Konya, building military applications on a web framework I designed.",
+                "@tr": "Konya'da, kendi tasarladığım bir web framework'ü üzerinde askeri uygulamalar geliştirdim."
+              }
+            },
+            {
+              "when": { "@en": "Oct 2004 – May 2006", "@tr": "Eki 2004 – May 2006" },
+              "title": "Lead Software Engineer",
+              "org": "Sony"
+            },
+            {
+              "when": { "@en": "Aug 2003 – Sep 2004", "@tr": "Ağu 2003 – Eyl 2004" },
+              "title": "Software Engineer",
+              "org": "BYM"
+            },
+            {
+              "when": { "@en": "Jun 2002 – Jan 2003", "@tr": "Haz 2002 – Oca 2003" },
+              "title": { "@en": "Laboratory Assistant", "@tr": "Laboratuvar Asistanı" },
+              "org": { "@en": "Marmara University", "@tr": "Marmara Üniversitesi" }
+            },
+            {
+              "when": { "@en": "Jun 2001 – Sep 2001", "@tr": "Haz 2001 – Eyl 2001" },
+              "title": "Software Engineer",
+              "org": "TÜSSİDE"
+            }
           ]
         }
       ]
     },
     {
       "id": "education",
-      "heading": "Education",
+      "heading": { "@en": "Education", "@tr": "Eğitim" },
       "blocks": [
         {
           "type": "facts",
           "groups": [
             {
-              "heading": "Degrees",
+              "heading": { "@en": "Degrees", "@tr": "Diplomalar" },
               "items": [
-                { "title": "M.Sc., Computer Engineering", "text": "Marmara University, 2002 – 2005. Thesis: [Example Project: XML Based Content Management Engine](https://web.archive.org/web/20260906174543/https://katalog.marmara.edu.tr/veriler/yordambt/cokluortam/5C/T0052086.pdf), October 2005, advised by Prof. Dr. M. Akif Eyler. A set of open-source Java frameworks for content-heavy web portals, built to work together or alone: JEWEL for page layout, navigation and role-based security, Quarry with JCategorizer for categorized content, and JConfiX for configuration." },
-                { "title": "B.Sc., Computer Engineering", "text": "Marmara University, 1997 – 2002. Thesis: a new task-scheduling algorithm in parallel processing, for M-Tasks and S-Tasks in heterogeneous systems." }
+                {
+                  "title": { "@en": "M.Sc., Computer Engineering", "@tr": "Yüksek Lisans, Bilgisayar Mühendisliği" },
+                  "text": {
+                    "@en": "Marmara University, 2002 – 2005. Thesis: [Example Project: XML Based Content Management Engine](https://web.archive.org/web/20260906174543/https://katalog.marmara.edu.tr/veriler/yordambt/cokluortam/5C/T0052086.pdf), October 2005, advised by Prof. Dr. M. Akif Eyler. A set of open-source Java frameworks for content-heavy web portals, built to work together or alone: JEWEL for page layout, navigation and role-based security, Quarry with JCategorizer for categorized content, and JConfiX for configuration.",
+                    "@tr": "Marmara Üniversitesi, 2002 – 2005. Tez: [Example Project: XML Based Content Management Engine](https://web.archive.org/web/20260906174543/https://katalog.marmara.edu.tr/veriler/yordambt/cokluortam/5C/T0052086.pdf), Ekim 2005, danışmanı Prof. Dr. M. Akif Eyler. İçeriği yoğun web portalları için, birlikte ya da tek başına çalışabilen açık kaynak Java framework'leri: sayfa düzeni, navigasyon ve rol tabanlı güvenlik için JEWEL, kategorilere ayrılmış içerik için Quarry ile JCategorizer, konfigürasyon için JConfiX."
+                  }
+                },
+                {
+                  "title": { "@en": "B.Sc., Computer Engineering", "@tr": "Lisans, Bilgisayar Mühendisliği" },
+                  "text": {
+                    "@en": "Marmara University, 1997 – 2002. Thesis: a new task-scheduling algorithm in parallel processing, for M-Tasks and S-Tasks in heterogeneous systems.",
+                    "@tr": "Marmara Üniversitesi, 1997 – 2002. Tez: paralel işlemede, heterojen sistemlerdeki M-Task ve S-Task'lar için yeni bir görev zamanlama algoritması."
+                  }
+                }
               ]
             },
             {
-              "heading": "Certifications",
+              "heading": { "@en": "Certifications", "@tr": "Sertifikalar" },
               "items": [
-                { "title": "[Certified ScrumMaster](https://www.scrumalliance.org/members/49418)", "text": "Scrum Alliance, 2009, trained by James Coplien" },
+                {
+                  "title": "[Certified ScrumMaster](https://www.scrumalliance.org/members/49418)",
+                  "text": { "@en": "Scrum Alliance, 2009, trained by James Coplien", "@tr": "Scrum Alliance, 2009, James Coplien'in eğitimiyle" }
+                },
                 { "title": "PSM I", "text": "Scrum.org, 2013" },
                 { "title": "Certified Kanban Practitioner", "text": "Lean Kanban University, 2013" },
                 { "title": "Management 3.0 Licensed Facilitator", "text": "Happy Melly, 2015" },
@@ -60,11 +179,11 @@
               ]
             },
             {
-              "heading": "Languages",
+              "heading": { "@en": "Languages", "@tr": "Diller" },
               "items": [
-                { "title": "Turkish", "text": "Native" },
-                { "title": "English", "text": "Professional working proficiency" },
-                { "title": "German", "text": "Elementary" }
+                { "title": { "@en": "Turkish", "@tr": "Türkçe" }, "text": { "@en": "Native", "@tr": "Ana dil" } },
+                { "title": { "@en": "English", "@tr": "İngilizce" }, "text": { "@en": "Professional working proficiency", "@tr": "Profesyonel çalışma yetkinliği" } },
+                { "title": { "@en": "German", "@tr": "Almanca" }, "text": { "@en": "Elementary", "@tr": "Başlangıç düzeyi" } }
               ]
             }
           ]
@@ -73,7 +192,7 @@
     },
     {
       "id": "honors",
-      "heading": "Honors and awards",
+      "heading": { "@en": "Honors and awards", "@tr": "Ödüller ve dereceler" },
       "blocks": [
         {
           "type": "by-year",
@@ -81,53 +200,116 @@
             {
               "year": "2002",
               "items": [
-                { "title": "Ranked in the first 1,000", "text": "Among 130,000 candidates in the National Postgraduate Education Entrance Exam" }
+                {
+                  "title": { "@en": "Ranked in the first 1,000", "@tr": "İlk 1.000 içinde" },
+                  "text": {
+                    "@en": "Among 130,000 candidates in the National Postgraduate Education Entrance Exam",
+                    "@tr": "Lisansüstü eğitim giriş sınavına giren 130.000 aday arasında"
+                  }
+                }
               ]
             },
             {
               "year": "2001",
               "items": [
-                { "title": "Speaker, \"Quality Improvement Teams\" training for medical institutions", "text": "TÜSSİDE" }
+                {
+                  "title": {
+                    "@en": "Speaker, \"Quality Improvement Teams\" training for medical institutions",
+                    "@tr": "Konuşmacı, sağlık kuruluşları için \"Kalite İyileştirme Takımları\" eğitimi"
+                  },
+                  "text": "TÜSSİDE"
+                }
               ]
             },
             {
               "year": "2000",
               "items": [
-                { "title": "Speaker, \"Quality and Ergonomics in Education\" symposium", "text": "KalDer, the Turkish Quality Association, 11 May. Presented the work of Solak İnisiyatif, our university team, on improving how left-handed students sit at lecture-hall desks." }
+                {
+                  "title": {
+                    "@en": "Speaker, \"Quality and Ergonomics in Education\" symposium",
+                    "@tr": "Konuşmacı, \"Eğitimde Kalite ve Ergonomi\" sempozyumu"
+                  },
+                  "text": {
+                    "@en": "KalDer, the Turkish Quality Association, 11 May. Presented the work of Solak İnisiyatif, our university team, on improving how left-handed students sit at lecture-hall desks.",
+                    "@tr": "KalDer, Türkiye Kalite Derneği, 11 Mayıs. Üniversite ekibimiz Solak İnisiyatif'in çalışmasını sundum. Çalışma, solak öğrencilerin amfi sıralarında oturuşunu iyileştirmek üzerineydi."
+                  }
+                }
               ]
             },
             {
               "year": "1999",
               "items": [
-                { "title": "Dean's Award", "text": "For TQM activities in the faculty, Marmara University" },
-                { "title": "First Prize, Quality Improvement Teams Contest", "text": "Marmara University" },
-                { "title": "Second Prize, Quality Improvement Teams Contest", "text": "Marmara University" },
-                { "title": "Dean's Award", "text": "For the work on the way to the EFQM 2000 finals, Marmara University" }
+                {
+                  "title": { "@en": "Dean's Award", "@tr": "Dekanlık Ödülü" },
+                  "text": {
+                    "@en": "For TQM activities in the faculty, Marmara University",
+                    "@tr": "Fakültedeki toplam kalite yönetimi (TKY) çalışmaları için, Marmara Üniversitesi"
+                  }
+                },
+                {
+                  "title": { "@en": "First Prize, Quality Improvement Teams Contest", "@tr": "Birincilik, Kalite İyileştirme Takımları Yarışması" },
+                  "text": { "@en": "Marmara University", "@tr": "Marmara Üniversitesi" }
+                },
+                {
+                  "title": { "@en": "Second Prize, Quality Improvement Teams Contest", "@tr": "İkincilik, Kalite İyileştirme Takımları Yarışması" },
+                  "text": { "@en": "Marmara University", "@tr": "Marmara Üniversitesi" }
+                },
+                {
+                  "title": { "@en": "Dean's Award", "@tr": "Dekanlık Ödülü" },
+                  "text": {
+                    "@en": "For the work on the way to the EFQM 2000 finals, Marmara University",
+                    "@tr": "EFQM 2000 finaline uzanan çalışmalar için, Marmara Üniversitesi"
+                  }
+                }
               ]
             },
             {
               "year": "1998",
               "items": [
-                { "title": "Dean's Award", "text": "For TQM activities in the faculty, Marmara University" }
+                {
+                  "title": { "@en": "Dean's Award", "@tr": "Dekanlık Ödülü" },
+                  "text": {
+                    "@en": "For TQM activities in the faculty, Marmara University",
+                    "@tr": "Fakültedeki toplam kalite yönetimi (TKY) çalışmaları için, Marmara Üniversitesi"
+                  }
+                }
               ]
             },
             {
               "year": "1997",
               "items": [
-                { "title": "Ranked in the first 1,000", "text": "Among 1.3 million candidates in the National University Entrance Examination" }
+                {
+                  "title": { "@en": "Ranked in the first 1,000", "@tr": "İlk 1.000 içinde" },
+                  "text": {
+                    "@en": "Among 1.3 million candidates in the National University Entrance Examination",
+                    "@tr": "Üniversite giriş sınavına giren 1,3 milyon aday arasında"
+                  }
+                }
               ]
             },
             {
               "year": "1996",
               "items": [
-                { "title": "TÜBİTAK National Mathematics Project Competition", "text": "Took part with the project \"The computation of the unique formula of the divisibility rules of all natural numbers\", high school" },
-                { "title": "High Honour Student and Student Representative", "text": "High school" }
+                {
+                  "title": { "@en": "TÜBİTAK National Mathematics Project Competition", "@tr": "TÜBİTAK Ulusal Matematik Proje Yarışması" },
+                  "text": {
+                    "@en": "Took part with the project \"The computation of the unique formula of the divisibility rules of all natural numbers\", high school",
+                    "@tr": "\"Bütün doğal sayıların bölünebilme kurallarının tek formülünün hesaplanması\" projesiyle katıldım, lise"
+                  }
+                },
+                {
+                  "title": { "@en": "High Honour Student and Student Representative", "@tr": "Yüksek Onur Öğrencisi ve Öğrenci Temsilcisi" },
+                  "text": { "@en": "High school", "@tr": "Lise" }
+                }
               ]
             },
             {
               "year": "1994",
               "items": [
-                { "title": "Second place, Inter-High School Basketball Championship", "text": "High school basketball team" }
+                {
+                  "title": { "@en": "Second place, Inter-High School Basketball Championship", "@tr": "İkincilik, Liselerarası Basketbol Şampiyonası" },
+                  "text": { "@en": "High school basketball team", "@tr": "Lise basketbol takımı" }
+                }
               ]
             }
           ]

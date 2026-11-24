@@ -1,135 +1,265 @@
 {
-  "title": "Bio, Lemi Orhan Ergin",
-  "description": "A longer biography of Lemi Orhan Ergin: from İzmir to Istanbul, Sony to Craftgate, Software Craftsmanship Turkey, and the macOS root bug of 2017.",
+  "title": { "@en": "Bio, Lemi Orhan Ergin", "@tr": "Biyografi, Lemi Orhan Ergin" },
+  "description": {
+    "@en": "A longer biography of Lemi Orhan Ergin: from İzmir to Istanbul, Sony to Craftgate, Software Craftsmanship Turkey, and the macOS root bug of 2017.",
+    "@tr": "Lemi Orhan Ergin'in uzun biyografisi: İzmir'den İstanbul'a, Sony'den Craftgate'e, Software Craftsmanship Turkey ve 2017'deki macOS root açığı."
+  },
   "head": {
-    "heading": "Bio",
+    "heading": { "@en": "Bio", "@tr": "Biyografi" },
     "cmd": "man lemi",
     "blocks": [
-      { "type": "p", "class": "intro", "text": "Lemi Orhan Ergin is a Turkish software developer who describes himself as a software crafter. He is a co-founder and the Chief Software Crafter of [Craftgate](../craftgate/), a payment orchestration platform based in Istanbul, and the founder of the Software Craftsmanship Turkey community. He has been writing software since 2001." },
-      { "type": "contents", "label": "On this page" }
+      {
+        "type": "p",
+        "class": "intro",
+        "text": {
+          "@en": "Lemi Orhan Ergin is a Turkish software developer who describes himself as a software crafter. He is a co-founder and the Chief Software Crafter of [Craftgate](../craftgate/), a payment orchestration platform based in Istanbul, and the founder of the Software Craftsmanship Turkey community. He has been writing software since 2001.",
+          "@tr": "Lemi Orhan Ergin, kendini software crafter olarak tanımlayan bir Türk yazılımcı. İstanbul merkezli ödeme orkestrasyonu platformu [Craftgate](../craftgate/)'in kurucu ortaklarından biri ve Chief Software Crafter'ı. Software Craftsmanship Turkey topluluğunun da kurucusu. 2001'den beri yazılım geliştiriyor."
+        }
+      },
+      { "type": "contents", "label": { "@en": "On this page", "@tr": "Bu sayfada" } }
     ]
   },
   "sections": [
     {
       "id": "facts",
-      "heading": "At a glance",
+      "heading": { "@en": "At a glance", "@tr": "Kısaca" },
       "blocks": [
         {
           "type": "infobox",
           "items": [
-            { "label": "From", "text": "İzmir, Türkiye" },
-            { "label": "Lives in", "text": "Istanbul" },
-            { "label": "Education", "text": "Marmara University, B.Sc. (2002) and M.Sc. (2005) in Computer Engineering" },
-            { "label": "Occupation", "text": "Co-founder and Chief Software Crafter, [Craftgate](https://craftgate.io)" },
-            { "label": "Known for", "text": "Craftgate, Software Craftsmanship Turkey, the [macOS root bug](../root-bug/) (2017)" },
-            { "label": "Family", "text": "Married, a lovely wife and two kerata sons" },
-            { "label": "Favorite Sport", "text": "Turkey's First Sumo Commentator, sharing at [sumo_turk](https://x.com/sumo_turk) X channel" },
-            { "label": "Indie Coffee Lover", "text": "He roasts, grinds, brews, and drinks his coffee at home" },
-            { "label": "Club Fan", "text": "Göztepe" }
+            { "label": { "@en": "From", "@tr": "Memleket" }, "text": "İzmir, Türkiye" },
+            { "label": { "@en": "Lives in", "@tr": "Yaşadığı yer" }, "text": { "@en": "Istanbul", "@tr": "İstanbul" } },
+            {
+              "label": { "@en": "Education", "@tr": "Eğitim" },
+              "text": {
+                "@en": "Marmara University, B.Sc. (2002) and M.Sc. (2005) in Computer Engineering",
+                "@tr": "Marmara Üniversitesi, Bilgisayar Mühendisliği lisans (2002) ve yüksek lisans (2005)"
+              }
+            },
+            {
+              "label": { "@en": "Occupation", "@tr": "Meslek" },
+              "text": {
+                "@en": "Co-founder and Chief Software Crafter, [Craftgate](https://craftgate.io)",
+                "@tr": "Kurucu ortak ve Chief Software Crafter, [Craftgate](https://craftgate.io)"
+              }
+            },
+            {
+              "label": { "@en": "Known for", "@tr": "Tanınma nedeni" },
+              "text": {
+                "@en": "Craftgate, Software Craftsmanship Turkey, the [macOS root bug](../root-bug/) (2017)",
+                "@tr": "Craftgate, Software Craftsmanship Turkey, [macOS root açığı](../root-bug/) (2017)"
+              }
+            },
+            {
+              "label": { "@en": "Family", "@tr": "Aile" },
+              "text": { "@en": "Married, a lovely wife and two kerata sons", "@tr": "Evli, sevgili bir eşi ve iki kerata oğlu var" }
+            },
+            {
+              "label": { "@en": "Favorite Sport", "@tr": "En sevdiği spor" },
+              "text": {
+                "@en": "Turkey's First Sumo Commentator, sharing at [sumo_turk](https://x.com/sumo_turk) X channel",
+                "@tr": "Türkiye'nin ilk sumo yorumcusu, X'teki [sumo_turk](https://x.com/sumo_turk) hesabında sumo paylaşıyor"
+              }
+            },
+            {
+              "label": { "@en": "Indie Coffee Lover", "@tr": "Indie kahve tutkunu" },
+              "text": {
+                "@en": "He roasts, grinds, brews, and drinks his coffee at home",
+                "@tr": "Kahvesini evde kendisi kavuruyor, öğütüyor, demliyor ve içiyor"
+              }
+            },
+            { "label": { "@en": "Club Fan", "@tr": "Tuttuğu takım" }, "text": "Göztepe" }
           ]
         }
       ]
     },
     {
       "id": "early-life",
-      "heading": "Early life and education",
+      "heading": { "@en": "Early life and education", "@tr": "İlk yıllar ve eğitim" },
       "class": "prose",
       "blocks": [
-        "Lemi is from İzmir, on Türkiye's Aegean coast. For seven years, from 1990 to 1997, he played amateur basketball for İzmirspor. He studied computer engineering at Marmara University in Istanbul, where he earned a bachelor's degree in 2002 and a master's degree in 2005.[^1] His first job, in the summer of 2001, was as a software engineer at TÜSSİDE, and in 2002 he worked as a laboratory assistant at the university.[^1]",
+        {
+          "@en": "Lemi is from İzmir, on Türkiye's Aegean coast. For seven years, from 1990 to 1997, he played amateur basketball for İzmirspor. He studied computer engineering at Marmara University in Istanbul, where he earned a bachelor's degree in 2002 and a master's degree in 2005.[^1] His first job, in the summer of 2001, was as a software engineer at TÜSSİDE, and in 2002 he worked as a laboratory assistant at the university.[^1]",
+          "@tr": "Lemi aslen Türkiye'nin Ege kıyısındaki İzmir'den. 1990'dan 1997'ye yedi yıl İzmirspor'da amatör basketbol oynadı. İstanbul'da Marmara Üniversitesi'nde bilgisayar mühendisliği okudu; 2002'de lisansı, 2005'te yüksek lisansı bitirdi.[^1] 2001 yazında ilk işine TÜSSİDE'de yazılım mühendisi olarak başladı, 2002'de de üniversitede laboratuvar asistanı olarak çalıştı.[^1]"
+        },
         {
           "type": "photo",
           "src": "assets/bio/childhood.jpg",
           "width": 934,
           "height": 1119,
-          "alt": "Lemi as a boy at home with his father, mother and older sister, the two children in navy school uniforms",
-          "caption": "Lemi as a child with his mother, father and older sister"
+          "alt": {
+            "@en": "Lemi as a boy at home with his father, mother and older sister, the two children in navy school uniforms",
+            "@tr": "Küçük Lemi evde babası, annesi ve ablasıyla; iki çocuğun üstünde lacivert okul formaları var"
+          },
+          "caption": {
+            "@en": "Lemi as a child with his mother, father and older sister",
+            "@tr": "Lemi çocukken annesi, babası ve ablasıyla"
+          }
         },
         {
           "type": "photo",
           "src": "assets/bio/basketball.jpg",
           "width": 912,
           "height": 624,
-          "alt": "A youth basketball team in matching navy and white tracksuits on the steps of a building signed Manisa Gençlik ve Spor İl Müdürlüğü, an adult man in the middle",
-          "caption": "Lemi with his İzmirspor basketball team"
+          "alt": {
+            "@en": "A youth basketball team in matching navy and white tracksuits on the steps of a building signed Manisa Gençlik ve Spor İl Müdürlüğü, an adult man in the middle",
+            "@tr": "Hepsi aynı lacivert-beyaz eşofmanı giymiş bir genç basketbol takımı, üzerinde Manisa Gençlik ve Spor İl Müdürlüğü yazan bir binanın merdivenlerinde; ortada yetişkin bir adam var"
+          },
+          "caption": { "@en": "Lemi with his İzmirspor basketball team", "@tr": "Lemi, İzmirspor basketbol takımıyla" }
         }
       ]
     },
     {
       "id": "career",
-      "heading": "Career",
+      "heading": { "@en": "Career", "@tr": "Kariyer" },
       "class": "prose",
       "blocks": [
-        "After a year at BYM, Lemi joined Sony in 2004, where he spent most of the following decade.[^1] His roles there ran from software engineer to technical coordinator and Scrum Master, principal software engineer, technical lead, solution architect and agile practice lead. He left Sony twice and came back both times: from 2006 to 2007 he served as a software officer in the Turkish Air Force, and in 2012 he spent six months at GittiGidiyor, eBay's marketplace in Türkiye.[^1] He started working in Scrum teams in 2008, and in 2009 he trained as a Certified ScrumMaster with James Coplien.[^1]",
-        "In 2015 he became a managing partner of ACM, a consultancy, where for two years he coached and trained teams at dozens of companies in agile culture and engineering practices.[^1] In 2017 he joined iyzico, an Istanbul payments company, as Agile Practice Lead, and led the cultural transformation of its engineering team around agile and lean thinking and software craftsmanship.[^1]",
-        "In April 2018 he co-founded Craftbase with Hakan Erdoğan, Sabri Onur Tüzün and Murathan Özcan, a company that built fintech and payment software for clients.[^2] Craftgate grew inside it as a product and was introduced publicly in January 2021 as a cloud payment gateway that connects an online merchant to its banks and payment providers from one place.[^2] In 2021, with investors and buyers at the door, the founders pursued neither and gave up their profitable service work instead; since January 2022 the company has been only Craftgate.[^3] It raised a seed round in 2022,[^4] took investment from Hepsiburada and D4 Ventures in 2023[^5] and from Turkven in 2026,[^6] and started operating in Spain in 2024.[^7] Lemi is its Chief Software Crafter. The [Craftgate page](../craftgate/) tells that story in full."
+        {
+          "@en": "After a year at BYM, Lemi joined Sony in 2004, where he spent most of the following decade.[^1] His roles there ran from software engineer to technical coordinator and Scrum Master, principal software engineer, technical lead, solution architect and agile practice lead. He left Sony twice and came back both times: from 2006 to 2007 he served as a software officer in the Turkish Air Force, and in 2012 he spent six months at GittiGidiyor, eBay's marketplace in Türkiye.[^1] He started working in Scrum teams in 2008, and in 2009 he trained as a Certified ScrumMaster with James Coplien.[^1]",
+          "@tr": "BYM'deki bir yılın ardından Lemi 2004'te Sony'ye katıldı ve sonraki on yılın çoğunu orada geçirdi.[^1] Sony'de yazılım mühendisi olarak başladı; teknik koordinatör ve Scrum Master, principal software engineer, teknik lider, çözüm mimarı ve agile practice lead olarak çalıştı. Sony'den iki kez ayrıldı ve ikisinde de geri döndü: 2006'dan 2007'ye kadar Türk Hava Kuvvetleri'nde yazılım subayı olarak görev yaptı, 2012'de de eBay'in Türkiye'deki pazaryeri GittiGidiyor'da altı ay çalıştı.[^1] 2008'de Scrum ekiplerinde çalışmaya başladı, 2009'da da James Coplien'in eğitimiyle Certified ScrumMaster oldu.[^1]"
+        },
+        {
+          "@en": "In 2015 he became a managing partner of ACM, a consultancy, where for two years he coached and trained teams at dozens of companies in agile culture and engineering practices.[^1] In 2017 he joined iyzico, an Istanbul payments company, as Agile Practice Lead, and led the cultural transformation of its engineering team around agile and lean thinking and software craftsmanship.[^1]",
+          "@tr": "2015'te danışmanlık şirketi ACM'nin yönetici ortağı oldu. İki yıl boyunca onlarca şirketteki ekiplere agile kültürü ve mühendislik pratikleri üzerine koçluk yaptı, eğitim verdi.[^1] 2017'de İstanbul'daki ödeme şirketi iyzico'ya Agile Practice Lead olarak katıldı. Şirketin mühendislik ekibinde kültür dönüşümünü yönetti; dönüşümün merkezinde agile ve lean düşünce ile yazılım zanaatkârlığı vardı.[^1]"
+        },
+        {
+          "@en": "In April 2018 he co-founded Craftbase with Hakan Erdoğan, Sabri Onur Tüzün and Murathan Özcan, a company that built fintech and payment software for clients.[^2] Craftgate grew inside it as a product and was introduced publicly in January 2021 as a cloud payment gateway that connects an online merchant to its banks and payment providers from one place.[^2] In 2021, with investors and buyers at the door, the founders pursued neither and gave up their profitable service work instead; since January 2022 the company has been only Craftgate.[^3] It raised a seed round in 2022,[^4] took investment from Hepsiburada and D4 Ventures in 2023[^5] and from Turkven in 2026,[^6] and started operating in Spain in 2024.[^7] Lemi is its Chief Software Crafter. The [Craftgate page](../craftgate/) tells that story in full.",
+          "@tr": "Nisan 2018'de Hakan Erdoğan, Sabri Onur Tüzün ve Murathan Özcan'la birlikte Craftbase'i kurdu. Craftbase, müşterileri için fintech ve ödeme yazılımı geliştiren bir şirketti.[^2] Craftgate bu şirketin içinde bir ürün olarak büyüdü. Ocak 2021'de, online satış yapan bir işletmeyi bankalarına ve ödeme sağlayıcılarına tek bir yerden bağlayan bulut tabanlı bir ödeme geçidi olarak kamuoyuna tanıtıldı.[^2] 2021'de kapıda yatırımcılar da, şirketi satın almak isteyenler de vardı. Kurucular ikisinin de peşine düşmedi; bunun yerine kârlı hizmet işlerini bıraktılar. Ocak 2022'den beri şirketin tek işi Craftgate.[^3] Şirket 2022'de tohum yatırım aldı,[^4] 2023'te Hepsiburada ve D4 Ventures'tan,[^5] 2026'da da Turkven'den yatırım aldı.[^6] 2024'te İspanya'da faaliyete başladı.[^7] Lemi şirketin Chief Software Crafter'ı. Hikâyenin tamamı [Craftgate sayfasında](../craftgate/)."
+        }
       ]
     },
     {
       "id": "community",
-      "heading": "Community",
+      "heading": { "@en": "Community", "@tr": "Topluluk" },
       "class": "prose",
       "blocks": [
-        "In 2014 Lemi founded Software Craftsmanship Turkey, a community for developers who care about their craft, which has run more than 200 free meetups.[^8] He has facilitated code retreats since 2013, including the Global Day of Coderetreat.[^8] From 2015 to 2017 he was a community lead of Agile Turkey, which held more than 50 free public meetups in that time, and the product owner of the Agile Turkey Summit in 2015 and 2016 and of CraftSummit 2015.[^8]",
-        "He was part of the team that translated the Agile Manifesto into Turkish, and he is the Turkish translator of the Software Craftsmanship Manifesto, the SOA Manifesto and the Disciplined Agile Manifesto.[^8] The [Community page](../community/) has the links."
+        {
+          "@en": "In 2014 Lemi founded Software Craftsmanship Turkey, a community for developers who care about their craft, which has run more than 200 free meetups.[^8] He has facilitated code retreats since 2013, including the Global Day of Coderetreat.[^8] From 2015 to 2017 he was a community lead of Agile Turkey, which held more than 50 free public meetups in that time, and the product owner of the Agile Turkey Summit in 2015 and 2016 and of CraftSummit 2015.[^8]",
+          "@tr": "Lemi 2014'te, zanaatlarını önemseyen yazılımcılar için bir topluluk olan Software Craftsmanship Turkey'yi kurdu. Topluluk bugüne kadar 200'den fazla ücretsiz meetup düzenledi.[^8] 2013'ten beri, Global Day of Coderetreat de dahil, code retreat'lerde kolaylaştırıcılık yapıyor.[^8] 2015'ten 2017'ye kadar Agile Turkey'nin topluluk liderlerinden biriydi; Agile Turkey bu sürede 50'den fazla ücretsiz ve herkese açık meetup düzenledi. 2015 ve 2016'da Agile Turkey Summit'in, ayrıca CraftSummit 2015'in product owner'ıydı.[^8]"
+        },
+        {
+          "@en": "He was part of the team that translated the Agile Manifesto into Turkish, and he is the Turkish translator of the Software Craftsmanship Manifesto, the SOA Manifesto and the Disciplined Agile Manifesto.[^8] The [Community page](../community/) has the links.",
+          "@tr": "Agile Manifesto'yu Türkçeye çeviren ekipteydi. Software Craftsmanship Manifesto, SOA Manifesto ve Disciplined Agile Manifesto'yu da Türkçeye o çevirdi.[^8] Bağlantılar [Topluluk sayfasında](../community/)."
+        }
       ]
     },
     {
       "id": "speaking",
-      "heading": "Speaking and sharing",
+      "heading": { "@en": "Speaking and sharing", "@tr": "Konuşmalar ve paylaşımlar" },
       "class": "prose",
       "blocks": [
-        "Lemi speaks about software craftsmanship, engineering culture, agile without the ceremony, and Git. Outside Türkiye his stages include Devoxx in Belgium, Poland and Ukraine, XP Days Ukraine, GrowIT in Serbia, ITAKE in Romania, Agile Tour Kaunas, Bosnia Agile Day and Agile Middle East in Dubai, and at home he is a regular at DevFest Istanbul, DevFest İzmir, Java Day Istanbul and the Devnot Developer Summit.[^9] He has also given more than 200 seminars at companies and universities.[^9] In 2019 he gave a TEDx talk in Turkish, at TEDxTarsusAmericanCollege, on the night the root bug made him known.[^10]",
-        "He hosts the Turkish podcast Lemi'nin Not Defteri, publishes his slides on Speaker Deck, and wrote for InfoQ on slowing down to go faster in software development.[^11] The [Talks page](../talks/) lists the talks year by year and on a map, and the [Sharing page](../sharing/) lists everything else."
+        {
+          "@en": "Lemi speaks about software craftsmanship, engineering culture, agile without the ceremony, and Git. Outside Türkiye his stages include Devoxx in Belgium, Poland and Ukraine, XP Days Ukraine, GrowIT in Serbia, ITAKE in Romania, Agile Tour Kaunas, Bosnia Agile Day and Agile Middle East in Dubai, and at home he is a regular at DevFest Istanbul, DevFest İzmir, Java Day Istanbul and the Devnot Developer Summit.[^9] He has also given more than 200 seminars at companies and universities.[^9] In 2019 he gave a TEDx talk in Turkish, at TEDxTarsusAmericanCollege, on the night the root bug made him known.[^10]",
+          "@tr": "Lemi yazılım zanaatkârlığı, mühendislik kültürü, seremonisiz agile ve Git üzerine konuşuyor. Türkiye dışında çıktığı sahneler arasında Belçika, Polonya ve Ukrayna'da Devoxx, XP Days Ukraine, Sırbistan'da GrowIT, Romanya'da ITAKE, Agile Tour Kaunas, Bosnia Agile Day ve Dubai'de Agile Middle East var. Türkiye'de ise DevFest Istanbul, DevFest İzmir, Java Day Istanbul ve Devnot Developer Summit'in düzenli konuşmacılarından.[^9] Şirketlerde ve üniversitelerde 200'den fazla seminer de verdi.[^9] 2019'da TEDxTarsusAmericanCollege sahnesinde Türkçe bir TEDx konuşması yaptı. Konuşmanın konusu, root açığıyla tanındığı geceydi.[^10]"
+        },
+        {
+          "@en": "He hosts the Turkish podcast Lemi'nin Not Defteri, publishes his slides on Speaker Deck, and wrote for InfoQ on slowing down to go faster in software development.[^11] The [Talks page](../talks/) lists the talks year by year and on a map, and the [Sharing page](../sharing/) lists everything else.",
+          "@tr": "Lemi'nin Not Defteri adlı Türkçe podcast'i sunuyor, slaytlarını Speaker Deck'te yayımlıyor. InfoQ için de yazılım geliştirmede yavaşlayarak hızlanmak üzerine yazdı.[^11] [Konuşmalar sayfası](../talks/) konuşmaları yıl yıl ve harita üzerinde listeliyor; geri kalan her şey [Paylaşımlar sayfasında](../sharing/)."
+        }
       ]
     },
     {
       "id": "root-bug",
-      "heading": "The macOS root bug",
+      "heading": { "@en": "The macOS root bug", "@tr": "macOS root açığı" },
       "class": "prose",
       "blocks": [
-        "On 28 November 2017 Lemi asked Apple Support on Twitter whether it knew that anyone could log in as “root” on macOS High Sierra with an empty password.[^12] He had not discovered the flaw himself: the infrastructure staff at the company he worked for had come across it and reported it to Apple five days earlier, as he wrote the next day.[^12] The tweet was covered around the world, from TechCrunch and CNBC to China Daily and the Turkish dailies,[^13] and on 29 November Apple released Security Update 2017-001 and apologised to Mac users.[^14]",
-        "He answered the criticism that he should have told Apple privately first in a talk on the ethics of going public, “Irresponsible Disclosure: Short Handbook of an Ethical Developer” (2018),[^15] and told the story again in his TEDx talk.[^10] The [root bug page](../root-bug/) tells it in full."
+        {
+          "@en": "On 28 November 2017 Lemi asked Apple Support on Twitter whether it knew that anyone could log in as “root” on macOS High Sierra with an empty password.[^12] He had not discovered the flaw himself: the infrastructure staff at the company he worked for had come across it and reported it to Apple five days earlier, as he wrote the next day.[^12] The tweet was covered around the world, from TechCrunch and CNBC to China Daily and the Turkish dailies,[^13] and on 29 November Apple released Security Update 2017-001 and apologised to Mac users.[^14]",
+          "@tr": "28 Kasım 2017'de Lemi, Twitter'da Apple Support'a, macOS High Sierra'da herkesin boş parolayla “root” olarak giriş yapabildiğini bilip bilmediklerini sordu.[^12] Açığı kendisi bulmamıştı. Ertesi gün yazdığına göre, çalıştığı şirketin altyapı ekibi açığa denk gelmiş ve beş gün önce Apple'a bildirmişti.[^12] Tweet, TechCrunch ve CNBC'den China Daily'ye ve Türk gazetelerine kadar dünyanın her yerinde haber oldu.[^13] 29 Kasım'da Apple, Security Update 2017-001'i yayımladı ve Mac kullanıcılarından özür diledi.[^14]"
+        },
+        {
+          "@en": "He answered the criticism that he should have told Apple privately first in a talk on the ethics of going public, “Irresponsible Disclosure: Short Handbook of an Ethical Developer” (2018),[^15] and told the story again in his TEDx talk.[^10] The [root bug page](../root-bug/) tells it in full.",
+          "@tr": "Önce Apple'a özelden haber vermesi gerektiği eleştirisine, açığı kamuya duyurmanın etiği üzerine yaptığı “Irresponsible Disclosure: Short Handbook of an Ethical Developer” (2018) konuşmasıyla cevap verdi.[^15] Aynı hikâyeyi TEDx konuşmasında da anlattı.[^10] Hikâyenin tamamı [root açığı sayfasında](../root-bug/)."
+        }
       ]
     },
     {
       "id": "personal-life",
-      "heading": "Personal life",
+      "heading": { "@en": "Personal life", "@tr": "Özel hayat" },
       "class": "prose",
       "blocks": [
-        "Lemi lives in Istanbul with his wife, an academic in the Computer Engineering Department of Marmara University, and their two sons. An İzmir native, he supports Göztepe, the İzmir football club.",
+        {
+          "@en": "Lemi lives in Istanbul with his wife, an academic in the Computer Engineering Department of Marmara University, and their two sons. An İzmir native, he supports Göztepe, the İzmir football club.",
+          "@tr": "Lemi, Marmara Üniversitesi Bilgisayar Mühendisliği Bölümü'nde akademisyen olan eşi ve iki oğluyla İstanbul'da yaşıyor. Bir İzmirli olarak İzmir kulübü Göztepe'yi tutuyor."
+        },
         {
           "type": "photo",
           "src": "assets/bio/family.jpg",
           "width": 1512,
           "height": 1134,
-          "alt": "Lemi taking a night-time selfie with his wife and their two sons, the moon in the sky above them",
-          "caption": "Lemi with his wife and their two sons"
+          "alt": {
+            "@en": "Lemi taking a night-time selfie with his wife and their two sons, the moon in the sky above them",
+            "@tr": "Lemi gece eşi ve iki oğluyla selfie çekiyor; tepelerinde, gökyüzünde ay var"
+          },
+          "caption": { "@en": "Lemi with his wife and their two sons", "@tr": "Lemi, eşi ve iki oğluyla" }
         }
       ]
     },
     {
       "id": "references",
-      "heading": "References",
+      "heading": { "@en": "References", "@tr": "Kaynaklar" },
       "blocks": [
         {
           "type": "sources",
           "cited": true,
           "items": [
-            "[Career](../career/), on this site: positions and dates since 2001, degrees and certifications",
-            "[Webrazzi, 4 January 2021](https://webrazzi.com/2021/01/04/craftbase-ekibinden-bulut-tabanli-odeme-gecidi-craftgate): Craftgate introduced; Craftbase founded in 2018",
-            "[Webrazzi, 1 September 2021](https://webrazzi.com/2021/09/01/bulut-tabanli-odeme-gecidi-craftgate-yil-sonunda-1-milyar-tllik-odeme-hacmini-gecmeyi-hedefliyor): investors, buyers, and leaving service work",
-            "[Webrazzi, 1 June 2022](https://webrazzi.com/2022/06/01/bulut-tabanli-odeme-gecidi-craftgate-2-milyon-dolar-tohum-yatirim-aldi): seed round",
-            "[Webrazzi, 23 August 2023](https://webrazzi.com/2023/08/23/craftgate-hepsiburada-ve-d4-ventures-tan-1-milyon-dolar-yatirim-aldi/): Hepsiburada and D4 Ventures",
-            "[Webrazzi, 12 October 2026](https://webrazzi.com/2026/10/12/craftgate-turkven-den-yatirim-aldi/): Turkven",
-            "[Invest in Spain, 23 January 2025](https://www.investinspain.org/content/icex-invest/en/noticias-main/2025/craftgate.html): Craftgate Europe",
-            "[Community](../community/), on this site: Software Craftsmanship Turkey, Agile Turkey, manifesto translations",
-            "[Talks](../talks/), on this site: conferences, seminars and topics",
+            {
+              "@en": "[Career](../career/), on this site: positions and dates since 2001, degrees and certifications",
+              "@tr": "[Kariyer](../career/), bu sitede: 2001'den beri görevler ve tarihleri, akademik dereceler ve sertifikalar"
+            },
+            {
+              "@en": "[Webrazzi, 4 January 2021](https://webrazzi.com/2021/01/04/craftbase-ekibinden-bulut-tabanli-odeme-gecidi-craftgate): Craftgate introduced; Craftbase founded in 2018",
+              "@tr": "[Webrazzi, 4 Ocak 2021](https://webrazzi.com/2021/01/04/craftbase-ekibinden-bulut-tabanli-odeme-gecidi-craftgate): Craftgate'in tanıtımı ve Craftbase'in 2018'deki kuruluşu"
+            },
+            {
+              "@en": "[Webrazzi, 1 September 2021](https://webrazzi.com/2021/09/01/bulut-tabanli-odeme-gecidi-craftgate-yil-sonunda-1-milyar-tllik-odeme-hacmini-gecmeyi-hedefliyor): investors, buyers, and leaving service work",
+              "@tr": "[Webrazzi, 1 Eylül 2021](https://webrazzi.com/2021/09/01/bulut-tabanli-odeme-gecidi-craftgate-yil-sonunda-1-milyar-tllik-odeme-hacmini-gecmeyi-hedefliyor): yatırımcılar, şirketi almak isteyenler ve hizmet işlerinden çekilme"
+            },
+            {
+              "@en": "[Webrazzi, 1 June 2022](https://webrazzi.com/2022/06/01/bulut-tabanli-odeme-gecidi-craftgate-2-milyon-dolar-tohum-yatirim-aldi): seed round",
+              "@tr": "[Webrazzi, 1 Haziran 2022](https://webrazzi.com/2022/06/01/bulut-tabanli-odeme-gecidi-craftgate-2-milyon-dolar-tohum-yatirim-aldi): tohum yatırım"
+            },
+            {
+              "@en": "[Webrazzi, 23 August 2023](https://webrazzi.com/2023/08/23/craftgate-hepsiburada-ve-d4-ventures-tan-1-milyon-dolar-yatirim-aldi/): Hepsiburada and D4 Ventures",
+              "@tr": "[Webrazzi, 23 Ağustos 2023](https://webrazzi.com/2023/08/23/craftgate-hepsiburada-ve-d4-ventures-tan-1-milyon-dolar-yatirim-aldi/): Hepsiburada ve D4 Ventures"
+            },
+            {
+              "@en": "[Webrazzi, 12 October 2026](https://webrazzi.com/2026/10/12/craftgate-turkven-den-yatirim-aldi/): Turkven",
+              "@tr": "[Webrazzi, 12 Ekim 2026](https://webrazzi.com/2026/10/12/craftgate-turkven-den-yatirim-aldi/): Turkven"
+            },
+            {
+              "@en": "[Invest in Spain, 23 January 2025](https://www.investinspain.org/content/icex-invest/en/noticias-main/2025/craftgate.html): Craftgate Europe",
+              "@tr": "[Invest in Spain, 23 Ocak 2025](https://www.investinspain.org/content/icex-invest/en/noticias-main/2025/craftgate.html): Craftgate Europe"
+            },
+            {
+              "@en": "[Community](../community/), on this site: Software Craftsmanship Turkey, Agile Turkey, manifesto translations",
+              "@tr": "[Topluluk](../community/), bu sitede: Software Craftsmanship Turkey, Agile Turkey, manifesto çevirileri"
+            },
+            {
+              "@en": "[Talks](../talks/), on this site: conferences, seminars and topics",
+              "@tr": "[Konuşmalar](../talks/), bu sitede: konferanslar, seminerler ve konular"
+            },
             "[TED: The Apple That Made Me Famous Overnight](https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma), TEDxTarsusAmericanCollege, 2019",
-            "[Sharing](../sharing/), on this site: the podcast, slides and articles",
-            "[The Story Behind “anyone can login as root” Tweet](https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71), Medium, 29 November 2017",
-            "[The macOS root bug](../root-bug/), on this site: the press coverage",
-            "[MacRumors, 29 November 2017](https://www.macrumors.com/2017/11/29/apple-fixes-root-password-bug-security-update/): the fix and Apple's apology",
-            "[Irresponsible Disclosure](https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer), Women Techmakers Istanbul, 31 March 2018"
+            {
+              "@en": "[Sharing](../sharing/), on this site: the podcast, slides and articles",
+              "@tr": "[Paylaşımlar](../sharing/), bu sitede: podcast, slaytlar ve yazılar"
+            },
+            {
+              "@en": "[The Story Behind “anyone can login as root” Tweet](https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71), Medium, 29 November 2017",
+              "@tr": "[The Story Behind “anyone can login as root” Tweet](https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71), Medium, 29 Kasım 2017"
+            },
+            {
+              "@en": "[The macOS root bug](../root-bug/), on this site: the press coverage",
+              "@tr": "[macOS root açığı](../root-bug/), bu sitede: basında çıkan haberler"
+            },
+            {
+              "@en": "[MacRumors, 29 November 2017](https://www.macrumors.com/2017/11/29/apple-fixes-root-password-bug-security-update/): the fix and Apple's apology",
+              "@tr": "[MacRumors, 29 Kasım 2017](https://www.macrumors.com/2017/11/29/apple-fixes-root-password-bug-security-update/): düzeltme ve Apple'ın özrü"
+            },
+            {
+              "@en": "[Irresponsible Disclosure](https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer), Women Techmakers Istanbul, 31 March 2018",
+              "@tr": "[Irresponsible Disclosure](https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer), Women Techmakers Istanbul, 31 Mart 2018"
+            }
           ]
         }
       ]

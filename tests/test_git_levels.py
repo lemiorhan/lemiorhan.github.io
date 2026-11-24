@@ -1,12 +1,10 @@
-import json
-import os
 import unittest
 from collections import namedtuple
 
 import gitgraph
+import i18n
 from gitgraph import canonical, engine_jobs, engine_matches, match_job, run_engine, run_git, run_job
 
-HOME = os.path.join(gitgraph.ROOT, 'content', 'home.json')
 REACHES_GOAL = {'setup alone': False, 'solution': True, 'alternative': True, 'near miss': False}
 RUN_IN_GIT = {'solution', 'alternative', 'near miss'}
 
@@ -14,8 +12,7 @@ Attempt = namedtuple('Attempt', 'level label kind lines')
 
 
 def home_levels():
-    with open(HOME, encoding='utf-8') as f:
-        return json.load(f)['game']['levels']
+    return i18n.content('home')['game']['levels']
 
 
 def attempts(levels):
@@ -73,8 +70,7 @@ class LevelsPlayAsDesigned(unittest.TestCase):
         self.assertEqual(walked, {key(a): list(range(len(a.lines) + 1)) for a in ATTEMPTS})
 
     def test_every_level_on_the_home_page_is_checked_with_each_kind_of_attempt(self):
-        with open(HOME, encoding='utf-8') as f:
-            ids = [level['id'] for level in json.load(f)['game']['levels']]
+        ids = [level['id'] for level in home_levels()]
         self.assertTrue(ids, 'content/home.json game.levels is empty')
         for name, cases, kinds in (('engine', ATTEMPTS, set(REACHES_GOAL)),
                                    ('real git', [a for a, _ in GIT_RUNS], RUN_IN_GIT)):

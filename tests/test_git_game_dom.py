@@ -20,6 +20,8 @@ import tempfile
 import unittest
 from html.parser import HTMLParser
 
+import i18n
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLI = os.path.join(ROOT, 'tests', 'git_game_dom_cli.js')
 TIMEOUT = 120
@@ -28,8 +30,7 @@ VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'met
 GAME_SCRIPTS = ['assets/git-engine.js', 'assets/git-game.js']
 LOCATION = {'origin': 'https://example.test', 'pathname': '/'}
 
-with open(os.path.join(ROOT, 'content', 'home.json'), encoding='utf-8') as f:
-    GAME = json.load(f)['game']
+GAME = i18n.content('home')['game']
 LEVELS = GAME['levels']
 
 PAGE = {}

@@ -1,189 +1,307 @@
 {
-  "title": "The macOS root bug, Lemi Orhan Ergin",
-  "description": "The night in November 2017 Lemi Orhan Ergin tweeted that anyone could log in as root on macOS High Sierra with an empty password: how the flaw was found, why he went public, Apple's fix and apology, and the press coverage around the world.",
+  "title": { "@en": "The macOS root bug, Lemi Orhan Ergin", "@tr": "macOS root bug'ı, Lemi Orhan Ergin" },
+  "description": {
+    "@en": "The night in November 2017 Lemi Orhan Ergin tweeted that anyone could log in as root on macOS High Sierra with an empty password: how the flaw was found, why he went public, Apple's fix and apology, and the press coverage around the world.",
+    "@tr": "Kasım 2017'de bir gece Lemi Orhan Ergin, macOS High Sierra'da herkesin boş şifreyle root olarak login olabildiğini Twitter'da yazdı. Bu sayfa açığın nasıl fark edildiğini, neden kamuya açıkladığını, Apple'ın düzeltmesini ve özrünü, dünya basınındaki haberleri anlatıyor."
+  },
   "head": {
-    "heading": "The macOS root bug",
+    "heading": { "@en": "The macOS root bug", "@tr": "macOS root bug'ı" },
     "cmd": "su root",
     "blocks": [
-      { "type": "p", "class": "intro", "text": "On 28 November 2017 I asked Apple Support, on Twitter, whether it knew that anyone could log in as “root” on macOS High Sierra with an empty password. Within hours tech news sites had picked it up, by the next day it was in newspapers from the United States to China, and that same day Apple shipped a fix and apologised. This is the story as I told it then, and what I learned from it." },
-      { "type": "contents", "label": "On this page" }
+      {
+        "type": "p",
+        "class": "intro",
+        "text": {
+          "@en": "On 28 November 2017 I asked Apple Support, on Twitter, whether it knew that anyone could log in as “root” on macOS High Sierra with an empty password. Within hours tech news sites had picked it up, by the next day it was in newspapers from the United States to China, and that same day Apple shipped a fix and apologised. This is the story as I told it then, and what I learned from it.",
+          "@tr": "28 Kasım 2017'de Twitter'dan Apple Support'a sordum: macOS High Sierra'da herkesin boş şifreyle “root” olarak login olabildiğini biliyor muydu? Birkaç saat içinde teknoloji haber siteleri konuyu yazmaya başladı. Ertesi gün haber ABD'den Çin'e kadar gazetelerdeydi. Apple da aynı gün bir düzeltme yayınladı ve özür diledi. Bu sayfa, hikâyenin o zaman anlattığım hâli ve ondan öğrendiklerim."
+        }
+      },
+      { "type": "contents", "label": { "@en": "On this page", "@tr": "Bu sayfada" } }
     ]
   },
   "sections": [
     {
       "id": "facts",
-      "heading": "At a glance",
+      "heading": { "@en": "At a glance", "@tr": "Kısaca" },
       "blocks": [
         {
           "type": "infobox",
           "items": [
-            { "label": "Bug", "text": "CVE-2017-13872, a logic error in validating credentials[^1][^2]" },
-            { "label": "Affected", "text": "macOS High Sierra 10.13 and 10.13.1[^2]" },
-            { "label": "Severity", "text": "8.1 of 10, High (CVSS 3.0)[^1]" },
-            { "label": "The tweet", "text": "28 November 2017, 21:38 in Istanbul[^3]" },
-            { "label": "Fixed", "text": "Security Update 2017-001, 29 November 2017[^2]" },
-            { "label": "Noticed by", "text": "The infrastructure team of the company I worked for, not me; it had been on Apple's forums since 13 November[^4]" }
+            { "label": "Bug", "text": { "@en": "CVE-2017-13872, a logic error in validating credentials[^1][^2]", "@tr": "CVE-2017-13872, kimlik bilgisi doğrulamasında bir mantık hatası[^1][^2]" } },
+            { "label": { "@en": "Affected", "@tr": "Etkilenen sürümler" }, "text": { "@en": "macOS High Sierra 10.13 and 10.13.1[^2]", "@tr": "macOS High Sierra 10.13 ve 10.13.1[^2]" } },
+            { "label": { "@en": "Severity", "@tr": "Önem derecesi" }, "text": { "@en": "8.1 of 10, High (CVSS 3.0)[^1]", "@tr": "10 üzerinden 8,1, yani Yüksek (CVSS 3.0)[^1]" } },
+            { "label": { "@en": "The tweet", "@tr": "Tweet" }, "text": { "@en": "28 November 2017, 21:38 in Istanbul[^3]", "@tr": "28 Kasım 2017, İstanbul saatiyle 21:38[^3]" } },
+            { "label": { "@en": "Fixed", "@tr": "Düzeltme" }, "text": { "@en": "Security Update 2017-001, 29 November 2017[^2]", "@tr": "Security Update 2017-001, 29 Kasım 2017[^2]" } },
+            { "label": { "@en": "Noticed by", "@tr": "Fark eden" }, "text": { "@en": "The infrastructure team of the company I worked for, not me; it had been on Apple's forums since 13 November[^4]", "@tr": "Ben değil, çalıştığım şirketin altyapı ekibi; açık 13 Kasım'dan beri Apple'ın forumlarındaydı[^4]" } }
           ]
         }
       ]
     },
     {
       "id": "tweet",
-      "heading": "The tweet",
+      "heading": { "@en": "The tweet", "@tr": "Tweet" },
       "blocks": [
-        { "type": "quote", "text": "Dear @AppleSupport, we noticed a *HUGE* security issue at MacOS High Sierra. Anyone can login as \"root\" with empty password after clicking on login button several times. Are you aware of it @Apple?", "caption": "[@lemiorhan, 28 November 2017](https://twitter.com/lemiorhan/status/935578694541770752)" },
-        { "type": "p", "text": "Nine minutes later I posted the steps: open System Preferences, go to Users & Groups and click the lock to make changes, then type “root” with no password, and try it several times. “Result is unbelievable!”[^5]" }
+        {
+          "type": "quote",
+          "text": {
+            "@en": "Dear @AppleSupport, we noticed a *HUGE* security issue at MacOS High Sierra. Anyone can login as \"root\" with empty password after clicking on login button several times. Are you aware of it @Apple?",
+            "@tr": "Sevgili @AppleSupport, MacOS High Sierra'da *ÇOK BÜYÜK* bir güvenlik açığı fark ettik. Login butonuna birkaç kez tıkladıktan sonra herkes boş şifreyle “root” olarak login olabiliyor. Bunun farkında mısınız @Apple?"
+          },
+          "caption": {
+            "@en": "[@lemiorhan, 28 November 2017](https://twitter.com/lemiorhan/status/935578694541770752)",
+            "@tr": "[@lemiorhan, 28 Kasım 2017](https://twitter.com/lemiorhan/status/935578694541770752). İngilizce aslı:"
+          },
+          "original": "“Dear @AppleSupport, we noticed a *HUGE* security issue at MacOS High Sierra. Anyone can login as \"root\" with empty password after clicking on login button several times. Are you aware of it @Apple?”",
+          "original_lang": "en"
+        },
+        {
+          "type": "p",
+          "text": {
+            "@en": "Nine minutes later I posted the steps: open System Preferences, go to Users & Groups and click the lock to make changes, then type “root” with no password, and try it several times. “Result is unbelievable!”[^5]",
+            "@tr": "Dokuz dakika sonra adımları paylaştım: System Preferences'ı açın, Users & Groups'a girin ve değişiklik yapmak için kilide tıklayın. Sonra şifre girmeden “root” yazın ve birkaç kez deneyin. “Sonuç inanılmaz!”[^5]"
+          }
+        }
       ]
     },
     {
       "id": "found",
-      "heading": "How we noticed it",
+      "heading": { "@en": "How we noticed it", "@tr": "Nasıl fark ettik" },
       "blocks": [
-        { "type": "p", "text": "I am not the one who discovered the bug, and I wrote so the day after the tweet.[^4] About a week before it, the infrastructure staff at the company I worked for stumbled on the issue while helping one of my colleagues get back into his local admin account, and they used the flaw to recover it. On 23 November they reported it to Apple. Searching online, they found it already mentioned in a few places, even on Apple's Developer Forums on 13 November. The issue had been revealed, but Apple had not noticed yet.[^4]" },
-        { "type": "p", "text": "On 28 November the staff told me they had to set a root password on my Mac so that it would not be open to it. I saw the issue with my own eyes and could not believe it.[^4] “They tried the same thing at my machine and worked. It scared us a lot,” I told Motherboard that night.[^6] The issue was serious, it had already been mentioned in public forums weeks before, and I thought I had to ask Apple whether it was aware of it. So I asked on Twitter.[^4]" },
-        { "type": "p", "text": "I am neither a hacker nor a security specialist. I had no intention to harm Apple or its users; I wanted to warn Apple that there was a serious security issue in High Sierra, so that it would fix it.[^4]" }
+        {
+          "type": "p",
+          "text": {
+            "@en": "I am not the one who discovered the bug, and I wrote so the day after the tweet.[^4] About a week before it, the infrastructure staff at the company I worked for stumbled on the issue while helping one of my colleagues get back into his local admin account, and they used the flaw to recover it. On 23 November they reported it to Apple. Searching online, they found it already mentioned in a few places, even on Apple's Developer Forums on 13 November. The issue had been revealed, but Apple had not noticed yet.[^4]",
+            "@tr": "Bug'ı keşfeden ben değilim, bunu tweet'in ertesi günü de yazdım.[^4] Tweet'ten yaklaşık bir hafta önce, çalıştığım şirketin altyapı ekibi bir iş arkadaşımın yerel admin hesabına yeniden girmesine yardım ederken bu açığa denk geldi. Hesabı da bu açığı kullanarak kurtardılar. 23 Kasım'da Apple'a bildirdiler. İnternette arayınca birkaç yerde zaten konuşulduğunu gördüler; 13 Kasım'da Apple'ın Developer Forums'unda bile geçiyordu. Açık ortaya çıkmıştı ama Apple henüz fark etmemişti.[^4]"
+          }
+        },
+        {
+          "type": "p",
+          "text": {
+            "@en": "On 28 November the staff told me they had to set a root password on my Mac so that it would not be open to it. I saw the issue with my own eyes and could not believe it.[^4] “They tried the same thing at my machine and worked. It scared us a lot,” I told Motherboard that night.[^6] The issue was serious, it had already been mentioned in public forums weeks before, and I thought I had to ask Apple whether it was aware of it. So I asked on Twitter.[^4]",
+            "@tr": "28 Kasım'da altyapı ekibi, Mac'im bu açıktan etkilenmesin diye ona bir root şifresi belirlemeleri gerektiğini söyledi. Açığı kendi gözümle gördüm ve inanamadım.[^4] O gece Motherboard'a şöyle dedim: “Aynı şeyi benim makinemde denediler ve çalıştı. Bu bizi çok korkuttu.”[^6] Açık ciddiydi ve haftalar önce herkesin okuyabildiği forumlarda konuşulmuştu. Apple'a bundan haberi olup olmadığını sormam gerektiğini düşündüm. Ben de Twitter'dan sordum.[^4]"
+          }
+        },
+        {
+          "type": "p",
+          "text": {
+            "@en": "I am neither a hacker nor a security specialist. I had no intention to harm Apple or its users; I wanted to warn Apple that there was a serious security issue in High Sierra, so that it would fix it.[^4]",
+            "@tr": "Ne hacker'ım ne de güvenlik uzmanıyım. Apple'a ya da kullanıcılarına zarar vermek gibi bir niyetim yoktu. High Sierra'da ciddi bir güvenlik açığı olduğu için Apple'ı uyarmak istedim, düzeltsin diye.[^4]"
+          }
+        }
       ]
     },
     {
       "id": "apple",
-      "heading": "Apple's answer",
+      "heading": { "@en": "Apple's answer", "@tr": "Apple'ın cevabı" },
       "blocks": [
-        { "type": "p", "text": "Apple Support replied to my tweet that evening and asked me to send a direct message with my Mac model and macOS version.[^7] The same night Apple told the press it was working on a software update, and that setting a root password would block unauthorised access until then.[^8]" },
-        { "type": "p", "text": "The next day, 29 November, Apple released Security Update 2017-001. Its notes describe the flaw in one sentence: “A logic error existed in the validation of credentials. This was addressed with improved credential validation.”[^2] On a Mac upgraded from 10.13 to 10.13.1 the fix needed a reboot, or the bug came back.[^2][^10] Apple also apologised:" },
-        { "type": "quote", "text": "Security is a top priority for every Apple product, and regrettably we stumbled with this release of macOS. … We greatly regret this error and we apologize to all Mac users, both for releasing with this vulnerability and for the concern it has caused. Our customers deserve better.", "caption": "Apple, in a statement to MacRumors, 29 November 2017[^9]" }
+        {
+          "type": "p",
+          "text": {
+            "@en": "Apple Support replied to my tweet that evening and asked me to send a direct message with my Mac model and macOS version.[^7] The same night Apple told the press it was working on a software update, and that setting a root password would block unauthorised access until then.[^8]",
+            "@tr": "Apple Support o akşam tweet'ime cevap verdi. Mac modelimi ve macOS sürümümü DM ile göndermemi istedi.[^7] Apple aynı gece basına bir yazılım güncellemesi üzerinde çalıştığını, o zamana kadar root şifresi belirlemenin yetkisiz erişimi engelleyeceğini söyledi.[^8]"
+          }
+        },
+        {
+          "type": "p",
+          "text": {
+            "@en": "The next day, 29 November, Apple released Security Update 2017-001. Its notes describe the flaw in one sentence: “A logic error existed in the validation of credentials. This was addressed with improved credential validation.”[^2] On a Mac upgraded from 10.13 to 10.13.1 the fix needed a reboot, or the bug came back.[^2][^10] Apple also apologised:",
+            "@tr": "Ertesi gün, 29 Kasım'da Apple, Security Update 2017-001'i yayınladı. Güncellemenin notları açığı tek cümleyle anlatıyor: “Kimlik bilgilerinin doğrulanmasında bir mantık hatası vardı. Bu hata, kimlik bilgisi doğrulaması iyileştirilerek giderildi.”[^2] 10.13'ten 10.13.1'e yükseltilmiş bir Mac'te düzeltme ancak yeniden başlatmayla tutuyordu, yoksa bug geri geliyordu.[^2][^10] Apple ayrıca özür diledi:"
+          }
+        },
+        {
+          "type": "quote",
+          "text": {
+            "@en": "Security is a top priority for every Apple product, and regrettably we stumbled with this release of macOS. … We greatly regret this error and we apologize to all Mac users, both for releasing with this vulnerability and for the concern it has caused. Our customers deserve better.",
+            "@tr": "Güvenlik, her Apple ürünü için en önemli önceliklerden biridir ve ne yazık ki bu macOS sürümünde tökezledik. … Bu hatadan dolayı çok üzgünüz. Hem bu güvenlik açığıyla sürüm çıkardığımız hem de yol açtığı endişe için bütün Mac kullanıcılarından özür dileriz. Müşterilerimiz daha iyisini hak ediyor."
+          },
+          "caption": {
+            "@en": "Apple, in a statement to MacRumors, 29 November 2017[^9]",
+            "@tr": "Apple'ın MacRumors'a yaptığı açıklama, 29 Kasım 2017.[^9] İngilizce aslı:"
+          },
+          "original": "“Security is a top priority for every Apple product, and regrettably we stumbled with this release of macOS. … We greatly regret this error and we apologize to all Mac users, both for releasing with this vulnerability and for the concern it has caused. Our customers deserve better.”",
+          "original_lang": "en"
+        }
       ]
     },
     {
       "id": "disclosure",
-      "heading": "Going public",
+      "heading": { "@en": "Going public", "@tr": "Kamuya açıklamak" },
       "blocks": [
-        { "type": "p", "text": "The criticism came as fast as the coverage. I should have told Apple privately, the argument went, and given it time to patch the bug before anyone heard of it.[^7][^11]" },
-        { "type": "p", "text": "Four months later I took that argument on stage at Women Techmakers Istanbul, in a talk called “Irresponsible Disclosure: Short Handbook of an Ethical Developer”.[^12] The rule I give there is the one my critics gave: it does not matter whether a company runs a bug bounty program; report a vulnerability to it privately, through private channels, and keep it confidential. Then comes the turn: we had already done exactly that. Our infrastructure team had contacted Apple several times. One of those messages went out on 23 November, five days before the tweet, and ended: “I don't think you can resolve this issue, therefore I want to talk with someone from security.”[^12]" },
-        { "type": "p", "text": "By then a private report was no longer enough. The flaw had been public for two weeks, which meant it could already be on the deep web, and attackers could already be using it to get into machines as root.[^12]" },
-        { "type": "quote", "text": "When you see the fire spreading uncontrollably, you have to press the fire alarm. Sometimes keeping the issue private causes more problems than making it public.", "caption": "From “Irresponsible Disclosure”, 2018[^12]" },
-        { "type": "p", "text": "The talk puts this inside a longer list, the principles of an ethical developer. On security it reads: we apply secure coding practices, we test the security of our software, we do not keep passwords in clear text, we remove passwords from external files, we protect log files and all internals, and we inform about security vulnerabilities. On social media: we show respect.[^12]" }
+        {
+          "type": "p",
+          "text": {
+            "@en": "The criticism came as fast as the coverage. I should have told Apple privately, the argument went, and given it time to patch the bug before anyone heard of it.[^7][^11]",
+            "@tr": "Eleştiriler de haberler kadar hızlı geldi. Eleştirenlere göre Apple'a özelden haber vermeli, kimse duymadan bug'ı düzeltmesi için ona zaman tanımalıydım.[^7][^11]"
+          }
+        },
+        {
+          "type": "p",
+          "text": {
+            "@en": "Four months later I took that argument on stage at Women Techmakers Istanbul, in a talk called “Irresponsible Disclosure: Short Handbook of an Ethical Developer”.[^12] The rule I give there is the one my critics gave: it does not matter whether a company runs a bug bounty program; report a vulnerability to it privately, through private channels, and keep it confidential. Then comes the turn: we had already done exactly that. Our infrastructure team had contacted Apple several times. One of those messages went out on 23 November, five days before the tweet, and ended: “I don't think you can resolve this issue, therefore I want to talk with someone from security.”[^12]",
+            "@tr": "Dört ay sonra bu görüşü Women Techmakers Istanbul'da, “Irresponsible Disclosure: Short Handbook of an Ethical Developer” adlı konuşmamla sahneye taşıdım.[^12] Orada verdiğim kural, beni eleştirenlerin söylediğinin aynısı: Şirketin bug bounty programı olsun ya da olmasın fark etmez; bir güvenlik açığını şirkete özel olarak, özel kanallardan bildirin ve gizli tutun. Sonra konuşma tersine dönüyor: Biz tam olarak bunu zaten yapmıştık. Altyapı ekibimiz Apple'a birkaç kez ulaşmıştı. Bu mesajlardan biri tweet'ten beş gün önce, 23 Kasım'da gitmişti ve şöyle bitiyordu: “Bu sorunu çözebileceğinizi sanmıyorum, bu yüzden güvenlik ekibinden biriyle konuşmak istiyorum.”[^12]"
+          }
+        },
+        {
+          "type": "p",
+          "text": {
+            "@en": "By then a private report was no longer enough. The flaw had been public for two weeks, which meant it could already be on the deep web, and attackers could already be using it to get into machines as root.[^12]",
+            "@tr": "O noktada özelden bildirmek artık yetmiyordu. Açık iki haftadır ortadaydı. Yani deep web'e çoktan düşmüş olabilirdi, saldırganlar da onu makinelere root olarak girmek için çoktan kullanıyor olabilirdi.[^12]"
+          }
+        },
+        {
+          "type": "quote",
+          "text": {
+            "@en": "When you see the fire spreading uncontrollably, you have to press the fire alarm. Sometimes keeping the issue private causes more problems than making it public.",
+            "@tr": "Yangının kontrolsüzce yayıldığını görüyorsanız yangın alarmına basmanız gerekir. Bazen sorunu gizli tutmak, onu açıklamaktan daha çok soruna yol açar."
+          },
+          "caption": {
+            "@en": "From “Irresponsible Disclosure”, 2018[^12]",
+            "@tr": "“Irresponsible Disclosure” konuşmasından, 2018.[^12] İngilizce aslı:"
+          },
+          "original": "“When you see the fire spreading uncontrollably, you have to press the fire alarm. Sometimes keeping the issue private causes more problems than making it public.”",
+          "original_lang": "en"
+        },
+        {
+          "type": "p",
+          "text": {
+            "@en": "The talk puts this inside a longer list, the principles of an ethical developer. On security it reads: we apply secure coding practices, we test the security of our software, we do not keep passwords in clear text, we remove passwords from external files, we protect log files and all internals, and we inform about security vulnerabilities. On social media: we show respect.[^12]",
+            "@tr": "Konuşma bunu daha uzun bir listenin içine koyuyor: etik bir yazılımcının ilkeleri. Güvenlik başlığında şunlar var: güvenli kodlama pratiklerini uygularız, yazılımımızın güvenliğini test ederiz, şifreleri düz metin olarak saklamayız, şifreleri dış dosyalardan çıkarırız, log dosyalarını ve bütün iç ayrıntıları koruruz, güvenlik açıklarını haber veririz. Sosyal medya başlığında: saygı gösteririz.[^12]"
+          }
+        }
       ]
     },
     {
       "id": "timeline",
-      "heading": "Timeline",
+      "heading": { "@en": "Timeline", "@tr": "Zaman çizelgesi" },
       "cmd": "git log --since=2017-11-13",
       "blocks": [
-        { "type": "p", "class": "sub-note", "text": "Newest first. Times are Istanbul time." },
+        { "type": "p", "class": "sub-note", "text": { "@en": "Newest first. Times are Istanbul time.", "@tr": "En yenisi en üstte. Saatler İstanbul saatine göre." } },
         {
           "type": "log",
-          "label": "What happened, newest first",
+          "label": { "@en": "What happened, newest first", "@tr": "Olanlar, en yenisi en üstte" },
           "items": [
-            { "when": "Dec 2019", "title": "I tell the story again at TEDx", "org": "TEDxTarsusAmericanCollege", "note": "[The Apple That Made Me Famous Overnight](https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma), in Turkish." },
-            { "when": "31 Mar 2018", "title": "Irresponsible Disclosure", "org": "Women Techmakers Istanbul", "note": "The [slides](https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer) are on Speaker Deck." },
-            { "when": "29 Nov 2017", "title": "Apple ships Security Update 2017-001 and apologises", "note": "Later that day it starts installing itself on every Mac running 10.13.1.[^9]" },
-            { "when": "29 Nov 2017, 14:27", "title": "I write the story behind the tweet", "org": "[Medium](https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71)" },
-            { "when": "28 Nov 2017, 23:25", "title": "Apple Support replies and asks for a DM" },
-            { "when": "28 Nov 2017, 23:15", "title": "The Register writes it up", "note": "Coverage follows through the night, from the US to Germany and Türkiye." },
-            { "when": "28 Nov 2017, 21:38", "title": "I tweet to @AppleSupport" },
-            { "when": "28 Nov 2017", "title": "Our staff set a root password on my Mac", "note": "I see the issue with my own eyes." },
-            { "when": "23 Nov 2017", "title": "Our infrastructure team reports the issue to Apple" },
-            { "when": "Before 23 Nov 2017", "title": "Our infrastructure staff stumble on the flaw", "note": "While helping a colleague of mine back into his local admin account." },
-            { "when": "13 Nov 2017", "title": "The flaw appears on Apple's Developer Forums" }
+            { "when": { "@en": "Dec 2019", "@tr": "Ara 2019" }, "title": { "@en": "I tell the story again at TEDx", "@tr": "Hikâyeyi TEDx'te yeniden anlatıyorum" }, "org": "TEDxTarsusAmericanCollege", "note": { "@en": "[The Apple That Made Me Famous Overnight](https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma), in Turkish.", "@tr": "[The Apple That Made Me Famous Overnight](https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma), Türkçe." } },
+            { "when": "31 Mar 2018", "title": "Irresponsible Disclosure", "org": "Women Techmakers Istanbul", "note": { "@en": "The [slides](https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer) are on Speaker Deck.", "@tr": "[Slaytlar](https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer) Speaker Deck'te." } },
+            { "when": { "@en": "29 Nov 2017", "@tr": "29 Kas 2017" }, "title": { "@en": "Apple ships Security Update 2017-001 and apologises", "@tr": "Apple, Security Update 2017-001'i yayınlıyor ve özür diliyor" }, "note": { "@en": "Later that day it starts installing itself on every Mac running 10.13.1.[^9]", "@tr": "Güncelleme günün ilerleyen saatlerinde 10.13.1 çalışan her Mac'e kendiliğinden yüklenmeye başlıyor.[^9]" } },
+            { "when": { "@en": "29 Nov 2017, 14:27", "@tr": "29 Kas 2017, 14:27" }, "title": { "@en": "I write the story behind the tweet", "@tr": "Tweet'in arkasındaki hikâyeyi yazıyorum" }, "org": "[Medium](https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71)" },
+            { "when": { "@en": "28 Nov 2017, 23:25", "@tr": "28 Kas 2017, 23:25" }, "title": { "@en": "Apple Support replies and asks for a DM", "@tr": "Apple Support cevap veriyor ve DM istiyor" } },
+            { "when": { "@en": "28 Nov 2017, 23:15", "@tr": "28 Kas 2017, 23:15" }, "title": { "@en": "The Register writes it up", "@tr": "The Register haberi yazıyor" }, "note": { "@en": "Coverage follows through the night, from the US to Germany and Türkiye.", "@tr": "Gece boyunca ABD'den Almanya'ya ve Türkiye'ye kadar başka haberler de çıkıyor." } },
+            { "when": { "@en": "28 Nov 2017, 21:38", "@tr": "28 Kas 2017, 21:38" }, "title": { "@en": "I tweet to @AppleSupport", "@tr": "@AppleSupport'a tweet atıyorum" } },
+            { "when": { "@en": "28 Nov 2017", "@tr": "28 Kas 2017" }, "title": { "@en": "Our staff set a root password on my Mac", "@tr": "Altyapı ekibimiz Mac'ime root şifresi belirliyor" }, "note": { "@en": "I see the issue with my own eyes.", "@tr": "Açığı kendi gözümle görüyorum." } },
+            { "when": { "@en": "23 Nov 2017", "@tr": "23 Kas 2017" }, "title": { "@en": "Our infrastructure team reports the issue to Apple", "@tr": "Altyapı ekibimiz açığı Apple'a bildiriyor" } },
+            { "when": { "@en": "Before 23 Nov 2017", "@tr": "23 Kas 2017'den önce" }, "title": { "@en": "Our infrastructure staff stumble on the flaw", "@tr": "Altyapı ekibimiz açığa denk geliyor" }, "note": { "@en": "While helping a colleague of mine back into his local admin account.", "@tr": "Bir iş arkadaşımın yerel admin hesabına yeniden girmesine yardım ederken." } },
+            { "when": { "@en": "13 Nov 2017", "@tr": "13 Kas 2017" }, "title": { "@en": "The flaw appears on Apple's Developer Forums", "@tr": "Açık, Apple'ın Developer Forums'unda ortaya çıkıyor" } }
           ]
         }
       ]
     },
     {
       "id": "press",
-      "heading": "In the press",
+      "heading": { "@en": "In the press", "@tr": "Basında" },
       "cmd": "grep -ri lemi",
       "blocks": [
-        { "type": "p", "text": "The story ran in tech news sites and newspapers around the world, and many of them told it with two errors. They wrote that I discovered the bug, and that nobody had told Apple before the tweet. Our staff noticed it, and reported it to Apple five days before I tweeted.[^4][^12] Apple's own statement said its security engineers became aware of the issue on Tuesday afternoon, the day of the tweet.[^9] My name came out in a few new spellings too: Lemi Ergin, Lemi Orhan Ergan, Lemi Orhan Engin and Erign.[^7][^13][^14][^10]" },
-        { "type": "p", "text": "Each article below names me or embeds my tweet. [Ars Technica](https://arstechnica.com/information-technology/2017/11/macos-bug-lets-you-log-in-as-admin-with-no-password-required/) and [Wired](https://www.wired.com/story/macos-update-undoes-apple-root-bug-patch/) covered the bug as well; both are among the references of its CVE entry.[^1]" },
-        { "type": "h3", "text": "United States" },
+        {
+          "type": "p",
+          "text": {
+            "@en": "The story ran in tech news sites and newspapers around the world, and many of them told it with two errors. They wrote that I discovered the bug, and that nobody had told Apple before the tweet. Our staff noticed it, and reported it to Apple five days before I tweeted.[^4][^12] Apple's own statement said its security engineers became aware of the issue on Tuesday afternoon, the day of the tweet.[^9] My name came out in a few new spellings too: Lemi Ergin, Lemi Orhan Ergan, Lemi Orhan Engin and Erign.[^7][^13][^14][^10]",
+            "@tr": "Hikâye dünyanın her yerinde teknoloji haber sitelerinde ve gazetelerde çıktı. Birçoğu da onu iki hatayla anlattı. Bug'ı benim keşfettiğimi ve tweet'ten önce kimsenin Apple'a haber vermediğini yazdılar. Açığı altyapı ekibimiz fark etti ve tweet'imden beş gün önce Apple'a bildirdi.[^4][^12] Apple'ın kendi açıklamasına göre güvenlik mühendisleri açığı salı öğleden sonra, yani tweet günü öğrenmişti.[^9] Adım da birkaç yeni yazılışla çıktı: Lemi Ergin, Lemi Orhan Ergan, Lemi Orhan Engin ve Erign.[^7][^13][^14][^10]"
+          }
+        },
+        {
+          "type": "p",
+          "text": {
+            "@en": "Each article below names me or embeds my tweet. [Ars Technica](https://arstechnica.com/information-technology/2017/11/macos-bug-lets-you-log-in-as-admin-with-no-password-required/) and [Wired](https://www.wired.com/story/macos-update-undoes-apple-root-bug-patch/) covered the bug as well; both are among the references of its CVE entry.[^1]",
+            "@tr": "Aşağıdaki her haber ya adımı veriyor ya da tweet'imi sayfasına gömüyor. [Ars Technica](https://arstechnica.com/information-technology/2017/11/macos-bug-lets-you-log-in-as-admin-with-no-password-required/) ve [Wired](https://www.wired.com/story/macos-update-undoes-apple-root-bug-patch/) da bug'ı haberleştirdi; ikisi de bug'ın CVE kaydındaki kaynaklar arasında.[^1]"
+          }
+        },
+        { "type": "h3", "text": { "@en": "United States", "@tr": "ABD" } },
         {
           "type": "entries",
           "items": [
-            { "kind": "TechCrunch", "title": "Huge security flaw lets anyone log into a High Sierra Mac", "url": "https://techcrunch.com/2017/11/28/astonishing-os-x-bug-lets-anyone-log-into-a-high-sierra-machine/", "text": "28 November 2017, with Apple's first statement." },
-            { "kind": "MacRumors", "title": "Major macOS High Sierra Bug Allows Full Admin Access Without Password - How to Fix", "url": "https://www.macrumors.com/2017/11/28/macos-high-sierra-bug-admin-access/", "text": "28 November 2017." },
-            { "kind": "Engadget", "title": "macOS High Sierra bug allows full admin access without a password", "url": "https://www.engadget.com/2017-11-28-macos-high-sierra-bug-full-admin-access-without-password.html", "text": "28 November 2017." },
-            { "kind": "Motherboard", "title": "‘Dumb’ MacOS Bug Allowed Anyone to Get Admin Privileges Without a Password", "url": "https://www.vice.com/en/article/apple-mac-bug-root-admin-without-password/", "text": "28 November 2017, with my own words, sent by direct message." },
-            { "kind": "Fortune", "title": "Major Apple Vulnerability Lets Anyone Log Into Macs Running Its Latest Operating System", "url": "https://fortune.com/2017/11/28/apple-security-flaw-vulnerability-bug-mac-high-sierra-root-password/", "text": "28 November 2017." },
-            { "kind": "BGR", "title": "Critical Security Flaw Lets Anyone Gain Root Access To A Mac Running macOS High Sierra", "url": "https://www.bgr.com/tech/macos-high-sierra-login-bug-hack-how-to-fix/", "text": "28 November 2017." },
-            { "kind": "CSO Online", "title": "Apple’s High Sierra allows root with no password, there’s a workaround to help", "url": "https://www.csoonline.com/article/563733/apples-high-sierra-allows-root-with-no-password-theres-a-workaround-to-help.html", "text": "28 November 2017." },
-            { "kind": "CNBC", "title": "Apple rushes to resolve ‘huge’ password glitch on its new operating system", "url": "https://www.cnbc.com/2017/11/29/apple-rushes-to-resolve-huge-password-glitch-on-macos-high-sierra.html", "text": "29 November 2017." },
-            { "kind": "Computerworld", "title": "What to do about Apple’s shameful Mac security flaw", "url": "https://www.computerworld.com/article/1714896/what-to-do-about-apples-shameful-mac-security-flaw.html", "text": "29 November 2017." },
-            { "kind": "Macworld", "title": "macOS High Sierra ‘root’ security bug reappears if you recently upgraded from macOS 10.13 to 10.13.1", "url": "https://www.macworld.com/article/230754/macos-high-sierra-root-security-issue-allows-admin-access-to-your-macbut-theres-a-fix.html", "text": "1 December 2017." }
+            { "kind": "TechCrunch", "title": "Huge security flaw lets anyone log into a High Sierra Mac", "url": "https://techcrunch.com/2017/11/28/astonishing-os-x-bug-lets-anyone-log-into-a-high-sierra-machine/", "text": { "@en": "28 November 2017, with Apple's first statement.", "@tr": "28 Kasım 2017, Apple'ın ilk açıklamasıyla." } },
+            { "kind": "MacRumors", "title": "Major macOS High Sierra Bug Allows Full Admin Access Without Password - How to Fix", "url": "https://www.macrumors.com/2017/11/28/macos-high-sierra-bug-admin-access/", "text": { "@en": "28 November 2017.", "@tr": "28 Kasım 2017." } },
+            { "kind": "Engadget", "title": "macOS High Sierra bug allows full admin access without a password", "url": "https://www.engadget.com/2017-11-28-macos-high-sierra-bug-full-admin-access-without-password.html", "text": { "@en": "28 November 2017.", "@tr": "28 Kasım 2017." } },
+            { "kind": "Motherboard", "title": "‘Dumb’ MacOS Bug Allowed Anyone to Get Admin Privileges Without a Password", "url": "https://www.vice.com/en/article/apple-mac-bug-root-admin-without-password/", "text": { "@en": "28 November 2017, with my own words, sent by direct message.", "@tr": "28 Kasım 2017, DM ile gönderdiğim kendi sözlerimle." } },
+            { "kind": "Fortune", "title": "Major Apple Vulnerability Lets Anyone Log Into Macs Running Its Latest Operating System", "url": "https://fortune.com/2017/11/28/apple-security-flaw-vulnerability-bug-mac-high-sierra-root-password/", "text": { "@en": "28 November 2017.", "@tr": "28 Kasım 2017." } },
+            { "kind": "BGR", "title": "Critical Security Flaw Lets Anyone Gain Root Access To A Mac Running macOS High Sierra", "url": "https://www.bgr.com/tech/macos-high-sierra-login-bug-hack-how-to-fix/", "text": { "@en": "28 November 2017.", "@tr": "28 Kasım 2017." } },
+            { "kind": "CSO Online", "title": "Apple’s High Sierra allows root with no password, there’s a workaround to help", "url": "https://www.csoonline.com/article/563733/apples-high-sierra-allows-root-with-no-password-theres-a-workaround-to-help.html", "text": { "@en": "28 November 2017.", "@tr": "28 Kasım 2017." } },
+            { "kind": "CNBC", "title": "Apple rushes to resolve ‘huge’ password glitch on its new operating system", "url": "https://www.cnbc.com/2017/11/29/apple-rushes-to-resolve-huge-password-glitch-on-macos-high-sierra.html", "text": { "@en": "29 November 2017.", "@tr": "29 Kasım 2017." } },
+            { "kind": "Computerworld", "title": "What to do about Apple’s shameful Mac security flaw", "url": "https://www.computerworld.com/article/1714896/what-to-do-about-apples-shameful-mac-security-flaw.html", "text": { "@en": "29 November 2017.", "@tr": "29 Kasım 2017." } },
+            { "kind": "Macworld", "title": "macOS High Sierra ‘root’ security bug reappears if you recently upgraded from macOS 10.13 to 10.13.1", "url": "https://www.macworld.com/article/230754/macos-high-sierra-root-security-issue-allows-admin-access-to-your-macbut-theres-a-fix.html", "text": { "@en": "1 December 2017.", "@tr": "1 Aralık 2017." } }
           ]
         },
-        { "type": "h3", "text": "United Kingdom and Ireland" },
+        { "type": "h3", "text": { "@en": "United Kingdom and Ireland", "@tr": "Birleşik Krallık ve İrlanda" } },
         {
           "type": "entries",
           "items": [
-            { "kind": "The Register", "title": "Pro tip: You can log into macOS High Sierra as root with no password", "url": "https://www.theregister.com/software/2017/11/28/pro-tip-you-can-log-into-macos-high-sierra-as-root-with-no-password/954100", "text": "28 November 2017, about an hour and a half after the tweet." },
-            { "kind": "The Week", "title": "Apple races to fix password security flaw", "url": "https://theweek.com/90060/apple-races-to-fix-password-security-flaw", "text": "29 November 2017." },
-            { "kind": "Silicon Republic", "title": "What you need to know about the security flaw in MacOS High Sierra", "url": "https://www.siliconrepublic.com/enterprise/apple-mac-high-sierra-flaw", "text": "29 November 2017." }
+            { "kind": "The Register", "title": "Pro tip: You can log into macOS High Sierra as root with no password", "url": "https://www.theregister.com/software/2017/11/28/pro-tip-you-can-log-into-macos-high-sierra-as-root-with-no-password/954100", "text": { "@en": "28 November 2017, about an hour and a half after the tweet.", "@tr": "28 Kasım 2017, tweet'ten yaklaşık bir buçuk saat sonra." } },
+            { "kind": "The Week", "title": "Apple races to fix password security flaw", "url": "https://theweek.com/90060/apple-races-to-fix-password-security-flaw", "text": { "@en": "29 November 2017.", "@tr": "29 Kasım 2017." } },
+            { "kind": "Silicon Republic", "title": "What you need to know about the security flaw in MacOS High Sierra", "url": "https://www.siliconrepublic.com/enterprise/apple-mac-high-sierra-flaw", "text": { "@en": "29 November 2017.", "@tr": "29 Kasım 2017." } }
           ]
         },
-        { "type": "h3", "text": "Europe and China" },
+        { "type": "h3", "text": { "@en": "Europe and China", "@tr": "Avrupa ve Çin" } },
         {
           "type": "entries",
           "items": [
-            { "kind": "heise online", "title": "Schwere Sicherheitslücke: root ohne Passwort mit macOS High Sierra", "lang": "de", "url": "https://www.heise.de/news/Schwere-Sicherheitsluecke-root-ohne-Passwort-mit-macOS-High-Sierra-3903707.html", "text": "29 November 2017, in German." },
-            { "kind": "t3n", "title": "macOS High Sierra: Durch Mega-Lücke kann sich jeder zum Admin machen – ohne Passwort", "lang": "de", "url": "https://t3n.de/news/macos-high-sierra-privilege-escalation-881378/", "text": "29 November 2017, in German." },
-            { "kind": "Le Monde Informatique", "title": "Apple corrige la faille super utilisateur de macOS High Sierra", "lang": "fr", "url": "https://www.lemondeinformatique.fr/cybersecurite-conformite/2017-11-30-apple-corrige-la-faille-super-utilisateur-de-macos-high-sierra", "text": "30 November 2017, in French." },
-            { "kind": "Xataka", "title": "En un gran fallo de Apple, macOS High Sierra permite iniciar sesión como administrador sin necesidad de contraseña", "lang": "es", "url": "https://www.xataka.com/seguridad/en-un-gran-fallo-de-apple-macos-high-sierra-permite-iniciar-sesion-como-administrador-sin-necesidad-de-contrasena", "text": "28 November 2017, in Spanish." },
-            { "kind": "China Daily", "title": "Apple's MacOS security bug likely to invite easy system hacking", "url": "https://www.chinadaily.com.cn/a/201711/29/WS5a276e97a3107865316d4177.html", "text": "29 November 2017." }
+            { "kind": "heise online", "title": "Schwere Sicherheitslücke: root ohne Passwort mit macOS High Sierra", "lang": "de", "url": "https://www.heise.de/news/Schwere-Sicherheitsluecke-root-ohne-Passwort-mit-macOS-High-Sierra-3903707.html", "text": { "@en": "29 November 2017, in German.", "@tr": "29 Kasım 2017, Almanca." } },
+            { "kind": "t3n", "title": "macOS High Sierra: Durch Mega-Lücke kann sich jeder zum Admin machen – ohne Passwort", "lang": "de", "url": "https://t3n.de/news/macos-high-sierra-privilege-escalation-881378/", "text": { "@en": "29 November 2017, in German.", "@tr": "29 Kasım 2017, Almanca." } },
+            { "kind": "Le Monde Informatique", "title": "Apple corrige la faille super utilisateur de macOS High Sierra", "lang": "fr", "url": "https://www.lemondeinformatique.fr/cybersecurite-conformite/2017-11-30-apple-corrige-la-faille-super-utilisateur-de-macos-high-sierra", "text": { "@en": "30 November 2017, in French.", "@tr": "30 Kasım 2017, Fransızca." } },
+            { "kind": "Xataka", "title": "En un gran fallo de Apple, macOS High Sierra permite iniciar sesión como administrador sin necesidad de contraseña", "lang": "es", "url": "https://www.xataka.com/seguridad/en-un-gran-fallo-de-apple-macos-high-sierra-permite-iniciar-sesion-como-administrador-sin-necesidad-de-contrasena", "text": { "@en": "28 November 2017, in Spanish.", "@tr": "28 Kasım 2017, İspanyolca." } },
+            { "kind": "China Daily", "title": "Apple's MacOS security bug likely to invite easy system hacking", "url": "https://www.chinadaily.com.cn/a/201711/29/WS5a276e97a3107865316d4177.html", "text": { "@en": "29 November 2017.", "@tr": "29 Kasım 2017." } }
           ]
         },
         { "type": "h3", "text": "Türkiye" },
         {
           "type": "entries",
           "items": [
-            { "kind": "Hürriyet", "title": "Türk yazılımcı açığını buldu, Apple ayağa kalktı!", "lang": "tr", "url": "https://www.hurriyet.com.tr/teknoloji/apple-turk-yazilimcinin-buldugu-acigi-duzeltmeye-calisiyor-40662011", "text": "29 November 2017, from BBC Türkçe's report, which CNN Türk and Milliyet ran too." },
-            { "kind": "CNN Türk", "title": "Türk yazılımcı Apple'da kriz çıkardı!", "lang": "tr", "url": "https://www.cnnturk.com/video/dunya/turk-yazilimci-appleda-kriz-cikardi-706037", "text": "29 November 2017." },
-            { "kind": "Milliyet", "title": "Apple'ın Mac sistemlerinde büyük bir açık bulundu! Türk yazılımcının bulduğu açık nasıl düzeltilebilir?", "lang": "tr", "url": "https://www.milliyet.com.tr/teknoloji/applein-mac-sistemlerinde-buyuk-bir-acik-bulundu-turk-yazilimcinin-buldugu-acik-nasil-duzeltilebilir-2563528", "text": "29 November 2017." },
-            { "kind": "Habertürk", "title": "Apple Mac sistemlerinde büyük açık bulundu! Mac açığı nasıl düzeltilir?", "lang": "tr", "url": "https://www.haberturk.com/apple-mac-sistemlerinde-buyuk-acik-bulundu-mac-acigi-nasil-duzeltilir-1733529-ekonomi", "text": "29 November 2017, updated with my Medium post." },
-            { "kind": "Sabah", "title": "Türk yazılımcı Apple'ın açığını buldu", "lang": "tr", "url": "https://www.sabah.com.tr/teknokulis/haberler/2017/11/29/turk-yazilimci-applein-acigini-buldu", "text": "29 November 2017." },
-            { "kind": "LOG", "title": "Kritik macOS High Sierra açığını duyuran Türk olayın perde arkasını anlattı", "lang": "tr", "url": "https://www.log.com.tr/kritik-macos-high-sierra-acigini-duyuran-turk-olayin-perde-arkasini-anlatti/", "text": "29 November 2017, a retelling of my Medium post." },
-            { "kind": "Gazete Vatan", "title": "Apple’a milyonlardan özür dileten Türk!", "lang": "tr", "url": "https://www.gazetevatan.com/dunya/apple-a-milyonlardan-ozur-dileten-turk-1122971", "text": "30 November 2017, on Apple's apology." }
+            { "kind": "Hürriyet", "title": "Türk yazılımcı açığını buldu, Apple ayağa kalktı!", "lang": "tr", "url": "https://www.hurriyet.com.tr/teknoloji/apple-turk-yazilimcinin-buldugu-acigi-duzeltmeye-calisiyor-40662011", "text": { "@en": "29 November 2017, from BBC Türkçe's report, which CNN Türk and Milliyet ran too.", "@tr": "29 Kasım 2017, BBC Türkçe'nin haberinden; aynı haberi CNN Türk ve Milliyet de yayınladı." } },
+            { "kind": "CNN Türk", "title": "Türk yazılımcı Apple'da kriz çıkardı!", "lang": "tr", "url": "https://www.cnnturk.com/video/dunya/turk-yazilimci-appleda-kriz-cikardi-706037", "text": { "@en": "29 November 2017.", "@tr": "29 Kasım 2017." } },
+            { "kind": "Milliyet", "title": "Apple'ın Mac sistemlerinde büyük bir açık bulundu! Türk yazılımcının bulduğu açık nasıl düzeltilebilir?", "lang": "tr", "url": "https://www.milliyet.com.tr/teknoloji/applein-mac-sistemlerinde-buyuk-bir-acik-bulundu-turk-yazilimcinin-buldugu-acik-nasil-duzeltilebilir-2563528", "text": { "@en": "29 November 2017.", "@tr": "29 Kasım 2017." } },
+            { "kind": "Habertürk", "title": "Apple Mac sistemlerinde büyük açık bulundu! Mac açığı nasıl düzeltilir?", "lang": "tr", "url": "https://www.haberturk.com/apple-mac-sistemlerinde-buyuk-acik-bulundu-mac-acigi-nasil-duzeltilir-1733529-ekonomi", "text": { "@en": "29 November 2017, updated with my Medium post.", "@tr": "29 Kasım 2017, Medium yazımla güncellendi." } },
+            { "kind": "Sabah", "title": "Türk yazılımcı Apple'ın açığını buldu", "lang": "tr", "url": "https://www.sabah.com.tr/teknokulis/haberler/2017/11/29/turk-yazilimci-applein-acigini-buldu", "text": { "@en": "29 November 2017.", "@tr": "29 Kasım 2017." } },
+            { "kind": "LOG", "title": "Kritik macOS High Sierra açığını duyuran Türk olayın perde arkasını anlattı", "lang": "tr", "url": "https://www.log.com.tr/kritik-macos-high-sierra-acigini-duyuran-turk-olayin-perde-arkasini-anlatti/", "text": { "@en": "29 November 2017, a retelling of my Medium post.", "@tr": "29 Kasım 2017, Medium yazımı yeniden anlatıyor." } },
+            { "kind": "Gazete Vatan", "title": "Apple’a milyonlardan özür dileten Türk!", "lang": "tr", "url": "https://www.gazetevatan.com/dunya/apple-a-milyonlardan-ozur-dileten-turk-1122971", "text": { "@en": "30 November 2017, on Apple's apology.", "@tr": "30 Kasım 2017, Apple'ın özrü üzerine." } }
           ]
         }
       ]
     },
     {
       "id": "retold",
-      "heading": "Told again",
+      "heading": { "@en": "Told again", "@tr": "Yeniden anlattıklarım" },
       "cmd": "history | grep root",
       "blocks": [
         {
           "type": "entries",
           "items": [
-            { "kind": "Medium, 2017", "title": "The Story Behind “anyone can login as root” Tweet", "url": "https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71", "text": "Written the day after, to explain how we noticed the issue and why I tweeted." },
-            { "kind": "Talk, 2018", "title": "Irresponsible Disclosure: Short Handbook of an Ethical Developer", "url": "https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer", "text": "Women Techmakers Istanbul: the ethics of going public, and the principles of an ethical developer." },
-            { "kind": "TEDx, 2019", "title": "The Apple That Made Me Famous Overnight", "url": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma", "text": "At TEDxTarsusAmericanCollege, in Turkish: the chain of events of one night." }
+            { "kind": "Medium, 2017", "title": "The Story Behind “anyone can login as root” Tweet", "url": "https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71", "text": { "@en": "Written the day after, to explain how we noticed the issue and why I tweeted.", "@tr": "Ertesi gün, açığı nasıl fark ettiğimizi ve neden tweet attığımı anlatmak için yazdım." } },
+            { "kind": { "@en": "Talk, 2018", "@tr": "Konuşma, 2018" }, "title": "Irresponsible Disclosure: Short Handbook of an Ethical Developer", "url": "https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer", "text": { "@en": "Women Techmakers Istanbul: the ethics of going public, and the principles of an ethical developer.", "@tr": "Women Techmakers Istanbul: kamuya açıklamanın etiği ve etik bir yazılımcının ilkeleri." } },
+            { "kind": "TEDx, 2019", "title": "The Apple That Made Me Famous Overnight", "url": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma", "text": { "@en": "At TEDxTarsusAmericanCollege, in Turkish: the chain of events of one night.", "@tr": "TEDxTarsusAmericanCollege'de, Türkçe: bir gecenin olaylar zinciri." } }
           ]
         }
       ]
     },
     {
       "id": "references",
-      "heading": "References",
+      "heading": { "@en": "References", "@tr": "Kaynaklar" },
       "blocks": [
         {
           "type": "sources",
           "cited": true,
           "items": [
-            "[NVD, CVE-2017-13872](https://nvd.nist.gov/vuln/detail/CVE-2017-13872): description, CVSS score and references",
-            "[Apple Support, Security Update 2017-001](https://support.apple.com/en-us/103471): released 29 November 2017",
-            "[The tweet](https://twitter.com/lemiorhan/status/935578694541770752), 28 November 2017; the time is read from the tweet's ID",
-            "[The Story Behind “anyone can login as root” Tweet](https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71), Medium, 29 November 2017",
-            "[The follow-up tweet](https://twitter.com/lemiorhan/status/935581020774117381) with the steps, 28 November 2017",
-            "[Motherboard, 28 November 2017](https://www.vice.com/en/article/apple-mac-bug-root-admin-without-password/): my answer by direct message",
-            "[CNBC, 29 November 2017](https://www.cnbc.com/2017/11/29/apple-rushes-to-resolve-huge-password-glitch-on-macos-high-sierra.html): Apple Support's reply, the criticism, and “Lemi Ergin”",
-            "[TechCrunch, 28 November 2017](https://techcrunch.com/2017/11/28/astonishing-os-x-bug-lets-anyone-log-into-a-high-sierra-machine/): Apple's first statement",
-            "[MacRumors, 29 November 2017](https://www.macrumors.com/2017/11/29/apple-fixes-root-password-bug-security-update/): the fix and Apple's apology in full",
-            "[Macworld, 1 December 2017](https://www.macworld.com/article/230754/macos-high-sierra-root-security-issue-allows-admin-access-to-your-macbut-theres-a-fix.html): the bug coming back after the upgrade, and “Erign”",
-            "[iMore, 28 November 2017](https://www.imore.com/macos-has-root-bug): the case for telling Apple first",
-            "[Irresponsible Disclosure: Short Handbook of an Ethical Developer](https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer), Women Techmakers Istanbul, 31 March 2018",
-            "[The Register, 28 November 2017](https://www.theregister.com/software/2017/11/28/pro-tip-you-can-log-into-macos-high-sierra-as-root-with-no-password/954100): “Lemi Orhan Ergan”",
-            "[Habertürk, 29 November 2017](https://www.haberturk.com/apple-mac-sistemlerinde-buyuk-acik-bulundu-mac-acigi-nasil-duzeltilir-1733529-ekonomi): “Lemi Orhan Engin”"
+            { "@en": "[NVD, CVE-2017-13872](https://nvd.nist.gov/vuln/detail/CVE-2017-13872): description, CVSS score and references", "@tr": "[NVD, CVE-2017-13872](https://nvd.nist.gov/vuln/detail/CVE-2017-13872): açıklama, CVSS puanı ve kaynaklar" },
+            { "@en": "[Apple Support, Security Update 2017-001](https://support.apple.com/en-us/103471): released 29 November 2017", "@tr": "[Apple Support, Security Update 2017-001](https://support.apple.com/en-us/103471): 29 Kasım 2017'de yayınlandı" },
+            { "@en": "[The tweet](https://twitter.com/lemiorhan/status/935578694541770752), 28 November 2017; the time is read from the tweet's ID", "@tr": "[Tweet](https://twitter.com/lemiorhan/status/935578694541770752), 28 Kasım 2017; saat, tweet'in ID'sinden okunuyor" },
+            { "@en": "[The Story Behind “anyone can login as root” Tweet](https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71), Medium, 29 November 2017", "@tr": "[The Story Behind “anyone can login as root” Tweet](https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71), Medium, 29 Kasım 2017" },
+            { "@en": "[The follow-up tweet](https://twitter.com/lemiorhan/status/935581020774117381) with the steps, 28 November 2017", "@tr": "[Adımları verdiğim ikinci tweet](https://twitter.com/lemiorhan/status/935581020774117381), 28 Kasım 2017" },
+            { "@en": "[Motherboard, 28 November 2017](https://www.vice.com/en/article/apple-mac-bug-root-admin-without-password/): my answer by direct message", "@tr": "[Motherboard, 28 Kasım 2017](https://www.vice.com/en/article/apple-mac-bug-root-admin-without-password/): DM ile verdiğim cevap" },
+            { "@en": "[CNBC, 29 November 2017](https://www.cnbc.com/2017/11/29/apple-rushes-to-resolve-huge-password-glitch-on-macos-high-sierra.html): Apple Support's reply, the criticism, and “Lemi Ergin”", "@tr": "[CNBC, 29 Kasım 2017](https://www.cnbc.com/2017/11/29/apple-rushes-to-resolve-huge-password-glitch-on-macos-high-sierra.html): Apple Support'un cevabı, eleştiriler ve “Lemi Ergin”" },
+            { "@en": "[TechCrunch, 28 November 2017](https://techcrunch.com/2017/11/28/astonishing-os-x-bug-lets-anyone-log-into-a-high-sierra-machine/): Apple's first statement", "@tr": "[TechCrunch, 28 Kasım 2017](https://techcrunch.com/2017/11/28/astonishing-os-x-bug-lets-anyone-log-into-a-high-sierra-machine/): Apple'ın ilk açıklaması" },
+            { "@en": "[MacRumors, 29 November 2017](https://www.macrumors.com/2017/11/29/apple-fixes-root-password-bug-security-update/): the fix and Apple's apology in full", "@tr": "[MacRumors, 29 Kasım 2017](https://www.macrumors.com/2017/11/29/apple-fixes-root-password-bug-security-update/): düzeltme ve Apple'ın özrünün tam metni" },
+            { "@en": "[Macworld, 1 December 2017](https://www.macworld.com/article/230754/macos-high-sierra-root-security-issue-allows-admin-access-to-your-macbut-theres-a-fix.html): the bug coming back after the upgrade, and “Erign”", "@tr": "[Macworld, 1 Aralık 2017](https://www.macworld.com/article/230754/macos-high-sierra-root-security-issue-allows-admin-access-to-your-macbut-theres-a-fix.html): yükseltmeden sonra bug'ın geri gelmesi ve “Erign”" },
+            { "@en": "[iMore, 28 November 2017](https://www.imore.com/macos-has-root-bug): the case for telling Apple first", "@tr": "[iMore, 28 Kasım 2017](https://www.imore.com/macos-has-root-bug): önce Apple'a haber vermek gerektiğini savunan yazı" },
+            { "@en": "[Irresponsible Disclosure: Short Handbook of an Ethical Developer](https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer), Women Techmakers Istanbul, 31 March 2018", "@tr": "[Irresponsible Disclosure: Short Handbook of an Ethical Developer](https://speakerdeck.com/lemiorhan/irresponsible-disclosure-short-handbook-of-an-ethical-developer), Women Techmakers Istanbul, 31 Mart 2018" },
+            { "@en": "[The Register, 28 November 2017](https://www.theregister.com/software/2017/11/28/pro-tip-you-can-log-into-macos-high-sierra-as-root-with-no-password/954100): “Lemi Orhan Ergan”", "@tr": "[The Register, 28 Kasım 2017](https://www.theregister.com/software/2017/11/28/pro-tip-you-can-log-into-macos-high-sierra-as-root-with-no-password/954100): “Lemi Orhan Ergan”" },
+            { "@en": "[Habertürk, 29 November 2017](https://www.haberturk.com/apple-mac-sistemlerinde-buyuk-acik-bulundu-mac-acigi-nasil-duzeltilir-1733529-ekonomi): “Lemi Orhan Engin”", "@tr": "[Habertürk, 29 Kasım 2017](https://www.haberturk.com/apple-mac-sistemlerinde-buyuk-acik-bulundu-mac-acigi-nasil-duzeltilir-1733529-ekonomi): “Lemi Orhan Engin”" }
           ]
         }
       ]

@@ -7,6 +7,10 @@
 Every content/<name>.json is one page: home.json is the home page, 404.json the
 not-found page, and any other file is served at /<name>/. site.json holds what
 every page shares and is not a page itself.
+
+Every page is built in each language site.json lists: the first at the site
+root, every other under /<code>/. A string that differs between languages is
+written as {"@en": "...", "@tr": "..."}; any other value is the same in all.
 """
 import argparse
 import datetime
@@ -70,13 +74,42 @@ class BuildError(Exception):
     pass
 
 
-def load(name):
-    path = os.path.join(CONTENT, name + '.json')
-    with open(path, encoding='utf-8') as f:
+def read_content(name):
+    with open(os.path.join(CONTENT, name + '.json'), encoding='utf-8') as f:
         try:
             return json.load(f)
         except json.JSONDecodeError as err:
             raise BuildError('content/{}.json: {}'.format(name, err))
+
+
+def load(name, langs, lang):
+    """content/<name>.json with every translation pair resolved to its `lang` side."""
+    return localize(read_content(name), ['@' + code for code in langs], '@' + lang, 'content/{}.json'.format(name), '')
+
+
+PLACEHOLDER = re.compile(r'\{(\w+)\}')
+
+
+def pair_marks(s):
+    return sorted(PLACEHOLDER.findall(s)), sorted(url for _, url in LINK.findall(s)), sorted(REF.findall(s))
+
+
+def localize(value, keys, key, source, where):
+    if isinstance(value, list):
+        return [localize(v, keys, key, source, '{}[{}]'.format(where, i)) for i, v in enumerate(value)]
+    if not isinstance(value, dict):
+        return value
+    if not any(k in keys for k in value):
+        return {k: localize(v, keys, key, source, (where + '.' if where else '') + k) for k, v in value.items()}
+    if sorted(value) != sorted(keys) or not all(isinstance(v, str) and v for v in value.values()):
+        raise BuildError('{}: the translation at {} must give {} as non-empty strings, and nothing else'.format(
+            source, where or 'the top', ', '.join('"{}"'.format(k) for k in keys)))
+    marks = {k: pair_marks(value[k]) for k in keys}
+    for k in keys[1:]:
+        if marks[k] != marks[keys[0]]:
+            raise BuildError('{}: the translation at {} must keep the same {{placeholders}}, link URLs and [^n] '
+                             'refs in "{}" as in "{}"'.format(source, where, k, keys[0]))
+    return value[key]
 
 
 def attr(s):
@@ -112,13 +145,49 @@ def cls(base, extra):
     return base + ' ' + extra if extra else base
 
 
+TR_ALPHABET = 'abcçdefgğhıijklmnoöpqrsştuüvwxyz'
+
+
+def collate(s, lang):
+    if lang != 'tr':
+        return s.lower()
+    low = s.replace('I', 'ı').replace('İ', 'i').lower()
+    return [TR_ALPHABET.index(c) if c in TR_ALPHABET else len(TR_ALPHABET) + ord(c) for c in low]
+
+
+def lang_root(site, lang):
+    return '' if lang == site['languages'][0]['code'] else lang + '/'
+
+
 class Page:
-    def __init__(self, name, data, site):
+    def __init__(self, name, data, site, lang):
         self.name = name
         self.data = data
         self.site = site
-        self.path = '' if name == 'home' else name + '/'
+        self.lang = lang
+        self.local = '' if name == 'home' else name + '/'
+        self.path = lang_root(site, lang) + self.local
         self.prefix = '../' * self.path.count('/')
+        self.home = '../' * self.local.count('/')
+
+    def load(self, name):
+        return load(name, [lg['code'] for lg in self.site['languages']], self.lang)
+
+    def foreign(self, lang):
+        """Content with no "lang" of its own is written in the root language, so a page in another language marks it."""
+        lang = lang or self.site['languages'][0]['code']
+        return None if lang == self.lang else lang
+
+    def lang_attr(self, lang):
+        lang = self.foreign(lang)
+        return ' lang="{}"'.format(attr(lang)) if lang else ''
+
+    def marked(self, s, lang):
+        mark = self.lang_attr(lang)
+        return '<span{}>{}</span>'.format(mark, text(s)) if mark else text(s)
+
+    def collate(self, s):
+        return collate(s, self.lang)
 
     def month_year(self, date):
         year, month = date.split('-')[:2]
@@ -145,7 +214,7 @@ def block_h3(b, page):
 
 def block_quote(b, page):
     caption = inline(b['caption'])
-    if b.get('original'):
+    if b.get('original') and page.foreign(b['original_lang']):
         caption += ' <span lang="{}">{}</span>'.format(attr(b['original_lang']), text(b['original']))
     return ['<figure class="pull">',
             '  <blockquote>',
@@ -181,7 +250,7 @@ def block_entries(b, page):
             out.append('    <time datetime="{}">{}</time>'.format(attr(item['date']), page.month_year(item['date'])))
         else:
             out.append('    <span class="kind">{}</span>'.format(text(item['kind'])))
-        lang = ' lang="{}"'.format(attr(item['lang'])) if item.get('lang') else ''
+        lang = page.lang_attr(item.get('lang'))
         out.append('    <div>')
         out.append('      <a class="entry-title" href="{}"{}>{}</a>'.format(attr(item['url']), lang, text(item['title'])))
         if item.get('text'):
@@ -300,7 +369,7 @@ def block_toc(b, page):
     out = ['<ul class="toc">']
     for item in b['items']:
         out.append('  <li><a href="{}{}"><span class="toc-name">{}</span><span class="toc-desc">{}</span></a></li>'.format(
-            page.prefix, attr(item['path']), text(item['name']), inline(item['text'])))
+            page.home, attr(item['path']), text(item['name']), inline(item['text'])))
     out.append('</ul>')
     return out
 
@@ -389,7 +458,7 @@ def block_by_year(b, page):
 
 
 def block_latest_talks(b, page):
-    talks_page = Page('talks', load('talks'), page.site)
+    talks_page = Page('talks', page.load('talks'), page.site, page.lang)
     every_talk = ((year, ev, t)
                   for year, events in archive_years(talks_page.data['archive'], talks_page)
                   for ev in events
@@ -403,8 +472,7 @@ def block_latest_talks(b, page):
             out.append('    <time datetime="{0}">{0}</time>'.format(year))
         out.append('    <div>')
         title = t.get('title') or ev['name']
-        lang = t.get('lang') if t.get('title') else ev.get('lang')
-        lang = ' lang="{}"'.format(attr(lang)) if lang else ''
+        lang = page.lang_attr(t.get('lang') if t.get('title') else ev.get('lang'))
         link = t.get('slides') or next(iter(talk_videos(t, ev, talks_page)), None)
         archive = talks_page.data['archive']
         badge = ' ' + spoken_badge(ev, archive, talks_page)
@@ -413,8 +481,7 @@ def block_latest_talks(b, page):
         else:
             out.append('      <span class="entry-title"{}>{}</span>{}'.format(lang, text(title), badge))
         if t.get('title'):
-            ev_lang = ' lang="{}"'.format(attr(ev['lang'])) if ev.get('lang') else ''
-            out.append('      <p class="entry-meta"{}>{}</p>'.format(ev_lang, text(ev['name'])))
+            out.append('      <p class="entry-meta"{}>{}</p>'.format(page.lang_attr(ev.get('lang')), text(ev['name'])))
         if t.get('summary'):
             out.append('      <p>{}</p>'.format(inline(t['summary'])))
         out.append('    </div>')
@@ -471,14 +538,15 @@ def media_card(item, uses, talks_page, page):
         raise BuildError('data/sharing.json: {} has no thumbnail at {}; run python3 tools/sharing_sources.py'.format(
             item['url'], path))
     archive = talks_page.data['archive']
-    meta = []
+    meta, lang = [], ''
     if uses:
         year, ev, t, url, _ = uses[0]
         href = url
         title = t.get('title') or ev['name']
+        lang = page.lang_attr(t.get('lang') if t.get('title') else ev.get('lang'))
         for year, ev, t, url, part in uses:
             when = page.month_year(ev['date']) if ev.get('date') else year
-            where = '' if ev['name'] == title else text(ev['name']) + ', '
+            where = '' if ev['name'] == title else page.marked(ev['name'], ev.get('lang')) + ', '
             meta.append('{}<time datetime="{}">{}</time>'.format(where, attr(ev.get('date', year)), when))
             if part:
                 meta[-1] += ', ' + text(fill(archive['video_n'], n=str(part)))
@@ -494,7 +562,7 @@ def media_card(item, uses, talks_page, page):
            '  <a class="media-card" href="{}">'.format(attr(href)),
            '    <img src="{}{}" width="{}" height="{}" loading="lazy" alt="">'.format(
                page.prefix, attr(path), item['width'], item['height']),
-           '    <span class="media-title">{}</span>'.format(text(title)),
+           '    <span class="media-title"{}>{}</span>'.format(lang, text(title)),
            '  </a>']
     if meta:
         out.append('  <p class="media-meta">{}</p>'.format(meta))
@@ -502,7 +570,7 @@ def media_card(item, uses, talks_page, page):
 
 
 def block_media(kind, b, page):
-    talks_page = Page('talks', load('talks'), page.site)
+    talks_page = Page('talks', page.load('talks'), page.site, page.lang)
     links = talk_links(kind, talks_page)
     cards = [media_card(item, links.get(media_key(item['url'])), talks_page, page) for item in sharing_snapshot(kind)]
     return ['<ul class="media-grid">'] + indent(sum(cards, []), 2) + ['</ul>']
@@ -607,7 +675,7 @@ def blocks_in(data, kind):
 
 def career_path(page):
     """content/career.json's log as git history, newest first: one commit per stretch at one org."""
-    logs = blocks_in(load('career'), 'log')
+    logs = blocks_in(page.load('career'), 'log')
     if not logs:
         page.fail('the hero draws the "log" block of content/career.json, and that file has none')
     rows = []
@@ -625,7 +693,7 @@ def career_path(page):
 
 
 def photo_event(photo, page):
-    events = [ev for evs in load('talks')['archive']['events'].values() for ev in evs
+    events = [ev for evs in page.load('talks')['archive']['events'].values() for ev in evs
               if any(t.get('title') == photo['talk'] for t in ev.get('talks', []))]
     if len(events) != 1:
         page.fail('hero.photo.talk {!r} must name a talk given at exactly one event in content/talks.json; it was given at {}'.format(
@@ -636,7 +704,7 @@ def photo_event(photo, page):
 def hero_facts(h, path, page):
     facts = {'since': path[-1]['year'], 'event': photo_event(h['photo'], page)['name']}
     if h.get('community'):
-        items = [i for b in blocks_in(load('community'), 'items') for i in b['items'] if i.get('title') == h['community']]
+        items = [i for b in blocks_in(page.load('community'), 'items') for i in b['items'] if i.get('title') == h['community']]
         founded = first_year(items[0].get('meta')) if items else None
         if not founded:
             page.fail('hero.community {!r} needs an item of that title in content/community.json with a year in "meta"'.format(
@@ -710,6 +778,7 @@ def hero_path(path, h):
 
 def hero_photo(h, facts, page):
     photo = h['photo']
+    event = photo_event(photo, page)
     stem = page.prefix + 'assets/img/' + HERO_PHOTO
 
     def srcset(ext):
@@ -724,7 +793,8 @@ def hero_photo(h, facts, page):
                 attr(hero_fill('photo.alt', photo['alt'], facts, page))),
             '  </picture>',
             '  <p class="hero-ref" aria-hidden="true">{}</p>'.format(text(h['head'])),
-            '  <figcaption class="hero-caption">{}</figcaption>'.format(text(hero_fill('photo.caption', photo['caption'], facts, page))),
+            '  <figcaption class="hero-caption">{}</figcaption>'.format(hero_fill(
+                'photo.caption', text(photo['caption']), dict(facts, event=page.marked(event['name'], event.get('lang'))), page)),
             '</figure>']
 
 
@@ -819,7 +889,7 @@ def game(g, page):
     levels = game_levels(g, page)
     island = json.dumps({'ui': g['ui'], 'levels': levels}, ensure_ascii=False).replace('<', '\\u003c')
     talk = g['talk']
-    cited = '<a href="{}">{}</a>'.format(attr(talk['url']), text(talk['title']))
+    cited = '<a href="{}"{}>{}</a>'.format(attr(talk['url']), page.lang_attr(talk.get('lang')), text(talk['title']))
     out = ['<section class="game" id="play" aria-labelledby="play-title">',
            '  <div class="wrap">',
            '    <div class="game-head">',
@@ -972,7 +1042,8 @@ def talk_map(archive, page):
             if p['region']:
                 r = regions.setdefault(p['region'], dict(p, n=0))
                 r['n'] += 1
-    by_count = sorted((k for k in countries if k != 'online'), key=lambda k: (-countries[k]['n'], countries[k]['name']))
+    by_count = sorted((k for k in countries if k != 'online'),
+                      key=lambda k: (-countries[k]['n'], page.collate(countries[k]['name'])))
     w = world()
 
     def path(d, cls, attrs='', title=''):
@@ -1032,7 +1103,8 @@ def talk_map(archive, page):
     out += indent(chips, 6)
     out.append('    </div>')
     for k in by_count:
-        mine = sorted(((code, r) for code, r in regions.items() if r['country'] == k), key=lambda cr: (-cr[1]['n'], cr[1]['region_name']))
+        mine = sorted(((code, r) for code, r in regions.items() if r['country'] == k),
+                      key=lambda cr: (-cr[1]['n'], page.collate(cr[1]['region_name'])))
         if len(mine) < 2:
             continue
         out.append('    <div class="chips chips-sub" role="group" aria-label="{}" data-for="{}" hidden>'.format(
@@ -1092,7 +1164,7 @@ def theme_cloud(archive, page):
         text(th['all']), total)]
     buttons += ['<button type="button" data-theme="{}" data-label="{}" aria-pressed="false">{} <span class="n">{}</span></button>'.format(
                     attr(k), attr(items[k]), text(items[k]), count[k])
-                for k in sorted(items, key=lambda k: items[k].lower())]
+                for k in sorted(items, key=lambda k: page.collate(items[k]))]
     return (['<section class="themes" aria-labelledby="themes-title" hidden>',
              '  <h2 class="sub" id="themes-title">{}</h2>'.format(text(th['heading'])),
              '  <div class="chips cloud" role="group" aria-label="{}">'.format(attr(th['label']))]
@@ -1117,7 +1189,7 @@ def archive_controls(archive, page):
     if unused:
         page.fail('archive.locationTypes.items defines {}, but no event has that locationType'.format(', '.join(unused)))
     chips = ['    <button type="button" data-location-type="{}" aria-pressed="false">{} <span class="n">{}</span></button>'.format(
-                 attr(k), text(items[k]), count[k]) for k in sorted(items, key=lambda k: items[k].lower())]
+                 attr(k), text(items[k]), count[k]) for k in sorted(items, key=lambda k: page.collate(items[k]))]
     return (['', '<nav class="years-nav" aria-label="{}">'.format(attr(archive['years_label'])), '  <ol class="years">']
             + indent(strip, 4) + ['  </ol>', '</nav>', '',
                                   '<div class="filter-bar" hidden>',
@@ -1166,8 +1238,7 @@ def event(ev, archive, page):
     name = text(ev['name'])
     if ev.get('url'):
         name = '<a href="{}">{}</a>'.format(attr(ev['url']), name)
-    lang = ' lang="{}"'.format(attr(ev['lang'])) if ev.get('lang') else ''
-    out.append('    <h3 class="ev-name"{}>{}</h3>'.format(lang, name))
+    out.append('    <h3 class="ev-name"{}>{}</h3>'.format(page.lang_attr(ev.get('lang')), name))
     meta = []
     if place:
         meta.append('<span class="ev-place">{}{}</span>'.format(place['flag'], text(place['label'])))
@@ -1178,7 +1249,7 @@ def event(ev, archive, page):
     if talks:
         out.append('    <ul class="ev-talks">')
         for t, keys in zip(talks, themes):
-            about = text(t.get('title') or ev['name'])
+            about = page.marked(t.get('title') or ev['name'], t.get('lang') if t.get('title') else ev.get('lang'))
             links = []
             if t.get('slides'):
                 links.append('<a href="{}">{}<span class="sr-only">{}</span></a>'.format(
@@ -1190,8 +1261,7 @@ def event(ev, archive, page):
                     attr(url), text(label), fill(text(archive['video_hidden']), title=about)))
             parts = []
             if t.get('title'):
-                tlang = ' lang="{}"'.format(attr(t['lang'])) if t.get('lang') else ''
-                parts.append('<span class="ev-title"{}>{}</span>'.format(tlang, text(t['title'])))
+                parts.append('<span class="ev-title"{}>{}</span>'.format(page.lang_attr(t.get('lang')), text(t['title'])))
             if links:
                 parts.append('<span class="ev-links">' + ' '.join(links) + '</span>')
             if keys:
@@ -1229,7 +1299,8 @@ def event_photo(ev, photo, page):
         if not os.path.isfile(os.path.join(ROOT, 'assets', 'talks', name + suffix + '.jpg')):
             page.fail('photo of {!r}: assets/talks/{}{}.jpg does not exist'.format(ev['name'], name, suffix))
     src = page.prefix + 'assets/talks/' + attr(name)
-    lang = ' data-caption-lang="{}"'.format(attr(ev['lang'])) if ev.get('lang') else ''
+    lang = page.foreign(ev.get('lang'))
+    lang = ' data-caption-lang="{}"'.format(attr(lang)) if lang else ''
     return ['<a class="ev-photo" href="{}.jpg" data-lightbox data-caption="{}"{}>'.format(src, attr(ev['name']), lang),
             '  <img src="{}-640.jpg" width="640" height="427" loading="lazy" alt="{}">'.format(src, attr(photo['alt'])),
             '</a>']
@@ -1254,11 +1325,6 @@ def archive_sections(archive, page):
 
 # Documents
 
-def check_lang(fail, lang):
-    if not isinstance(lang, str) or not lang:
-        fail('"lang" must be a non-empty string')
-
-
 def check_strings(fail, key, value):
     if not isinstance(value, dict) or not all(isinstance(v, str) and v for v in value.values()):
         fail('"{}" must be an object whose values are non-empty strings'.format(key))
@@ -1277,8 +1343,19 @@ def shell(page, body):
     image = d.get('image', site['image'])
     if 'image' in d:
         check_image(page.fail, image)
-    nav = ['<a href="{}{}"{}>{}</a>'.format(p, attr(item['path']), ' aria-current="page"' if item['path'] == page.path else '',
+    nav = ['<a href="{}{}"{}>{}</a>'.format(page.home, attr(item['path']),
+                                             ' aria-current="page"' if item['path'] == page.local else '',
                                              text(item['label'])) for item in site['nav']]
+    others = [lg for lg in site['languages'] if lg['code'] != page.lang]
+    alternates = ['  <link rel="alternate" hreflang="{}" href="{}{}{}">'.format(
+                      attr(lg['code']), site['url'], lang_root(site, lg['code']), page.local) for lg in site['languages']]
+    alternates.append('  <link rel="alternate" hreflang="x-default" href="{}{}">'.format(site['url'], page.local))
+    locale, = [lg['locale'] for lg in site['languages'] if lg['code'] == page.lang]
+    locales = (['  <meta property="og:locale" content="{}">'.format(attr(locale))]
+               + ['  <meta property="og:locale:alternate" content="{}">'.format(attr(lg['locale'])) for lg in others])
+    switch = ['      <a class="lang-switch" href="{}{}{}" hreflang="{code}" lang="{code}" aria-label="{}">{}</a>'.format(
+                  p, lang_root(site, lg['code']), page.local, attr(lg['name']), text(lg['code'].upper()), code=attr(lg['code']))
+              for lg in others]
     extra = []
     if d.get('profile'):
         extra = ['  <meta property="profile:first_name" content="{}">'.format(attr(d['profile']['first_name'])),
@@ -1291,18 +1368,8 @@ def shell(page, body):
         person['image'] = site['url'] + person['image']
         data = json.dumps(person, ensure_ascii=False, indent=2).replace('</', '<\\/')
         jsonld = ['', '  <script type="application/ld+json">'] + indent(data.split('\n'), 2) + ['  </script>']
-    lang = d.get('lang', site['lang'])
-    check_lang(page.fail, lang)
-    page_ui = d.get('ui', {})
-    check_strings(page.fail, 'ui', page_ui)
-    chrome = '' if lang == site['lang'] else ' lang="{}"'.format(attr(site['lang']))
     ui = dict(site['ui'])
     ui.update(d.get('archive', {}).get('ui', {}))
-    unknown = sorted(set(page_ui) - set(site['ui']))
-    if unknown:
-        page.fail('ui gives {}, which site.json\'s ui does not have; a page can only translate the site\'s strings'.format(
-            ', '.join(unknown)))
-    ui.update(page_ui)
     ui_json = json.dumps(ui, ensure_ascii=False).replace('</', '<\\/')
     main_class = ' class="archive"' if d.get('archive') else ''
     game_css, game_js = [], []
@@ -1313,7 +1380,7 @@ def shell(page, body):
     lines = [
         '<!doctype html>',
         GENERATED,
-        '<html lang="{}">'.format(attr(lang)),
+        '<html lang="{}">'.format(attr(page.lang)),
         '<head>',
         '  <meta charset="utf-8">',
         '  <meta name="viewport" content="width=device-width, initial-scale=1">',
@@ -1324,6 +1391,7 @@ def shell(page, body):
         '  <meta name="theme-color" content="#F4F6FA" media="(prefers-color-scheme: light)">',
         '  <meta name="theme-color" content="#0B1A30" media="(prefers-color-scheme: dark)">',
         '  <link rel="canonical" href="{}{}">'.format(site['url'], page.path),
+    ] + alternates + [
         '',
         '  <meta property="og:type" content="{}">'.format(attr(d.get('og_type', 'website'))),
         '  <meta property="og:site_name" content="{}">'.format(attr(site['name'])),
@@ -1334,7 +1402,7 @@ def shell(page, body):
         '  <meta property="og:image:width" content="{}">'.format(image['width']),
         '  <meta property="og:image:height" content="{}">'.format(image['height']),
         '  <meta property="og:image:alt" content="{}">'.format(attr(image['alt'])),
-    ] + extra + [
+    ] + locales + extra + [
         '  <meta name="twitter:card" content="summary_large_image">',
         '  <meta name="twitter:site" content="{}">'.format(attr(site['twitter'])),
         '',
@@ -1360,14 +1428,15 @@ def shell(page, body):
     ] + game_js + jsonld + [
         '</head>',
         '<body>',
-        '  <a class="skip" href="#main"{}>{}</a>'.format(chrome, text(site['skip'])),
+        '  <a class="skip" href="#main">{}</a>'.format(text(site['skip'])),
         '',
-        '  <header class="site-header"{}>'.format(chrome),
+        '  <header class="site-header">',
         '    <div class="wrap header-row">',
-        '      <a class="brand" href="{}">{}</a>'.format(p or './', text(site['name'])),
+        '      <a class="brand" href="{}">{}</a>'.format(page.home or './', text(site['name'])),
         '      <nav class="site-nav" aria-label="{}">'.format(attr(site['nav_label'])),
     ] + indent(nav, 8) + [
         '      </nav>',
+    ] + switch + [
         '      <button class="theme-toggle" type="button" aria-label="{}" hidden>'.format(attr(site['theme_toggle'])),
         '        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z"/></svg>',
         '      </button>',
@@ -1378,7 +1447,7 @@ def shell(page, body):
         body,
         '  </main>',
         '',
-        '  <footer class="site-footer"{}>'.format(chrome),
+        '  <footer class="site-footer">',
         '    <div class="wrap footer-row">',
     ] + ['      <p>{}</p>'.format(text(line)) for line in site['footer']] + [
         '    </div>',
@@ -1423,26 +1492,54 @@ def check_refs(html_text, page):
         page.fail('sources listed but never cited with [^n]: {}'.format(sorted(listed - cited)))
 
 
-def render_not_found(page):
+def localize_links(html_text, page):
+    """The not-found page is served at any path, so it links pages root-absolute, each to its own language's."""
+    root = lang_root(page.site, page.lang)
+    return re.sub(r'href="/(?!/|assets/)', 'href="/' + root, html_text) if root else html_text
+
+
+def not_found_body(page):
     d = page.data
-    if 'lang' in d or 'ui' in d:
-        page.fail('the not-found page takes "lang" from site.json and shows no "ui" strings')
+    out = ['<div class="notfound-text">',
+           '  <h1>{}</h1>'.format(text(d['heading'])),
+           '  <p><code>{}</code></p>'.format(text(d['code']))]
+    out += indent(blocks(d['blocks'], page), 2) + ['</div>']
     maze = d.get('maze')
-    maze_head, maze_body = [], []
     if maze:
         island = json.dumps({'ui': maze['ui']}, ensure_ascii=False).replace('<', '\\u003c')
-        # Root-absolute: GitHub Pages serves 404.html at whatever path was asked for.
+        out += ['<section class="maze" aria-labelledby="maze-title" data-maze hidden>',
+                '  <h2 id="maze-title">{}</h2>'.format(text(maze['title'])),
+                '  <p class="maze-intro">{}</p>'.format(text(maze['intro'])),
+                '</section>',
+                '<script type="application/json" id="maze-data">{}</script>'.format(island)]
+    return localize_links('\n'.join(out), page).split('\n')
+
+
+# GitHub Pages serves this one file at whatever path was asked for, so it carries every language: the root one
+# in <main>, the others in a <template> each, swapped in before the deferred maze script reads the page.
+NOT_FOUND_SWAP = ('document.querySelectorAll(\'template[data-lang]\').forEach(function (t) { '
+                  'if (location.pathname.split(\'/\')[1] !== t.dataset.lang) return; '
+                  'document.querySelector(\'main\').replaceChildren(t.content); '
+                  'document.documentElement.lang = t.dataset.lang; document.title = t.dataset.title; });')
+
+
+def render_not_found(pages):
+    page, others = pages[0], pages[1:]
+    d = page.data
+    maze_head = []
+    if d.get('maze'):
         maze_head = ['  <link rel="stylesheet" href="/assets/maze-game.css">',
                      '  <script src="/assets/maze-game.js" defer></script>']
-        maze_body = ['    <section class="maze" aria-labelledby="maze-title" data-maze hidden>',
-                     '      <h2 id="maze-title">{}</h2>'.format(text(maze['title'])),
-                     '      <p class="maze-intro">{}</p>'.format(text(maze['intro'])),
-                     '    </section>',
-                     '    <script type="application/json" id="maze-data">{}</script>'.format(island)]
+    templates = []
+    for other in others:
+        templates += ['  <template data-lang="{}" data-title="{}">'.format(attr(other.lang), attr(other.data['title']))]
+        templates += indent(not_found_body(other), 4) + ['  </template>']
+    if templates:
+        templates += ['  <script>{}</script>'.format(NOT_FOUND_SWAP)]
     lines = [
         '<!doctype html>',
         GENERATED,
-        '<html lang="{}">'.format(attr(page.site['lang'])),
+        '<html lang="{}">'.format(attr(page.lang)),
         '<head>',
         '  <meta charset="utf-8">',
         '  <meta name="viewport" content="width=device-width, initial-scale=1">',
@@ -1467,13 +1564,9 @@ def render_not_found(page):
         '</head>',
         '<body>',
         '  <main class="wrap notfound">',
-        '    <div class="notfound-text">',
-        '      <h1>{}</h1>'.format(text(d['heading'])),
-        '      <p><code>{}</code></p>'.format(text(d['code'])),
-    ] + indent(blocks(d['blocks'], page), 6) + [
-        '    </div>',
-    ] + maze_body + [
+    ] + indent(not_found_body(page), 4) + [
         '  </main>',
+    ] + templates + [
         '</body>',
         '</html>',
         '',
@@ -1481,28 +1574,52 @@ def render_not_found(page):
     return '\n'.join(lines)
 
 
-def build(out):
-    site = load('site')
+LANG_CODE = re.compile(r'[a-z]{2,3}')
 
+
+def languages(site_fail):
+    langs = read_content('site').get('languages')
+    if not isinstance(langs, list) or not langs or not all(
+            isinstance(lg, dict) and isinstance(lg.get('code'), str) and LANG_CODE.fullmatch(lg['code'])
+            and all(isinstance(lg.get(k), str) and lg[k] for k in ('name', 'locale')) for lg in langs):
+        site_fail('"languages" must list each language as {"code", "name", "locale"}, the code in lowercase letters')
+    codes = [lg['code'] for lg in langs]
+    if len(set(codes)) != len(codes):
+        site_fail('"languages" lists a language twice')
+    return codes
+
+
+def build(out):
     def site_fail(message):
         raise BuildError('content/site.json: {}'.format(message))
-    check_lang(site_fail, site.get('lang'))
-    check_strings(site_fail, 'ui', site.get('ui'))
-    check_image(site_fail, site['image'])
+    langs = languages(site_fail)
     names = sorted(f[:-5] for f in os.listdir(CONTENT) if f.endswith('.json') and f != 'site.json')
-    written = []
-    for name in names:
-        page = Page(name, load(name), site)
-        if name == '404':
-            target, html_text = '404.html', render_not_found(page)
-        else:
-            target, html_text = os.path.join(page.path, 'index.html'), render_page(page)
+    written, not_found = [], []
+
+    def write(target, html_text, page):
         check_refs(html_text, page)
         dest = os.path.join(out, target)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         with open(dest, 'w', encoding='utf-8') as f:
             f.write(html_text)
         written.append(target)
+
+    for lang in langs:
+        site = load('site', langs, lang)
+        check_strings(site_fail, 'ui', site.get('ui'))
+        check_image(site_fail, site['image'])
+        for name in names:
+            page = Page(name, load(name, langs, lang), site, lang)
+            stray = sorted(k for k in ('lang', 'ui') if k in page.data)
+            if stray:
+                page.fail('{} belongs in site.json: every page is built in each language it lists'.format(
+                    ' and '.join('"{}"'.format(k) for k in stray)))
+            if name == '404':
+                not_found.append(page)
+            else:
+                write(os.path.join(page.path, 'index.html'), render_page(page), page)
+    if not_found:
+        write('404.html', render_not_found(not_found), not_found[0])
     if os.path.abspath(out) != ROOT:
         shutil.copytree(os.path.join(ROOT, 'assets'), os.path.join(out, 'assets'), dirs_exist_ok=True)
     return written

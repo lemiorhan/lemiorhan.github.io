@@ -15,13 +15,15 @@ import tempfile
 import unittest
 from html.parser import HTMLParser
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import i18n
+
+ROOT =os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLI = os.path.join(ROOT, 'tests', 'contact_dom_cli.js')
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'}
 WEB3FORMS = 'https://api.web3forms.com/submit'
 
-with open(os.path.join(ROOT, 'content', 'contact.json'), encoding='utf-8') as f:
-    FORM = next(b for s in json.load(f)['sections'] for b in s['blocks'] if isinstance(b, dict) and b.get('type') == 'form')
+FORM = next(b for s in i18n.content('contact')['sections'] for b in s['blocks']
+            if isinstance(b, dict) and b.get('type') == 'form')
 SAY = FORM['status']
 VISITOR = {'name': 'Ada Lovelace', 'email': 'ada@example.com', 'message': 'Would you speak at our meetup?'}
 FIXED = {'access_key': FORM['access_key'], 'subject': FORM['subject'], 'from_name': FORM['from_name']}

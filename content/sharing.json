@@ -1,91 +1,227 @@
 {
-  "title": "Sharing, Lemi Orhan Ergin",
-  "description": "Everything Lemi Orhan Ergin shares in public: talk slides and recordings, code on GitHub, the Lemi'nin Not Defteri podcast, articles and social media accounts.",
+  "title": { "@en": "Sharing, Lemi Orhan Ergin", "@tr": "Paylaşımlar, Lemi Orhan Ergin" },
+  "description": {
+    "@en": "Everything Lemi Orhan Ergin shares in public: talk slides and recordings, code on GitHub, the Lemi'nin Not Defteri podcast, articles and social media accounts.",
+    "@tr": "Lemi Orhan Ergin'in herkese açık paylaştığı her şey: konuşma slaytları ve kayıtları, GitHub'daki kodlar, Lemi'nin Not Defteri podcast'i, yazılar ve sosyal medya hesapları."
+  },
   "head": {
-    "heading": "Sharing",
+    "heading": { "@en": "Sharing", "@tr": "Paylaşımlar" },
     "cmd": "git remote -v",
     "blocks": [
-      { "type": "p", "class": "intro", "text": "Everything I share in public, in one place: the slides and recordings of my talks, code, my podcast, articles, and the accounts I post from." }
+      {
+        "type": "p",
+        "class": "intro",
+        "text": {
+          "@en": "Everything I share in public, in one place: the slides and recordings of my talks, code, my podcast, articles, and the accounts I post from.",
+          "@tr": "Herkese açık paylaştığım her şey tek yerde: konuşmalarımın slaytları ve kayıtları, kodlarım, podcast'im, yazılarım ve paylaşım yaptığım hesaplar."
+        }
+      }
     ]
   },
   "sections": [
     {
       "id": "slides",
-      "heading": "Slides",
+      "heading": { "@en": "Slides", "@tr": "Slaytlar" },
       "cmd": "ls *.pdf",
       "blocks": [
-        { "type": "p", "class": "sub-note", "text": "My latest decks. All of them are on [Speaker Deck](https://speakerdeck.com/lemiorhan)." },
+        {
+          "type": "p",
+          "class": "sub-note",
+          "text": {
+            "@en": "My latest decks. All of them are on [Speaker Deck](https://speakerdeck.com/lemiorhan).",
+            "@tr": "En son slaytlarım. Hepsi [Speaker Deck'te](https://speakerdeck.com/lemiorhan)."
+          }
+        },
         { "type": "decks" }
       ]
     },
     {
       "id": "video",
-      "heading": "Video",
+      "heading": { "@en": "Video", "@tr": "Videolar" },
       "cmd": "ls *.mp4",
       "blocks": [
-        { "type": "p", "class": "sub-note", "text": "From the top of my [playlist of talk recordings](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdvUVfv0M55mRbTB8CMYT9R) on YouTube, which also has the ones published on conference channels. There is also one on [modularity](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdK0lBBfpGhwX1ppqq128WD)." },
+        {
+          "type": "p",
+          "class": "sub-note",
+          "text": {
+            "@en": "From the top of my [playlist of talk recordings](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdvUVfv0M55mRbTB8CMYT9R) on YouTube, which also has the ones published on conference channels. There is also one on [modularity](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdK0lBBfpGhwX1ppqq128WD).",
+            "@tr": "YouTube'daki [konuşma kayıtları playlist'imin](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdvUVfv0M55mRbTB8CMYT9R) en üstündeki videolar. Konferans kanallarında yayımlanan kayıtlar da bu listede. [Modülerlik](https://www.youtube.com/playlist?list=PLQTv1b9jwvWdK0lBBfpGhwX1ppqq128WD) üzerine ayrı bir playlist de var."
+          }
+        },
         { "type": "recordings" },
         {
           "type": "entries",
           "items": [
-            { "kind": "TEDx, 2019", "title": "The Apple That Made Me Famous Overnight", "url": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma", "text": "In Turkish, at TEDxTarsusAmericanCollege: the night a macOS root login bug made me known worldwide, and what it says about professional ethics. The [root bug page](../root-bug/) has the whole story." }
+            {
+              "kind": "TEDx, 2019",
+              "title": "The Apple That Made Me Famous Overnight",
+              "url": "https://www.ted.com/talks/lemi_orhan_ergin_bir_gecede_unlu_eden_elma",
+              "text": {
+                "@en": "In Turkish, at TEDxTarsusAmericanCollege: the night a macOS root login bug made me known worldwide, and what it says about professional ethics. The [root bug page](../root-bug/) has the whole story.",
+                "@tr": "TEDxTarsusAmericanCollege'da, Türkçe: macOS'taki root login bug'ının beni dünyaca tanınır yaptığı gece ve bu gecenin meslek etiği hakkında söyledikleri. Hikâyenin tamamı [root bug sayfasında](../root-bug/)."
+              }
+            }
           ]
         }
       ]
     },
     {
       "id": "code",
-      "heading": "Code",
+      "heading": { "@en": "Code", "@tr": "Kod" },
       "cmd": "gh repo list",
       "blocks": [
-        { "type": "p", "class": "sub-note", "text": "My own repositories on [GitHub](https://github.com/lemiorhan). The year is when each one started." },
+        {
+          "type": "p",
+          "class": "sub-note",
+          "text": {
+            "@en": "My own repositories on [GitHub](https://github.com/lemiorhan). The year is when each one started.",
+            "@tr": "[GitHub'daki](https://github.com/lemiorhan) kendi repo'larım. Yanlarındaki yıl, her birinin başladığı yıl."
+          }
+        },
         {
           "type": "entries",
           "items": [
-            { "kind": "2026, Python", "title": "brewdash", "url": "https://github.com/lemiorhan/brewdash", "text": "The missing dashboard for Homebrew on the Mac. Installs from its own [Homebrew tap](https://github.com/lemiorhan/homebrew-brewdash); [project page](https://lemiorhan.github.io/brewdash)." },
-            { "kind": "2026, TypeScript", "title": "keycode", "url": "https://github.com/lemiorhan/keycode", "text": "A terminal-based presentation tool for macOS." },
-            { "kind": "2026, Python", "title": "audiocript", "url": "https://github.com/lemiorhan/audiocript", "text": "A terminal-based audio transcription app for macOS." },
-            { "kind": "2026, JavaScript", "title": "firefox-advanced-tab-manager", "url": "https://github.com/lemiorhan/firefox-advanced-tab-manager", "text": "An advanced tab manager for the browser." },
-            { "kind": "2017", "title": "personal-zen", "url": "https://github.com/lemiorhan/personal-zen", "text": "Some words about my values and principles, and about life in general." }
+            {
+              "kind": "2026, Python",
+              "title": "brewdash",
+              "url": "https://github.com/lemiorhan/brewdash",
+              "text": {
+                "@en": "The missing dashboard for Homebrew on the Mac. Installs from its own [Homebrew tap](https://github.com/lemiorhan/homebrew-brewdash); [project page](https://lemiorhan.github.io/brewdash).",
+                "@tr": "Mac'te Homebrew için eksik olan dashboard. Kendi [Homebrew tap'inden](https://github.com/lemiorhan/homebrew-brewdash) kurulur; [proje sayfası](https://lemiorhan.github.io/brewdash)."
+              }
+            },
+            {
+              "kind": "2026, TypeScript",
+              "title": "keycode",
+              "url": "https://github.com/lemiorhan/keycode",
+              "text": { "@en": "A terminal-based presentation tool for macOS.", "@tr": "macOS için terminal tabanlı bir sunum aracı." }
+            },
+            {
+              "kind": "2026, Python",
+              "title": "audiocript",
+              "url": "https://github.com/lemiorhan/audiocript",
+              "text": {
+                "@en": "A terminal-based audio transcription app for macOS.",
+                "@tr": "Ses kayıtlarını metne döken, terminal tabanlı bir macOS uygulaması."
+              }
+            },
+            {
+              "kind": "2026, JavaScript",
+              "title": "firefox-advanced-tab-manager",
+              "url": "https://github.com/lemiorhan/firefox-advanced-tab-manager",
+              "text": { "@en": "An advanced tab manager for the browser.", "@tr": "Tarayıcı için gelişmiş bir sekme yöneticisi." }
+            },
+            {
+              "kind": "2017",
+              "title": "personal-zen",
+              "url": "https://github.com/lemiorhan/personal-zen",
+              "text": {
+                "@en": "Some words about my values and principles, and about life in general.",
+                "@tr": "Değerlerim, ilkelerim ve genel olarak hayat üzerine birkaç söz."
+              }
+            }
           ]
         }
       ]
     },
     {
       "id": "audio",
-      "heading": "Audio",
+      "heading": { "@en": "Audio", "@tr": "Ses" },
       "cmd": "ls *.mp3",
       "blocks": [
         {
           "type": "entries",
           "items": [
-            { "kind": "Podcast, 2018 – 2020", "title": "Lemi'nin Not Defteri", "url": "https://open.spotify.com/show/29k87DtwOLRZ1h2f0ONXni", "text": "My podcast in Turkish, on software, technology and culture. Also on [Apple Podcasts](https://podcasts.apple.com/tr/podcast/leminin-not-defteri/id1410475318), [Spreaker](https://www.spreaker.com/podcast/lemi-nin-not-defteri--6288114) and [YouTube](https://www.youtube.com/playlist?list=PLQTv1b9jwvWd7AwjQrOsDGOvRcRs4tb2k), and as an [RSS feed](https://www.spreaker.com/show/6288114/episodes/feed)." },
-            { "kind": "Guest, 2020", "title": "Technical: How Does Craftbase Build Software?","url": "https://open.spotify.com/episode/3x1FiEoaDg0VW59bPVGy2d", "text": "On the Üretim Bandı podcast, about how we built software at Craftbase." },
-            { "kind": "Guest, 2017", "title": "How Does iyzico Build Products?","url": "https://open.spotify.com/episode/3Pb7IUoSRMTR32C5Hqk0BO", "text": "On the Üretim Bandı podcast, about how iyzico builds products." },
-            { "kind": "Guest, 2016", "title": "On fighting elephants in the room", "url": "https://podcasts.apple.com/us/podcast/on-fighting-elephants-in-the-room-with-lemi-orhan-ergin/id936476881?i=1000377992398", "text": "On the IT Serbia Podcast, in English." }
+            {
+              "kind": "Podcast, 2018 – 2020",
+              "title": "Lemi'nin Not Defteri",
+              "lang": "tr",
+              "url": "https://open.spotify.com/show/29k87DtwOLRZ1h2f0ONXni",
+              "text": {
+                "@en": "My podcast in Turkish, on software, technology and culture. Also on [Apple Podcasts](https://podcasts.apple.com/tr/podcast/leminin-not-defteri/id1410475318), [Spreaker](https://www.spreaker.com/podcast/lemi-nin-not-defteri--6288114) and [YouTube](https://www.youtube.com/playlist?list=PLQTv1b9jwvWd7AwjQrOsDGOvRcRs4tb2k), and as an [RSS feed](https://www.spreaker.com/show/6288114/episodes/feed).",
+                "@tr": "Yazılım, teknoloji ve kültür üzerine Türkçe podcast'im. [Apple Podcasts](https://podcasts.apple.com/tr/podcast/leminin-not-defteri/id1410475318), [Spreaker](https://www.spreaker.com/podcast/lemi-nin-not-defteri--6288114) ve [YouTube](https://www.youtube.com/playlist?list=PLQTv1b9jwvWd7AwjQrOsDGOvRcRs4tb2k) üzerinden de dinleyebilirsiniz. Bir de [RSS feed'i](https://www.spreaker.com/show/6288114/episodes/feed) var."
+              }
+            },
+            {
+              "kind": { "@en": "Guest, 2020", "@tr": "Konuk, 2020" },
+              "title": "Technical: How Does Craftbase Build Software?",
+              "url": "https://open.spotify.com/episode/3x1FiEoaDg0VW59bPVGy2d",
+              "text": {
+                "@en": "On the Üretim Bandı podcast, about how we built software at Craftbase.",
+                "@tr": "Üretim Bandı podcast'inde, Craftbase'de yazılımı nasıl geliştirdiğimiz üzerine."
+              }
+            },
+            {
+              "kind": { "@en": "Guest, 2017", "@tr": "Konuk, 2017" },
+              "title": "How Does iyzico Build Products?",
+              "url": "https://open.spotify.com/episode/3Pb7IUoSRMTR32C5Hqk0BO",
+              "text": {
+                "@en": "On the Üretim Bandı podcast, about how iyzico builds products.",
+                "@tr": "Üretim Bandı podcast'inde, iyzico'nun ürünlerini nasıl geliştirdiği üzerine."
+              }
+            },
+            {
+              "kind": { "@en": "Guest, 2016", "@tr": "Konuk, 2016" },
+              "title": "On fighting elephants in the room",
+              "url": "https://podcasts.apple.com/us/podcast/on-fighting-elephants-in-the-room-with-lemi-orhan-ergin/id936476881?i=1000377992398",
+              "text": { "@en": "On the IT Serbia Podcast, in English.", "@tr": "IT Serbia Podcast'te, İngilizce." }
+            }
           ]
         }
       ]
     },
     {
       "id": "writing",
-      "heading": "Writing",
+      "heading": { "@en": "Writing", "@tr": "Yazılar" },
       "cmd": "ls *.md",
       "blocks": [
         {
           "type": "entries",
           "items": [
-            { "kind": "Medium, 2025", "title": "10 Things Every Foreign Speaker Should Know Before Stepping on the Conference Stage", "url": "https://medium.com/@lemiorhan/10-things-every-foreign-speaker-should-know-before-stepping-on-the-conference-stage-bbcf5e1c5298", "text": "Advice for speakers about to talk in a country not their own." },
-            { "kind": "InfoQ, 2019", "title": "How to Slow Down to Go Faster Than Ever in Software Development", "url": "https://www.infoq.com/articles/slow-down-go-faster/", "text": "Rushing makes a team neither faster nor more productive. Slowing down on practice and code quality does." },
-            { "kind": "Medium, 2017", "title": "The Story Behind “anyone can login as root” Tweet", "url": "https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71", "text": "Written the day after the macOS High Sierra root bug went public. The [root bug page](../root-bug/) tells it again, with the press coverage." },
-            { "kind": "Blog, 2012 – 2014", "title": "Agilistanbul", "lang": "tr", "url": "https://web.archive.org/web/20260511123956/http://www.agilistanbul.com/", "text": "My Turkish blog on agile software development. The domain is gone, so the link goes to the Internet Archive's copy." }
+            {
+              "kind": "Medium, 2025",
+              "title": "10 Things Every Foreign Speaker Should Know Before Stepping on the Conference Stage",
+              "url": "https://medium.com/@lemiorhan/10-things-every-foreign-speaker-should-know-before-stepping-on-the-conference-stage-bbcf5e1c5298",
+              "text": {
+                "@en": "Advice for speakers about to talk in a country not their own.",
+                "@tr": "Kendi ülkesi dışında bir ülkede sahneye çıkmak üzere olan konuşmacılara tavsiyeler."
+              }
+            },
+            {
+              "kind": "InfoQ, 2019",
+              "title": "How to Slow Down to Go Faster Than Ever in Software Development",
+              "url": "https://www.infoq.com/articles/slow-down-go-faster/",
+              "text": {
+                "@en": "Rushing makes a team neither faster nor more productive. Slowing down on practice and code quality does.",
+                "@tr": "Acele etmek bir ekibi ne hızlandırır ne de daha üretken yapar. Pratik ve kod kalitesi için yavaşlamak ise ikisini de yapar."
+              }
+            },
+            {
+              "kind": "Medium, 2017",
+              "title": "The Story Behind “anyone can login as root” Tweet",
+              "url": "https://medium.com/@lemiorhan/the-story-behind-anyone-can-login-as-root-tweet-33731b5ded71",
+              "text": {
+                "@en": "Written the day after the macOS High Sierra root bug went public. The [root bug page](../root-bug/) tells it again, with the press coverage.",
+                "@tr": "macOS High Sierra'daki root bug'ı duyulduktan bir gün sonra yazdım. [Root bug sayfası](../root-bug/) hikâyeyi basında çıkan haberlerle birlikte yeniden anlatıyor."
+              }
+            },
+            {
+              "kind": "Blog, 2012 – 2014",
+              "title": "Agilistanbul",
+              "lang": "tr",
+              "url": "https://web.archive.org/web/20260511123956/http://www.agilistanbul.com/",
+              "text": {
+                "@en": "My Turkish blog on agile software development. The domain is gone, so the link goes to the Internet Archive's copy.",
+                "@tr": "Agile yazılım geliştirme üzerine Türkçe bloğum. Domain artık yok, bu yüzden bağlantı Internet Archive'daki kopyaya gidiyor."
+              }
+            }
           ]
         }
       ]
     },
     {
       "id": "accounts",
-      "heading": "Accounts",
+      "heading": { "@en": "Accounts", "@tr": "Hesaplar" },
       "cmd": "git config --get user.name",
       "blocks": [
         {
@@ -98,7 +234,15 @@
             { "kind": "YouTube", "title": "@lemiorhan", "url": "https://www.youtube.com/@lemiorhan" },
             { "kind": "Speaker Deck", "title": "lemiorhan", "url": "https://speakerdeck.com/lemiorhan" },
             { "kind": "Medium", "title": "@lemiorhan", "url": "https://medium.com/@lemiorhan" },
-            { "kind": "Community", "title": "Software Craftsmanship Turkey", "url": "https://kommunity.com/software-craftsmanship-turkey", "text": "The community I founded, on Kommunity and on [GitHub](https://github.com/scturkey)." }
+            {
+              "kind": { "@en": "Community", "@tr": "Topluluk" },
+              "title": "Software Craftsmanship Turkey",
+              "url": "https://kommunity.com/software-craftsmanship-turkey",
+              "text": {
+                "@en": "The community I founded, on Kommunity and on [GitHub](https://github.com/scturkey).",
+                "@tr": "Kurduğum topluluk; Kommunity'de ve [GitHub'da](https://github.com/scturkey)."
+              }
+            }
           ]
         }
       ]

@@ -15,6 +15,8 @@ import shutil
 import subprocess
 import unittest
 
+import i18n
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLI = os.path.join(ROOT, 'tests', 'git_game_cli.js')
 GAME = os.path.join(ROOT, 'assets', 'git-game.js')
@@ -107,8 +109,7 @@ def play(level, steps, ui=UI):
 
 
 def site_ui():
-    with open(os.path.join(ROOT, 'content', 'home.json'), encoding='utf-8') as f:
-        return json.load(f)['game']['ui']
+    return i18n.content('home')['game']['ui']
 
 
 def message_of(state, hash_):
@@ -212,8 +213,7 @@ class Solving(unittest.TestCase):
 
 
 def home_level(level_id):
-    with open(os.path.join(ROOT, 'content', 'home.json'), encoding='utf-8') as f:
-        level = next(lv for lv in json.load(f)['game']['levels'] if lv['id'] == level_id)
+    level = next(lv for lv in i18n.content('home')['game']['levels'] if lv['id'] == level_id)
     return dict(level, par=len(level['solution']))
 
 

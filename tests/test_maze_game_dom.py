@@ -11,6 +11,7 @@ unless a test places it, and nothing is drawn: how the board looks is checked on
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -18,11 +19,14 @@ import tempfile
 import unittest
 from html.parser import HTMLParser
 
+import i18n
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLI = os.path.join(ROOT, 'tests', 'maze_game_dom_cli.js')
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'}
 UI = None
 PAGE = {}
+OTHER_LANGS = {}
 BUILT = {}
 
 
@@ -69,15 +73,21 @@ def setUpModule():
         raise AssertionError(result.stderr)
     page = MainOf()
     with open(os.path.join(tmp.name, '404.html'), encoding='utf-8') as f:
-        page.feed(f.read())
+        source = f.read()
+    page.feed(source)
     page.close()
     scripts = [s for s in page.scripts if s.endswith('/maze-game.js')]
     if page.main is None or len(scripts) != 1:
         raise AssertionError('the built 404.html needs one <main> and one maze-game.js script')
     PAGE.update(tree=page.main, script=os.path.join(tmp.name, scripts[0].lstrip('/')),
                 location={'origin': 'http://localhost', 'pathname': '/no/such/page/'})
-    with open(os.path.join(ROOT, 'content', '404.json'), encoding='utf-8') as f:
-        UI = json.load(f)['maze']['ui']
+    UI = i18n.content('404')['maze']['ui']
+    for lang, inner in re.findall(r'(?s)<template data-lang="([^"]+)"[^>]*>(.*?)</template>', source):
+        other = MainOf()
+        other.feed('<main>' + inner + '</main>')
+        other.close()
+        OTHER_LANGS[lang] = dict(PAGE, tree=dict(page.main, children=other.main['children']),
+                                 location={'origin': 'http://localhost', 'pathname': '/{}/no/such/page/'.format(lang)})
 
 
 def tearDownModule():
@@ -96,9 +106,9 @@ def job(*actions, storage=None, layout=None, random=None, reduce_motion=False):
             'reduceMotion': reduce_motion}
 
 
-def load(*jobs):
+def load(*jobs, at=None):
     """Returns {"results": [...], "storage": ...} per job."""
-    payload = {'page': PAGE, 'jobs': list(jobs)}
+    payload = {'page': at or PAGE, 'jobs': list(jobs)}
     proc = subprocess.run([node(), CLI], input=json.dumps(payload).encode('utf-8'), capture_output=True, timeout=120)
     if proc.returncode != 0:
         raise AssertionError('maze_game_dom_cli.js exited {}:\n{}'.format(proc.returncode, proc.stderr.decode('utf-8', 'replace')))
@@ -155,6 +165,17 @@ class Mount(unittest.TestCase):
         self.assertEqual((look['said'], look['button']), (UI['start'], UI['play']))
         self.assertEqual(look['keys'], [['←', UI['left']], ['↑', UI['up']], ['↓', UI['down']], ['→', UI['right']]])
         self.assertFalse(look['running'])
+
+    def test_the_page_of_each_other_language_mounts_the_game_with_that_languages_labels(self):
+        self.assertEqual(sorted(OTHER_LANGS), sorted(i18n.LANGS[1:]))
+        for lang, at in OTHER_LANGS.items():
+            ui = i18n.content('404', lang)['maze']['ui']
+            self.assertNotEqual(ui['play'], UI['play'], lang)
+            look = load(job(['look']), at=at)[0]['results'][0]
+            self.assertFalse(look['hidden'], lang)
+            self.assertEqual((look['board'], look['said'], look['button']), (ui['board'], ui['start'], ui['play']), lang)
+            self.assertEqual(look['hud'][0], '{} 0'.format(ui['score']), lang)
+            self.assertEqual(look['keys'], [['←', ui['left']], ['↑', ui['up']], ['↓', ui['down']], ['→', ui['right']]], lang)
 
     def test_a_best_score_stored_by_an_earlier_visit_shows_in_the_hud(self):
         look = page(['look'], storage={'maze-best': '230'})['results'][0]

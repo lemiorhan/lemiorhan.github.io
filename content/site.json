@@ -1,40 +1,51 @@
 {
   "name": "Lemi Orhan Ergin",
   "url": "https://lemiorhanergin.com/",
-  "lang": "en",
+  "languages": [
+    { "code": "en", "name": "English", "locale": "en_US" },
+    { "code": "tr", "name": "Türkçe", "locale": "tr_TR" }
+  ],
   "twitter": "@lemiorhan",
   "cloudflare_analytics_token": "dfdddb20cad844759f9acc8e6c47f1aa",
   "image": {
     "src": "assets/img/social.jpg",
-    "alt": "Lemi Orhan Ergin, Software Crafter: co-founder and Chief Software Crafter of Craftgate, founder of Software Craftsmanship Turkey, shown on stage mid-talk",
+    "alt": {
+      "@en": "Lemi Orhan Ergin, Software Crafter: co-founder and Chief Software Crafter of Craftgate, founder of Software Craftsmanship Turkey, shown on stage mid-talk",
+      "@tr": "Lemi Orhan Ergin, Software Crafter: Craftgate'in kurucu ortağı ve Chief Software Crafter'ı, Software Craftsmanship Turkey'nin kurucusu, sahnede konuşurken"
+    },
     "width": 1200,
     "height": 630
   },
-  "skip": "Skip to content",
+  "skip": { "@en": "Skip to content", "@tr": "İçeriğe geç" },
   "nav_label": "Site",
   "nav": [
-    { "path": "bio/", "label": "Bio" },
-    { "path": "talks/", "label": "Talks" },
+    { "path": "bio/", "label": { "@en": "Bio", "@tr": "Biyografi" } },
+    { "path": "talks/", "label": { "@en": "Talks", "@tr": "Konuşmalar" } },
     { "path": "craftgate/", "label": "Craftgate" },
-    { "path": "career/", "label": "Career" },
-    { "path": "community/", "label": "Community" },
-    { "path": "sharing/", "label": "Sharing" },
-    { "path": "contact/", "label": "Contact" }
+    { "path": "career/", "label": { "@en": "Career", "@tr": "Kariyer" } },
+    { "path": "community/", "label": { "@en": "Community", "@tr": "Topluluk" } },
+    { "path": "sharing/", "label": { "@en": "Sharing", "@tr": "Paylaşımlar" } },
+    { "path": "contact/", "label": { "@en": "Contact", "@tr": "İletişim" } }
   ],
-  "theme_toggle": "Switch color theme",
+  "theme_toggle": { "@en": "Switch color theme", "@tr": "Renk temasını değiştir" },
   "ui": {
-    "theme_to_dark": "Switch to dark theme",
-    "theme_to_light": "Switch to light theme",
-    "copied": "Copied",
-    "copy_failed": "Could not copy. Select the text instead.",
-    "photo_viewer": "Photo viewer",
-    "close": "Close",
-    "previous_photo": "Previous photo",
-    "next_photo": "Next photo"
+    "theme_to_dark": { "@en": "Switch to dark theme", "@tr": "Koyu temaya geç" },
+    "theme_to_light": { "@en": "Switch to light theme", "@tr": "Açık temaya geç" },
+    "copied": { "@en": "Copied", "@tr": "Kopyalandı" },
+    "copy_failed": { "@en": "Could not copy. Select the text instead.", "@tr": "Kopyalanamadı. Metni elle seçin." },
+    "photo_viewer": { "@en": "Photo viewer", "@tr": "Fotoğraf görüntüleyici" },
+    "close": { "@en": "Close", "@tr": "Kapat" },
+    "previous_photo": { "@en": "Previous photo", "@tr": "Önceki fotoğraf" },
+    "next_photo": { "@en": "Next photo", "@tr": "Sonraki fotoğraf" }
   },
   "footer": [
     "© 2026 Lemi Orhan Ergin",
-    "Updated November 2026"
+    { "@en": "Updated November 2026", "@tr": "Son güncelleme: Kasım 2026" }
   ],
-  "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  "months": [
+    { "@en": "Jan", "@tr": "Oca" }, { "@en": "Feb", "@tr": "Şub" }, { "@en": "Mar", "@tr": "Mar" },
+    { "@en": "Apr", "@tr": "Nis" }, { "@en": "May", "@tr": "May" }, { "@en": "Jun", "@tr": "Haz" },
+    { "@en": "Jul", "@tr": "Tem" }, { "@en": "Aug", "@tr": "Ağu" }, { "@en": "Sep", "@tr": "Eyl" },
+    { "@en": "Oct", "@tr": "Eki" }, { "@en": "Nov", "@tr": "Kas" }, { "@en": "Dec", "@tr": "Ara" }
+  ]
 }

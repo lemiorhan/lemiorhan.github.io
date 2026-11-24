@@ -1,4 +1,3 @@
-import json
 import os
 import re
 import shlex
@@ -6,6 +5,7 @@ import subprocess
 import unittest
 
 import gitgraph
+import i18n
 from gitgraph import canonical, engine_jobs, engine_matches, git_attempt, match_job, run_engine, run_git, run_job
 from test_git_game import run_jobs as game_jobs
 
@@ -413,8 +413,7 @@ class EngineIdentityDiff(unittest.TestCase):
                 self.assertFalse(r['matches'])
 
     def test_identity_diff_is_empty_exactly_when_the_graph_matches(self):
-        with open(os.path.join(gitgraph.ROOT, 'content', 'home.json'), encoding='utf-8') as f:
-            levels = json.load(f)['game']['levels']
+        levels = i18n.content('home')['game']['levels']
         self.assertTrue(levels, 'content/home.json game.levels is empty')
         cases = []
         for level in levels:

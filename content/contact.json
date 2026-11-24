@@ -1,8 +1,11 @@
 {
-  "title": "Contact, Lemi Orhan Ergin",
-  "description": "How to reach Lemi Orhan Ergin about talks, podcasts and community events.",
+  "title": { "@en": "Contact, Lemi Orhan Ergin", "@tr": "İletişim, Lemi Orhan Ergin" },
+  "description": {
+    "@en": "How to reach Lemi Orhan Ergin about talks, podcasts and community events.",
+    "@tr": "Konuşma, podcast ve topluluk etkinlikleri için Lemi Orhan Ergin'e ulaşma yolları."
+  },
   "head": {
-    "heading": "Contact",
+    "heading": { "@en": "Contact", "@tr": "İletişim" },
     "cmd": "git send-email",
     "blocks": []
   },
@@ -10,22 +13,35 @@
     {
       "class": "contact",
       "blocks": [
-        "Write to me about talks, podcasts and community events. I no longer take on training or consulting work; my time goes to Craftgate. You can also reach me on [LinkedIn](https://www.linkedin.com/in/lemiorhan) or [X](https://x.com/lemiorhan).",
+        {
+          "@en": "Write to me about talks, podcasts and community events. I no longer take on training or consulting work; my time goes to Craftgate. You can also reach me on [LinkedIn](https://www.linkedin.com/in/lemiorhan) or [X](https://x.com/lemiorhan).",
+          "@tr": "Konuşma, podcast ve topluluk etkinlikleri için bana yazın. Eğitim ve danışmanlık işi artık almıyorum; zamanım Craftgate'e gidiyor. Bana [LinkedIn](https://www.linkedin.com/in/lemiorhan) ya da [X](https://x.com/lemiorhan) üzerinden de ulaşabilirsiniz."
+        },
         {
           "type": "form",
           "access_key": "3e8b01e6-5277-4444-9f94-618c43765be8",
           "subject": "New message from lemiorhanergin.com",
           "from_name": "lemiorhanergin.com",
-          "labels": { "name": "Name", "email": "Email", "message": "Message" },
-          "submit": "Send message",
+          "labels": {
+            "name": { "@en": "Name", "@tr": "Ad" },
+            "email": { "@en": "Email", "@tr": "E-posta" },
+            "message": { "@en": "Message", "@tr": "Mesaj" }
+          },
+          "submit": { "@en": "Send message", "@tr": "Mesajı gönder" },
           "status": {
-            "captcha": "Please complete the captcha first. If it does not appear, reach me on LinkedIn or X.",
-            "sending": "Sending…",
-            "sent": "Thank you. Your message is on its way to me.",
-            "failed": "Your message could not be sent. Please try again, or reach me on LinkedIn or X."
+            "captcha": {
+              "@en": "Please complete the captcha first. If it does not appear, reach me on LinkedIn or X.",
+              "@tr": "Önce captcha'yı tamamlayın. Görünmüyorsa bana LinkedIn ya da X üzerinden ulaşın."
+            },
+            "sending": { "@en": "Sending…", "@tr": "Gönderiliyor…" },
+            "sent": { "@en": "Thank you. Your message is on its way to me.", "@tr": "Teşekkürler, mesajınız gönderildi." },
+            "failed": {
+              "@en": "Your message could not be sent. Please try again, or reach me on LinkedIn or X.",
+              "@tr": "Mesajınız gönderilemedi. Tekrar deneyin ya da bana LinkedIn veya X üzerinden ulaşın."
+            }
           }
         },
-        { "type": "p", "class": "meta", "text": "Istanbul, Türkiye" }
+        { "type": "p", "class": "meta", "text": { "@en": "Istanbul, Türkiye", "@tr": "İstanbul, Türkiye" } }
       ]
     }
   ]
