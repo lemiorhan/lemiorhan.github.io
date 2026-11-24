@@ -231,7 +231,7 @@
                 },
                 {
                   "@en": "It was not the Java code I write, or a design. It was the small touch on someone's life: a teammate, someone I mentor, a stranger watching my talk on YouTube. Nobody remembers their kindergarten PE teacher's name, yet a small touch from such a teacher can steer a child's life. Leave aside those who teach for the money. The special teachers I have known wanted to touch children's lives, and that moves me too.",
-                  "@tr": "Beni motive eden, yazdığım Java kodu ya da bir tasarım değildi. Birinin hayatına küçük bir dokunuştu: bir takım arkadaşı, mentorluk yaptığım biri, YouTube'da konuşmamı izleyen bir yabancı. Kimse anaokulundaki beden eğitimi öğretmeninin adını hatırlamaz, ama böyle bir öğretmenin küçük bir dokunuşu bir çocuğun hayatına yön verebilir. Para için öğretmenlik yapanları bir kenara bırakalım. Tanıdığım özel öğretmenler çocukların hayatına dokunmak istiyordu ve bu beni de etkiliyor."
+                  "@tr": "Beni motive eden, yazdığım Java kodu ya da bir tasarım değildi. Birinin hayatına küçük bir dokunuştu: bir takım arkadaşı, mentorluk yaptığım biri, YouTube'da konuşmamı izleyen bir yabancı. Kimse anaokulundaki beden eğitimi öğretmeninin adını hatırlamaz, ama böyle bir öğretmenin küçük bir dokunuşu bir çocuğun hayatına yön verebilir. Para için öğretmenlik yapanları bir kenara bırakalım. Tanıdığım iz bırakan öğretmenler çocukların hayatına dokunmak istiyordu ve bu beni de etkiliyor."
                 },
                 {
                   "@en": "So one talk takes me sixty or eighty hours, many of them at night, from eleven until one or two, after my family is asleep. If I am going to touch someone, it should be my best work.",
@@ -264,7 +264,7 @@
                 },
                 {
                   "@en": "Then I saw that TDD is more about design than testing, and I started learning the real reasons behind design principles. I read Corey Haines on the four rules of simple design, then dug into SOLID and refactoring. Everyone says SOLID is good. Ask people how they use it in their code, and many say they know it but rarely use it.",
-                  "@tr": "Sonra TDD'nin test etmekten çok tasarımla ilgili olduğunu gördüm ve tasarım prensiplerinin ardındaki gerçek nedenleri öğrenmeye başladım. Corey Haines'in basit tasarımın dört kuralı üzerine yazdıklarını okudum, sonra SOLID'e ve refactoring'e daldım. Herkes SOLID'in iyi olduğunu söyler. İnsanlara onu kodlarında nasıl kullandıklarını sorduğunda çoğu bildiğini ama nadiren kullandığını söyler."
+                  "@tr": "Sonra TDD'nin test etmekten çok tasarımla ilgili olduğunu gördüm ve tasarım prensiplerinin ardındaki gerçek nedenleri öğrenmeye başladım. Corey Haines'in basit tasarımın dört kuralı üzerine yazdıklarını okudum, sonra SOLID'e ve refactoring'e daldım. Herkes SOLID'in iyi olduğunu söyler. İnsanlara onu kodlarında nasıl kullandıklarını sorduğunda birçoğu bildiğini ama nadiren kullandığını söyler."
                 }
               ],
               "source": {
@@ -458,7 +458,7 @@
                 },
                 {
                   "@en": "I knew the bug was serious. I did not know how far a few words could travel. By the next day it was in newspapers from the United States to China, and Apple had shipped a fix. At half past one at night I was still messaging the BBC when my wife told me to come and help, and go to bed. One email opened with “moron”. I taped over my camera. It took me weeks to recover.",
-                  "@tr": "Hatanın ciddi olduğunu biliyordum. Birkaç kelimenin ne kadar uzağa gidebileceğini bilmiyordum. Ertesi gün haber ABD'den Çin'e kadar gazetelerdeydi, Apple da bir düzeltme yayınlamıştı. Gece bir buçukta hâlâ BBC'yle yazışırken eşim, yanına gelip yardım etmemi ve yatmamı söyledi. Bir e-posta “geri zekâlı” diye başlıyordu. Kameramın üstünü bantladım. Toparlanmam haftalar sürdü."
+                  "@tr": "Hatanın ciddi olduğunu biliyordum. Birkaç kelimenin ne kadar uzağa gidebileceğini bilmiyordum. Ertesi gün haber ABD'den Çin'e kadar gazetelerdeydi, Apple da bir düzeltme yayınlamıştı. Gece bir buçukta hâlâ BBC'yle yazışırken eşim, yanına gelip yardım etmemi ve yatmamı söyledi. Bir e-posta “moron” diye başlıyordu. Kameramın üstünü bantladım. Toparlanmam haftalar sürdü."
                 },
                 {
                   "@en": "I still think pressing the alarm was right. But I had sent those words naively, and words go further than the hand that types them.",
@@ -561,7 +561,7 @@
               "id": "politics-and-religion",
               "zen": {
                 "@en": "Never talk about politics and religions in public",
-                "@tr": "Herkesin içinde siyaset ve din konuşma"
+                "@tr": "Herkesin içinde asla siyaset ve din konuşma"
               },
               "image": {
                 "src": "assets/zen/politics-and-religion.svg",
@@ -577,7 +577,7 @@
                 },
                 {
                   "@en": "Their business was medicine, anatomy, geometry, astronomy, navigation, magnetism, chemistry and mechanics. Wallis later wrote down their rule: “we barred all discourses of divinity, of state affairs, and of news, other than what concerned our business of Philosophy.” In 1662 the group was incorporated as the Royal Society.",
-                  "@tr": "Uğraştıkları konular tıp, anatomi, geometri, astronomi, seyrüsefer, manyetizma, kimya ve mekanikti. Wallis onların kuralını sonradan şöyle yazdı: “ilahiyata, devlet işlerine ve haberlere dair bütün konuşmaları yasakladık, felsefe işimizi ilgilendirenler dışında.” 1662'de grup, Royal Society olarak resmen kuruldu."
+                  "@tr": "Uğraştıkları konular tıp, anatomi, geometri, astronomi, seyrüsefer, manyetizma, kimya ve mekanikti. Wallis onların kuralını sonradan şöyle yazdı: “we barred all discourses of divinity, of state affairs, and of news, other than what concerned our business of Philosophy.” (“ilahiyata, devlet işlerine ve haberlere dair bütün konuşmaları yasakladık, felsefe işimizi ilgilendirenler dışında.”) 1662'de grup, Royal Society olarak resmen kuruldu."
                 },
                 {
                   "@en": "Wallis did not give up theology. He kept it for the divines, and kept the weekly room for the work.",
@@ -753,7 +753,7 @@
               "story": [
                 {
                   "@en": "In 1938, in the middle of the Great Depression, scientists began following the lives of 268 Harvard sophomores. They hoped the study would reveal clues to a healthy and happy life. One of them was the future president John F. Kennedy. Later, 456 people from Boston's inner city joined the study.",
-                  "@tr": "1938'de, Büyük Buhran'ın ortasında, bilim insanları Harvard'da ikinci sınıfta okuyan 268 öğrencinin hayatını izlemeye başladı. Bu çalışmanın sağlıklı ve mutlu bir hayatın ipuçlarını ortaya çıkaracağını umuyorlardı. Öğrencilerden biri, ileride başkan olacak John F. Kennedy'ydi. Daha sonra Boston'un merkez mahallelerinden 456 kişi de çalışmaya katıldı."
+                  "@tr": "1938'de, Büyük Buhran'ın ortasında, bilim insanları Harvard'da ikinci sınıfta okuyan 268 öğrencinin hayatını izlemeye başladı. Bu çalışmanın sağlıklı ve mutlu bir hayatın ipuçlarını ortaya çıkaracağını umuyorlardı. Öğrencilerden biri, ileride başkan olacak John F. Kennedy'ydi. Daha sonra Boston'un yoksul semtlerinden 456 kişi de çalışmaya katıldı."
                 },
                 {
                   "@en": "Some of the men became successful businessmen, doctors and lawyers. Others ended up with alcoholism or schizophrenia. In the end, relationships predicted a long and happy life better than social class, IQ or even genes. The people most satisfied in their relationships at 50 were the healthiest at 80.",
@@ -761,7 +761,7 @@
                 },
                 {
                   "@en": "“Close relationships, more than money or fame, are what keep people happy throughout their lives,” the Harvard Gazette wrote in 2017. “Loneliness kills,” said Robert Waldinger, the study's director. Money buys many things, but not the people who stay beside you.",
-                  "@tr": "Harvard Gazette 2017'de şöyle yazdı: “İnsanları hayatları boyunca mutlu tutan şey, paradan ya da şöhretten çok yakın ilişkilerdir.” Çalışmanın direktörü Robert Waldinger ise “Yalnızlık öldürür” dedi. Para çok şey satın alır, ama yanında kalan insanları satın alamaz."
+                  "@tr": "Harvard Gazette 2017'de şöyle yazdı: “Close relationships, more than money or fame, are what keep people happy throughout their lives.” (“İnsanları hayatları boyunca mutlu tutan şey, paradan ya da şöhretten çok yakın ilişkilerdir.”) Çalışmanın direktörü Robert Waldinger ise “Loneliness kills” (“Yalnızlık öldürür”) dedi. Para çok şey satın alır, ama yanında kalan insanları satın alamaz."
                 }
               ],
               "source": {
@@ -814,11 +814,11 @@
               "story": [
                 {
                   "@en": "In July 1863 Abraham Lincoln was angry with George Meade. His general had not pursued and destroyed Lee's army after the Battle of Gettysburg. On 14 July Lincoln wrote to him, and the letter holds nothing back: “Your golden opportunity is gone, and I am distressed immeasurably because of it.”",
-                  "@tr": "Temmuz 1863'te Abraham Lincoln, George Meade'e kızgındı. Generali, Gettysburg Muharebesi'nden sonra Lee'nin ordusunu takip edip yok etmemişti. Lincoln 14 Temmuz'da ona bir mektup yazdı ve mektupta hiçbir şeyi sakınmadı: “Altın fırsatınız kaçtı ve bu yüzden ölçülemeyecek kadar üzgünüm.”"
+                  "@tr": "Temmuz 1863'te Abraham Lincoln, George Meade'e kızgındı. Generali, Gettysburg Muharebesi'nden sonra Lee'nin ordusunu takip edip yok etmemişti. Lincoln 14 Temmuz'da ona bir mektup yazdı ve mektupta hiçbir şeyi sakınmadı: “Your golden opportunity is gone, and I am distressed immeasurably because of it.” (“Altın fırsatınız kaçtı ve bu yüzden ölçülemeyecek kadar üzgünüm.”)"
                 },
                 {
                   "@en": "Then he put it in an envelope and wrote on it: “To Gen. Meade, never sent, or signed.” The American Battlefield Trust, which publishes the draft, says writing letters like this and storing them away was one of his favourite ways of coping.",
-                  "@tr": "Sonra mektubu bir zarfa koydu ve üzerine şunu yazdı: “General Meade'e, hiç gönderilmedi, imzalanmadı da.” Taslağı yayımlayan American Battlefield Trust'a göre böyle mektuplar yazıp bir kenara kaldırmak, Lincoln'ın en sevdiği başa çıkma yollarından biriydi."
+                  "@tr": "Sonra mektubu bir zarfa koydu ve üzerine şunu yazdı: “To Gen. Meade, never sent, or signed.” (“General Meade'e, hiç gönderilmedi, imzalanmadı da.”) Taslağı yayımlayan American Battlefield Trust'a göre böyle mektuplar yazıp bir kenara kaldırmak, Lincoln'ın en sevdiği başa çıkma yollarından biriydi."
                 },
                 {
                   "@en": "The anger was real, and it got its words. It just never got a reader. Spoken words have no drawer to go into. When anger gets too loud, stop talking, and speak again once it has passed.",
@@ -850,7 +850,7 @@
                 },
                 {
                   "@en": "Each juror swore an oath. One of its lines, in A. T. Murray's translation of Demosthenes, reads: “I will give impartial hearing to prosecutor and defendant alike.”",
-                  "@tr": "Her jüri üyesi yemin ederdi. A. T. Murray'nin Demosthenes çevirisinde bu yeminin bir satırı şöyle geçer: “Suçlayanı da sanığı da aynı tarafsızlıkla dinleyeceğim.”"
+                  "@tr": "Her jüri üyesi yemin ederdi. A. T. Murray'nin Demosthenes çevirisinde bu yeminin bir satırı şöyle geçer: “I will give impartial hearing to prosecutor and defendant alike.” (“Suçlayanı da sanığı da aynı tarafsızlıkla dinleyeceğim.”)"
                 },
                 {
                   "@en": "The Athenians did not leave fairness to a juror's patience. They poured it out in equal measures, one for each side.",
@@ -940,7 +940,7 @@
                 },
                 {
                   "@en": "Hamilton wanted the software, and the people building it, to get the respect other engineering fields had. So she started calling the work software engineering. “When I first came up with the term, no one had heard of it before, at least in our world,” she recalled. “It was an ongoing joke for a long time.”",
-                  "@tr": "Hamilton, yazılımın ve onu yapan insanların diğer mühendislik alanlarının gördüğü saygıyı görmesini istiyordu. Bu yüzden bu işe yazılım mühendisliği demeye başladı. “Terimi ilk ortaya attığımda, en azından bizim dünyamızda, daha önce kimse duymamıştı” diye hatırlıyor. “Uzun süre şakası yapılıp durdu.”"
+                  "@tr": "Hamilton, yazılımın ve onu yapan insanların diğer mühendislik alanlarının gördüğü saygıyı görmesini istiyordu. Bu yüzden bu işe yazılım mühendisliği demeye başladı. “When I first came up with the term, no one had heard of it before, at least in our world” (“Terimi ilk ortaya attığımda, en azından bizim dünyamızda, daha önce kimse duymamıştı”) diye hatırlıyor. “It was an ongoing joke for a long time.” (“Uzun süre şakası yapılıp durdu.”)"
                 },
                 {
                   "@en": "She kept pushing for it. Then, in one meeting, a respected hardware expert said that building software was an engineering discipline too, just like hardware. She had asked for respect for the work by giving it a name. The name they joked about is now a job title.",
@@ -1001,7 +1001,7 @@
                 },
                 {
                   "@en": "In 1754, before the book came out, Chesterfield praised it in a magazine. Johnson wrote back on 7 February 1755. Seven years had passed, he said, since he had waited in Chesterfield's outer rooms. He had brought the work this far “without one Act of assistance, one word of encouragement, or one smile of favour.” He asked whether a patron is not “one who looks with unconcern on a Man struggling for Life in the water and when he has reached ground encumbers him with help.”",
-                  "@tr": "1754'te, kitap çıkmadan önce, Chesterfield bir dergide sözlüğü övdü. Johnson 7 Şubat 1755'te ona cevap yazdı. Chesterfield'ın dış odalarında beklediği günden bu yana yedi yıl geçtiğini söyledi. İşi bu noktaya “tek bir yardım, tek bir yüreklendirici söz ya da tek bir lütufkâr gülümseme görmeden” getirmişti. Bir hami, “suda hayatı için çırpınan bir adama kayıtsızca bakan, adam karaya ulaştığında ise yardımıyla ona yük olan biri” değil midir diye sordu."
+                  "@tr": "1754'te, kitap çıkmadan önce, Chesterfield bir dergide sözlüğü övdü. Johnson 7 Şubat 1755'te ona cevap yazdı. Chesterfield'ın dış odalarında beklediği günden bu yana yedi yıl geçtiğini söyledi. İşi bu noktaya “without one Act of assistance, one word of encouragement, or one smile of favour” (“tek bir yardım, tek bir yüreklendirici söz ya da tek bir lütufkâr gülümseme görmeden”) getirmişti. Bir hami, “one who looks with unconcern on a Man struggling for Life in the water and when he has reached ground encumbers him with help” (“suda hayatı için çırpınan bir adama kayıtsızca bakan, adam karaya ulaştığında ise yardımıyla ona yük olan biri”) değil midir diye sordu."
                 },
                 {
                   "@en": "He had done the work without a patron, and would not let one claim it.",
@@ -1148,7 +1148,7 @@
               "story": [
                 {
                   "@en": "From 1859 to 1871 Anthony Trollope lived at Waltham Cross. Until the autumn of 1867 he also worked as a surveyor for the General Post Office. Over and above his novels, he wrote articles for periodicals “without number.”",
-                  "@tr": "Anthony Trollope 1859'dan 1871'e kadar Waltham Cross'ta yaşadı. 1867 sonbaharına kadar bir yandan da General Post Office'te müfettiş olarak çalıştı. Romanlarının yanı sıra süreli yayınlara “sayısız” makale yazdı."
+                  "@tr": "Anthony Trollope 1859'dan 1871'e kadar Waltham Cross'ta yaşadı. 1867 sonbaharına kadar bir yandan da General Post Office'te müfettiş olarak çalıştı. Romanlarının yanı sıra süreli yayınlara “without number” (“sayısız”) makale yazdı."
                 },
                 {
                   "@en": "He put it all down to early hours. He was at his table every morning at 5.30. An old groom, paid £5 a year extra to wake him, was never once late with the coffee. Trollope began by reading the previous day's work. Then he wrote with his watch in front of him and asked himself for 250 words every quarter of an hour. He was finished before he dressed for breakfast.",
@@ -1156,7 +1156,7 @@
                 },
                 {
                   "@en": "Three hours a day, he believed, was as much as a man ought to write. The 250 words, he wrote, came “as regularly as my watch went.” He did not wait for a free day. He wrote every morning, before the day began.",
-                  "@tr": "Bir insanın günde en fazla üç saat yazması gerektiğine inanıyordu. O 250 kelimenin “saatimin işleyişi kadar düzenli” geldiğini yazmıştı. Boş bir gün beklemedi. Her sabah, gün başlamadan yazdı."
+                  "@tr": "Bir insanın günde en fazla üç saat yazması gerektiğine inanıyordu. O 250 kelimenin “as regularly as my watch went” (“saatimin işleyişi kadar düzenli”) geldiğini yazmıştı. Boş bir gün beklemedi. Her sabah, gün başlamadan yazdı."
                 }
               ],
               "source": {
@@ -1273,7 +1273,7 @@
               "story": [
                 {
                   "@en": "In the late 1920s, at Washington State College, Edward R. Murrow took nineteen speech courses, most of them from Ida Lou Anderson. Polio had left her with serious physical handicaps, yet she excelled in speech and drama. She had her students read prose and poetry aloud and challenged them to say what they felt about the meaning of the words. She tutored Murrow privately for hours. “She taught me to speak,” he wrote.",
-                  "@tr": "1920'lerin sonunda, Washington State College'da Edward R. Murrow on dokuz hitabet dersi aldı, çoğunu Ida Lou Anderson'dan. Çocuk felci Anderson'da ağır bedensel engeller bırakmıştı, yine de hitabet ve dramada çok başarılıydı. Öğrencilerine düzyazı ve şiir sesli okutur, kelimelerin anlamı hakkında ne hissettiklerini söylemeleri için onları zorlardı. Murrow'a saatlerce özel ders verdi. Murrow “Bana konuşmayı o öğretti” diye yazmıştı."
+                  "@tr": "1920'lerin sonunda, Washington State College'da Edward R. Murrow on dokuz hitabet dersi aldı, çoğunu Ida Lou Anderson'dan. Çocuk felci Anderson'da ağır bedensel engeller bırakmıştı, yine de hitabet ve dramada çok başarılıydı. Öğrencilerine düzyazı ve şiir sesli okutur, kelimelerin anlamı hakkında ne hissettiklerini söylemeleri için onları zorlardı. Murrow'a saatlerce özel ders verdi. Murrow “She taught me to speak” (“Bana konuşmayı o öğretti”) diye yazmıştı."
                 },
                 {
                   "@en": "Years later, before the United States entered the Second World War, Murrow reported on the Blitz from London rooftops. His reports opened with three words, and it was at Anderson's suggestion that he put a half-second pause after the first: “This ... is London.” He sent her the most powerful radio available so she could critique his broadcasts.",
@@ -1322,7 +1322,7 @@
               "id": "keep-your-principles",
               "zen": {
                 "@en": "Never smoke, never cheat, never try bad habits... do not betray your principles",
-                "@tr": "Asla sigara içme, asla hile yapma, kötü alışkanlıkları denemeye kalkma... prensiplerine ihanet etme"
+                "@tr": "Asla sigara içme, asla hile yapma, asla kötü alışkanlıkları denemeye kalkma... prensiplerine ihanet etme"
               },
               "image": {
                 "src": "assets/zen/keep-your-principles.svg",
