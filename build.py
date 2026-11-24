@@ -1577,6 +1577,13 @@ def check_refs(html_text, page):
         page.fail('sources listed but never cited with [^n]: {}'.format(sorted(listed - cited)))
 
 
+def check_lang_marks(html_text, page):
+    stray = re.search(r'\{lang=[^}<\s]*\}?', html_text)
+    if stray:
+        page.fail(stray.group() + ' is not rendered as a language mark: write [text](url){lang=xx} '
+                  'with a two-letter lowercase code, right after the link, in a zen story or source')
+
+
 def localize_links(html_text, page):
     """The not-found page is served at any path, so it links pages root-absolute, each to its own language's."""
     root = lang_root(page.site, page.lang)
@@ -1683,6 +1690,7 @@ def build(out):
 
     def write(target, html_text, page):
         check_refs(html_text, page)
+        check_lang_marks(html_text, page)
         dest = os.path.join(out, target)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         with open(dest, 'w', encoding='utf-8') as f:

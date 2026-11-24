@@ -815,6 +815,20 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
                             'a link names its language with {lang=…} only inside a zen block; this text has one: '
                             + repr(text))
 
+    def test_a_language_mark_left_on_the_page_as_text(self):
+        cases = (('in the hero role, which is not rendered by inline()', 'home',
+                  lambda d: d['hero'].update(role='Co-founder of [Craftgate](https://craftgate.io){lang=tr}.'), '{lang=tr}'),
+                 ('with an upper-case code in a zen source', 'personal-zen',
+                  lambda d: blocks_of(d, 'zen')[0]['items'][0].update(source='Told at [A talk](https://example.com/a){lang=EN}.'),
+                  '{lang=EN}'),
+                 ('without its closing brace in a zen source', 'personal-zen',
+                  lambda d: blocks_of(d, 'zen')[0]['items'][0].update(source='Told at [A talk](https://example.com/a){lang=en'),
+                  '{lang=en'))
+        for case, name, fn, mark in cases:
+            with self.subTest(case):
+                self.assertRejected(self.edit(name, fn),
+                                    'content/{}.json: {} is not rendered as a language mark'.format(name, mark))
+
     def test_a_translation_may_move_its_placeholders_links_and_refs(self):
         def moved(d):
             d['sections'][0]['blocks'][0] = {
