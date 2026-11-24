@@ -618,6 +618,42 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
         self.assertRejected(self.sumo_live(lambda b: b.update(api='http://www.sumo-api.com/api')),
                             'sumo-live "api" must be an https:// URL')
 
+    # Page list
+
+    def test_a_page_missing_from_the_page_list(self):
+        def drop(d):
+            d['pages'] = [p for p in d['pages'] if p['path'] != 'sumo/']
+        self.assertRejected(self.edit('site', drop), 'content/site.json: "pages" does not list sumo/')
+
+    def test_a_listed_page_without_a_content_file(self):
+        self.assertRejected(self.edit('site', lambda d: d['pages'].append({'path': 'nowhere/', 'name': 'Nowhere', 'text': 'Gone.'})),
+                            'content/site.json: "pages" lists nowhere/, which has no content file')
+
+    def test_a_page_list_entry_in_the_wrong_shape(self):
+        def without(key, path):
+            return lambda d: next(p for p in d['pages'] if p['path'] == path).pop(key)
+        changes = {'no text': without('text', 'sumo/'), 'no name in the header': without('name', 'bio/'),
+                   'no path': without('path', 'sumo/'), 'empty name': lambda d: d['pages'][-1].update(name=''),
+                   'a name with no language keys': lambda d: d['pages'][0].update(name={'en': 'Bio', 'tr': 'Biyografi'}),
+                   'a text with no language keys': lambda d: d['pages'][-2].update(text={'en': 'Sumo.', 'tr': 'Sumo.'}),
+                   'nav as a word': lambda d: d['pages'][-2].update(nav='false'),
+                   'nav as a number': lambda d: d['pages'][-2].update(nav=1),
+                   'a bare path': lambda d: d['pages'].append('sumo/'), 'not a list': lambda d: d.update(pages='bio/'),
+                   'no list': lambda d: d.pop('pages')}
+        for label, change in changes.items():
+            with self.subTest(label):
+                self.assertRejected(self.edit('site', change), 'content/site.json: "pages" must list each page as')
+
+    def test_a_page_path_given_per_language(self):
+        def per_language(d):
+            next(p for p in d['pages'] if p['path'] == 'bio/')['path'] = {'@en': 'nowhere/', '@tr': 'bio/'}
+        self.assertRejected(self.edit('site', per_language, read=read_json),
+                            'content/site.json: "pages" gives a "path" per language')
+
+    def test_a_page_listed_twice(self):
+        self.assertRejected(self.edit('site', lambda d: d['pages'].append(dict(d['pages'][0]))),
+                            'content/site.json: "pages" lists bio/ more than once')
+
     # Sharing
 
     def test_a_share_image_without_its_size(self):
@@ -1608,12 +1644,64 @@ class BuiltSite(unittest.TestCase):
         self.assertIn('bio', self.trees)
         self.assertIn('root-bug', self.trees)
 
-    def test_every_page_is_linked_from_the_site_nav_or_the_home_page(self):
-        nav = {item['path'] for item in self.content('site')['nav']}
-        home = {a.attrs['href'] for a in self.trees['home'].find(lambda n: n.tag == 'a' and n.attrs.get('href'))}
-        pages = [name + '/' for name in self.trees if name not in ('home', '404')]
-        self.assertEqual([p for p in pages if p not in home], [])
-        self.assertNotEqual([p for p in pages if p not in nav], [], 'no page is reached from the home page alone')
+    def ls_a(self, name):
+        found = self.trees[name].find(lambda n: n.attrs.get('id') == 'ls-a')
+        self.assertEqual(len(found), 1, name)
+        return found[0]
+
+    def resolved(self, name, links):
+        # 404.html is served at any path; from one this deep a relative link misses the site's pages.
+        here = '/' + lang_dir(self.lang) + ('no/such/page/' if name == '404' else self.local(name))
+        return [posixpath.normpath(posixpath.join(here, a.attrs['href'])) for a in links]
+
+    def test_every_page_lists_every_page_of_the_site_under_ls_a(self):
+        pages = sorted(posixpath.normpath('/' + lang_dir(self.lang) + name) for name in self.trees if name not in ('home', '404'))
+        self.assertTrue({'personal-zen', 'root-bug', 'sumo'} <= {posixpath.basename(p) for p in pages})
+        for name in self.trees:
+            self.assertEqual(sorted(self.resolved(name, self.ls_a(name).find(lambda n: n.tag == 'a'))), pages, name)
+
+    def test_the_header_nav_shows_the_pages_marked_nav_in_order_then_a_link_to_the_ls_a_list(self):
+        pages = self.content('site')['pages']
+        shown = [(posixpath.normpath('/' + lang_dir(self.lang) + p['path']), p['name']) for p in pages if p.get('nav') is True]
+        self.assertTrue(0 < len(shown) < len(pages))
+        for name, tree in self.trees.items():
+            if name == '404':
+                continue
+            nav, = tree.find(has_class('site-nav'))
+            links = nav.find(lambda n: n.tag == 'a')
+            self.assertEqual(list(zip(self.resolved(name, links[:-1]), [a.all_text() for a in links[:-1]])), shown, name)
+            self.assertEqual([(a.attrs['href'], a.all_text()) for a in links[-1:]], [('#ls-a', 'ls -a')], name)
+            here = posixpath.normpath('/' + lang_dir(self.lang) + self.local(name))
+            current = [a for a in links if a.attrs.get('aria-current') == 'page']
+            self.assertEqual(self.resolved(name, current), [path for path, _ in shown if path == here], name)
+
+    def test_the_ls_a_link_and_list_are_named_for_screen_readers(self):
+        every = self.content('site')['all_pages']
+        own = {'home': next(s['heading'] for s in self.content('home')['sections'] if s.get('id') == 'ls-a')}
+        for name, tree in self.trees.items():
+            node = self.ls_a(name)
+            title = node.find(lambda n: n.attrs.get('id') == node.attrs.get('aria-labelledby'))
+            self.assertEqual([(n.tag, n.all_text()) for n in title], [('h2', own.get(name, every['heading']))], name)
+            links = tree.find(has_class('nav-all'))
+            want = [] if name == '404' else ['{}: {}'.format(every['cmd'], every['heading'])]
+            self.assertEqual([a.attrs.get('aria-label') for a in links], want, name)
+
+    def test_the_ls_a_list_sits_in_the_footer_but_is_the_home_pages_own_section_and_in_the_404_message(self):
+        for name, tree in self.trees.items():
+            node, ancestors = self.ls_a(name), []
+            parent = node.parent
+            while parent:
+                ancestors.append(parent.tag)
+                parent = parent.parent
+            where = next(tag for tag in ancestors if tag in ('footer', 'main'))
+            want = {'home': ('section', 'main'), '404': ('nav', 'main')}.get(name, ('nav', 'footer'))
+            self.assertEqual((node.tag, where), want, name)
+
+    def test_the_ls_a_list_marks_the_page_it_is_on(self):
+        for name in self.trees:
+            current = self.ls_a(name).find(lambda n: n.tag == 'a' and n.attrs.get('aria-current') == 'page')
+            want = [] if name in ('home', '404') else [posixpath.normpath('/' + lang_dir(self.lang) + name)]
+            self.assertEqual(self.resolved(name, current), want, name)
 
     def local(self, name):
         return '' if name == 'home' else name + '/'

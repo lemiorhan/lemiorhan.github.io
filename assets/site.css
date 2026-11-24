@@ -152,7 +152,8 @@ a:hover { text-decoration-color: var(--accent); }
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 0 1.35rem;
+  align-items: baseline;
+  gap: 0 1.15rem;
   padding-block: 0.3rem;
   border-top: 1px solid var(--rule);
 }
@@ -166,6 +167,8 @@ a:hover { text-decoration-color: var(--accent); }
   padding-block: 0.35rem;
 }
 .site-nav a:hover { color: var(--ink); }
+.site-nav .nav-all { font-family: var(--mono); font-size: 0.85rem; }
+.nav-all::before { content: "$ "; color: var(--accent-text); }
 
 .theme-toggle {
   display: inline-grid;
@@ -201,7 +204,7 @@ a:hover { text-decoration-color: var(--accent); }
 .theme-toggle path { fill: currentColor; }
 
 /* The Turkish nav is the longest; narrower than these widths, its one-row header wraps the brand onto a line of its own. */
-@media (min-width: 58rem) {
+@media (min-width: 63rem) {
   .site-header {
     position: sticky;
     top: 0;
@@ -221,7 +224,7 @@ a:hover { text-decoration-color: var(--accent); }
   .site-nav a { padding-block: 0.6rem; }
 }
 
-@media (min-width: 64rem) {
+@media (min-width: 70rem) {
   .header-row { gap: 0 1.5rem; }
   .site-nav { gap: 0 1.6rem; }
 }
@@ -1157,6 +1160,48 @@ a:hover { text-decoration-color: var(--accent); }
 }
 .footer-row p { margin: 0; }
 
+.site-map {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1.25rem;
+  padding-block: clamp(2.5rem, 6vw, 4rem) 0.5rem;
+}
+.site-map-head h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.4rem;
+  font-weight: 720;
+  font-stretch: 85%;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.site-map-head .cmd { margin-top: 0.45rem; }
+.site-map-list a { gap: 0.15rem 1.5rem; padding-block: 0.75rem; }
+.site-map-list .toc-name {
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 650;
+  font-stretch: 100%;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+.site-map-list .toc-desc { font-size: 0.875rem; line-height: 1.5; }
+.toc a[aria-current="page"] .toc-name {
+  text-decoration-line: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+@media (min-width: 40rem) {
+  .site-map-list a { grid-template-columns: 11rem minmax(0, 1fr); }
+}
+@media (min-width: 60rem) {
+  .site-map {
+    grid-template-columns: 12.5rem minmax(0, 46rem);
+    column-gap: clamp(3rem, 6vw, 6rem);
+  }
+}
+
 /* Talk archive */
 
 .page-head { padding-block: clamp(3rem, 8vw, 6rem) clamp(2.5rem, 6vw, 4rem); }
@@ -1598,6 +1643,7 @@ a:hover { text-decoration-color: var(--accent); }
 }
 .notfound p { margin: 0 0 0.75rem; max-width: 36rem; }
 .notfound code { font-family: var(--mono); font-size: 0.9em; color: var(--accent-text); }
+.notfound .site-map { grid-template-columns: minmax(0, 1fr); max-width: 46rem; padding-block: 2.5rem 0; }
 
 @media print {
   :root {
@@ -1607,7 +1653,7 @@ a:hover { text-decoration-color: var(--accent); }
     --ink-soft: #333;
     --rule: #bbb;
   }
-  .site-header, .skip, .theme-toggle, .copy, .stage, .cmd, .years-nav, .years-mini, .filter-bar, .tmap { display: none !important; }
+  .site-header, .skip, .theme-toggle, .copy, .stage, .cmd, .years-nav, .years-mini, .filter-bar, .tmap, .site-map { display: none !important; }
   .section { padding-block: 1.5rem; break-inside: avoid-page; }
   .section-head { position: static; }
   a { text-decoration: none; }

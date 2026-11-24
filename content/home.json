@@ -603,94 +603,12 @@
       ]
     },
     {
-      "id": "pages",
+      "id": "ls-a",
       "heading": { "@en": "On this site", "@tr": "Bu sitede" },
-      "cmd": "ls",
+      "cmd": "ls -a",
       "blocks": [
         {
-          "type": "toc",
-          "items": [
-            {
-              "path": "bio/",
-              "name": { "@en": "Bio", "@tr": "Biyografi" },
-              "text": {
-                "@en": "The longer story, wiki style: from İzmir to Istanbul, writing software since 2001, and the people and work along the way.",
-                "@tr": "Hikâyenin uzun hâli, wiki tarzında: İzmir'den İstanbul'a, 2001'den beri yazılım geliştirmek, yol boyunca tanıştığım insanlar ve yaptığım işler."
-              }
-            },
-            {
-              "path": "talks/",
-              "name": { "@en": "Talks", "@tr": "Konuşmalar" },
-              "text": {
-                "@en": "Conferences, meetups and universities, year by year and on a map, with slides and recordings.",
-                "@tr": "Konferanslar, meetup'lar ve üniversiteler; yıl yıl ve harita üzerinde, slaytları ve kayıtlarıyla."
-              }
-            },
-            {
-              "path": "craftgate/",
-              "name": "Craftgate",
-              "text": {
-                "@en": "The payment orchestration company we founded: how it started and where it stands.",
-                "@tr": "Kurduğumuz ödeme orkestrasyonu şirketi: nasıl başladı, bugün nerede."
-              }
-            },
-            {
-              "path": "career/",
-              "name": { "@en": "Career", "@tr": "Kariyer" },
-              "text": {
-                "@en": "Positions since 2001, drawn as a git log.",
-                "@tr": "2001'den beri çalıştığım pozisyonlar, git log olarak çizilmiş."
-              }
-            },
-            {
-              "path": "community/",
-              "name": { "@en": "Community", "@tr": "Topluluk" },
-              "text": {
-                "@en": "Software Craftsmanship Turkey, Agile Turkey, and manifesto translations.",
-                "@tr": "Software Craftsmanship Turkey, Agile Turkey ve manifesto çevirileri."
-              }
-            },
-            {
-              "path": "sharing/",
-              "name": { "@en": "Sharing", "@tr": "Paylaşımlar" },
-              "text": {
-                "@en": "Everything I share in public: code, recordings, the podcast, slides, articles and my accounts.",
-                "@tr": "Herkese açık paylaştığım her şey: kod, kayıtlar, podcast, slaytlar, yazılar ve hesaplarım."
-              }
-            },
-            {
-              "path": "personal-zen/",
-              "name": "Personal Zen",
-              "text": {
-                "@en": "The principles I live and work by, first written down for my kids in 2017, each with a charcoal drawing.",
-                "@tr": "Hayatıma ve işime yön veren prensipler. İlk kez 2017'de çocuklarım için yazdım, her birinin bir kömür kalem çizimi var."
-              }
-            },
-            {
-              "path": "root-bug/",
-              "name": { "@en": "The macOS root bug", "@tr": "macOS root açığı" },
-              "text": {
-                "@en": "The night in 2017 I asked Apple, on Twitter, whether it knew anyone could log in as root on a Mac. The fix came the next day; the story, the press and what I learned from it.",
-                "@tr": "2017'de Twitter'da Apple'a, herkesin bir Mac'te root olarak giriş yapabildiğini bilip bilmediğini sorduğum gece. Düzeltme ertesi gün geldi. Burada hikâyesi, basında çıkanlar ve bu olaydan öğrendiklerim var."
-              }
-            },
-            {
-              "path": "sumo/",
-              "name": "Sumo",
-              "text": {
-                "@en": "A Turkish introduction to sumo: the rules, the six divisions, the ranks from yokozuna down to maegashira, the six tournaments a year, and two wrestlers I like, Hakuhō and Ura.",
-                "@tr": "Sumoya Türkçe bir giriş: kurallar, altı lig, yokozunadan maegashiraya seviyeler, yılda altı turnuva ve sevdiğim iki güreşçi, Hakuhō ile Ura."
-              }
-            },
-            {
-              "path": "contact/",
-              "name": { "@en": "Contact", "@tr": "İletişim" },
-              "text": {
-                "@en": "For talks, podcasts and community events.",
-                "@tr": "Konuşma, podcast ve topluluk etkinlikleri için."
-              }
-            }
-          ]
+          "type": "toc"
         }
       ]
     }

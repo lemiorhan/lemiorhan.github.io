@@ -35,7 +35,7 @@
     column-gap: clamp(2rem, 5vw, 5rem);
     align-items: center;
   }
-  .notfound.has-maze .maze { margin-top: 0; }
+  .notfound.has-maze .maze { margin-top: 0; grid-column: 2; grid-row: 1 / span 2; }
 }
 
 .maze h2 {

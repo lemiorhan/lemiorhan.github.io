@@ -373,13 +373,31 @@ def block_contents(b, page):
     return ['<nav class="contents" aria-label="{}">'.format(attr(b['label'])), '  <ol>'] + items + ['  </ol>', '</nav>']
 
 
-def block_toc(b, page):
-    out = ['<ul class="toc">']
-    for item in b['items']:
-        out.append('  <li><a href="{}{}"><span class="toc-name">{}</span><span class="toc-desc">{}</span></a></li>'.format(
-            page.home, attr(item['path']), text(item['name']), inline(item['text'])))
+def page_list(page, home, extra=None):
+    out = ['<ul class="{}">'.format(cls('toc', extra))]
+    for item in page.site['pages']:
+        out.append('  <li><a href="{}{}"{}><span class="toc-name">{}</span><span class="toc-desc">{}</span></a></li>'.format(
+            home, attr(item['path']), ' aria-current="page"' if item['path'] == page.local else '',
+            text(item['name']), inline(item['text'])))
     out.append('</ul>')
     return out
+
+
+def block_toc(b, page):
+    return page_list(page, page.home)
+
+
+ALL_PAGES = 'ls-a'
+
+
+def all_pages(page, home, classes):
+    head = page.site['all_pages']
+    return (['<nav class="{1}" id="{0}" aria-labelledby="{0}-title">'.format(ALL_PAGES, classes),
+             '  <div class="site-map-head">',
+             '    <h2 id="{}-title">{}</h2>'.format(ALL_PAGES, text(head['heading'])),
+             '    <p class="cmd" aria-hidden="true">{}</p>'.format(text(head['cmd'])),
+             '  </div>']
+            + indent(page_list(page, home, 'site-map-list'), 2) + ['</nav>'])
 
 
 WEB3FORMS = 'https://api.web3forms.com/submit'
@@ -1430,7 +1448,11 @@ def shell(page, body):
         check_image(page.fail, image)
     nav = ['<a href="{}{}"{}>{}</a>'.format(page.home, attr(item['path']),
                                              ' aria-current="page"' if item['path'] == page.local else '',
-                                             text(item['label'])) for item in site['nav']]
+                                             text(item['name'])) for item in site['pages'] if item.get('nav')]
+    every = site['all_pages']
+    nav.append('<a class="nav-all" href="#{}" aria-label="{}: {}">{}</a>'.format(
+        ALL_PAGES, attr(every['cmd']), attr(every['heading']), text(every['cmd'])))
+    site_map = [] if 'id="{}"'.format(ALL_PAGES) in body else indent(all_pages(page, page.home, 'wrap site-map'), 4)
     others = [lg for lg in site['languages'] if lg['code'] != page.lang]
     alternates = ['  <link rel="alternate" hreflang="{}" href="{}{}{}">'.format(
                       attr(lg['code']), site['url'], lang_root(site, lg['code']), page.local) for lg in site['languages']]
@@ -1533,6 +1555,7 @@ def shell(page, body):
         '  </main>',
         '',
         '  <footer class="site-footer">',
+    ] + site_map + [
         '    <div class="wrap footer-row">',
     ] + ['      <p>{}</p>'.format(text(line)) for line in site['footer']] + [
         '    </div>',
@@ -1595,7 +1618,7 @@ def not_found_body(page):
     out = ['<div class="notfound-text">',
            '  <h1>{}</h1>'.format(text(d['heading'])),
            '  <p><code>{}</code></p>'.format(text(d['code']))]
-    out += indent(blocks(d['blocks'], page), 2) + ['</div>']
+    out += indent(blocks(d['blocks'], page), 2) + ['</div>'] + all_pages(page, '/', 'site-map')
     maze = d.get('maze')
     if maze:
         island = json.dumps({'ui': maze['ui']}, ensure_ascii=False).replace('<', '\\u003c')
@@ -1681,11 +1704,36 @@ def languages(site_fail):
     return codes
 
 
+def check_pages(site_fail, names, langs):
+    for lang in langs:
+        entries = load('site', langs, lang).get('pages')
+        if not isinstance(entries, list) or not all(
+                isinstance(item, dict) and all(isinstance(item.get(k), str) and item[k] for k in ('path', 'name', 'text'))
+                and isinstance(item.get('nav', False), bool) for item in entries):
+            site_fail('"pages" must list each page as {"path", "name", "text"}, each a non-empty string in every '
+                      'language, and "nav", where given, as true or false')
+    listed = [item['path'] for item in read_content('site')['pages']]
+    if not all(isinstance(path, str) for path in listed):
+        site_fail('"pages" gives a "path" per language: a page has one path, the same in every language')
+    repeated = sorted(path for path, n in Counter(listed).items() if n > 1)
+    if repeated:
+        site_fail('"pages" lists {} more than once'.format(', '.join(repeated)))
+    pages = [name + '/' for name in names if name not in ('home', '404')]
+    missing = [path for path in pages if path not in listed]
+    if missing:
+        site_fail('"pages" does not list {}: every page needs a name and a line of text there, '
+                  'so the ls -a list on every page reaches it'.format(', '.join(missing)))
+    unknown = [path for path in listed if path not in pages]
+    if unknown:
+        site_fail('"pages" lists {}, which has no content file'.format(', '.join(unknown)))
+
+
 def build(out):
     def site_fail(message):
         raise BuildError('content/site.json: {}'.format(message))
     langs = languages(site_fail)
     names = sorted(f[:-5] for f in os.listdir(CONTENT) if f.endswith('.json') and f != 'site.json')
+    check_pages(site_fail, names, langs)
     written, not_found = [], []
 
     def write(target, html_text, page):
