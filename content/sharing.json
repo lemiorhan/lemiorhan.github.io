@@ -82,6 +82,15 @@
           "type": "entries",
           "items": [
             {
+              "kind": "2026, Go",
+              "title": "dirstato",
+              "url": "https://github.com/lemiorhan/dirstato",
+              "text": {
+                "@en": "A fast, read-only disk usage explorer for the macOS terminal, whose sizes match du. Installs from its own [Homebrew tap](https://github.com/lemiorhan/homebrew-dirstato); [project page](https://lemiorhanergin.com/dirstato/).",
+                "@tr": "macOS terminali için hızlı ve salt okunur bir disk kullanımı gezgini; gösterdiği boyutlar du ile birebir aynı. Kendi [Homebrew tap'inden](https://github.com/lemiorhan/homebrew-dirstato) kurulur; [proje sayfası](https://lemiorhanergin.com/dirstato/)."
+              }
+            },
+            {
               "kind": "2026, Python",
               "title": "brewdash",
               "url": "https://github.com/lemiorhan/brewdash",
