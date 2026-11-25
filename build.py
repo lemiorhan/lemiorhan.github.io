@@ -373,12 +373,13 @@ def block_contents(b, page):
     return ['<nav class="contents" aria-label="{}">'.format(attr(b['label'])), '  <ol>'] + items + ['  </ol>', '</nav>']
 
 
-def page_list(page, home, extra=None):
-    out = ['<ul class="{}">'.format(cls('toc', extra))]
+def page_list(page, home, extra=None, described=True):
+    out = ['<ul class="{}">'.format(cls('toc', extra) if described else 'footer-pages')]
     for item in page.site['pages']:
-        out.append('  <li><a href="{}{}"{}><span class="toc-name">{}</span><span class="toc-desc">{}</span></a></li>'.format(
-            home, attr(item['path']), ' aria-current="page"' if item['path'] == page.local else '',
-            text(item['name']), inline(item['text'])))
+        label = ('<span class="toc-name">{}</span><span class="toc-desc">{}</span>'.format(text(item['name']), inline(item['text']))
+                 if described else text(item['name']))
+        out.append('  <li><a href="{}{}"{}>{}</a></li>'.format(
+            home, attr(item['path']), ' aria-current="page"' if item['path'] == page.local else '', label))
     out.append('</ul>')
     return out
 
@@ -390,14 +391,14 @@ def block_toc(b, page):
 ALL_PAGES = 'ls-a'
 
 
-def all_pages(page, home, classes):
+def all_pages(page, home, classes, described=True):
     head = page.site['all_pages']
     return (['<nav class="{1}" id="{0}" aria-labelledby="{0}-title">'.format(ALL_PAGES, classes),
              '  <div class="site-map-head">',
              '    <h2 id="{}-title">{}</h2>'.format(ALL_PAGES, text(head['heading'])),
              '    <p class="cmd" aria-hidden="true">{}</p>'.format(text(head['cmd'])),
              '  </div>']
-            + indent(page_list(page, home, 'site-map-list'), 2) + ['</nav>'])
+            + indent(page_list(page, home, 'site-map-list', described), 2) + ['</nav>'])
 
 
 WEB3FORMS = 'https://api.web3forms.com/submit'
@@ -500,9 +501,6 @@ def zen_items(b, page):
 
 
 def block_zen(b, page):
-    top = b.get('top')
-    if not isinstance(top, str) or not top.strip():
-        page.fail('a zen block needs "top", the text of the link back to the top of the page')
     out = ['<div class="zen-list">']
     for n, item in enumerate(zen_items(b, page), 1):
         width, height = zen_size(item['image']['src'], page)
@@ -516,7 +514,6 @@ def block_zen(b, page):
                 '      <h2 id="{}-title">{}</h2>'.format(attr(item['id']), text(item['zen']))]
         out += ['      <p>{}</p>'.format(inline(p, page)) for p in item['story']]
         out += ['      <p class="zen-source">{}</p>'.format(inline(item['source'], page)),
-                '      <p class="zen-top"><a href="#top">{}</a></p>'.format(text(top)),
                 '    </div>',
                 '  </article>']
     out.append('</div>')
@@ -914,7 +911,7 @@ def hero(h, page):
     intro = hero_fill('text', h['text'], facts, page)
     actions = ' '.join('<a class="{}" href="{}">{}</a>'.format('hero-play' if i == 0 else 'hero-more', attr(a['url']), text(a['label']))
                        for i, a in enumerate(h.get('actions', [])))
-    out = ['<section class="hero" id="top" aria-labelledby="name">',
+    out = ['<section class="hero" aria-labelledby="name">',
            '  <div class="wrap hero-grid">',
            '    <div class="hero-main">',
            '      <h1 id="name" class="hero-name">{}</h1>'.format(' '.join('<span>{}</span>'.format(text(n)) for n in h['name'])),
@@ -1452,7 +1449,8 @@ def shell(page, body):
     every = site['all_pages']
     nav.append('<a class="nav-all" href="#{}" aria-label="{}: {}">{}</a>'.format(
         ALL_PAGES, attr(every['cmd']), attr(every['heading']), text(every['cmd'])))
-    site_map = [] if 'id="{}"'.format(ALL_PAGES) in body else indent(all_pages(page, page.home, 'wrap site-map'), 4)
+    site_map = ([] if 'id="{}"'.format(ALL_PAGES) in body
+                else indent(all_pages(page, page.home, 'wrap site-map footer-map', described=False), 4))
     others = [lg for lg in site['languages'] if lg['code'] != page.lang]
     alternates = ['  <link rel="alternate" hreflang="{}" href="{}{}{}">'.format(
                       attr(lg['code']), site['url'], lang_root(site, lg['code']), page.local) for lg in site['languages']]
@@ -1556,9 +1554,15 @@ def shell(page, body):
         '',
         '  <footer class="site-footer">',
     ] + site_map + [
-        '    <div class="wrap footer-row">',
-    ] + ['      <p>{}</p>'.format(text(line)) for line in site['footer']] + [
+        '    <div class="footer-base">',
+        '      <div class="wrap footer-row">',
+    ] + ['        <p>{}</p>'.format(text(line)) for line in site['footer']] + [
+        '      </div>',
         '    </div>',
+        # No element may carry id="top": the fragment then scrolls to the very top, above the phone header #main sits under.
+        '    <a class="to-top" href="#top" aria-label="{}">'.format(attr(site['to_top'])),
+        '      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg>',
+        '    </a>',
         '  </footer>',
         '</body>',
         '</html>',

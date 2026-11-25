@@ -1,9 +1,10 @@
 'use strict';
 
-// A DOM double for tests/git_game_dom_cli.js, tests/archive_dom_cli.js, tests/contact_dom_cli.js and
-// tests/maze_game_dom_cli.js, written by hand for what assets/git-game.js, the year archive and the
-// contact form in assets/site.js and assets/maze-game.js use. There is no layout: every box measures 0 unless a
-// driver places it on screen through `element._.rect`, and every scroll is only recorded, as is
+// A DOM double for the tests/*_dom_cli.js drivers, written by hand for what assets/git-game.js,
+// assets/site.js and assets/maze-game.js use. There is no layout: every box measures 0 unless a
+// driver places it on screen through `element._.rect`, every computed style is empty unless a driver
+// sets it in `element._.computed`, the page stays at scrollY 0 until a driver moves it with
+// setScrollY, and every scrollBy is only recorded, as is
 // each textContent write on an element, in `element._.writes`, the way a live region hears it. There is
 // no drawing either: a canvas gives no context, as in a browser that cannot make one. Reading,
 // writing or calling anything this file does not define throws, and so do selectors, media
@@ -13,7 +14,7 @@
 var SVG_NS = 'http://www.w3.org/2000/svg';
 var EVENTS = {
   click: 'mouse', pointerdown: 'mouse', pointermove: 'mouse', pointerup: 'mouse', pointercancel: 'mouse',
-  keydown: 'key', input: 'plain', submit: 'plain', focusin: 'plain', visibilitychange: 'plain'
+  keydown: 'key', input: 'plain', submit: 'plain', focusin: 'plain', visibilitychange: 'plain', DOMContentLoaded: 'plain'
 };
 var FOCUSABLE = { a: true, button: true, input: true };
 
@@ -466,6 +467,7 @@ function createWindow(options) {
   var engine;
   var listeners = { resize: [], scroll: [], blur: [] };
   var scrolls = [];
+  var scrollY = 0;
   var location = strict({ origin: options.location.origin, pathname: options.location.pathname }, 'location');
   var raw = {
     get GitEngine() { return engine; },
@@ -478,9 +480,12 @@ function createWindow(options) {
       return options.document;
     },
     get innerHeight() { return 800; },
+    get scrollY() { return scrollY; },
     performance: strict({ now: function () { return clock; } }, 'performance'),
-    getComputedStyle: function () {
-      return strict({ getPropertyValue: function () { return ''; } }, 'CSSStyleDeclaration');
+    getComputedStyle: function (element) {
+      var computed = (element && element._ && element._.computed) || {};
+      return strict({ getPropertyValue: function (name) { return has(computed, name) ? computed[name] : ''; } },
+                    'CSSStyleDeclaration');
     },
     matchMedia: function (query) {
       if (!has(media, query)) throw new Error('fake DOM: unsupported media query ' + query);
@@ -510,6 +515,7 @@ function createWindow(options) {
   return {
     window: strict(raw, 'window'),
     scrolls: function () { return scrolls.slice(); },
+    setScrollY: function (y) { scrollY = y; },
     emit: function (type) {
       if (!has(listeners, type)) throw new Error('fake DOM: window has no ' + type + ' events');
       listeners[type].slice().forEach(function (listener) { listener(strict({ type: type }, type + ' event')); });

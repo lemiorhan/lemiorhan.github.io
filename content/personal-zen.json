@@ -1,11 +1,11 @@
 {
-  "title": "Personal Zen, Lemi Orhan Ergin",
+  "title": { "@en": "Personal Zen, Lemi Orhan Ergin", "@tr": "Kişisel ilkelerim, Lemi Orhan Ergin" },
   "description": {
     "@en": "The principles Lemi Orhan Ergin lives and works by, each with a charcoal drawing.",
     "@tr": "Lemi Orhan Ergin'in hayatına ve işine yön veren prensipler, her biri bir kömür kalem çizimle."
   },
   "head": {
-    "heading": "Personal Zen",
+    "heading": { "@en": "Personal Zen", "@tr": "Kişisel ilkelerim" },
     "cmd": "import this",
     "blocks": [
       {
@@ -35,7 +35,6 @@
       "blocks": [
         {
           "type": "zen",
-          "top": { "@en": "Back to the top", "@tr": "Başa dön" },
           "items": [
             {
               "id": "help",

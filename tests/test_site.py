@@ -456,13 +456,6 @@ class BrokenContentStopsTheBuild(unittest.TestCase):
                 self.assertRejected(self.edit('personal-zen', lambda d, items=items: blocks_of(d, 'zen')[0].update(items=items)),
                                     'a zen block needs "items", a non-empty list')
 
-    def test_a_zen_block_without_the_text_of_its_back_to_top_link(self):
-        for name, fn in (('missing', lambda b: b.pop('top')), ('blank', lambda b: b.update(top='  ')),
-                         ('a number', lambda b: b.update(top=7))):
-            with self.subTest(top=name):
-                self.assertRejected(self.edit('personal-zen', lambda d, fn=fn: fn(blocks_of(d, 'zen')[0])),
-                                    'a zen block needs "top", the text of the link back to the top of the page')
-
     def test_a_zen_index_on_a_page_with_no_zen_block(self):
         def drop(d):
             d['sections'] = [s for s in d['sections'] if not any(isinstance(b, dict) and b.get('type') == 'zen' for b in s['blocks'])]
@@ -1226,11 +1219,15 @@ class ContentRendersAsText(unittest.TestCase):
         zen['story'][0] += ' ' + cls.MARK
         zen['image']['alt'] += ' ' + cls.MARK
         blocks_of(data, 'zen-index')[0]['label'] += ' ' + cls.MARK
-        blocks_of(data, 'zen')[0]['top'] += ' ' + cls.MARK
-        cls.zen_top = blocks_of(data, 'zen')[0]['top']
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False)
         cls.zen, cls.zen_label = zen, blocks_of(data, 'zen-index')[0]['label']
+        path = os.path.join(site, 'content', 'site.json')
+        data = read_in_root_language(path)
+        data['to_top'] += ' ' + cls.MARK
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False)
+        cls.to_top = data['to_top']
         out = os.path.join(cls.tmp.name, 'out')
         result = run_build(site, out)
         if result.returncode:
@@ -1251,7 +1248,7 @@ class ContentRendersAsText(unittest.TestCase):
     def tearDownClass(cls):
         cls.tmp.cleanup()
 
-    def test_the_zen_title_story_source_alt_index_and_back_to_top_link_render_as_text(self):
+    def test_the_zen_title_story_source_alt_index_and_the_back_to_top_link_render_as_text(self):
         self.assertEqual(self.zen_page.find(lambda n: n.tag == 'xmark'), [])
         article, = self.zen_page.find(lambda n: n.tag == 'article' and n.attrs.get('id') == self.zen['id'])
         self.assertEqual([n.all_text() for n in article.find(lambda n: n.tag == 'h2')], [self.zen['zen']])
@@ -1261,9 +1258,9 @@ class ContentRendersAsText(unittest.TestCase):
         index, = self.zen_page.find(has_class('zen-index'))
         self.assertEqual((index.attrs.get('aria-label'), index.find(lambda n: n.tag == 'a')[0].all_text()),
                          (self.zen_label, '01' + self.zen['zen']))
-        self.assertEqual([n.all_text() for n in article.find(has_class('zen-top'))], [self.zen_top])
+        self.assertEqual([n.attrs.get('aria-label') for n in self.zen_page.find(has_class('to-top'))], [self.to_top])
         for planted in (self.zen['zen'], self.zen['story'][0], self.zen['source'], self.zen['image']['alt'], self.zen_label,
-                        self.zen_top):
+                        self.to_top):
             self.assertIn(self.MARK, planted)
 
     def test_the_sumo_live_island_holds_no_angle_bracket_and_carries_its_strings_unchanged(self):
@@ -1317,7 +1314,7 @@ class ContentRendersAsText(unittest.TestCase):
                           'Mk&amp;&lt;xmark&gt;x&lt;/xmark&gt;"&amp;lt;</p>'])
 
     def test_every_hero_and_game_string_renders_as_text(self):
-        sections = self.tree.find(lambda n: n.attrs.get('id') in ('top', 'play'))
+        sections = self.tree.find(lambda n: 'hero' in n.classes() or n.attrs.get('id') == 'play')
         self.assertEqual([n.tag for n in sections], ['section', 'section'])
         self.assertEqual(self.tree.find(lambda n: n.tag == 'xmark'), [])
 
@@ -1697,6 +1694,17 @@ class BuiltSite(unittest.TestCase):
             want = {'home': ('section', 'main'), '404': ('nav', 'main')}.get(name, ('nav', 'footer'))
             self.assertEqual((node.tag, where), want, name)
 
+    def test_the_footer_lists_the_pages_by_name_alone_while_the_home_section_and_the_404_list_describe_each(self):
+        pages = self.content('site')['pages']
+        self.assertIn('talks', self.trees)
+        for name in self.trees:
+            links = self.ls_a(name).find(lambda n: n.tag == 'a')
+            if name in ('home', '404'):
+                self.assertEqual([len(a.find(has_class('toc-desc'))) for a in links], [1] * len(pages), name)
+            else:
+                self.assertEqual([(a.all_text(), a.find(lambda n: n.tag == 'span')) for a in links],
+                                 [(p['name'], []) for p in pages], name)
+
     def test_the_ls_a_list_marks_the_page_it_is_on(self):
         for name in self.trees:
             current = self.ls_a(name).find(lambda n: n.tag == 'a' and n.attrs.get('aria-current') == 'page')
@@ -1715,6 +1723,17 @@ class BuiltSite(unittest.TestCase):
             chrome = tree.find(lambda n: n.tag in ('header', 'footer') or 'skip' in n.classes())
             self.assertEqual([n.tag for n in chrome], [] if name == '404' else ['a', 'header', 'footer'], name)
             self.assertEqual([n.attrs.get('lang') for n in chrome if n.attrs.get('lang')], [], name)
+
+    def test_every_page_but_the_not_found_page_has_one_link_back_to_the_top_and_no_element_with_its_id(self):
+        to_top = self.content('site')['to_top']
+        self.assertIn('talks', self.trees)
+        for name, tree in self.trees.items():
+            with self.subTest(page=name):
+                links = tree.find(has_class('to-top'))
+                self.assertEqual([(a.tag, a.attrs.get('href'), a.attrs.get('aria-label'), a.parent.tag) for a in links],
+                                 [] if name == '404' else [('a', '#top', to_top, 'footer')])
+                self.assertEqual(tree.find(lambda n: n.attrs.get('id') == 'top'), [],
+                                 'a "#top" link goes to the very top of the document only while no element has that id')
 
     def test_every_page_names_itself_and_its_counterpart_in_each_language_for_search_engines(self):
         site = self.content('site')
@@ -3188,12 +3207,9 @@ class BuiltSite(unittest.TestCase):
     def zen_items(self):
         return blocks_of(self.content('personal-zen'), 'zen')[0]['items']
 
-    def test_every_zen_is_an_article_with_its_number_drawing_story_source_and_back_to_top_link(self):
+    def test_every_zen_is_an_article_with_its_number_drawing_story_and_source_and_no_link_of_its_own_to_the_top(self):
         items = self.zen_items()
-        top, = [b['top'] for b in blocks_of(self.content('personal-zen'), 'zen')]
         folder = posixpath.dirname(page_file('personal-zen', self.lang))
-        self.assertEqual(self.trees['personal-zen'].find(lambda n: n.attrs.get('id') == 'top'), [],
-                         'a "#top" link goes to the top of the document only while no element has that id')
         articles = self.trees['personal-zen'].find(lambda n: n.tag == 'article' and 'zen' in n.classes())
         self.assertTrue(items)
         self.assertEqual([a.attrs.get('id') for a in articles], [i['id'] for i in items])
@@ -3208,8 +3224,7 @@ class BuiltSite(unittest.TestCase):
                 self.assertEqual([x.all_text() for x in article.find(lambda x: x.tag == 'p' and not x.classes())],
                                  [plain(p) for p in item['story']])
                 self.assertEqual([x.all_text() for x in article.find(has_class('zen-source'))], [plain(item['source'])])
-                self.assertEqual([(a.attrs.get('href'), a.all_text()) for p in article.find(has_class('zen-top'))
-                                  for a in p.find(lambda x: x.tag == 'a')], [('#top', top)])
+                self.assertEqual([a for a in article.find(lambda x: x.tag == 'a') if a.attrs.get('href') == '#top'], [])
 
     def test_a_link_in_a_zen_source_carries_the_language_its_content_names_for_its_text(self):
         stated, shown = [], []
@@ -3237,19 +3252,94 @@ class BuiltSite(unittest.TestCase):
         self.assertTrue(drawn)
         self.assertEqual(sorted(used), drawn)
 
-    def test_print_leaves_the_zen_index_and_back_to_top_links_out_and_undoes_the_tilt_shadow_and_dimming_of_every_drawing(self):
+    def test_print_leaves_the_zen_index_and_the_back_to_top_link_out_and_undoes_the_tilt_shadow_and_dimming_of_every_drawing(self):
         with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
             css = re.sub(r'/\*.*?\*/', '', f.read(), flags=re.S)
         printed = css[css.index('@media print'):]
         rules = [(s.strip(), body) for group, body in re.findall(r'([^{}@;]+)\{([^{}]*)\}', printed) for s in group.split(',')]
         hidden = [s for s, body in rules if 'display: none' in body]
         self.assertIn('.zen-index', hidden)
-        self.assertIn('.zen-top', hidden)
+        self.assertIn('.to-top', hidden)
         for prop in ('rotate', 'box-shadow', 'filter'):
             with self.subTest(prop=prop):
                 self.assertEqual(css_values(printed, '.zen-art img', prop), ['none !important'],
                                  'the even tilt and the dark shadow and dimming rules are more specific than this print rule, '
                                  'so only !important lets print undo them')
+
+    def test_the_back_to_top_link_stays_on_screen_and_out_of_sight_and_of_the_tab_order_until_site_js_shows_it(self):
+        with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
+            css = re.sub(r'/\*.*?\*/', '', f.read(), flags=re.S)
+        self.assertEqual(css_values(css, '.to-top', 'position'), ['fixed'])
+        self.assertEqual(css_values(css, '.to-top', 'visibility'), ['hidden'])
+        self.assertEqual(css_values(css, '.to-top.is-shown', 'visibility'), ['visible'])
+
+    def test_the_footer_is_a_band_darker_than_the_page_in_every_theme_with_legible_text_on_screen_only(self):
+        with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
+            css = re.sub(r'/\*.*?\*/', '', f.read(), flags=re.S)
+
+        def luminance(hex_colour):
+            channels = [int(hex_colour.lstrip('#')[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+            r, g, b = [c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in channels]
+            return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+        def contrast(a, b):
+            high, low = sorted((luminance(a), luminance(b)), reverse=True)
+            return (high + 0.05) / (low + 0.05)
+
+        band = '.footer-map, .footer-base'
+        set_on_band = {prop: css_values(css, band, prop) for prop in ('--ink', '--ink-soft', '--accent-text')}
+        self.assertEqual({prop: len(v) for prop, v in set_on_band.items()}, dict.fromkeys(set_on_band, 1),
+                         'the page\'s own --accent-text is 2.92:1 on the light band, so the band sets every text colour itself')
+        text = [v[0] for v in set_on_band.values()]
+        themes = [':root', ':root:not([data-theme="light"])', ':root[data-theme="dark"]']
+        for theme in themes:
+            with self.subTest(theme=theme):
+                paper, foot, base = (css_values(css, theme, prop)[0] for prop in ('--paper', '--foot', '--foot-2'))
+                self.assertLess(luminance(foot), luminance(paper))
+                self.assertLess(luminance(base), luminance(foot))
+                for colour in text:
+                    for ground in (foot, base):
+                        self.assertGreaterEqual(contrast(colour, ground), 4.5, (colour, ground))
+
+        screen = css.index('@media screen')
+        depth, end = 0, css.index('{', screen)
+        while True:
+            depth += {'{': 1, '}': -1}.get(css[end], 0)
+            if depth == 0:
+                break
+            end += 1
+        on_screen = css[screen:end]
+        self.assertEqual(css_values(on_screen, '.site-footer', 'background'), ['var(--foot)'])
+        self.assertEqual(css_values(on_screen, '.footer-base', 'background'), ['var(--foot-2)'])
+        self.assertEqual(css_values(css, '.site-footer', 'background'), ['var(--foot)'])
+        self.assertEqual(css_values(on_screen, band, '--ink'), text[:1],
+                         'the band sets its text colours on its parts, so the back-to-top link inside the footer keeps the page\'s')
+        self.assertEqual([p for p in ('--paper', '--ink', '--ink-soft', '--rule') if css_values(css, '.site-footer', p)], [])
+
+    def test_the_back_to_top_link_sits_in_the_bottom_right_corner_and_the_footer_lists_pages_in_two_then_three_columns(self):
+        with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:
+            css = re.sub(r'/\*.*?\*/', '', f.read(), flags=re.S)
+        anywhere = re.sub(r'@media[^{]*\{(.*?)\n\}', '', css, flags=re.S)
+        wide = ''.join(re.findall(r'@media \(min-width: 64rem\) \{(.*?)\n\}', css, re.S))
+        self.assertEqual([css_values(anywhere, '.to-top', side) for side in ('right', 'bottom')],
+                         [['max(1rem, env(safe-area-inset-right))'], ['max(1rem, env(safe-area-inset-bottom))']])
+        self.assertEqual([css_values(wide, '.to-top', side) for side in ('right', 'bottom')], [['1.5rem'], ['1.5rem']])
+        self.assertEqual([side for side in ('left', 'top', 'inset', 'inset-inline', 'inset-block') if css_values(css, '.to-top', side)], [])
+
+        tablet = ''.join(re.findall(r'@media \(min-width: 40rem\) \{(.*?)\n\}', css, re.S))
+        self.assertEqual(css_values(anywhere, '.footer-pages', 'columns'), ['2'])
+        self.assertEqual(css_values(tablet, '.footer-pages', 'columns'), ['3'])
+        self.assertEqual(css_values(css, '.footer-pages', 'columns'), ['2', '3'])
+
+    def test_on_a_phone_the_git_game_pins_its_dock_as_the_sticky_one_the_back_to_top_link_steps_aside_for(self):
+        with open(os.path.join(ROOT, 'assets', 'git-game.css'), encoding='utf-8') as f:
+            css = re.sub(r'/\*.*?\*/', '', f.read(), flags=re.S)
+        with open(os.path.join(ROOT, 'assets', 'git-game.js'), encoding='utf-8') as f:
+            self.assertIn("matchMedia('(max-width: 40rem)')", f.read())
+        phone = css.index('@media (max-width: 40rem)')
+        self.assertEqual(css_values(css[phone:], '.gg-dock', 'position'), ['sticky'])
+        with open(os.path.join(ROOT, 'assets', 'site.js'), encoding='utf-8') as f:
+            self.assertIn("window.getComputedStyle(dock).getPropertyValue('position') === 'sticky'", f.read())
 
     def test_the_zen_layout_keeps_its_gaps_full_width_two_columns_and_dark_dimming(self):
         with open(os.path.join(ROOT, 'assets', 'site.css'), encoding='utf-8') as f:

@@ -727,6 +727,35 @@
     });
   }
 
+  function setupToTop() {
+    var link = document.querySelector('.to-top');
+    if (!link) return;
+    var queued = false;
+
+    function update() {
+      queued = false;
+      var shown = window.scrollY > window.innerHeight;
+      // On a phone the git game pins its command dock to the foot of the screen, under this link's corner.
+      var dock = document.querySelector('.gg-dock');
+      if (shown && dock && window.getComputedStyle(dock).getPropertyValue('position') === 'sticky') {
+        var box = dock.getBoundingClientRect();
+        shown = box.bottom <= 0 || box.top >= window.innerHeight;
+      }
+      link.classList.toggle('is-shown', shown);
+    }
+
+    function queue() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    }
+
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    // git-game.js builds the dock after this deferred script runs and before DOMContentLoaded.
+    document.addEventListener('DOMContentLoaded', queue);
+  }
+
   function setupLightbox() {
     var links = Array.prototype.slice.call(document.querySelectorAll('a[data-lightbox]'));
     if (!links.length || typeof HTMLDialogElement !== 'function') return;
@@ -814,5 +843,6 @@
   setupGraph();
   setupArchive();
   setupSumoLive();
+  setupToTop();
   setupLightbox();
 })();

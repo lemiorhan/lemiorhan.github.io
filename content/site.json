@@ -17,6 +17,7 @@
     "height": 630
   },
   "skip": { "@en": "Skip to content", "@tr": "İçeriğe geç" },
+  "to_top": { "@en": "Back to the top", "@tr": "Başa dön" },
   "nav_label": "Site",
   "all_pages": { "heading": { "@en": "All pages", "@tr": "Bütün sayfalar" }, "cmd": "ls -a" },
   "pages": [
@@ -76,7 +77,7 @@
     },
     {
       "path": "personal-zen/",
-      "name": "Personal Zen",
+      "name": { "@en": "Personal Zen", "@tr": "Kişisel ilkelerim" },
       "text": {
         "@en": "The principles I live and work by, first written down for my kids in 2017, each with a charcoal drawing.",
         "@tr": "Hayatıma ve işime yön veren prensipler. İlk kez 2017'de çocuklarım için yazdım, her birinin bir kömür kalem çizimi var."
